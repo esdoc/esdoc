@@ -1,0 +1,45 @@
+{
+  "name": "esdoc",
+  "version": "0.0.1",
+  "description": "API Documentation Generator For ECMAScript6",
+  "author": "h13i32maru",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/h13i32maru/esdoc"
+  },
+  "scripts": {
+    "postinstall": "cd node_modules/esquery/node_modules; rm -rf estraverse; npm i estraverse@3.1.0",
+    "init": "bash ./script/init.sh",
+    "build": "bash ./script/build.sh",
+    "build_test": "bash ./script/build_test.sh",
+    "test": "bash ./script/test.sh",
+    "jsdoc": "bash ./script/build_jsdoc.sh",
+    "start": "bash ./script/server.sh"
+  },
+  "dependencies": {
+    "espree": "",
+    "esquery": "",
+    "estraverse": "",
+    "fs-extra": ""
+  },
+  "devDependencies": {
+    "babel": "",
+    "mocha": "",
+    "power-assert": "",
+    "espower-loader": "",
+    "istanbul": "",
+    "coveralls": "",
+    "http-server": ""
+  },
+  "keywords": [
+    "jsdoc",
+    "api",
+    "document"
+  ],
+  "files": [
+    "out/src",
+    "README.md"
+  ],
+  "main": "out/src/index.js"
+}
