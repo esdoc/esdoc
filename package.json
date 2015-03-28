@@ -20,7 +20,8 @@
     "esquery": "",
     "estraverse": "",
     "fs-extra": "",
-    "minimist": "^1.1.1"
+    "minimist": "^1.1.1",
+    "taffydb": ""
   },
   "devDependencies": {
     "babel": "",
