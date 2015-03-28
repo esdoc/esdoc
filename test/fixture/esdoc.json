@@ -1,0 +1,15 @@
+{
+  "source": "./test/fixture/src",
+  "pattern": "\\.js$",
+  "destination": "./test/fixture/esdoc",
+  "debug": true,
+
+  "readme": "./README.md",
+  "package": "./package.json",
+  "private": false,
+  "title": "ESDoc Test Fixture",
+  "description": "ESDoc Test Fixture description.",
+  "importPathPrefix": "",
+  "styles": [],
+  "scripts": []
+}

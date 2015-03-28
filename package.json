@@ -10,18 +10,17 @@
   },
   "scripts": {
     "postinstall": "cd node_modules/esquery/node_modules; rm -rf estraverse; npm i estraverse@3.1.0",
-    "init": "bash ./script/init.sh",
     "build": "bash ./script/build.sh",
-    "build_test": "bash ./script/build_test.sh",
     "test": "bash ./script/test.sh",
-    "jsdoc": "bash ./script/build_jsdoc.sh",
+    "esdoc": "bash ./script/esdoc.sh",
     "start": "bash ./script/server.sh"
   },
   "dependencies": {
     "espree": "",
     "esquery": "",
     "estraverse": "",
-    "fs-extra": ""
+    "fs-extra": "",
+    "minimist": "^1.1.1"
   },
   "devDependencies": {
     "babel": "",

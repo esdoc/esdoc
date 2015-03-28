@@ -1,0 +1,4 @@
+{
+  "name": "esdoc-test-fixture",
+  "main": "./src/index.js"
+}
