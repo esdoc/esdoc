@@ -21,7 +21,9 @@
     "estraverse": "",
     "fs-extra": "",
     "minimist": "^1.1.1",
-    "taffydb": ""
+    "taffydb": "",
+    "escape-html": "",
+    "ice-cap": ""
   },
   "devDependencies": {
     "babel": "",
@@ -30,7 +32,8 @@
     "espower-loader": "",
     "istanbul": "",
     "coveralls": "",
-    "http-server": ""
+    "http-server": "",
+    "cheerio": ""
   },
   "keywords": [
     "jsdoc",

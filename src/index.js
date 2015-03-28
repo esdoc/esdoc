@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import minimist from 'minimist';
 import esdoc from './esdoc.js';
+import defaultPublisher from './Publisher/publish.js';
 
 let argv = minimist(process.argv.slice(2));
 if (argv.h || argv.help) {
@@ -14,7 +15,8 @@ let configFilePath = path.resolve(argv._[0]);
 let configJSON = fs.readFileSync(configFilePath, {encode: 'utf8'});
 let config = JSON.parse(configJSON);
 
-esdoc(config, (data)=>{
+
+esdoc(config, (data, config)=>{
   let taffy = require('taffydb').taffy;
   function publish(values) {
     let db = taffy(values);
