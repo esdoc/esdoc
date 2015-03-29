@@ -20,24 +20,27 @@
 - [x] @member
 - [x] @interface
 - [x] @extends
-- [ ] @public
-- [ ] @private
-- [ ] @protected
+- [x] @public
+- [x] @private
+- [x] @protected
+- [x] {@link}
+- [x] @external
+- [x] @see
+- [x] @typedef
+- [x] @function
+- [x] @variable
+- [x] @variation
+
 - [ ] @abstract
 - [ ] @deprecated
 - [ ] @experimental
-- [ ] @external
 - [ ] @implements
 - [ ] @override
 - [ ] @readonly
 - [ ] @since
 - [ ] @throw
-- [ ] @see
-- [ ] @typedef
 - [ ] @fire
 - [ ] @listen
-- [ ] @variation
 - [ ] @version
 - [ ] @todo
-- [ ] {@link}
-- [ ] @function
+- [ ] @ignore

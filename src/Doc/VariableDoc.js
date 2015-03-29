@@ -1,35 +1,74 @@
 import AbstractDoc from './AbstractDoc.js';
+import MemberDoc from './MemberDoc.js';
+import Logger from '../Util/Logger.js';
 
 export default class VariableDoc extends AbstractDoc {
-  get kind() {
+  _apply() {
+    super._apply();
+
+    this['@property']();
+    this['@type']();
+  }
+
+  ['@kind']() {
+    super['@kind']();
+    if (this._value.kind) return;
+
     let node = this._node;
     let type = node.type;
     if (type === 'AssignmentExpression') {
       if (node.right.type === 'FunctionExpression') {
-        return 'function';
+        this._value.kind = 'function';
+        return;
       } else {
-        return 'variable';
+        this._value.kind = 'variable';
+        return;
       }
     } else if (type === 'VariableDeclaration') {
       if (node.declarations[0].init.type === 'FunctionExpression') {
-        return 'function';
+        this._value.kind = 'function';
+        return;
       } else {
-        return 'variable';
+        this._value.kind = 'variable';
+        return;
       }
     }
 
-    throw new Error('can not resolve kind.');
+    Logger.w(TAG, `can not resolve kind.`);
   }
 
-  get name() {
+  ['@name']() {
+    super['@name']();
+    if (this._value.name) return;
+
     let node = this._node;
     let type = node.type;
     if (type === 'AssignmentExpression') {
-      return this._flattenMemberExpression(node.left).replace(/^this\./, '');
+      let name = this._flattenMemberExpression(node.left).replace(/^this\./, '');
+      this._value.name = name;
+      return;
     } else if (type === 'VariableDeclaration') {
-      return this._node.declarations[0].id.name;
+      this._value.name = node.declarations[0].id.name;
+      return;
     }
 
-    throw new Error('can not resolve name.');
+    Logger.w(TAG, `can not resolve name.`);
+  }
+
+  ['@memberof']() {
+    super['@memberof']();
+    if (this._value.memberof) return;
+    this._value.memberof = this._pathResolver.filePath;
+  }
+
+  ['@property']() {
+    MemberDoc.prototype['@property'].call(this);
+  }
+
+  ['@type']() {
+    MemberDoc.prototype['@type'].call(this);
   }
 }
+
+let TAG = VariableDoc.name;
+

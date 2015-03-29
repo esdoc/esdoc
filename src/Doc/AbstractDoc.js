@@ -1,9 +1,5 @@
 import assert from 'assert';
 import esquery from 'esquery';
-import Logger from '../Util/Logger.js';
-import Doc2Value from './Doc2Value.js';
-
-let TAG = 'AbstractDoc';
 
 export default class AbstractDoc {
   constructor(ast, node, pathResolver, commentTags = []){
@@ -11,199 +7,223 @@ export default class AbstractDoc {
     this._node = node;
     this._pathResolver = pathResolver;
     this._commentTags = commentTags;
-    this._tags = [];
-    this._cache = {};
+    this._value = {};
 
-    this._push('@kind', this.kind);
-    this._push('@name', this.name);
-    this._push('@memberof', this.memberof);
-    this._push('@longname', this.longname);
-    this._push('@static', this.static);
-    this._push('@export', this.export);
-    this._push('@importPath', this.import);
-    this._push('@importStyle', this.importname);
+    this._apply();
   }
 
   get value() {
-    let doc2value = new Doc2Value(this._commentTags, this._tags);
-    return doc2value.value;
+    return JSON.parse(JSON.stringify(this._value));
   }
 
-  get variation() {
-    
+  _apply() {
+    this['@kind']();
+    this['@static']();
+    this['@variation']();
+    this['@name']();
+    this['@memberof']();
+    this['@longname']();
+    this['@access']();
+    this['@export']();
+    this['@importPath']();
+    this['@importStyle']();
+    this['@desc']();
+    this['@example']();
+    this['@see']();
   }
 
-  get kind() {
-    return null;
+  ['@kind']() {
+    this._value.kind = this._findTagValue(['@kind']);
   }
 
-  get name() {
-    return this._node.id.name;
-  }
-
-  get static() {
-    if ('static' in this._cache) return this._cache.static;
-
-    let node = this._node;
-    let isStatic = true;
-
-    switch (node.type) {
-      case 'ClassDeclaration':
-        break;
-      case 'MethodDefinition':
-        assert(node.parent.type === 'ClassBody');
-        isStatic = node.static;
-        break;
-      case 'ExpressionStatement':
-        let parent;
-
-        parent = node.parent;
-        while (parent) {
-          if (parent.type === 'MethodDefinition') {
-            isStatic = parent.static;
-            break;
-          }
-          parent = parent.parent;
-        }
-        break;
-      case 'Program': break;
-      case 'FunctionDeclaration': break;
-      case 'VariableDeclaration': break;
-      case 'Typedef':  break;
-      case 'External': break;
-      default:
-        Logger.w(TAG, `unknown node type. type = "${node.type}"`);
-    }
-
-    this._cache.static = isStatic;
-
-    return isStatic;
-  }
-
-  get memberof() {
-    if ('memberof' in this._cache) return this._cache.memberof;
-
-    let node = this._node;
-    let memberof = null;
-    let parent = node.parent;
-
-    // todo: support nested class.
-    switch (node.type) {
-      case 'ClassDeclaration':
-        memberof = this._pathResolver.filePath;
-        break;
-      case 'MethodDefinition':
-        //assert(parent.type === 'ClassBody');
-        //while (parent) {
-        //  if (parent.type === 'ClassDeclaration') {
-        //    memberof = `${this._pathResolver.filePath}~${parent.id.name}`;
-        //    break;
-        //  }
-        //  parent = parent.parent;
-        //}
-        //assert(memberof);
-        //break;
-      case 'ExpressionStatement':
-        //while (parent) {
-        //  if (parent.type === 'ClassDeclaration') {
-        //    memberof = `${this._pathResolver.filePath}~${parent.id.name}`;
-        //    break;
-        //  }
-        //  parent = parent.parent;
-        //}
-        //assert(memberof);
-        //break;
-      case 'Typedef':
-      case 'External':
-        memberof = this._pathResolver.filePath;
-        while (parent) {
-          if (parent.type === 'ClassDeclaration') {
-            memberof = `${this._pathResolver.filePath}~${parent.id.name}`;
-            break;
-          }
-          parent = parent.parent;
-        }
-        break;
-      default:
-        memberof = this._pathResolver.filePath;
-        Logger.w(`unknown node type. type = "${node.type}"`);
-    }
-
-    this._cache.memberof = memberof;
-
-    return memberof;
-  }
-
-  get longname() {
-    if ('longname' in this._cache) return this._cache.longname;
-
-    let name = this.name;
-    let memberof = this.memberof;
-
-    if (!name) {
-      this._cache.longname = null;
-      return null;
-    }
-
-    if (!memberof) {
-      this._cache.longname = name;
-      return name;
-    }
-
-    let longname;
-    if (memberof.includes('~')) {
-      if (this.static) {
-        longname = `${memberof}.${name}`;
+  ['@static']() {
+    let tag = this._find(['@static']);
+    if (tag) {
+      if (tag.tagValue === '' || tag.tagValue === 'true') {
+        this._value.static = true;
       } else {
-        longname = `${memberof}#${name}`;
+        this._value.static = false;
       }
     } else {
-      longname = `${memberof}~${name}`;
+      if ('static' in this._node) {
+        this._value.static = this._node.static;
+      } else {
+        this._value.static = true;
+      }
     }
-
-    this._cache.longname = longname;
-
-    return longname;
   }
 
-  get export() {
+  ['@variation']() {
+    this._value.variation = this._findTagValue(['@variation']);
+  }
+
+  ['@name']() {
+    this._value.name = this._findTagValue(['@name']);
+  }
+
+  ['@memberof']() {
+    this._value.memberof = this._findTagValue(['@memberof']);
+  }
+
+  ['@longname']() {
+    let tag = this._find(['@longname']);
+    if (tag) {
+      this._value.longname = tag.tagValue;
+    } else {
+      let memberof = this._value.memberof;
+      let name = this._value.name;
+      let scope = this._value.static ? '.' : '#';
+      if (memberof.includes('~')) {
+        this._value.longname = `${memberof}${scope}${name}`;
+      } else {
+        this._value.longname = `${memberof}~${name}`;
+      }
+    }
+  }
+
+  ['@access']() {
+    let tag = this._find(['@access', '@public', '@private', '@protected']);
+    if (tag) {
+      let access;
+      switch (tag.tagName) {
+        case '@access': access = tag.tagValue; break;
+        case '@public': access = 'public'; break;
+        case '@protected': access = 'protected'; break;
+        case '@private': access = 'private'; break;
+      }
+
+      this._value.access = access;
+    } else {
+      this._value.access = null;
+    }
+  }
+
+  ['@export']() {
+    let tag = this._find(['@export']);
+    if (tag) {
+      if (tag.tagValue === '' || tag.tagValue === 'true') {
+        this._value.export = true;
+      } else {
+        this._value.export = false;
+      }
+      return;
+    }
+
     let parent = this._node.parent;
     while (parent) {
       if (parent.type === 'ExportDefaultDeclaration') {
-        return true;
+        this._value.export = true;
+        return;
       } else if (parent.type === 'ExportNamedDeclaration') {
-        return true;
+        this._value.export = true;
+        return;
       }
 
       parent = parent.parent;
     }
 
-    return false;
+    this._value.export = false;
   }
 
-  get import() {
-    return this._pathResolver.importPath;
+  ['@importPath']() {
+    let tag = this._find(['@importPath']);
+    if (tag) {
+      this._value.importPath = tag.tagValue;
+    } else {
+      this._value.importPath = this._pathResolver.importPath;
+    }
   }
 
-  get importname() {
+  ['@importStyle']() {
+    let tag = this._find(['@importStyle']);
+    if (tag) {
+      this._value.importStyle = tag.tagValue;
+      return;
+    }
+
     let parent = this._node.parent;
-    let node;
+    let name = this._value.name;
     while (parent) {
       if (parent.type === 'ExportDefaultDeclaration') {
-        return this.name;
+        this._value.importStyle = name;
+        return;
       } else if (parent.type === 'ExportNamedDeclaration') {
-        return `{${this.name}}`
+        this._value.importStyle = `{${name}}`;
+        return;
       }
-
       parent = parent.parent;
     }
 
-    return null;
+    this._value.importStyle = null;
   }
 
-  _push(tagName, tagValue) {
-    if (tagName.charAt(0) !== '@') throw new Error(`tagName must be started with "@". tagName = ${tagName}`);
-    this._tags.push({tagName, tagValue});
+  ['@desc']() {
+    this._value.description = this._findTagValue(['@desc']);
+  }
+
+  ['@example']() {
+    let tags = this._findAll(['@example']);
+    if (!tags) return;
+    if (!tags.length) return;
+
+    this._value.examples = [];
+    for (let tag of tags) {
+      this._value.examples.push(tag.tagValue);
+    }
+  }
+
+  ['@see']() {
+    let tags = this._findAll(['@see']);
+    if (!tags) return;
+    if (!tags.length) return;
+
+    this._value.see = [];
+    for (let tag of tags) {
+      this._value.see.push(tag.tagValue);
+    }
+  }
+
+  _findAll(names) {
+    let results = [];
+    for (let tag of this._commentTags) {
+      if (names.includes(tag.tagName)) results.push(tag);
+    }
+
+    if (results.length) {
+      return results;
+    } else {
+      return null;
+    }
+  }
+
+  _find(names) {
+    let results = this._findAll(names);
+    if (results && results.length) {
+      return results[results.length - 1];
+    } else {
+      return null;
+    }
+  }
+
+  _findAllTagValues(names) {
+    let tags = this._findAll(names);
+    if (!tags) return;
+
+    let results = [];
+    for (let tag of tags) {
+      results.push(tag.tagValue);
+    }
+
+    return results;
+  }
+
+  _findTagValue(names) {
+    let tag = this._find(names);
+    if (tag) {
+      return tag.tagValue;
+    } else {
+      return null;
+    }
   }
 
   _resolveLongname(name) {

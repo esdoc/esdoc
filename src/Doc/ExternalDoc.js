@@ -1,31 +1,50 @@
 import AbstractDoc from './AbstractDoc.js';
+import Logger from '../Util/Logger.js';
 
 export default class ExternalDoc extends AbstractDoc {
-  constructor(ast, node, ...args) {
-    node.type = 'External';
-    super(ast, node, ...args);
+  //constructor(ast, node, ...args) {
+  //  node.type = 'External';
+  //  super(ast, node, ...args);
+  //}
+
+  ['@kind']() {
+    super['@kind']();
+    if (this._value.kind) return;
+    this._value.kind = 'external';
   }
 
-  get kind() {
-    return 'external';
-  }
+  //['@static']() {
+  //}
 
-  get name() {
-    let name = null;
-    for (let tag of this._commentTags) {
-      if (tag.tagName === '@external') {
-        name = tag.tagValue;
-      }
+  ['@name']() {
+    //super['@name']();
+    //if (this._value.name) return;
+    //
+    //let value = this._findTagValue(['@external']);
+    //if (value) {
+    //  this._value.name = value;
+    //}
+
+    let value = this._findTagValue(['@name', '@external']);
+    if (!value) {
+      Logger.w(TAG, `can not resolve name.`);
     }
 
-    return name;
+    this._value.name = value;
   }
 
-  get memberof() {
-    return null;
+  ['@memberof']() {
+    super['@memberof']();
+    if (this._value.memberof) return;
+    this._value.memberof = this._pathResolver.filePath;
   }
 
-  get longname() {
-    return `external:${this.name}`;
+  ['@longname']() {
+    super['@longname']();
+    if (this._value.longname) return;
+    this._value.longname = this._value.name;
   }
 }
+
+let TAG = ExternalDoc.name;
+

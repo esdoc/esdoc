@@ -67,7 +67,6 @@ function walk(dirPath, callback) {
 
 function generate(inDirPath, filePath, packageName, mainFilePath, pathPrefix) {
   let ast = ESParser.parse(filePath);
-  if (filePath.includes('myVariable.js')) console.log(JSON.stringify(ast, null, 2));
 
   let values = [];
   let pathResolver = new PathResolver(inDirPath, filePath, packageName, mainFilePath, pathPrefix);
