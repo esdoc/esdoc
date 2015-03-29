@@ -24,6 +24,10 @@ a {
   color:rgb(37, 138, 175);
 }
 
+code a:hover {
+  text-decoration: underline;
+}
+
 ul {
   padding-left: 20px;
 }
@@ -241,6 +245,10 @@ table.params td p {
   margin-left: 10px;
 }
 
+.content .detail > .import-path {
+  margin-top: -8px;
+}
+
 .content .detail .throw p {
   margin: 0;
 }
@@ -324,6 +332,12 @@ footer, .file-footer {
   padding-top: 30px;
   margin-top: 20px;
   padding-bottom: 10px;
+}
+
+pre.source-code {
+  background: white;
+  border: solid 1px #ddd;
+  padding: 4px;
 }
 
 /* search box */

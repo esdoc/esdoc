@@ -1,14 +1,9 @@
-export function shorten(doc, ignoreClassdesc = false) {
+export function shorten(doc) {
   if (!doc) return '';
 
   if (doc.summary) return doc.summary;
 
-  var desc;
-  if (ignoreClassdesc) {
-    desc = doc.description;
-  } else {
-    desc = doc.classdesc || doc.description;
-  }
+  var desc = doc.description;
   if (!desc) return '';
 
   var len = desc.length;

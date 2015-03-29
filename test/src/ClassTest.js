@@ -383,6 +383,78 @@ describe('MyClass1:', ()=>{
   });
 });
 
+describe('MyClass2:', ()=> {
+  let db = global.db;
+
+  it('has class doc.', ()=> {
+    let docs = db.find({name: 'MyClass2'});
+    assert.equal(docs.length, 1);
+    assert.deepEqual(docs[0],
+    {
+      "kind": "class",
+      "static": true,
+      "variation": null,
+      "name": "MyClass2",
+      "memberof": "src/MyClass.js",
+      "longname": "src/MyClass.js~MyClass2",
+      "access": null,
+      "export": true,
+      "importPath": "esdoc-test-fixture/src/MyClass.js",
+      "importStyle": "{MyClass2}",
+      "description": "this is MyClass2 desc.",
+      "interface": false
+    });
+  });
+});
+
+describe('MyClass3:', ()=> {
+  let db = global.db;
+
+  it('has class doc.', ()=> {
+    let docs = db.find({name: 'MyClass3'});
+    assert.equal(docs.length, 1);
+    assert.deepEqual(docs[0],
+    {
+      "kind": "class",
+      "static": true,
+      "variation": null,
+      "name": "MyClass3",
+      "memberof": "src/MyClass.js",
+      "longname": "src/MyClass.js~MyClass3",
+      "access": null,
+      "export": false,
+      "importPath": "esdoc-test-fixture/src/MyClass.js",
+      "importStyle": null,
+      "description": "this is MyClass3 desc.",
+      "interface": false
+    });
+  });
+});
+
+describe('MyClass4:', ()=> {
+  let db = global.db;
+
+  it('has class doc.', ()=> {
+    let docs = db.find({name: 'MyClass4'});
+    assert.equal(docs.length, 1);
+    assert.deepEqual(docs[0],
+      {
+        "kind": "class",
+        "static": true,
+        "variation": null,
+        "name": "MyClass4",
+        "memberof": "src/MyClass.js",
+        "longname": "src/MyClass.js~MyClass4",
+        "access": null,
+        "export": false,
+        "importPath": "esdoc-test-fixture/src/MyClass.js",
+        "importStyle": null,
+        "description": "this is MyClass4 desc.",
+        "interface": true
+      });
+  });
+});
+
 describe('SuperMyClass1:', ()=> {
   let db = global.db;
 

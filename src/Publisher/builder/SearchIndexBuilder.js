@@ -5,17 +5,17 @@ export default class StaticFileBuilder extends DocBuilder {
   exec(callback) {
     let searchIndex = [];
     let docs = this._find({
-      kind: {'!is': 'package'},
-      inherited: {isUndefined: true},
-      mixed: {isUndefined: true}
+      //kind: {'!is': 'package'},
+      //inherited: {isUndefined: true},
+      //mixed: {isUndefined: true}
     });
 
     for (let doc of docs) {
       let indexText, url, displayText;
 
-      if (doc._custom_import_path) {
-        displayText = `<span>${doc.name}</span> <span class="search-result-import-path">${doc._custom_import_path}</span>`;
-        indexText = `${doc._custom_import_path}~${doc.name}`.toLowerCase();
+      if (doc.importPath) {
+        displayText = `<span>${doc.name}</span> <span class="search-result-import-path">${doc.importPath}</span>`;
+        indexText = `${doc.importPath}~${doc.name}`.toLowerCase();
         url = this._getURL(doc, null, 2);
       } else {
         displayText = doc.longname;

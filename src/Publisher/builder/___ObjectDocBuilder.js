@@ -1,14 +1,14 @@
 import IceCap from 'ice-cap';
 import DocBuilder from './DocBuilder.js';
 
-export default class NamespaceDocBuilder extends DocBuilder {
+export default class ObjectDocBuilder extends DocBuilder {
   exec(callback) {
     var ice = this._buildLayoutDoc();
     ice.autoDrop = false;
-    var docs = this._find({kind: ['namespace', 'module', 'mixin', 'file', 'class', 'interface']});
+    var docs = this._find({kind: ['class']});
     for (var doc of docs) {
       ice.load('content', this._buildObjectDoc(doc), IceCap.MODE_WRITE);
-      ice.load('fileFooter', this._buildFileFooterHTML(doc), IceCap.MODE_WRITE);
+      //ice.load('fileFooter', this._buildFileFooterHTML(doc), IceCap.MODE_WRITE);
       var fileName = this._getOutputFileName(doc);
       callback(ice.html, fileName);
     }
@@ -22,9 +22,9 @@ export default class NamespaceDocBuilder extends DocBuilder {
     var ice = new IceCap(this._readTemplate('object.html'));
 
     // header
-    if (doc._custom_import_path) {
+    if (doc.importPath) {
       ice.drop('memberof');
-      ice.into('importPath', `import ${doc.name} from '${doc._custom_import_path}'`, (code, ice)=>{
+      ice.into('importPath', `import ${doc.importStyle} from '${doc.importPath}'`, (code, ice)=>{
         ice.text('importPathCode', code);
       });
     } else {
@@ -53,7 +53,7 @@ export default class NamespaceDocBuilder extends DocBuilder {
 
     // self
     ice.text('name', doc.name);
-    ice.load('description', doc.classdesc || doc.description);
+    ice.load('description', doc.description);
     ice.load('deprecated', this._buildDeprecatedHTML(doc));
     ice.load('experimental', this._buildExperimentalHTML(doc));
     ice.load('require', this._buildDocsLinkHTML(doc.requires), 'append');
@@ -62,22 +62,23 @@ export default class NamespaceDocBuilder extends DocBuilder {
     ice.load('todo', this._buildDocsLinkHTML(doc.todo), 'append');
 
     // file example
-    ice.into('fileexampleDocs', doc.fileexamples, (fileexamples, ice)=>{
-      ice.loop('fileexampleDoc', fileexamples, (i, filexample, ice)=>{
-        ice.text('fileexampleCode', filexample);
-      });
-    });
+    //ice.into('fileexampleDocs', doc.fileexamples, (fileexamples, ice)=>{
+    //  ice.loop('fileexampleDoc', fileexamples, (i, filexample, ice)=>{
+    //    ice.text('fileexampleCode', filexample);
+    //  });
+    //});
 
     // summary
     ice.load('namespaceSummary', this._buildSummaryHTML(doc, 'namespace', 'Namespaces'));
     ice.load('classSummary', this._buildSummaryHTML(doc, 'class', 'Classes'));
-    ice.load('interfaceSummary', this._buildSummaryHTML(doc, 'interface', 'Interfaces'));
-    ice.load('mixinSummary', this._buildSummaryHTML(doc, 'mixin', 'Mixin'));
-    ice.load('staticMemberSummary', this._buildSummaryHTML(doc, 'member', 'Members', 'static'));
-    ice.load('staticMethodSummary', this._buildSummaryHTML(doc, 'function', 'Methods', 'static'));
+    //ice.load('interfaceSummary', this._buildSummaryHTML(doc, 'interface', 'Interfaces'));
+    //ice.load('mixinSummary', this._buildSummaryHTML(doc, 'mixin', 'Mixin'));
+    // todo: get, set
+    ice.load('staticMemberSummary', this._buildSummaryHTML(doc, 'member', 'Members', true));
+    ice.load('staticMethodSummary', this._buildSummaryHTML(doc, 'method', 'Methods', true));
     ice.load('constructorSummary', this._buildSummaryHTML(doc, 'constructor', 'Constructor'));
-    ice.load('memberSummary', this._buildSummaryHTML(doc, 'member', 'Members', {'!is': 'static'}));
-    ice.load('methodSummary', this._buildSummaryHTML(doc, 'function', 'Methods', {'!is': 'static'}));
+    ice.load('memberSummary', this._buildSummaryHTML(doc, 'member', 'Members', false));
+    ice.load('methodSummary', this._buildSummaryHTML(doc, 'method', 'Methods', false));
     ice.load('typedefSummary', this._buildSummaryHTML(doc, 'typedef', 'Typedefs'));
     ice.load('eventSummary', this._buildSummaryHTML(doc, 'event', 'Events'));
     ice.load('constSummary', this._buildSummaryHTML(doc, 'constant', 'Constants'));
@@ -87,11 +88,12 @@ export default class NamespaceDocBuilder extends DocBuilder {
     ice.load('inheritedSummary', this._buildInheritedSummaryHTML(doc), 'append');
 
     // detail
-    ice.load('staticMemberDetails', this._buildDetailHTML(doc, 'member', 'Members', 'static'));
-    ice.load('staticMethodDetails', this._buildDetailHTML(doc, 'function', 'Methods', 'static'));
+    // todo: get, set
+    ice.load('staticMemberDetails', this._buildDetailHTML(doc, 'member', 'Members', true));
+    ice.load('staticMethodDetails', this._buildDetailHTML(doc, 'method', 'Methods', true));
     ice.load('constructorDetails', this._buildDetailHTML(doc, 'constructor', 'Constructors'));
-    ice.load('memberDetails', this._buildDetailHTML(doc, 'member', 'Members', {'!is': 'static'}));
-    ice.load('methodDetails', this._buildDetailHTML(doc, 'function', 'Methods', {'!is': 'static'}));
+    ice.load('memberDetails', this._buildDetailHTML(doc, 'member', 'Members', false));
+    ice.load('methodDetails', this._buildDetailHTML(doc, 'method', 'Methods', false));
     ice.load('typedefDetails', this._buildDetailHTML(doc, 'typedef', 'Typedefs'));
     ice.load('eventDetails', this._buildDetailHTML(doc, 'event', 'Events'));
     ice.load('constDetails', this._buildDetailHTML(doc, 'constant', 'Constants'));
@@ -99,9 +101,9 @@ export default class NamespaceDocBuilder extends DocBuilder {
     ice.load('callbackDetails', this._buildDetailHTML(doc, 'callback', 'Callbacks'));
 
     // source code
-    ice.into('sourceCodeWrap', doc._custom_source_code, (sourceCode, ice)=>{
-      ice.text('sourceCode', sourceCode);
-    });
+    //ice.into('sourceCodeWrap', doc._custom_source_code, (sourceCode, ice)=>{
+    //  ice.text('sourceCode', sourceCode);
+    //});
 
     return ice;
   }
@@ -164,13 +166,15 @@ export default class NamespaceDocBuilder extends DocBuilder {
 
     let html = [];
     for (let longname of longnames) {
-      let superDoc = this._find({longname })[0];
+      let superDoc = this._find({longname})[0];
 
-      let targetDocs = this._orderedFind('scope desc, kind desc, access desc', {
+      if (!superDoc) continue;
+
+      let targetDocs = this._orderedFind('static desc, kind desc, access desc', {
         memberof: longname,
-        kind: ['member', 'function'],
-        inherits: {isUndefined: true},
-        mixed: {isUndefined: true}
+        kind: ['member', 'method', 'get', 'set']
+        //inherits: {isUndefined: true},
+        //mixed: {isUndefined: true}
       });
 
       let title = `From ${superDoc.kind} ${this._buildDocLinkHTML(longname, longname)}`;

@@ -8,18 +8,18 @@ export default class DocResolver {
   }
 
   resolve() {
-    this._resolveGlobalNamespace();
+    //this._resolveGlobalNamespace();
     this._resolveIgnore();
-    this._resolveCustomTag();
-    this._resolveEventDoc();
-    this._resolveRequires();
+    //this._resolveCustomTag();
+    //this._resolveEventDoc();
+    //this._resolveRequires();
     this._resolveAccess();
     this._resolveLink();
-    this._resolveCallback();
-    this._resolveSourceCode();
+    //this._resolveCallback();
+    //this._resolveSourceCode();
     this._resolveExtendsChain();
-    this._resolveFileAbsPath();
-    this._resolveImportPath();
+    //this._resolveFileAbsPath();
+    //this._resolveImportPath();
   }
 
   _resolveIgnore() {
@@ -38,60 +38,60 @@ export default class DocResolver {
   _resolveAccess() {
     if (this._data.__RESOLVED_ACCESS__) return;
 
-    this._builder._data({access: {isUndefined: true}}).update({access: 'public'});
+    this._builder._data({access: {isNull: true}}).update({access: 'public'});
 
     this._data.__RESOLVED_ACCESS__ = true;
   }
 
-  _resolveGlobalNamespace() {
-    if (this._data.__RESOLVED_GLOBAL_NAMESPACE__) return;
+  //_resolveGlobalNamespace() {
+  //  if (this._data.__RESOLVED_GLOBAL_NAMESPACE__) return;
+  //
+  //  if (this._builder._config) {
+  //    if ('global' in this._builder._config.cloudy) {
+  //      if (!this._builder._config.cloudy.global) {
+  //        return;
+  //      }
+  //    }
+  //  }
+  //
+  //  var docs = this._builder._find({memberof: {isUndefined: true}});
+  //  if (docs.length) {
+  //    for (var doc of docs) {
+  //      doc.memberof = '@global';
+  //    }
+  //
+  //    var globalNamespaceDoc = {
+  //      comment: '',
+  //      longname: '@global',
+  //      name: '@global',
+  //      kind: 'namespace',
+  //      description: 'global object.',
+  //      memberof: '@global'
+  //    };
+  //    this._data.insert(globalNamespaceDoc);
+  //  }
+  //
+  //  this._data.__RESOLVED_GLOBAL_NAMESPACE__ = true;
+  //}
 
-    if (this._builder._config) {
-      if ('global' in this._builder._config.cloudy) {
-        if (!this._builder._config.cloudy.global) {
-          return;
-        }
-      }
-    }
-
-    var docs = this._builder._find({memberof: {isUndefined: true}});
-    if (docs.length) {
-      for (var doc of docs) {
-        doc.memberof = '@global';
-      }
-
-      var globalNamespaceDoc = {
-        comment: '',
-        longname: '@global',
-        name: '@global',
-        kind: 'namespace',
-        description: 'global object.',
-        memberof: '@global'
-      };
-      this._data.insert(globalNamespaceDoc);
-    }
-
-    this._data.__RESOLVED_GLOBAL_NAMESPACE__ = true;
-  }
-
-  _resolveCustomTag() {
-    if (this._data.__RESOLVED_CUSTOM_TAG__) return;
-
-    var docs = this._builder._find({tags: {isUndefined: false}});
-    for (var doc of docs) {
-      var tags = doc.tags;
-      for (var tag of tags) {
-        if (tag.originalTitle === 'fileexample') {
-          if (!doc.fileexamples) doc.fileexamples = [];
-          doc.fileexamples.push(tag.text);
-        } else if (tag.originalTitle === 'experimental') {
-          doc.experimental = tag.text;
-        }
-      }
-    }
-
-    this._data.__RESOLVED_CUSTOM_TAG__ = true;
-  }
+  //_resolveCustomTag() {
+  //  if (this._data.__RESOLVED_CUSTOM_TAG__) return;
+  //
+  //  var docs = this._builder._find({tags: {isUndefined: false}});
+  //  for (var doc of docs) {
+  //    var tags = doc.tags;
+  //    for (var tag of tags) {
+  //      if (tag.originalTitle === 'fileexample') {
+  //        if (!doc.fileexamples) doc.fileexamples = [];
+  //        doc.fileexamples.push(tag.text);
+  //      } else if (tag.originalTitle === 'experimental') {
+  //        doc.experimental = tag.text;
+  //      }
+  //    }
+  //  }
+  //
+  //  this._data.__RESOLVED_CUSTOM_TAG__ = true;
+  //}
 
   _resolveLink() {
     if(this._data.__RESOLVED_LINK__) return;
@@ -107,9 +107,9 @@ export default class DocResolver {
     this._data().each((v)=>{
       v.description = link(v.description);
 
-      if (v.classdesc) {
-        v.classdesc = link(v.classdesc);
-      }
+      //if (v.classdesc) {
+      //  v.classdesc = link(v.classdesc);
+      //}
 
       if (v.params) {
         for (var param of v.params) {
@@ -117,10 +117,8 @@ export default class DocResolver {
         }
       }
 
-      if (v.returns) {
-        for (var returnParam of v.returns) {
-          returnParam.description = link(returnParam.description);
-        }
+      if (v.return) {
+        v.return.description = link(v.return.description);
       }
 
       if (v.exceptions) {
@@ -146,53 +144,53 @@ export default class DocResolver {
     this._data.__RESOLVED_LINK__ = true;
   }
 
-  _resolveCallback() {
-    if (this._data.__RESOLVED_CALLBACK__) return;
+  //_resolveCallback() {
+  //  if (this._data.__RESOLVED_CALLBACK__) return;
+  //
+  //  var typedefDocs = this._builder._find({kind: 'typedef'});
+  //  for (var typedefDoc of typedefDocs) {
+  //    if (typedefDoc.comment.search(/\* +@callback +[\w_$]+/) !== -1) {
+  //      typedefDoc._custom_is_callback = true;
+  //    } else {
+  //      typedefDoc._custom_is_callback = false;
+  //    }
+  //  }
+  //
+  //  this._data.__RESOLVED_CALLBACK__ = true;
+  //}
 
-    var typedefDocs = this._builder._find({kind: 'typedef'});
-    for (var typedefDoc of typedefDocs) {
-      if (typedefDoc.comment.search(/\* +@callback +[\w_$]+/) !== -1) {
-        typedefDoc._custom_is_callback = true;
-      } else {
-        typedefDoc._custom_is_callback = false;
-      }
-    }
-
-    this._data.__RESOLVED_CALLBACK__ = true;
-  }
-
-  _resolveSourceCode() {
-    if (this._data.__RESOLVED_SOURCE_CODE__) return;
-
-    var docs = this._builder._find({kind: 'file'});
-    for (var doc of docs) {
-      var filePath = path.resolve(doc.meta.path, doc.meta.filename);
-      var sourceCode = fs.readFileSync(filePath, {encode: 'utf-8'});
-      doc._custom_source_code = sourceCode;
-    }
-
-    this._data.__RESOLVED_SOURCE_CODE__ = true;
-  }
+  //_resolveSourceCode() {
+  //  if (this._data.__RESOLVED_SOURCE_CODE__) return;
+  //
+  //  var docs = this._builder._find({kind: 'file'});
+  //  for (var doc of docs) {
+  //    var filePath = path.resolve(doc.meta.path, doc.meta.filename);
+  //    var sourceCode = fs.readFileSync(filePath, {encode: 'utf-8'});
+  //    doc._custom_source_code = sourceCode;
+  //  }
+  //
+  //  this._data.__RESOLVED_SOURCE_CODE__ = true;
+  //}
 
   _resolveExtendsChain() {
     if (this._data.__RESOLVED_EXTENDS_CHAIN__) return;
 
     var extendsChain = (doc) => {
-      if (!doc.augments) return;
+      if (!doc.extends) return;
 
       var selfDoc = doc;
 
       // traverse super class.
       var chains = [];
       while (1) {
-        if (!doc.augments) break;
+        if (!doc.extends) break;
 
-        var superClassDoc = this._builder._find({longname: doc.augments[0]})[0];
+        var superClassDoc = this._builder._find({longname: doc.extends[0]})[0];
         if (superClassDoc) {
           chains.push(superClassDoc.longname);
           doc = superClassDoc;
         } else {
-          chains.push(doc.augments[0]);
+          chains.push(doc.extends[0]);
           break;
         }
       }
@@ -287,113 +285,113 @@ export default class DocResolver {
     this._data.__RESOLVED_EXTENDS_CHAIN__ = true;
   }
 
-  _resolveEventDoc() {
-    if (this._builder._data.__RESOLVED_EVENT_DOC__) return;
+  //_resolveEventDoc() {
+  //  if (this._builder._data.__RESOLVED_EVENT_DOC__) return;
+  //
+  //  // JSDoc 3.3.0-beta1 (Wed, 21 Jan 2015 17:41:43 GMT)
+  //  // jsdoc has bug for `event`. for example, write jsdoc under comment.
+  //  //
+  //  // /**
+  //  //  * @module module1
+  //  //  */
+  //  // /**
+  //  //  * @event Event1
+  //  //  */
+  //  //
+  //  // correctly is {longname: 'module:module1~event:Event1}
+  //  // but {longname: 'event:Event1'}
+  //  // so, I patch to avoid this bug.
+  //
+  //  var docs = this._builder._find({kind: 'event'});
+  //  for (var doc of docs) {
+  //    var longname = doc.longname;
+  //    var memberof = doc.memberof;
+  //
+  //    if (longname.indexOf(memberof) === 0) continue;
+  //
+  //    var parentDoc = this._builder._find({longname: memberof})[0];
+  //    switch (parentDoc.kind) {
+  //      case 'module':
+  //        if (doc.scope === 'inner') {
+  //          doc.longname = `${memberof}~${longname}`;
+  //        } else {
+  //          doc.longname = `${memberof}.${longname}`;
+  //        }
+  //        break;
+  //      default:
+  //        doc.longname = `${memberof}.${longname}`;
+  //        break;
+  //    }
+  //  }
+  //
+  //  this._builder._data.__RESOLVED_EVENT_DOC__ = true;
+  //}
+  //
+  //_resolveRequires() {
+  //  if (this._builder._data.__RESOLVED_REQUIRES__) return;
+  //
+  //  // JSDoc 3.3.0-beta1 (Wed, 21 Jan 2015 17:41:43 GMT)
+  //  // jsdoc has bug for `@requires`. for example, write jsdoc under comment.
+  //  //
+  //  // /**
+  //  //  * @module module1
+  //  //  * @requires external:XMLHttpRequest
+  //  //  */
+  //  //
+  //  // correctly is {requires: ['external:XMLHttpRequest']}
+  //  // but {requires: ['module:external:XMLHttpRequest']}
+  //  // so, I patch to avoid this bug.
+  //
+  //  var docs = this._builder._find({requires: {isUndefined: false}});
+  //  for (var doc of docs) {
+  //    var requires = [];
+  //    for (var require of doc.requires) {
+  //      if (require.indexOf('module:external:') === 0) {
+  //        require = require.replace('module:', '');
+  //      }
+  //      requires.push(require);
+  //    }
+  //    doc.requires = requires;
+  //  }
+  //
+  //  this._builder._data.__RESOLVED_REQUIRES__ = true;
+  //}
 
-    // JSDoc 3.3.0-beta1 (Wed, 21 Jan 2015 17:41:43 GMT)
-    // jsdoc has bug for `event`. for example, write jsdoc under comment.
-    //
-    // /**
-    //  * @module module1
-    //  */
-    // /**
-    //  * @event Event1
-    //  */
-    //
-    // correctly is {longname: 'module:module1~event:Event1}
-    // but {longname: 'event:Event1'}
-    // so, I patch to avoid this bug.
+  //_resolveFileAbsPath() {
+  //  if (this._builder._data.__RESOLVED_FILE_LONGNAME__) return;
+  //
+  //  this._builder._data({kind: 'file'}).update(function(){
+  //    this._custom_file_abs_path = this.meta.path + path.sep + this.meta.filename;
+  //    return this;
+  //  });
+  //
+  //  this._builder._data.__RESOLVED_FILE_LONGNAME__ = true;
+  //}
 
-    var docs = this._builder._find({kind: 'event'});
-    for (var doc of docs) {
-      var longname = doc.longname;
-      var memberof = doc.memberof;
-
-      if (longname.indexOf(memberof) === 0) continue;
-
-      var parentDoc = this._builder._find({longname: memberof})[0];
-      switch (parentDoc.kind) {
-        case 'module':
-          if (doc.scope === 'inner') {
-            doc.longname = `${memberof}~${longname}`;
-          } else {
-            doc.longname = `${memberof}.${longname}`;
-          }
-          break;
-        default:
-          doc.longname = `${memberof}.${longname}`;
-          break;
-      }
-    }
-
-    this._builder._data.__RESOLVED_EVENT_DOC__ = true;
-  }
-
-  _resolveRequires() {
-    if (this._builder._data.__RESOLVED_REQUIRES__) return;
-
-    // JSDoc 3.3.0-beta1 (Wed, 21 Jan 2015 17:41:43 GMT)
-    // jsdoc has bug for `@requires`. for example, write jsdoc under comment.
-    //
-    // /**
-    //  * @module module1
-    //  * @requires external:XMLHttpRequest
-    //  */
-    //
-    // correctly is {requires: ['external:XMLHttpRequest']}
-    // but {requires: ['module:external:XMLHttpRequest']}
-    // so, I patch to avoid this bug.
-
-    var docs = this._builder._find({requires: {isUndefined: false}});
-    for (var doc of docs) {
-      var requires = [];
-      for (var require of doc.requires) {
-        if (require.indexOf('module:external:') === 0) {
-          require = require.replace('module:', '');
-        }
-        requires.push(require);
-      }
-      doc.requires = requires;
-    }
-
-    this._builder._data.__RESOLVED_REQUIRES__ = true;
-  }
-
-  _resolveFileAbsPath() {
-    if (this._builder._data.__RESOLVED_FILE_LONGNAME__) return;
-
-    this._builder._data({kind: 'file'}).update(function(){
-      this._custom_file_abs_path = this.meta.path + path.sep + this.meta.filename;
-      return this;
-    });
-
-    this._builder._data.__RESOLVED_FILE_LONGNAME__ = true;
-  }
-
-  _resolveImportPath() {
-    if (this._builder._data.__RESOLVED_IMPORT_PATH__) return;
-
-    let prefix = null;
-    if (!this._builder._config) return;
-    if ('importPath' in this._builder._config.cloudy) {
-      prefix = this._builder._config.cloudy.importPath;
-    } else {
-      return;
-    }
-
-    let inDirPath = this._builder._option._[0];
-    inDirPath = path.resolve(inDirPath);
-
-    this._builder._data({kind: ['class', 'interface', 'mixin']}).update(function(){
-      if (this.meta) {
-        let filePath = this.meta.path + path.sep + this.meta.filename;
-        let relativeFilePath = path.relative(inDirPath, filePath);
-        let importPath = path.normalize(prefix + path.sep + relativeFilePath);
-        this._custom_import_path = importPath;
-        return this;
-      }
-    });
-
-    this._builder._data.__RESOLVED_IMPORT_PATH__ = true;
-  }
+  //_resolveImportPath() {
+  //  if (this._builder._data.__RESOLVED_IMPORT_PATH__) return;
+  //
+  //  let prefix = null;
+  //  if (!this._builder._config) return;
+  //  if ('importPath' in this._builder._config.cloudy) {
+  //    prefix = this._builder._config.cloudy.importPath;
+  //  } else {
+  //    return;
+  //  }
+  //
+  //  let inDirPath = this._builder._option._[0];
+  //  inDirPath = path.resolve(inDirPath);
+  //
+  //  this._builder._data({kind: ['class', 'interface', 'mixin']}).update(function(){
+  //    if (this.meta) {
+  //      let filePath = this.meta.path + path.sep + this.meta.filename;
+  //      let relativeFilePath = path.relative(inDirPath, filePath);
+  //      let importPath = path.normalize(prefix + path.sep + relativeFilePath);
+  //      this._custom_import_path = importPath;
+  //      return this;
+  //    }
+  //  });
+  //
+  //  this._builder._data.__RESOLVED_IMPORT_PATH__ = true;
+  //}
 }

@@ -8,7 +8,8 @@ let configJSON = fs.readFileSync(configFilePath, {encode: 'utf8'});
 let config = JSON.parse(configJSON);
 
 esdoc(config, (data, config)=>{
-  let db = taffy(data);
+  let clonedData = JSON.parse(JSON.stringify(data));
+  let db = taffy(clonedData);
   db.find = function(...cond) {
     return db(...cond).map((v)=>{
       let copy = JSON.parse(JSON.stringify(v));
@@ -21,5 +22,5 @@ esdoc(config, (data, config)=>{
 
   fs.writeFileSync('./test/fixture/esdoc/dump.json', JSON.stringify(db.find({}), null, 2));
 
-  //defaultPublisher(data, config);
+  defaultPublisher(data, config);
 });
