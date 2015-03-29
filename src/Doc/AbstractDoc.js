@@ -76,12 +76,13 @@ export default class AbstractDoc {
     // todo: support nested class.
     switch (node.type) {
       case 'ClassDeclaration':
+        memberof = this._pathResolver.filePath;
         break;
       case 'MethodDefinition':
         assert(parent.type === 'ClassBody');
         while (parent) {
           if (parent.type === 'ClassDeclaration') {
-            memberof = parent.id.name;
+            memberof = `${this._pathResolver.filePath}~${parent.id.name}`;
             break;
           }
           parent = parent.parent;
@@ -91,7 +92,7 @@ export default class AbstractDoc {
       case 'ExpressionStatement':
         while (parent) {
           if (parent.type === 'ClassDeclaration') {
-            memberof = parent.id.name;
+            memberof = `${this._pathResolver.filePath}~${parent.id.name}`;
             break;
           }
           parent = parent.parent;
@@ -101,7 +102,7 @@ export default class AbstractDoc {
       default:
         while (parent) {
           if (parent.type === 'ClassDeclaration') {
-            memberof = parent.id.name;
+            memberof = `${this._pathResolver.filePath}~${parent.id.name}`;
             break;
           }
           parent = parent.parent;
@@ -122,16 +123,18 @@ export default class AbstractDoc {
 
     let longname;
     if (memberof) {
-      if (this.static) {
-        longname = `${memberof}.${name}`;
+      if (memberof.includes('~')) {
+        if (this.static) {
+          longname = `${memberof}.${name}`;
+        } else {
+          longname = `${memberof}#${name}`;
+        }
       } else {
-        longname = `${memberof}#${name}`;
+        longname = `${memberof}~${name}`;
       }
     } else {
       longname = name;
     }
-
-    longname = `${this._pathResolver.filePath}~${longname}`;
 
     this._cache.longname = longname;
 

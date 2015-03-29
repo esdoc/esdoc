@@ -115,14 +115,14 @@ function parseParam(typeText = null, paramName = null, paramDesc = null) {
         result.defaultraw = pair[1];
       }
     } else {
-      result.default = 'undefined';
-      result.defaultraw = undefined;
+      result.defaultValue = 'undefined';
+      result.defaultValueRaw = undefined;
     }
 
     result.name = pair[0];
   }
 
-  result.desc = paramDesc;
+  result.description = paramDesc;
 
   return result;
 }
@@ -139,7 +139,7 @@ export default class Tag2Value {
      * @type {DocValue}
      * @private
      */
-    this._value = {};
+    this._value = {access: null};
 
     let commentTagsMap = tagsToMap(commentTags);
     let systemTagsMap = tagsToMap(systemTags);
@@ -179,9 +179,9 @@ export default class Tag2Value {
 
   ['@desc'](commentValues, systemValues) {
     if (commentValues.length) {
-      this._value.desc = commentValues.join('\n');
+      this._value.description = commentValues.join('\n');
     } else if (systemValues.length) {
-      this._value.desc = systemValues.join('\n');
+      this._value.description = systemValues.join('\n');
     }
   }
 
@@ -218,7 +218,19 @@ export default class Tag2Value {
   }
 
   ['@example'](commentValues, systemValues) {
-    this._value.example = [...commentValues, ...systemValues];
+    this._value.examples = [...commentValues, ...systemValues];
+  }
+
+  ['@public']() {
+    this._value.access = 'public';
+  }
+
+  ['@private']() {
+    this._value.access = 'private';
+  }
+
+  ['@protected']() {
+    this._value.access = 'protected';
   }
 
   //==============================
@@ -227,22 +239,22 @@ export default class Tag2Value {
   ['@param'](commentValues, systemValues) {
     let values = commentValues.length ? commentValues : systemValues;
 
-    this._value.param = [];
+    this._value.params = [];
     for (let value of values) {
       let {typeText, paramName, paramDesc} = parseParamValue(value);
       let result = parseParam(typeText, paramName, paramDesc);
-      this._value.param.push(result);
+      this._value.params.push(result);
     }
   }
 
   ['@property'](commentValues, systemValues) {
     let values = commentValues.length ? commentValues : systemValues;
 
-    this._value.property = [];
+    this._value.properties = [];
     for (let value of values) {
       let {typeText, paramName, paramDesc} = parseParamValue(value);
       let result = parseParam(typeText, paramName, paramDesc);
-      this._value.property.push(result);
+      this._value.properties.push(result);
     }
   }
 
@@ -271,8 +283,13 @@ export default class Tag2Value {
   // for class
   //==============================
 
-  ['@interface']() {
-    this._value.interface = true;
+  ['@interface'](commentValues, systemValues) {
+    var last = l(commentValues, systemValues);
+    if (last === '' || last) {
+      this._value.interface = true;
+    } else {
+      this._value.interface = false;
+    }
   }
 
   ['@extends'](commentValues, systemValues) {

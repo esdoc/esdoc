@@ -14,6 +14,8 @@ export default class ClassDoc extends AbstractDoc {
   _apply() {
     let node = this._node;
 
+    this._push('@interface', false);
+
     if (node.superClass) {
       let longname = this._resolveLongname(node.superClass.name);
       this._push('@extends', longname);
