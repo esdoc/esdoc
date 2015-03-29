@@ -1,9 +1,9 @@
 import AbstractDoc from './AbstractDoc.js';
 
 export default class TypedefDoc extends AbstractDoc {
-  constructor(...args) {
-    super(...args);
-    this._apply();
+  constructor(ast, node, ...args) {
+    node.type = 'Typedef';
+    super(ast, node, ...args);
   }
 
   get kind() {
@@ -11,9 +11,16 @@ export default class TypedefDoc extends AbstractDoc {
   }
 
   get name() {
-    return null;
-  }
+    let name = null;
+    for (let tag of this._commentTags) {
+      if (tag.tagName === '@typedef') {
+        let matched = tag.tagValue.match(/(\S+)$/);
+        if (matched) {
+          name = matched[1];
+        }
+      }
+    }
 
-  _apply() {
+    return name;
   }
 }

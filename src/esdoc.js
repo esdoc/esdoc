@@ -5,11 +5,16 @@ import estraverse from 'estraverse';
 import ESParser from './Parser/ESParser';
 import PathResolver from './Util/PathResolver.js';
 import DocFactory from './Factory/DocFactory.js';
+import Logger from './Util/Logger.js';
 
 export default function esdoc(config, publisher) {
   assert(typeof publisher === 'function');
   assert(config.source);
   assert(config.destination);
+
+  if (config.debug) {
+    Logger.debug = true;
+  }
 
   let pattern = null;
   if (config.pattern) {
@@ -61,13 +66,8 @@ function walk(dirPath, callback) {
 }
 
 function generate(inDirPath, filePath, packageName, mainFilePath, pathPrefix) {
-  //let inDirPath = './_temp/target';
-  //let filePath = './_temp/target/MyClass1.js';
-  //let packageName = 'foo-bar';
-  //let mainFilePath = './_temp/target/MyClass1.jsaaa';
-  //let pathPrefix = '';
-
   let ast = ESParser.parse(filePath);
+  if (filePath.includes('myVariable.js')) console.log(JSON.stringify(ast, null, 2));
 
   let values = [];
   let pathResolver = new PathResolver(inDirPath, filePath, packageName, mainFilePath, pathPrefix);

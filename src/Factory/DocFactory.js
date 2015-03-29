@@ -1,15 +1,43 @@
+import Logger from '../Util/Logger.js';
 import CommentParser from '../Parser/CommentParser.js';
-import Tag2Value from './Tag2Value.js';
+import FileDoc from '../Doc/FileDoc.js';
 import ClassDoc from '../Doc/ClassDoc.js';
 import MethodDoc from '../Doc/MethodDoc.js';
-import TypedefDoc from '../Doc/TypedefDoc.js';
 import MemberDoc from '../Doc/MemberDoc.js';
+import FunctionDoc from '../Doc/FunctionDoc.js';
+import VariableDoc from '../Doc/VariableDoc.js';
+import TypedefDoc from '../Doc/TypedefDoc.js';
+import ExternalDoc from '../Doc/ExternalDoc.js';
 
 let already = Symbol('already');
+let TAG = 'DocFactory';
 
 export default class DocFactory {
   static create(ast, node, parentNode, pathResolver) {
     if (node[already]) return [];
+
+    let results = [];
+
+    // for ast
+    if (node.type === 'Program') {
+      let doc = new FileDoc(ast, node, pathResolver, []);
+      results.push(doc.value);
+
+      // ast does not child, so only comment.
+      if (ast.body.length === 0 && ast.leadingComments) {
+        for (let comment of ast.leadingComments) {
+          let tags = CommentParser.parse(comment);
+          let virtualNode = {};
+          Object.defineProperty(virtualNode, 'parent', {value: ast});
+          doc = this.createDoc(ast, virtualNode, tags, pathResolver);
+          if (doc) {
+            results.push(doc.value);
+          }
+        }
+      }
+
+      return results;
+    }
 
     let isLastNodeInParent = this._isLastNodeInParent(node, parentNode);
 
@@ -26,8 +54,6 @@ export default class DocFactory {
     if (!node.leadingComments) node.leadingComments = [];
     if (!node.trailingComments) node.trailingComments = [];
 
-    let results = [];
-
     // leading comments
     for (let i = 0; i < node.leadingComments.length; i++) {
       let comment = node.leadingComments[i];
@@ -43,8 +69,7 @@ export default class DocFactory {
       }
 
       if (doc) {
-        let tag2value = new Tag2Value(tags, doc.tags);
-        results.push(tag2value.value);
+        results.push(doc.value);
       }
     }
 
@@ -57,8 +82,20 @@ export default class DocFactory {
         Object.defineProperty(virtualNode, 'parent', {value: parentNode});
         let doc = this.createDoc(ast, virtualNode, tags, pathResolver);
         if (doc) {
-          let tag2value = new Tag2Value(tags, doc.tags);
-          results.push(tag2value.value);
+          results.push(doc.value);
+        }
+      }
+    }
+
+    // only comment
+    if (ast.body.length === 0 && ast.leadingComments) {
+      for (let comment of ast.leadingComments) {
+        let tags = CommentParser.parse(comment);
+        let virtualNode = {};
+        Object.defineProperty(virtualNode, 'parent', {value: parentNode});
+        let doc = this.createDoc(ast, virtualNode, tags, pathResolver);
+        if (doc) {
+          results.push(doc.value);
         }
       }
     }
@@ -68,23 +105,24 @@ export default class DocFactory {
 
   static createDoc(ast, node, tags, pathResolver) {
     let type = this.decideType(tags, node);
-    let clazz;
-
     if (!type) return null;
 
+    let clazz;
     switch (type) {
       case 'Class':   clazz = ClassDoc; break;
       case 'Method':  clazz = MethodDoc; break;
       case 'Member':  clazz = MemberDoc; break;
-      case 'Variable': break;
+      case 'Function': clazz = FunctionDoc; break;
+      case 'Variable': clazz = VariableDoc; break;
       case 'Typedef': clazz = TypedefDoc; break;
-      default: console.log(`unresolve: ${type}`);
+      case 'External': clazz = ExternalDoc; break;
+      default: Logger.w(TAG, `unresolve: ${type}`);
     }
 
     if (!clazz) return;
     if (!node.type) node.type = type;
 
-    return new clazz(ast, node, pathResolver);
+    return new clazz(ast, node, pathResolver, tags);
   }
 
   static decideType(tags, node) {
@@ -98,8 +136,7 @@ export default class DocFactory {
         case '@function': type = 'Function'; break;
         case '@var':      type = 'Variable'; break;
         case '@typedef':  type = 'Typedef'; break;
-        case '@callback': type = 'Callback'; break;
-        case '@event':    type = 'Event'; break;
+        case '@external': type = 'External'; break;
       }
     }
 
@@ -111,8 +148,10 @@ export default class DocFactory {
       case 'ClassDeclaration':    type = 'Class'; break;
       case 'MethodDefinition':    type = 'Method'; break;
       case 'ExpressionStatement': type = 'Member'; break;
+      case 'FunctionDeclaration': type = 'Function'; break;
       case 'VariableDeclaration': type = 'Variable'; break;
-      default: console.log(`unresolve: ${node.type}`);
+      case 'AssignmentExpression': type = 'Variable'; break;
+      default: Logger.w(TAG, `unresolve: ${node.type}`);
     }
 
     return type;

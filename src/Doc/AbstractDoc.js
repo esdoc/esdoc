@@ -1,12 +1,16 @@
-import Logger from '../Util/Logger.js';
 import assert from 'assert';
 import esquery from 'esquery';
+import Logger from '../Util/Logger.js';
+import Doc2Value from './Doc2Value.js';
+
+let TAG = 'AbstractDoc';
 
 export default class AbstractDoc {
-  constructor(ast, node, pathResolver){
+  constructor(ast, node, pathResolver, commentTags = []){
     this._ast = ast;
     this._node = node;
     this._pathResolver = pathResolver;
+    this._commentTags = commentTags;
     this._tags = [];
     this._cache = {};
 
@@ -20,8 +24,13 @@ export default class AbstractDoc {
     this._push('@importStyle', this.importname);
   }
 
-  get tags() {
-    return JSON.parse(JSON.stringify(this._tags));
+  get value() {
+    let doc2value = new Doc2Value(this._commentTags, this._tags);
+    return doc2value.value;
+  }
+
+  get variation() {
+    
   }
 
   get kind() {
@@ -57,8 +66,13 @@ export default class AbstractDoc {
           parent = parent.parent;
         }
         break;
+      case 'Program': break;
+      case 'FunctionDeclaration': break;
+      case 'VariableDeclaration': break;
+      case 'Typedef':  break;
+      case 'External': break;
       default:
-        Logger.w(`unknown node type. type = "${node.type}"`);
+        Logger.w(TAG, `unknown node type. type = "${node.type}"`);
     }
 
     this._cache.static = isStatic;
@@ -79,17 +93,29 @@ export default class AbstractDoc {
         memberof = this._pathResolver.filePath;
         break;
       case 'MethodDefinition':
-        assert(parent.type === 'ClassBody');
-        while (parent) {
-          if (parent.type === 'ClassDeclaration') {
-            memberof = `${this._pathResolver.filePath}~${parent.id.name}`;
-            break;
-          }
-          parent = parent.parent;
-        }
-        assert(memberof);
-        break;
+        //assert(parent.type === 'ClassBody');
+        //while (parent) {
+        //  if (parent.type === 'ClassDeclaration') {
+        //    memberof = `${this._pathResolver.filePath}~${parent.id.name}`;
+        //    break;
+        //  }
+        //  parent = parent.parent;
+        //}
+        //assert(memberof);
+        //break;
       case 'ExpressionStatement':
+        //while (parent) {
+        //  if (parent.type === 'ClassDeclaration') {
+        //    memberof = `${this._pathResolver.filePath}~${parent.id.name}`;
+        //    break;
+        //  }
+        //  parent = parent.parent;
+        //}
+        //assert(memberof);
+        //break;
+      case 'Typedef':
+      case 'External':
+        memberof = this._pathResolver.filePath;
         while (parent) {
           if (parent.type === 'ClassDeclaration') {
             memberof = `${this._pathResolver.filePath}~${parent.id.name}`;
@@ -97,16 +123,9 @@ export default class AbstractDoc {
           }
           parent = parent.parent;
         }
-        assert(memberof);
         break;
       default:
-        while (parent) {
-          if (parent.type === 'ClassDeclaration') {
-            memberof = `${this._pathResolver.filePath}~${parent.id.name}`;
-            break;
-          }
-          parent = parent.parent;
-        }
+        memberof = this._pathResolver.filePath;
         Logger.w(`unknown node type. type = "${node.type}"`);
     }
 
@@ -121,19 +140,25 @@ export default class AbstractDoc {
     let name = this.name;
     let memberof = this.memberof;
 
+    if (!name) {
+      this._cache.longname = null;
+      return null;
+    }
+
+    if (!memberof) {
+      this._cache.longname = name;
+      return name;
+    }
+
     let longname;
-    if (memberof) {
-      if (memberof.includes('~')) {
-        if (this.static) {
-          longname = `${memberof}.${name}`;
-        } else {
-          longname = `${memberof}#${name}`;
-        }
+    if (memberof.includes('~')) {
+      if (this.static) {
+        longname = `${memberof}.${name}`;
       } else {
-        longname = `${memberof}~${name}`;
+        longname = `${memberof}#${name}`;
       }
     } else {
-      longname = name;
+      longname = `${memberof}~${name}`;
     }
 
     this._cache.longname = longname;
@@ -204,5 +229,25 @@ export default class AbstractDoc {
     }
 
     return null;
+  }
+
+  _flattenMemberExpression(node) {
+    let results = [];
+    let target = node;
+
+    while(target) {
+      if (target.type === 'ThisExpression') {
+        results.push('this');
+        break;
+      } else if (target.type === 'Identifier') {
+        results.push(target.name);
+        break;
+      } else {
+        results.push(target.property.name);
+        target = target.object;
+      }
+    }
+
+    return results.reverse().join('.');
   }
 }

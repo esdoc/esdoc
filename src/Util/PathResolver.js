@@ -10,7 +10,7 @@ export default class PathResolver {
     this._filePath = path.resolve(filePath);
     this._packageName = packageName;
     this._mainFilePath = path.resolve(mainFilePath);
-    this._pathPrefix = pathPrefix;
+    this._pathPrefix = pathPrefix || '';
   }
 
   get importPath() {
@@ -24,6 +24,10 @@ export default class PathResolver {
     } else {
       return `./${relativeFilePath}`;
     }
+  }
+
+  get fileFullPath() {
+    return this._filePath;
   }
 
   get filePath() {

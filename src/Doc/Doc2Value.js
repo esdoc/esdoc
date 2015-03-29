@@ -127,9 +127,9 @@ function parseParam(typeText = null, paramName = null, paramDesc = null) {
   return result;
 }
 
-let TAG = 'Tag2Value';
+let TAG = 'Doc2Value';
 
-export default class Tag2Value {
+export default class Doc2Value {
   /**
    * @param {Tag[]} commentTags
    * @param {Tag[]} systemTags
@@ -153,13 +153,13 @@ export default class Tag2Value {
       let commentValues = commentTagsMap[tagName] || [];
       let systemValues = systemTagsMap[tagName] || [];
 
-        if (this[tagName]) {
-          if (commentValues.length || systemValues.length) {
-            this[tagName](commentValues, systemValues, commentTagsMap, systemTagsMap);
-          }
-        } else {
-          this['@unknown'](tagName, commentValues, systemValues);
+      if (this[tagName]) {
+        if (commentValues.length || systemValues.length) {
+          this[tagName](commentValues, systemValues, commentTagsMap, systemTagsMap);
         }
+      } else {
+        this['@unknown'](tagName, commentValues, systemValues);
+      }
     }
   }
 
@@ -233,6 +233,10 @@ export default class Tag2Value {
     this._value.access = 'protected';
   }
 
+  ['@see'](commentValues, systemValues) {
+    this._value.see = [...commentValues, ...systemValues];
+  }
+
   //==============================
   // for method
   //==============================
@@ -298,6 +302,31 @@ export default class Tag2Value {
     } else if (systemValues.length) {
       this._value.extends = [...systemValues];
     }
+  }
+
+  //============================================
+  // for typedef, external, file
+  //============================================
+
+  ['@typedef'](commentValues, systemValues) {
+    var value = l(commentValues, systemValues);
+    this._value.kind = 'typedef';
+    let {typeText, paramName, paramDesc} = parseParamValue(value, true, true, false);
+    let result = parseParam(typeText);
+
+    delete result.description;
+    delete result.nullable;
+    delete result.spread;
+
+    this._value.type = result;
+  }
+
+  ['@external'](commentValues, systemValues, commentTagsMap, systemTagsMap) {
+    //see ExternalDoc.js
+  }
+
+  ['@content'](commentValues, systemValues) {
+    this._value.content = l(commentValues, systemValues);
   }
 }
 
