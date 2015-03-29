@@ -9,6 +9,10 @@ export default class MethodDoc extends AbstractDoc {
     this['@property']();
     this['@return']();
     this['@type']();
+
+    delete this._value.export;
+    delete this._value.importPath;
+    delete this._value.importStyle;
   }
 
   ['@kind']() {

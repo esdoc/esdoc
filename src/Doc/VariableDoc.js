@@ -1,5 +1,6 @@
 import AbstractDoc from './AbstractDoc.js';
 import MemberDoc from './MemberDoc.js';
+import FunctionDoc from './FunctionDoc.js';
 import Logger from '../Util/Logger.js';
 
 export default class VariableDoc extends AbstractDoc {
@@ -8,6 +9,11 @@ export default class VariableDoc extends AbstractDoc {
 
     this['@property']();
     this['@type']();
+
+    if (this._value.kind === 'function') {
+      FunctionDoc.prototype['@param'].call(this);
+      FunctionDoc.prototype['@return'].call(this);
+    }
   }
 
   ['@kind']() {

@@ -6,6 +6,10 @@ export default class FileDoc extends AbstractDoc {
     super._apply();
 
     this['@content']();
+
+    delete this._value.export;
+    delete this._value.importPath;
+    delete this._value.importStyle;
   }
 
   ['@kind']() {

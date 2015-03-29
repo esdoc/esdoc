@@ -7,6 +7,14 @@ export default class ExternalDoc extends AbstractDoc {
   //  super(ast, node, ...args);
   //}
 
+  _apply() {
+    super._apply();
+
+    delete this._value.export;
+    delete this._value.importPath;
+    delete this._value.importStyle;
+  }
+
   ['@kind']() {
     super['@kind']();
     if (this._value.kind) return;

@@ -19,8 +19,7 @@ esdoc(config, (data, config)=>{
   };
   global.db = db;
 
-  console.log(db.find({kind: 'class'}));
-  console.log(db.find({name: '_p1'}));
+  fs.writeFileSync('./test/fixture/esdoc/dump.json', JSON.stringify(db.find({}), null, 2));
 
-  defaultPublisher(data, config);
+  //defaultPublisher(data, config);
 });

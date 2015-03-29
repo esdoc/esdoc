@@ -1,4 +1,4 @@
-import SuperMyClass from './OtherClass/SuperMyClass.js';
+import SuperMyClass1 from './OtherClass/SuperMyClass.js';
 
 /**
  * this is MyClass1 desc.
@@ -11,7 +11,7 @@ import SuperMyClass from './OtherClass/SuperMyClass.js';
  *   let foo = v;
  * }
  */
-export default class MyClass1 extends SuperMyClass {
+export default class MyClass1 extends SuperMyClass1 {
   /**
    * this is staticValue(get) desc.
    * @type {number}
@@ -30,6 +30,12 @@ export default class MyClass1 extends SuperMyClass {
    * this is staticMethod desc.
    */
   static staticMethod() {
+    /**
+     * this is static _p1 desc.
+     * @type {number}
+     * @private
+     */
+    this._p1 = 123;
   }
 
   /**

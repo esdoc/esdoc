@@ -10,6 +10,10 @@ export default class MemberDoc extends AbstractDoc {
     this['@property']();
     this['@type']();
     this['@member']();
+
+    delete this._value.export;
+    delete this._value.importPath;
+    delete this._value.importStyle;
   }
 
   ['@kind']() {

@@ -81,16 +81,13 @@ export default class ParamParser {
       // check default value
       let pair = paramName.split('=');
       if (pair.length === 2) {
-        result.default = pair[1];
+        result.defaultValue = pair[1];
         try {
           let raw = JSON.parse(pair[1]);
-          result.defaultraw = raw;
+          result.defaultRaw = raw;
         } catch (e) {
-          result.defaultraw = pair[1];
+          result.defaultRaw = pair[1];
         }
-      } else {
-        result.defaultValue = 'undefined';
-        result.defaultValueRaw = undefined;
       }
 
       result.name = pair[0];
