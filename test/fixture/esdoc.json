@@ -7,8 +7,6 @@
   "readme": "./test/fixture/README.md",
   "package": "./test/fixture/package.json",
   "private": true,
-  "title": "ESDoc Test Fixture",
-  "description": "ESDoc Test Fixture description.",
   "importPathPrefix": "",
   "styles": [],
   "scripts": []

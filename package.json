@@ -23,7 +23,8 @@
     "minimist": "^1.1.1",
     "taffydb": "",
     "escape-html": "",
-    "ice-cap": ""
+    "ice-cap": "",
+    "marked": ""
   },
   "devDependencies": {
     "babel": "",

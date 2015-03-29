@@ -6,13 +6,13 @@ export default class IndexDocBuilder extends DocBuilder {
   exec(callback) {
     var ice = this._buildLayoutDoc();
     ice.load('content', this._buildIndexDoc());
-    callback(ice.html, 'index.html');
+    callback(ice.html, '@index.html');
   }
 
   _buildIndexDoc() {
     var indexInfo = this._getIndexInfo();
 
-    var ice = new IceCap(this._readTemplate('index.html'));
+    var ice = new IceCap(this._readTemplate('@index.html'));
 
     ice.text('title', indexInfo.title);
     ice.text('version', indexInfo.version, 'append');

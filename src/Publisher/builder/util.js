@@ -1,3 +1,5 @@
+import marked from 'marked';
+
 export function shorten(doc) {
   if (!doc) return '';
 
@@ -34,4 +36,16 @@ export function shorten(doc) {
   }
 
   return desc.substr(0, len);
+}
+
+export function markdown(text) {
+  let compiled = marked(text, {
+    gfm: true,
+    tables: true,
+    highlight: function (code) {
+      return `<pre class="source-code"><code class="prettyprint">${code}</code></pre>`;
+    }
+  });
+
+  return compiled;
 }

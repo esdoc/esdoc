@@ -42,8 +42,30 @@ export default class DocBuilder {
     return fs.readFileSync(filePath, {encoding: 'utf-8'});
   }
 
+  _getInfo() {
+    var config = this._config;
+    if (config.package) {
+      var packagePath = config.package;
+      var json = fs.readFileSync(packagePath, {encoding: 'utf-8'});
+      var packageObj = JSON.parse(json);
+    }
+
+    var indexInfo = {
+      version: config.version || packageObj.version,
+      url: config.url || packageObj.repository ? packageObj.repository.url : ''
+    };
+
+    return indexInfo;
+  }
+
   _buildLayoutDoc() {
+    let info = this._getInfo();
+
     var ice = new IceCap(this._readTemplate('layout.html'), {autoClose: false});
+
+    ice.text('version', info.version);
+    ice.text('url', info.url);
+    ice.attr('url', 'href', info.url);
 
     // see StaticFileBuilder#exec
     ice.loop('userScript', this._config.scripts, (i, userScript, ice)=>{
