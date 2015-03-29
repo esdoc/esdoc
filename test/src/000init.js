@@ -20,7 +20,7 @@ esdoc(config, (data, config)=>{
   };
   global.db = db;
 
-  fs.writeFileSync('./test/fixture/esdoc/dump.json', JSON.stringify(db.find({}), null, 2));
-
   defaultPublisher(data, config);
+
+  fs.writeFileSync('./test/fixture/esdoc/dump.json', JSON.stringify(db.find({}), null, 2));
 });
