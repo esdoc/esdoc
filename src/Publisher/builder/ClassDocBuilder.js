@@ -48,8 +48,6 @@ export default class ClassDocBuilder extends DocBuilder {
     ice.load('description', doc.description);
     ice.load('deprecated', this._buildDeprecatedHTML(doc));
     ice.load('experimental', this._buildExperimentalHTML(doc));
-    ice.load('require', this._buildDocsLinkHTML(doc.requires), 'append');
-    ice.load('author', this._buildAuthorHTML(doc), 'append');
     ice.load('see', this._buildDocsLinkHTML(doc.see), 'append');
     ice.load('todo', this._buildDocsLinkHTML(doc.todo), 'append');
 
