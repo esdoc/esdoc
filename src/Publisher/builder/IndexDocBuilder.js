@@ -4,15 +4,15 @@ import DocBuilder from './DocBuilder.js';
 
 export default class IndexDocBuilder extends DocBuilder {
   exec(callback) {
-    var ice = this._buildLayoutDoc();
+    let ice = this._buildLayoutDoc();
     ice.load('content', this._buildIndexDoc());
     callback(ice.html, '@index.html');
   }
 
   _buildIndexDoc() {
-    var indexInfo = this._getInfo();
+    let indexInfo = this._getInfo();
 
-    var ice = new IceCap(this._readTemplate('@index.html'));
+    let ice = new IceCap(this._readTemplate('@index.html'));
 
     ice.text('title', indexInfo.title);
     ice.text('version', indexInfo.version, 'append');

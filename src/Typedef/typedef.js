@@ -33,3 +33,9 @@
  * @property {function} drop
  * @property {string} html
  */
+
+/**
+ * @todo remove this typedef.
+ * @typedef {Object} TaffyCursor
+ * @property {function} each
+ */

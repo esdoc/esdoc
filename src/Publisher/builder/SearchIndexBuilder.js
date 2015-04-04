@@ -4,11 +4,7 @@ import DocBuilder from './DocBuilder.js';
 export default class StaticFileBuilder extends DocBuilder {
   exec(callback) {
     let searchIndex = [];
-    let docs = this._find({
-      //kind: {'!is': 'package'},
-      //inherited: {isUndefined: true},
-      //mixed: {isUndefined: true}
-    });
+    let docs = this._find({});
 
     for (let doc of docs) {
       let indexText, url, displayText;

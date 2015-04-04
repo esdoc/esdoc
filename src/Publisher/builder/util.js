@@ -5,18 +5,18 @@ export function shorten(doc) {
 
   if (doc.summary) return doc.summary;
 
-  var desc = doc.description;
+  let desc = doc.description;
   if (!desc) return '';
 
-  var len = desc.length;
-  var inSQuote = false;
-  var inWQuote = false;
-  var inCode = false;
-  for (var i = 0; i < desc.length; i++) {
-    var char1 = desc.charAt(i);
-    var char2 = desc.charAt(i + 1);
-    var char4 = desc.substr(i, 6);
-    var char5 = desc.substr(i, 7);
+  let len = desc.length;
+  let inSQuote = false;
+  let inWQuote = false;
+  let inCode = false;
+  for (let i = 0; i < desc.length; i++) {
+    let char1 = desc.charAt(i);
+    let char2 = desc.charAt(i + 1);
+    let char4 = desc.substr(i, 6);
+    let char5 = desc.substr(i, 7);
     if (char1 === "'") inSQuote = !inSQuote;
     else if (char1 === '"') inWQuote = !inWQuote;
     else if (char4 === '<code>') inCode = true;
