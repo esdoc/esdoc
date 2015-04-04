@@ -340,6 +340,21 @@ pre.source-code {
   padding: 4px;
 }
 
+pre.source-code.line-number {
+  padding: 0;
+}
+
+pre.source-code ol {
+  background: #eee;
+  padding-left: 40px;
+}
+
+pre.source-code li {
+  background: white;
+  padding-left: 4px;
+  list-style: decimal;
+}
+
 /* search box */
 .search-box {
   position: absolute;

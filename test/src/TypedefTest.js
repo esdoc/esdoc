@@ -6,7 +6,7 @@ describe('MyTypedef:', ()=> {
   it('has MyTypedef1.', ()=> {
     let docs = db.find({name: 'MyTypedef1'});
     assert.equal(docs.length, 1);
-    assert.deepEqual(docs[0],
+    assert.doc(docs[0],
     {
       "kind": "typedef",
       "static": true,

@@ -6,7 +6,7 @@ describe('myFunctions:', ()=> {
   it('has myFunction1.', ()=>{
     let docs = db.find({name: 'myFunction1'});
     assert.equal(docs.length, 1);
-    assert.deepEqual(docs[0],
+    assert.doc(docs[0],
     {
       "kind": "function",
       "static": true,
@@ -25,7 +25,7 @@ describe('myFunctions:', ()=> {
   it('has myFunction2.', ()=>{
     let docs = db.find({name: 'myFunction2'});
     assert.equal(docs.length, 1);
-    assert.deepEqual(docs[0],
+    assert.doc(docs[0],
     {
       "kind": "function",
       "static": true,
@@ -66,7 +66,7 @@ describe('myFunctions:', ()=> {
   it('has myFunction3.', ()=>{
     let docs = db.find({name: 'myFunction3'});
     assert.equal(docs.length, 1);
-    assert.deepEqual(docs[0],
+    assert.doc(docs[0],
     {
       "kind": "function",
       "static": true,
@@ -93,7 +93,7 @@ describe('myFunctions:', ()=> {
   it('has myFunction4.', ()=>{
     let docs = db.find({name: 'myFunction4'});
     assert.equal(docs.length, 1);
-    assert.deepEqual(docs[0],
+    assert.doc(docs[0],
     {
       "kind": "function",
       "static": true,
@@ -142,7 +142,7 @@ describe('myFunctions:', ()=> {
   it('has myFunction5.', ()=>{
     let docs = db.find({name: 'myFunction5'});
     assert.equal(docs.length, 1);
-    assert.deepEqual(docs[0],
+    assert.doc(docs[0],
     {
       "kind": "function",
       "static": true,

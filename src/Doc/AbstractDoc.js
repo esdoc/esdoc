@@ -30,6 +30,7 @@ export default class AbstractDoc {
     this['@desc']();
     this['@example']();
     this['@see']();
+    this['@lineNumber']();
   }
 
   ['@kind']() {
@@ -180,6 +181,19 @@ export default class AbstractDoc {
     this._value.see = [];
     for (let tag of tags) {
       this._value.see.push(tag.tagValue);
+    }
+  }
+
+  ["@lineNumber"]() {
+    let tag = this._find(['@lineNumber']);
+    if (tag) {
+      this._value.lineNumber = tag.tagValue;
+      return;
+    }
+
+    let node = this._node;
+    if (node.loc) {
+      this._value.lineNumber = node.loc.start.line;
     }
   }
 

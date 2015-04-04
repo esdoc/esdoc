@@ -9,6 +9,7 @@ export default class ESParser {
     return espree.parse(code, {
       comments: true,
       attachComment: true,
+      loc: true,
       ecmaFeatures: {
         arrowFunctions: true,
         blockBindings: true,

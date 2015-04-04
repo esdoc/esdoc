@@ -8,7 +8,7 @@ describe('files:', ()=> {
     let content = fs.readFileSync('./test/fixture/src/MyClass.js').toString();
     let docs = db.find({kind: 'file', name: 'src/MyClass.js'});
     assert.equal(docs.length, 1);
-    assert.deepEqual(docs[0],
+    assert.doc(docs[0],
     {
       "kind": "file",
       "static": true,
@@ -26,7 +26,7 @@ describe('files:', ()=> {
     let content = fs.readFileSync('./test/fixture/src/OtherClass/SuperMyClass.js').toString();
     let docs = db.find({kind: 'file', name: 'src/OtherClass/SuperMyClass.js'});
     assert.equal(docs.length, 1);
-    assert.deepEqual(docs[0],
+    assert.doc(docs[0],
     {
       "kind": "file",
       "static": true,

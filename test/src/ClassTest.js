@@ -1,4 +1,4 @@
-import assert from 'power-assert';
+import assert from './Util/assert.js';
 
 describe('MyClass1:', ()=>{
   let db = global.db;
@@ -7,7 +7,7 @@ describe('MyClass1:', ()=>{
   it('has class doc.', ()=>{
     let docs = db.find({name: 'MyClass1'});
     assert.equal(docs.length, 1);
-    assert.deepEqual(docs[0],
+    assert.doc(docs[0],
     {
       "kind": "class",
       "static": true,
@@ -34,7 +34,7 @@ describe('MyClass1:', ()=>{
   it('has static get method.', ()=>{
     let docs = db.find({name: 'staticValue', kind: 'get', memberof: classDoc.longname});
     assert.equal(docs.length, 1);
-    assert.deepEqual(docs[0],
+    assert.doc(docs[0],
     {
       "kind": "get",
       "static": true,
@@ -58,7 +58,7 @@ describe('MyClass1:', ()=>{
   it('has static set method.', ()=>{
     let docs = db.find({name: 'staticValue', kind: 'set', memberof: classDoc.longname});
     assert.equal(docs.length, 1);
-    assert.deepEqual(docs[0],
+    assert.doc(docs[0],
     {
       "kind": "set",
       "static": true,
@@ -82,7 +82,7 @@ describe('MyClass1:', ()=>{
   it('has static method.', ()=>{
     let docs = db.find({name: 'staticMethod', kind: 'method', memberof: classDoc.longname});
     assert.equal(docs.length, 1);
-    assert.deepEqual(docs[0],
+    assert.doc(docs[0],
     {
       "kind": "method",
       "static": true,
@@ -98,7 +98,7 @@ describe('MyClass1:', ()=>{
   it('has static member.', ()=>{
     let docs = db.find({name: '_p1', kind: 'member', static: true, memberof: classDoc.longname});
     assert.equal(docs.length, 1);
-    assert.deepEqual(docs[0],
+    assert.doc(docs[0],
     {
       "kind": "member",
       "static": true,
@@ -122,7 +122,7 @@ describe('MyClass1:', ()=>{
   it('has constructor.', ()=>{
     let docs = db.find({kind: 'constructor', memberof: classDoc.longname});
     assert.equal(docs.length, 1);
-    assert.deepEqual(docs[0],
+    assert.doc(docs[0],
     {
       "kind": "constructor",
       "static": false,
@@ -150,7 +150,7 @@ describe('MyClass1:', ()=>{
   it('has get method.', ()=>{
     let docs = db.find({kind: 'get', name: 'value', memberof: classDoc.longname});
     assert.equal(docs.length, 1);
-    assert.deepEqual(docs[0],
+    assert.doc(docs[0],
     {
       "kind": "get",
       "static": false,
@@ -174,7 +174,7 @@ describe('MyClass1:', ()=>{
   it('has set method.', ()=>{
     let docs = db.find({kind: 'set', name: 'value', memberof: classDoc.longname});
     assert.equal(docs.length, 1);
-    assert.deepEqual(docs[0],
+    assert.doc(docs[0],
     {
       "kind": "set",
       "static": false,
@@ -198,7 +198,7 @@ describe('MyClass1:', ()=>{
   it('has member.', ()=>{
     let docs = db.find({kind: 'member', name: '_p1', static: false, memberof: classDoc.longname});
     assert.equal(docs.length, 1);
-    assert.deepEqual(docs[0],
+    assert.doc(docs[0],
     {
       "kind": "member",
       "static": false,
@@ -222,7 +222,7 @@ describe('MyClass1:', ()=>{
   it('has method.', ()=>{
     let docs = db.find({kind: 'method', name: 'method', memberof: classDoc.longname});
     assert.equal(docs.length, 1);
-    assert.deepEqual(docs[0],
+    assert.doc(docs[0],
     {
       "kind": "method",
       "static": false,
@@ -389,7 +389,7 @@ describe('MyClass2:', ()=> {
   it('has class doc.', ()=> {
     let docs = db.find({name: 'MyClass2'});
     assert.equal(docs.length, 1);
-    assert.deepEqual(docs[0],
+    assert.doc(docs[0],
     {
       "kind": "class",
       "static": true,
@@ -413,7 +413,7 @@ describe('MyClass3:', ()=> {
   it('has class doc.', ()=> {
     let docs = db.find({name: 'MyClass3'});
     assert.equal(docs.length, 1);
-    assert.deepEqual(docs[0],
+    assert.doc(docs[0],
     {
       "kind": "class",
       "static": true,
@@ -437,7 +437,7 @@ describe('MyClass4:', ()=> {
   it('has class doc.', ()=> {
     let docs = db.find({name: 'MyClass4'});
     assert.equal(docs.length, 1);
-    assert.deepEqual(docs[0],
+    assert.doc(docs[0],
       {
         "kind": "class",
         "static": true,
@@ -461,7 +461,7 @@ describe('SuperMyClass1:', ()=> {
   it('has class doc.', ()=> {
     let docs = db.find({name: 'SuperMyClass1'});
     assert.equal(docs.length, 1);
-    assert.deepEqual(docs[0],
+    assert.doc(docs[0],
     {
       "kind": "class",
       "static": true,

@@ -6,7 +6,7 @@ describe('myVariables:', ()=> {
   it('has myVariable1.', ()=>{
     let docs = db.find({name: 'myVariable1'});
     assert.equal(docs.length, 1);
-    assert.deepEqual(docs[0],
+    assert.doc(docs[0],
     {
       "kind": "variable",
       "static": true,
@@ -25,7 +25,7 @@ describe('myVariables:', ()=> {
   it('has myVariable2.', ()=>{
     let docs = db.find({name: 'myVariable2'});
     assert.equal(docs.length, 1);
-    assert.deepEqual(docs[0],
+    assert.doc(docs[0],
     {
       "kind": "variable",
       "static": true,
@@ -44,7 +44,7 @@ describe('myVariables:', ()=> {
   it('has myVariable3.', ()=>{
     let docs = db.find({name: 'myVariable3'});
     assert.equal(docs.length, 1);
-    assert.deepEqual(docs[0],
+    assert.doc(docs[0],
     {
       "kind": "variable",
       "static": true,

@@ -6,7 +6,7 @@ describe('external:', ()=> {
   it('has string external.', ()=> {
     let docs = db.find({name: 'string'});
     assert.equal(docs.length, 1);
-    assert.deepEqual(docs[0],
+    assert.doc(docs[0],
     {
       "kind": "external",
       "static": true,
@@ -25,7 +25,7 @@ describe('external:', ()=> {
   it('has XMLHttpRequest external.', ()=>{
     let docs = db.find({name: 'XMLHttpRequest'});
     assert.equal(docs.length, 1);
-    assert.deepEqual(docs[0],
+    assert.doc(docs[0],
     {
       "kind": "external",
       "static": true,
