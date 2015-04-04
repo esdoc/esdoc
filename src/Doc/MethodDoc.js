@@ -12,7 +12,7 @@ export default class MethodDoc extends AbstractDoc {
     this['@abstract']();
     this['@override']();
     this['@throws']();
-    this['@fires']();
+    this['@emits']();
     this['@listens']();
 
     delete this._value.export;
@@ -119,15 +119,15 @@ export default class MethodDoc extends AbstractDoc {
     }
   }
 
-  ['@fires'](){
-    let values = this._findAllTagValues(['@fires']);
+  ['@emits'](){
+    let values = this._findAllTagValues(['@emits']);
     if (!values) return;
 
-    this._value.fires = [];
+    this._value.emits = [];
     for (let value of values) {
       let {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value, true, false, true);
       let result = ParamParser.parseParam(typeText, paramName, paramDesc);
-      this._value.fires.push({
+      this._value.emits.push({
         types: result.types,
         description: result.description
       });

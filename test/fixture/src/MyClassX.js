@@ -7,7 +7,6 @@
  * @version 1.2.3
  * @todo this is MyClassX todo1.
  * @todo this is MyClassX todo2.
- * @ignore
  */
 export default class MyClassX {
   /**
@@ -17,10 +16,18 @@ export default class MyClassX {
    * @override
    * @throws {ErrorX} this is throws ErrorX desc.
    * @throws {ErrorY} this is throws ErrorY desc.
-   * @fires {EventX} this is fires EventX desc.
-   * @fires {EventY} this is fires EventY desc.
+   * @emits {EventX} this is emits EventX desc.
+   * @emits {EventY} this is emits EventY desc.
    * @listens {EventX} this is listens EventX desc.
    * @listens {EventY} this is listens EventY desc.
    */
   method() {}
+}
+
+/**
+ * this is IgnoredClass desc.
+ * @ignore
+ */
+export class IgnoredClass {
+
 }

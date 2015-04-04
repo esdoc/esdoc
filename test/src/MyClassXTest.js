@@ -19,7 +19,7 @@ describe('MyClassX:', ()=>{
       "importPath": "esdoc-test-fixture/src/MyClassX.js",
       "importStyle": "MyClassX",
       "description": "this is MyClassX desc.",
-      "lineNumber": 12,
+      "lineNumber": 11,
       "deprecated": "use MyClassXX instead of this class.",
       "since": "0.0.1",
       "version": "1.2.3",
@@ -27,7 +27,6 @@ describe('MyClassX:', ()=>{
         "this is MyClassX todo1.",
         "this is MyClassX todo2."
       ],
-      "ignore": true,
       "interface": false,
       "implements": [
         "InterfaceX",
@@ -49,7 +48,7 @@ describe('MyClassX:', ()=>{
       "longname": "src/MyClassX.js~MyClassX#method",
       "access": null,
       "description": "this is MyClassX#method desc.",
-      "lineNumber": 25,
+      "lineNumber": 24,
       "experimental": "this method is dangerous.",
       "abstract": true,
       "override": true,
@@ -67,18 +66,18 @@ describe('MyClassX:', ()=>{
           "description": "this is throws ErrorY desc."
         }
       ],
-      "fires": [
+      "emits": [
         {
           "types": [
             "EventX"
           ],
-          "description": "this is fires EventX desc."
+          "description": "this is emits EventX desc."
         },
         {
           "types": [
             "EventY"
           ],
-          "description": "this is fires EventY desc."
+          "description": "this is emits EventY desc."
         }
       ],
       "listens": [
@@ -95,6 +94,29 @@ describe('MyClassX:', ()=>{
           "description": "this is listens EventY desc."
         }
       ]
+    });
+  });
+});
+
+describe('IgnoredClass:', ()=>{
+  it('does not have IgnoredClass.', ()=>{
+    let docs = db.find({name: 'IgnoredClass'});
+    assert.equal(docs.length, 1);
+    assert.doc(docs[0], {
+      "kind": "class",
+      "static": true,
+      "variation": null,
+      "name": "IgnoredClass",
+      "memberof": "src/MyClassX.js",
+      "longname": "src/MyClassX.js~IgnoredClass",
+      "access": null,
+      "export": true,
+      "importPath": "esdoc-test-fixture/src/MyClassX.js",
+      "importStyle": "{IgnoredClass}",
+      "description": "this is IgnoredClass desc.",
+      "lineNumber": 31,
+      "ignore": true,
+      "interface": false
     });
   });
 });

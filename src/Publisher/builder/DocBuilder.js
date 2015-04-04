@@ -135,27 +135,20 @@ export default class DocBuilder {
   }
 
   _findAccessDocs(doc, kind, isStatic = true) {
-    // todo: refactor
-    let memberof = doc ? doc.longname : null;
     let cond = {kind, static: isStatic};
-    if (cond.memberof) cond.memberof = memberof;
+
+    if (doc) cond.memberof = doc.longname;
 
     switch (kind) {
       case 'class':
         cond.interface = false;
-        //cond = {kind: 'class', memberof, static: isStatic, interface: false};
         break;
       case 'interface':
         cond.interface = true;
-        //cond = {kind: 'class', memberof, static: isStatic, interface: true};
         break;
       case 'member':
         cond.kind = ['member', 'get', 'set'];
-        //cond = {kind: ['member', 'get', 'set'], memberof, static: isStatic};
         break;
-      //default:
-      //  cond = {kind: kind, memberof, static: isStatic};
-      //  break;
     }
 
     let publicDocs = this._find(cond, {access: 'public'});
@@ -263,8 +256,8 @@ export default class DocBuilder {
       ice.load('deprecated', this._buildDeprecatedHTML(doc));
       ice.load('experimental', this._buildExperimentalHTML(doc));
       ice.text('version', doc.version, 'append');
-      ice.load('fire', this._buildDocsLinkHTML(doc.fires), 'append');
-      ice.load('listen', this._buildDocsLinkHTML(doc.listens), 'append');
+      //ice.load('fire', this._buildFiresHTML(doc.fires), 'append');
+      //ice.load('listen', this._buildFiresHTML(doc.listens), 'append');
       ice.load('see', this._buildDocsLinkHTML(doc.see), 'append');
       ice.load('todo', this._buildDocsLinkHTML(doc.todo), 'append');
 
@@ -301,6 +294,26 @@ export default class DocBuilder {
         });
       } else {
         ice.drop('throwWrap');
+      }
+
+      // fires
+      if (doc.emits) {
+        ice.loop('emit', doc.emits, (i, emitDoc, ice)=>{
+          ice.load('emitName', this._buildDocLinkHTML(emitDoc.types[0]));
+          ice.load('emitDesc', emitDoc.description);
+        });
+      } else {
+        ice.drop('emitWrap');
+      }
+
+      // listens
+      if (doc.listens) {
+        ice.loop('listen', doc.listens, (i, listenDoc, ice)=>{
+          ice.load('listenName', this._buildDocLinkHTML(listenDoc.types[0]));
+          ice.load('listenDesc', listenDoc.description);
+        });
+      } else {
+        ice.drop('listenWrap');
       }
 
       // example
@@ -542,6 +555,24 @@ export default class DocBuilder {
       return '';
     }
   }
+
+  //// fires, listens, events
+  //_buildFiresHTML(fires) {
+  //  if (!fires) return;
+  //  if (!fires.length) return;
+  //
+  //  let links = [];
+  //  for (let fire of fires) {
+  //    let longname = fire.types[0];
+  //    if (!longname) continue;
+  //    let link = this._buildDocLinkHTML(longname, longname, false);
+  //    links.push(`<li>${link}</li>`);
+  //  }
+  //
+  //  if (!links.length) return;
+  //
+  //  return `<ul>${links.join('\n')}</ul>`;
+  //}
 
   //_buildAuthorHTML(doc, separator = '\n') {
   //  if (!doc.author) return '';
