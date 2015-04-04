@@ -31,6 +31,12 @@ export default class AbstractDoc {
     this['@example']();
     this['@see']();
     this['@lineNumber']();
+    this['@deprecated']();
+    this['@experimental']();
+    this['@since']();
+    this['@version']();
+    this['@todo']();
+    this['@ignore']();
   }
 
   ['@kind']() {
@@ -194,6 +200,59 @@ export default class AbstractDoc {
     let node = this._node;
     if (node.loc) {
       this._value.lineNumber = node.loc.start.line;
+    }
+  }
+
+  ['@deprecated']() {
+    let tag = this._find(['@deprecated']);
+    if (tag) {
+      if (tag.tagValue) {
+        this._value.deprecated = tag.tagValue;
+      } else {
+        this._value.deprecated = true;
+      }
+    }
+  }
+
+  ['@experimental'](){
+    let tag = this._find(['@experimental']);
+    if (tag) {
+      if (tag.tagValue) {
+        this._value.experimental = tag.tagValue;
+      } else {
+        this._value.experimental = true;
+      }
+    }
+  }
+
+  ['@since'](){
+    let tag = this._find(['@since']);
+    if (tag) {
+      this._value.since = tag.tagValue;
+    }
+  }
+
+  ['@version'](){
+    let tag = this._find(['@version']);
+    if (tag) {
+      this._value.version = tag.tagValue;
+    }
+  }
+
+  ['@todo'](){
+    let tags = this._findAll(['@todo']);
+    if (tags) {
+      this._value.todo = [];
+      for (let tag of tags) {
+        this._value.todo.push(tag.tagValue);
+      }
+    }
+  }
+
+  ['@ignore'](){
+    let tag = this._find(['@ignore']);
+    if (tag) {
+      this._value.ignore = true;
     }
   }
 

@@ -20,6 +20,7 @@
 - [x] @member
 - [x] @interface
 - [x] @extends
+- [x] @access
 - [x] @public
 - [x] @private
 - [x] @protected
@@ -30,17 +31,17 @@
 - [x] @function
 - [x] @variable
 - [x] @variation
+- [x] @abstract
+- [x] @deprecated
+- [x] @experimental
+- [x] @implements
+- [x] @override
+- [x] @since
+- [x] @throws
+- [x] @fires
+- [x] @listens
+- [x] @version
+- [x] @todo
+- [x] @ignore
 
-- [ ] @abstract
-- [ ] @deprecated
-- [ ] @experimental
-- [ ] @implements
-- [ ] @override
 - [ ] @readonly
-- [ ] @since
-- [ ] @throw
-- [ ] @fire
-- [ ] @listen
-- [ ] @version
-- [ ] @todo
-- [ ] @ignore

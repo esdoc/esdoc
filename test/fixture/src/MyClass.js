@@ -88,6 +88,18 @@ export default class MyClass1 extends SuperMyClass1 {
    */
   method(p1, p2, p3, p4, p5, p6, p7, p8, p9) {
   }
+
+  /**
+   * this is protectedMethod desc.
+   * @protected
+   */
+  protectedMethod(){}
+
+  /**
+   * this is privateMethod desc.
+   * @private
+   */
+  privateMethod(){}
 }
 
 /**

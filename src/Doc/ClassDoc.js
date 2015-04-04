@@ -6,15 +6,7 @@ export default class ClassDoc extends AbstractDoc {
 
     this['@interface']();
     this['@extends']();
-
-    //let node = this._node;
-    //
-    //this._push('@interface', false);
-    //
-    //if (node.superClass) {
-    //  let longname = this._resolveLongname(node.superClass.name);
-    //  this._push('@extends', longname);
-    //}
+    this['@implements']();
   }
 
   ['@kind']() {
@@ -22,12 +14,6 @@ export default class ClassDoc extends AbstractDoc {
     if (this._value.kind) return;
     this._value.kind = 'class';
   }
-
-  //['@static']() {
-  //  super['@static']();
-  //  if ('static' in this._value) return;
-  //  this._value.static = true;
-  //}
 
   ['@name']() {
     super['@name']();
@@ -61,6 +47,13 @@ export default class ClassDoc extends AbstractDoc {
     if (node.superClass) {
       let longname = this._resolveLongname(node.superClass.name);
       this._value.extends = [longname];
+    }
+  }
+
+  ['@implements'](){
+    let values = this._findAllTagValues(['@implements', '@implement']);
+    if (values) {
+      this._value.implements = values;
     }
   }
 }

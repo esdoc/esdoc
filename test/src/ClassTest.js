@@ -381,6 +381,38 @@ describe('MyClass1:', ()=>{
       }
     });
   });
+
+  it('has protected method.', ()=>{
+    let docs = db.find({kind: 'method', name: 'protectedMethod', memberof: classDoc.longname});
+    assert.equal(docs.length, 1);
+    assert.doc(docs[0],
+    {
+      "kind": "method",
+      "static": false,
+      "variation": null,
+      "name": "protectedMethod",
+      "memberof": "src/MyClass.js~MyClass1",
+      "longname": "src/MyClass.js~MyClass1#protectedMethod",
+      "access": "protected",
+      "description": "this is protectedMethod desc."
+    });
+  });
+
+  it('has private method.', ()=>{
+    let docs = db.find({kind: 'method', name: 'privateMethod', memberof: classDoc.longname});
+    assert.equal(docs.length, 1);
+    assert.doc(docs[0],
+    {
+      "kind": "method",
+      "static": false,
+      "variation": null,
+      "name": "privateMethod",
+      "memberof": "src/MyClass.js~MyClass1",
+      "longname": "src/MyClass.js~MyClass1#privateMethod",
+      "access": "private",
+      "description": "this is privateMethod desc."
+    });
+  })
 });
 
 describe('MyClass2:', ()=> {
