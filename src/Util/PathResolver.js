@@ -9,7 +9,9 @@ export default class PathResolver {
     this._inDirPath = path.resolve(inDirPath);
     this._filePath = path.resolve(filePath);
     this._packageName = packageName;
-    this._mainFilePath = path.resolve(mainFilePath);
+    if (mainFilePath) {
+      this._mainFilePath = path.resolve(mainFilePath);
+    }
     this._pathPrefix = pathPrefix || '';
   }
 

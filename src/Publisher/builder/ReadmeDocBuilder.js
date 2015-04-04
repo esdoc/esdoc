@@ -11,7 +11,7 @@ export default class ReadmeDocBuilder extends DocBuilder {
   }
 
   _buildReadmeDoc() {
-    if (!this._config.readme) return '';
+    if (!this._config.readme) return 'NO README';
 
     let readme = fs.readFileSync(this._config.readme, {encode: 'utf8'}).toString();
 

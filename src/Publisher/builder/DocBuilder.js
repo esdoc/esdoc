@@ -48,9 +48,13 @@ export default class DocBuilder {
       var packagePath = config.package;
       var json = fs.readFileSync(packagePath, {encoding: 'utf-8'});
       var packageObj = JSON.parse(json);
+    } else {
+      packageObj = {};
     }
 
     var indexInfo = {
+      title: config.title || packageObj.name,
+      desc: config.description || packageObj.description,
       version: config.version || packageObj.version,
       url: config.url || packageObj.repository ? packageObj.repository.url : ''
     };
@@ -68,12 +72,12 @@ export default class DocBuilder {
     ice.attr('url', 'href', info.url);
 
     // see StaticFileBuilder#exec
-    ice.loop('userScript', this._config.scripts, (i, userScript, ice)=>{
+    ice.loop('userScript', this._config.scripts || [], (i, userScript, ice)=>{
       var name = `user/script/${i}-${path.basename(userScript)}`;
       ice.attr('userScript', 'src', name);
     });
 
-    ice.loop('userStyle', this._config.styles, (i, userStyle, ice)=>{
+    ice.loop('userStyle', this._config.styles || [], (i, userStyle, ice)=>{
       var name = `user/css/${i}-${path.basename(userStyle)}`;
       ice.attr('userStyle', 'href', name);
     });

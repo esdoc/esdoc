@@ -1,3 +1,4 @@
+import assert from 'assert';
 import fs from 'fs';
 import path from 'path';
 import minimist from 'minimist';
@@ -6,80 +7,43 @@ import defaultPublisher from './Publisher/publish.js';
 
 let argv = minimist(process.argv.slice(2));
 if (argv.h || argv.help) {
-  console.log('usage: esdoc esdoc.json');
+  console.log('usage: esdoc [esdoc.json | path/to/js/src]');
   return;
 }
 
-assert.equal(argv._.length, 1, 'specify esdoc.json');
-let configFilePath = path.resolve(argv._[0]);
-let configJSON = fs.readFileSync(configFilePath, {encode: 'utf8'});
-let config = JSON.parse(configJSON);
+assert.equal(argv._.length, 1, 'specify esdoc.json or dir. see -h');
+assert(argv._[0], 'specify esdoc.json or dir. see -h');
 
+let specifiedPath = path.resolve(argv._[0]);
+let stat = fs.statSync(specifiedPath);
+let config;
 
-esdoc(config, (data, config)=>{
-  let taffy = require('taffydb').taffy;
-  function publish(values) {
-    let db = taffy(values);
-    let results = [];
-    db({kind: 'class'}).each((v)=>{
-      results.push(v);
-    });
-    console.log(results);
+if (stat.isFile()) {
+  // specified JSON file path.
+
+  let configJSON = fs.readFileSync(specifiedPath, {encode: 'utf8'});
+  config = JSON.parse(configJSON);
+
+} else if(stat.isDirectory()) {
+  // specified source directory path.
+
+  let readmeStat = null;
+  try {
+    readmeStat = fs.statSync('./README.md');
+  } catch(e) {
+    // ignore
   }
-});
 
-//import path from 'path';
-//import fs from 'fs-extra';
-//import estraverse from 'estraverse';
-//import Logger from './Util/Logger.js';
-//import ESParser from './Parser/ESParser';
-//import PathResolver from './Util/PathResolver.js';
-//import DocFactory from './Factory/DocFactory.js';
-//
-//Logger.debug = true;
-//
-//let inDirPath = './_temp/target';
-//let filePath = './_temp/target/MyClass1.js';
-//let packageName = 'foo-bar';
-//let mainFilePath = './_temp/target/MyClass1.jsaaa';
-//let pathPrefix = '';
-//
-//let ast = ESParser.parse(filePath);
-//fs.writeFileSync('./_temp/ast.json', JSON.stringify(ast, null, 2), {encode: 'utf8'});
-//
-//let indent = [];
-//let values = [];
-//let pathResolver = new PathResolver(inDirPath, filePath, packageName, mainFilePath, pathPrefix);
-//
-//estraverse.traverse(ast, {
-//  enter: function(node, parent) {
-//    //Object.defineProperty(node, 'parent', {value: parent});
-//    //if (node.leadingComments) {
-//    //  console.log(JSON.stringify(node, null, 2));
-//    let results = DocFactory.create(ast, node, parent, pathResolver);
-//    values.push(...results);
-//    //}
-//    //console.log(indent.join('') + node.type);
-//    //indent.push(' ');
-//  },
-//
-//  leave: function() {
-//    //indent.pop();
-//  }
-//});
-//
-//
-//let taffy = require('taffydb').taffy;
-//function publish(values) {
-//  let db = taffy(values);
-//  let results = [];
-//  db({kind: 'class'}).each((v)=>{
-//    results.push(v);
-//  });
-//  console.log(results);
-//}
-//
-//publish(values);
-//
+  config = {
+    source: specifiedPath,
+    pattern: '\\.js$',
+    destination: '_esdoc_',
+    title: 'NO TITLE',
+    description: 'NO DESCRIPTION',
+    readme: readmeStat ? './README.md' : ''
+  };
 
+}
+
+esdoc(config, defaultPublisher);
 

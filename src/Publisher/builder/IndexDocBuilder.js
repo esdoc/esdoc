@@ -10,7 +10,7 @@ export default class IndexDocBuilder extends DocBuilder {
   }
 
   _buildIndexDoc() {
-    var indexInfo = this._getIndexInfo();
+    var indexInfo = this._getInfo();
 
     var ice = new IceCap(this._readTemplate('@index.html'));
 
@@ -28,23 +28,5 @@ export default class IndexDocBuilder extends DocBuilder {
     ice.load('fileSummary', this._buildSummaryHTML(null, 'file', 'File Summary'), 'append');
 
     return ice;
-  }
-
-  _getIndexInfo() {
-    var config = this._config;
-    if (config.package) {
-      var packagePath = config.package;
-      var json = fs.readFileSync(packagePath, {encoding: 'utf-8'});
-      var packageObj = JSON.parse(json);
-    }
-
-    var indexInfo = {
-      title: config.title || packageObj.name,
-      desc: config.description || packageObj.description,
-      version: config.version || packageObj.version,
-      url: config.url || packageObj.repository ? packageObj.repository.url : ''
-    };
-
-    return indexInfo;
   }
 }
