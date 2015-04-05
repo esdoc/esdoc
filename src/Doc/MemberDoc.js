@@ -23,9 +23,6 @@ export default class MemberDoc extends AbstractDoc {
   }
 
   ['@static']() {
-    //super['@static']();
-    //if ('static' in this._value.static) return;
-
     let tag = this._find(['@static']);
     if (tag) {
       let value = ['', 'true', true].includes(tag.tagValue);
@@ -44,13 +41,6 @@ export default class MemberDoc extends AbstractDoc {
   }
 
   ['@name']() {
-    //super['@name']();
-    //if (this._value.name) return;
-    //
-    //let node = this._node;
-    //let name = this._flattenMemberExpression(node.expression.left).replace(/^this\./, '');
-    //this._value.name = name;
-
     let name;
     let tags = this._findAll(['@name', '@member']);
     if (tags) {
@@ -74,18 +64,6 @@ export default class MemberDoc extends AbstractDoc {
 
   ['@memberof']() {
     MethodDoc.prototype['@memberof'].call(this);
-    //super['@memberof']();
-    //if (this._value.memberof) return;
-    //
-    //let parent = this._node.parent;
-    //while (parent) {
-    //  if (parent.type === 'ClassDeclaration') {
-    //    let memberof = `${this._pathResolver.filePath}~${parent.id.name}`;
-    //    this._value.memberof = memberof;
-    //    break;
-    //  }
-    //  parent = parent.parent;
-    //}
   }
 
   ['@property']() {
@@ -105,6 +83,3 @@ export default class MemberDoc extends AbstractDoc {
     this._value.type = result;
   }
 }
-
-let TAG = MemberDoc.name;
-
