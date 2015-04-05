@@ -38,10 +38,11 @@ export function shorten(doc) {
   return desc.substr(0, len);
 }
 
-export function markdown(text) {
+export function markdown(text, breaks = false) {
   let compiled = marked(text, {
     gfm: true,
     tables: true,
+    breaks: breaks,
     highlight: function (code) {
       return `<pre class="source-code"><code class="prettyprint">${code}</code></pre>`;
     }
