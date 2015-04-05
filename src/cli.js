@@ -9,7 +9,7 @@ import defaultPublisher from './Publisher/publish.js';
 let argv = minimist(process.argv.slice(2));
 if (argv.h || argv.help) {
   console.log('usage: esdoc [esdoc.json | path/to/js/src]');
-  return;
+  process.exit(0)
 }
 
 assert.equal(argv._.length, 1, 'specify esdoc.json or dir. see -h');
