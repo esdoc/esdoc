@@ -25,19 +25,29 @@ export default class DocBuilder {
 
   _findByName(name, kind = null) {
     let docs;
+
     if (kind) {
       docs = this._orderedFind(null, {longname: name, kind: kind});
     } else {
       docs = this._orderedFind(null, {longname: name});
     }
-
     if (docs.length) return docs;
 
     if (kind) {
-      return this._orderedFind(null, {name: name, kind: kind});
+      docs = this._orderedFind(null, {name: name, kind: kind});
     } else {
-      return this._orderedFind(null, {name: name});
+      docs = this._orderedFind(null, {name: name});
     }
+    if (docs.length) return docs;
+
+    if (kind) {
+      docs = this._orderedFind(null, {longname: {right: name}, kind: kind});
+    } else {
+      docs = this._orderedFind(null, {longname: {right: name}});
+    }
+    if (docs.length) return docs;
+
+    return [];
   }
 
   _orderedFind(order, ...cond) {

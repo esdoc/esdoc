@@ -29,6 +29,15 @@ import SuperMyClass1 from './OtherClass/SuperMyClass.js';
  * for (let v of values) {
  *   let foo = v;
  * }
+ * @deprecated use MyClass1Ex instead of this class.
+ * @experimental this class is dangerous.
+ * @todo this is todo1
+ * @todo this is todo2
+ * @see http://example.com
+ * @see {@link MyClass2}
+ * @see {@link SuperMyClass1#superMethod}
+ * @since 1.2.3
+ * @version 0.0.1
  */
 export default class MyClass1 extends SuperMyClass1 {
   /**
@@ -144,6 +153,14 @@ export default class MyClass1 extends SuperMyClass1 {
    * @return {Object} this is return desc.
    * @property {number} p1 this is p1 of return desc.
    * @property {string[]} p2 this is p2 of return desc.
+   *
+   * @deprecated
+   * @experimental
+   * @todo this is todo1
+   * @see http://example.com
+   *
+   * @since 1.2.3
+   * @version 0.0.1
    */
   method1(p1, p2, p3, p4, p5, p6, p7, p8, p9) {
   }

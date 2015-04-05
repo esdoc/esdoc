@@ -11,6 +11,8 @@ describe('Publisher: src/MyClass: ', ()=> {
       assert.includes(doc, '[data-ice="kind"]', 'class');
       assert.includes(doc, '[data-ice="file"]', 'file src/MyClass.js');
       assert.includes(doc, '[data-ice="file"] a', encode('@file-src|MyClass.js.html'), 'href');
+      assert.includes(doc, '[data-ice="version"]', 'version 0.0.1');
+      assert.includes(doc, '[data-ice="since"]', 'since 1.2.3');
     });
   });
 
@@ -44,6 +46,25 @@ describe('Publisher: src/MyClass: ', ()=> {
       assert.includes(doc, '[data-ice="indirectImplemented"] span:nth-of-type(1) a', encode('@class-src|MyClass.js~MyClass6.html'), 'href');
 
       assert.includes(doc, '[data-ice="description"]', 'this is MyClass1 desc.');
+
+      assert.includes(doc, '[data-ice="deprecated"]', 'this class was deprecated. use MyClass1Ex instead of this class.');
+      assert.includes(doc, '[data-ice="experimental"]', 'this class is experimental. this class is dangerous.');
+
+      find(doc, '[data-ice="see"]', (doc)=>{
+        assert.includes(doc, 'li:nth-child(1)', 'http://example.com');
+        assert.includes(doc, 'li:nth-child(1) a', 'http://example.com', 'href');
+
+        assert.includes(doc, 'li:nth-child(2)', 'MyClass2');
+        assert.includes(doc, 'li:nth-child(2) a', encode('@class-src|MyClass.js~MyClass2.html'), 'href');
+
+        assert.includes(doc, 'li:nth-child(3)', 'SuperMyClass1#superMethod');
+        assert.includes(doc, 'li:nth-child(3) a', encode('@class-src|OtherClass|SuperMyClass.js~SuperMyClass1.html') + '#instance-method-superMethod', 'href');
+      });
+
+      find(doc, '[data-ice="todo"]', (doc)=>{
+        assert.includes(doc, 'li:nth-child(1)', 'this is todo1');
+        assert.includes(doc, 'li:nth-child(2)', 'this is todo2');
+      });
     });
   });
 
@@ -133,11 +154,12 @@ describe('Publisher: src/MyClass: ', ()=> {
     find(doc, '[data-ice="methodSummary"]', (doc)=>{
       // public
       find(doc, 'table[data-ice="summary"]:nth-of-type(1)', (doc)=>{
-        assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public method1(p1: number[], p2: number, p3: number, p4: number | string[], p5: number, p6: number, p7: {a: number, b: string}, p8: Object, p9: MyClass2 | MyClass3[] | {a: number, b: string}): Object this is method1 desc.');
-        //assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'this method was deprecated. this is method1 deprecated.');
-        //assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'this method is experimental. this is method1 experimental.');
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public method1(p1: number[], p2: number, p3: number, p4: number | string[], p5: number, p6: number, p7: {a: number, b: string}, p8: Object, p9: MyClass2 | MyClass3[] | {a: number, b: string}): Object');
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'this method was deprecated.');
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'this method is experimental.');
         assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'this is method1 desc.');
-        //assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'version 0.0.1 since 1.2.3');
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(1) [data-ice="version"]', 'version 0.0.1');
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(1) [data-ice="since"]', 'since 1.2.3');
         assert.includes(doc, '[data-ice="target"]:nth-of-type(1) [data-ice="name"] a', encode('@class-src|MyClass.js~MyClass1.html') + '#instance-method-method1', 'href');
       });
       // protected
@@ -306,10 +328,12 @@ describe('Publisher: src/MyClass: ', ()=> {
       // public
       find(doc, '[data-ice="detail"]:nth-of-type(1)', (doc)=>{
         assert.includes(doc, '#instance-method-method1', 'public method1(p1: number[], p2: number, p3: number, p4: number | string[], p5: number, p6: number, p7: {a: number, b: string}, p8: Object, p9: MyClass2 | MyClass3[] | {a: number, b: string}): Object');
-        //assert.includes(doc, '#instance-method-method1', 'version 0.0.1 since 1.2.3');
-        //assert.includes(doc, '[data-ice="deprecated"]', 'this method was deprecated. this is method1 deprecated.');
-        //assert.includes(doc, '[data-ice="experimental"]', 'this method is experimental. this is method1 experimental.');
+        assert.includes(doc, '#instance-method-method1 [data-ice="version"]', 'version 0.0.1');
+        assert.includes(doc, '#instance-method-method1 [data-ice="since"]', 'since 1.2.3');
         assert.includes(doc, '#instance-method-method1 ~ [data-ice="description"]', 'this is method1 desc.');
+
+        assert.includes(doc, '[data-ice="deprecated"]', 'this method was deprecated.');
+        assert.includes(doc, '[data-ice="experimental"]', 'this method is experimental.');
 
         find(doc, '#instance-method-method1 ~ [data-ice="properties"]', (doc)=>{
           assert.includes(doc, '[data-ice="property"]:nth-of-type(1)', 'p1 number[] this is p1(simple) desc.');
@@ -333,6 +357,15 @@ describe('Publisher: src/MyClass: ', ()=> {
             assert.includes(doc, '[data-ice="property"]:nth-of-type(1)', 'p1 number this is p1 of return desc.');
             assert.includes(doc, '[data-ice="property"]:nth-of-type(2)', 'p2 string[] this is p2 of return desc.');
           });
+        });
+
+        find(doc, '[data-ice="see"]', (doc)=>{
+          assert.includes(doc, 'li:nth-child(1)', 'http://example.com');
+          assert.includes(doc, 'li:nth-child(1) a', 'http://example.com', 'href');
+        });
+
+        find(doc, '[data-ice="todo"]', (doc)=>{
+          assert.includes(doc, 'li:nth-child(1)', 'this is todo1');
         });
 
         //assert.includes(doc, '[data-ice="fire"]', 'Event1 Event2');
