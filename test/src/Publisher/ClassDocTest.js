@@ -154,7 +154,7 @@ describe('Publisher: src/MyClass: ', ()=> {
     find(doc, '[data-ice="methodSummary"]', (doc)=>{
       // public
       find(doc, 'table[data-ice="summary"]:nth-of-type(1)', (doc)=>{
-        assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public method1(p1: number[], p2: number, p3: number, p4: number | string[], p5: number, p6: number, p7: {a: number, b: string}, p8: Object, p9: MyClass2 | MyClass3[] | {a: number, b: string}): Object');
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public abstract method1(p1: number[], p2: number, p3: number, p4: number | string[], p5: number, p6: number, p7: {a: number, b: string}, p8: Object, p9: MyClass2 | MyClass3[] | {a: number, b: string}): Object');
         assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'this method was deprecated.');
         assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'this method is experimental.');
         assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'this is method1 desc.');
@@ -289,22 +289,6 @@ describe('Publisher: src/MyClass: ', ()=> {
       find(doc, '[data-ice="detail"]:nth-of-type(1)', (doc)=>{
         assert.includes(doc, '#instance-member-p1', 'public p1: number');
         assert.includes(doc, '#instance-member-p1 + [data-ice="description"]', 'this is p1 desc.');
-
-        //find(doc, '#instance-member1 ~ [data-ice="properties"]', (doc)=>{
-        //  assert.includes(doc, '[data-ice="property"]:nth-of-type(1)', 'p1 string | number optional default: 10 nullable: true this is p1 desc.');
-        //  assert.includes(doc, '[data-ice="property"]:nth-of-type(2)', 'p2 string | number optional default: 10 nullable: false this is p2 desc.');
-        //  assert.includes(doc, '[data-ice="property"]:nth-of-type(3)', 'p3 Object this is p3 desc.');
-        //  assert.includes(doc, '[data-ice="property"]:nth-of-type(4)', 'p3.p4 string[] this is p4 desc.');
-        //  assert.includes(doc, '[data-ice="property"]:nth-of-type(5)', 'p3.p5 Class1 this is desc.');
-        //  assert.includes(doc, '[data-ice="property"]:nth-of-type(6)', 'p3.p6 member1 this is desc.');
-        //  assert.includes(doc, '[data-ice="property"]:nth-of-type(7)', 'p3.p6 member1 this is desc.');
-        //  assert.includes(doc, '[data-ice="property"]:nth-of-type(8)', 'p3.p7 staticMember1 this is desc.');
-        //
-        //  assert.includes(doc, '[data-ice="property"]:nth-of-type(5) a', encode('module:module|module1~Class1.html'), 'href');
-        //  assert.includes(doc, '[data-ice="property"]:nth-of-type(6) a', encode('module:module|module1.html') + '#inner-member1', 'href');
-        //  assert.includes(doc, '[data-ice="property"]:nth-of-type(7) a', encode('module:module|module1~Class1.html') + '#instance-member1', 'href');
-        //  assert.includes(doc, '[data-ice="property"]:nth-of-type(8) a', encode('module:module|module1~Class1.html') + '#static-staticMember1', 'href');
-        //});
       });
       find(doc, '[data-ice="detail"]:nth-of-type(2)', (doc)=> {
         assert.includes(doc, '#instance-get-value', 'public get value: number');
@@ -327,7 +311,7 @@ describe('Publisher: src/MyClass: ', ()=> {
     find(doc, '[data-ice="methodDetails"]', (doc)=>{
       // public
       find(doc, '[data-ice="detail"]:nth-of-type(1)', (doc)=>{
-        assert.includes(doc, '#instance-method-method1', 'public method1(p1: number[], p2: number, p3: number, p4: number | string[], p5: number, p6: number, p7: {a: number, b: string}, p8: Object, p9: MyClass2 | MyClass3[] | {a: number, b: string}): Object');
+        assert.includes(doc, '#instance-method-method1', 'public abstract method1(p1: number[], p2: number, p3: number, p4: number | string[], p5: number, p6: number, p7: {a: number, b: string}, p8: Object, p9: MyClass2 | MyClass3[] | {a: number, b: string}): Object');
         assert.includes(doc, '#instance-method-method1 [data-ice="version"]', 'version 0.0.1');
         assert.includes(doc, '#instance-method-method1 [data-ice="since"]', 'since 1.2.3');
         assert.includes(doc, '#instance-method-method1 ~ [data-ice="description"]', 'this is method1 desc.');
@@ -368,65 +352,29 @@ describe('Publisher: src/MyClass: ', ()=> {
           assert.includes(doc, 'li:nth-child(1)', 'this is todo1');
         });
 
-        //assert.includes(doc, '[data-ice="fire"]', 'Event1 Event2');
-        //assert.includes(doc, '[data-ice="fire"] li:nth-of-type(1) a', encode('module:module|module1.html') + '#inner-Event1', 'href');
-        //assert.includes(doc, '[data-ice="fire"] li:nth-of-type(2) a', encode('module:module|module1.html') + '#inner-Event2', 'href');
-        //
-        //assert.includes(doc, '[data-ice="listen"]', 'Event1 Event2');
-        //assert.includes(doc, '[data-ice="listen"] li:nth-of-type(1) a', encode('module:module|module1.html') + '#inner-Event1', 'href');
-        //assert.includes(doc, '[data-ice="listen"] li:nth-of-type(2) a', encode('module:module|module1.html') + '#inner-Event2', 'href');
-        //
-        //assert.includes(doc, '[data-ice="throw"]:nth-of-type(1)', 'Error this is throws Error desc.');
-        //assert.includes(doc, '[data-ice="throw"]:nth-of-type(2)', 'Class1 this is throws Class1 desc.');
-        //assert.includes(doc, '[data-ice="throw"]:nth-of-type(3)', 'ReferenceError this is throws ReferenceError desc.');
-        //
-        //assert.includes(doc, '[data-ice="throw"]:nth-of-type(2) a', encode('module:module|module1~Class1.html'), 'href');
-        //assert.includes(doc, '[data-ice="throw"]:nth-of-type(3) a', 'https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError', 'href');
+        find(doc, '[data-ice="emitWrap"]', (doc)=>{
+          assert.includes(doc, '[data-ice="emit"]:nth-of-type(1)', 'MyEvent1 this is emits MyEvent1 desc.');
+          assert.includes(doc, '[data-ice="emit"]:nth-of-type(2)', 'MyEvent2 this is emits MyEvent2 desc.');
 
-        //find(doc, '[data-ice="see"] ul', (doc)=>{
-        //  assert.includes(doc, 'li:nth-of-type(1)', 'http://example.com');
-        //  assert.includes(doc, 'li:nth-of-type(2)', 'module/module1');
-        //  assert.includes(doc, 'li:nth-of-type(3)', 'Namespace1');
-        //  assert.includes(doc, 'li:nth-of-type(4)', 'Class1');
-        //  assert.includes(doc, 'li:nth-of-type(5)', 'Interface1');
-        //  assert.includes(doc, 'li:nth-of-type(6)', 'Mixin1');
-        //  assert.includes(doc, 'li:nth-of-type(7)', 'method1');
-        //  assert.includes(doc, 'li:nth-of-type(8)', 'member1');
-        //  assert.includes(doc, 'li:nth-of-type(9)', 'Typedef1');
-        //  assert.includes(doc, 'li:nth-of-type(10)', 'Callback1');
-        //  assert.includes(doc, 'li:nth-of-type(11)', 'CONSTANT1');
-        //  assert.includes(doc, 'li:nth-of-type(12)', 'Event1');
-        //  assert.includes(doc, 'li:nth-of-type(13)', 'XMLHttpRequest');
-        //  assert.includes(doc, 'li:nth-of-type(14)', 'module/module1.js');
-        //  assert.includes(doc, 'li:nth-of-type(15)', 'member1');
-        //  assert.includes(doc, 'li:nth-of-type(16)', 'method1');
-        //  assert.includes(doc, 'li:nth-of-type(17)', 'staticMember1');
-        //  assert.includes(doc, 'li:nth-of-type(18)', 'staticMethod1');
-        //
-        //  assert.includes(doc, 'li:nth-of-type(1) a', 'http://example.com', 'href');
-        //  assert.includes(doc, 'li:nth-of-type(2) a', encode('module:module|module1.html'), 'href');
-        //  assert.includes(doc, 'li:nth-of-type(3) a', encode('module:module|module1~Namespace1.html'), 'href');
-        //  assert.includes(doc, 'li:nth-of-type(4) a', encode('module:module|module1~Class1.html'), 'href');
-        //  assert.includes(doc, 'li:nth-of-type(5) a', encode('module:module|module1~Interface1.html'), 'href');
-        //  assert.includes(doc, 'li:nth-of-type(6) a', encode('module:module|module1~Mixin1.html'), 'href');
-        //  assert.includes(doc, 'li:nth-of-type(7) a', encode('module:module|module1.html') + '#inner-method1', 'href');
-        //  assert.includes(doc, 'li:nth-of-type(8) a', encode('module:module|module1.html') + '#inner-member1', 'href');
-        //  assert.includes(doc, 'li:nth-of-type(9) a', encode('module:module|module1.html') + '#inner-Typedef1', 'href');
-        //  assert.includes(doc, 'li:nth-of-type(10) a', encode('module:module|module1.html') + '#inner-Callback1', 'href');
-        //  assert.includes(doc, 'li:nth-of-type(11) a', encode('module:module|module1.html') + '#inner-CONSTANT1', 'href');
-        //  assert.includes(doc, 'li:nth-of-type(12) a', encode('module:module|module1.html') + '#inner-Event1', 'href');
-        //  assert.includes(doc, 'li:nth-of-type(13) a', 'https://developer.mozilla.org/ja/docs/Web/API/XMLHttpRequest', 'href');
-        //  assert.includes(doc, 'li:nth-of-type(14) a', encode('@file-module|module1.js.html'), 'href');
-        //  assert.includes(doc, 'li:nth-of-type(15) a', encode('module:module|module1~Class1.html') + '#instance-member1', 'href');
-        //  assert.includes(doc, 'li:nth-of-type(16) a', encode('module:module|module1~Class1.html') + '#instance-method1', 'href');
-        //  assert.includes(doc, 'li:nth-of-type(17) a', encode('module:module|module1~Class1.html') + '#static-staticMember1', 'href');
-        //  assert.includes(doc, 'li:nth-of-type(18) a', encode('module:module|module1~Class1.html') + '#static-staticMethod1', 'href');
-        //});
+          assert.includes(doc, '[data-ice="emit"]:nth-of-type(1) a', encode('@class-src|MyEvent.js~MyEvent1.html'), 'href');
+          assert.includes(doc, '[data-ice="emit"]:nth-of-type(2) a', 'http://example.com', 'href');
+        });
 
-        //find(doc, '[data-ice="todo"] ul', (doc)=>{
-        //  assert.includes(doc, 'li:nth-of-type(1)', 'this is method1 1st todo.');
-        //  assert.includes(doc, 'li:nth-of-type(2)', 'this is method1 2nd todo.');
-        //});
+        find(doc, '[data-ice="listenWrap"]', (doc)=>{
+          assert.includes(doc, '[data-ice="listen"]:nth-of-type(1)', 'MyEvent1 this is listens MyEvent1 desc.');
+          assert.includes(doc, '[data-ice="listen"]:nth-of-type(2)', 'MyEvent2 this is listens MyEvent2 desc.');
+
+          assert.includes(doc, '[data-ice="listen"]:nth-of-type(1) a', encode('@class-src|MyEvent.js~MyEvent1.html'), 'href');
+          assert.includes(doc, '[data-ice="listen"]:nth-of-type(2) a', 'http://example.com', 'href');
+        });
+
+        find(doc, '[data-ice="throwWrap"]', (doc)=>{
+          assert.includes(doc, '[data-ice="throw"]:nth-of-type(1)', 'MyError1 this is throws MyError1 desc.');
+          assert.includes(doc, '[data-ice="throw"]:nth-of-type(2)', 'MyError2 this is throws MyError2 desc.');
+
+          assert.includes(doc, '[data-ice="throw"]:nth-of-type(1) a', encode('@class-src|MyError.js~MyError1.html'), 'href');
+          assert.includes(doc, '[data-ice="throw"]:nth-of-type(2) a', 'http://example.com', 'href');
+        });
       });
       // protected
       find(doc, '[data-ice="detail"]:nth-of-type(2)', (doc)=>{

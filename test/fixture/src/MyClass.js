@@ -161,6 +161,15 @@ export default class MyClass1 extends SuperMyClass1 {
    *
    * @since 1.2.3
    * @version 0.0.1
+   *
+   * @abstract
+   * @override
+   * @throws {MyError1} this is throws MyError1 desc.
+   * @throws {MyError2} this is throws MyError2 desc.
+   * @emits {MyEvent1} this is emits MyEvent1 desc.
+   * @emits {MyEvent2} this is emits MyEvent2 desc.
+   * @listens {MyEvent1} this is listens MyEvent1 desc.
+   * @listens {MyEvent2} this is listens MyEvent2 desc.
    */
   method1(p1, p2, p3, p4, p5, p6, p7, p8, p9) {
   }
