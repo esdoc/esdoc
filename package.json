@@ -40,7 +40,11 @@
   "keywords": [
     "jsdoc",
     "api",
-    "document"
+    "document",
+    "ES6",
+    "ES2015",
+    "ECMAScript6",
+    "ECMAScript2015"
   ],
   "files": [
     "out/src",
