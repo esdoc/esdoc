@@ -2,7 +2,6 @@ import {readDoc, assert, find} from './util.js';
 
 describe('INDEX:', ()=> {
   let doc = readDoc('@index.html');
-  let encode = encodeURIComponent;
 
   it('has class summary.', ()=>{
     find(doc, '[data-ice="classSummary"]', (doc)=>{
