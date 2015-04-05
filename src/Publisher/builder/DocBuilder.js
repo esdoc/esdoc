@@ -171,6 +171,7 @@ export default class DocBuilder {
         cond.interface = false;
         break;
       case 'interface':
+        cond.kind = 'class';
         cond.interface = true;
         break;
       case 'member':

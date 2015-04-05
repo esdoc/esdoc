@@ -25,7 +25,7 @@ export function shorten(doc) {
     if (inSQuote || inCode || inWQuote) continue;
 
     if (char1 === '.') {
-      if (char2 === ' ' || char2 === '\n') {
+      if (char2 === ' ' || char2 === '\n' || char2 === '<') {
         len = i + 1;
         break;
       }
