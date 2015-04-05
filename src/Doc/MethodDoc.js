@@ -1,7 +1,7 @@
 import AbstractDoc from './AbstractDoc.js';
-import FunctionDoc from './FunctionDoc.js';
+//import FunctionDoc from './FunctionDoc.js';
 
-export default class MethodDoc extends FunctionDoc {
+export default class MethodDoc extends AbstractDoc {
   _apply() {
     super._apply();
 

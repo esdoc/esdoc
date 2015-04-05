@@ -6,7 +6,7 @@ describe('MyVariable:', ()=> {
 
   it('has summary.', ()=>{
     find(doc, '[data-ice="summary"]', (doc)=>{
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public static myVariable1: number this is myVariable1 desc.');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public static myVariable1: Object this is myVariable1 desc.');
       assert.includes(doc, '[data-ice="target"]:nth-of-type(2)', 'public static myVariable2: number this is myVariable2 desc.');
       assert.includes(doc, '[data-ice="target"]:nth-of-type(3)', 'public static myVariable3: number this is myVariable3 desc.');
 
@@ -16,7 +16,7 @@ describe('MyVariable:', ()=> {
 
   it('has detail.', ()=> {
     find(doc, '[data-ice="detail"]:nth-of-type(1)', (doc)=> {
-      assert.includes(doc, '#static-variable-myVariable1', 'public static myVariable1: number');
+      assert.includes(doc, '#static-variable-myVariable1', 'public static myVariable1: Object');
       assert.includes(doc, '[data-ice="importPath"]', "import myVariable1 from 'esdoc-test-fixture/src/myVariable.js'");
     });
 

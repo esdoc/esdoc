@@ -1,8 +1,10 @@
 /**
  * this is myVariable1 desc.
- * @type {number}
+ * @type {Object}
+ * @property {number} p1 this is p1 desc.
+ * @property {string[]} p2 this is p2 desc.
  */
-export default myVariable1 = 123;
+export default myVariable1 = {};
 
 /**
  * this is myVariable2 desc.

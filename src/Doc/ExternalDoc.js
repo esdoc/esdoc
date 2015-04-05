@@ -2,11 +2,6 @@ import AbstractDoc from './AbstractDoc.js';
 import Logger from '../Util/Logger.js';
 
 export default class ExternalDoc extends AbstractDoc {
-  //constructor(ast, node, ...args) {
-  //  node.type = 'External';
-  //  super(ast, node, ...args);
-  //}
-
   _apply() {
     super._apply();
 
@@ -21,18 +16,7 @@ export default class ExternalDoc extends AbstractDoc {
     this._value.kind = 'external';
   }
 
-  //['@static']() {
-  //}
-
   ['@name']() {
-    //super['@name']();
-    //if (this._value.name) return;
-    //
-    //let value = this._findTagValue(['@external']);
-    //if (value) {
-    //  this._value.name = value;
-    //}
-
     let value = this._findTagValue(['@name', '@external']);
     if (!value) {
       Logger.w(TAG, `can not resolve name.`);

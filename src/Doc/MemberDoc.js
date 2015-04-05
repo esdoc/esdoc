@@ -1,15 +1,15 @@
 import AbstractDoc from './AbstractDoc.js';
 import MethodDoc from './MethodDoc.js';
-import ParamParser from '../Parser/ParamParser.js';
+//import ParamParser from '../Parser/ParamParser.js';
 import Logger from '../Util/Logger.js';
 
 export default class MemberDoc extends AbstractDoc {
   _apply() {
     super._apply();
 
-    this['@property']();
-    this['@type']();
-    this['@member']();
+    //this['@property']();
+    //this['@type']();
+    //this['@member']();
 
     delete this._value.export;
     delete this._value.importPath;
@@ -65,21 +65,13 @@ export default class MemberDoc extends AbstractDoc {
   ['@memberof']() {
     MethodDoc.prototype['@memberof'].call(this);
   }
+  //
+  //['@property']() {
+  //  MethodDoc.prototype['@property'].call(this);
+  //}
+  //
+  //['@type']() {
+  //  MethodDoc.prototype['@type'].call(this);
+  //}
 
-  ['@property']() {
-    MethodDoc.prototype['@property'].call(this);
-  }
-
-  ['@type']() {
-    MethodDoc.prototype['@type'].call(this);
-  }
-
-  ['@member']() {
-    let value = this._findTagValue(['@member']);
-    if (!value) return;
-
-    let {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value, true, true, false);
-    let result = ParamParser.parseParam(typeText, paramName, paramDesc);
-    this._value.type = result;
-  }
 }

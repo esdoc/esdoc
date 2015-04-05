@@ -7,13 +7,13 @@ export default class VariableDoc extends AbstractDoc {
   _apply() {
     super._apply();
 
-    this['@property']();
-    this['@type']();
+    //this['@property']();
+    //this['@type']();
 
-    if (this._value.kind === 'function') {
-      FunctionDoc.prototype['@param'].call(this);
-      FunctionDoc.prototype['@return'].call(this);
-    }
+    //if (this._value.kind === 'function') {
+    //  FunctionDoc.prototype['@param'].call(this);
+    //  FunctionDoc.prototype['@return'].call(this);
+    //}
   }
 
   ['@kind']() {
@@ -66,14 +66,14 @@ export default class VariableDoc extends AbstractDoc {
     if (this._value.memberof) return;
     this._value.memberof = this._pathResolver.filePath;
   }
-
-  ['@property']() {
-    MemberDoc.prototype['@property'].call(this);
-  }
-
-  ['@type']() {
-    MemberDoc.prototype['@type'].call(this);
-  }
+  //
+  //['@property']() {
+  //  MemberDoc.prototype['@property'].call(this);
+  //}
+  //
+  //['@type']() {
+  //  MemberDoc.prototype['@type'].call(this);
+  //}
 }
 
 let TAG = VariableDoc.name;
