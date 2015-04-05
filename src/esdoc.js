@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import assert from 'assert';
 import estraverse from 'estraverse';
-import Logger from 'color-logger';
+import Logger from './Util/Logger.js';
 import ESParser from './Parser/ESParser';
 import PathResolver from './Util/PathResolver.js';
 import DocFactory from './Factory/DocFactory.js';
