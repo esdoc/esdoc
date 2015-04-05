@@ -1,6 +1,6 @@
 import {readDoc, assert, find} from './util.js';
 
-describe('Publisher: src/MyClass: ', ()=> {
+describe('MyClass1: ', ()=> {
   let doc = readDoc('@class-src|MyClass.js~MyClass1.html');
   let encode = encodeURIComponent;
 

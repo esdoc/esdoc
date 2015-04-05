@@ -218,3 +218,10 @@ class MyClass5 {
  */
 class MyClass6 extends MyClass5 {
 }
+
+/**
+ * this is MyClass999 desc.
+ * @ignore
+ */
+export class MyClass999 {
+}
