@@ -17,9 +17,9 @@ describe('MyClass1:', ()=>{
       "longname": "src/MyClass.js~MyClass1",
       "access": null,
       "export": true,
-      "importPath": "esdoc-test-fixture/src/MyClass.js",
+      "importPath": "esdoc-test-fixture",
       "importStyle": "MyClass1",
-      "description": "this is MyClass1 desc.\nthis is second line.",
+      //"description": "this is MyClass1 desc.\nthis is second line.",
       "examples": [
         "let foo = 10;\nlet bar = 20;",
         "for (let v of values) {\n  let foo = v;\n}"
@@ -431,7 +431,7 @@ describe('MyClass2:', ()=> {
       "longname": "src/MyClass.js~MyClass2",
       "access": null,
       "export": true,
-      "importPath": "esdoc-test-fixture/src/MyClass.js",
+      "importPath": "esdoc-test-fixture",
       "importStyle": "{MyClass2}",
       "description": "this is MyClass2 desc.",
       "interface": false
@@ -455,7 +455,7 @@ describe('MyClass3:', ()=> {
       "longname": "src/MyClass.js~MyClass3",
       "access": null,
       "export": false,
-      "importPath": "esdoc-test-fixture/src/MyClass.js",
+      "importPath": "esdoc-test-fixture",
       "importStyle": null,
       "description": "this is MyClass3 desc.",
       "interface": false
@@ -479,7 +479,7 @@ describe('MyClass4:', ()=> {
         "longname": "src/MyClass.js~MyClass4",
         "access": null,
         "export": false,
-        "importPath": "esdoc-test-fixture/src/MyClass.js",
+        "importPath": "esdoc-test-fixture",
         "importStyle": null,
         "description": "this is MyClass4 desc.",
         "interface": true

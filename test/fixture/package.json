@@ -5,5 +5,5 @@
     "type": "git",
     "url": "https://github.com/h13i32maru/esdoc"
   },
-  "main": "./src/index.js"
+  "main": "./src/MyClass.js"
 }

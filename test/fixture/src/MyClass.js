@@ -3,6 +3,22 @@ import SuperMyClass1 from './OtherClass/SuperMyClass.js';
 /**
  * this is MyClass1 desc.
  * this is second line.
+ *
+ * this is third line.
+ *
+ * - item1
+ * - item2
+ * - item3
+ *
+ * ```js
+ * let foo = 'this is code block'
+ * ```
+ *
+ * | Left align | Right align | Center align |
+ * |:-----------|------------:|:------------:|
+ * | This       |        This |     This     |
+ * | column     |      column |    column    |
+ *
  * @example
  * let foo = 10;
  * let bar = 20;
