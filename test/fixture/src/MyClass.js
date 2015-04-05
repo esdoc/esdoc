@@ -19,6 +19,9 @@ import SuperMyClass1 from './OtherClass/SuperMyClass.js';
  * | This       |        This |     This     |
  * | column     |      column |    column    |
  *
+ * @implements MyInterface1
+ * @implements XMLHttpRequest
+ *
  * @example
  * let foo = 10;
  * let bar = 20;
@@ -43,15 +46,42 @@ export default class MyClass1 extends SuperMyClass1 {
   }
 
   /**
-   * this is staticMethod desc.
+   * this is staticMethod1 desc.
    */
-  static staticMethod() {
+  static staticMethod1() {
     /**
-     * this is static _p1 desc.
+     * this is static p1 desc.
+     * @type {number}
+     */
+    this.p1 = 123;
+
+    /**
+     * this is static p2 desc.
+     * @type {number}
+     * @protected
+     */
+    this.p2 = 123;
+
+    /**
+     * this is static p3 desc.
      * @type {number}
      * @private
      */
-    this._p1 = 123;
+    this.p3 = 123;
+  }
+
+  /**
+   * this is staticMethod2 desc.
+   * @protected
+   */
+  static staticMethod2() {
+  }
+
+  /**
+   * this is staticMethod3 desc.
+   * @private
+   */
+  static staticMethod3() {
   }
 
   /**
@@ -62,11 +92,24 @@ export default class MyClass1 extends SuperMyClass1 {
     super(p1);
 
     /**
-     * this is _p1 desc.
+     * this is p1 desc.
+     * @type {number}
+     */
+    this.p1 = p1;
+
+    /**
+     * this is p2 desc.
+     * @type {number}
+     * @protected
+     */
+    this.p2 = p1;
+
+    /**
+     * this is p3 desc.
      * @type {number}
      * @private
      */
-    this._p1 = p1;
+    this.p3 = p1;
   }
 
   /**
@@ -84,50 +127,50 @@ export default class MyClass1 extends SuperMyClass1 {
   }
 
   /**
-   * this is method desc.
-   * @param {number} p1 this is p1(simple) desc.
+   * this is method1 desc.
+   * @param {number[]} p1 this is p1(simple) desc.
    * @param {!number} p2 this is p2(not nullable) desc.
    * @param {?number} p3 this is p3(nullable) desc.
    * @param {(number|string[])} p4 this is p4(union) desc.
    * @param {number} [p5] this is p5(optional) desc.
-   * @param {number} [p6=123] this is p4(default) desc.
+   * @param {number} [p6=123] this is p6(default) desc.
    * @param {{a: number, b: string}} p7 this is p7(object) desc.
    * @param {Object} p8 this is p8(nest) desc.
    * @param {number} p8.a this is p8.a(nest) desc.
    * @param {string} p8.b this is p8.b(nest) desc.
-   * @param {!(number|string[]|{a: number, b: string})} p9 - this is p9(complex) desc.
+   * @param {!(MyClass2|MyClass3[]|{a: number, b: string})} p9 - this is p9(complex) desc.
    * this is second line.
    *
    * @return {Object} this is return desc.
    * @property {number} p1 this is p1 of return desc.
    * @property {string[]} p2 this is p2 of return desc.
    */
-  method(p1, p2, p3, p4, p5, p6, p7, p8, p9) {
+  method1(p1, p2, p3, p4, p5, p6, p7, p8, p9) {
   }
 
   /**
-   * this is protectedMethod desc.
+   * this is method2 desc.
    * @protected
    */
-  protectedMethod(){}
+  method2(){}
 
   /**
-   * this is privateMethod desc.
+   * this is method3 desc.
    * @private
    */
-  privateMethod(){}
+  method3(){}
 }
 
 /**
  * this is MyClass2 desc.
  */
-export class MyClass2 {
+export class MyClass2 extends MyClass1 {
 }
 
 /**
  * this is MyClass3 desc.
  */
-class MyClass3 {
+class MyClass3 extends MyClass2 {
 }
 
 /**
@@ -135,4 +178,17 @@ class MyClass3 {
  * @interface
  */
 class MyClass4 {
+}
+
+/**
+ * this is MyClass5 desc.
+ * @implements MyClass1
+ */
+class MyClass5 {
+}
+
+/**
+ * this is MyClass6 desc.
+ */
+class MyClass6 extends MyClass5 {
 }

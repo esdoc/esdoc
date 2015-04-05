@@ -1,5 +1,5 @@
 import assert from 'power-assert';
-import Logger from '../../../src/Util/Logger.js';
+import Logger from '../../../../src/Util/Logger.js';
 
 export default assert;
 

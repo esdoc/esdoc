@@ -32,7 +32,7 @@ export default class CommentParser {
           tagValue = nextLine;
           i++;
         }
-        tagValue = tagValue.replace('\\TRUE', '').replace(/^\n/, '').replace(/\n$/, '');
+        tagValue = tagValue.replace('\\TRUE', '').replace(/^\n/, '').replace(/\n*$/, '');
         tags.push({tagName, tagValue});
       }
     }

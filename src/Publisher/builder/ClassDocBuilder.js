@@ -125,11 +125,9 @@ export default class ClassDocBuilder extends DocBuilder {
     if (['class', 'interface'].indexOf(doc.kind) === -1) return;
 
     let longnames = [
-      ...doc._custom_extends_chains || [],
-      ...doc.implements || [],
-      ...doc._custom_indirect_implements || [],
-      ...doc.mixes || [],
-      ...doc._custom_indirect_mixes || []
+      ...doc._custom_extends_chains || []
+      //...doc.implements || [],
+      //...doc._custom_indirect_implements || [],
     ];
 
     let html = [];
@@ -138,11 +136,23 @@ export default class ClassDocBuilder extends DocBuilder {
 
       if (!superDoc) continue;
 
-      let targetDocs = this._orderedFind('static desc, kind desc, access desc', {
-        memberof: longname,
-        kind: ['member', 'method', 'get', 'set']
-        //inherits: {isUndefined: true},
-        //mixed: {isUndefined: true}
+      let targetDocs = this._find({memberof: longname, kind: ['member', 'method', 'get', 'set']});
+
+      targetDocs.sort((a, b)=>{
+        if (a.static !== b.static) return -(a.static - b.static);
+
+        let order = {get: 0, set: 0, member: 1, method: 2};
+        if (order[a.kind] !== order[b.kind]) {
+          return order[a.kind] - order[b.kind];
+        }
+
+        order = {public: 0, protected: 1, private: 2};
+        if (a.access != b.access) return order[a.access] - order[b.access];
+
+        if (a.name !== b.name) return a.name < b.name ? -1 : 1;
+
+        order = {get: 0, set: 1, member: 2};
+        return order[a.kind] - order[b.kind];
       });
 
       let title = `From ${superDoc.kind} ${this._buildDocLinkHTML(longname, superDoc.name)}`;

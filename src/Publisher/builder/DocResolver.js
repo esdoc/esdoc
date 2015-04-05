@@ -118,7 +118,7 @@ export default class DocResolver {
       while (1) {
         if (!doc.extends) break;
 
-        let superClassDoc = this._builder._find({longname: doc.extends[0]})[0];
+        let superClassDoc = this._builder._findByName(doc.extends[0])[0];
         if (superClassDoc) {
           chains.push(superClassDoc.longname);
           doc = superClassDoc;
@@ -130,7 +130,7 @@ export default class DocResolver {
 
       if (chains.length) {
         // direct subclass
-        let superClassDoc = this._builder._find({longname: chains[0]})[0];
+        let superClassDoc = this._builder._findByName(chains[0])[0];
         if (superClassDoc) {
           if (!superClassDoc._custom_direct_subclasses) superClassDoc._custom_direct_subclasses = [];
           superClassDoc._custom_direct_subclasses.push(selfDoc.longname);
@@ -138,7 +138,7 @@ export default class DocResolver {
 
         // indirect subclass
         for (let superClassLongname of chains.slice(1)) {
-          superClassDoc = this._builder._find({longname: superClassLongname})[0];
+          superClassDoc = this._builder._findByName(superClassLongname)[0];
           if (superClassDoc) {
             if (!superClassDoc._custom_indirect_subclasses) superClassDoc._custom_indirect_subclasses = [];
             superClassDoc._custom_indirect_subclasses.push(selfDoc.longname);
@@ -147,7 +147,7 @@ export default class DocResolver {
 
         // indirect implements and mixes
         for (let superClassLongname of chains) {
-          superClassDoc = this._builder._find({longname: superClassLongname})[0];
+          superClassDoc = this._builder._findByName(superClassLongname)[0];
           if (!superClassDoc) continue;
 
           // indirect implements
@@ -173,7 +173,7 @@ export default class DocResolver {
 
       // direct implemented (like direct subclass)
       for (let superClassLongname of selfDoc.implements || []) {
-        let superClassDoc = this._builder._find({longname: superClassLongname})[0];
+        let superClassDoc = this._builder._findByName(superClassLongname)[0];
         if (!superClassDoc) continue;
         if(!superClassDoc._custom_direct_implemented) superClassDoc._custom_direct_implemented = [];
         superClassDoc._custom_direct_implemented.push(selfDoc.longname);
@@ -181,7 +181,7 @@ export default class DocResolver {
 
       // indirect implemented (like indirect subclass)
       for (let superClassLongname of selfDoc._custom_indirect_implements || []) {
-        let superClassDoc = this._builder._find({longname: superClassLongname})[0];
+        let superClassDoc = this._builder._findByName(superClassLongname)[0];
         if (!superClassDoc) continue;
         if(!superClassDoc._custom_indirect_implemented) superClassDoc._custom_indirect_implemented = [];
         superClassDoc._custom_indirect_implemented.push(selfDoc.longname);

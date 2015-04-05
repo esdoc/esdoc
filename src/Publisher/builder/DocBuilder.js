@@ -23,6 +23,23 @@ export default class DocBuilder {
     return this._orderedFind(null, ...cond);
   }
 
+  _findByName(name, kind = null) {
+    let docs;
+    if (kind) {
+      docs = this._orderedFind(null, {longname: name, kind: kind});
+    } else {
+      docs = this._orderedFind(null, {longname: name});
+    }
+
+    if (docs.length) return docs;
+
+    if (kind) {
+      return this._orderedFind(null, {name: name, kind: kind});
+    } else {
+      return this._orderedFind(null, {name: name});
+    }
+  }
+
   _orderedFind(order, ...cond) {
     let data = this._data(...cond);
 
@@ -186,7 +203,7 @@ export default class DocBuilder {
 
     ice.text('title', title);
     ice.loop('target', docs, (i, doc, ice)=>{
-      ice.load('name', this._buildDocLinkHTML(doc.longname, null, innerLink));
+      ice.load('name', this._buildDocLinkHTML(doc.longname, null, innerLink, doc.kind));
       ice.load('signature', this._buildSignatureHTML(doc));
       ice.load('description', shorten(doc));
       ice.text('abstract', doc.abstract ? 'abstract' : '');
@@ -197,6 +214,7 @@ export default class DocBuilder {
       } else {
         ice.drop('kind');
       }
+      ice.text('static', doc.static ? 'static' : '');
       ice.text('since', doc.since);
       ice.load('deprecated', this._buildDeprecatedHTML(doc));
       ice.load('experimental', this._buildExperimentalHTML(doc));
@@ -252,6 +270,7 @@ export default class DocBuilder {
       } else {
         ice.drop('importPath');
       }
+      ice.text('static', doc.static ? 'static' : '');
       ice.text('since', doc.since, 'append');
       ice.load('deprecated', this._buildDeprecatedHTML(doc));
       ice.load('experimental', this._buildExperimentalHTML(doc));
@@ -274,7 +293,7 @@ export default class DocBuilder {
         for (let typeName of doc.return.types) {
           typeNames.push(this._buildDocLinkHTML(typeName));
         }
-        if ('nullable' in doc.return) {
+        if (typeof doc.return.nullable === 'boolean') {
           let nullable = doc.return.nullable;
           ice.load('returnType', typeNames.join(' | ') + ` (nullable: ${nullable})`);
         } else {
@@ -389,7 +408,7 @@ export default class DocBuilder {
     return `<span><a href="${this._getURL(fileDoc)}">${text}</a></span>`;
   }
 
-  _buildDocLinkHTML(longname, text = null, inner = false) {
+  _buildDocLinkHTML(longname, text = null, inner = false, kind = null) {
     if (!longname) return '';
 
     if (typeof longname !== 'string') throw new Error(JSON.stringify(longname));
@@ -403,7 +422,7 @@ export default class DocBuilder {
       isArray = true;
     }
 
-    let doc = this._find({longname})[0];
+    let doc = this._findByName(longname, kind)[0];
 
     if (!doc) {
       // if longname is HTML tag, not escape.
@@ -416,9 +435,11 @@ export default class DocBuilder {
     }
 
     if (doc.kind === 'external') {
-      text = doc.longname.replace(/^external:\s*/, '');
+      //text = doc.longname.replace(/^external:\s*/, '');
+      text = doc.name;
+      let arraySuffix = isArray ? '[]' : '';
       let aTag = doc.see[0].replace(/>.*?</, `>${text}<`);
-      return `<span>${aTag}</span>`;
+      return `<span>${aTag}${arraySuffix}</span>`;
     } else {
       text = escape(text || doc.name);
       let url = this._getURL(doc, inner);
@@ -486,7 +507,11 @@ export default class DocBuilder {
     }
 
     let html = '';
-    if (callSignatures.length) html = `(${callSignatures.join(', ')})`;
+    if (callSignatures.length) {
+      html = `(${callSignatures.join(', ')})`;
+    } else if (['function', 'method'].includes(doc.kind)) {
+      html = '()';
+    }
     if (returnSignatures.length) html = `${html}: ${returnSignatures.join(' | ')}`;
     if (typeSignatures.length) html = `${html}: ${typeSignatures.join(' | ')}`;
 
@@ -519,7 +544,7 @@ export default class DocBuilder {
       if ('defaultValue' in prop) {
         appendix.push(`<li>default: ${prop.defaultValue}</li>`);
       }
-      if ('nullable' in prop) {
+      if (typeof prop.nullable === 'boolean') {
         appendix.push(`<li>nullable: ${prop.nullable}</li>`);
       }
       if (appendix.length) {
