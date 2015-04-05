@@ -75,4 +75,9 @@ export default class SuperMyClass1 extends SuperMyClass2 {
      */
     this.superP1 = 123;
   }
+
+  /**
+   * this is method1 desc.
+   */
+  method1(){}
 }

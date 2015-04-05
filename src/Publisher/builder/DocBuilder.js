@@ -217,7 +217,6 @@ export default class DocBuilder {
       ice.load('signature', this._buildSignatureHTML(doc));
       ice.load('description', shorten(doc));
       ice.text('abstract', doc.abstract ? 'abstract' : '');
-      ice.text('override', doc.inherits ? 'override' : '');
       ice.text('access', doc.access);
       if (['get', 'set'].includes(doc.kind)) {
         ice.text('kind', doc.kind);
@@ -265,7 +264,6 @@ export default class DocBuilder {
       ice.load('signature', this._buildSignatureHTML(doc));
       ice.load('description', doc.description);
       ice.text('abstract', doc.abstract ? 'abstract' : '');
-      ice.text('override', doc.inherits ? 'override' : '');
       ice.text('access', doc.access);
       if (['get', 'set'].includes(doc.kind)) {
         ice.text('kind', doc.kind);
@@ -285,10 +283,9 @@ export default class DocBuilder {
       ice.load('deprecated', this._buildDeprecatedHTML(doc));
       ice.load('experimental', this._buildExperimentalHTML(doc));
       ice.text('version', doc.version, 'append');
-      //ice.load('fire', this._buildFiresHTML(doc.fires), 'append');
-      //ice.load('listen', this._buildFiresHTML(doc.listens), 'append');
       ice.load('see', this._buildDocsLinkHTML(doc.see), 'append');
       ice.load('todo', this._buildDocsLinkHTML(doc.todo), 'append');
+      ice.load('override', this._buildOverrideMethod(doc));
 
       if (['method', 'constructor', 'function'].indexOf(doc.kind) !== -1) {
         ice.load('properties', this._buildProperties(doc.params, 'Params:'));
@@ -591,23 +588,22 @@ export default class DocBuilder {
     }
   }
 
-  //// fires, listens, events
-  //_buildFiresHTML(fires) {
-  //  if (!fires) return;
-  //  if (!fires.length) return;
-  //
-  //  let links = [];
-  //  for (let fire of fires) {
-  //    let longname = fire.types[0];
-  //    if (!longname) continue;
-  //    let link = this._buildDocLinkHTML(longname, longname, false);
-  //    links.push(`<li>${link}</li>`);
-  //  }
-  //
-  //  if (!links.length) return;
-  //
-  //  return `<ul>${links.join('\n')}</ul>`;
-  //}
+  _buildOverrideMethod(doc) {
+    let parentDoc = this._findByName(doc.memberof)[0];
+    if (!parentDoc) return;
+    if (!parentDoc._custom_extends_chains) return;
+
+    let chains = [...parentDoc._custom_extends_chains].reverse();
+    for (let longname of chains) {
+      let superClassDoc = this._findByName(longname)[0];
+      if (!superClassDoc) continue;
+
+      let superMethodDoc = this._find({name: doc.name, memberof: superClassDoc.longname})[0];
+      if (!superMethodDoc) continue;
+
+      return this._buildDocLinkHTML(superMethodDoc.longname, `${superClassDoc.name}#${superMethodDoc.name}`, true);
+    }
+  }
 
   //_buildAuthorHTML(doc, separator = '\n') {
   //  if (!doc.author) return '';

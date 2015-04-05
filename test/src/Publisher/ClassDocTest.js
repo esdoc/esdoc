@@ -222,8 +222,11 @@ describe('Publisher: src/MyClass: ', ()=> {
       assert.includes(doc, '[data-ice="target"]:nth-of-type(7)', 'public superP1');
       assert.includes(doc, '[data-ice="target"]:nth-of-type(7) [data-ice="name"] a', encode('@class-src|OtherClass|SuperMyClass.js~SuperMyClass1.html') + '#instance-member-superP1', 'href');
 
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(8)', 'public superMethod()');
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(8) a', encode('@class-src|OtherClass|SuperMyClass.js~SuperMyClass1.html') + '#instance-method-superMethod', 'href');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(8)', 'public method1()');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(8) a', encode('@class-src|OtherClass|SuperMyClass.js~SuperMyClass1.html') + '#instance-method-method1', 'href');
+
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(9)', 'public superMethod()');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(9) a', encode('@class-src|OtherClass|SuperMyClass.js~SuperMyClass1.html') + '#instance-method-superMethod', 'href');
     });
   });
 
