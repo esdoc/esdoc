@@ -3,7 +3,7 @@ node_js:
   - "0.12"
 
 script:
-  - TRAVIS=1 npm run test
+  - TRAVIS=1 npm run test-es5
 
 install:
   - npm install

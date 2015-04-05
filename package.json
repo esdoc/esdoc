@@ -12,6 +12,7 @@
     "postinstall": "cd node_modules/esquery/node_modules; rm -rf estraverse; npm i estraverse@3.1.0",
     "build": "bash ./script/build.sh",
     "test": "bash ./script/test.sh",
+    "test-es5": "bash ./script/test-es5.sh",
     "esdoc": "bash ./script/esdoc.sh",
     "start": "bash ./script/server.sh"
   },
@@ -24,7 +25,8 @@
     "taffydb": "",
     "escape-html": "",
     "ice-cap": "",
-    "marked": ""
+    "marked": "",
+    "color-logger": "../color-logger"
   },
   "devDependencies": {
     "babel": "",
@@ -45,5 +47,6 @@
     "out/src",
     "README.md"
   ],
-  "main": "out/src/index.js"
+  "main": "out/src/index.js",
+  "bin": {"esdoc": "out/src/cli.js"}
 }

@@ -1,11 +1,12 @@
+import babel from 'babel/polyfill';
 import fs from 'fs';
 import path from 'path';
 import assert from 'assert';
 import estraverse from 'estraverse';
+import Logger from 'color-logger';
 import ESParser from './Parser/ESParser';
 import PathResolver from './Util/PathResolver.js';
 import DocFactory from './Factory/DocFactory.js';
-import Logger from './Util/Logger.js';
 
 export default function esdoc(config, publisher) {
   assert(typeof publisher === 'function');
