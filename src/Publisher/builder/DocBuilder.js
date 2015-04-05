@@ -223,7 +223,13 @@ export default class DocBuilder {
       } else {
         ice.drop('kind');
       }
-      ice.text('static', doc.static ? 'static' : '');
+
+      if (['member', 'method', 'get', 'set'].includes(doc.kind)) {
+        ice.text('static', doc.static ? 'static' : '');
+      } else {
+        ice.drop('static');
+      }
+
       ice.text('since', doc.since);
       ice.load('deprecated', this._buildDeprecatedHTML(doc));
       ice.load('experimental', this._buildExperimentalHTML(doc));
@@ -278,7 +284,13 @@ export default class DocBuilder {
       } else {
         ice.drop('importPath');
       }
-      ice.text('static', doc.static ? 'static' : '');
+
+      if (['member', 'method', 'get', 'set'].includes(doc.kind)) {
+        ice.text('static', doc.static ? 'static' : '');
+      } else {
+        ice.drop('static');
+      }
+
       ice.text('since', doc.since, 'append');
       ice.load('deprecated', this._buildDeprecatedHTML(doc));
       ice.load('experimental', this._buildExperimentalHTML(doc));

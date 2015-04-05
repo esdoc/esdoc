@@ -6,9 +6,9 @@ describe('MyVariable:', ()=> {
 
   it('has summary.', ()=>{
     find(doc, '[data-ice="summary"]', (doc)=>{
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public static myVariable1: Object this is myVariable1 desc.');
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(2)', 'public static myVariable2: number this is myVariable2 desc.');
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(3)', 'public static myVariable3: number this is myVariable3 desc.');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public myVariable1: Object this is myVariable1 desc.');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(2)', 'public myVariable2: number this is myVariable2 desc.');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(3)', 'public myVariable3: number this is myVariable3 desc.');
 
       assert.includes(doc, '[data-ice="target"]:nth-of-type(1) [data-ice="name"] a', encode('@variable.html') + '#static-variable-myVariable1', 'href');
     });
@@ -16,17 +16,17 @@ describe('MyVariable:', ()=> {
 
   it('has detail.', ()=> {
     find(doc, '[data-ice="detail"]:nth-of-type(1)', (doc)=> {
-      assert.includes(doc, '#static-variable-myVariable1', 'public static myVariable1: Object');
+      assert.includes(doc, '#static-variable-myVariable1', 'public myVariable1: Object');
       assert.includes(doc, '[data-ice="importPath"]', "import myVariable1 from 'esdoc-test-fixture/src/myVariable.js'");
     });
 
     find(doc, '[data-ice="detail"]:nth-of-type(2)', (doc)=> {
-      assert.includes(doc, '#static-variable-myVariable2', 'public static myVariable2: number');
+      assert.includes(doc, '#static-variable-myVariable2', 'public myVariable2: number');
       assert.includes(doc, '[data-ice="importPath"]', "import {myVariable2} from 'esdoc-test-fixture/src/myVariable.js'");
     });
 
     find(doc, '[data-ice="detail"]:nth-of-type(3)', (doc)=> {
-      assert.includes(doc, '#static-variable-myVariable3', 'public static myVariable3: number');
+      assert.includes(doc, '#static-variable-myVariable3', 'public myVariable3: number');
     });
   });
 });
