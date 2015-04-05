@@ -13,10 +13,12 @@ export default class PathResolver {
       this._mainFilePath = path.resolve(mainFilePath);
     }
     this._pathPrefix = pathPrefix || '';
+
+    this._prefixedFilePath = path.resolve(`${this._pathPrefix}${path.sep}${this.filePath}`);
   }
 
   get importPath() {
-    if (this._mainFilePath === this._filePath) {
+    if (this._mainFilePath === this._prefixedFilePath) {
       return this._packageName;
     }
 

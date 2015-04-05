@@ -33,7 +33,7 @@ export default function esdoc(config, publisher) {
 
   let pathPrefix = null;
   if (config.importPathPrefix) {
-    pathPrefix = config.iportPathPrefix;
+    pathPrefix = config.importPathPrefix;
   }
 
   let results = [];
