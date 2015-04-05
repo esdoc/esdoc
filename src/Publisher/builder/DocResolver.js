@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import {markdown} from './util.js';
 
 export default class DocResolver {
   constructor(builder) {
@@ -10,6 +11,7 @@ export default class DocResolver {
   resolve() {
     this._resolveIgnore();
     this._resolveAccess();
+    this._resolveMarkdown();
     this._resolveLink();
     this._resolveExtendsChain();
   }
@@ -33,6 +35,28 @@ export default class DocResolver {
     this._builder._data({access: {isNull: true}}).update({access: 'public'});
 
     this._data.__RESOLVED_ACCESS__ = true;
+  }
+
+  _resolveMarkdown() {
+    if (this._data.__RESOLVED_MARKDOWN__) return;
+
+    function convert(obj) {
+      for (let key of Object.keys(obj)) {
+        let value = obj[key];
+        if (key === 'description' && typeof value === 'string') {
+          obj[key] = markdown(value, true);
+        } else if (typeof value === 'object' && value) {
+          convert(value);
+        }
+      }
+    }
+
+    let docs = this._builder._find();
+    for (let doc of docs) {
+      convert(doc);
+    }
+
+    this._data.__RESOLVED_MARKDOWN__ = true;
   }
 
   _resolveLink() {
