@@ -57,6 +57,7 @@ export default class DocFactory {
     // leading comments
     for (let i = 0; i < node.leadingComments.length; i++) {
       let comment = node.leadingComments[i];
+      if (!CommentParser.isESDoc(comment)) continue;
       let tags = CommentParser.parse(comment);
 
       let doc;
