@@ -6,45 +6,73 @@ import minimist from 'minimist';
 import esdoc from './esdoc.js';
 import defaultPublisher from './Publisher/publish.js';
 
-let argv = minimist(process.argv.slice(2));
-if (argv.h || argv.help) {
-  console.log('usage: esdoc [esdoc.json | path/to/js/src]');
-  process.exit(0)
-}
-
-assert.equal(argv._.length, 1, 'specify esdoc.json or dir. see -h');
-assert(argv._[0], 'specify esdoc.json or dir. see -h');
-
-let specifiedPath = path.resolve(argv._[0]);
-let stat = fs.statSync(specifiedPath);
-let config;
-
-if (stat.isFile()) {
-  // specified JSON file path.
-
-  let configJSON = fs.readFileSync(specifiedPath, {encode: 'utf8'});
-  config = JSON.parse(configJSON);
-
-} else if(stat.isDirectory()) {
-  // specified source directory path.
-
-  let readmeStat = null;
-  try {
-    readmeStat = fs.statSync('./README.md');
-  } catch(e) {
-    // ignore
+export default class ESDocCLI {
+  constructor(argv) {
+    this._argv = minimist(argv.slice(2));
+    if (this._argv.h || this._argv.help) {
+      this._showHelp();
+      process.exit(0)
+    }
   }
 
-  config = {
-    source: specifiedPath,
-    pattern: '\\.js$',
-    destination: '_esdoc_',
-    title: 'NO TITLE',
-    description: 'NO DESCRIPTION',
-    readme: readmeStat ? './README.md' : ''
-  };
+  exec() {
+    let config;
+    if (this._argv.c) {
+      config = this._createConfigFromJSONFile(this._argv.c);
+    } else if (this._argv._.length) {
+      config = this._createConfigFromPath(this._argv._[0]);
+    } else {
+      this._showHelp();
+      process.exit(1);
+    }
 
+    esdoc(config, defaultPublisher);
+  }
+
+  _showHelp() {
+    console.log('usage: esdoc [-c esdoc.json | path/to/dir]');
+  }
+
+  _createConfigFromJSONFile(configFilePath) {
+    configFilePath = path.resolve(configFilePath);
+    let configJSON = fs.readFileSync(configFilePath, {encode: 'utf8'});
+    let config = JSON.parse(configJSON);
+
+    return config;
+  }
+
+  _createConfigFromPath(targetPath) {
+    targetPath = path.resolve(targetPath);
+    let stat = fs.statSync(targetPath);
+    let config;
+
+    if (!stat.isDirectory()) {
+      this._showHelp();
+      process.exit(1);
+    }
+
+    let readmeStat = null;
+    try {
+      readmeStat = fs.statSync('./README.md');
+    } catch(e) {
+      // ignore
+    }
+
+    config = {
+      source: targetPath,
+      pattern: '\\.js$|\\.es6$',
+      destination: '_esdoc_',
+      title: 'NO TITLE',
+      description: 'NO DESCRIPTION',
+      readme: readmeStat ? './README.md' : ''
+    };
+
+    return config;
+  }
 }
 
-esdoc(config, defaultPublisher);
-
+let executedFilePath = fs.realpathSync(process.argv[1]);
+if (executedFilePath === __filename) {
+  let cli = new ESDocCLI(process.argv);
+  cli.exec();
+}
