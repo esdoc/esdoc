@@ -1,0 +1,39 @@
+body {
+  margin: 20px;
+}
+
+pre {
+  background: #f7f7f7;
+  padding: 10px;
+  border-radius: 3px;
+}
+
+code {
+  padding: 0.2em 0;
+  background-color: rgba(0,0,0,0.04);
+  border-radius: 3px;
+}
+
+pre code {
+  background: transparent;
+  padding: 0;
+  border-right: 0;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table tr {
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+}
+
+table th, table td {
+  padding: 6px 13px;
+  border: 1px solid #ddd;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}

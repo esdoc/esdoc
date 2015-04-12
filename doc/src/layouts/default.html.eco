@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>ESDoc</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/prettify/prettify-tomorrow.css">
+    <script src="/prettify/prettify.js"></script>
+</head>
+<body>
+<%- @content %>
+
+<script src="/script/pretty.js"></script>
+</body>
+</html>
