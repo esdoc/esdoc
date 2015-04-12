@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import assert from 'assert';
 import estraverse from 'estraverse';
-import Logger from './Util/Logger.js';
+import Logger from 'color-logger';
 import ESParser from './Parser/ESParser';
 import PathResolver from './Util/PathResolver.js';
 import DocFactory from './Factory/DocFactory.js';
@@ -14,7 +14,7 @@ export default function esdoc(config, publisher) {
   assert(config.destination);
 
   if (config.debug) {
-    Logger.debug = true;
+    Logger.debug = config.debug;
   }
 
   let pattern = null;

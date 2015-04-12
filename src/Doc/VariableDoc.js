@@ -1,7 +1,9 @@
+import Logger from 'color-logger';
 import AbstractDoc from './AbstractDoc.js';
 import MemberDoc from './MemberDoc.js';
 import FunctionDoc from './FunctionDoc.js';
-import Logger from '../Util/Logger.js';
+
+let logger = new Logger('VariableDoc');
 
 export default class VariableDoc extends AbstractDoc {
   _apply() {
@@ -40,7 +42,7 @@ export default class VariableDoc extends AbstractDoc {
       }
     }
 
-    Logger.w(TAG, `can not resolve kind.`);
+    logger.w(`can not resolve kind.`);
   }
 
   ['@name']() {
@@ -58,7 +60,7 @@ export default class VariableDoc extends AbstractDoc {
       return;
     }
 
-    Logger.w(TAG, `can not resolve name.`);
+    logger.w(`can not resolve name.`);
   }
 
   ['@memberof']() {

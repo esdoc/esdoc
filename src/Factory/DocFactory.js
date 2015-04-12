@@ -1,4 +1,4 @@
-import Logger from '../Util/Logger.js';
+import Logger from 'color-logger';
 import CommentParser from '../Parser/CommentParser.js';
 import FileDoc from '../Doc/FileDoc.js';
 import ClassDoc from '../Doc/ClassDoc.js';
@@ -10,7 +10,7 @@ import TypedefDoc from '../Doc/TypedefDoc.js';
 import ExternalDoc from '../Doc/ExternalDoc.js';
 
 let already = Symbol('already');
-let TAG = 'DocFactory';
+let logger = new Logger('DocFactory');
 
 export default class DocFactory {
   static create(ast, node, parentNode, pathResolver) {
@@ -117,7 +117,7 @@ export default class DocFactory {
       case 'Variable': clazz = VariableDoc; break;
       case 'Typedef': clazz = TypedefDoc; break;
       case 'External': clazz = ExternalDoc; break;
-      default: Logger.w(TAG, `unresolve: ${type}`);
+      default: logger.w(`unresolve: ${type}`);
     }
 
     if (!clazz) return;
@@ -152,7 +152,7 @@ export default class DocFactory {
       case 'FunctionDeclaration': type = 'Function'; break;
       case 'VariableDeclaration': type = 'Variable'; break;
       case 'AssignmentExpression': type = 'Variable'; break;
-      default: Logger.w(TAG, `unresolve: ${node.type}`);
+      default: logger.w(`unresolve: ${node.type}`);
     }
 
     return type;

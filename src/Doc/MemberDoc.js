@@ -1,7 +1,5 @@
 import AbstractDoc from './AbstractDoc.js';
 import MethodDoc from './MethodDoc.js';
-//import ParamParser from '../Parser/ParamParser.js';
-import Logger from '../Util/Logger.js';
 
 export default class MemberDoc extends AbstractDoc {
   _apply() {

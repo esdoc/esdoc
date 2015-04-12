@@ -1,6 +1,8 @@
+import Logger from 'color-logger';
 import AbstractDoc from './AbstractDoc.js';
 import ParamParser from '../Parser/ParamParser.js';
-import Logger from '../Util/Logger.js';
+
+let logger = new Logger('TypedefDoc');
 
 export default class TypedefDoc extends AbstractDoc {
   _apply() {
@@ -22,7 +24,7 @@ export default class TypedefDoc extends AbstractDoc {
   ['@name']() {
     let tags = this._findAll(['@name', '@typedef']);
     if (!tags) {
-      Logger.w(TAG, `can not resolve name.`);
+      logger.w(`can not resolve name.`);
       return;
     }
 
@@ -72,5 +74,3 @@ export default class TypedefDoc extends AbstractDoc {
     this._value.type = result;
   }
 }
-
-let TAG = TypedefDoc.name;

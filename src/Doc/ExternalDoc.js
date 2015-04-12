@@ -1,5 +1,7 @@
+import Logger from 'color-logger';
 import AbstractDoc from './AbstractDoc.js';
-import Logger from '../Util/Logger.js';
+
+let logger = new Logger('ExternalDoc');
 
 export default class ExternalDoc extends AbstractDoc {
   _apply() {
@@ -19,7 +21,7 @@ export default class ExternalDoc extends AbstractDoc {
   ['@name']() {
     let value = this._findTagValue(['@name', '@external']);
     if (!value) {
-      Logger.w(TAG, `can not resolve name.`);
+      logger.w(`can not resolve name.`);
     }
 
     this._value.name = value;
@@ -37,6 +39,4 @@ export default class ExternalDoc extends AbstractDoc {
     this._value.longname = this._value.name;
   }
 }
-
-let TAG = ExternalDoc.name;
 

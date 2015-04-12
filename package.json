@@ -29,13 +29,14 @@
   },
   "devDependencies": {
     "babel": "",
-    "mocha": "",
-    "power-assert": "",
-    "espower-loader": "",
-    "istanbul": "",
+    "cheerio": "",
+    "color-logger": "0.0.3",
     "coveralls": "",
+    "espower-loader": "",
     "http-server": "",
-    "cheerio": ""
+    "istanbul": "",
+    "mocha": "",
+    "power-assert": ""
   },
   "keywords": [
     "jsdoc",
@@ -51,5 +52,7 @@
     "README.md"
   ],
   "main": "out/src/index.js",
-  "bin": {"esdoc": "out/src/cli.js"}
+  "bin": {
+    "esdoc": "out/src/cli.js"
+  }
 }
