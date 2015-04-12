@@ -6,7 +6,7 @@ export default class ESParser {
   static parse(filePath) {
     let code = fs.readFileSync(filePath, {encode: 'utf8'});
 
-    return espree.parse(code, {
+    let ast = espree.parse(code, {
       comments: true,
       attachComment: true,
       loc: true,
@@ -35,5 +35,7 @@ export default class ESParser {
         globalReturn: true
       }
     });
+
+    return ast;
   }
 }

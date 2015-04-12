@@ -9,7 +9,6 @@
     "url": "https://github.com/h13i32maru/esdoc"
   },
   "scripts": {
-    "postinstall": "cd node_modules/esquery/node_modules; rm -rf estraverse; npm i estraverse@3.1.0",
     "build": "bash ./script/build.sh",
     "test": "bash ./script/test.sh",
     "test-es5": "bash ./script/test-es5.sh",
@@ -18,7 +17,6 @@
   },
   "dependencies": {
     "espree": "1.12.3",
-    "esquery": "",
     "estraverse": "",
     "fs-extra": "",
     "minimist": "^1.1.1",

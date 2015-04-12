@@ -1,7 +1,7 @@
 import assert from 'assert';
-import esquery from 'esquery';
 import fs from 'fs';
 import ParamParser from '../Parser/ParamParser.js';
+import ASTUtil from '../Util/ASTUtil.js';
 
 export default class AbstractDoc {
   constructor(ast, node, pathResolver, commentTags = []){
@@ -435,7 +435,7 @@ export default class AbstractDoc {
   }
 
   _resolveLongname(name) {
-    let importPath = this._findPathInImportDeclaration(this._ast, name);
+    let importPath = ASTUtil.findPathInImportDeclaration(this._ast, name);
     if (importPath) {
       let resolvedPath = this._pathResolver.resolve(importPath);
       let longname = `${resolvedPath}~${name}`;
@@ -443,20 +443,6 @@ export default class AbstractDoc {
     }
 
     return name;
-  }
-
-  _findPathInImportDeclaration(ast, name) {
-    let nodes = esquery(ast, 'ImportDeclaration');
-    for (let node of nodes) {
-      for (let spec of node.specifiers) {
-        let localName = spec.local.name;
-        if (localName === name) {
-          return node.source.value;
-        }
-      }
-    }
-
-    return null;
   }
 
   _flattenMemberExpression(node) {

@@ -2,8 +2,8 @@ import babel from 'babel/polyfill';
 import fs from 'fs';
 import path from 'path';
 import assert from 'assert';
-import estraverse from 'estraverse';
 import Logger from 'color-logger';
+import ASTUtil from './Util/ASTUtil.js';
 import ESParser from './Parser/ESParser';
 import PathResolver from './Util/PathResolver.js';
 import DocFactory from './Factory/DocFactory.js';
@@ -72,11 +72,9 @@ function generate(inDirPath, filePath, packageName, mainFilePath, pathPrefix) {
   let values = [];
   let pathResolver = new PathResolver(inDirPath, filePath, packageName, mainFilePath, pathPrefix);
 
-  estraverse.traverse(ast, {
-    enter: function(node, parent) {
-      let results = DocFactory.create(ast, node, parent, pathResolver);
-      values.push(...results);
-    }
+  ASTUtil.traverse(ast, (node, parent)=>{
+    let results = DocFactory.create(ast, node, parent, pathResolver);
+    values.push(...results);
   });
 
   return values;
