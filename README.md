@@ -2,7 +2,7 @@
 [![Coverage Status](https://coveralls.io/repos/h13i32maru/esdoc/badge.svg)](https://coveralls.io/r/h13i32maru/esdoc)
 # ESDoc
 
-ESDoc is API Documentation Generator for JavaScript(like JSDoc).
+[ESDoc](https://github.com/h13i32maru/esdoc) is API Documentation Generator for JavaScript(like JSDoc).
 
 - [Demo](#demo)
 - [Install](#install)
@@ -18,7 +18,10 @@ ESDoc is API Documentation Generator for JavaScript(like JSDoc).
 - [Internal Data Structure](#internal-data-structure)
 
 # Demo
-- todo
+TODO: create more better demo.
+
+- http://h13i32maru.github.io/color-logger/
+- http://h13i32maru.github.io/esdoc-test-fixture/
 
 # Install
 sorry, not yet publish to npmjs.org
@@ -473,3 +476,6 @@ esdoc(config, (results, config)=>{
 
 # Internal Data Structure
 - todo
+
+# License
+MIT
