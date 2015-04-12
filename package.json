@@ -16,7 +16,7 @@
     "start": "bash ./script/server.sh"
   },
   "dependencies": {
-    "espree": "1.12.3",
+    "espree": "",
     "estraverse": "",
     "fs-extra": "",
     "minimist": "^1.1.1",
