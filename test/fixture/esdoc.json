@@ -7,7 +7,6 @@
   "debug": true,
   "readme": "./test/fixture/README.md",
   "package": "./test/fixture/package.json",
-  "private": true,
   "importPathPrefix": "",
   "styles": [],
   "scripts": []

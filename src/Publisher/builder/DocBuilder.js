@@ -53,10 +53,6 @@ export default class DocBuilder {
   _orderedFind(order, ...cond) {
     let data = this._data(...cond);
 
-    if (!this._config.private) {
-      data = data.filter({access: {'!is': 'private'}});
-    }
-
     if (order) {
       return data.order(order + ', name asec').map(v => v);
     } else {
