@@ -9,8 +9,8 @@ export default class DocResolver {
   }
 
   resolve() {
-    this._resolveIgnore();
     this._resolveAccess();
+    this._resolveIgnore();
     this._resolveMarkdown();
     this._resolveLink();
     this._resolveExtendsChain();
@@ -32,7 +32,13 @@ export default class DocResolver {
   _resolveAccess() {
     if (this._data.__RESOLVED_ACCESS__) return;
 
-    this._builder._data({access: {isNull: true}}).update({access: 'public'});
+    let config = this._builder._config;
+    let access = config.access || ['public', 'protected', 'private'];
+    this._builder._data().update(function(){
+      if (!this.access) this.access = 'public';
+      if (!access.includes(this.access)) this.ignore = true;
+      return this;
+    });
 
     this._data.__RESOLVED_ACCESS__ = true;
   }

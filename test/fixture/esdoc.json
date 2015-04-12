@@ -2,6 +2,7 @@
   "source": "./test/fixture/src",
   "pattern": "\\.js$",
   "destination": "./test/fixture/esdoc",
+  "access": ["public", "protected", "private"],
   "debug": true,
   "readme": "./test/fixture/README.md",
   "package": "./test/fixture/package.json",
