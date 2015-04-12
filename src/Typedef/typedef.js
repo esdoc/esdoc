@@ -3,6 +3,8 @@
  * @property {string} source - directory path of javascript source code.
  * @property {string} pattern - target file path patter.
  * @property {string} destination
+ * @property {string[]} access
+ * @property {boolean} onlyExported
  * @property {boolean} debug
  * @property {string} readme
  * @property {string} package

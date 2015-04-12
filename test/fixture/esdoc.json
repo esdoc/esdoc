@@ -3,6 +3,7 @@
   "pattern": "\\.js$",
   "destination": "./test/fixture/esdoc",
   "access": ["public", "protected", "private"],
+  "onlyExported": false,
   "debug": true,
   "readme": "./test/fixture/README.md",
   "package": "./test/fixture/package.json",

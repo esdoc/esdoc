@@ -10,6 +10,7 @@ export default class DocResolver {
 
   resolve() {
     this._resolveAccess();
+    this._resolveOnlyExported();
     this._resolveIgnore();
     this._resolveMarkdown();
     this._resolveLink();
@@ -34,13 +35,26 @@ export default class DocResolver {
 
     let config = this._builder._config;
     let access = config.access || ['public', 'protected', 'private'];
-    this._builder._data().update(function(){
+
+    this._data().update(function(){
       if (!this.access) this.access = 'public';
       if (!access.includes(this.access)) this.ignore = true;
       return this;
     });
 
     this._data.__RESOLVED_ACCESS__ = true;
+  }
+
+  _resolveOnlyExported() {
+    if (this._data.__RESOLVED_ONLY_EXPORTED__) return;
+
+    let config = this._builder._config;
+    let onlyExported = config.onlyExported;
+    if (onlyExported) {
+      this._data({export: false}).update({ignore: true});
+    }
+
+    this._data.__RESOLVED_ONLY_EXPORTED__ = true;
   }
 
   _resolveMarkdown() {
