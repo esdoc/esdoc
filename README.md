@@ -4,18 +4,18 @@
 
 ESDoc is API Documentation Generator for JavaScript(like JSDoc).
 
-- [Demo](#DEMO)
-- [Install](#Install)
-- [Usage](#Usage)
-- [Config](#Config)
-- [Tags](#Tags)
-  - [For Common](#For Common)
-  - [For Class](#For Class)
-  - [For Method And Function](#For Method And Function)
-  - [For Member And Variable](#For Member And Variable)
-  - [For Virtual](#For Member And Variable)
-- [API](#API)
-- [Internal Data Structure](#Internal Data Structure)
+- [Demo](#demo)
+- [Install](#install)
+- [Usage](#usage)
+- [Config](#config)
+- [Tags](#tags)
+  - [For Common](#for-Common)
+  - [For Class](#for-Class)
+  - [For Method And Function](#for-method-and-function)
+  - [For Member And Variable](#for-member-and-variable)
+  - [For Virtual](#for-member-and-variable)
+- [API](#api)
+- [Internal Data Structure](#internal-data-structure)
 
 # Demo
 - todo
