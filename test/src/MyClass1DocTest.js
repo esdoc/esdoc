@@ -9,8 +9,8 @@ describe('MyClass1: ', ()=> {
       assert.includes(doc, '[data-ice="importPath"]', "import MyClass1 from 'esdoc-test-fixture'");
       assert.includes(doc, '[data-ice="access"]', 'public');
       assert.includes(doc, '[data-ice="kind"]', 'class');
-      assert.includes(doc, '[data-ice="file"]', 'file src/MyClass.js');
-      assert.includes(doc, '[data-ice="file"] a', encode('@file-src|MyClass.js.html'), 'href');
+      assert.includes(doc, '[data-ice="source"]', 'source');
+      assert.includes(doc, '[data-ice="source"] a', encode('@file-src|MyClass.js.html') + '#lineNumber42', 'href');
       assert.includes(doc, '[data-ice="version"]', 'version 0.0.1');
       assert.includes(doc, '[data-ice="since"]', 'since 1.2.3');
     });

@@ -292,6 +292,7 @@ export default class DocBuilder {
         ice.drop('static');
       }
 
+      ice.load('source', this._buildFileDocLinkHTML(doc, 'source'));
       ice.text('since', doc.since, 'append');
       ice.load('deprecated', this._buildDeprecatedHTML(doc));
       ice.load('experimental', this._buildExperimentalHTML(doc));
@@ -425,7 +426,7 @@ export default class DocBuilder {
     if (!fileDoc) return;
 
     if (!text) text = fileDoc.name;
-    return `<span><a href="${this._getURL(fileDoc)}">${text}</a></span>`;
+    return `<span><a href="${this._getURL(fileDoc)}#lineNumber${doc.lineNumber}">${text}</a></span>`;
   }
 
   _buildDocLinkHTML(longname, text = null, inner = false, kind = null) {

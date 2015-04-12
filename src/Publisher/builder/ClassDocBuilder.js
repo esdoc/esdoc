@@ -29,7 +29,7 @@ export default class ClassDocBuilder extends DocBuilder {
     }
     ice.text('access', doc.access);
     ice.text('kind', doc.interface ? 'interface' : 'class');
-    ice.load('file', this._buildFileDocLinkHTML(doc), 'append');
+    ice.load('source', this._buildFileDocLinkHTML(doc, 'source'), 'append');
     ice.text('since', doc.since, 'append');
     ice.text('version', doc.version, 'append');
     ice.load('variation', this._buildVariationHTML(doc), 'append');
