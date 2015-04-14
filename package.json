@@ -49,7 +49,7 @@
     "out/src",
     "README.md"
   ],
-  "main": "out/src/index.js",
+  "main": "out/src/esdoc.js",
   "bin": {
     "esdoc": "out/src/cli.js"
   }

@@ -483,5 +483,6 @@ esdoc(config, (results, config)=>{
 - todo
 
 # License
+MIT
 
 
