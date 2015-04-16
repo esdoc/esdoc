@@ -51,6 +51,7 @@ export default class AbstractDoc {
     this['@listens']();
     this['@member']();
     this['@content']();
+    this['@generator']();
   }
 
   ['@kind']() {
@@ -384,10 +385,13 @@ export default class AbstractDoc {
     let value = this._findTagValue(['@content']);
     if (value) {
       this._value.content = value;
-    } else {
-      let filePath = this._pathResolver.fileFullPath;
-      let content = fs.readFileSync(filePath, {encode: 'utf8'}).toString();
-      this._value.content = content;
+    }
+  }
+
+  ['@generator']() {
+    let tag = this._find(['@generator']);
+    if (tag) {
+      this._value.generator = true;
     }
   }
 

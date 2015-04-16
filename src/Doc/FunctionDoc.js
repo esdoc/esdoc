@@ -1,12 +1,6 @@
 import AbstractDoc from './AbstractDoc.js';
-//import ParamParser from '../Parser/ParamParser.js';
 
 export default class FunctionDoc extends AbstractDoc {
-  //_apply() {
-  //  super._apply();
-  //
-  //}
-
   ['@kind']() {
     super['@kind']();
     if (this._value.kind) return;
@@ -25,4 +19,10 @@ export default class FunctionDoc extends AbstractDoc {
     this._value.memberof = this._pathResolver.filePath;
   }
 
+  ['@generator']() {
+    super['@generator']();
+    if ('generator' in this._value) return;
+
+    this._value.generator = this._node.generator;
+  }
 }

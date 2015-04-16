@@ -1,3 +1,4 @@
+import fs from 'fs';
 import AbstractDoc from './AbstractDoc.js';
 
 export default class FileDoc extends AbstractDoc {
@@ -30,5 +31,14 @@ export default class FileDoc extends AbstractDoc {
     } else {
       this._value.longname = this._value.name;
     }
+  }
+
+  ['@content']() {
+    super['@content']();
+    if ('content' in this._value) return;
+
+    let filePath = this._pathResolver.fileFullPath;
+    let content = fs.readFileSync(filePath, {encode: 'utf8'}).toString();
+    this._value.content = content;
   }
 }

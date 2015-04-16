@@ -185,6 +185,13 @@ export default class MyClass1 extends SuperMyClass1 {
    * @private
    */
   method3(){}
+
+  /**
+   * this is method4 desc.
+   * @return {Generator}
+   * @private
+   */
+  * method4(){}
 }
 
 /**

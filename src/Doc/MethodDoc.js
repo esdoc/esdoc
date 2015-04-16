@@ -37,4 +37,11 @@ export default class MethodDoc extends AbstractDoc {
       parent = parent.parent;
     }
   }
+
+  ['@generator']() {
+    super['@generator']();
+    if ('generator' in this._value) return;
+
+    this._value.generator = this._node.value.generator;
+  }
 }

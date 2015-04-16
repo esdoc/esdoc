@@ -210,6 +210,7 @@ export default class DocBuilder {
 
     ice.text('title', title);
     ice.loop('target', docs, (i, doc, ice)=>{
+      ice.text('generator', doc.generator ? '*' : '');
       ice.load('name', this._buildDocLinkHTML(doc.longname, null, innerLink, doc.kind));
       ice.load('signature', this._buildSignatureHTML(doc));
       ice.load('description', shorten(doc));
@@ -263,6 +264,7 @@ export default class DocBuilder {
     ice.loop('detail', docs, (i, doc, ice)=>{
       let scope = doc.static ? 'static' : 'instance';
       ice.attr('anchor', 'id', `${scope}-${doc.kind}-${doc.name}`);
+      ice.text('generator', doc.generator ? '*' : '');
       ice.text('name', doc.name);
       ice.load('signature', this._buildSignatureHTML(doc));
       ice.load('description', doc.description);

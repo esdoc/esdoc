@@ -36,3 +36,9 @@ function myFunction4(p1, p2){
  * @property {number} p1 - this is p1 of return value.
  */
 let myFunction5 = function(p1, p2){};
+
+/**
+ * this is myFunction6 desc.
+ * @return {Generator}
+ */
+export function* myFunction6(){}
