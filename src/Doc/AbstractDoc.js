@@ -39,6 +39,7 @@ export default class AbstractDoc {
     this['@version']();
     this['@todo']();
     this['@ignore']();
+    this['@unknown']();
 
     this['@param']();
     this['@property']();
@@ -268,6 +269,15 @@ export default class AbstractDoc {
     let tag = this._find(['@ignore']);
     if (tag) {
       this._value.ignore = true;
+    }
+  }
+
+  ['@unknown']() {
+    for (let tag of this._commentTags) {
+      if (this[tag.tagName]) continue;
+
+      if (!this._value.unknown) this._value.unknown = [];
+      this._value.unknown.push(tag);
     }
   }
 

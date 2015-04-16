@@ -4,13 +4,20 @@ describe('MyClass1: ', ()=> {
   let doc = readDoc('@class-src|MyClass.js~MyClass1.html');
   let encode = encodeURIComponent;
 
+  it('has unknown tag.', ()=>{
+    let doc = global.db.find({name: 'MyClass1'})[0];
+    assert.equal(doc.unknown.length, 1);
+    assert.equal(doc.unknown[0].tagName, '@foobar');
+    assert.equal(doc.unknown[0].tagValue, 'this is unknown tag.');
+  });
+
   it('has header notice.', ()=>{
     find(doc, '[data-ice="content"] .header-notice', (doc)=>{
       assert.includes(doc, '[data-ice="importPath"]', "import MyClass1 from 'esdoc-test-fixture'");
       assert.includes(doc, '[data-ice="access"]', 'public');
       assert.includes(doc, '[data-ice="kind"]', 'class');
       assert.includes(doc, '[data-ice="source"]', 'source');
-      assert.includes(doc, '[data-ice="source"] a', encode('@file-src|MyClass.js.html') + '#lineNumber42', 'href');
+      assert.includes(doc, '[data-ice="source"] a', encode('@file-src|MyClass.js.html') + '#lineNumber43', 'href');
       assert.includes(doc, '[data-ice="version"]', 'version 0.0.1');
       assert.includes(doc, '[data-ice="since"]', 'since 1.2.3');
     });

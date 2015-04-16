@@ -38,6 +38,7 @@ import SuperMyClass1 from './OtherClass/SuperMyClass.js';
  * @see {@link SuperMyClass1#superMethod}
  * @since 1.2.3
  * @version 0.0.1
+ * @foobar this is unknown tag.
  */
 export default class MyClass1 extends SuperMyClass1 {
   /**
