@@ -80,6 +80,8 @@ class MyClass {
 }
 ```
 
+----
+
 #### @deprecated
 syntax: ``@deprecated [description]``
 
@@ -89,6 +91,8 @@ syntax: ``@deprecated [description]``
  */
 class MyClass{...}
 ```
+
+----
 
 #### @desc
 syntax: ``@desc <description>``
@@ -107,6 +111,8 @@ class MyClass{...}
 class MyClass{...}
 ```
 
+----
+
 #### @example
 syntax: ``@example <JavaScript>``
 
@@ -124,6 +130,8 @@ syntax: ``@example <JavaScript>``
 class MyClass{...}
 ```
 
+----
+
 #### @experimental
 syntax: ``@experimental [description]``
 
@@ -133,6 +141,8 @@ syntax: ``@experimental [description]``
  */
 class MyClass{...}
 ```
+
+----
 
 #### @ignore
 syntax: ``@ignore``
@@ -146,6 +156,8 @@ symbol is not diaplayed in document.
 class MyClass{...}
 ```
 
+----
+
 #### @see
 syntax: ``@see <URL>``
 
@@ -157,6 +169,8 @@ syntax: ``@see <URL>``
 class MyClass{...}
 ```
 
+----
+
 #### @since
 syntax: ``@since <version>``
 
@@ -166,6 +180,8 @@ syntax: ``@since <version>``
  */
 class MyClass{...}
 ```
+
+----
 
 #### @todo
 syntax: ``@todo <description>``
@@ -178,6 +194,8 @@ syntax: ``@todo <description>``
 class MyClass{...}
 ```
 
+----
+
 #### @version
 syntax: ``@version <version>``
 
@@ -187,6 +205,8 @@ syntax: ``@version <version>``
  */
 class MyClass{...}
 ```
+
+----
 
 ## For Class
 #### @extends
@@ -202,6 +222,8 @@ normally automatically detected. because ES6 has the extends syntax. howerver, y
 class MyClass extends mix(SuperClass1, SuperClass2) {...}
 ```
 
+----
+
 #### @implements
 syntax: ``@implements <symbol>``
 
@@ -213,6 +235,8 @@ syntax: ``@implements <symbol>``
 class MyClass {...}
 ```
 
+----
+
 #### @interface
 syntax: ``@interface``
 
@@ -222,6 +246,8 @@ syntax: ``@interface``
  */
 class MyInterface {...}
 ```
+
+----
 
 ## For Method And Function
 #### @abstract
@@ -237,6 +263,8 @@ class MyClass {
 }
 ```
 
+----
+
 #### @emits
 syntax: ``@emits <symbol> [description]``
 
@@ -249,6 +277,8 @@ class MyClass {
   method(){...}
 }
 ```
+
+----
 
 #### @listens
 syntax: ``@listens <symbol> [description]``
@@ -263,6 +293,8 @@ class MyClass {
 }
 ```
 
+----
+
 #### @override
 syntax: ``@override``
 
@@ -274,6 +306,8 @@ class MyClass extends SuperClass {
   method(){...}
 }
 ```
+
+----
 
 #### @param
 syntax: ``@param <type> <name> [description]``
@@ -288,6 +322,8 @@ class MyClass {
   method(p){...}
 }
 ```
+
+----
 
 #### @return
 syntax: ``@return <type> [description]``
@@ -316,6 +352,8 @@ class MyClass {
 }
 ```
 
+----
+
 #### @throws
 syntax: ``@throws <symbol> [description]``
 
@@ -328,6 +366,8 @@ class MyClass {
   method(){...}
 }
 ```
+
+----
 
 ## For Member And Variable
 #### @type
@@ -361,6 +401,8 @@ class MyClass {
 }
 ```
 
+----
+
 ## For Virtual
 #### @external
 syntax: ``@external <symbol>``
@@ -372,6 +414,8 @@ should be use with ``@see``.
  * @external {XMLHttpRequest} https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest
  */
 ```
+
+----
 
 #### @typedef
 syntax: ``@typedef <type> <name>``
@@ -393,6 +437,8 @@ if type is Object, can use ``@property <type> <name> [description]`` for each pr
  * @property {string} bar this is description.
  */
 ```
+
+----
 
 ## Type Syntax
 

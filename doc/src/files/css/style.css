@@ -4,6 +4,12 @@ body {
   font-size: 16px;
 }
 
+hr {
+  border-color: #ccc;
+  border-width: 1px;
+  border-style: solid none none none;
+}
+
 a {
   color: #337ab7;
   text-decoration: none;
