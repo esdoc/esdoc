@@ -25,7 +25,6 @@ sorry, not yet publish to npmjs.org.
 because I want use https://www.npmjs.com/package/esdoc, but the name is already used with empty software :(
 
 ```
-cd your-project
 git clone https://github.com/h13i32maru/esdoc
 cd esdoc
 npm install
@@ -49,7 +48,6 @@ esdoc ./path/to/js/dir
 # Example
 ```
 ├── esdoc.json
-├── esdoc/bin/esdoc
 └── src/MyClass.js
 ```
 
@@ -80,7 +78,7 @@ export default class MyClass {
 exec esdoc
 
 ```
-./esdoc/bin/esdoc -c esdoc.json
+esdoc -c esdoc.json
 open ./esdoc/index.html
 ```
 
