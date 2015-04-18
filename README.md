@@ -466,9 +466,9 @@ the following tags are usually no need to use.
 
 # API
 ```javascript
-import esdoc from 'esdoc';
+import ESDoc from 'esdoc';
 
-esdoc(config, (results, config)=>{
+ESDoc.generate(config, (results, config)=>{
   console.log(results);
 });
 ```

@@ -1,7 +1,7 @@
 import assert from 'power-assert';
 import fs from 'fs-extra';
 import path from 'path';
-import ESDocCLI from '../../../src/cli.js';
+import ESDocCLI from '../../../src/ESDocCLI.js';
 
 describe('ESDocCLI:', ()=>{
   it('can execute with config file.', ()=>{

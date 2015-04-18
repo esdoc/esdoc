@@ -3,7 +3,7 @@ import assert from 'assert';
 import fs from 'fs';
 import path from 'path';
 import minimist from 'minimist';
-import esdoc from './esdoc.js';
+import ESDoc from './ESDoc.js';
 import defaultPublisher from './Publisher/publish.js';
 
 export default class ESDocCLI {
@@ -26,7 +26,7 @@ export default class ESDocCLI {
       process.exit(1);
     }
 
-    esdoc(config, defaultPublisher);
+    ESDoc.generate(config, defaultPublisher);
   }
 
   _showHelp() {
@@ -71,6 +71,7 @@ export default class ESDocCLI {
   }
 }
 
+// if this file is directory executed, work as CLI.
 let executedFilePath = fs.realpathSync(process.argv[1]);
 if (executedFilePath === __filename) {
   let cli = new ESDocCLI(process.argv);

@@ -49,8 +49,8 @@
     "out/src",
     "README.md"
   ],
-  "main": "out/src/esdoc.js",
+  "main": "out/src/ESDoc.js",
   "bin": {
-    "esdoc": "out/src/cli.js"
+    "esdoc": "out/src/ESDocCLI.js"
   }
 }
