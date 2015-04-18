@@ -1,11 +1,23 @@
 body {
-  margin: 20px;
+  font-family: 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
+  margin: 0;
+  font-size: 16px;
+}
+
+a {
+  color: #337ab7;
+  text-decoration: none;
 }
 
 pre {
   background: #f7f7f7;
   padding: 10px;
   border-radius: 3px;
+  font-size: 0.8em;
+}
+
+li {
+  margin: 4px 0;
 }
 
 code {
@@ -36,4 +48,43 @@ table th, table td {
 
 table tr:nth-child(2n) {
   background-color: #f8f8f8;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 10px 0 4px 15px;
+  border-bottom: solid 1px #E02130;
+  background: white;
+  font-weight: bold;
+}
+
+nav .title {
+  color: #E02130;
+  font-size: 2em;
+}
+
+nav ul {
+  display: inline-block;
+  padding-left: 0;
+  margin: 0 0 0 20px;
+}
+
+nav ul li{
+  display: inline-block;
+  list-style: none;
+  margin: 0 4px;
+}
+
+nav ul li a {
+  color: black;
+}
+
+article.content {
+  margin: 80px 20px 20px 20px;
+}
+
+h1 {
+  color: #E02130;
 }

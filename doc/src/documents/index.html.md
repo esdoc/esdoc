@@ -3,19 +3,16 @@ layout: "default"
 isPage: true
 ---
 
-[![Build Status](https://travis-ci.org/h13i32maru/esdoc.svg?branch=master)](https://travis-ci.org/h13i32maru/esdoc)
-[![Coverage Status](https://coveralls.io/repos/h13i32maru/esdoc/badge.svg)](https://coveralls.io/r/h13i32maru/esdoc)
-# ESDoc
+**CAUTION: ESDoc is super alpha version!**
 
-[ESDoc](https://github.com/h13i32maru/esdoc) is API Documentation Generator for JavaScript(like JSDoc).
+ESDoc is API Documentation Generator for JavaScript.
+
+ESDoc targets at ES6. if you want to target at ES5, might better to use [JSDoc](http://usejsdoc.org/).
 
 - [Demo](#demo)
 - [Install](#install)
 - [Usage](#usage)
 - [Example](#example)
-- [Config](config.html)
-- [Tags](tags.html)
-- [Customize](customize.html)
 
 # Demo
 TODO: create more better demo.
@@ -25,6 +22,7 @@ TODO: create more better demo.
 
 # Install
 sorry, not yet publish to npmjs.org.
+
 because I want use https://www.npmjs.com/package/esdoc, but the name is already used with empty software :(
 
 ```
@@ -88,9 +86,8 @@ open ./esdoc/index.html
 ```
 
 # Document
-please visit [https://esdoc.org](esdoc.org) to see more document.
+please visit [esdoc.org](https://esdoc.org) to see more document.
 
 # License
 MIT
-
 

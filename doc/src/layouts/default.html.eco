@@ -8,7 +8,19 @@
     <script src="/prettify/prettify.js"></script>
 </head>
 <body>
+<nav>
+  <a class="title" href="./">ESDoc</a>
+  <ul>
+    <li><a href="./config.html">Config</a></li>
+    <li><a href="./tags.html">Tags</a></li>
+    <li><a href="./customize.html">Customize</a></li>
+    <li style="position: relative; top: 5px;"><a href="https://github.com/h13i32maru/esdoc"><img src="image/github.png" width="24px"></a></li>
+  </ul>
+</nav>
+
+<article class="content">
 <%- @content %>
+</article>
 
 <script src="/script/pretty.js"></script>
 </body>
