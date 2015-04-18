@@ -6,6 +6,7 @@ import MethodDoc from '../Doc/MethodDoc.js';
 import MemberDoc from '../Doc/MemberDoc.js';
 import FunctionDoc from '../Doc/FunctionDoc.js';
 import VariableDoc from '../Doc/VariableDoc.js';
+import AssignmentDoc from '../Doc/AssignmentDoc.js';
 import TypedefDoc from '../Doc/TypedefDoc.js';
 import ExternalDoc from '../Doc/ExternalDoc.js';
 
@@ -25,15 +26,17 @@ export default class DocFactory {
 
       // ast does not child, so only comment.
       if (ast.body.length === 0 && ast.leadingComments) {
-        for (let comment of ast.leadingComments) {
-          let tags = CommentParser.parse(comment);
-          let virtualNode = {};
-          Object.defineProperty(virtualNode, 'parent', {value: ast});
-          doc = this.createDoc(ast, virtualNode, tags, pathResolver);
-          if (doc) {
-            results.push(doc.value);
-          }
-        }
+        let _results = this.traverseComments(ast, ast, null, ast.leadingComments, pathResolver);
+        results.push(..._results);
+        //for (let comment of ast.leadingComments) {
+        //  let tags = CommentParser.parse(comment);
+        //  let virtualNode = {};
+        //  Object.defineProperty(virtualNode, 'parent', {value: ast});
+        //  doc = this.createDoc(ast, virtualNode, tags, pathResolver);
+        //  if (doc) {
+        //    results.push(doc.value);
+        //  }
+        //}
       }
 
       return results;
@@ -55,13 +58,74 @@ export default class DocFactory {
     if (!node.trailingComments) node.trailingComments = [];
 
     // leading comments
-    for (let i = 0; i < node.leadingComments.length; i++) {
-      let comment = node.leadingComments[i];
-      if (!CommentParser.isESDoc(comment)) continue;
+    //for (let i = 0; i < node.leadingComments.length; i++) {
+    //  let comment = node.leadingComments[i];
+    //  if (!CommentParser.isESDoc(comment)) continue;
+    //  let tags = CommentParser.parse(comment);
+    //
+    //  let doc;
+    //  if (i + 1 === node.leadingComments.length) {
+    //    doc = this.createDoc(ast, node, tags, pathResolver);
+    //  } else {
+    //    let virtualNode = {};
+    //    Object.defineProperty(virtualNode, 'parent', {value: parentNode});
+    //    doc = this.createDoc(ast, virtualNode, tags, pathResolver);
+    //  }
+    //
+    //  if (doc) {
+    //    results.push(doc.value);
+    //  }
+    //}
+    {
+      let _results = this.traverseComments(ast, parentNode, node, node.leadingComments, pathResolver);
+      results.push(..._results);
+    }
+
+    // trailing comments
+    if (isLastNodeInParent) {
+      let _results = this.traverseComments(ast, parentNode, null, node.trailingComments, pathResolver);
+      results.push(..._results);
+      //for (let comment of node.trailingComments) {
+      //  let tags = CommentParser.parse(comment);
+      //  let virtualNode = {};
+      //  Object.defineProperty(virtualNode, 'parent', {value: parentNode});
+      //  let doc = this.createDoc(ast, virtualNode, tags, pathResolver);
+      //  if (doc) {
+      //    results.push(doc.value);
+      //  }
+      //}
+    }
+
+    // only comment
+    //if (ast.body.length === 0 && ast.leadingComments) {
+    //  for (let comment of ast.leadingComments) {
+    //    let tags = CommentParser.parse(comment);
+    //    let virtualNode = {};
+    //    Object.defineProperty(virtualNode, 'parent', {value: parentNode});
+    //    let doc = this.createDoc(ast, virtualNode, tags, pathResolver);
+    //    if (doc) {
+    //      results.push(doc.value);
+    //    }
+    //  }
+    //}
+
+    return results;
+  }
+
+  static traverseComments(ast, parentNode, node, comments, pathResolver) {
+    if (!node) {
+      let virtualNode = {};
+      Object.defineProperty(virtualNode, 'parent', {value: parentNode});
+      node = virtualNode;
+    }
+
+    let results = [];
+    let lastComment = comments[comments.length - 1];
+    for (let comment of comments) {
       let tags = CommentParser.parse(comment);
 
       let doc;
-      if (i + 1 === node.leadingComments.length) {
+      if (comment === lastComment) {
         doc = this.createDoc(ast, node, tags, pathResolver);
       } else {
         let virtualNode = {};
@@ -69,43 +133,17 @@ export default class DocFactory {
         doc = this.createDoc(ast, virtualNode, tags, pathResolver);
       }
 
-      if (doc) {
-        results.push(doc.value);
-      }
-    }
-
-    // trailing comments
-    if (isLastNodeInParent) {
-      for (let i = 0; i < node.trailingComments.length; i++) {
-        let comment = node.trailingComments[i];
-        let tags = CommentParser.parse(comment);
-        let virtualNode = {};
-        Object.defineProperty(virtualNode, 'parent', {value: parentNode});
-        let doc = this.createDoc(ast, virtualNode, tags, pathResolver);
-        if (doc) {
-          results.push(doc.value);
-        }
-      }
-    }
-
-    // only comment
-    if (ast.body.length === 0 && ast.leadingComments) {
-      for (let comment of ast.leadingComments) {
-        let tags = CommentParser.parse(comment);
-        let virtualNode = {};
-        Object.defineProperty(virtualNode, 'parent', {value: parentNode});
-        let doc = this.createDoc(ast, virtualNode, tags, pathResolver);
-        if (doc) {
-          results.push(doc.value);
-        }
-      }
+      if (doc) results.push(doc.value);
     }
 
     return results;
   }
 
   static createDoc(ast, node, tags, pathResolver) {
-    let type = this.decideType(tags, node);
+    let result = this.decideType(tags, node);
+    let type = result.type;
+    node = result.node;
+
     if (!type) return null;
 
     let clazz;
@@ -115,6 +153,7 @@ export default class DocFactory {
       case 'Member':  clazz = MemberDoc; break;
       case 'Function': clazz = FunctionDoc; break;
       case 'Variable': clazz = VariableDoc; break;
+      case 'Assignment': clazz = AssignmentDoc; break;
       case 'Typedef': clazz = TypedefDoc; break;
       case 'External': clazz = ExternalDoc; break;
       default: logger.w(`unresolve: ${type}`);
@@ -141,21 +180,118 @@ export default class DocFactory {
       }
     }
 
-    if (type) return type;
+    if (type) return {type, node};
 
-    if (!node) return type;
+    if (!node) return {type, node};
 
     switch (node.type) {
-      case 'ClassDeclaration':    type = 'Class'; break;
-      case 'MethodDefinition':    type = 'Method'; break;
-      case 'ExpressionStatement': type = 'Member'; break;
-      case 'FunctionDeclaration': type = 'Function'; break;
-      case 'VariableDeclaration': type = 'Variable'; break;
-      case 'AssignmentExpression': type = 'Variable'; break;
+      case 'ClassDeclaration':
+        type = 'Class';
+        break;
+      case 'MethodDefinition':
+        type = 'Method';
+        break;
+      case 'ExpressionStatement':
+        {
+          let result = this.decideExpressionStatementType(node);
+          type = result.type;
+          node = result.node;
+        }
+        break;
+      case 'FunctionDeclaration':
+        type = 'Function';
+        break;
+      case 'VariableDeclaration':
+        {
+          let result = this.decideVariableType(node);
+          type = result.type;
+          node = result.node;
+        }
+        break;
+      case 'AssignmentExpression':
+        {
+          let result = this.decideAssignmentType(node);
+          type = result.type;
+          node = result.node;
+        }
+        break;
       default: logger.w(`unresolve: ${node.type}`);
     }
 
-    return type;
+    return {type, node};
+  }
+
+  static decideExpressionStatementType(node) {
+    Object.defineProperty(node.expression, 'parent', {value: node.parent});
+    node = node.expression;
+    node[already] = true;
+
+    let innerType;
+    let innerNode;
+
+    switch (node.right.type) {
+      case 'FunctionExpression':
+        innerType = 'Function';
+        break;
+      case 'ClassExpression':
+        innerType = 'Class';
+        break;
+      default:
+        return {type: 'Member', node: node};
+    }
+
+    innerNode = node.right;
+    innerNode.id = this._copy(node.left.id || node.left.property);
+    Object.defineProperty(innerNode, 'parent', {value: node.parent});
+    innerNode[already] = true;
+
+    return {type: innerType, node: innerNode};
+  }
+
+  static decideVariableType(node) {
+    let innerType;
+    let innerNode;
+
+    switch (node.declarations[0].init.type) {
+      case 'FunctionExpression':
+        innerType = 'Function';
+        break;
+      case 'ClassExpression':
+        innerType = 'Class';
+        break;
+      default:
+        return {type: 'Variable', node: node};
+    }
+
+    innerNode = node.declarations[0].init;
+    innerNode.id = this._copy(node.declarations[0].id);
+    Object.defineProperty(innerNode, 'parent', {value: node.parent});
+    innerNode[already] = true;
+
+    return {type: innerType, node: innerNode};
+  }
+
+  static decideAssignmentType(node) {
+    let innerType;
+    let innerNode;
+
+    switch (node.right.type) {
+      case 'FunctionExpression':
+        innerType = 'Function';
+        break;
+      case 'ClassExpression':
+        innerType = 'Class';
+        break;
+      default:
+        return {type: 'Assignment', node: node};
+    }
+
+    innerNode = node.right;
+    innerNode.id = this._copy(node.left.id || node.left.property);
+    Object.defineProperty(innerNode, 'parent', {value: node.parent});
+    innerNode[already] = true;
+
+    return {type: innerType, node: innerNode};
   }
 
   static unwrapExportDeclaration(astNode) {
@@ -176,5 +312,9 @@ export default class DocFactory {
     }
 
     return false;
+  }
+
+  static _copy(obj) {
+    return JSON.parse(JSON.stringify(obj));
   }
 }

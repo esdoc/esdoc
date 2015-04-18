@@ -228,6 +228,26 @@ class MyClass6 extends MyClass5 {
 }
 
 /**
+ * this is myClass7 desc.
+ */
+let MyClass7 = class {
+  /**
+   * this is method1 desc.
+   */
+  method1(){}
+};
+
+/**
+ * this is myClass8 desc.
+ */
+global.MyClass8 = class {
+  /**
+   * this is method1 desc.
+   */
+  method1(){}
+};
+
+/**
  * this is MyClass999 desc.
  * @ignore
  */

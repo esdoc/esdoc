@@ -5,10 +5,6 @@ export default class MemberDoc extends AbstractDoc {
   _apply() {
     super._apply();
 
-    //this['@property']();
-    //this['@type']();
-    //this['@member']();
-
     delete this._value.export;
     delete this._value.importPath;
     delete this._value.importStyle;
@@ -54,7 +50,7 @@ export default class MemberDoc extends AbstractDoc {
 
     } else {
       let node = this._node;
-      name = this._flattenMemberExpression(node.expression.left).replace(/^this\./, '');
+      name = this._flattenMemberExpression(node.left).replace(/^this\./, '');
     }
 
     this._value.name = name;
@@ -63,13 +59,4 @@ export default class MemberDoc extends AbstractDoc {
   ['@memberof']() {
     MethodDoc.prototype['@memberof'].call(this);
   }
-  //
-  //['@property']() {
-  //  MethodDoc.prototype['@property'].call(this);
-  //}
-  //
-  //['@type']() {
-  //  MethodDoc.prototype['@type'].call(this);
-  //}
-
 }

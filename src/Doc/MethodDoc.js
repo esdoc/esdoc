@@ -1,5 +1,4 @@
 import AbstractDoc from './AbstractDoc.js';
-//import FunctionDoc from './FunctionDoc.js';
 
 export default class MethodDoc extends AbstractDoc {
   _apply() {
@@ -29,7 +28,7 @@ export default class MethodDoc extends AbstractDoc {
     let memberof;
     let parent = this._node.parent;
     while (parent) {
-      if (parent.type === 'ClassDeclaration') {
+      if (parent.type === 'ClassDeclaration' || parent.type === 'ClassExpression') {
         memberof = `${this._pathResolver.filePath}~${parent.id.name}`;
         this._value.memberof = memberof;
         return;
