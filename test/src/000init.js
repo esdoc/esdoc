@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
 import {taffy} from 'taffydb';
-import ESDoc from './../../src/ESDoc.js';
+import ESDoc from '../../src/ESDoc.js';
 import defaultPublisher from '../../src/Publisher/publish.js';
 
 let configFilePath = './test/fixture/esdoc.json';
