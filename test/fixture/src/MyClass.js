@@ -120,6 +120,13 @@ export default class MyClass1 extends SuperMyClass1 {
      * @private
      */
     this.p3 = p1;
+
+    /**
+     * this is p4 desc.
+     * @type {function}
+     * @private
+     */
+    this.p4 = ()=>{};
   }
 
   /**

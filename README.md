@@ -22,8 +22,6 @@ TODO: create more better demo.
 # Install
 sorry, not yet publish to npmjs.org.
 
-because I want use https://www.npmjs.com/package/esdoc, but the name is already used with empty software :(
-
 ```
 git clone https://github.com/h13i32maru/esdoc
 cd esdoc
