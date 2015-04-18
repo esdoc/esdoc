@@ -1,6 +1,6 @@
 /**
  * this is SuperMyClass2 desc.
- * @implements MyInterface3
+ * @implements {MyInterface3}
  */
 export class SuperMyClass2 extends XMLHttpRequest{
   /**
@@ -39,7 +39,7 @@ export class SuperMyClass2 extends XMLHttpRequest{
 }
 /**
  * this is SuperMyClass1.
- * @implements MyInterface2
+ * @implements {MyInterface2}
  */
 export default class SuperMyClass1 extends SuperMyClass2 {
   /**

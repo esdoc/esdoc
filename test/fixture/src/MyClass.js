@@ -19,8 +19,8 @@ import SuperMyClass1 from './OtherClass/SuperMyClass.js';
  * | This       |        This |     This     |
  * | column     |      column |    column    |
  *
- * @implements MyInterface1
- * @implements XMLHttpRequest
+ * @implements {MyInterface1}
+ * @implements {XMLHttpRequest}
  *
  * @example
  * let foo = 10;
@@ -216,7 +216,7 @@ class MyClass4 {
 
 /**
  * this is MyClass5 desc.
- * @implements MyClass1
+ * @implements {MyClass1}
  */
 class MyClass5 {
 }

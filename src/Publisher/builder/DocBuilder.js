@@ -457,8 +457,7 @@ export default class DocBuilder {
       //text = doc.longname.replace(/^external:\s*/, '');
       text = doc.name;
       let arraySuffix = isArray ? '[]' : '';
-      let aTag = doc.see[0].replace(/>.*?</, `>${text}<`);
-      return `<span>${aTag}${arraySuffix}</span>`;
+      return `<span><a href="${doc.externalLink}">${text}</a>${arraySuffix}</span>`;
     } else {
       text = escape(text || doc.name);
       let url = this._getURL(doc, inner);

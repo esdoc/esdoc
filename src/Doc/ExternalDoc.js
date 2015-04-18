@@ -1,5 +1,6 @@
 import Logger from 'color-logger';
 import AbstractDoc from './AbstractDoc.js';
+import ParamParser from '../Parser/ParamParser.js';
 
 let logger = new Logger('ExternalDoc');
 
@@ -25,6 +26,26 @@ export default class ExternalDoc extends AbstractDoc {
     }
 
     this._value.name = value;
+
+    let tags = this._findAll(['@name', '@external']);
+    if (!tags) {
+      logger.w(`can not resolve name.`);
+      return;
+    }
+
+    let name;
+    for (let tag of tags) {
+      let {tagName, tagValue} = tag;
+      if (tagName === '@name') {
+        name = tagValue;
+      } else if (tagName === '@external') {
+        let {typeText, paramDesc} = ParamParser.parseParamValue(tagValue, true, false, true);
+        name = typeText;
+        this._value.externalLink = paramDesc;
+      }
+    }
+
+    this._value.name = name;
   }
 
   ['@memberof']() {

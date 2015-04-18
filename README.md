@@ -427,8 +427,7 @@ should be use with ``@see``.
 
 ```javascript
 /**
- * @external {XMLHttpRequest}
- * @see https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest
+ * @external {XMLHttpRequest} https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest
  */
 ```
 

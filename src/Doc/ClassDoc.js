@@ -1,4 +1,5 @@
 import AbstractDoc from './AbstractDoc.js';
+import ParamParser from '../Parser/ParamParser.js';
 
 export default class ClassDoc extends AbstractDoc {
   _apply() {
@@ -39,7 +40,11 @@ export default class ClassDoc extends AbstractDoc {
   ['@extends']() {
     let values = this._findAllTagValues(['@extends', '@extend']);
     if (values) {
-      this._value.extends = values;
+      this._value.extends = [];
+      for (let value of values) {
+        let {typeText} = ParamParser.parseParamValue(value, true, false, false);
+        this._value.extends.push(typeText);
+      }
       return;
     }
 
@@ -52,8 +57,12 @@ export default class ClassDoc extends AbstractDoc {
 
   ['@implements'](){
     let values = this._findAllTagValues(['@implements', '@implement']);
-    if (values) {
-      this._value.implements = values;
+    if (!values) return;
+
+    this._value.implements = [];
+    for (let value of values) {
+      let {typeText} = ParamParser.parseParamValue(value, true, false, false);
+      this._value.implements.push(typeText);
     }
   }
 }

@@ -5,6 +5,5 @@ class MyEvent1{
 }
 
 /**
- * @external MyEvent2
- * @see http://example.com
+ * @external {MyEvent2} http://example.com
  */

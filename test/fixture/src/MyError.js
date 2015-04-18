@@ -5,7 +5,6 @@ class MyError1{
 }
 
 /**
- * @external MyError2
- * @see http://example.com
+ * @external {MyError2} http://example.com
  */
 
