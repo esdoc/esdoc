@@ -85,9 +85,6 @@ exec esdoc
 open ./esdoc/index.html
 ```
 
-# Document
-please visit [esdoc.org](https://esdoc.org) to see more document.
-
 # License
 MIT
 
