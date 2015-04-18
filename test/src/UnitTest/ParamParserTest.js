@@ -1,5 +1,5 @@
 import assert from 'power-assert';
-import ParamParser from '../../src/Parser/ParamParser.js';
+import ParamParser from '../../../src/Parser/ParamParser.js';
 
 describe('ParamParser:', ()=>{
   it('parse param value.', ()=>{
