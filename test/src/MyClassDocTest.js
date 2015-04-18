@@ -401,3 +401,40 @@ describe('MyClass1: ', ()=> {
     })
   });
 });
+
+describe('MyClass7', ()=>{
+  let doc = readDoc('@class-src|MyClass.js~MyClass7.html');
+
+  it('is exists', ()=>{
+    assert.includes(doc, '.self-detail [data-ice="name"]', 'MyClass7');
+
+    find(doc, 'table[data-ice="summary"]:nth-of-type(1)', (doc)=>{
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public method1() this is method1 desc.');
+    });
+  });
+});
+
+describe('MyClass8', ()=>{
+  let doc = readDoc('@class-src|MyClass.js~MyClass8.html');
+
+  it('is exists', ()=>{
+    assert.includes(doc, '.self-detail [data-ice="name"]', 'MyClass8');
+
+    find(doc, 'table[data-ice="summary"]:nth-of-type(1)', (doc)=>{
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public method1() this is method1 desc.');
+    });
+  });
+});
+
+describe('MyClass999:', ()=>{
+  it('is not exist.', ()=>{
+    try {
+      readDoc('@class-src|MyClass.js~MyClass999.html');
+    } catch(e) {
+      assert(e instanceof Error);
+      assert(e.message.includes('no such file or directory'));
+      return;
+    }
+    assert(false, 'unreachable');
+  });
+});
