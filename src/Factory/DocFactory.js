@@ -14,105 +14,57 @@ let already = Symbol('already');
 let logger = new Logger('DocFactory');
 
 export default class DocFactory {
-  static create(ast, node, parentNode, pathResolver) {
-    if (node[already]) return [];
+  get results() {
+    return [...this._results];
+  }
 
-    let results = [];
+  constructor(ast, pathResolver) {
+    this._ast = ast;
+    this._pathResolver = pathResolver;
+    this._results = [];
 
-    // for ast
-    if (node.type === 'Program') {
-      let doc = new FileDoc(ast, node, pathResolver, []);
-      results.push(doc.value);
+    // file doc
+    let doc = new FileDoc(ast, ast, pathResolver, []);
+    this._results.push(doc.value);
 
-      // ast does not child, so only comment.
-      if (ast.body.length === 0 && ast.leadingComments) {
-        let _results = this.traverseComments(ast, ast, null, ast.leadingComments, pathResolver);
-        results.push(..._results);
-        //for (let comment of ast.leadingComments) {
-        //  let tags = CommentParser.parse(comment);
-        //  let virtualNode = {};
-        //  Object.defineProperty(virtualNode, 'parent', {value: ast});
-        //  doc = this.createDoc(ast, virtualNode, tags, pathResolver);
-        //  if (doc) {
-        //    results.push(doc.value);
-        //  }
-        //}
-      }
-
-      return results;
+    // ast does not child, so only comment.
+    if (ast.body.length === 0 && ast.leadingComments) {
+      let results = this._traverseComments(ast, null, ast.leadingComments);
+      this._results.push(...results);
     }
+  }
+
+  push(node, parentNode) {
+    if (node[already]) return;
 
     let isLastNodeInParent = this._isLastNodeInParent(node, parentNode);
 
     node[already] = true;
     Object.defineProperty(node, 'parent', {value: parentNode});
 
+    // unwrap export declaration
     if (['ExportDefaultDeclaration', 'ExportNamedDeclaration'].includes(node.type)) {
       parentNode = node;
-      node = this.unwrapExportDeclaration(node);
+      node = this._unwrapExportDeclaration(node);
       node[already] = true;
       Object.defineProperty(node, 'parent', {value: parentNode});
     }
 
-    if (!node.leadingComments) node.leadingComments = [];
-    if (!node.trailingComments) node.trailingComments = [];
-
-    // leading comments
-    //for (let i = 0; i < node.leadingComments.length; i++) {
-    //  let comment = node.leadingComments[i];
-    //  if (!CommentParser.isESDoc(comment)) continue;
-    //  let tags = CommentParser.parse(comment);
-    //
-    //  let doc;
-    //  if (i + 1 === node.leadingComments.length) {
-    //    doc = this.createDoc(ast, node, tags, pathResolver);
-    //  } else {
-    //    let virtualNode = {};
-    //    Object.defineProperty(virtualNode, 'parent', {value: parentNode});
-    //    doc = this.createDoc(ast, virtualNode, tags, pathResolver);
-    //  }
-    //
-    //  if (doc) {
-    //    results.push(doc.value);
-    //  }
-    //}
-    {
-      let _results = this.traverseComments(ast, parentNode, node, node.leadingComments, pathResolver);
-      results.push(..._results);
+    // for leading comments
+    if (node.leadingComments) {
+      let results = this._traverseComments(parentNode, node, node.leadingComments);
+      this._results.push(...results);
     }
 
-    // trailing comments
-    if (isLastNodeInParent) {
-      let _results = this.traverseComments(ast, parentNode, null, node.trailingComments, pathResolver);
-      results.push(..._results);
-      //for (let comment of node.trailingComments) {
-      //  let tags = CommentParser.parse(comment);
-      //  let virtualNode = {};
-      //  Object.defineProperty(virtualNode, 'parent', {value: parentNode});
-      //  let doc = this.createDoc(ast, virtualNode, tags, pathResolver);
-      //  if (doc) {
-      //    results.push(doc.value);
-      //  }
-      //}
+    // for trailing comments.
+    // traverse with only last node, because prevent duplication of trailing comments.
+    if (node.trailingComments && isLastNodeInParent) {
+      let results = this._traverseComments(parentNode, null, node.trailingComments);
+      this._results.push(...results);
     }
-
-    // only comment
-    //if (ast.body.length === 0 && ast.leadingComments) {
-    //  for (let comment of ast.leadingComments) {
-    //    let tags = CommentParser.parse(comment);
-    //    let virtualNode = {};
-    //    Object.defineProperty(virtualNode, 'parent', {value: parentNode});
-    //    let doc = this.createDoc(ast, virtualNode, tags, pathResolver);
-    //    if (doc) {
-    //      results.push(doc.value);
-    //    }
-    //  }
-    //}
-
-    return results;
   }
 
-  static traverseComments(ast, parentNode, node, comments, pathResolver) {
+  _traverseComments(parentNode, node, comments) {
     if (!node) {
       let virtualNode = {};
       Object.defineProperty(virtualNode, 'parent', {value: parentNode});
@@ -122,15 +74,17 @@ export default class DocFactory {
     let results = [];
     let lastComment = comments[comments.length - 1];
     for (let comment of comments) {
+      if (!CommentParser.isESDoc(comment)) continue;
+
       let tags = CommentParser.parse(comment);
 
       let doc;
       if (comment === lastComment) {
-        doc = this.createDoc(ast, node, tags, pathResolver);
+        doc = this._createDoc(node, tags);
       } else {
         let virtualNode = {};
         Object.defineProperty(virtualNode, 'parent', {value: parentNode});
-        doc = this.createDoc(ast, virtualNode, tags, pathResolver);
+        doc = this._createDoc(virtualNode, tags);
       }
 
       if (doc) results.push(doc.value);
@@ -139,8 +93,8 @@ export default class DocFactory {
     return results;
   }
 
-  static createDoc(ast, node, tags, pathResolver) {
-    let result = this.decideType(tags, node);
+  _createDoc(node, tags) {
+    let result = this._decideType(tags, node);
     let type = result.type;
     node = result.node;
 
@@ -162,10 +116,10 @@ export default class DocFactory {
     if (!clazz) return;
     if (!node.type) node.type = type;
 
-    return new clazz(ast, node, pathResolver, tags);
+    return new clazz(this._ast, node, this._pathResolver, tags);
   }
 
-  static decideType(tags, node) {
+  _decideType(tags, node) {
     let type = null;
     for (let tag of tags) {
       let tagName = tag.tagName;
@@ -192,28 +146,28 @@ export default class DocFactory {
         type = 'Method';
         break;
       case 'ExpressionStatement':
-        {
-          let result = this.decideExpressionStatementType(node);
-          type = result.type;
-          node = result.node;
-        }
+      {
+        let result = this._decideExpressionStatementType(node);
+        type = result.type;
+        node = result.node;
+      }
         break;
       case 'FunctionDeclaration':
         type = 'Function';
         break;
       case 'VariableDeclaration':
-        {
-          let result = this.decideVariableType(node);
-          type = result.type;
-          node = result.node;
-        }
+      {
+        let result = this._decideVariableType(node);
+        type = result.type;
+        node = result.node;
+      }
         break;
       case 'AssignmentExpression':
-        {
-          let result = this.decideAssignmentType(node);
-          type = result.type;
-          node = result.node;
-        }
+      {
+        let result = this._decideAssignmentType(node);
+        type = result.type;
+        node = result.node;
+      }
         break;
       default: logger.w(`unresolve: ${node.type}`);
     }
@@ -221,7 +175,7 @@ export default class DocFactory {
     return {type, node};
   }
 
-  static decideExpressionStatementType(node) {
+  _decideExpressionStatementType(node) {
     Object.defineProperty(node.expression, 'parent', {value: node.parent});
     node = node.expression;
     node[already] = true;
@@ -248,7 +202,7 @@ export default class DocFactory {
     return {type: innerType, node: innerNode};
   }
 
-  static decideVariableType(node) {
+  _decideVariableType(node) {
     let innerType;
     let innerNode;
 
@@ -271,7 +225,7 @@ export default class DocFactory {
     return {type: innerType, node: innerNode};
   }
 
-  static decideAssignmentType(node) {
+  _decideAssignmentType(node) {
     let innerType;
     let innerNode;
 
@@ -294,18 +248,18 @@ export default class DocFactory {
     return {type: innerType, node: innerNode};
   }
 
-  static unwrapExportDeclaration(astNode) {
-    let exportedASTNode = astNode.declaration;
+  _unwrapExportDeclaration(node) {
+    let exportedASTNode = node.declaration;
     if (!exportedASTNode.leadingComments) exportedASTNode.leadingComments = [];
-    exportedASTNode.leadingComments.push(...astNode.leadingComments || []);
+    exportedASTNode.leadingComments.push(...node.leadingComments || []);
 
     if (!exportedASTNode.trailingComments) exportedASTNode.trailingComments = [];
-    exportedASTNode.trailingComments.push(...astNode.trailingComments || []);
+    exportedASTNode.trailingComments.push(...node.trailingComments || []);
 
     return exportedASTNode;
   }
 
-  static _isLastNodeInParent(node, parentNode) {
+  _isLastNodeInParent(node, parentNode) {
     if (parentNode && parentNode.body) {
       let lastNode = parentNode.body[parentNode.body.length - 1];
       return node === lastNode;
@@ -314,7 +268,7 @@ export default class DocFactory {
     return false;
   }
 
-  static _copy(obj) {
+  _copy(obj) {
     return JSON.parse(JSON.stringify(obj));
   }
 }

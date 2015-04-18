@@ -68,15 +68,13 @@ function walk(dirPath, callback) {
 
 function generate(inDirPath, filePath, packageName, mainFilePath, pathPrefix) {
   let ast = ESParser.parse(filePath);
-
-  let values = [];
   let pathResolver = new PathResolver(inDirPath, filePath, packageName, mainFilePath, pathPrefix);
+  let factory = new DocFactory(ast, pathResolver);
 
   ASTUtil.traverse(ast, (node, parent)=>{
-    let results = DocFactory.create(ast, node, parent, pathResolver);
-    values.push(...results);
+    factory.push(node, parent);
   });
 
-  return values;
+  return factory.results;
 }
 
