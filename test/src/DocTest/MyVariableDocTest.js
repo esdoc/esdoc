@@ -17,12 +17,12 @@ describe('MyVariable:', ()=> {
   it('has detail.', ()=> {
     find(doc, '[data-ice="detail"]:nth-of-type(1)', (doc)=> {
       assert.includes(doc, '#static-variable-myVariable1', 'public myVariable1: Object');
-      assert.includes(doc, '[data-ice="importPath"]', "import myVariable1 from 'esdoc-test-fixture/src/myVariable.js'");
+      assert.includes(doc, '[data-ice="importPath"]', "import myVariable1 from 'esdoc-test-fixture/out/src/myVariable.js'");
     });
 
     find(doc, '[data-ice="detail"]:nth-of-type(2)', (doc)=> {
       assert.includes(doc, '#static-variable-myVariable2', 'public myVariable2: number');
-      assert.includes(doc, '[data-ice="importPath"]', "import {myVariable2} from 'esdoc-test-fixture/src/myVariable.js'");
+      assert.includes(doc, '[data-ice="importPath"]', "import {myVariable2} from 'esdoc-test-fixture/out/src/myVariable.js'");
     });
 
     find(doc, '[data-ice="detail"]:nth-of-type(3)', (doc)=> {

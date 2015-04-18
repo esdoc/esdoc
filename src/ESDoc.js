@@ -14,27 +14,23 @@ export default class ESDoc {
     assert(config.source);
     assert(config.destination);
 
-    if (config.debug) {
-      Logger.debug = config.debug;
-    }
+    this._setDefaultConfig(config);
 
-    let pattern = null;
-    if (config.pattern) {
-      pattern = RegExp(config.pattern);
-    }
+    Logger.debug = !!config.debug;
+    let pattern = new RegExp(config.pattern);
+    let pathPrefix = config.importPathPrefix;
 
     let packageName = null;
     let mainFilePath = null;
     if (config.package) {
-      let packegeJSON = fs.readFileSync(config.package, {encode: 'utf8'});
-      let packageConfig = JSON.parse(packegeJSON);
-      packageName = packageConfig.name;
-      mainFilePath = packageConfig.main;
-    }
-
-    let pathPrefix = null;
-    if (config.importPathPrefix) {
-      pathPrefix = config.importPathPrefix;
+      try {
+        let packageJSON = fs.readFileSync(config.package, {encode: 'utf8'});
+        let packageConfig = JSON.parse(packageJSON);
+        packageName = packageConfig.name;
+        mainFilePath = packageConfig.main;
+      } catch (e) {
+        // ignore
+      }
     }
 
     let results = [];
@@ -50,6 +46,24 @@ export default class ESDoc {
     });
 
     publisher(results, config);
+  }
+
+  static _setDefaultConfig(config) {
+    if (!config.pattern) config.pattern = '\\.js$';
+
+    if (!config.access) config.access = ['public', 'protected'];
+
+    if (!('onlyExported' in config)) config.onlyExported = true;
+
+    if (!config.readme) config.readme = './README.md';
+
+    if (!config.package) config.package = './package.json';
+
+    if (!config.importPathPrefix) config.importPathPrefix = '';
+
+    if (!config.styles) config.styles = [];
+
+    if (!config.scripts) config.scripts = [];
   }
 
   static _walk(dirPath, callback) {
