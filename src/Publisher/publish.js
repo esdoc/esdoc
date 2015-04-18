@@ -10,6 +10,9 @@ import FileDocBuilder from './builder/FileDocBuilder.js';
 import SearchIndexBuilder from './builder/SearchIndexBuilder.js';
 
 export default function publish(values, config) {
+  let dumpPath = path.resolve(config.destination, 'dump.json');
+  fs.outputFileSync(dumpPath, JSON.stringify(values, null, 2));
+
   let data = taffy(values);
 
   function writeHTML(html, fileName) {
