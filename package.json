@@ -1,7 +1,7 @@
 {
   "name": "esdoc",
   "version": "0.0.1",
-  "description": "API Documentation Generator For ECMAScript6",
+  "description": "API Documentation Generator For JavaScript",
   "author": "h13i32maru",
   "license": "MIT",
   "repository": {
