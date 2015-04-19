@@ -6,7 +6,7 @@
 
 ESDoc is API Documentation Generator for JavaScript.
 
-ESDoc targets at ES6. if you want to target at ES5, might better to use [JSDoc](http://usejsdoc.org/).
+ESDoc targets at ES6 and Class-based OOP. if you want to target at ES5, might better to use [JSDoc](http://usejsdoc.org/).
 
 - [Demo](#demo)
 - [Install](#install)
