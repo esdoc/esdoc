@@ -21,14 +21,10 @@ TODO: create more better demo.
 - http://h13i32maru.github.io/esdoc-test-fixture/
 
 # Install
-sorry, not yet publish to npmjs.org.
 
 ```
-git clone https://github.com/h13i32maru/esdoc
-cd esdoc
-npm install
-npm run build
-./bin/esdoc -h
+npm install -g esdoc
+esdoc -h
 ```
 
 # Usage
