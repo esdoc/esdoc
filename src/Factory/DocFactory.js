@@ -35,6 +35,8 @@ export default class DocFactory {
   }
 
   push(node, parentNode) {
+    if (node === this._ast) return;
+
     if (node[already]) return;
 
     let isLastNodeInParent = this._isLastNodeInParent(node, parentNode);
@@ -51,15 +53,55 @@ export default class DocFactory {
     }
 
     // for leading comments
-    if (node.leadingComments) {
+    if (node.leadingComments && node.leadingComments.length) {
       let results = this._traverseComments(parentNode, node, node.leadingComments);
       this._results.push(...results);
+    } else {
+      this._workOnNonCommentNode(parentNode, node);
     }
 
     // for trailing comments.
     // traverse with only last node, because prevent duplication of trailing comments.
     if (node.trailingComments && isLastNodeInParent) {
       let results = this._traverseComments(parentNode, null, node.trailingComments);
+      this._results.push(...results);
+    }
+  }
+
+  _workOnNonCommentNode(parentNode, node) {
+    let isTopLevel = (node) =>{
+      for (let _node of this._ast.body) {
+        if (node === _node) return true;
+      }
+      return false;
+    };
+
+    let {type} = this._decideType([], node);
+    let kind = null;
+    switch (type) {
+      case 'Class':
+        kind = 'class';
+        break;
+      case 'Method':
+        kind = 'method';
+        break;
+      case 'Member':
+        kind = 'member';
+        break;
+      case 'Function':
+        if (isTopLevel(node)) kind = 'function';
+        break;
+      case 'Variable':
+        if (isTopLevel(node)) kind = 'variable';
+        break;
+      case 'Assignment':
+        if (isTopLevel(node)) kind = 'variable';
+        break;
+    }
+
+    if (kind !== null) {
+      let comments = [{type: 'Block', value: `* @kind ${kind}`}];
+      let results = this._traverseComments(parentNode, node, comments);
       this._results.push(...results);
     }
   }
@@ -98,7 +140,10 @@ export default class DocFactory {
     let type = result.type;
     node = result.node;
 
-    if (!type) return null;
+    if (!type) {
+      logger.w(`unresolve: ${node.type}`, node);
+      return null;
+    }
 
     let clazz;
     switch (type) {
@@ -110,7 +155,6 @@ export default class DocFactory {
       case 'Assignment': clazz = AssignmentDoc; break;
       case 'Typedef': clazz = TypedefDoc; break;
       case 'External': clazz = ExternalDoc; break;
-      default: logger.w(`unresolve: ${type}`);
     }
 
     if (!clazz) return;
@@ -169,7 +213,6 @@ export default class DocFactory {
         node = result.node;
       }
         break;
-      default: logger.w(`unresolve: ${node.type}`);
     }
 
     return {type, node};
@@ -180,8 +223,10 @@ export default class DocFactory {
     node = node.expression;
     node[already] = true;
 
-    let innerType;
-    let innerNode;
+    let innerType = null;
+    let innerNode = null;
+
+    if (!node.right) return {type: innerType, node: innerNode};
 
     switch (node.right.type) {
       case 'FunctionExpression':
@@ -191,7 +236,11 @@ export default class DocFactory {
         innerType = 'Class';
         break;
       default:
-        return {type: 'Member', node: node};
+        if (node.left.type === 'MemberExpression' && node.left.object.type === 'ThisExpression') {
+          return {type: 'Member', node: node};
+        } else {
+          return {type: 'Variable', node: node};
+        }
     }
 
     innerNode = node.right;
@@ -203,8 +252,10 @@ export default class DocFactory {
   }
 
   _decideVariableType(node) {
-    let innerType;
-    let innerNode;
+    let innerType = null;
+    let innerNode = null;
+
+    if (!node.declarations[0].init) return {type: innerType, node: innerNode};
 
     switch (node.declarations[0].init.type) {
       case 'FunctionExpression':
