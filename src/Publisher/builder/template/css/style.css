@@ -15,10 +15,6 @@ html
   background-color: #F9F9F9;
 }
 
-table {
-  font-size: 14px;
-}
-
 a {
   /*color: #0095dd;*/
   color:rgb(37, 138, 175);
@@ -34,6 +30,7 @@ ul {
 
 li {
   list-style: disc;
+  margin: 4px 0;
 }
 
 h1 {
@@ -89,8 +86,9 @@ p > code {
 }
 
 .navigation {
+  box-sizing: border-box;
   position: fixed;
-  width: 200px;
+  width: 230px;
   height: 100%;
   padding: 15px;
   overflow-x: scroll;
@@ -147,6 +145,25 @@ h1 .url a {
 
 .extends-chain > div {
   margin: 5px 0;
+}
+
+.description table {
+  font-size: 14px;
+  border-spacing: 0;
+  border: 0;
+  border-collapse: collapse;
+}
+
+.description thead {
+  background: #999;
+  color: white;
+}
+
+.description table td,
+.description table th {
+  border: solid 1px #ddd;
+  padding: 4px;
+  font-weight: normal;
 }
 
 .flat-list ul {
@@ -249,10 +266,6 @@ table.params td p {
   margin-top: -8px;
 }
 
-.content .detail .throw p {
-  margin: 0;
-}
-
 .content .detail + .detail {
   margin-top: 30px;
 }
@@ -267,7 +280,6 @@ table.params td p {
 }
 
 .content .detail h4 + ul li {
-  margin: 2px 0;
   list-style: none;
 }
 
@@ -297,6 +309,12 @@ table.params td p {
   border-left: solid 5px orange;
   padding-left: 4px;
   margin: 4px 0;
+}
+
+tr.listen p,
+tr.throw p,
+tr.emit p{
+  margin-bottom: 10px;
 }
 
 .version, .since {
@@ -353,6 +371,7 @@ pre.source-code li {
   background: white;
   padding-left: 4px;
   list-style: decimal;
+  margin: 0;
 }
 
 /* search box */

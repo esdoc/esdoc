@@ -23,39 +23,39 @@ ESDoc config file.
 ```
 
 - ``source`` (required)
-  - directory path of JavaScript source codes.
-  - path is based on current directory.
+  - Directory path of JavaScript source codes.
+  - Path is based on current directory.
 - ``destination`` (required)
-  - output directory path.
-  - path is based on current directory.
+  - Output directory path.
+  - Path is based on current directory.
 - ``pattern``
-  - process only files that are matched with the regexp.
-  - default: ``\\.js$``
+  - Process only files that are matched with the regexp.
+  - Default: ``\\.js$``
 - ``access``
-  - process only symbols(class, method, function, etc...) that are have the access(public, protected and private).
-  - default: ``["public", "protected"]``
+  - Process only symbols(class, method, function, etc...) that are have the access(public, protected and private).
+  - Default: ``["public", "protected"]``
 - ``onlyExported``
-  - process only symbols that are exported(ES6 export syntax).
+  - Process only symbols that are exported(ES6 export syntax).
   - e.g. ``export MyClass {...}`` is exported, ``MyClass{}`` is not exported.
-  - default: ``true``
+  - Default: ``true``
 - ``importPathPrefix``
-  - display symbol's import path with the prefix.
+  - Display symbol's import path with the prefix.
   - e.g. if ``MyClass`` in ``src/foo/MyClass.js``, import path is ``import MyClass from 'src/foo/MyClass.js'``. but specified the prefix with ``importPathPrefix: "out"``, import path is ``import MyClass from 'out/src/foo/MyClass.js'``.
-  - default: ``""``
+  - Default: ``""``
 - ``readme``
-  - includes README.md into out put document.
+  - Includes README.md into out put document.
   - path is based on current directory.
   - default: ``./README.md``
 - ``package``
-  - use info(version, url, etc...) in package.json(npm)
-  - path is based on current directory.
+  - Use info(version, url, etc...) in package.json(npm)
+  - Path is based on current directory.
   - default: ``./package.json``
 - ``styles``
-  - includes styles into out put document.
-  - path is based on current directory.
-  - default: ``null``
+  - Includes styles into out put document.
+  - Path is based on current directory.
+  - Default: ``null``
 - ``scripts``
-  - includes scripts into out put document.
-  - path is based on current directory.
-  - default: ``null``
+  - Includes scripts into out put document.
+  - Path is based on current directory.
+  - Default: ``null``
   

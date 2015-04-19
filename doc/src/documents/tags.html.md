@@ -66,7 +66,7 @@ class MyClass {
 #### @access
 syntax: ``@access <public|protected|private>``
 
-alias are ``@public``, ``@protected`` and ``@private``.
+Alias are ``@public``, ``@protected`` and ``@private``.
 
 ```javascript
 /**
@@ -97,7 +97,9 @@ class MyClass{...}
 #### @desc
 syntax: ``@desc <description>``
 
-the first line is processed as automatically @desc.
+``<description>`` supports markdown.
+
+Normally you don't need to use ``@desc``, because first section in doc comment is determined automatically as ``@desc``.
 
 ```javascript
 /**
@@ -147,7 +149,7 @@ class MyClass{...}
 #### @ignore
 syntax: ``@ignore``
 
-symbol is not diaplayed in document.
+Symbol is not displayed in document.
 
 ```javascript
 /**
@@ -212,7 +214,7 @@ class MyClass{...}
 #### @extends
 syntax: ``@extends <symbol>``
 
-normally automatically detected. because ES6 has the extends syntax. howerver, you want to use this tag if you want to explicitly specify.
+Normally you don't need to use ``@extends``. because ES6 has the Class-Extends syntax. however, you can use this tag if you want to explicitly specify.
 
 ```javascript
 /**
@@ -312,7 +314,7 @@ class MyClass extends SuperClass {
 #### @param
 syntax: ``@param <type> <name> [description]``
 
-about ``<type>`` to see [Type Syntax](#type-syntax)
+About ``<type>`` to see [Type Syntax](#type-syntax)
 
 ```javascript
 class MyClass {
@@ -328,7 +330,7 @@ class MyClass {
 #### @return
 syntax: ``@return <type> [description]``
 
-about ``<type>`` to see [Type Syntax](#type-syntax)
+About ``<type>`` to see [Type Syntax](#type-syntax)
 
 ```javascript
 class MyClass {
@@ -339,7 +341,7 @@ class MyClass {
 }
 ```
 
-if return Object, can use ``@property <type> <name> [description]`` for each properties.
+If return Object, you can use ``@property <type> <name> [description]`` for each properties.
 
 ```javascript
 class MyClass {
@@ -373,7 +375,7 @@ class MyClass {
 #### @type
 syntax: ``@type <type>``
 
-about ``<type>`` to see [Type Syntax](#type-syntax)
+About ``<type>`` to see [Type Syntax](#type-syntax)
 
 ```javascript
 class MyClass {
@@ -386,7 +388,7 @@ class MyClass {
 }
 ```
 
-if type is Object, can use ``@property <type> <name> [description]`` for each properties.
+If ``<type>`` is Object, you can use ``@property <type> <name> [description]`` for each properties.
 
 ```javascript
 class MyClass {
@@ -405,9 +407,7 @@ class MyClass {
 
 ## For Virtual
 #### @external
-syntax: ``@external <symbol>``
-
-should be use with ``@see``.
+syntax: ``@external <symbol> <URL>``
 
 ```javascript
 /**
@@ -420,7 +420,7 @@ should be use with ``@see``.
 #### @typedef
 syntax: ``@typedef <type> <name>``
 
-about ``<type>`` to see [Type Syntax](#type-syntax)
+About ``<type>`` to see [Type Syntax](#type-syntax)
 
 ```javascript
 /**
@@ -428,7 +428,7 @@ about ``<type>`` to see [Type Syntax](#type-syntax)
  */
 ```
 
-if type is Object, can use ``@property <type> <name> [description]`` for each properties.
+If ``<type>`` is Object, you can use ``@property <type> <name> [description]`` for each properties.
 
 ```javascript
 /**
@@ -517,7 +517,7 @@ function(...paramName){...}
 ```
 
 ## For Internal
-the following tags are usually no need to use.
+The following tags are usually no need to use.
 
 - @kind
 - @static

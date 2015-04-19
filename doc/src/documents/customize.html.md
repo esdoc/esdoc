@@ -4,11 +4,12 @@ isPage: true
 ---
 
 # Customize
-if you want to customize output, can choose following way.
+If you want to customize output, can choose following way.
 
-- includes style sheet and script to output.
-  - see ``styles`` and ``scripts`` in [Config](config.html)
-- uses ESDoc API and implements your publisher.
+- Includes style sheet and script to output.
+  - To see ``styles`` and ``scripts`` in [Config](config.html)
+  - And can use ``dump.json`` in ESDoc output directory.
+- Uses ESDoc API and implements your publisher.
 
 # API
 ```javascript
