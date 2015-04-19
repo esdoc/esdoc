@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "API Documentation Generator For JavaScript",
   "author": "h13i32maru",
+  "homepage": "https://esdoc.org/",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -13,7 +14,7 @@
     "test": "bash ./script/test.sh",
     "test-es5": "bash ./script/test-es5.sh",
     "esdoc": "bash ./script/esdoc.sh",
-    "publish": "bash ./script/publish.sh",
+    "prepublish": "npm run test-es5",
     "start": "bash ./script/server.sh"
   },
   "dependencies": {

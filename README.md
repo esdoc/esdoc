@@ -16,8 +16,8 @@ ESDoc targets at ES6 and Class-based OOP. if you want to target at ES5, might be
 # Demo
 TODO: create more better demo.
 
-- http://h13i32maru.github.io/color-logger/
-- http://h13i32maru.github.io/esdoc-test-fixture/
+- [http://h13i32maru.github.io/color-logger/](http://h13i32maru.github.io/color-logger/)
+- [http://h13i32maru.github.io/esdoc-test-fixture/](http://h13i32maru.github.io/esdoc-test-fixture/)
 
 # Install
 
