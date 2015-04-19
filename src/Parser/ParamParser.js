@@ -1,4 +1,8 @@
+import Logger from 'color-logger';
 import assert from 'assert';
+import ASTUtil from '../Util/ASTUtil.js';
+
+let logger = new Logger('ParamParser');
 
 export default class ParamParser {
   static parseParamValue(value, type = true, name = true, desc = true) {
@@ -170,5 +174,43 @@ export default class ParamParser {
     }
 
     return _params;
+  }
+
+  static guessReturnParam(body) {
+    let result = {};
+
+    ASTUtil.traverse(body, function(node, parent){
+      // `return` in Function is not the body's `return`
+      if (node.type.includes('Function')) {
+        this.skip();
+        return;
+      }
+
+      if (node.type !== 'ReturnStatement') return;
+
+      if (!node.argument) return;
+
+      switch (node.argument.type) {
+        case 'Literal':
+          if (node.argument.value === null) {
+            result.types = result.types || ['*'];
+          } else {
+            result.types = [typeof node.argument.value];
+          }
+          break;
+        case 'TemplateLiteral':
+          result.types = ['string'];
+          break;
+        default:
+          // todo: more better guess.
+          result.types = ['*'];
+      }
+    });
+
+    if (result.types) {
+      return result;
+    }
+
+    return null;
   }
 }

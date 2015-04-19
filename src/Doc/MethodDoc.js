@@ -1,8 +1,5 @@
-import Logger from 'color-logger';
 import AbstractDoc from './AbstractDoc.js';
 import ParamParser from '../Parser/ParamParser.js';
-
-let logger = new Logger('MethodDoc');
 
 export default class MethodDoc extends AbstractDoc {
   _apply() {
@@ -48,6 +45,16 @@ export default class MethodDoc extends AbstractDoc {
     if (this._value.params) return;
 
     this._value.params = ParamParser.guessParams(this._node.value.params);
+  }
+
+  ['@return']() {
+    super['@return']();
+    if (this._value.return) return;
+
+    let result = ParamParser.guessReturnParam(this._node.value.body);
+    if (result) {
+      this._value.return = result;
+    }
   }
 
   ['@generator']() {
