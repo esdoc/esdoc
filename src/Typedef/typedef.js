@@ -3,7 +3,8 @@
  * @typedef {Object} ESDocConfig
  * @property {!string} source - directory path of javascript source code.
  * @property {!string} destination - directory path of output.
- * @property {string} [pattern="\\.js$"]
+ * @property {string[]} [includes=["\\.js$"]]
+ * @property {string[]} [excludes=["\\.config.\\.js$"]]
  * @property {string[]} [access=["public", "protected"]]
  * @property {boolean} [onlyExported=true]
  * @property {boolean} [debug=false]
