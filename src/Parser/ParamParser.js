@@ -15,6 +15,8 @@ export default class ParamParser {
       if (match) {
         typeText = match[1];
         value = value.replace(/^\{.*\}\s*/, '');
+      } else {
+        typeText = '*';
       }
     }
 
