@@ -12,6 +12,7 @@ ESDoc config file.
   "source": "./path/to/src",
   "destination": "./path/to/esdoc",
   "pattern": "\\.js$",
+  "excludes": ["\\.es7$", "\\.config\\.js$"],
   "access": ["public", "protected", "private"],
   "onlyExported": true,
   "importPathPrefix": "",
@@ -31,6 +32,9 @@ ESDoc config file.
 - ``pattern``
   - Process only files that are matched with the regexp.
   - Default: ``\\.js$``
+- ``excludes``  
+  - Not process files that are matched with the regexp.
+  - Default: ``[]``
 - ``access``
   - Process only symbols(class, method, function, etc...) that are have the access(public, protected and private).
   - Default: ``["public", "protected"]``
