@@ -1,7 +1,7 @@
 import path from 'path';
 import DocBuilder from './DocBuilder.js';
 
-export default class StaticFileBuilder extends DocBuilder {
+export default class SearchIndexBuilder extends DocBuilder {
   exec(callback) {
     let searchIndex = [];
     let docs = this._find({});

@@ -1,0 +1,10 @@
+{
+  "source": "./src",
+  "destination": "./doc/out/esdoc",
+  "access": ["public", "protected", "private"],
+  "onlyExported": true,
+  "debug": true,
+  "readme": "./README.md",
+  "package": "./package.json",
+  "importPathPrefix": "out"
+}

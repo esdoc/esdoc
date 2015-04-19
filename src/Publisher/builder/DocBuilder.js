@@ -394,6 +394,7 @@ export default class DocBuilder {
       case 'set': // fall
       case 'get': // fal
         let parentDoc = this._find({longname: doc.memberof})[0];
+        console.log(doc.memberof, this._find({name: 'DocBuilder'})[0]);
         return this._getOutputFileName(parentDoc);
       case 'external':
         return '@external.html';

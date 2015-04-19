@@ -1,5 +1,5 @@
 #!/bin/bash
 
-rm -rf out/esdoc
-mkdir -p out/esdoc
-./out/src/index.js -c esdoc.json
+rm -rf ./doc/out/esdoc
+mkdir -p ./doc/out/esdoc
+./node_modules/.bin/babel-node ./src/ESDocCLI.js -c esdoc.json

@@ -4,7 +4,11 @@ import espree from 'espree';
 
 export default class ESParser {
   static parse(filePath) {
-    let code = fs.readFileSync(filePath, {encode: 'utf8'});
+    let code = fs.readFileSync(filePath, {encode: 'utf8'}).toString();
+
+    if (code.charAt(0) === '#') {
+      code = code.replace(/^#!/, '//');
+    }
 
     let ast = espree.parse(code, {
       comments: true,

@@ -1,17 +1,23 @@
 /**
+ * ESDoc config object.
  * @typedef {Object} ESDocConfig
- * @property {string} source - directory path of javascript source code.
- * @property {string} pattern - target file path patter.
- * @property {string} destination
- * @property {string[]} access
- * @property {boolean} onlyExported
- * @property {boolean} debug
- * @property {string} readme
- * @property {string} package
- * @property {boolean} private
- * @property {string} importPathPrefix
- * @property {string[]} styles
- * @property {string[]} scripts
+ * @property {!string} source - directory path of javascript source code.
+ * @property {!string} destination - directory path of output.
+ * @property {string} [pattern="\\.js$"]
+ * @property {string[]} [access=["public", "protected"]]
+ * @property {boolean} [onlyExported=true]
+ * @property {boolean} [debug=false]
+ * @property {string} [readme="./README.md"]
+ * @property {string} [package="./package.json"]
+ * @property {string} [importPathPrefix=""]
+ * @property {string[]} [styles=[]]
+ * @property {string[]} [scripts=[]]
+ * @see https://esdoc.org/config.html
+ */
+
+/**
+ * Parsed doc comment.
+ * @typedef {Object} DocObject
  */
 
 /**
