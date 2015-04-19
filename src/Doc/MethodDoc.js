@@ -18,7 +18,9 @@ export default class MethodDoc extends AbstractDoc {
   ['@name']() {
     AbstractDoc.prototype['@name'].call(this);
     if (this._value.name) return;
-    this._value.name = this._node.key.name;
+
+    // normally `key.name`, but computed value(aka ['foo']) refers `key.value`.
+    this._value.name = this._node.key.name || this._node.key.value;
   }
 
   ['@memberof']() {
