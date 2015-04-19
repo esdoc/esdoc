@@ -13,6 +13,7 @@
     "test": "bash ./script/test.sh",
     "test-es5": "bash ./script/test-es5.sh",
     "esdoc": "bash ./script/esdoc.sh",
+    "publish": "bash ./script/publish.sh",
     "start": "bash ./script/server.sh"
   },
   "dependencies": {
