@@ -107,6 +107,10 @@ p > code {
   border: none;
 }
 
+.navigation h2 a {
+  color: inherit;
+}
+
 .navigation ul {
   padding: 0;
 }
