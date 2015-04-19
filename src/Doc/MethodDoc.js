@@ -1,4 +1,8 @@
+import Logger from 'color-logger';
 import AbstractDoc from './AbstractDoc.js';
+import ParamParser from '../Parser/ParamParser.js';
+
+let logger = new Logger('MethodDoc');
 
 export default class MethodDoc extends AbstractDoc {
   _apply() {
@@ -37,6 +41,13 @@ export default class MethodDoc extends AbstractDoc {
       }
       parent = parent.parent;
     }
+  }
+
+  ['@param']() {
+    super['@param']();
+    if (this._value.params) return;
+
+    this._value.params = ParamParser.guessParams(this._node.value.params);
   }
 
   ['@generator']() {

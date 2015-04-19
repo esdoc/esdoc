@@ -99,4 +99,76 @@ export default class ParamParser {
 
     return result;
   }
+
+  static guessParams(params) {
+    let _params = [];
+    for (let param of params) {
+      let result = {};
+
+      switch (param.type) {
+        case 'Identifier':
+          // e.g. func(a){}
+          result.name = param.name;
+          result.types = ['*'];
+          break;
+
+        case 'AssignmentPattern':
+          if (param.left.type === 'Identifier') {
+            result.name = param.left.name;
+          } else if (param.left.type === 'ObjectPattern') {
+            let names = [];
+            for (let prop of param.left.properties) {
+              names.push(prop.key.name);
+            }
+            result.name = `{${names.join(',')}}`;
+          }
+
+          result.optional = true;
+
+          if (param.right.type === 'Literal') {
+            // e.g. func(a = 10){}
+            result.types = param.right.value === null ? ['*'] : [typeof param.right.value];
+            result.defaultRaw = param.right.value;
+            result.defaultValue = `${result.defaultRaw}`;
+          } else if (param.right.type === 'ArrayExpression') {
+            // e.g. func(a = [123]){}
+            result.types = param.right.elements.length ? [`${typeof param.right.elements[0].value}[]`] : ['*[]'];
+            result.defaultRaw = param.right.elements.map((elm)=> elm.value);
+            result.defaultValue = `${JSON.stringify(result.defaultRaw)}`;
+          } else if(param.right.type === 'ObjectExpression'){
+            // e.g. func(a = {key: 123}){}
+            let obj = {};
+            for (let prop of param.right.properties) {
+              obj[prop.key.name] = prop.value.value;
+            }
+
+            result.types = [`${JSON.stringify(obj)}`];
+            result.defaultRaw = obj;
+            result.defaultValue = `${JSON.stringify(result.defaultRaw)}`;
+          } else if (param.right.type === 'Identifier') {
+            // e.g. func(a = value){}
+            result.types = ['*'];
+            result.defaultRaw = param.right.name;
+            result.defaultValue = `${param.right.name}`;
+          } else {
+            // e.g. func(a = new Foo()){}, func(a = foo()){}
+            // CallExpression, NewExpression
+            result.types = ['*'];
+          }
+          break;
+        case 'RestElement':
+          // e.g. func(...a){}
+          result.name = `${param.argument.name}`;
+          result.types = ['...*'];
+          result.spread = true;
+          break;
+        default:
+          logger.w('unknown param.type', param);
+      }
+
+      _params.push(result);
+    }
+
+    return _params;
+  }
 }
