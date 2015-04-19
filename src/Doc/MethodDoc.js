@@ -44,7 +44,9 @@ export default class MethodDoc extends AbstractDoc {
     super['@param']();
     if (this._value.params) return;
 
-    this._value.params = ParamParser.guessParams(this._node.value.params);
+    if (this._value.kind !== 'set') {
+      this._value.params = ParamParser.guessParams(this._node.value.params);
+    }
   }
 
   ['@return']() {
