@@ -33,6 +33,7 @@ export default class ESDoc {
     Logger.debug = !!config.debug;
     let pattern = new RegExp(config.pattern);
     let pathPrefix = config.importPathPrefix;
+    let excludes = config.excludes.map((v) => new RegExp(v));
 
     let packageName = null;
     let mainFilePath = null;
@@ -55,6 +56,10 @@ export default class ESDoc {
         if (!matched) return;
       }
 
+      for (let reg of excludes) {
+        if (filePath.match(reg)) return;
+      }
+
       let values = this._traverse(config.source, filePath, packageName, mainFilePath, pathPrefix);
       results.push(...values);
     });
@@ -69,6 +74,8 @@ export default class ESDoc {
    */
   static _setDefaultConfig(config) {
     if (!config.pattern) config.pattern = '\\.js$';
+
+    if (!config.excludes) config.excludes = [];
 
     if (!config.access) config.access = ['public', 'protected'];
 
