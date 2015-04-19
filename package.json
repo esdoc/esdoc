@@ -25,12 +25,12 @@
     "taffydb": "",
     "escape-html": "",
     "ice-cap": "",
+    "color-logger": "0.0.3",
     "marked": ""
   },
   "devDependencies": {
     "babel": "",
     "cheerio": "",
-    "color-logger": "0.0.3",
     "coveralls": "",
     "espower-loader": "",
     "http-server": "",
