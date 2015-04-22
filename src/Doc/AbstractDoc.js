@@ -39,6 +39,7 @@ export default class AbstractDoc {
     this['@version']();
     this['@todo']();
     this['@ignore']();
+    this['@undocument']();
     this['@unknown']();
 
     this['@param']();
@@ -269,6 +270,13 @@ export default class AbstractDoc {
     let tag = this._find(['@ignore']);
     if (tag) {
       this._value.ignore = true;
+    }
+  }
+
+  ['@undocument']() {
+    let tag = this._find(['@undocument']);
+    if (tag) {
+      this._value.undocument = true;
     }
   }
 
