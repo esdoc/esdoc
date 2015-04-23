@@ -3,6 +3,7 @@
   "destination": "./test/fixture/esdoc",
   "access": ["public", "protected", "private"],
   "onlyExported": false,
+  "coverage": true,
   "debug": true,
   "readme": "./test/fixture/README.md",
   "package": "./test/fixture/package.json",

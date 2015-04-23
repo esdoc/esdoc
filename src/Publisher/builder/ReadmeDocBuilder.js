@@ -4,6 +4,11 @@ import DocBuilder from './DocBuilder.js';
 import {markdown} from './util.js';
 
 export default class ReadmeDocBuilder extends DocBuilder {
+  constructor(data, config, coverage) {
+    super(data, config);
+    this._coverage = coverage;
+  }
+
   exec(callback) {
     let ice = this._buildLayoutDoc();
     ice.load('content', this._buildReadmeDoc());

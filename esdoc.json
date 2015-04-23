@@ -4,6 +4,7 @@
   "excludes": ["Publisher/builder/template/"],
   "access": ["public", "protected", "private"],
   "onlyExported": true,
+  "coverage": true,
   "debug": true,
   "readme": "./README.md",
   "package": "./package.json",
