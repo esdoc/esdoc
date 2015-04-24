@@ -450,3 +450,46 @@ pre.source-code li {
 .search-box.active .search-input-edge {
   display: inline-block;
 }
+
+/* coverage badge */
+.esdoc-coverage {
+  display: inline-block;
+  height: 20px;
+  vertical-align: top;
+  font-size: 12px;
+}
+
+.esdoc-coverage-wrap {
+  color: white;
+}
+
+.esdoc-coverage-label {
+  padding: 3px 4px 3px 6px;
+  background: linear-gradient(to bottom, #5e5e5e 0%,#4c4c4c 100%);
+  border-radius: 4px 0 0 4px;
+  display: inline-block;
+  height: 20px;
+  box-sizing: border-box;
+  line-height: 14px;
+}
+
+.esdoc-coverage-ratio {
+  padding: 3px 6px 3px 4px;
+  border-radius: 0 4px 4px 0;
+  display: inline-block;
+  height: 20px;
+  box-sizing: border-box;
+  line-height: 14px;
+}
+
+.esdoc-coverage-low {
+  background: linear-gradient(to bottom, #db654f 0%,#c9533d 100%);
+}
+
+.esdoc-coverage-middle {
+  background: linear-gradient(to bottom, #dab226 0%,#c9a179 100%);
+}
+
+.esdoc-coverage-high {
+  background: linear-gradient(to bottom, #4fc921 0%,#3eb810 100%);
+}

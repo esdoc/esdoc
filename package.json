@@ -26,11 +26,11 @@
     "escape-html": "",
     "ice-cap": "",
     "color-logger": "0.0.3",
+    "cheerio": "",
     "marked": ""
   },
   "devDependencies": {
     "babel": "",
-    "cheerio": "",
     "coveralls": "",
     "espower-loader": "",
     "http-server": "",
