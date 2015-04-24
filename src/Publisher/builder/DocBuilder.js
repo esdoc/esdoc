@@ -40,12 +40,13 @@ export default class DocBuilder {
     }
     if (docs.length) return docs;
 
-    //if (kind) {
-    //  docs = this._orderedFind(null, {longname: {right: name}, kind: kind});
-    //} else {
-    //  docs = this._orderedFind(null, {longname: {right: name}});
-    //}
-    //if (docs.length) return docs;
+    let regexp = new RegExp(`[~/]${name}$`);
+    if (kind) {
+      docs = this._orderedFind(null, {longname: {regex: regexp}, kind: kind});
+    } else {
+      docs = this._orderedFind(null, {longname: {regex: regexp}});
+    }
+    if (docs.length) return docs;
 
     return [];
   }
