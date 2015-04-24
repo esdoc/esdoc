@@ -6,4 +6,8 @@ describe('README:', ()=> {
   it('has README.md', ()=>{
     assert.includes(doc, '[data-ice="readme"]', 'this is ESDoc Test Fixture README.');
   });
+
+  it('has coverage badge', ()=>{
+    assert.includes(doc, '.esdoc-coverage .esdoc-coverage-ratio', '100%');
+  });
 });

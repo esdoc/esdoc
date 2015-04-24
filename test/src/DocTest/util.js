@@ -1,4 +1,4 @@
-import _assert from 'power-assert';
+import _assert from 'assert';
 import fs from 'fs';
 import path from 'path';
 import cheerio from 'cheerio';

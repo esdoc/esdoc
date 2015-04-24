@@ -32,11 +32,9 @@
   "devDependencies": {
     "babel": "",
     "coveralls": "",
-    "espower-loader": "",
     "http-server": "",
     "istanbul": "",
-    "mocha": "",
-    "power-assert": ""
+    "mocha": ""
   },
   "keywords": [
     "jsdoc",
