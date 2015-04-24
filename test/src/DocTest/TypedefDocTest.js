@@ -1,13 +1,12 @@
 import {readDoc, assert, find} from './util.js';
 
 describe('MyTypedef:', ()=> {
-  let doc = readDoc('@typedef.html');
-  let encode = encodeURIComponent;
+  let doc = readDoc('typedef/index.html');
 
   it('has summary.', ()=>{
     find(doc, '[data-ice="summary"]', (doc)=>{
       assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public MyTypedef1: Object this is MyTypedef1 desc.');
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(1) [data-ice="name"] a', encode('@typedef.html') + '#static-typedef-MyTypedef1', 'href');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(1) [data-ice="name"] a', 'typedef/index.html#static-typedef-MyTypedef1', 'href');
     });
   });
 

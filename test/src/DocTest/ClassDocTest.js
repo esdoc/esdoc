@@ -1,8 +1,7 @@
 import {readDoc, assert, find} from './util.js';
 
 describe('MyClass1: ', ()=> {
-  let doc = readDoc('@class-src|MyClass.js~MyClass1.html');
-  let encode = encodeURIComponent;
+  let doc = readDoc('class/src/MyClass.js~MyClass1.html');
 
   it('has unknown tag.', ()=>{
     let doc = global.db.find({name: 'MyClass1'})[0];
@@ -17,7 +16,7 @@ describe('MyClass1: ', ()=> {
       assert.includes(doc, '[data-ice="access"]', 'public');
       assert.includes(doc, '[data-ice="kind"]', 'class');
       assert.includes(doc, '[data-ice="source"]', 'source');
-      assert.includes(doc, '[data-ice="source"] a', encode('@file-src|MyClass.js.html') + '#lineNumber43', 'href');
+      assert.includes(doc, '[data-ice="source"] a', 'file/src/MyClass.js.html#lineNumber43', 'href');
       assert.includes(doc, '[data-ice="version"]', 'version 0.0.1');
       assert.includes(doc, '[data-ice="since"]', 'since 1.2.3');
     });
@@ -29,28 +28,28 @@ describe('MyClass1: ', ()=> {
 
       assert.includes(doc, '[data-ice="extendsChain"]', 'XMLHttpRequest → SuperMyClass2 → SuperMyClass1 → MyClass1');
       assert.includes(doc, '[data-ice="extendsChain"] span:nth-of-type(1) a', 'https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest', 'href');
-      assert.includes(doc, '[data-ice="extendsChain"] span:nth-of-type(2) a', encode('@class-src|OtherClass|SuperMyClass.js~SuperMyClass2.html'), 'href');
-      assert.includes(doc, '[data-ice="extendsChain"] span:nth-of-type(3) a', encode('@class-src|OtherClass|SuperMyClass.js~SuperMyClass1.html'), 'href');
+      assert.includes(doc, '[data-ice="extendsChain"] span:nth-of-type(2) a', 'class/src/OtherClass/SuperMyClass.js~SuperMyClass2.html', 'href');
+      assert.includes(doc, '[data-ice="extendsChain"] span:nth-of-type(3) a', 'class/src/OtherClass/SuperMyClass.js~SuperMyClass1.html', 'href');
 
       assert.includes(doc, '[data-ice="directSubclass"]', 'MyClass2');
-      assert.includes(doc, '[data-ice="directSubclass"] span:nth-of-type(1) a', encode('@class-src|MyClass.js~MyClass2.html'), 'href');
+      assert.includes(doc, '[data-ice="directSubclass"] span:nth-of-type(1) a', 'class/src/MyClass.js~MyClass2.html', 'href');
 
       assert.includes(doc, '[data-ice="indirectSubclass"]', 'MyClass3');
-      assert.includes(doc, '[data-ice="indirectSubclass"] span:nth-of-type(1) a', encode('@class-src|MyClass.js~MyClass3.html'), 'href');
+      assert.includes(doc, '[data-ice="indirectSubclass"] span:nth-of-type(1) a', 'class/src/MyClass.js~MyClass3.html', 'href');
 
       assert.includes(doc, '[data-ice="implements"]', 'MyInterface1, XMLHttpRequest');
-      assert.includes(doc, '[data-ice="implements"] li:nth-of-type(1) a', encode('@class-src|MyInterface.js~MyInterface1.html'), 'href');
+      assert.includes(doc, '[data-ice="implements"] li:nth-of-type(1) a', 'class/src/MyInterface.js~MyInterface1.html', 'href');
       assert.includes(doc, '[data-ice="implements"] li:nth-of-type(2) a', 'https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest', 'href');
 
       assert.includes(doc, '[data-ice="indirectImplements"]', 'MyInterface2, MyInterface3');
-      assert.includes(doc, '[data-ice="indirectImplements"] li:nth-of-type(1) a', encode('@class-src|MyInterface.js~MyInterface2.html'), 'href');
-      assert.includes(doc, '[data-ice="indirectImplements"] li:nth-of-type(2) a', encode('@class-src|MyInterface.js~MyInterface3.html'), 'href');
+      assert.includes(doc, '[data-ice="indirectImplements"] li:nth-of-type(1) a', 'class/src/MyInterface.js~MyInterface2.html', 'href');
+      assert.includes(doc, '[data-ice="indirectImplements"] li:nth-of-type(2) a', 'class/src/MyInterface.js~MyInterface3.html', 'href');
 
       assert.includes(doc, '[data-ice="directImplemented"]', 'MyClass5');
-      assert.includes(doc, '[data-ice="directImplemented"] span:nth-of-type(1) a', encode('@class-src|MyClass.js~MyClass5.html'), 'href');
+      assert.includes(doc, '[data-ice="directImplemented"] span:nth-of-type(1) a', 'class/src/MyClass.js~MyClass5.html', 'href');
 
       assert.includes(doc, '[data-ice="indirectImplemented"]', 'MyClass6');
-      assert.includes(doc, '[data-ice="indirectImplemented"] span:nth-of-type(1) a', encode('@class-src|MyClass.js~MyClass6.html'), 'href');
+      assert.includes(doc, '[data-ice="indirectImplemented"] span:nth-of-type(1) a', 'class/src/MyClass.js~MyClass6.html', 'href');
 
       assert.includes(doc, '[data-ice="description"]', 'this is MyClass1 desc.');
 
@@ -62,10 +61,10 @@ describe('MyClass1: ', ()=> {
         assert.includes(doc, 'li:nth-child(1) a', 'http://example.com', 'href');
 
         assert.includes(doc, 'li:nth-child(2)', 'MyClass2');
-        assert.includes(doc, 'li:nth-child(2) a', encode('@class-src|MyClass.js~MyClass2.html'), 'href');
+        assert.includes(doc, 'li:nth-child(2) a', 'class/src/MyClass.js~MyClass2.html', 'href');
 
         assert.includes(doc, 'li:nth-child(3)', 'SuperMyClass1#superMethod');
-        assert.includes(doc, 'li:nth-child(3) a', encode('@class-src|OtherClass|SuperMyClass.js~SuperMyClass1.html') + '#instance-method-superMethod', 'href');
+        assert.includes(doc, 'li:nth-child(3) a', 'class/src/OtherClass/SuperMyClass.js~SuperMyClass1.html#instance-method-superMethod', 'href');
       });
 
       find(doc, '[data-ice="todo"]', (doc)=>{
@@ -80,22 +79,22 @@ describe('MyClass1: ', ()=> {
 
       find(doc, 'table[data-ice="summary"]:nth-of-type(1)', (doc)=>{
         assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public static p1: number this is static p1 desc.');
-        assert.includes(doc, '[data-ice="target"]:nth-of-type(1) [data-ice="name"] a', encode('@class-src|MyClass.js~MyClass1.html') + '#static-member-p1', 'href');
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(1) [data-ice="name"] a', 'class/src/MyClass.js~MyClass1.html#static-member-p1', 'href');
       });
 
       find(doc, 'table[data-ice="summary"]:nth-of-type(1)', (doc)=>{
         assert.includes(doc, '[data-ice="target"]:nth-of-type(2)', 'public static get staticValue: number this is staticValue(get) desc.');
-        assert.includes(doc, '[data-ice="target"]:nth-of-type(2) [data-ice="name"] a', encode('@class-src|MyClass.js~MyClass1.html') + '#static-get-staticValue', 'href');
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(2) [data-ice="name"] a', 'class/src/MyClass.js~MyClass1.html#static-get-staticValue', 'href');
       });
 
       find(doc, 'table[data-ice="summary"]:nth-of-type(1)', (doc)=>{
         assert.includes(doc, '[data-ice="target"]:nth-of-type(3)', 'public static set staticValue: number this is staticValue(set) desc.');
-        assert.includes(doc, '[data-ice="target"]:nth-of-type(3) [data-ice="name"] a', encode('@class-src|MyClass.js~MyClass1.html') + '#static-set-staticValue', 'href');
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(3) [data-ice="name"] a', 'class/src/MyClass.js~MyClass1.html#static-set-staticValue', 'href');
       });
 
       find(doc, 'table[data-ice="summary"]:nth-of-type(2)', (doc)=>{
         assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'protected static p2: number this is static p2 desc.');
-        assert.includes(doc, '[data-ice="target"]:nth-of-type(1) [data-ice="name"] a', encode('@class-src|MyClass.js~MyClass1.html') + '#static-member-p2', 'href');
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(1) [data-ice="name"] a', 'class/src/MyClass.js~MyClass1.html#static-member-p2', 'href');
       });
     });
   });
@@ -105,7 +104,7 @@ describe('MyClass1: ', ()=> {
       // public
       find(doc, 'table[data-ice="summary"]:nth-of-type(1)', (doc)=>{
         assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public static staticMethod1() this is staticMethod1 desc.');
-        assert.includes(doc, '[data-ice="target"]:nth-of-type(1) a', encode('@class-src|MyClass.js~MyClass1.html') + '#static-method-staticMethod1', 'href');
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(1) a', 'class/src/MyClass.js~MyClass1.html#static-method-staticMethod1', 'href');
       });
       // protected
       find(doc, 'table[data-ice="summary"]:nth-of-type(2)', (doc)=>{
@@ -122,7 +121,7 @@ describe('MyClass1: ', ()=> {
     find(doc, '[data-ice="constructorSummary"]', (doc)=>{
       find(doc, 'table[data-ice="summary"]:nth-of-type(1)', (doc)=>{
         assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public constructor(p1: number) this is constructor desc.');
-        assert.includes(doc, '[data-ice="target"]:nth-of-type(1) [data-ice="name"] a', encode('@class-src|MyClass.js~MyClass1.html') + '#instance-constructor-constructor', 'href');
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(1) [data-ice="name"] a', 'class/src/MyClass.js~MyClass1.html#instance-constructor-constructor', 'href');
       });
     });
   });
@@ -132,17 +131,17 @@ describe('MyClass1: ', ()=> {
       // public
       find(doc, 'table[data-ice="summary"]:nth-of-type(1)', (doc)=>{
         assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public p1: number this is p1 desc.');
-        assert.includes(doc, '[data-ice="target"]:nth-of-type(1) [data-ice="name"] a', encode('@class-src|MyClass.js~MyClass1.html') + '#instance-member-p1', 'href');
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(1) [data-ice="name"] a', 'class/src/MyClass.js~MyClass1.html#instance-member-p1', 'href');
       });
 
       find(doc, 'table[data-ice="summary"]:nth-of-type(1)', (doc)=>{
         assert.includes(doc, '[data-ice="target"]:nth-of-type(2)', 'public get value: number this is value(get) desc.');
-        assert.includes(doc, '[data-ice="target"]:nth-of-type(2) [data-ice="name"] a', encode('@class-src|MyClass.js~MyClass1.html') + '#instance-get-value', 'href');
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(2) [data-ice="name"] a', 'class/src/MyClass.js~MyClass1.html#instance-get-value', 'href');
       });
 
       find(doc, 'table[data-ice="summary"]:nth-of-type(1)', (doc)=>{
         assert.includes(doc, '[data-ice="target"]:nth-of-type(3)', 'public set value: number this is value(set) desc.');
-        assert.includes(doc, '[data-ice="target"]:nth-of-type(3) [data-ice="name"] a', encode('@class-src|MyClass.js~MyClass1.html') + '#instance-set-value', 'href');
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(3) [data-ice="name"] a', 'class/src/MyClass.js~MyClass1.html#instance-set-value', 'href');
       });
 
       // protected
@@ -167,7 +166,7 @@ describe('MyClass1: ', ()=> {
         assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'this is method1 desc.');
         assert.includes(doc, '[data-ice="target"]:nth-of-type(1) [data-ice="version"]', 'version 0.0.1');
         assert.includes(doc, '[data-ice="target"]:nth-of-type(1) [data-ice="since"]', 'since 1.2.3');
-        assert.includes(doc, '[data-ice="target"]:nth-of-type(1) [data-ice="name"] a', encode('@class-src|MyClass.js~MyClass1.html') + '#instance-method-method1', 'href');
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(1) [data-ice="name"] a', 'class/src/MyClass.js~MyClass1.html#instance-method-method1', 'href');
       });
       // protected
       find(doc, 'table[data-ice="summary"]:nth-of-type(2)', (doc)=>{
@@ -184,57 +183,57 @@ describe('MyClass1: ', ()=> {
   it('has inherited summary.', ()=>{
     find(doc, '[data-ice="inheritedSummary"] [data-ice="summary"]:nth-of-type(1)', (doc)=>{
       assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public static get ultraStaticValue');
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(1) a', encode('@class-src|OtherClass|SuperMyClass.js~SuperMyClass2.html') + '#static-get-ultraStaticValue', 'href');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(1) a', 'class/src/OtherClass/SuperMyClass.js~SuperMyClass2.html#static-get-ultraStaticValue', 'href');
 
       assert.includes(doc, '[data-ice="target"]:nth-of-type(2)', 'public static set ultraStaticValue');
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(2) a', encode('@class-src|OtherClass|SuperMyClass.js~SuperMyClass2.html') + '#static-set-ultraStaticValue', 'href');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(2) a', 'class/src/OtherClass/SuperMyClass.js~SuperMyClass2.html#static-set-ultraStaticValue', 'href');
 
       assert.includes(doc, '[data-ice="target"]:nth-of-type(3)', 'public static ultraP1');
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(3) [data-ice="name"] a', encode('@class-src|OtherClass|SuperMyClass.js~SuperMyClass2.html') + '#static-member-ultraP1', 'href');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(3) [data-ice="name"] a', 'class/src/OtherClass/SuperMyClass.js~SuperMyClass2.html#static-member-ultraP1', 'href');
 
       assert.includes(doc, '[data-ice="target"]:nth-of-type(4)', 'public static ultraStaticMethod()');
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(4) a', encode('@class-src|OtherClass|SuperMyClass.js~SuperMyClass2.html') + '#static-method-ultraStaticMethod', 'href');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(4) a', 'class/src/OtherClass/SuperMyClass.js~SuperMyClass2.html#static-method-ultraStaticMethod', 'href');
 
       assert.includes(doc, '[data-ice="target"]:nth-of-type(5)', 'public get ultraValue');
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(5) a', encode('@class-src|OtherClass|SuperMyClass.js~SuperMyClass2.html') + '#instance-get-ultraValue', 'href');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(5) a', 'class/src/OtherClass/SuperMyClass.js~SuperMyClass2.html#instance-get-ultraValue', 'href');
 
       assert.includes(doc, '[data-ice="target"]:nth-of-type(6)', 'public set ultraValue');
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(6) a', encode('@class-src|OtherClass|SuperMyClass.js~SuperMyClass2.html') + '#instance-set-ultraValue', 'href');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(6) a', 'class/src/OtherClass/SuperMyClass.js~SuperMyClass2.html#instance-set-ultraValue', 'href');
 
       assert.includes(doc, '[data-ice="target"]:nth-of-type(7)', 'public ultraP1');
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(7) [data-ice="name"] a', encode('@class-src|OtherClass|SuperMyClass.js~SuperMyClass2.html') + '#instance-member-ultraP1', 'href');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(7) [data-ice="name"] a', 'class/src/OtherClass/SuperMyClass.js~SuperMyClass2.html#instance-member-ultraP1', 'href');
 
       assert.includes(doc, '[data-ice="target"]:nth-of-type(8)', 'public ultraMethod()');
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(8) a', encode('@class-src|OtherClass|SuperMyClass.js~SuperMyClass2.html') + '#instance-method-ultraMethod', 'href');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(8) a', 'class/src/OtherClass/SuperMyClass.js~SuperMyClass2.html#instance-method-ultraMethod', 'href');
     });
 
     find(doc, '[data-ice="inheritedSummary"] [data-ice="summary"]:nth-of-type(2)', (doc)=>{
       assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public static get superStaticValue');
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(1) a', encode('@class-src|OtherClass|SuperMyClass.js~SuperMyClass1.html') + '#static-get-superStaticValue', 'href');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(1) a', 'class/src/OtherClass/SuperMyClass.js~SuperMyClass1.html#static-get-superStaticValue', 'href');
 
       assert.includes(doc, '[data-ice="target"]:nth-of-type(2)', 'public static set superStaticValue');
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(2) a', encode('@class-src|OtherClass|SuperMyClass.js~SuperMyClass1.html') + '#static-set-superStaticValue', 'href');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(2) a', 'class/src/OtherClass/SuperMyClass.js~SuperMyClass1.html#static-set-superStaticValue', 'href');
 
       assert.includes(doc, '[data-ice="target"]:nth-of-type(3)', 'public static superP1');
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(3) [data-ice="name"] a', encode('@class-src|OtherClass|SuperMyClass.js~SuperMyClass1.html') + '#static-member-superP1', 'href');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(3) [data-ice="name"] a', 'class/src/OtherClass/SuperMyClass.js~SuperMyClass1.html#static-member-superP1', 'href');
 
       assert.includes(doc, '[data-ice="target"]:nth-of-type(4)', 'public static superStaticMethod()');
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(4) a', encode('@class-src|OtherClass|SuperMyClass.js~SuperMyClass1.html') + '#static-method-superStaticMethod', 'href');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(4) a', 'class/src/OtherClass/SuperMyClass.js~SuperMyClass1.html#static-method-superStaticMethod', 'href');
 
       assert.includes(doc, '[data-ice="target"]:nth-of-type(5)', 'public get superValue');
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(5) a', encode('@class-src|OtherClass|SuperMyClass.js~SuperMyClass1.html') + '#instance-get-superValue', 'href');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(5) a', 'class/src/OtherClass/SuperMyClass.js~SuperMyClass1.html#instance-get-superValue', 'href');
 
       assert.includes(doc, '[data-ice="target"]:nth-of-type(6)', 'public set superValue');
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(6) a', encode('@class-src|OtherClass|SuperMyClass.js~SuperMyClass1.html') + '#instance-set-superValue', 'href');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(6) a', 'class/src/OtherClass/SuperMyClass.js~SuperMyClass1.html#instance-set-superValue', 'href');
 
       assert.includes(doc, '[data-ice="target"]:nth-of-type(7)', 'public superP1');
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(7) [data-ice="name"] a', encode('@class-src|OtherClass|SuperMyClass.js~SuperMyClass1.html') + '#instance-member-superP1', 'href');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(7) [data-ice="name"] a', 'class/src/OtherClass/SuperMyClass.js~SuperMyClass1.html#instance-member-superP1', 'href');
 
       assert.includes(doc, '[data-ice="target"]:nth-of-type(8)', 'public method1()');
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(8) a', encode('@class-src|OtherClass|SuperMyClass.js~SuperMyClass1.html') + '#instance-method-method1', 'href');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(8) a', 'class/src/OtherClass/SuperMyClass.js~SuperMyClass1.html#instance-method-method1', 'href');
 
       assert.includes(doc, '[data-ice="target"]:nth-of-type(9)', 'public superMethod()');
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(9) a', encode('@class-src|OtherClass|SuperMyClass.js~SuperMyClass1.html') + '#instance-method-superMethod', 'href');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(9) a', 'class/src/OtherClass/SuperMyClass.js~SuperMyClass1.html#instance-method-superMethod', 'href');
     });
   });
 
@@ -367,7 +366,7 @@ describe('MyClass1: ', ()=> {
           assert.includes(doc, '[data-ice="emit"]:nth-of-type(1)', 'MyEvent1 this is emits MyEvent1 desc.');
           assert.includes(doc, '[data-ice="emit"]:nth-of-type(2)', 'MyEvent2 this is emits MyEvent2 desc.');
 
-          assert.includes(doc, '[data-ice="emit"]:nth-of-type(1) a', encode('@class-src|MyEvent.js~MyEvent1.html'), 'href');
+          assert.includes(doc, '[data-ice="emit"]:nth-of-type(1) a', 'class/src/MyEvent.js~MyEvent1.html', 'href');
           assert.includes(doc, '[data-ice="emit"]:nth-of-type(2) a', 'http://example.com', 'href');
         });
 
@@ -375,7 +374,7 @@ describe('MyClass1: ', ()=> {
           assert.includes(doc, '[data-ice="listen"]:nth-of-type(1)', 'MyEvent1 this is listens MyEvent1 desc.');
           assert.includes(doc, '[data-ice="listen"]:nth-of-type(2)', 'MyEvent2 this is listens MyEvent2 desc.');
 
-          assert.includes(doc, '[data-ice="listen"]:nth-of-type(1) a', encode('@class-src|MyEvent.js~MyEvent1.html'), 'href');
+          assert.includes(doc, '[data-ice="listen"]:nth-of-type(1) a', 'class/src/MyEvent.js~MyEvent1.html', 'href');
           assert.includes(doc, '[data-ice="listen"]:nth-of-type(2) a', 'http://example.com', 'href');
         });
 
@@ -383,7 +382,7 @@ describe('MyClass1: ', ()=> {
           assert.includes(doc, '[data-ice="throw"]:nth-of-type(1)', 'MyError1 this is throws MyError1 desc.');
           assert.includes(doc, '[data-ice="throw"]:nth-of-type(2)', 'MyError2 this is throws MyError2 desc.');
 
-          assert.includes(doc, '[data-ice="throw"]:nth-of-type(1) a', encode('@class-src|MyError.js~MyError1.html'), 'href');
+          assert.includes(doc, '[data-ice="throw"]:nth-of-type(1) a', 'class/src/MyError.js~MyError1.html', 'href');
           assert.includes(doc, '[data-ice="throw"]:nth-of-type(2) a', 'http://example.com', 'href');
         });
       });
@@ -403,7 +402,7 @@ describe('MyClass1: ', ()=> {
 });
 
 describe('MyClass7', ()=>{
-  let doc = readDoc('@class-src|MyClass.js~MyClass7.html');
+  let doc = readDoc('class/src/MyClass.js~MyClass7.html');
 
   it('is exists', ()=>{
     assert.includes(doc, '.self-detail [data-ice="name"]', 'MyClass7');
@@ -415,7 +414,7 @@ describe('MyClass7', ()=>{
 });
 
 describe('MyClass8', ()=>{
-  let doc = readDoc('@class-src|MyClass.js~MyClass8.html');
+  let doc = readDoc('class/src/MyClass.js~MyClass8.html');
 
   it('is exists', ()=>{
     assert.includes(doc, '.self-detail [data-ice="name"]', 'MyClass8');
@@ -429,7 +428,7 @@ describe('MyClass8', ()=>{
 describe('MyClass999:', ()=>{
   it('is not exist.', ()=>{
     try {
-      readDoc('@class-src|MyClass.js~MyClass999.html');
+      readDoc('class/src/MyClass.js~MyClass999.html');
     } catch(e) {
       assert(e instanceof Error);
       assert(e.message.includes('no such file or directory'));

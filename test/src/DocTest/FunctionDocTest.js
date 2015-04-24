@@ -1,8 +1,7 @@
 import {readDoc, assert, find} from './util.js';
 
 describe('MyFunction:', ()=>{
-  let doc = readDoc('@function.html');
-  let encode = encodeURIComponent;
+  let doc = readDoc('function/index.html');
 
   it('has summary.', ()=>{
     find(doc, '[data-ice="summary"]', (doc)=>{
@@ -12,7 +11,7 @@ describe('MyFunction:', ()=>{
       assert.includes(doc, '[data-ice="target"]:nth-of-type(4)', 'public myFunction4(p1: number, p2: string): number this is myFunction4 desc.');
       assert.includes(doc, '[data-ice="target"]:nth-of-type(5)', 'public myFunction5(p1: number, p2: string): Object this is myFunction5 desc.');
 
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(1) [data-ice="name"] a', encode('@function.html') + '#static-function-myFunction1', 'href');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(1) [data-ice="name"] a', 'function/index.html#static-function-myFunction1', 'href');
     });
   });
 

@@ -1,8 +1,7 @@
 import {readDoc, assert, find} from './util.js';
 
 describe('MyVariable:', ()=> {
-  let doc = readDoc('@variable.html');
-  let encode = encodeURIComponent;
+  let doc = readDoc('variable/index.html');
 
   it('has summary.', ()=>{
     find(doc, '[data-ice="summary"]', (doc)=>{
@@ -10,7 +9,7 @@ describe('MyVariable:', ()=> {
       assert.includes(doc, '[data-ice="target"]:nth-of-type(2)', 'public myVariable2: number this is myVariable2 desc.');
       assert.includes(doc, '[data-ice="target"]:nth-of-type(3)', 'public myVariable3: number this is myVariable3 desc.');
 
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(1) [data-ice="name"] a', encode('@variable.html') + '#static-variable-myVariable1', 'href');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(1) [data-ice="name"] a', 'variable/index.html#static-variable-myVariable1', 'href');
     });
   });
 
