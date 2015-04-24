@@ -9,9 +9,11 @@ export default class SingleDocBuilder extends DocBuilder {
     let kinds = ['function', 'variable', 'typedef'];
     for (let kind of kinds) {
       let docs = this._find({kind: kind});
-      if (!docs.length) return;
-      ice.load('content', this._buildSingleDoc(kind), IceCap.MODE_WRITE);
+      if (!docs.length) continue;
       let fileName = this._getOutputFileName(docs[0]);
+      let baseUrl = this._getBaseUrl(fileName);
+      ice.load('content', this._buildSingleDoc(kind), IceCap.MODE_WRITE);
+      ice.attr('baseUrl', 'href', baseUrl, IceCap.MODE_WRITE);
       callback(ice.html, fileName);
     }
   }

@@ -40,12 +40,12 @@ export default class DocBuilder {
     }
     if (docs.length) return docs;
 
-    if (kind) {
-      docs = this._orderedFind(null, {longname: {right: name}, kind: kind});
-    } else {
-      docs = this._orderedFind(null, {longname: {right: name}});
-    }
-    if (docs.length) return docs;
+    //if (kind) {
+    //  docs = this._orderedFind(null, {longname: {right: name}, kind: kind});
+    //} else {
+    //  docs = this._orderedFind(null, {longname: {right: name}});
+    //}
+    //if (docs.length) return docs;
 
     return [];
   }
@@ -365,6 +365,11 @@ export default class DocBuilder {
     return ice;
   }
 
+  _getBaseUrl(fileName) {
+    let baseUrl = '../'.repeat(fileName.split('/').length - 1);
+    return baseUrl;
+  }
+
   _getURL(doc) {
     let inner = false;
     if (['variable', 'function', 'member', 'typedef', 'method', 'constructor', 'get', 'set'].includes(doc.kind)) {
@@ -374,20 +379,19 @@ export default class DocBuilder {
     if (inner) {
       let scope = doc.static ? 'static' : 'instance';
       let fileName = this._getOutputFileName(doc);
-      return `${encodeURIComponent(fileName)}#${scope}-${doc.kind}-${doc.name}`;
+      return `${fileName}#${scope}-${doc.kind}-${doc.name}`;
     } else {
       let fileName = this._getOutputFileName(doc);
-      return encodeURIComponent(fileName);
+      return fileName;
     }
   }
 
   _getOutputFileName(doc) {
-    let name;
     switch (doc.kind) {
       case 'variable':
-        return '@variable.html';
+        return 'variable/index.html';
       case 'function':
-        return '@function.html';
+        return 'function/index.html';
       case 'member': // fall
       case 'method': // fall
       case 'constructor': // fall
@@ -396,15 +400,13 @@ export default class DocBuilder {
         let parentDoc = this._find({longname: doc.memberof})[0];
         return this._getOutputFileName(parentDoc);
       case 'external':
-        return '@external.html';
+        return 'external/index.html';
       case 'typedef':
-        return '@typedef.html';
+        return 'typedef/index.html';
       case 'class':
-        name = doc.longname.replace(/\//g, '|');
-        return `@class-${name}.html`;
+        return `class/${doc.longname}.html`;
       case 'file':
-        name = doc.longname.replace(/\//g, '|');
-        return `@file-${name}.html`;
+        return `file/${doc.longname}.html`;
       default:
         throw new Error('DocBuilder: can not resolve file name.');
     }
@@ -424,7 +426,12 @@ export default class DocBuilder {
     if (!fileDoc) return;
 
     if (!text) text = fileDoc.name;
-    return `<span><a href="${this._getURL(fileDoc)}#lineNumber${doc.lineNumber}">${text}</a></span>`;
+
+    if (doc.kind === 'file') {
+      return `<span><a href="${this._getURL(fileDoc)}">${text}</a></span>`;
+    } else {
+      return `<span><a href="${this._getURL(fileDoc)}#lineNumber${doc.lineNumber}">${text}</a></span>`;
+    }
   }
 
   _buildDocLinkHTML(longname, text = null, inner = false, kind = null) {

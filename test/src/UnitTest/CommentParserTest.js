@@ -1,4 +1,4 @@
-import assert from 'power-assert';
+import assert from 'assert';
 import CommentParser from '../../../src/Parser/CommentParser.js';
 
 describe('CommentParser:', ()=>{

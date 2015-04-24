@@ -3,12 +3,14 @@ import DocBuilder from './DocBuilder.js';
 
 export default class ClassDocBuilder extends DocBuilder {
   exec(callback) {
-    var ice = this._buildLayoutDoc();
+    let ice = this._buildLayoutDoc();
     ice.autoDrop = false;
-    var docs = this._find({kind: ['class']});
-    for (var doc of docs) {
+    let docs = this._find({kind: ['class']});
+    for (let doc of docs) {
+      let fileName = this._getOutputFileName(doc);
+      let baseUrl = this._getBaseUrl(fileName);
       ice.load('content', this._buildObjectDoc(doc), IceCap.MODE_WRITE);
-      var fileName = this._getOutputFileName(doc);
+      ice.attr('baseUrl', 'href', baseUrl, IceCap.MODE_WRITE);
       callback(ice.html, fileName);
     }
   }
