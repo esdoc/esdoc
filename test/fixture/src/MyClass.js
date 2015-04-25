@@ -200,6 +200,15 @@ export default class MyClass1 extends SuperMyClass1 {
    * @private
    */
   * method4(){}
+
+  method5(p1 = 'abc') {
+    return 'abc';
+  }
+
+  // this is undocument
+  method6(p1 = 10){
+    return 10;
+  }
 }
 
 /**

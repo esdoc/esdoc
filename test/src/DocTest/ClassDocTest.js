@@ -10,6 +10,16 @@ describe('MyClass1: ', ()=> {
     assert.equal(doc.unknown[0].tagValue, 'this is unknown tag.');
   });
 
+  it('has undocument tag', ()=>{
+    let doc;
+
+    doc = global.db.find({name: 'method5', undocument: true})[0];
+    assert.equal(doc.undocument, true);
+
+    doc = global.db.find({name: 'method6', undocument: true})[0];
+    assert.equal(doc.undocument, true);
+  });
+
   it('has header notice.', ()=>{
     find(doc, '[data-ice="content"] .header-notice', (doc)=>{
       assert.includes(doc, '[data-ice="importPath"]', "import MyClass1 from 'esdoc-test-fixture'");
@@ -387,14 +397,14 @@ describe('MyClass1: ', ()=> {
         });
       });
       // protected
-      find(doc, '[data-ice="detail"]:nth-of-type(2)', (doc)=>{
+      find(doc, '[data-ice="detail"]:nth-of-type(4)', (doc)=>{
         assert.includes(doc, '#instance-method-method2', 'protected method2()');
       });
       // private
-      find(doc, '[data-ice="detail"]:nth-of-type(3)', (doc)=>{
+      find(doc, '[data-ice="detail"]:nth-of-type(5)', (doc)=>{
         assert.includes(doc, '#instance-method-method3', 'private method3()');
       });
-      find(doc, '[data-ice="detail"]:nth-of-type(4)', (doc)=>{
+      find(doc, '[data-ice="detail"]:nth-of-type(6)', (doc)=>{
         assert.includes(doc, '#instance-method-method4', 'private * method4(): Generator');
       });
     })

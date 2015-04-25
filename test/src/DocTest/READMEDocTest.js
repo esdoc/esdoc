@@ -8,6 +8,6 @@ describe('README:', ()=> {
   });
 
   it('has coverage badge', ()=>{
-    assert.includes(doc, '.esdoc-coverage .esdoc-coverage-ratio', '100%');
+    assert.includes(doc, '.esdoc-coverage .esdoc-coverage-ratio', '97%');
   });
 });

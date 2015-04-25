@@ -53,15 +53,8 @@ export default class DocFactory {
       Object.defineProperty(node, 'parent', {value: parentNode});
     }
 
-    // for leading comments
-    if (node.leadingComments && node.leadingComments.length) {
-      let results = this._traverseComments(parentNode, node, node.leadingComments);
-      this._results.push(...results);
-    } else {
-      let comments = [{type: 'Block', value: '* @undocument'}];
-      let results = this._traverseComments(parentNode, node, comments);
-      this._results.push(...results);
-    }
+    let results = this._traverseComments(parentNode, node, node.leadingComments);
+    this._results.push(...results);
 
     // for trailing comments.
     // traverse with only last node, because prevent duplication of trailing comments.
@@ -78,11 +71,23 @@ export default class DocFactory {
       node = virtualNode;
     }
 
+    if (comments && comments.length) {
+      let temp = [];
+      for (let comment of comments) {
+        if (CommentParser.isESDoc(comment)) temp.push(comment);
+      }
+      comments = temp;
+    } else {
+      comments = [];
+    }
+
+    if (comments.length === 0) {
+      comments = [{type: 'Block', value: '* @undocument'}];
+    }
+
     let results = [];
     let lastComment = comments[comments.length - 1];
     for (let comment of comments) {
-      if (!CommentParser.isESDoc(comment)) continue;
-
       let tags = CommentParser.parse(comment);
 
       let doc;
