@@ -20,7 +20,7 @@ export default class SingleDocBuilder extends DocBuilder {
 
   _buildSingleDoc(kind) {
     let title = kind.replace(/^(\w)/, (c)=> c.toUpperCase() );
-    let ice = new IceCap(this._readTemplate('@single.html'));
+    let ice = new IceCap(this._readTemplate('single.html'));
     ice.text('title', title);
     ice.load('summaries', this._buildSummaryHTML(null, kind, 'Summary'), 'append');
     ice.load('details', this._buildDetailHTML(null, kind, ''));

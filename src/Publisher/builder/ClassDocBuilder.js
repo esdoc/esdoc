@@ -20,7 +20,7 @@ export default class ClassDocBuilder extends DocBuilder {
     var directSubclass = this._buildDirectSubclassHTML(doc);
     var indirectSubclass = this._buildIndirectSubclassHTML(doc);
 
-    var ice = new IceCap(this._readTemplate('@class.html'));
+    var ice = new IceCap(this._readTemplate('class.html'));
 
     // header
     if (doc.export && doc.importPath && doc.importStyle) {

@@ -21,7 +21,7 @@ export default class ReadmeDocBuilder extends DocBuilder {
 
     let readme = fs.readFileSync(this._config.readme, {encode: 'utf8'}).toString();
 
-    let html = this._readTemplate('@readme.html');
+    let html = this._readTemplate('readme.html');
     let ice = new IceCap(html);
     ice.load('readme', markdown(readme));
 
