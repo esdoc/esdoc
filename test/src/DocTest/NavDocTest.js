@@ -1,6 +1,6 @@
 import {readDoc, assert, find} from './util.js';
 
-describe('INDEX:', ()=> {
+describe('Nav:', ()=> {
   let doc = readDoc('index.html');
 
   it('has class nav.', ()=>{
@@ -35,6 +35,13 @@ describe('INDEX:', ()=> {
     find(doc, '[data-ice="nav"] [data-ice="typedefWrap"]', (doc)=>{
       assert.includes(doc, '[data-ice="typedefDoc"]:nth-of-type(1)', 'MyTypedef1');
       assert.includes(doc, '[data-ice="typedefDoc"]:nth-of-type(1) a', 'typedef/index.html#static-typedef-MyTypedef1', 'href');
+    });
+  });
+
+  it('has external nav.', ()=>{
+    find(doc, '[data-ice="nav"] [data-ice="externalWrap"]', (doc)=>{
+      assert.includes(doc, '[data-ice="externalDoc"]:nth-of-type(1)', 'MyError2');
+      assert.includes(doc, '[data-ice="externalDoc"]:nth-of-type(1) a', 'example.com', 'href');
     });
   });
 
