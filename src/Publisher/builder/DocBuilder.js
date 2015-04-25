@@ -148,6 +148,13 @@ export default class DocBuilder {
       ice.load('typedefDoc', this._buildDocLinkHTML(typedefDoc.longname));
     });
 
+    // external
+    let externalDocs = this._find({kind: 'external'});
+    ice.drop('externalWrap', !externalDocs.length);
+    ice.loop('externalDoc', externalDocs, (i, externalDoc, ice)=>{
+      ice.load('externalDoc', this._buildDocLinkHTML(externalDoc.longname));
+    });
+
     // files
     let fileDocs = this._find({kind: 'file'});
     ice.drop('fileWrap', !fileDocs.length);
