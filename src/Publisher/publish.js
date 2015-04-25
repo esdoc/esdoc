@@ -2,7 +2,7 @@ import fs from 'fs-extra';
 import path from 'path';
 import {taffy} from 'taffydb';
 import StaticFileBuilder from './builder/StaticFileBuilder.js';
-import IndexDocBuilder from './builder/IndexDocBuilder.js';
+import SymbolsDocBuilder from './builder/SymbolsDocBuilder.js';
 import ReadmeDocBuilder from './builder/ReadmeDocBuilder.js';
 import ClassDocBuilder from './builder/ClassDocBuilder.js';
 import SingleDocBuilder from './builder/SingleDocBuilder.js';
@@ -15,7 +15,7 @@ export default function publish(values, config) {
   fs.outputFileSync(dumpPath, JSON.stringify(values, null, 2));
 
   let data = taffy(values);
-  let _coverage;
+  let _coverage = null;
 
   function writeHTML(html, fileName) {
     console.log(fileName);
@@ -39,7 +39,7 @@ export default function publish(values, config) {
     new CoverageBuilder(data, config).exec(writeCoverage);
   }
 
-  new IndexDocBuilder(data, config).exec(writeHTML);
+  new SymbolsDocBuilder(data, config).exec(writeHTML);
   new ReadmeDocBuilder(data, config, _coverage).exec(writeHTML);
   new ClassDocBuilder(data, config).exec(writeHTML);
   new SingleDocBuilder(data, config).exec(writeHTML);

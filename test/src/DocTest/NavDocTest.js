@@ -1,7 +1,7 @@
 import {readDoc, assert, find} from './util.js';
 
 describe('INDEX:', ()=> {
-  let doc = readDoc('@index.html');
+  let doc = readDoc('index.html');
 
   it('has class nav.', ()=>{
     find(doc, '[data-ice="nav"] [data-ice="classWrap"]', (doc)=>{

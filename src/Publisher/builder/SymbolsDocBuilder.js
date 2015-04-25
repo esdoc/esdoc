@@ -2,17 +2,17 @@ import fs from 'fs';
 import IceCap from 'ice-cap';
 import DocBuilder from './DocBuilder.js';
 
-export default class IndexDocBuilder extends DocBuilder {
+export default class SymbolsDocBuilder extends DocBuilder {
   exec(callback) {
     let ice = this._buildLayoutDoc();
     ice.load('content', this._buildIndexDoc());
-    callback(ice.html, '@index.html');
+    callback(ice.html, 'symbols.html');
   }
 
   _buildIndexDoc() {
     let indexInfo = this._getInfo();
 
-    let ice = new IceCap(this._readTemplate('@index.html'));
+    let ice = new IceCap(this._readTemplate('symbols.html'));
 
     ice.text('title', indexInfo.title);
     ice.text('version', indexInfo.version, 'append');
