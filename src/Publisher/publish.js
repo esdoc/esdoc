@@ -9,8 +9,9 @@ import SingleDocBuilder from './builder/SingleDocBuilder.js';
 import FileDocBuilder from './builder/FileDocBuilder.js';
 import SearchIndexBuilder from './builder/SearchIndexBuilder.js';
 import CoverageBuilder from './builder/CoverageBuilder.js';
+import ASTDocBuilder from './builder/ASTDocBuilder.js';
 
-export default function publish(values, config) {
+export default function publish(values, asts, config) {
   let dumpPath = path.resolve(config.destination, 'dump.json');
   fs.outputFileSync(dumpPath, JSON.stringify(values, null, 2));
 
@@ -30,6 +31,11 @@ export default function publish(values, config) {
     fs.outputFileSync(filePath, json, {encoding: 'utf8'});
   }
 
+  function writeAST(astJSON, fileName) {
+    let filePath = path.resolve(config.destination, fileName);
+    fs.outputFileSync(filePath, astJSON, {encoding: 'utf8'});
+  }
+
   function copy(srcPath, destPath) {
     console.log(destPath);
     fs.copySync(srcPath, path.resolve(config.destination, destPath));
@@ -46,6 +52,7 @@ export default function publish(values, config) {
   new FileDocBuilder(data, config).exec(writeHTML);
   new StaticFileBuilder(data, config).exec(copy);
   new SearchIndexBuilder(data, config).exec(writeHTML);
+  new ASTDocBuilder(data, asts, config).exec(writeAST);
 
   if (config.coverage) {
     console.log('==================================');

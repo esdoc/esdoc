@@ -21,7 +21,7 @@ export default class ESDoc {
   /**
    * Generate documentation.
    * @param {ESDocConfig} config - config for generation.
-   * @param {function(results: Object, config: ESDocConfig)} publisher - callback for output html.
+   * @param {function(results: Object, asts: Object[], config: ESDocConfig)} publisher - callback for output html.
    */
   static generate(config, publisher) {
     assert(typeof publisher === 'function');
@@ -49,6 +49,7 @@ export default class ESDoc {
     }
 
     let results = [];
+    let asts = [];
 
     this._walk(config.source, (filePath)=>{
       let match = false;
@@ -64,11 +65,14 @@ export default class ESDoc {
         if (filePath.match(reg)) return;
       }
 
-      let values = this._traverse(config.source, filePath, packageName, mainFilePath, pathPrefix);
-      results.push(...values);
+      let temp = this._traverse(config.source, filePath, packageName, mainFilePath, pathPrefix);
+      results.push(...temp.results);
+
+      let relativeFilePath = path.relative(path.dirname(config.source), filePath);
+      asts.push({filePath: relativeFilePath, ast: temp.ast});
     });
 
-    publisher(results, config);
+    publisher(results, asts, config);
   }
 
   /**
@@ -124,7 +128,9 @@ export default class ESDoc {
    * @param {string} [packageName] - npm package name of target.
    * @param {string} [mainFilePath] - npm main file path of target.
    * @param {string} [pathPrefix] - prefix of import path from root directory.
-   * @returns {DocObject[]}
+   * @returns {Object}
+   * @property {DocObject[]} results
+   * @property {Object} ast
    * @private
    */
   static _traverse(inDirPath, filePath, packageName, mainFilePath, pathPrefix) {
@@ -136,6 +142,6 @@ export default class ESDoc {
       factory.push(node, parent);
     });
 
-    return factory.results;
+    return {results: factory.results, ast: ast};
   }
 }

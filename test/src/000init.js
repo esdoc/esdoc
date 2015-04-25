@@ -7,7 +7,7 @@ let configFilePath = './test/fixture/esdoc.json';
 let configJSON = fs.readFileSync(configFilePath, {encode: 'utf8'});
 let config = JSON.parse(configJSON);
 
-ESDoc.generate(config, (data, config)=>{
+ESDoc.generate(config, (data, asts, config)=>{
   fs.removeSync(config.destination);
 
   let db = taffy(data);
@@ -17,5 +17,5 @@ ESDoc.generate(config, (data, config)=>{
 
   global.db = db;
 
-  defaultPublisher(data, config);
+  defaultPublisher(data, asts, config);
 });
