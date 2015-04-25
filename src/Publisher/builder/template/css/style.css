@@ -441,6 +441,11 @@ pre.source-code li {
   background: #ddd;
 }
 
+.search-result li.search-separator {
+  background: rgb(37, 138, 175);
+  color: white;
+}
+
 .search-box.active .search-input {
   visibility: visible;
   transition: width 0.2s ease-out;

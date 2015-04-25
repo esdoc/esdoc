@@ -19,7 +19,18 @@ export default class SearchIndexBuilder extends DocBuilder {
         url = this._getURL(doc, null, 2);
       }
 
-      searchIndex.push([indexText, url, displayText]);
+      let kind = doc.kind;
+      switch (kind) {
+        case 'constructor':
+          kind = 'method';
+          break;
+        case 'get':
+        case 'set':
+          kind = 'member';
+          break;
+      }
+
+      searchIndex.push([indexText, url, displayText, kind]);
     }
 
     searchIndex.sort((a, b)=>{
@@ -32,7 +43,7 @@ export default class SearchIndexBuilder extends DocBuilder {
       }
     });
 
-    let javascript = 'window.jsdocCloudySearchIndex = ' + JSON.stringify(searchIndex, null, 2);
+    let javascript = 'window.esdocSearchIndex = ' + JSON.stringify(searchIndex, null, 2);
 
     callback(javascript, 'script/search_index.js');
   }
