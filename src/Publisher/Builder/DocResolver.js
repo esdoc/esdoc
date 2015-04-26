@@ -35,10 +35,19 @@ export default class DocResolver {
 
     let config = this._builder._config;
     let access = config.access || ['public', 'protected', 'private'];
+    let autoPrivate = config.autoPrivate;
 
     this._data().update(function(){
-      if (!this.access) this.access = 'public';
+      if (!this.access) {
+        if (autoPrivate && this.name.charAt(0) === '_') {
+          this.access = 'private';
+        } else {
+          this.access = 'public';
+        }
+      }
+
       if (!access.includes(this.access)) this.ignore = true;
+
       return this;
     });
 

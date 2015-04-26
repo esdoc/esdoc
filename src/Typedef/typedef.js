@@ -6,6 +6,7 @@
  * @property {string[]} [includes=["\\.js$"]]
  * @property {string[]} [excludes=["\\.config.\\.js$"]]
  * @property {string[]} [access=["public", "protected"]]
+ * @property {boolean} [autoPrivate=true]
  * @property {boolean} [onlyExported=true]
  * @property {boolean} [debug=false]
  * @property {string} [readme="./README.md"]

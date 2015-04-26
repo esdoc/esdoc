@@ -87,6 +87,8 @@ export default class ESDoc {
 
     if (!config.access) config.access = ['public', 'protected'];
 
+    if (!('autoPrivate' in config)) config.autoPrivate = true;
+
     if (!('onlyExported' in config)) config.onlyExported = true;
 
     if (!config.readme) config.readme = './README.md';
