@@ -40,7 +40,7 @@ export default class DocBuilder {
     }
     if (docs.length) return docs;
 
-    let regexp = new RegExp(`[~/]${name}$`);
+    let regexp = new RegExp(`[~/]\\${name}$`);
     if (kind) {
       docs = this._orderedFind(null, {longname: {regex: regexp}, kind: kind});
     } else {
