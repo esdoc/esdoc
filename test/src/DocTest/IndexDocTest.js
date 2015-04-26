@@ -1,6 +1,6 @@
 import {readDoc, assert, find} from './util.js';
 
-describe('README:', ()=> {
+describe('Index:', ()=> {
   let doc = readDoc('index.html');
 
   it('has README.md', ()=>{

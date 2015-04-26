@@ -3,7 +3,7 @@ import path from 'path';
 import {taffy} from 'taffydb';
 import StaticFileBuilder from './builder/StaticFileBuilder.js';
 import SymbolsDocBuilder from './builder/SymbolsDocBuilder.js';
-import ReadmeDocBuilder from './builder/ReadmeDocBuilder.js';
+import IndexDocBuilder from './builder/IndexDocBuilder.js';
 import ClassDocBuilder from './builder/ClassDocBuilder.js';
 import SingleDocBuilder from './builder/SingleDocBuilder.js';
 import FileDocBuilder from './builder/FileDocBuilder.js';
@@ -46,7 +46,7 @@ export default function publish(values, asts, config) {
   }
 
   new SymbolsDocBuilder(data, config).exec(writeHTML);
-  new ReadmeDocBuilder(data, config, _coverage).exec(writeHTML);
+  new IndexDocBuilder(data, config, _coverage).exec(writeHTML);
   new ClassDocBuilder(data, config).exec(writeHTML);
   new SingleDocBuilder(data, config).exec(writeHTML);
   new FileDocBuilder(data, config).exec(writeHTML);

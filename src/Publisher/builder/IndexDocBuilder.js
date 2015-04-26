@@ -4,7 +4,7 @@ import IceCap from 'ice-cap';
 import DocBuilder from './DocBuilder.js';
 import {markdown} from './util.js';
 
-export default class ReadmeDocBuilder extends DocBuilder {
+export default class IndexDocBuilder extends DocBuilder {
   constructor(data, config, coverage) {
     super(data, config);
     this._coverage = coverage;
