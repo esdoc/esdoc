@@ -50,3 +50,19 @@ export function markdown(text, breaks = false) {
 
   return compiled;
 }
+
+export function dateForUTC(date) {
+  function pad(num, len) {
+    let count = Math.max(0, len - `${num}`.length);
+    return '0'.repeat(count) + num;
+  }
+
+  let year = date.getUTCFullYear();
+  let month = pad(date.getUTCMonth() + 1, 2);
+  let day = pad(date.getUTCDay() + 1, 2);
+  let hours = pad(date.getUTCHours(), 2);
+  let minutes = pad(date.getUTCMinutes(), 2);
+  let seconds = pad(date.getUTCSeconds(), 2);
+
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds} (UTC)`;
+}

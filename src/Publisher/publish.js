@@ -10,6 +10,7 @@ import FileDocBuilder from './Builder/FileDocBuilder.js';
 import SearchIndexBuilder from './Builder/SearchIndexBuilder.js';
 import CoverageBuilder from './Builder/CoverageBuilder.js';
 import ASTDocBuilder from './Builder/ASTDocBuilder.js';
+import FilesDocBuilder from './Builder/FilesDocBuilder.js';
 
 export default function publish(values, asts, config) {
   let dumpPath = path.resolve(config.destination, 'dump.json');
@@ -53,6 +54,7 @@ export default function publish(values, asts, config) {
   new StaticFileBuilder(data, config).exec(copy);
   new SearchIndexBuilder(data, config).exec(writeHTML);
   new ASTDocBuilder(data, asts, config).exec(writeAST);
+  new FilesDocBuilder(data, config, _coverage).exec(writeHTML);
 
   if (config.coverage) {
     console.log('==================================');

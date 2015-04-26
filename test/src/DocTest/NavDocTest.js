@@ -44,11 +44,4 @@ describe('Nav:', ()=> {
       assert.includes(doc, '[data-ice="externalDoc"]:nth-of-type(1) a', 'example.com', 'href');
     });
   });
-
-  it('has file nav.', ()=>{
-    find(doc, '[data-ice="nav"] [data-ice="fileWrap"]', (doc)=>{
-      assert.includes(doc, '[data-ice="fileDoc"]:nth-of-type(1)', 'src/MyClass.js');
-      assert.includes(doc, '[data-ice="fileDoc"]:nth-of-type(1) a', 'file/src/MyClass.js.html', 'href');
-    });
-  });
 });
