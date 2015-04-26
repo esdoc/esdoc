@@ -157,7 +157,7 @@ export default class ClassDocBuilder extends DocBuilder {
         return order[a.kind] - order[b.kind];
       });
 
-      let title = `From ${superDoc.kind} ${this._buildDocLinkHTML(longname, superDoc.name)}`;
+      let title = `<span class="toggle closed"></span> From ${superDoc.kind} ${this._buildDocLinkHTML(longname, superDoc.name)}`;
       let result = this._buildSummaryDoc(targetDocs, '----------', false, superDoc.kind);
       if (result) {
         result.load('title', title, IceCap.MODE_WRITE);

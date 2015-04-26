@@ -224,8 +224,28 @@ table.summary td p {
   margin-bottom: 0;
 }
 
+.inherited-summary thead td {
+  padding-left: 2px;
+}
+
 .inherited-summary thead a {
   color: white;
+}
+
+.inherited-summary .summary tbody {
+  display: none;
+}
+
+.inherited-summary .summary .toggle {
+  padding: 0 4px;
+  font-size: 12px;
+  cursor: pointer;
+}
+.inherited-summary .summary .toggle.closed:before {
+  content: "▶";
+}
+.inherited-summary .summary .toggle.opened:before {
+  content: "▼";
 }
 
 .member, .method {
