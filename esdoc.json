@@ -1,7 +1,7 @@
 {
   "source": "./src",
   "destination": "./doc/out/esdoc",
-  "excludes": ["Publisher/builder/template/"],
+  "excludes": ["Publisher/Builder/template/"],
   "access": ["public", "protected", "private"],
   "onlyExported": true,
   "coverage": true,
