@@ -25,7 +25,6 @@ export default class SymbolsDocBuilder extends DocBuilder {
     ice.load('functionSummary', this._buildSummaryHTML(null, 'function', 'Function Summary'), 'append');
     ice.load('variableSummary', this._buildSummaryHTML(null, 'variable', 'Variable Summary'), 'append');
     ice.load('typedefSummary', this._buildSummaryHTML(null, 'typedef', 'Typedef Summary'), 'append');
-    ice.load('fileSummary', this._buildSummaryHTML(null, 'file', 'File Summary'), 'append');
 
     return ice;
   }

@@ -35,11 +35,4 @@ describe('Symbols:', ()=> {
       assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public MyTypedef1: Object this is MyTypedef1 desc.');
     });
   });
-
-  it('has file summary.', ()=>{
-    find(doc, '[data-ice="fileSummary"]', (doc)=>{
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public src/MyClass.js');
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(8)', 'public src/myVariable.js');
-    });
-  });
 });
