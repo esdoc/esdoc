@@ -1,15 +1,15 @@
 import fs from 'fs-extra';
 import path from 'path';
 import {taffy} from 'taffydb';
-import StaticFileBuilder from './builder/StaticFileBuilder.js';
-import SymbolsDocBuilder from './builder/SymbolsDocBuilder.js';
-import IndexDocBuilder from './builder/IndexDocBuilder.js';
-import ClassDocBuilder from './builder/ClassDocBuilder.js';
-import SingleDocBuilder from './builder/SingleDocBuilder.js';
-import FileDocBuilder from './builder/FileDocBuilder.js';
-import SearchIndexBuilder from './builder/SearchIndexBuilder.js';
-import CoverageBuilder from './builder/CoverageBuilder.js';
-import ASTDocBuilder from './builder/ASTDocBuilder.js';
+import StaticFileBuilder from './Builder/StaticFileBuilder.js';
+import SymbolsDocBuilder from './Builder/SymbolsDocBuilder.js';
+import IndexDocBuilder from './Builder/IndexDocBuilder.js';
+import ClassDocBuilder from './Builder/ClassDocBuilder.js';
+import SingleDocBuilder from './Builder/SingleDocBuilder.js';
+import FileDocBuilder from './Builder/FileDocBuilder.js';
+import SearchIndexBuilder from './Builder/SearchIndexBuilder.js';
+import CoverageBuilder from './Builder/CoverageBuilder.js';
+import ASTDocBuilder from './Builder/ASTDocBuilder.js';
 
 export default function publish(values, asts, config) {
   let dumpPath = path.resolve(config.destination, 'dump.json');
