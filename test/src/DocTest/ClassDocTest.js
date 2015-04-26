@@ -177,6 +177,10 @@ describe('MyClass1: ', ()=> {
         assert.includes(doc, '[data-ice="target"]:nth-of-type(1) [data-ice="version"]', 'version 0.0.1');
         assert.includes(doc, '[data-ice="target"]:nth-of-type(1) [data-ice="since"]', 'since 1.2.3');
         assert.includes(doc, '[data-ice="target"]:nth-of-type(1) [data-ice="name"] a', 'class/src/MyClass.js~MyClass1.html#instance-method-method1', 'href');
+
+        // undocument symbols that are auto detected.
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(2)', 'public method5(p1: number, p2: string, p3: *[]): number');
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(3)', 'public method6(p1: *)');
       });
       // protected
       find(doc, 'table[data-ice="summary"]:nth-of-type(2)', (doc)=>{
@@ -396,14 +400,40 @@ describe('MyClass1: ', ()=> {
           assert.includes(doc, '[data-ice="throw"]:nth-of-type(2) a', 'http://example.com', 'href');
         });
       });
-      // protected
+
+      // public method5
+      find(doc, '[data-ice="detail"]:nth-of-type(2)', (doc)=>{
+        assert.includes(doc, '#instance-method-method5', 'public method5(p1: number, p2: string, p3: *[]): number');
+        find(doc, '#instance-method-method5 ~ [data-ice="properties"]', (doc)=>{
+          assert.includes(doc, '[data-ice="property"]:nth-of-type(1)', 'p1 number optional default: 123');
+          assert.includes(doc, '[data-ice="property"]:nth-of-type(2)', 'p2 string optional default: abc');
+          assert.includes(doc, '[data-ice="property"]:nth-of-type(3)', 'p3 *[] optional default: []');
+        });
+
+        find(doc, '[data-ice="returnParams"]', (doc)=> {
+          assert.includes(doc, '[data-ice="returnType"]', 'number');
+        });
+      });
+
+      // public method6
+      find(doc, '[data-ice="detail"]:nth-of-type(3)', (doc)=>{
+        assert.includes(doc, '#instance-method-method6', 'public method6(p1: *)');
+        find(doc, '#instance-method-method6 ~ [data-ice="properties"]', (doc)=>{
+          assert.includes(doc, '[data-ice="property"]:nth-of-type(1)', 'p1 *');
+        });
+      });
+
+      // protected method2
       find(doc, '[data-ice="detail"]:nth-of-type(4)', (doc)=>{
         assert.includes(doc, '#instance-method-method2', 'protected method2()');
       });
-      // private
+
+      // private method3
       find(doc, '[data-ice="detail"]:nth-of-type(5)', (doc)=>{
         assert.includes(doc, '#instance-method-method3', 'private method3()');
       });
+
+      // private method4
       find(doc, '[data-ice="detail"]:nth-of-type(6)', (doc)=>{
         assert.includes(doc, '#instance-method-method4', 'private * method4(): Generator');
       });

@@ -1,7 +1,7 @@
 /**
  * this is myFunction1 desc.
  */
-export default function myFunction1(p1){
+export default function myFunction1(){
 }
 
 /**
@@ -42,3 +42,11 @@ let myFunction5 = function(p1, p2){};
  * @return {Generator}
  */
 export function* myFunction6(){}
+
+export function myFunction7(p1 = [], p2 = [1,2,3], p3 = {}, p4 = {a: 123, b: 'abc'}) {
+  return Math.PI;
+}
+
+// this is undocument
+export function myFunction8(p1) {
+}

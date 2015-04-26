@@ -1,4 +1,5 @@
 import AbstractDoc from './AbstractDoc.js';
+import ParamParser from '../Parser/ParamParser.js';
 
 export default class FunctionDoc extends AbstractDoc {
   ['@kind']() {
@@ -24,5 +25,22 @@ export default class FunctionDoc extends AbstractDoc {
     if ('generator' in this._value) return;
 
     this._value.generator = this._node.generator;
+  }
+
+  ['@param']() {
+    super['@param']();
+    if (this._value.params) return;
+
+    this._value.params = ParamParser.guessParams(this._node.params);
+  }
+
+  ['@return']() {
+    super['@return']();
+    if (this._value.return) return;
+
+    let result = ParamParser.guessReturnParam(this._node.body);
+    if (result) {
+      this._value.return = result;
+    }
   }
 }
