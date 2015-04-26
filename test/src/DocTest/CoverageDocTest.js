@@ -5,8 +5,8 @@ describe('Coverage:', ()=> {
   it('has coverage.json', ()=>{
     let json = fs.readFileSync('./test/fixture/esdoc/coverage.json', {encoding: 'utf8'}).toString();
     let coverage = JSON.parse(json);
-    assert.equal(coverage.coverage, '89.65%');
-    assert.equal(coverage.expectCount, 87);
-    assert.equal(coverage.actualCount, 78);
+    assert.equal(coverage.coverage, '87.5%');
+    assert.equal(coverage.expectCount, 72);
+    assert.equal(coverage.actualCount, 63);
   });
 });

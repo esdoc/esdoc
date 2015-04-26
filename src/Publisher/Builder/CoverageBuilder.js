@@ -3,7 +3,7 @@ import DocBuilder from './DocBuilder.js';
 
 export default class CoverageBuilder extends DocBuilder {
   exec(callback) {
-    let docs = this._find({});
+    let docs = this._find({kind: ['class', 'method', 'member', 'get', 'set', 'constructor', 'function', 'variable']});
     let expectCount = docs.length;
     let actualCount = 0;
 

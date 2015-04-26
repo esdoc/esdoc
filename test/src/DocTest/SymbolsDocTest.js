@@ -39,7 +39,7 @@ describe('Symbols:', ()=> {
   it('has file summary.', ()=>{
     find(doc, '[data-ice="fileSummary"]', (doc)=>{
       assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public src/MyClass.js');
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(9)', 'public src/myVariable.js');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(8)', 'public src/myVariable.js');
     });
   });
 });

@@ -72,6 +72,10 @@ export default class ESDoc {
       asts.push({filePath: relativeFilePath, ast: temp.ast});
     });
 
+    if (config.defaultExternal) {
+      this._useDefaultExternal(results);
+    }
+
     publisher(results, asts, config);
   }
 
@@ -91,6 +95,8 @@ export default class ESDoc {
 
     if (!('onlyExported' in config)) config.onlyExported = true;
 
+    if (!('defaultExternal' in config)) config.defaultExternal = true;
+
     if (!config.readme) config.readme = './README.md';
 
     if (!config.package) config.package = './package.json';
@@ -100,6 +106,16 @@ export default class ESDoc {
     if (!config.styles) config.styles = [];
 
     if (!config.scripts) config.scripts = [];
+  }
+
+  static _useDefaultExternal(results) {
+    let dirPath = path.resolve(__dirname, './DefaultExternal/');
+    this._walk(dirPath, (filePath)=>{
+      let temp = this._traverse(dirPath, filePath);
+      temp.results.forEach((v)=> v.defaultExternal = true);
+      let res = temp.results.filter(v => v.kind === 'external');
+      results.push(...res);
+    });
   }
 
   /**
