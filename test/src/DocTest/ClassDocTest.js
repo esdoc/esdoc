@@ -202,8 +202,9 @@ describe('MyClass1: ', ()=> {
       });
       // private
       find(doc, 'table[data-ice="summary"]:nth-of-type(3)', (doc)=>{
-        assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'private method3() this is method3 desc.');
-        assert.includes(doc, '[data-ice="target"]:nth-of-type(2)', 'private * method4(): Generator this is method4 desc.');
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'private _method7() this is auto private.');
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(2)', 'private method3() this is method3 desc.');
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(3)', 'private * method4(): Generator this is method4 desc.');
       });
     });
   });
@@ -453,13 +454,18 @@ describe('MyClass1: ', ()=> {
         assert.includes(doc, '#instance-method-method2', 'protected method2()');
       });
 
-      // private method3
+      // private _method7
       find(doc, '[data-ice="detail"]:nth-of-type(5)', (doc)=>{
+        assert.includes(doc, '#instance-method-_method7', 'private _method7()');
+      });
+
+      // private method3
+      find(doc, '[data-ice="detail"]:nth-of-type(6)', (doc)=>{
         assert.includes(doc, '#instance-method-method3', 'private method3()');
       });
 
       // private method4
-      find(doc, '[data-ice="detail"]:nth-of-type(6)', (doc)=>{
+      find(doc, '[data-ice="detail"]:nth-of-type(7)', (doc)=>{
         assert.includes(doc, '#instance-method-method4', 'private * method4(): Generator');
       });
     })

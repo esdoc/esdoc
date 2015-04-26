@@ -213,6 +213,11 @@ export default class MyClass1 extends SuperMyClass1 {
   // this is undocument
   method6(p1){
   }
+
+  /**
+   * this is auto private.
+   */
+  _method7(){}
 }
 
 /**
