@@ -93,6 +93,7 @@ export default class DocBuilder {
     ice.text('version', info.version);
     ice.text('url', info.url);
     ice.attr('url', 'href', info.url);
+    ice.text('esdocVersion', `(${this._config._esdocVersion})`);
 
     // see StaticFileBuilder#exec
     ice.loop('userScript', this._config.scripts || [], (i, userScript, ice)=>{

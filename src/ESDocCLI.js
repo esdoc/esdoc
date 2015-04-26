@@ -9,8 +9,15 @@ import defaultPublisher from './Publisher/publish.js';
 export default class ESDocCLI {
   constructor(argv) {
     this._argv = minimist(argv.slice(2));
+    this._packageObj = this._findPackageJSON();
+
     if (this._argv.h || this._argv.help) {
       this._showHelp();
+      process.exit(0)
+    }
+
+    if (this._argv.v || this._argv.version) {
+      this._showVersion();
       process.exit(0)
     }
   }
@@ -26,11 +33,31 @@ export default class ESDocCLI {
       process.exit(1);
     }
 
+    config._esdocVersion = this._packageObj.version;
     ESDoc.generate(config, defaultPublisher);
+  }
+
+  _findPackageJSON() {
+    let packageObj = null;
+    try {
+      let packageFilePath = path.resolve(__dirname, '../package.json');
+      let json = fs.readFileSync(packageFilePath, {encode: 'utf8'});
+      packageObj = JSON.parse(json);
+    } catch (e) {
+      let packageFilePath = path.resolve(__dirname, '../../package.json');
+      let json = fs.readFileSync(packageFilePath, {encode: 'utf8'});
+      packageObj = JSON.parse(json);
+    }
+
+    return packageObj;
   }
 
   _showHelp() {
     console.log('usage: esdoc [-c esdoc.json | path/to/dir]');
+  }
+
+  _showVersion() {
+    console.log(this._packageObj.version);
   }
 
   _createConfigFromJSONFile(configFilePath) {
