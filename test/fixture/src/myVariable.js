@@ -17,3 +17,7 @@ export let myVariable2 = 123;
  * @type {number}
  */
 let myVariable3 = 123;
+
+// this is undocument
+export let myVariable4 = 123;
+export let myVariable5 = [];

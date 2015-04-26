@@ -1,4 +1,5 @@
 import AbstractDoc from './AbstractDoc.js';
+import ParamParser from '../Parser/ParamParser.js'
 
 export default class VariableDoc extends AbstractDoc {
   ['@kind']() {
@@ -19,6 +20,13 @@ export default class VariableDoc extends AbstractDoc {
     super['@memberof']();
     if (this._value.memberof) return;
     this._value.memberof = this._pathResolver.filePath;
+  }
+
+  ['@type']() {
+    super['@type']();
+    if (this._value.type) return;
+
+    this._value.type = ParamParser.guessType(this._node.declarations[0].init);
   }
 }
 

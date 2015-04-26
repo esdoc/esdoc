@@ -213,4 +213,14 @@ export default class ParamParser {
 
     return null;
   }
+
+  static guessType(right) {
+    let value = right && right.type === 'Literal' ? right.value : null;
+
+    if (value === null || value === undefined) {
+      return {types: ['*']};
+    } else {
+      return {types: [typeof value]};
+    }
+  }
 }

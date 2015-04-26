@@ -127,6 +127,11 @@ export default class MyClass1 extends SuperMyClass1 {
      * @private
      */
     this.p4 = ()=>{};
+
+    // this is undocument
+    this.p5 = 123;
+    this.p6 = {};
+    this.p7 = null;
   }
 
   /**

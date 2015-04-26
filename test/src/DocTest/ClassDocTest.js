@@ -140,28 +140,42 @@ describe('MyClass1: ', ()=> {
     find(doc, '[data-ice="memberSummary"]', (doc)=>{
       // public
       find(doc, 'table[data-ice="summary"]:nth-of-type(1)', (doc)=>{
+        // p1
         assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public p1: number this is p1 desc.');
         assert.includes(doc, '[data-ice="target"]:nth-of-type(1) [data-ice="name"] a', 'class/src/MyClass.js~MyClass1.html#instance-member-p1', 'href');
-      });
 
-      find(doc, 'table[data-ice="summary"]:nth-of-type(1)', (doc)=>{
-        assert.includes(doc, '[data-ice="target"]:nth-of-type(2)', 'public get value: number this is value(get) desc.');
-        assert.includes(doc, '[data-ice="target"]:nth-of-type(2) [data-ice="name"] a', 'class/src/MyClass.js~MyClass1.html#instance-get-value', 'href');
-      });
+        // p5
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(2)', 'public p5: number');
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(2) [data-ice="name"] a', 'class/src/MyClass.js~MyClass1.html#instance-member-p5', 'href');
 
-      find(doc, 'table[data-ice="summary"]:nth-of-type(1)', (doc)=>{
-        assert.includes(doc, '[data-ice="target"]:nth-of-type(3)', 'public set value: number this is value(set) desc.');
-        assert.includes(doc, '[data-ice="target"]:nth-of-type(3) [data-ice="name"] a', 'class/src/MyClass.js~MyClass1.html#instance-set-value', 'href');
+        // p6
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(3)', 'public p6: *');
+
+        // p7
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(4)', 'public p7: *');
+
+        // value
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(5)', 'public get value: number this is value(get) desc.');
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(5) [data-ice="name"] a', 'class/src/MyClass.js~MyClass1.html#instance-get-value', 'href');
+
+        // value
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(6)', 'public set value: number this is value(set) desc.');
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(6) [data-ice="name"] a', 'class/src/MyClass.js~MyClass1.html#instance-set-value', 'href');
       });
 
       // protected
       find(doc, 'table[data-ice="summary"]:nth-of-type(2)', (doc)=>{
-        assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'protected p2');
+        // p2
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'protected p2: number');
       });
 
       // private
       find(doc, 'table[data-ice="summary"]:nth-of-type(3)', (doc)=>{
-        assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'private p3');
+        // p3
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'private p3: number');
+
+        // p4
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(2)', 'private p4: function');
       });
     });
   });
@@ -309,23 +323,34 @@ describe('MyClass1: ', ()=> {
 
   it('has member detail.', ()=>{
     find(doc, '[data-ice="memberDetails"]', (doc)=>{
-      // public
+      // public p1
       find(doc, '[data-ice="detail"]:nth-of-type(1)', (doc)=>{
         assert.includes(doc, '#instance-member-p1', 'public p1: number');
         assert.includes(doc, '#instance-member-p1 + [data-ice="description"]', 'this is p1 desc.');
       });
-      find(doc, '[data-ice="detail"]:nth-of-type(2)', (doc)=> {
+
+      // public p5
+      find(doc, '[data-ice="detail"]:nth-of-type(2)', (doc)=>{
+        assert.includes(doc, '#instance-member-p5', 'public p5: number');
+      });
+
+      // public value
+      find(doc, '[data-ice="detail"]:nth-of-type(5)', (doc)=> {
         assert.includes(doc, '#instance-get-value', 'public get value: number');
       });
-      find(doc, '[data-ice="detail"]:nth-of-type(3)', (doc)=> {
+
+      // public value
+      find(doc, '[data-ice="detail"]:nth-of-type(6)', (doc)=> {
         assert.includes(doc, '#instance-set-value', 'public set value: number');
       });
-      // protected
-      find(doc, '[data-ice="detail"]:nth-of-type(4)', (doc)=>{
+
+      // protected p2
+      find(doc, '[data-ice="detail"]:nth-of-type(7)', (doc)=>{
         assert.includes(doc, '#instance-member-p2', 'protected p2: number');
       });
-      // private
-      find(doc, '[data-ice="detail"]:nth-of-type(5)', (doc)=>{
+
+      // private p3
+      find(doc, '[data-ice="detail"]:nth-of-type(8)', (doc)=>{
         assert.includes(doc, '#instance-member-p3', 'private p3: number');
       });
     })
