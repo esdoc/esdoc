@@ -22,6 +22,6 @@
 <%- @content %>
 </article>
 
-<script src="/script/pretty.js"></script>
+<script src="./script/pretty.js"></script>
 </body>
 </html>
