@@ -58,8 +58,7 @@ export default function publish(values, asts, config) {
 
   if (config.coverage) {
     console.log('==================================');
-    console.log('Coverage');
-    console.log(_coverage);
+    console.log(`Coverage: ${_coverage.coverage} (${_coverage.actualCount}/${_coverage.expectCount})`);
     console.log('==================================');
   }
 };
