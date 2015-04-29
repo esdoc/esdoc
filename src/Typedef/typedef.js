@@ -9,6 +9,7 @@
  * @property {boolean} [autoPrivate=true]
  * @property {boolean} [defaultExternal=true]
  * @property {boolean} [onlyExported=true]
+ * @property {boolean} [undocumentSymbol=true]
  * @property {boolean} [debug=false]
  * @property {string} [readme="./README.md"]
  * @property {string} [package="./package.json"]

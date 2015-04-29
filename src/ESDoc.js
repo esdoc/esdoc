@@ -97,6 +97,8 @@ export default class ESDoc {
 
     if (!('defaultExternal' in config)) config.defaultExternal = true;
 
+    if (!('undocumentSymbol' in config)) config.undocumentSymbol = true;
+
     if (!config.readme) config.readme = './README.md';
 
     if (!config.package) config.package = './package.json';
