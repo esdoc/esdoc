@@ -20,6 +20,10 @@ describe('MyClass1: ', ()=> {
     assert.equal(doc.undocument, true);
   });
 
+  it('has document title', ()=>{
+    assert.includes(doc, 'head title', 'MyClass1 | ESDoc Test Fixture API Document');
+  });
+
   it('has header notice.', ()=>{
     find(doc, '[data-ice="content"] .header-notice', (doc)=>{
       assert.includes(doc, '[data-ice="importPath"]', "import MyClass1 from 'esdoc-test-fixture'");

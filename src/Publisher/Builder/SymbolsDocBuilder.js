@@ -5,7 +5,9 @@ import DocBuilder from './DocBuilder.js';
 export default class SymbolsDocBuilder extends DocBuilder {
   exec(callback) {
     let ice = this._buildLayoutDoc();
+    let title = this._getTitle('Index');
     ice.load('content', this._buildIndexDoc());
+    ice.text('title', title, IceCap.MODE_WRITE);
     callback(ice.html, 'symbols.html');
   }
 

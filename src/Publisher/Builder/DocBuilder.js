@@ -367,6 +367,24 @@ export default class DocBuilder {
     return ice;
   }
 
+  _getTitle(doc = '') {
+    let name = doc.name || doc.toString();
+
+    if (!name) {
+      if (this._config.title) {
+        return `${this._config.title} API Document`;
+      } else {
+        return 'API Document';
+      }
+    }
+
+    if (this._config.title) {
+      return `${name} | ${this._config.title} API Document`;
+    } else {
+      return `${name} | API Document`;
+    }
+  }
+
   _getBaseUrl(fileName) {
     let baseUrl = '../'.repeat(fileName.split('/').length - 1);
     return baseUrl;

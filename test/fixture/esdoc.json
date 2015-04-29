@@ -7,5 +7,6 @@
   "debug": true,
   "readme": "./test/fixture/README.md",
   "package": "./test/fixture/package.json",
-  "importPathPrefix": "out"
+  "importPathPrefix": "out",
+  "title": "ESDoc Test Fixture"
 }

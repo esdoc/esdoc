@@ -12,8 +12,12 @@ export default class SingleDocBuilder extends DocBuilder {
       if (!docs.length) continue;
       let fileName = this._getOutputFileName(docs[0]);
       let baseUrl = this._getBaseUrl(fileName);
+      let title = kind.replace(/^(\w)/, (c)=> c.toUpperCase() );
+      title = this._getTitle(title);
+
       ice.load('content', this._buildSingleDoc(kind), IceCap.MODE_WRITE);
       ice.attr('baseUrl', 'href', baseUrl, IceCap.MODE_WRITE);
+      ice.text('title', title, IceCap.MODE_WRITE);
       callback(ice.html, fileName);
     }
   }

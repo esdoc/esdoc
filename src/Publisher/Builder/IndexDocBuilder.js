@@ -12,7 +12,9 @@ export default class IndexDocBuilder extends DocBuilder {
 
   exec(callback) {
     let ice = this._buildLayoutDoc();
+    let title = this._getTitle();
     ice.load('content', this._buildReadmeDoc());
+    ice.text('title', title, IceCap.MODE_WRITE);
     callback(ice.html, 'index.html');
   }
 

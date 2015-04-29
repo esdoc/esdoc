@@ -14,9 +14,11 @@ export default class FilesDocBuilder extends DocBuilder {
     let ice = this._buildLayoutDoc();
     let fileName = 'files.html';
     let baseUrl = this._getBaseUrl(fileName);
+    let title = this._getTitle('Files');
 
     ice.attr('baseUrl', 'href', baseUrl);
     ice.load('content', this._buildFilesHTML());
+    ice.text('title', title, IceCap.MODE_WRITE);
 
     callback(ice.html, fileName);
   }

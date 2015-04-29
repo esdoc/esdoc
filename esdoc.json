@@ -8,5 +8,6 @@
   "debug": true,
   "readme": "./README.md",
   "package": "./package.json",
-  "importPathPrefix": "out"
+  "importPathPrefix": "out",
+  "title": "ESDoc"
 }
