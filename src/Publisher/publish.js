@@ -1,6 +1,7 @@
 import fs from 'fs-extra';
 import path from 'path';
 import {taffy} from 'taffydb';
+import IceCap from 'ice-cap';
 import StaticFileBuilder from './Builder/StaticFileBuilder.js';
 import SymbolsDocBuilder from './Builder/SymbolsDocBuilder.js';
 import IndexDocBuilder from './Builder/IndexDocBuilder.js';
@@ -13,14 +14,20 @@ import ASTDocBuilder from './Builder/ASTDocBuilder.js';
 import FilesDocBuilder from './Builder/FilesDocBuilder.js';
 
 export default function publish(values, asts, config) {
+  IceCap.debug = !!config.debug;
+
   let dumpPath = path.resolve(config.destination, 'dump.json');
   fs.outputFileSync(dumpPath, JSON.stringify(values, null, 2));
 
   let data = taffy(values);
   let _coverage = null;
 
+  function log(text) {
+    console.log(text);
+  }
+
   function writeHTML(html, fileName) {
-    console.log(fileName);
+    log(fileName);
     let filePath = path.resolve(config.destination, fileName);
     fs.outputFileSync(filePath, html, {encoding: 'utf8'});
   }
@@ -38,7 +45,7 @@ export default function publish(values, asts, config) {
   }
 
   function copy(srcPath, destPath) {
-    console.log(destPath);
+    log(destPath);
     fs.copySync(srcPath, path.resolve(config.destination, destPath));
   }
 

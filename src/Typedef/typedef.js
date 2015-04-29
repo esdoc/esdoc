@@ -11,6 +11,7 @@
  * @property {boolean} [defaultExternal=true]
  * @property {boolean} [onlyExported=true]
  * @property {boolean} [undocumentSymbol=true]
+ * @property {boolean} [coverage=true]
  * @property {boolean} [debug=false]
  * @property {string} [readme="./README.md"]
  * @property {string} [package="./package.json"]

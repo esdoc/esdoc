@@ -99,6 +99,8 @@ export default class ESDoc {
 
     if (!('undocumentSymbol' in config)) config.undocumentSymbol = true;
 
+    if (!('coverage' in config)) config.coverage = true;
+
     if (!config.readme) config.readme = './README.md';
 
     if (!config.package) config.package = './package.json';
