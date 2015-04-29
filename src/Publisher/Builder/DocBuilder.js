@@ -312,7 +312,7 @@ export default class DocBuilder {
         ice.load('returnDescription', doc.return.description);
         let typeNames = [];
         for (let typeName of doc.return.types) {
-          typeNames.push(this._buildDocLinkHTML(typeName));
+          typeNames.push(this._buildTypeDocLinkHTML(typeName));
         }
         if (typeof doc.return.nullable === 'boolean') {
           let nullable = doc.return.nullable;
@@ -454,45 +454,87 @@ export default class DocBuilder {
     }
   }
 
+  _buildTypeDocLinkHTML(typeName) {
+    // e.g. number[]
+    let matched = typeName.match(/^(.*?)\[\]$/);
+    if (matched) {
+      typeName = matched[1];
+      return `<span>${this._buildDocLinkHTML(typeName, typeName)}<span>[]</span></span>`;
+    }
+
+    // e.g. function(a: number, b: string)
+    matched = typeName.match(/function\((.*?)\)/);
+    if (matched) {
+      let functionLink = this._buildDocLinkHTML('function');
+      if (!matched[1]) return `<span>${functionLink}<span>()</span></span>`;
+
+      let innerTypes = matched[1].split(',').map((v)=>{
+        let tmp = v.split(':').map((v)=> v.trim());
+        let paramName = tmp[0];
+        let typeName = tmp[1];
+        return `${paramName}: ${this._buildDocLinkHTML(typeName, typeName)}`;
+      });
+
+      return `<span>${functionLink}<span>(${innerTypes.join(', ')})</span></span>`;
+    }
+
+    // e.g. {a: number, b: string}
+    matched = typeName.match(/^\{(.*?)\}$/);
+    if (matched) {
+      if (!matched[1]) return '{}';
+
+      let innerTypes = matched[1].split(',').map((v)=>{
+        let tmp = v.split(':').map((v)=> v.trim());
+        let paramName = tmp[0];
+        let typeName = tmp[1];
+        return `${paramName}: ${this._buildDocLinkHTML(typeName, typeName)}`;
+      });
+
+      return `{${innerTypes.join(', ')}}`;
+    }
+
+    // e.g. Map.<number, string>
+    matched = typeName.match(/^(.*?)\.<(.*?)>$/);
+    if (matched) {
+      let mainType = matched[1];
+      let innerTypes = matched[2].split(',').map((v) => {
+        v = v.trim();
+        return this._buildDocLinkHTML(v, v, false);
+      });
+
+      let html = `${this._buildDocLinkHTML(mainType, mainType)}.<${innerTypes.join(', ')}>`;
+      return html;
+    }
+
+    return this._buildDocLinkHTML(typeName, typeName);
+  }
+
   _buildDocLinkHTML(longname, text = null, inner = false, kind = null) {
     if (!longname) return '';
 
     if (typeof longname !== 'string') throw new Error(JSON.stringify(longname));
 
-    // TODO: support nested Array
-    // Array.<Foo>
-    let isArray = false;
-    let matched = longname.match(/^(.*?)\[\]$/) || longname.match(/^Array\.<(.*?)>$/);
-    if (matched) {
-      longname = matched[1];
-      isArray = true;
-    }
-
     let doc = this._findByName(longname, kind)[0];
 
     if (!doc) {
       // if longname is HTML tag, not escape.
-      let arraySuffix = isArray ? '[]' : '';
       if (longname.indexOf('<') === 0) {
-        return `<span>${longname}${arraySuffix}</span>`;
+        return `<span>${longname}</span>`;
       } else {
-        return `<span>${escape(text || longname)}${arraySuffix}</span>`;
+        return `<span>${escape(text || longname)}</span>`;
       }
     }
 
     if (doc.kind === 'external') {
-      //text = doc.longname.replace(/^external:\s*/, '');
       text = doc.name;
-      let arraySuffix = isArray ? '[]' : '';
-      return `<span><a href="${doc.externalLink}">${text}</a>${arraySuffix}</span>`;
+      return `<span><a href="${doc.externalLink}">${text}</a></span>`;
     } else {
       text = escape(text || doc.name);
       let url = this._getURL(doc, inner);
-      let arraySuffix = isArray ? '[]' : '';
       if (url) {
-        return `<span><a href="${url}">${text}</a>${arraySuffix}</span>`;
+        return `<span><a href="${url}">${text}</a></span>`;
       } else {
-        return `<span>${text}${arraySuffix}</span>`;
+        return `<span>${text}</span>`;
       }
     }
   }
@@ -523,7 +565,7 @@ export default class DocBuilder {
 
         let types = [];
         for (let typeName of param.types) {
-          types.push(this._buildDocLinkHTML(typeName));
+          types.push(this._buildTypeDocLinkHTML(typeName));
         }
 
         callSignatures.push(`${paramName}: ${types.join(' | ')}`);
@@ -534,7 +576,7 @@ export default class DocBuilder {
     let returnSignatures = [];
     if (doc.return) {
       for (let typeName of doc.return.types) {
-        returnSignatures.push(this._buildDocLinkHTML(typeName));
+        returnSignatures.push(this._buildTypeDocLinkHTML(typeName));
       }
     }
 
@@ -542,7 +584,7 @@ export default class DocBuilder {
     let typeSignatures = [];
     if (doc.type) {
       for (let typeName of doc.type.types) {
-        typeSignatures.push(this._buildDocLinkHTML(typeName));
+        typeSignatures.push(this._buildTypeDocLinkHTML(typeName));
       }
     }
 
@@ -577,7 +619,7 @@ export default class DocBuilder {
 
       let typeNames = [];
       for (var typeName of prop.types) {
-        typeNames.push(this._buildDocLinkHTML(typeName));
+        typeNames.push(this._buildTypeDocLinkHTML(typeName));
       }
       ice.load('type', typeNames.join(' | '));
 

@@ -218,6 +218,16 @@ export default class MyClass1 extends SuperMyClass1 {
    * this is auto private.
    */
   _method7(){}
+
+  /**
+   * @param {Array.<number>} p1
+   * @param {Map.<string, boolean>} p2
+   * @param {Promise.<MyClass2, Error>} p3
+   * @param {function(a: number, b: string)} p4
+   * @return {Set.<MyClass3>}
+   * @private
+   */
+  method8(p1, p2, p3, p4){}
 }
 
 /**

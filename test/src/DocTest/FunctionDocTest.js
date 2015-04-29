@@ -11,7 +11,7 @@ describe('MyFunction:', ()=>{
       assert.includes(doc, '[data-ice="target"]:nth-of-type(4)', 'public myFunction4(p1: number, p2: string): number this is myFunction4 desc.');
       assert.includes(doc, '[data-ice="target"]:nth-of-type(5)', 'public myFunction5(p1: number, p2: string): Object this is myFunction5 desc.');
       assert.includes(doc, '[data-ice="target"]:nth-of-type(6)', 'public * myFunction6(): Generator this is myFunction6 desc.');
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(7)', 'public myFunction7(p1: *[], p2: number[], p3: {}, p4: {"a":123,"b":"abc"}): *');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(7)', 'public myFunction7(p1: *[], p2: number[], p3: {}, p4: {"a": 123, "b": "abc"}): *');
       assert.includes(doc, '[data-ice="target"]:nth-of-type(8)', 'public myFunction8(p1: *)');
 
       assert.includes(doc, '[data-ice="target"]:nth-of-type(1) [data-ice="name"] a', 'function/index.html#static-function-myFunction1', 'href');
@@ -47,7 +47,7 @@ describe('MyFunction:', ()=>{
     });
 
     find(doc, '[data-ice="detail"]:nth-of-type(7)', (doc)=>{
-      assert.includes(doc, '#static-function-myFunction7', 'public myFunction7(p1: *[], p2: number[], p3: {}, p4: {"a":123,"b":"abc"}): *');
+      assert.includes(doc, '#static-function-myFunction7', 'public myFunction7(p1: *[], p2: number[], p3: {}, p4: {"a": 123, "b": "abc"}): *');
     });
 
     find(doc, '[data-ice="detail"]:nth-of-type(8)', (doc)=>{
