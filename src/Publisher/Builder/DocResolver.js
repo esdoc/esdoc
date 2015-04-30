@@ -84,6 +84,7 @@ export default class DocResolver {
       for (let key of Object.keys(obj)) {
         let value = obj[key];
         if (key === 'description' && typeof value === 'string') {
+          obj[key + 'Raw'] = obj[key];
           obj[key] = markdown(value, true);
         } else if (typeof value === 'object' && value) {
           convert(value);

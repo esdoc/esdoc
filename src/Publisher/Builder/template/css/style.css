@@ -85,15 +85,36 @@ p > code {
   /*align-items: stretch;*/
 }
 
-.navigation {
-  box-sizing: border-box;
+.layout-container > header {
+  height: 40px;
+  line-height: 40px;
+  font-size: 16px;
+  padding: 0 10px;
+  margin: 0;
   position: fixed;
-  width: 230px;
+  width: 100%;
+  z-index: 1;
+  background-color: #F9F9F9;
+  top: 0;
+  border-bottom: solid 1px #E02130;
+}
+.layout-container > header > a{
+  margin: 0 5px;
+}
+
+.navigation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 200px;
   height: 100%;
-  padding: 15px;
+  padding-top: 40px;
+  padding-left: 15px;
+  padding-bottom: 20px;
   overflow-x: scroll;
-  background: #eaeaea;
-  float: left;
+  box-shadow: rgba(255, 255, 255, 1) -1px 0 0 inset;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .navigation h1 {
@@ -127,7 +148,8 @@ h1 .url a {
 }
 
 .content {
-  margin-left: 230px;
+  margin-top: 40px;
+  margin-left: 200px;
   padding: 10px 50px 10px 20px;
 }
 
@@ -473,10 +495,12 @@ table.test-summary tr.test-describe .toggle.closed:before {
 /* search box */
 .search-box {
   position: absolute;
-  top: 25px;
+  top: 10px;
   right: 50px;
   padding-right: 8px;
   padding-bottom: 10px;
+  line-height: normal;
+  font-size: 12px;
 }
 
 .search-box img {
@@ -513,6 +537,8 @@ table.test-summary tr.test-describe .toggle.closed:before {
   background: white;
   box-shadow: 1px 1px 4px rgb(0,0,0);
   white-space: nowrap;
+  height: 600px;
+  overflow-y: scroll;
 }
 
 .search-result-import-path {

@@ -13,6 +13,10 @@ export default class SearchIndexBuilder extends DocBuilder {
         displayText = `<span>${doc.name}</span> <span class="search-result-import-path">${doc.importPath}</span>`;
         indexText = `${doc.importPath}~${doc.name}`.toLowerCase();
         url = this._getURL(doc, null, 2);
+      } else if (doc.kind === 'testDescribe' || doc.kind === 'testIt') {
+        displayText = doc.descriptionRaw;
+        indexText = displayText.toLowerCase();
+        url = this._getURL(doc, null, 2);
       } else {
         displayText = doc.longname;
         indexText = displayText.toLowerCase();
@@ -27,6 +31,10 @@ export default class SearchIndexBuilder extends DocBuilder {
         case 'get':
         case 'set':
           kind = 'member';
+          break;
+        case 'testDescribe':
+        case 'testIt':
+          kind = 'test';
           break;
       }
 
