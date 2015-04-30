@@ -48,6 +48,20 @@ export default class DocBuilder {
     }
     if (docs.length) return docs;
 
+    // inherited method?
+    let matched = name.match(/(.*)[.#](.*)/);
+    if (matched) {
+      let parent = matched[1];
+      let childName = matched[2];
+      let parentDoc = this._findByName(parent, 'class')[0];
+      if (parentDoc && parentDoc._custom_extends_chains) {
+        for (let superLongname of parentDoc._custom_extends_chains) {
+          let docs = this._find({memberof: superLongname, name: childName});
+          if (docs.length) return docs;
+        }
+      }
+    }
+
     return [];
   }
 
