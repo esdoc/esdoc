@@ -132,7 +132,7 @@ export default class ESDoc {
 
     if (!('coverage' in config)) config.coverage = true;
 
-    if (!config.readme) config.readme = './README.md';
+    if (!config.index) config.index = './README.md';
 
     if (!config.package) config.package = './package.json';
 

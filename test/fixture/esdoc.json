@@ -4,7 +4,7 @@
   "access": ["public", "protected", "private"],
   "onlyExported": false,
   "debug": false,
-  "readme": "./test/fixture/README.md",
+  "index": "./test/fixture/README.md",
   "package": "./test/fixture/package.json",
   "importPathPrefix": "out",
   "title": "ESDoc Test Fixture",

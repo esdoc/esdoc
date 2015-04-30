@@ -13,7 +13,7 @@
  * @property {boolean} [undocumentSymbol=true]
  * @property {boolean} [coverage=true]
  * @property {boolean} [debug=false]
- * @property {string} [readme="./README.md"]
+ * @property {string} [index="./README.md"]
  * @property {string} [package="./package.json"]
  * @property {string} [importPathPrefix=""]
  * @property {string[]} [styles=[]]

@@ -4,7 +4,7 @@
   "excludes": ["Publisher/Builder/template/", "DefaultExternal/"],
   "access": ["public", "protected", "private"],
   "debug": false,
-  "readme": "./README.md",
+  "index": "./README.md",
   "package": "./package.json",
   "importPathPrefix": "out",
   "title": "ESDoc",
