@@ -4,7 +4,7 @@ import IceCap from 'ice-cap';
 import DocBuilder from './DocBuilder.js';
 import {dateForUTC} from './util.js';
 
-export default class FilesDocBuilder extends DocBuilder {
+export default class SourceDocBuilder extends DocBuilder {
   constructor(data, config, coverage) {
     super(data, config);
     this._coverage = coverage;
@@ -12,9 +12,9 @@ export default class FilesDocBuilder extends DocBuilder {
 
   exec(callback) {
     let ice = this._buildLayoutDoc();
-    let fileName = 'files.html';
+    let fileName = 'source.html';
     let baseUrl = this._getBaseUrl(fileName);
-    let title = this._getTitle('Files');
+    let title = this._getTitle('Source');
 
     ice.attr('baseUrl', 'href', baseUrl);
     ice.load('content', this._buildFilesHTML());
@@ -24,7 +24,7 @@ export default class FilesDocBuilder extends DocBuilder {
   }
 
   _buildFilesHTML() {
-    let ice = new IceCap(this._readTemplate('files.html'));
+    let ice = new IceCap(this._readTemplate('source.html'));
     let docs = this._find({kind: 'file'});
     let config = this._config;
     let useCoverage = this._config.coverage;

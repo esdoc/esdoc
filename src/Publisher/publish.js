@@ -11,7 +11,9 @@ import FileDocBuilder from './Builder/FileDocBuilder.js';
 import SearchIndexBuilder from './Builder/SearchIndexBuilder.js';
 import CoverageBuilder from './Builder/CoverageBuilder.js';
 import ASTDocBuilder from './Builder/ASTDocBuilder.js';
-import FilesDocBuilder from './Builder/FilesDocBuilder.js';
+import SourceDocBuilder from './Builder/SourceDocBuilder.js';
+import TestDocBuilder from './Builder/TestDocBuilder.js';
+import TestFileDocBuilder from './Builder/TestFileDocBuilder.js';
 
 export default function publish(values, asts, config) {
   IceCap.debug = !!config.debug;
@@ -61,7 +63,12 @@ export default function publish(values, asts, config) {
   new StaticFileBuilder(data, config).exec(copy);
   new SearchIndexBuilder(data, config).exec(writeHTML);
   new ASTDocBuilder(data, asts, config).exec(writeAST);
-  new FilesDocBuilder(data, config, _coverage).exec(writeHTML);
+  new SourceDocBuilder(data, config, _coverage).exec(writeHTML);
+
+  if (config.test) {
+    new TestDocBuilder(data, config).exec(writeHTML);
+    new TestFileDocBuilder(data, config).exec(writeHTML);
+  }
 
   if (config.coverage) {
     console.log('==================================');

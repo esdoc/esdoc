@@ -7,5 +7,10 @@
   "readme": "./README.md",
   "package": "./package.json",
   "importPathPrefix": "out",
-  "title": "ESDoc"
+  "title": "ESDoc",
+  "test": {
+    "type": "Mocha",
+    "source": "./test/src",
+    "includes": ["Test.js$"]
+  }
 }

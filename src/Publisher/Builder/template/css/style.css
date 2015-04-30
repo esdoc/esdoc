@@ -425,6 +425,51 @@ table.files-summary td {
   padding: 4px 10px;
 }
 
+table.test-summary thead {
+  background: #999;
+  color: white;
+}
+
+table.test-summary {
+  width: 100%;
+  margin: 10px 0;
+  border-spacing: 0;
+  border: 0;
+  border-collapse: collapse;
+}
+
+table.test-summary thead .test-count {
+  width: 3em;
+}
+
+table.test-summary tbody tr:hover {
+  background-color: #eee;
+}
+
+table.test-summary td {
+  border: solid 1px #ddd;
+  padding: 4px 10px;
+}
+
+table.test-summary td p {
+  margin: 0;
+}
+
+table.test-summary tr.test-describe .toggle {
+  display: inline-block;
+  float: left;
+  margin-right: 4px;
+  cursor: pointer;
+}
+
+table.test-summary tr.test-describe .toggle.opened:before {
+  content: '▼';
+}
+
+table.test-summary tr.test-describe .toggle.closed:before {
+  content: '▶';
+}
+
 /* search box */
 .search-box {
   position: absolute;

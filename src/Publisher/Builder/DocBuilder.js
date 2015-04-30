@@ -427,6 +427,12 @@ export default class DocBuilder {
         return `class/${doc.longname}.html`;
       case 'file':
         return `file/${doc.longname}.html`;
+      case 'testFile':
+        return `test-file/${doc.longname}.html`;
+      case 'testDescribe':
+        return `test.html`;
+      case 'testIt':
+        return `test.html`;
       default:
         throw new Error('DocBuilder: can not resolve file name.');
     }
@@ -436,18 +442,18 @@ export default class DocBuilder {
     if (!doc) return;
 
     let fileDoc;
-    if (doc.kind === 'file') {
+    if (doc.kind === 'file' || doc.kind === 'testFile') {
       fileDoc = doc;
     } else {
       let filePath = doc.longname.split('~')[0];
-      fileDoc = this._find({kind: 'file', longname: filePath})[0];
+      fileDoc = this._find({kind: ['file', 'testFile'], longname: filePath})[0];
     }
 
     if (!fileDoc) return;
 
     if (!text) text = fileDoc.name;
 
-    if (doc.kind === 'file') {
+    if (doc.kind === 'file' || doc.kind === 'testFile') {
       return `<span><a href="${this._getURL(fileDoc)}">${text}</a></span>`;
     } else {
       return `<span><a href="${this._getURL(fileDoc)}#lineNumber${doc.lineNumber}">${text}</a></span>`;

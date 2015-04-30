@@ -7,5 +7,10 @@
   "readme": "./test/fixture/README.md",
   "package": "./test/fixture/package.json",
   "importPathPrefix": "out",
-  "title": "ESDoc Test Fixture"
+  "title": "ESDoc Test Fixture",
+  "test": {
+    "type": "Mocha",
+    "source": "./test/src",
+    "includes": ["Test.js$"]
+  }
 }

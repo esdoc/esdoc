@@ -18,6 +18,7 @@
  * @property {string} [importPathPrefix=""]
  * @property {string[]} [styles=[]]
  * @property {string[]} [scripts=[]]
+ * @property {{type: string, source: string, includes: string[], excludes: string[]}} test
  * @see https://esdoc.org/config.html
  */
 

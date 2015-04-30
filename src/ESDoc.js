@@ -7,6 +7,7 @@ import ASTUtil from './Util/ASTUtil.js';
 import ESParser from './Parser/ESParser';
 import PathResolver from './Util/PathResolver.js';
 import DocFactory from './Factory/DocFactory.js';
+import TestDocFactory from './Factory/TestDocFactory.js';
 
 /**
  * API Documentation Generator.
@@ -69,14 +70,44 @@ export default class ESDoc {
       results.push(...temp.results);
 
       let relativeFilePath = path.relative(path.dirname(config.source), filePath);
-      asts.push({filePath: relativeFilePath, ast: temp.ast});
+      asts.push({filePath: 'source' + path.sep + relativeFilePath, ast: temp.ast});
     });
 
     if (config.defaultExternal) {
       this._useDefaultExternal(results);
     }
 
+    if (config.test) {
+      this._generateForTest(config, results, asts);
+    }
+
     publisher(results, asts, config);
+  }
+
+  static _generateForTest(config, results, asts) {
+    let includes = config.test.includes.map((v) => new RegExp(v));
+    let excludes = config.test.excludes.map((v) => new RegExp(v));
+
+    this._walk(config.test.source, (filePath)=>{
+      let match = false;
+      for (let reg of includes) {
+        if (filePath.match(reg)) {
+          match = true;
+          break;
+        }
+      }
+      if (!match) return;
+
+      for (let reg of excludes) {
+        if (filePath.match(reg)) return;
+      }
+
+      let temp = this._traverseForTest(config.test.type, config.test.source, filePath);
+      results.push(...temp.results);
+
+      let relativeFilePath = path.relative(path.dirname(config.test.source), filePath);
+      asts.push({filePath: 'test' + path.sep + relativeFilePath, ast: temp.ast});
+    });
   }
 
   /**
@@ -110,6 +141,13 @@ export default class ESDoc {
     if (!config.styles) config.styles = [];
 
     if (!config.scripts) config.scripts = [];
+
+    if (config.test) {
+      assert(config.test.type);
+      assert(config.test.source);
+      if (!config.test.includes) config.test.includes = ['\\.js$'];
+      if (!config.test.excludes) config.test.excludes = ['\\.config\\.js$'];
+    }
   }
 
   static _useDefaultExternal(results) {
@@ -159,6 +197,18 @@ export default class ESDoc {
     let ast = ESParser.parse(filePath);
     let pathResolver = new PathResolver(inDirPath, filePath, packageName, mainFilePath, pathPrefix);
     let factory = new DocFactory(ast, pathResolver);
+
+    ASTUtil.traverse(ast, (node, parent)=>{
+      factory.push(node, parent);
+    });
+
+    return {results: factory.results, ast: ast};
+  }
+
+  static _traverseForTest(type, inDirPath, filePath) {
+    let ast = ESParser.parse(filePath);
+    let pathResolver = new PathResolver(inDirPath, filePath);
+    let factory = new TestDocFactory(type, ast, pathResolver);
 
     ASTUtil.traverse(ast, (node, parent)=>{
       factory.push(node, parent);
