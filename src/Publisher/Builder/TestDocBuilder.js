@@ -27,7 +27,7 @@ export default class TestDocBuilder extends DocBuilder {
   _buildTestDescribeDocHTML(depth = 0, memberof = null) {
     let cond = {kind: 'testDescribe', testDepth: depth};
     if (memberof) cond.memberof = memberof;
-    let describeDocs = this._find(cond);
+    let describeDocs = this._orderedFind('testId asec', cond);
     let padding;
     let html = '';
 
@@ -53,7 +53,7 @@ export default class TestDocBuilder extends DocBuilder {
       });
 
       padding = 10 * (depth + 2);
-      let itDocs = this._find({kind: 'testIt', testDepth: depth + 1, memberof: describeDoc.longname});
+      let itDocs = this._orderedFind('testId asec', {kind: 'testIt', testDepth: depth + 1, memberof: describeDoc.longname});
       ice.loop('testIt', itDocs, (i, itDoc, ice)=>{
         let descriptionHTML = this._buildFileDocLinkHTML(itDoc, itDoc.description);
 

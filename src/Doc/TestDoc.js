@@ -32,7 +32,8 @@ export default class TestDoc extends AbstractDoc {
     super['@name']();
     if (this._value.name) return;
 
-    this._value.name = this._node._esdocTestId;
+    this._value.name = this._node._esdocTestName;
+    this._value.testId = this._node._esdocTestId;
   }
 
   ['@memberof']() {
@@ -42,7 +43,7 @@ export default class TestDoc extends AbstractDoc {
     let chain = [];
     let parent = this._node.parent;
     while (parent) {
-      if (parent._esdocTestId) chain.push(parent._esdocTestId);
+      if (parent._esdocTestName) chain.push(parent._esdocTestName);
       parent = parent.parent;
     }
 

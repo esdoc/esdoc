@@ -6,10 +6,10 @@ import TestFileDoc from '../Doc/TestFileDoc.js';
 let already = Symbol('already');
 
 export default class TestDocFactory {
-  static _getUniqueId(prefix = '') {
+  static _getUniqueId() {
     if (!this._sequence) this._sequence = 0;
 
-    return prefix + this._sequence++;
+    return this._sequence++;
   }
 
   get results() {
@@ -55,7 +55,9 @@ export default class TestDocFactory {
       tags = CommentParser.parse(comment);
     }
 
-    expression._esdocTestId = this.constructor._getUniqueId(expression.callee.name);
+    let uniqueId = this.constructor._getUniqueId();
+    expression._esdocTestId = uniqueId;
+    expression._esdocTestName = expression.callee.name + uniqueId;
 
     let testDoc = new TestDoc(this._ast, expression, this._pathResolver, tags);
 
