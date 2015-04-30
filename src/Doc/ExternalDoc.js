@@ -59,5 +59,9 @@ export default class ExternalDoc extends AbstractDoc {
     if (this._value.longname) return;
     this._value.longname = this._value.name;
   }
+
+  ['@external']() {
+    // avoid unknown tag.
+  }
 }
 

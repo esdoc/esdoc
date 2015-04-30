@@ -122,6 +122,18 @@ export default class AbstractDoc {
     }
   }
 
+  ['@public'](){
+    // avoid unknown tag.
+  }
+
+  ['@protected']() {
+    // avoid unknown tag.
+  }
+
+  ['@private']() {
+    // avoid unknown tag.
+  }
+
   ['@export']() {
     let tag = this._find(['@export']);
     if (tag) {
