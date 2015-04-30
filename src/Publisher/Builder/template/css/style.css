@@ -102,6 +102,16 @@ p > code {
   margin: 0 5px;
 }
 
+.layout-container > header > a.repo-url-github {
+  font-size: 0;
+  display: inline-block;
+  width: 20px;
+  height: 38px;
+  background: url("../image/github.png") no-repeat center;
+  background-size: 20px;
+  vertical-align: top;
+}
+
 .navigation {
   position: fixed;
   top: 0;

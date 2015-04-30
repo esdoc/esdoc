@@ -91,9 +91,10 @@ export default class DocBuilder {
 
     let indexInfo = {
       title: config.title || packageObj.name,
-      desc: config.description || packageObj.description,
+      //desc: config.description || packageObj.description,
       version: config.version || packageObj.version,
-      url: config.url || packageObj.repository ? packageObj.repository.url : ''
+      //url: config.url || packageObj.repository ? packageObj.repository.url : ''
+      url: packageObj.repository ? packageObj.repository.url : ''
     };
 
     return indexInfo;
@@ -104,10 +105,11 @@ export default class DocBuilder {
 
     let ice = new IceCap(this._readTemplate('layout.html'), {autoClose: false});
 
-    ice.text('version', info.version);
-    ice.text('url', info.url);
-    ice.attr('url', 'href', info.url);
     ice.text('esdocVersion', `(${this._config._esdocVersion})`);
+    ice.attr('repoURL', 'href', info.url);
+    if (info.url.indexOf('https://github.com/') === 0) {
+      ice.attr('repoURL', 'class', 'repo-url-github');
+    }
 
     // see StaticFileBuilder#exec
     ice.loop('userScript', this._config.scripts || [], (i, userScript, ice)=>{
