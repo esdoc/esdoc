@@ -110,6 +110,7 @@
   // clear search result when body is clicked.
   document.body.addEventListener('click', function(ev){
     selectedIndex = -1;
+    result.style.display = 'none';
     result.innerHTML = '';
   });
 
