@@ -124,7 +124,7 @@ export default class ESDoc {
 
     if (!('autoPrivate' in config)) config.autoPrivate = true;
 
-    if (!('onlyExported' in config)) config.onlyExported = true;
+    if (!('unexportSymbol' in config)) config.unexportSymbol = false;
 
     if (!('defaultExternal' in config)) config.defaultExternal = true;
 

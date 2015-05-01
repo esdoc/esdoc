@@ -9,7 +9,7 @@
  * @property {string[]} [access=["public", "protected"]]
  * @property {boolean} [autoPrivate=true]
  * @property {boolean} [defaultExternal=true]
- * @property {boolean} [onlyExported=true]
+ * @property {boolean} [unexportSymbol=false]
  * @property {boolean} [undocumentSymbol=true]
  * @property {boolean} [coverage=true]
  * @property {boolean} [debug=false]

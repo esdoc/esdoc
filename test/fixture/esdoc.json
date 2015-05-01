@@ -2,7 +2,7 @@
   "source": "./test/fixture/src",
   "destination": "./test/fixture/esdoc",
   "access": ["public", "protected", "private"],
-  "onlyExported": false,
+  "unexportSymbol": true,
   "debug": false,
   "index": "./test/fixture/README.md",
   "package": "./test/fixture/package.json",

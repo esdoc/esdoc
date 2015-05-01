@@ -60,8 +60,7 @@ export default class DocResolver {
     if (this._data.__RESOLVED_ONLY_EXPORTED__) return;
 
     let config = this._builder._config;
-    let onlyExported = config.onlyExported;
-    if (onlyExported) {
+    if (!config.unexportSymbol) {
       this._data({export: false}).update({ignore: true});
     }
 
