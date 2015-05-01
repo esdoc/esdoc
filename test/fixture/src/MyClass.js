@@ -223,11 +223,13 @@ export default class MyClass1 extends SuperMyClass1 {
    * @param {Array.<number>} p1
    * @param {Map.<string, boolean>} p2
    * @param {Promise.<MyClass2, Error>} p3
-   * @param {function(a: number, b: string)} p4
+   * @param {function(a: number, b: string[], c: Map.<string, boolean>, d: {e: number, f: Map.<string, boolean>})} p4
+   * @param {{a: number, b: string[], c: Map.<string, boolean>, d: {e: number, f: Map.<string, boolean>}}} p5
+   * @param {Map<Map<string, boolean>, Map<string, boolean>>} p6
    * @return {Set.<MyClass3>}
    * @private
    */
-  method8(p1, p2, p3, p4){}
+  method8(p1, p2, p3, p4, p5, p6){}
 }
 
 /**

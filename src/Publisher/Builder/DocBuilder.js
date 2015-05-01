@@ -485,6 +485,8 @@ export default class DocBuilder {
   }
 
   _buildTypeDocLinkHTML(typeName) {
+    // todo: re-implement with parse combinator
+
     // e.g. number[]
     let matched = typeName.match(/^(.*?)\[\]$/);
     if (matched) {
@@ -498,11 +500,16 @@ export default class DocBuilder {
       let functionLink = this._buildDocLinkHTML('function');
       if (!matched[1]) return `<span>${functionLink}<span>()</span></span>`;
 
-      let innerTypes = matched[1].split(',').map((v)=>{
+      // bad hack: Map.<string, boolean> => Map.<string\Z boolean>
+      // bad hack: {a: string, b: boolean} => {a\Y string\Z b\Y boolean}
+      let inner = matched[1]
+        .replace(/<.*?>/g, (a)=> a.replace(/,/g, '\\Z'))
+        .replace(/{.*?}/g, (a)=> a.replace(/,/g, '\\Z').replace(/:/g, '\\Y'));
+      let innerTypes = inner.split(',').map((v)=>{
         let tmp = v.split(':').map((v)=> v.trim());
         let paramName = tmp[0];
-        let typeName = tmp[1];
-        return `${paramName}: ${this._buildDocLinkHTML(typeName, typeName)}`;
+        let typeName = tmp[1].replace(/\\Z/g, ',').replace(/\\Y/g, ':');
+        return `${paramName}: ${this._buildTypeDocLinkHTML(typeName)}`;
       });
 
       return `<span>${functionLink}<span>(${innerTypes.join(', ')})</span></span>`;
@@ -513,26 +520,37 @@ export default class DocBuilder {
     if (matched) {
       if (!matched[1]) return '{}';
 
-      let innerTypes = matched[1].split(',').map((v)=>{
+      // bad hack: Map.<string, boolean> => Map.<string\Z boolean>
+      // bad hack: {a: string, b: boolean} => {a\Y string\Z b\Y boolean}
+      let inner = matched[1]
+        .replace(/<.*?>/g, (a)=> a.replace(/,/g, '\\Z'))
+        .replace(/{.*?}/g, (a)=> a.replace(/,/g, '\\Z').replace(/:/g, '\\Y'));
+      let innerTypes = inner.split(',').map((v)=>{
         let tmp = v.split(':').map((v)=> v.trim());
         let paramName = tmp[0];
-        let typeName = tmp[1];
-        return `${paramName}: ${this._buildDocLinkHTML(typeName, typeName)}`;
+        let typeName = tmp[1].replace(/\\Z/g, ',').replace(/\\Y/g, ':');
+        return `${paramName}: ${this._buildTypeDocLinkHTML(typeName)}`;
       });
 
       return `{${innerTypes.join(', ')}}`;
     }
 
-    // e.g. Map.<number, string>
-    matched = typeName.match(/^(.*?)\.<(.*?)>$/);
+    // e.g. Map<number, string>
+    matched = typeName.match(/^(.*?)\.?<(.*?)>$/);
+    if (typeName.includes('foo')) console.log(typeName);
     if (matched) {
       let mainType = matched[1];
-      let innerTypes = matched[2].split(',').map((v) => {
-        v = v.trim();
-        return this._buildDocLinkHTML(v, v, false);
+      // bad hack: Map.<string, boolean> => Map.<string\Z boolean>
+      // bad hack: {a: string, b: boolean} => {a\Y string\Z b\Y boolean}
+      let inner = matched[2]
+        .replace(/<.*?>/g, (a)=> a.replace(/,/g, '\\Z'))
+        .replace(/{.*?}/g, (a)=> a.replace(/,/g, '\\Z').replace(/:/g, '\\Y'));
+      let innerTypes = inner.split(',').map((v) => {
+        v = v.trim().replace(/\\Z/g, ',').replace(/\\Y/g, ':');
+        return this._buildTypeDocLinkHTML(v);
       });
 
-      let html = `${this._buildDocLinkHTML(mainType, mainType)}.<${innerTypes.join(', ')}>`;
+      let html = `${this._buildDocLinkHTML(mainType, mainType)}<${innerTypes.join(', ')}>`;
       return html;
     }
 
