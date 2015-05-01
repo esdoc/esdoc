@@ -12,15 +12,17 @@ export default class SearchIndexBuilder extends DocBuilder {
       if (doc.importPath) {
         displayText = `<span>${doc.name}</span> <span class="search-result-import-path">${doc.importPath}</span>`;
         indexText = `${doc.importPath}~${doc.name}`.toLowerCase();
-        url = this._getURL(doc, null, 2);
+        url = this._getURL(doc);
       } else if (doc.kind === 'testDescribe' || doc.kind === 'testIt') {
-        displayText = doc.descriptionRaw;
-        indexText = displayText.toLowerCase();
-        url = this._getURL(doc, null, 2);
+        displayText = doc.testFullDescription;
+        indexText = [...(doc.testTargets || []), ...(doc._custom_test_targets || [])].join(' ').toLowerCase();
+        let filePath = doc.longname.split('~')[0];
+        let fileDoc = this._find({kind: 'testFile', longname: filePath})[0];
+        url = `${this._getURL(fileDoc)}#lineNumber${doc.lineNumber}`;
       } else {
         displayText = doc.longname;
         indexText = displayText.toLowerCase();
-        url = this._getURL(doc, null, 2);
+        url = this._getURL(doc);
       }
 
       let kind = doc.kind;

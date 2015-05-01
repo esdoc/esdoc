@@ -541,13 +541,15 @@ table.test-summary tr.test-describe .toggle.closed:before {
 
 .search-result {
   position: absolute;
+  display: none;
+  height: 600px;
+  width: 100%;
   padding: 0;
   margin-top: 5px;
-  margin-left: 30px;
+  margin-left: 24px;
   background: white;
   box-shadow: 1px 1px 4px rgb(0,0,0);
   white-space: nowrap;
-  height: 600px;
   overflow-y: scroll;
 }
 

@@ -16,6 +16,7 @@
   input.addEventListener('keyup', function(ev){
     var text = ev.target.value.toLowerCase();
     if (!text) {
+      result.style.display = 'none';
       result.innerHTML = '';
       return;
     }
@@ -41,6 +42,7 @@
       innerHTML += '<li class="search-separator">' + kind + '</li>\n' + list.join('\n');
     }
     result.innerHTML = innerHTML;
+    if (innerHTML) result.style.display = 'block';
     selectedIndex = -1;
   });
 
