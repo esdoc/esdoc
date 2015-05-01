@@ -1,7 +1,7 @@
 import {readDoc, assert, find} from './util.js';
 
 /** @testTarget {ClassDocBuilder} */
-describe('MyClass1: ', ()=> {
+describe('MyClass1:', ()=> {
   let doc = readDoc('class/src/MyClass.js~MyClass1.html');
 
   /** @testTarget {ClassDoc#@unknown} */
