@@ -41,8 +41,8 @@ export default class TestDocBuilder extends DocBuilder {
         let descriptionHTML = this._buildFileDocLinkHTML(describeDoc, describeDoc.description);
 
         let testTargetsHTML = [];
-        for (let testTarget of describeDoc.testTargets || []) {
-          testTargetsHTML.push(this._buildDocLinkHTML(testTarget, testTarget));
+        for (let testTarget of describeDoc._custom_test_targets || []) {
+          testTargetsHTML.push(this._buildDocLinkHTML(testTarget[0], testTarget[1]));
         }
         testTargetsHTML = testTargetsHTML.join(', ') || '-';
 
@@ -58,8 +58,8 @@ export default class TestDocBuilder extends DocBuilder {
         let descriptionHTML = this._buildFileDocLinkHTML(itDoc, itDoc.description);
 
         let testTargetsHTML = [];
-        for (let testTarget of itDoc.testTargets || []) {
-          testTargetsHTML.push(this._buildDocLinkHTML(testTarget, testTarget));
+        for (let testTarget of itDoc._custom_test_targets || []) {
+          testTargetsHTML.push(this._buildDocLinkHTML(testTarget[0], testTarget[1]));
         }
         testTargetsHTML = testTargetsHTML.join(', ') || '-';
 

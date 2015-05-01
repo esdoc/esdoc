@@ -40,7 +40,7 @@ export default class DocBuilder {
     }
     if (docs.length) return docs;
 
-    let regexp = new RegExp(`[~/]\\${name}$`);
+    let regexp = new RegExp(`[~]\\${name}$`); // if name is `*`, need to escape.
     if (kind) {
       docs = this._orderedFind(null, {longname: {regex: regexp}, kind: kind});
     } else {
@@ -49,7 +49,7 @@ export default class DocBuilder {
     if (docs.length) return docs;
 
     // inherited method?
-    let matched = name.match(/(.*)[.#](.*)/);
+    let matched = name.match(/(.*)[.#](.*)$/); // instance method(Foo#bar) or static method(Foo.baz)
     if (matched) {
       let parent = matched[1];
       let childName = matched[2];
@@ -376,6 +376,14 @@ export default class DocBuilder {
       ice.into('example', doc.examples, (examples, ice)=>{
         ice.loop('exampleDoc', examples, (i, exampleDoc, ice)=>{
           ice.text('exampleCode', exampleDoc);
+        });
+      });
+
+      // tests
+      ice.into('tests', doc._custom_tests, (tests, ice)=>{
+        ice.loop('test', tests, (i, test, ice)=>{
+          let testDoc = this._find({longname: test})[0];
+          ice.load('test', this._buildFileDocLinkHTML(testDoc, testDoc.testFullDescription));
         });
       });
     });

@@ -18,11 +18,11 @@ export default class ClassDocBuilder extends DocBuilder {
   }
 
   _buildObjectDoc(doc) {
-    var extendsChain = this._buildExtendsChainHTML(doc);
-    var directSubclass = this._buildDirectSubclassHTML(doc);
-    var indirectSubclass = this._buildIndirectSubclassHTML(doc);
+    let extendsChain = this._buildExtendsChainHTML(doc);
+    let directSubclass = this._buildDirectSubclassHTML(doc);
+    let indirectSubclass = this._buildIndirectSubclassHTML(doc);
 
-    var ice = new IceCap(this._readTemplate('class.html'));
+    let ice = new IceCap(this._readTemplate('class.html'));
 
     // header
     if (doc.export && doc.importPath && doc.importStyle) {
@@ -58,6 +58,13 @@ export default class ClassDocBuilder extends DocBuilder {
     ice.into('exampleDocs', doc.examples, (examples, ice)=>{
       ice.loop('exampleDoc', examples, (i, example, ice)=>{
         ice.text('exampleCode', example);
+      });
+    });
+
+    ice.into('tests', doc._custom_tests, (tests, ice)=>{
+      ice.loop('test', tests, (i, test, ice)=>{
+        let testDoc = this._find({longname: test})[0];
+        ice.load('test', this._buildFileDocLinkHTML(testDoc, testDoc.testFullDescription));
       });
     });
 
