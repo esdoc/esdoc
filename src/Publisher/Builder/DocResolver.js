@@ -16,6 +16,7 @@ export default class DocResolver {
     this._resolveMarkdown();
     this._resolveLink();
     this._resolveExtendsChain();
+    this._resolveTestRelation();
   }
 
   _resolveIgnore() {
@@ -257,5 +258,44 @@ export default class DocResolver {
     }
 
     this._data.__RESOLVED_EXTENDS_CHAIN__ = true;
+  }
+
+  _resolveTestRelation() {
+    if (this._data.__RESOLVED_TEST_RELATION__) return;
+
+    let testDocs = this._builder._find({kind: ['testDescribe', 'testIt']});
+    for (let testDoc of testDocs) {
+      let testTargets = testDoc.testTargets;
+      if (!testTargets) continue;
+
+      for (let testTarget of testTargets) {
+        let doc = this._builder._findByName(testTarget)[0];
+        if (doc) {
+          if (!doc._custom_tests) doc._custom_tests = [];
+          doc._custom_tests.push(testDoc.longname);
+
+          if (!testDoc._custom_test_targets) testDoc._custom_test_targets = [];
+          testDoc._custom_test_targets.push([doc.longname, testTarget]);
+        } else {
+          if (!testDoc._custom_test_targets) testDoc._custom_test_targets = [];
+          testDoc._custom_test_targets.push([testTarget, testTarget]);
+        }
+      }
+    }
+
+    // test full description
+    for (let testDoc of testDocs) {
+      let desc = [];
+      let parents = (testDoc.memberof.split('~')[1] || '').split('.');
+      for (let parent of parents) {
+        let doc = this._builder._find({kind: ['testDescribe', 'testIt'], name: parent})[0];
+        if (!doc) continue;
+        desc.push(doc.descriptionRaw);
+      }
+      desc.push(testDoc.descriptionRaw);
+      testDoc.testFullDescription = desc.join(' ');
+    }
+
+    this._data.__RESOLVED_TEST_RELATION__ = true;
   }
 }
