@@ -5,8 +5,8 @@ describe('Nav:', ()=> {
 
   it('has class nav.', ()=>{
     find(doc, '[data-ice="nav"] [data-ice="classWrap"]', (doc)=>{
-      assert.includes(doc, '[data-ice="classDoc"]:nth-of-type(1)', 'MyClass1');
-      assert.includes(doc, '[data-ice="classDoc"]:nth-of-type(1) a', 'class/src/MyClass.js~MyClass1.html', 'href');
+      assert.includes(doc, '[data-ice="classDoc"]:nth-of-type(4)', 'MyClass1');
+      assert.includes(doc, '[data-ice="classDoc"]:nth-of-type(4) a', 'class/src/MyClass.js~MyClass1.html', 'href');
     });
   });
 
