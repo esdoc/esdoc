@@ -24,12 +24,16 @@ code a:hover {
   text-decoration: underline;
 }
 
-ul {
+ul, ol {
   padding-left: 20px;
 }
 
-li {
+ul li {
   list-style: disc;
+  margin: 4px 0;
+}
+
+ol li {
   margin: 4px 0;
 }
 
