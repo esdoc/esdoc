@@ -20,7 +20,7 @@ export default class FileDocBuilder extends DocBuilder {
   _buildFileDoc(doc) {
     let ice = new IceCap(this._readTemplate('file.html'));
     ice.text('title', doc.longname);
-    ice.load('content', doc.content);
+    ice.text('content', doc.content);
     return ice.html;
   }
 }
