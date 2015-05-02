@@ -514,14 +514,4 @@ describe('MyClass999:', ()=>{
     }
     assert(false, 'unreachable');
   });
-
-  describe('Nested Describe Dummy1', ()=>{
-    it('nested it dummy1', ()=>{
-    });
-
-    describe('Nested Describe Dummy2', ()=>{
-      it('nested it dummy2', ()=>{
-      });
-    })
-  });
 });

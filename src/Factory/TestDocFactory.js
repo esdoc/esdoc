@@ -17,7 +17,8 @@ export default class TestDocFactory {
   }
 
   constructor(type, ast, pathResolver) {
-    assert(type === 'Mocha');
+    type = type.toLowerCase();
+    assert(type === 'mocha');
 
     this._type = type;
     this._ast = ast;
@@ -35,7 +36,7 @@ export default class TestDocFactory {
     node[already] = true;
     Object.defineProperty(node, 'parent', {value: parentNode});
 
-    if (this._type === 'Mocha') this._pushForMocha(node, parentNode);
+    if (this._type === 'mocha') this._pushForMocha(node, parentNode);
   }
 
   _pushForMocha(node) {
@@ -44,7 +45,7 @@ export default class TestDocFactory {
     let expression = node.expression;
     if (expression.type !== 'CallExpression') return;
 
-    if (!['describe', 'it'].includes(expression.callee.name)) return;
+    if (!['describe', 'it', 'context', 'suite', 'test'].includes(expression.callee.name)) return;
 
     expression[already] = true;
     Object.defineProperty(expression, 'parent', {value: node});

@@ -4,8 +4,16 @@ describe('TestDocBuilder', ()=> {
   let doc = readDoc('test.html');
 
   it('has test description.', ()=> {
-    assert.includes(doc, '[data-ice="tests"]', 'Nested Describe Dummy2');
-    assert.includes(doc, '[data-ice="tests"]', 'nested it dummy2');
+    assert.includes(doc, '[data-ice="tests"]', 'Use describe style mocha interface');
+    assert.includes(doc, '[data-ice="tests"]', 'Use it style mocha interface');
+    assert.includes(doc, '[data-ice="tests"]', 'Nested describe');
+    assert.includes(doc, '[data-ice="tests"]', 'Nested it in describe');
+    assert.includes(doc, '[data-ice="tests"]', 'Use context style mocha interface');
+    assert.includes(doc, '[data-ice="tests"]', 'Nested it in context');
+    assert.includes(doc, '[data-ice="tests"]', 'Use suite style mocha interface');
+    assert.includes(doc, '[data-ice="tests"]', 'Use test style mocha interface');
+    assert.includes(doc, '[data-ice="tests"]', 'Nested suite');
+    assert.includes(doc, '[data-ice="tests"]', 'Nested test');
   });
 
   it('has test target.', ()=>{
@@ -45,4 +53,31 @@ describe('Symbol to Test', ()=>{
       });
     });
   });
+});
+
+describe('Use describe style mocha interface', ()=>{
+  it('Use it style mocha interface', ()=>{
+  });
+
+  describe('Nested describe', ()=>{
+    it('Nested it in describe', ()=>{
+    });
+  });
+
+  context('Use context style mocha interface', ()=>{
+    it('Nested it in context', ()=>{
+    });
+  });
+});
+
+let suite = describe;
+let test = it;
+suite('Use suite style mocha interface', ()=>{
+  test('Use test style mocha interface', ()=>{
+  });
+
+  suite('Nested suite', ()=>{
+    test('Nested test', ()=>{
+    });
+  })
 });

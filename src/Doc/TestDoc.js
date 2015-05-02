@@ -17,9 +17,12 @@ export default class TestDoc extends AbstractDoc {
     if (this._value.kind) return;
 
     switch (this._node.callee.name) {
+      case 'suite': //fall
+      case 'context': // fall
       case 'describe':
         this._value.kind = 'testDescribe';
         break;
+      case 'test': // fall
       case 'it':
         this._value.kind = 'testIt';
         break;
