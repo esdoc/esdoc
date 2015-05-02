@@ -591,11 +591,17 @@ table.test-summary tr.test-describe .toggle.closed:before {
   display: inline-block;
   height: 20px;
   vertical-align: top;
-  font-size: 12px;
+}
+
+h1 .esdoc-coverage {
+  position: relative;
+  top: -4px;
 }
 
 .esdoc-coverage-wrap {
   color: white;
+  font-size: 12px;
+  font-weight: 500;
 }
 
 .esdoc-coverage-label {
