@@ -216,7 +216,7 @@ export default class DocFactory {
         if (node.left.type === 'MemberExpression' && node.left.object.type === 'ThisExpression') {
           let classNode = this._findUp(node, ['ClassExpression', 'ClassDeclaration']);
           if (!this._processedClassNodes.includes(classNode)) {
-            logger.w('this member is not in class.', node);
+            logger.w('this member is not in class.', this._pathResolver.filePath, node);
             return {type: null, node: null};
           }
           return {type: 'Member', node: node};
