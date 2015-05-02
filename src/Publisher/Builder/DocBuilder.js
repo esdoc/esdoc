@@ -107,7 +107,8 @@ export default class DocBuilder {
 
     ice.text('esdocVersion', `(${this._config._esdocVersion})`);
     ice.attr('repoURL', 'href', info.url);
-    if (info.url.indexOf('https://github.com/') === 0) {
+    //if (info.url.indexOf('https://github.com/') === 0) {
+    if (info.url.match(new RegExp('^https?://github.com/'))) {
       ice.attr('repoURL', 'class', 'repo-url-github');
     }
 

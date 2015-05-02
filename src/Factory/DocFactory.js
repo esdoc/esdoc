@@ -49,6 +49,7 @@ export default class DocFactory {
     if (['ExportDefaultDeclaration', 'ExportNamedDeclaration'].includes(node.type)) {
       parentNode = node;
       node = this._unwrapExportDeclaration(node);
+      if (!node) return;
       node[already] = true;
       Object.defineProperty(node, 'parent', {value: parentNode});
     }
@@ -194,6 +195,7 @@ export default class DocFactory {
   }
 
   _decideExpressionStatementType(node) {
+    let isTop = this._isTopDepthInBody(node, this._ast.body);
     Object.defineProperty(node.expression, 'parent', {value: node});
     node = node.expression;
     node[already] = true;
@@ -223,7 +225,11 @@ export default class DocFactory {
         }
     }
 
+    if (!isTop) return {type: null, node: null};
+
     innerNode = node.right;
+    console.log(this._pathResolver.filePath);
+    console.log(node);
     innerNode.id = this._copy(node.left.id || node.left.property);
     Object.defineProperty(innerNode, 'parent', {value: node});
     innerNode[already] = true;
@@ -284,6 +290,9 @@ export default class DocFactory {
   }
 
   _unwrapExportDeclaration(node) {
+    // e.g. `export A from './A.js'` has not declaration
+    if (!node.declaration) return;
+
     let exportedASTNode = node.declaration;
     if (!exportedASTNode.leadingComments) exportedASTNode.leadingComments = [];
     exportedASTNode.leadingComments.push(...node.leadingComments || []);
