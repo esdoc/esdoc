@@ -194,8 +194,6 @@ export default class DocFactory {
   }
 
   _decideExpressionStatementType(node) {
-    let isTop = this._isTopDepthInBody(node, this._ast.body);
-
     Object.defineProperty(node.expression, 'parent', {value: node});
     node = node.expression;
     node[already] = true;
@@ -221,12 +219,9 @@ export default class DocFactory {
           }
           return {type: 'Member', node: node};
         } else {
-          if (!isTop) return {type: null, node: null};
-          return {type: 'Variable', node: node};
+          return {type: null, node: null};
         }
     }
-
-    if (!isTop) return {type: null, node: null};
 
     innerNode = node.right;
     innerNode.id = this._copy(node.left.id || node.left.property);
