@@ -430,6 +430,10 @@ pre.source-code li {
   margin: 0;
 }
 
+pre.source-code.line-number li.active {
+  background: rgb(255, 255, 150);
+}
+
 table.files-summary {
   width: 100%;
   margin: 10px 0;
