@@ -10,7 +10,7 @@ export default class ESParser {
       code = code.replace(/^#!/, '//');
     }
 
-    let ast = espree.parse(code, {
+    let option = {
       comments: true,
       attachComment: true,
       loc: true,
@@ -38,7 +38,9 @@ export default class ESParser {
         jsx: true,
         globalReturn: true
       }
-    });
+    };
+
+    let ast = espree.parse(code, option);
 
     return ast;
   }

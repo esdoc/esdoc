@@ -228,8 +228,6 @@ export default class DocFactory {
     if (!isTop) return {type: null, node: null};
 
     innerNode = node.right;
-    console.log(this._pathResolver.filePath);
-    console.log(node);
     innerNode.id = this._copy(node.left.id || node.left.property);
     Object.defineProperty(innerNode, 'parent', {value: node});
     innerNode[already] = true;

@@ -9,6 +9,8 @@ import PathResolver from './Util/PathResolver.js';
 import DocFactory from './Factory/DocFactory.js';
 import TestDocFactory from './Factory/TestDocFactory.js';
 
+let logger = new Logger('ESDoc');
+
 /**
  * API Documentation Generator.
  *
@@ -67,6 +69,7 @@ export default class ESDoc {
       }
 
       let temp = this._traverse(config.source, filePath, packageName, mainFilePath, pathPrefix);
+      if (!temp) return;
       results.push(...temp.results);
 
       let relativeFilePath = path.relative(path.dirname(config.source), filePath);
@@ -103,6 +106,7 @@ export default class ESDoc {
       }
 
       let temp = this._traverseForTest(config.test.type, config.test.source, filePath);
+      if (!temp) return;
       results.push(...temp.results);
 
       let relativeFilePath = path.relative(path.dirname(config.test.source), filePath);
@@ -194,7 +198,14 @@ export default class ESDoc {
    * @private
    */
   static _traverse(inDirPath, filePath, packageName, mainFilePath, pathPrefix) {
-    let ast = ESParser.parse(filePath);
+    let ast;
+    try {
+      ast = ESParser.parse(filePath);
+    } catch(e) {
+      logger.w(`fail parse: ${filePath}`);
+      return null;
+    }
+
     let pathResolver = new PathResolver(inDirPath, filePath, packageName, mainFilePath, pathPrefix);
     let factory = new DocFactory(ast, pathResolver);
 
@@ -206,7 +217,13 @@ export default class ESDoc {
   }
 
   static _traverseForTest(type, inDirPath, filePath) {
-    let ast = ESParser.parse(filePath);
+    let ast;
+    try {
+      ast = ESParser.parse(filePath);
+    } catch(e) {
+      logger.w(`fail parse: ${filePath}`);
+      return null;
+    }
     let pathResolver = new PathResolver(inDirPath, filePath);
     let factory = new TestDocFactory(type, ast, pathResolver);
 
