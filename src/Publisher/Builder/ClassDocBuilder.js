@@ -109,7 +109,7 @@ export default class ClassDocBuilder extends DocBuilder {
 
     links.push(doc.name);
 
-    return links.join(' → ');
+    return `<div>${links.join(' → ')}</div>`;
   }
 
   _buildIndirectSubclassHTML(doc) {
@@ -119,7 +119,8 @@ export default class ClassDocBuilder extends DocBuilder {
     for (var longname of doc._custom_indirect_subclasses) {
       links.push(this._buildDocLinkHTML(longname));
     }
-    return links.join(', ');
+
+    return `<div>${links.join(', ')}</div>`;
   }
 
   _buildDirectSubclassHTML(doc) {
@@ -129,7 +130,8 @@ export default class ClassDocBuilder extends DocBuilder {
     for (var longname of doc._custom_direct_subclasses) {
       links.push(this._buildDocLinkHTML(longname));
     }
-    return links.join(', ');
+
+    return `<div>${links.join(', ')}</div>`;
   }
 
   _buildInheritedSummaryHTML(doc) {
