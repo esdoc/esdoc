@@ -7,59 +7,64 @@ isPage: true
 
 ESDoc config file.
 
+minimum config
 ```json
 {
   "source": "./path/to/src",
   "destination": "./path/to/esdoc",
-  "includes": ["\\.js$"],
-  "excludes": ["\\.config\\.js$"],
-  "access": ["public", "protected", "private"],
-  "onlyExported": true,
+}
+```
+
+full config
+```json
+{
+  "source": "./path/to/src",
+  "destination": "./path/to/esdoc",
+  "includes": ["\\.(js|es6)$"],
+  "excludes": ["\\.config\\.(js|es6)$"],
+  "access": ["public", "protected"],
+  "autoPrivate": true,
+  "unexportSymbol": false,
+  "undocumentSymbol": true,
+  "builtinExternal": true,
   "importPathPrefix": "",
-  "readme": "./path/to/README.md",
-  "package": "./path/to/package.json",
+  "index": "./README.md",
+  "package": "./package.json",
+  "coverage": true,
+  "test": {
+    "type": "mocha",
+    "source": "./test/src",
+    "includes": ["Test\\.(js|es6)$"],
+    "excludes": ["\\.config\\.(js|es6)$"]
+  }
+  "title": "My Software Name",
   "styles": ["./path/to/style.css"],
   "scripts": ["./path/to/script.js"]
 }
 ```
 
-- ``source`` (required)
-  - Directory path of JavaScript source codes.
-  - Path is based on current directory.
-- ``destination`` (required)
-  - Output directory path.
-  - Path is based on current directory.
-- ``includes``
-  - Process files that are matched with the regexp at any one.
-  - Default: ``["\\.js$"]``
-- ``excludes``  
-  - Not process files that are matched with the regexp at any one.
-  - Default: ``["\\.config\\.js$"]``
-- ``access``
-  - Process only symbols(class, method, function, etc...) that are have the access(public, protected and private).
-  - Default: ``["public", "protected"]``
-- ``onlyExported``
-  - Process only symbols that are exported(ES6 export syntax).
-  - e.g. ``export MyClass {...}`` is exported, ``MyClass{}`` is not exported.
-  - Default: ``true``
-- ``importPathPrefix``
-  - Display symbol's import path with the prefix.
-  - e.g. if ``MyClass`` in ``src/foo/MyClass.js``, import path is ``import MyClass from 'src/foo/MyClass.js'``. but specified the prefix with ``importPathPrefix: "out"``, import path is ``import MyClass from 'out/src/foo/MyClass.js'``.
-  - Default: ``""``
-- ``readme``
-  - Includes README.md into out put document.
-  - path is based on current directory.
-  - default: ``./README.md``
-- ``package``
-  - Use info(version, url, etc...) in package.json(npm)
-  - Path is based on current directory.
-  - default: ``./package.json``
-- ``styles``
-  - Includes styles into out put document.
-  - Path is based on current directory.
-  - Default: ``null``
-- ``scripts``
-  - Includes scripts into out put document.
-  - Path is based on current directory.
-  - Default: ``null``
-  
+| Name  | Required | Default | Description |
+| ----- | -------- | ------- | ----------- |
+| ``source``  | true | - | JavaScript source codes directory path. |
+| ``destination`` | true | - | Output directory path. |
+| ``includes`` | - | <code>["\\\\.(js&#124;es6)$"]</code> | Process files that are matched with the regexp at any one. |
+| ``excludes`` | - | <code>["\\\\.config\\\\.(js&#124;es6)$"]</code> | Not process files that are matched with the regexp at any one. |
+| ``access`` | - | ``["public", "protected"]`` | Process only symbols(class, method, etc...) that are have the access(public, protected and private). |
+| ``autoPrivate`` | - | ``true`` | Deal with symbols beginning with "_" as a private. <br> e.g. ``this._foo`` is private. but ``/** @public */ this._foo`` is public.|
+| ``unexportSymbol`` | - | ``false`` | If true, also process unexported symbols. <br> e.g. ``export class MyClass`` is exported, ``class MyClass`` is not exported. |
+| ``undocumentSymbol`` | - | ``true`` | If true, also process undocument symbols. <br> e.g. ``/** @foo bar */ class MyClass`` is document symbol, ``class MyClass`` is undocument symbol. |
+| ``builtinExternal`` | - | ``true`` | If true, use built-in external tag. The built-in external has number, string, boolean, Promise, Map, etc... |
+| ``importPathPrefix`` | - | ``""`` | Display symbol's import path with the prefix. <br> e.g. if ``MyClass`` in ``src/foo/MyClass.js``, import path is ``import MyClass from 'src/foo/MyClass.js'``. <br> but specified the prefix with ``importPathPrefix: "out"``, import path is ``import MyClass from 'out/src/foo/MyClass.js'``. |
+| ``index`` | - | ``./README.md``| Includes file into index page of document |
+| ``package`` | - | ``./package.json`` | Use package.json info. |
+| ``coverage`` | - | ``true`` | If true, output document coverage. |
+| ``test`` | - | ``null`` | If specified, Generate document from test code. |
+| ``test.type`` | true | - | Test code type. Now only support "mocha". |
+| ``test.source`` | true | - | Test codes directory path. |
+| ``test.includes`` | - | <code>["(spec&#124;Spec&#124;test&#124;Test)\\\\.(js&#124;es6)$"]</code> | Process files that are matched with the regexp at any one. |
+| ``test.excludes`` | - | <code>["\\\\.config\\\\.(js&#124;es6)$"]</code> | Not process files that are matched with the regexp at any one. |
+| ``title`` | - | "" | Use title for output. |
+| ``styles`` | - | ``null`` | Includes styles into output document. |
+| ``scripts`` | - | ``null`` | Includes scripts into output document. |
+
+Note: A file path in config is based on current directory.
