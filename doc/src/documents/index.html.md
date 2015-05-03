@@ -9,7 +9,6 @@ ESDoc is API Documentation Generator for JavaScript.
 
 # Feature
 - Target at ES6 ``class`` and ``import/export`` style.
-  - If you want to target at ES5, might better to use [JSDoc](http://usejsdoc.org/).
 - Document coverage of source code.
 - Generate document from test code.
 

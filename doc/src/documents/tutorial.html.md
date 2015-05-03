@@ -247,6 +247,7 @@ describe('MyClass is super useful class.', ()=>{
 ### Target Code Style
 ESDoc target at ES6 Class-base OOP and module style.
 - Class-base OOP: Use class, extends, static, constructor, method, get and set syntax.
+  - If you want to target at ES5, might better to use JSDoc.
 - module: Use import and export syntax.
 
 ### Target Identifier
