@@ -94,3 +94,7 @@ article.content {
 h1 {
   color: #E02130;
 }
+
+.inner-link-active {
+  background: rgb(255, 255, 150);
+}

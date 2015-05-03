@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./prettify/prettify-tomorrow.css">
     <script src="./prettify/prettify.js"></script>
+    <script src="./script/inner-link.js"></script>
 </head>
 <body>
 <nav>

@@ -1,0 +1,15 @@
+// inner link(#foo) can not correctly scroll, because page has fixed header,
+// so, I manually scroll.
+(function(){
+  function adjust() {
+    window.scrollBy(0, -60);
+    var el = document.querySelector(location.hash);
+    if (el) el.classList.add('inner-link-active');
+  }
+
+  window.addEventListener('hashchange', adjust);
+
+  if (location.hash) {
+    setTimeout(adjust, 0);
+  }
+})();
