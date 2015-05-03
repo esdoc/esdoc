@@ -149,8 +149,8 @@ export default class ESDoc {
     if (config.test) {
       assert(config.test.type);
       assert(config.test.source);
-      if (!config.test.includes) config.test.includes = ['\\.js$'];
-      if (!config.test.excludes) config.test.excludes = ['\\.config\\.js$'];
+      if (!config.test.includes) config.test.includes = ['(spec|Spec|test|Test)\\.(js|es6)$'];
+      if (!config.test.excludes) config.test.excludes = ['\\.config\\.(js|es6)$'];
     }
   }
 

@@ -10,7 +10,6 @@
   "title": "ESDoc",
   "test": {
     "type": "Mocha",
-    "source": "./test/src",
-    "includes": ["Test.js$"]
+    "source": "./test/src"
   }
 }
