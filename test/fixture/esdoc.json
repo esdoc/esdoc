@@ -9,7 +9,7 @@
   "importPathPrefix": "out",
   "title": "ESDoc Test Fixture",
   "test": {
-    "type": "Mocha",
+    "type": "mocha",
     "source": "./test/src",
     "includes": ["Test.js$"]
   }
