@@ -70,7 +70,7 @@ Create ESDoc config file.
 ```json
 {
   "source": "./src",
-  "destination": "./out/esdoc",
+  "destination": "./out/esdoc"
 }
 ```
 
@@ -80,7 +80,7 @@ esdoc -c ./esdoc.json
 open ./out/esdoc/index.html
 ```
 
-![](./image/tutorial1.png)
+<img class="screen-shot" src="./image/tutorial/create-config-file1.png">
 
 Here it kept to a minimum configuration.
 [Config](./config.html) page describes full configuration.
@@ -89,7 +89,7 @@ Here it kept to a minimum configuration.
 
 
 ## Write Document Tag
-The document is not good, because the document tag is not exist.
+The document is not good, because a document tag is not exist.
 So, write document tag(a.k.a JSDoc Tag)
 
 ```javascript
@@ -145,7 +145,7 @@ esdoc -c ./esdoc.json
 open ./out/esdoc/index.html
 ```
 
-![](./image/tutorial2.png)
+<img class="screen-shot" src="./image/tutorial/write-document-tag1.png">
 
 Congratulation! The document is good!
 
@@ -159,7 +159,7 @@ ESDoc measures document coverage.
 
 See ``my-project/out/esdoc/source.html``
 
-![](./image/tutorial-coverage1.png)
+<img class="screen-shot" src="./image/tutorial/document-coverage1.png">
 
 If you want to display document coverage badge in index page, write ``<span class="esdoc-coverage"></span>`` in README.md file.
 ```markdown
@@ -168,6 +168,7 @@ If you want to display document coverage badge in index page, write ``<span clas
 this is My Project README
 ```
 
+<img class="screen-shot" src="./image/tutorial/document-coverage2.png">
 
 ## Generate Document From Test Code
 ESDoc can generate document from test code.
@@ -189,7 +190,7 @@ describe('MyClass is super useful class.', ()=>{
 });
 ```
 
-And add config.
+And add test configuration.
 
 ``my-project/esdoc.json``
 
@@ -211,10 +212,9 @@ esdoc -c ./esdoc.json
 open ./out/esdoc/index.html
 ```
 
-![](../image/tutorial/generate-from-test1.png)
+<img class="screen-shot" src="./image/tutorial/generate-document-from-test-code1.png">
 
 Write tag for test code
-``my-project/test/MyClassTest.js``
 
 ```javascript
 import assert from 'assert';
@@ -231,7 +231,9 @@ describe('MyClass is super useful class.', ()=>{
 });
 ```
 
-![](../image/tutorial/generate-from-test2.png)
+<img class="screen-shot" src="./image/tutorial/generate-document-from-test-code2.png">
+
+<img class="screen-shot" src="./image/tutorial/generate-document-from-test-code3.png">
 
 ----
 
@@ -259,3 +261,7 @@ class MyClass {
 
 You can select identifier with ``access``, ``unexportIdentifier`` and ``undocumentIdentifier`` in config.
 To see [Config](./config.html).
+
+----
+
+Tutorial is finish! Please enjoy writing documentation with ESDoc!
