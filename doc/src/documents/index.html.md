@@ -7,12 +7,11 @@ isPage: true
 
 ESDoc is API Documentation Generator for JavaScript.
 
-ESDoc targets at ES6 and Class-based OOP. if you want to target at ES5, might better to use [JSDoc](http://usejsdoc.org/).
-
-- [Demo](#demo)
-- [Install](#install)
-- [Usage](#usage)
-- [Example](#example)
+# Feature
+- Target at ES6 ``class`` and ``import/export`` style.
+  - If you want to target at ES5, might better to use [JSDoc](http://usejsdoc.org/).
+- Document coverage of source code.
+- Generate document from test code.
 
 # Demo
 TODO: create more better demo.
@@ -28,16 +27,9 @@ esdoc -h
 ```
 
 # Usage
-with config file.
 
 ```
 esdoc -c esdoc.json
-```
-
-with directory path
-
-```
-esdoc ./path/to/js/dir
 ```
 
 # Example

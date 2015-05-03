@@ -13,7 +13,7 @@
   <ul>
     <li><a href="./config.html">Config</a></li>
     <li><a href="./tags.html">Tags</a></li>
-    <li><a href="./customize.html">Customize</a></li>
+    <li><a href="./api.html">API</a></li>
     <li style="position: relative; top: 5px;"><a href="https://github.com/h13i32maru/esdoc"><img src="image/github.png" width="24px"></a></li>
   </ul>
 </nav>

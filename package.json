@@ -34,7 +34,8 @@
     "coveralls": "",
     "http-server": "",
     "istanbul": "",
-    "mocha": ""
+    "mocha": "",
+    "docpad": ""
   },
   "keywords": [
     "jsdoc",
