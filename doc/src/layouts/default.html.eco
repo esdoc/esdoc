@@ -24,6 +24,10 @@
 <%- @content %>
 </article>
 
+<footer>
+© 2015 <a href="https://twitter.com/h13i32maru">Ryo Maruyama</a>. All rights reserved.
+</footer>
+
 <script src="./script/pretty.js"></script>
 </body>
 </html>

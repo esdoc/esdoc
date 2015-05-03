@@ -5,10 +5,15 @@ isPage: true
 
 # Tutorial
 
+- [Install ESDoc](#install-esdoc)
+- [Create Config File](#create-config-file)
+- [Write Document Tag](#write-document-tag)
+- [Document Coverage](#document-coverage)
+- [Generate Document From Test Code](#generate-document-from-test-code)
+- [Appendix](#appendix)
+  - [Target Code Style](#target-code-style)
+  - [Target Identifier](#target-identifier)
 
-
-
-## Target Source Code
 This tutorial is going to generate a document based on the following JavaScript code.
 
 ```
@@ -239,12 +244,12 @@ describe('MyClass is super useful class.', ()=>{
 
 ## Appendix
 
-### Code Style
-ESDoc target at ES6 Class-base OOP and module
+### Target Code Style
+ESDoc target at ES6 Class-base OOP and module style.
 - Class-base OOP: Use class, extends, static, constructor, method, get and set syntax.
 - module: Use import and export syntax.
 
-### Process Target Identifier
+### Target Identifier
 ESDoc process only top level identifier.
 
 ```javascript

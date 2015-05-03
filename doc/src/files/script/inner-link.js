@@ -3,6 +3,9 @@
 (function(){
   function adjust() {
     window.scrollBy(0, -60);
+    var el = document.querySelector('.inner-link-active');
+    if (el) el.classList.remove('inner-link-active');
+
     var el = document.querySelector(location.hash);
     if (el) el.classList.add('inner-link-active');
   }
