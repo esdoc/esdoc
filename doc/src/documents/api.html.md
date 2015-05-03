@@ -3,15 +3,15 @@ layout: "default"
 isPage: true
 ---
 
-# Customize
-If you want to customize output, can choose following way.
+# API
+If you want to customize output, you can choose following way.
 
 - Includes style sheet and script to output.
   - To see ``styles`` and ``scripts`` in [Config](config.html)
-  - And can use ``dump.json`` in ESDoc output directory.
+  - And you can use ``dump.json`` in ESDoc output directory.
 - Uses ESDoc API and implements your publisher.
 
-# API
+## Publisher
 ```javascript
 import ESDoc from 'esdoc';
 
@@ -22,9 +22,9 @@ function publisher(results, config) {
 ESDoc.generate(config, publisher);
 ```
 
-# Internal Data Structure
-TODO: explain data.
+## Internal Data
+TODO: describe internal data.
 
-# Custom Tag
-TODO: explain custom tag.
+## Custom Tag
+TODO: describe custom tag.
 
