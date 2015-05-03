@@ -12,28 +12,43 @@ isPage: true
 This tutorial is going to generate a document based on the following JavaScript code.
 
 ```
-my-project
-  src
-    MyClass.js
-    MySuperClass.js
-  package.json
-  README.md
+my-project/
+├── README.md
+├── package.json
+└── src
+    ├── MyClass.js
+    └── MySuperClass.js
 ```
 
 ```javascript
-MyClass
+import MySuperClass from './MySuperClass.js';
+
+export default class MyClass extends MySuperClass {
+  constructor(name = 'anonymous') {
+    super();
+    this._name = name;
+  }
+
+  sayMyName() {
+    return `My name is ${this._name}`;
+  }
+}
 ```
 
 ```javascript
-MySuperClass
-```
+export default class MySuperClass {
+  constructor() {
+  }
 
-```json
-package.json
+  sayHello(){
+    return 'Hello!';
+  }
+}
 ```
 
 ```markdown
-README.md
+# My Project
+this is My Project README
 ```
 
 
@@ -77,14 +92,51 @@ Here it kept to a minimum configuration.
 The document is not good, because the document tag is not exist.
 So, write document tag(a.k.a JSDoc Tag)
 
-``my-project/src/MyClass.js``
 ```javascript
-MyClass
+import MySuperClass from './MySuperClass.js';
+
+/**
+ * this is MyClass description.
+ */
+export default class MyClass extends MySuperClass {
+  /**
+   * this is MyClass constructor description.
+   * @param {string} [name="anonymous"] - this is name description.
+   */
+  constructor(name = 'anonymous') {
+    super();
+    this._name = name;
+  }
+
+  /**
+   * this is sayMyName description
+   * @returns {string} this is return description.
+   */
+  sayMyName() {
+    return `My name is ${this._name}`;
+  }
+}
 ```
 
-``my-project/src/MySuperClass.js``
 ```javascript
-MySuperClass
+/**
+ * this is MySuperClass description.
+ */
+export default class MySuperClass {
+  /**
+   * this is MySuperClass constructor description.
+   */
+  constructor() {
+  }
+
+  /**
+   * this is sayHello description.
+   * @returns {string} this is return description.
+   */
+  sayHello(){
+    return 'Hello!';
+  }
+}
 ```
 
 execute ESDoc and see output document.
@@ -112,7 +164,8 @@ See ``my-project/out/esdoc/source.html``
 If you want to display document coverage badge in index page, write ``<span class="esdoc-coverage"></span>`` in README.md file.
 ```markdown
 <span class="esdoc-coverage"></span>
-...
+# My Project
+this is My Project README
 ```
 
 
@@ -125,7 +178,15 @@ Write test code.
 ``my-project/test/MyClassTest.js``
 
 ```javascript
-test
+import assert from 'assert';
+import MyClass from '../src/MyClass.js';
+
+describe('MyClass is super useful class.', ()=>{
+  it('say my name', ()=>{
+    let foo = new MyClass('Alice');
+    assert.equal(foo.sayMyName(), 'My name is Alice');
+  })
+});
 ```
 
 And add config.
@@ -156,7 +217,18 @@ Write tag for test code
 ``my-project/test/MyClassTest.js``
 
 ```javascript
-@testTarget {MyClass}
+import assert from 'assert';
+import MyClass from '../src/MyClass.js';
+
+/** @testTarget {MyClass} */
+describe('MyClass is super useful class.', ()=>{
+
+  /** @testTarget {MyClass#sayMyName} */
+  it('say my name', ()=>{
+    let foo = new MyClass('Alice');
+    assert.equal(foo.sayMyName(), 'My name is Alice');
+  })
+});
 ```
 
 ![](../image/tutorial/generate-from-test2.png)
