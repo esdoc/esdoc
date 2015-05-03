@@ -185,5 +185,5 @@ class MyClass {
 })();
 ```
 
-You can select identifier with ``access``, ``unexportSymbol`` and ``undocumentSymbol`` in config.
+You can select identifier with ``access``, ``unexportIdentifier`` and ``undocumentIdentifier`` in config.
 To see [Config](./config.html).

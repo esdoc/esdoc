@@ -28,7 +28,7 @@ describe('TestDocBuilder', ()=> {
   });
 });
 
-describe('Symbol to Test', ()=>{
+describe('Identifier to Test', ()=>{
   describe('ClassDocBuilder', ()=>{
     let doc = readDoc('class/src/ForTestDoc/ClassDocBuilder.js~ClassDocBuilder.html');
 

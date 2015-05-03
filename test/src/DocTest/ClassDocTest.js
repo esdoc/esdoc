@@ -199,7 +199,7 @@ describe('MyClass1:', ()=> {
         assert.includes(doc, '[data-ice="target"]:nth-of-type(1) [data-ice="since"]', 'since 1.2.3');
         assert.includes(doc, '[data-ice="target"]:nth-of-type(1) [data-ice="name"] a', 'class/src/MyClass.js~MyClass1.html#instance-method-method1', 'href');
 
-        // undocument symbols that are auto detected.
+        // undocument identifiers that are auto detected.
         assert.includes(doc, '[data-ice="target"]:nth-of-type(2)', 'public method5(p1: number, p2: string, p3: *[]): number');
         assert.includes(doc, '[data-ice="target"]:nth-of-type(3)', 'public method6(p1: *)');
       });

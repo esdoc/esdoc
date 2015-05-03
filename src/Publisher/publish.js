@@ -3,7 +3,7 @@ import path from 'path';
 import {taffy} from 'taffydb';
 import IceCap from 'ice-cap';
 import StaticFileBuilder from './Builder/StaticFileBuilder.js';
-import SymbolsDocBuilder from './Builder/SymbolsDocBuilder.js';
+import IdentifiersDocBuilder from './Builder/IdentifiersDocBuilder.js';
 import IndexDocBuilder from './Builder/IndexDocBuilder.js';
 import ClassDocBuilder from './Builder/ClassDocBuilder.js';
 import SingleDocBuilder from './Builder/SingleDocBuilder.js';
@@ -55,7 +55,7 @@ export default function publish(values, asts, config) {
     new CoverageBuilder(data, config).exec(writeCoverage);
   }
 
-  new SymbolsDocBuilder(data, config).exec(writeHTML);
+  new IdentifiersDocBuilder(data, config).exec(writeHTML);
   new IndexDocBuilder(data, config, _coverage).exec(writeHTML);
   new ClassDocBuilder(data, config).exec(writeHTML);
   new SingleDocBuilder(data, config).exec(writeHTML);

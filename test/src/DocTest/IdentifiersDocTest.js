@@ -1,7 +1,7 @@
 import {readDoc, assert, find} from './util.js';
 
-describe('Symbols:', ()=> {
-  let doc = readDoc('symbols.html');
+describe('Identifiers:', ()=> {
+  let doc = readDoc('identifiers.html');
 
   it('has class summary.', ()=>{
     find(doc, '[data-ice="classSummary"]', (doc)=>{

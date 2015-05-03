@@ -153,7 +153,7 @@ class MyClass{...}
 #### @ignore
 syntax: ``@ignore``
 
-Symbol is not displayed in document.
+The identifier is not displayed in document.
 
 ```javascript
 /**
@@ -216,7 +216,7 @@ class MyClass{...}
 
 ## For Class
 #### @extends
-syntax: ``@extends <symbol>``
+syntax: ``@extends <identifier>``
 
 Normally you don't need to use ``@extends``. because ES6 has the Class-Extends syntax. however, you can use this tag if you want to explicitly specify.
 
@@ -231,7 +231,7 @@ class MyClass extends mix(SuperClass1, SuperClass2) {...}
 ----
 
 #### @implements
-syntax: ``@implements <symbol>``
+syntax: ``@implements <identifier>``
 
 ```javascript
 /**
@@ -272,7 +272,7 @@ class MyClass {
 ----
 
 #### @emits
-syntax: ``@emits <symbol> [description]``
+syntax: ``@emits <identifier> [description]``
 
 ```javascript
 class MyClass {
@@ -287,7 +287,7 @@ class MyClass {
 ----
 
 #### @listens
-syntax: ``@listens <symbol> [description]``
+syntax: ``@listens <identifier> [description]``
 
 ```javascript
 class MyClass {
@@ -361,7 +361,7 @@ class MyClass {
 ----
 
 #### @throws
-syntax: ``@throws <symbol> [description]``
+syntax: ``@throws <identifier> [description]``
 
 ```javascript
 class MyClass {
@@ -411,7 +411,7 @@ class MyClass {
 
 ## For Virtual
 #### @external
-syntax: ``@external <symbol> <URL>``
+syntax: ``@external <identifier> <URL>``
 
 ```javascript
 /**
@@ -446,7 +446,7 @@ If ``<type>`` is Object, you can use ``@property <type> <name> [description]`` f
 
 ## For Test
 #### @testTarget
-syntax: ``@testTarget <symbol>``
+syntax: ``@testTarget <identifier>``
 
 ```javascript
 /** @testTarget {MyClass} */

@@ -128,11 +128,11 @@ export default class ESDoc {
 
     if (!('autoPrivate' in config)) config.autoPrivate = true;
 
-    if (!('unexportSymbol' in config)) config.unexportSymbol = false;
+    if (!('unexportIdentifier' in config)) config.unexportIdentifier = false;
 
     if (!('builtinExternal' in config)) config.builtinExternal = true;
 
-    if (!('undocumentSymbol' in config)) config.undocumentSymbol = true;
+    if (!('undocumentIdentifier' in config)) config.undocumentIdentifier = true;
 
     if (!('coverage' in config)) config.coverage = true;
 

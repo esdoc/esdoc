@@ -11,7 +11,7 @@ export default class DocResolver {
   resolve() {
     this._resolveAccess();
     this._resolveOnlyExported();
-    this._resolveUndocumentSymbol();
+    this._resolveUndocumentIdentifier();
     this._resolveIgnore();
     this._resolveMarkdown();
     this._resolveLink();
@@ -60,21 +60,21 @@ export default class DocResolver {
     if (this._data.__RESOLVED_ONLY_EXPORTED__) return;
 
     let config = this._builder._config;
-    if (!config.unexportSymbol) {
+    if (!config.unexportIdentifier) {
       this._data({export: false}).update({ignore: true});
     }
 
     this._data.__RESOLVED_ONLY_EXPORTED__ = true;
   }
 
-  _resolveUndocumentSymbol() {
-    if (this._data.__RESOLVED_UNDOCUMENT_SYMBOL__) return;
+  _resolveUndocumentIdentifier() {
+    if (this._data.__RESOLVED_UNDOCUMENT_IDENTIFIER__) return;
 
-    if (!this._builder._config.undocumentSymbol) {
+    if (!this._builder._config.undocumentIdentifier) {
       this._builder._data({undocument: true}).update({ignore: true});
     }
 
-    this._data.__RESOLVED_UNDOCUMENT_SYMBOL__ = true;
+    this._data.__RESOLVED_UNDOCUMENT_IDENTIFIER__ = true;
   }
 
   _resolveMarkdown() {
