@@ -53,14 +53,18 @@ class MyClass {
 - [For Virtual](#for-member-and-variable)
   - [@external](#-external)
   - [@typedef](#-typedef)
+- [For Test](#for-test)
+  - [@testTarget](#-testtarget)
 - [Type Syntax](#type-syntax)
   - [Simple](#simple)
   - [Array](#array)
+  - [Object](#object)
+  - [Generics](#generics)
+  - [Function](#function)
   - [Union](#union)
   - [Nullable And Not Nullable](#nullable-and-not-nullable)
   - [Spread](#spread)
   - [Optional And Default](#optional-and-default)
-  - [Object](#object)
 
 ## For Common
 #### @access
@@ -312,14 +316,14 @@ class MyClass extends SuperClass {
 ----
 
 #### @param
-syntax: ``@param <type> <name> [description]``
+syntax: ``@param <type> <name> [-] [description]``
 
 About ``<type>`` to see [Type Syntax](#type-syntax)
 
 ```javascript
 class MyClass {
   /**
-   * @param {number} p this is p description.
+   * @param {number} p - this is p description.
    */
   method(p){...}
 }
@@ -440,6 +444,22 @@ If ``<type>`` is Object, you can use ``@property <type> <name> [description]`` f
 
 ----
 
+## For Test
+#### @testTarget
+syntax: ``@testTarget <symbol>``
+
+```javascript
+/** @testTarget {MyClass} */
+describe('MyClass has foo bar feature', ()=>{
+
+  /** @testTarget {MyClass#baz} */
+  it('MyClass#baz returns magic value', ()=>{
+    assert(true);
+  });
+});
+```
+----
+
 ## Type Syntax
 
 ``@param``, ``@return``, ``@type`` and ``@typedef`` are support the following type syntax.
@@ -447,86 +467,103 @@ If ``<type>`` is Object, you can use ``@property <type> <name> [description]`` f
 ### Simple
 ```javascript
 /**
- * @param {number} paramName this is simple param.
+ * @param {number} param - this is simple param.
  */
-function(paramName){...}
+function myFunc(param){...}
 ```
 ### Array
 ```javascript
 /**
- * @param {number[]} paramName this is array param.
+ * @param {number[]} param - this is array param.
  */
-function(paramName){...}
-```
-
-### Union
-```javascript
-/**
- * @param {number|string} paramName this is union param.
- */
-function(paramName){...}
-```
-
-### Nullable And Not Nullable
-```javascript
-/**
- * @param {?number} paramName this is nullable param.
- */
-function(paramName){...}
-
-/**
- * @param {!number} paramName this is not nullable param.
- */
-function(paramName){...}
-
-/**
- * @param {?(number|string)} paramName this is nullable and union param.
- */
-function(paramName){...}
-```
-
-### Spread
-```javascript
-/**
- * @param {...number} paramName this is spread param.
- */
-function(...paramName){...}
-```
-
-### Optional And Default
-```javascript
-/**
- * @param {number} [paramName] this is optional param.
- */
-function(...paramName){...}
-
-/**
- * @param {number} [paramName=10] this is default param.
- */
-function(...paramName){...}
+function myFunc(param){...}
 ```
 
 ### Object
 ```javascript
 /**
- * @param {Object} paramName this is object param.
- * @param {number} paramName.foo this is property param.
- * @param {string} paramName.bar this is property param.
+ * @param {Object} param - this is object param.
+ * @param {number} param.foo - this is property param.
+ * @param {string} param.bar - this is property param.
  */
-function(...paramName){...}
+function myFunc(param){...}
+
+/**
+ * @param {{foo: number, bar: string}} param - this is object param(short hand).
+ */
+function myFunc(param){...}
 ```
 
-## For Internal
-The following tags are usually no need to use.
+### Generics
+```javascript
+/**
+ * @param {Array<string>} param - this is Array param.
+ */
+function myFunc(param){...}
 
-- @kind
-- @static
-- @name
-- @memberof
-- @longname
-- @export
-- @importPath
-- @importStyle
-- @lineNumber
-- @content
+/**
+ * @param {Map<number, string>} param - this is Map param.
+ */
+function myFunc(param){...}
+
+/**
+ * @return {Promise<string[], MyError>} this is Promise return value.
+ */
+function myFunc(){...}
+```
+
+### Function
+```javascript
+/**
+ * @param {function(foo: number, bar: string)} param - this is function param.
+ */
+function myFunc(param){...}
+```
+
+### Union
+```javascript
+/**
+ * @param {number|string} param - this is union param.
+ */
+function myFunc(param){...}
+```
+
+### Nullable And Not Nullable
+```javascript
+/**
+ * @param {?number} param - this is nullable param.
+ */
+function myFunc(param){...}
+
+/**
+ * @param {!number} param - this is not nullable param.
+ */
+function myFunc(param){...}
+
+/**
+ * @param {?(number|string)} param - this is nullable and union param.
+ */
+function myFunc(param){...}
+```
+
+### Spread
+```javascript
+/**
+ * @param {...number} param - this is spread param.
+ */
+function myFunc(...param){...}
+```
+
+### Optional And Default
+```javascript
+/**
+ * @param {number} [param] - this is optional param.
+ */
+function myFunc(param){...}
+
+/**
+ * @param {number} [param=10] - this is default param.
+ */
+function myFunc(param){...}
+```
 
