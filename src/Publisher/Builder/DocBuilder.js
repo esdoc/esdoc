@@ -167,7 +167,7 @@ export default class DocBuilder {
     });
 
     // external
-    let externalDocs = this._find({kind: 'external'}).filter(v => !v.defaultExternal);
+    let externalDocs = this._find({kind: 'external'}).filter(v => !v.builtinExternal);
     ice.drop('externalWrap', !externalDocs.length);
     ice.loop('externalDoc', externalDocs, (i, externalDoc, ice)=>{
       ice.load('externalDoc', this._buildDocLinkHTML(externalDoc.longname));

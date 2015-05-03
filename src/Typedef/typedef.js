@@ -8,7 +8,7 @@
  * @property {string[]} [excludes=["\\.config\\.(js|es6)$"]]
  * @property {string[]} [access=["public", "protected"]]
  * @property {boolean} [autoPrivate=true]
- * @property {boolean} [defaultExternal=true]
+ * @property {boolean} [builtinExternal=true]
  * @property {boolean} [unexportSymbol=false]
  * @property {boolean} [undocumentSymbol=true]
  * @property {boolean} [coverage=true]

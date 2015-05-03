@@ -76,8 +76,8 @@ export default class ESDoc {
       asts.push({filePath: 'source' + path.sep + relativeFilePath, ast: temp.ast});
     });
 
-    if (config.defaultExternal) {
-      this._useDefaultExternal(results);
+    if (config.builtinExternal) {
+      this._useBuiltinExternal(results);
     }
 
     if (config.test) {
@@ -130,7 +130,7 @@ export default class ESDoc {
 
     if (!('unexportSymbol' in config)) config.unexportSymbol = false;
 
-    if (!('defaultExternal' in config)) config.defaultExternal = true;
+    if (!('builtinExternal' in config)) config.builtinExternal = true;
 
     if (!('undocumentSymbol' in config)) config.undocumentSymbol = true;
 
@@ -154,11 +154,11 @@ export default class ESDoc {
     }
   }
 
-  static _useDefaultExternal(results) {
-    let dirPath = path.resolve(__dirname, './DefaultExternal/');
+  static _useBuiltinExternal(results) {
+    let dirPath = path.resolve(__dirname, './BuiltinExternal/');
     this._walk(dirPath, (filePath)=>{
       let temp = this._traverse(dirPath, filePath);
-      temp.results.forEach((v)=> v.defaultExternal = true);
+      temp.results.forEach((v)=> v.builtinExternal = true);
       let res = temp.results.filter(v => v.kind === 'external');
       results.push(...res);
     });
