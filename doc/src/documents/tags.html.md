@@ -32,6 +32,7 @@ class MyClass {
   - [@example](#-example)
   - [@experimental](#-experimental)
   - [@ignore](#-ignore)
+  - [@link](#-link)
   - [@see](#-see)
   - [@since](#-since)
   - [@todo](#-todo)
@@ -158,6 +159,21 @@ The identifier is not displayed in document.
 ```javascript
 /**
  * @ignore
+ */
+class MyClass{...}
+```
+
+----
+
+#### @link
+syntax: ``{@link <identifier>}``
+
+link other identifier
+
+```javascript
+/**
+ * this is MyClass.
+ * If device spec is low, you can use {@link MySimpleClass}.
  */
 class MyClass{...}
 ```
