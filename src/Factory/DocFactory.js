@@ -74,16 +74,12 @@ export default class DocFactory {
 
     // hack: leadingComment of MethodDefinition with Literal is not valid by espree(v2.0.2)
     if (node.type === 'MethodDefinition' && node.key.type === 'Literal') {
-      let prevNode = null;
-      for (let child of parentNode.body || []) {
-        if (child === node) {
+      let line = node.loc.start.line - 1;
+      for (let comment of this._ast.comments || []) {
+        if (comment.loc.end.line === line) {
+          comments = [comment];
           break;
         }
-        prevNode = child;
-      }
-
-      if (prevNode) {
-        comments = prevNode.trailingComments;
       }
     }
 
