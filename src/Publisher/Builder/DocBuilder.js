@@ -165,6 +165,8 @@ export default class DocBuilder {
       ice.drop('repoURL');
     }
 
+    ice.drop('testLink', !this._config.test);
+
     // see StaticFileBuilder#exec
     ice.loop('userScript', this._config.scripts || [], (i, userScript, ice)=>{
       let name = `user/script/${i}-${path.basename(userScript)}`;
