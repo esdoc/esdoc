@@ -72,6 +72,21 @@ export default class DocFactory {
       node = virtualNode;
     }
 
+    // hack: leadingComment of MethodDefinition with Literal is not valid by espree(v2.0.2)
+    if (node.type === 'MethodDefinition' && node.key.type === 'Literal') {
+      let prevNode = null;
+      for (let child of parentNode.body || []) {
+        if (child === node) {
+          break;
+        }
+        prevNode = child;
+      }
+
+      if (prevNode) {
+        comments = prevNode.trailingComments;
+      }
+    }
+
     if (comments && comments.length) {
       let temp = [];
       for (let comment of comments) {
