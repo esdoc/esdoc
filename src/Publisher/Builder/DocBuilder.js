@@ -695,7 +695,12 @@ export default class DocBuilder {
       return html;
     }
 
-    return this._buildDocLinkHTML(typeName, typeName);
+    if (typeName.indexOf('...') === 0) {
+      typeName = typeName.replace('...', '');
+      return '...' + this._buildDocLinkHTML(typeName, typeName);
+    } else {
+      return this._buildDocLinkHTML(typeName, typeName);
+    }
   }
 
   /**
