@@ -4,7 +4,29 @@ import ASTUtil from '../Util/ASTUtil.js';
 
 let logger = new Logger('ParamParser');
 
+/**
+ * Param Type Parser class.
+ */
 export default class ParamParser {
+
+  /**
+   * parse param value.
+   * @param {string} value - param value.
+   * @param {boolean} [type=true] if true, contain param type.
+   * @param {boolean} [name=true] if true, contain param name.
+   * @param {boolean} [desc=true] if true, contain param description.
+   * @return {{typeText: string, paramName: string, paramDesc: string}} parsed value.
+   *
+   * @example
+   * let value = '{number} param - this is number param';
+   * let {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value);
+   *
+   * let value = '{number} this is number return value';
+   * let {typeText, paramDesc} = ParamParser.parseParamValue(value, true, false, true);
+   *
+   * let value = '{number}';
+   * let {typeText} = ParamParser.parseParamValue(value, true, false, false);
+   */
   static parseParamValue(value, type = true, name = true, desc = true) {
     value = value.trim();
 
@@ -46,6 +68,18 @@ export default class ParamParser {
     return {typeText, paramName, paramDesc};
   }
 
+  /**
+   * parse param text and build formatted result.
+   * @param {string} typeText - param type text.
+   * @param {string} [paramName] - param name.
+   * @param {string} [paramDesc] - param description.
+   * @returns {ParsedParam} formatted result.
+   *
+   * @example
+   * let value = '{number} param - this is number param';
+   * let {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value);
+   * let result = ParamParser.parseParam(typeText, paramName, paramDesc);
+   */
   static parseParam(typeText = null, paramName = null, paramDesc = null) {
     let result = {};
 
@@ -104,6 +138,18 @@ export default class ParamParser {
     return result;
   }
 
+  /**
+   * guess param type by using param default arguments.
+   * @param {Object} params - node of callable AST node.
+   * @returns {ParsedParam[]} guess param results.
+   *
+   * @example
+   * // with method
+   * let results = ParamParser.guessParams(node.value.params);
+   *
+   * // with function
+   * let results = ParamParser.guessParams(node.params);
+   */
   static guessParams(params) {
     let _params = [];
     for (let param of params) {
@@ -176,6 +222,11 @@ export default class ParamParser {
     return _params;
   }
 
+  /**
+   * guess return type by using return node.
+   * @param {ASTNode} body - callable body node.
+   * @returns {ParsedParam|null}
+   */
   static guessReturnParam(body) {
     let result = {};
 
@@ -214,6 +265,11 @@ export default class ParamParser {
     return null;
   }
 
+  /**
+   * guess self type by using assignment node.
+   * @param {ASTNode} right - assignment right node.
+   * @returns {ParsedParam}
+   */
   static guessType(right) {
     let value = right && right.type === 'Literal' ? right.value : null;
 

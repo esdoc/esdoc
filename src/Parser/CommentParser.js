@@ -1,7 +1,19 @@
+/**
+ * Doc Comment Parser class.
+ *
+ * @example
+ * for (let comment of node.leadingComments) {
+ *   let tags = CommentParser.parse(comment);
+ *   console.log(tags);
+ * }
+ */
 export default class CommentParser {
   /**
-   * @param commentNode
-   * @returns {Tag[]}
+   * parse comment to tags.
+   * @param {ASTNode} commentNode - comment node.
+   * @param {string} commentNode.value - comment body.
+   * @param {string} commentNode.type - Block or Line.
+   * @returns {Tag[]} parsed comment.
    */
   static parse(commentNode) {
     if (!this.isESDoc(commentNode)) return [];
@@ -39,6 +51,11 @@ export default class CommentParser {
     return tags;
   }
 
+  /**
+   * judge doc comment or not.
+   * @param {ASTNode} commentNode - comment node.
+   * @returns {boolean} if true, this comment node is doc comment.
+   */
   static isESDoc(commentNode) {
     if (commentNode.type !== 'Block') return false;
     return commentNode.value.charAt(0) === '*';

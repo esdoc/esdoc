@@ -68,6 +68,18 @@
  */
 
 /**
+ * @typedef {Object} ParsedParam
+ * @property {boolean} [nullable]
+ * @property {string[]} types
+ * @property {boolean} [spread]
+ * @property {boolean} [optional]
+ * @property {string} [defaultValue]
+ * @property {*} [defaultRaw]
+ * @property {string} [name]
+ * @property {string} [description]
+ */
+
+/**
  * @todo remove this typedef.
  * @typedef {Object} IceCapInstanceTypedef
  * @property {function} loop
