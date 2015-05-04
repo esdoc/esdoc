@@ -23,12 +23,23 @@
  */
 
 /**
+ * doc comment tag.
+ * @typedef {Object} Tag
+ * @property {string} tagName
+ * @property {*} tagValue
+ */
+
+/**
  * Parsed doc comment.
  * @typedef {Object} DocObject
  */
 
 /**
  * @external {AST} https://github.com/estree/estree
+ */
+
+/**
+ * @external {ASTNode} https://github.com/estree/estree
  */
 
 /**

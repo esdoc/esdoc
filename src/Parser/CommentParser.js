@@ -44,9 +44,3 @@ export default class CommentParser {
     return commentNode.value.charAt(0) === '*';
   }
 }
-
-/**
- * @typedef {Object} Tag
- * @property {string} tagName
- * @property {*} tagValue
- */

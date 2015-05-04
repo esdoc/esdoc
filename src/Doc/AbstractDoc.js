@@ -3,7 +3,18 @@ import fs from 'fs';
 import ParamParser from '../Parser/ParamParser.js';
 import ASTUtil from '../Util/ASTUtil.js';
 
+/**
+ * Abstract Doc Class.
+ * @todo rename this class name.
+ */
 export default class AbstractDoc {
+  /**
+   * create instance.
+   * @param {AST} ast - this is AST that contains this doc.
+   * @param {ASTNode} node - this is self node.
+   * @param {PathResolver} pathResolver - this is file path resolver that contains this doc.
+   * @param {Tag[]} commentTags - this is tags that self node has.
+   */
   constructor(ast, node, pathResolver, commentTags = []){
     this._ast = ast;
     this._node = node;
@@ -14,10 +25,15 @@ export default class AbstractDoc {
     this._apply();
   }
 
+  /** @type {DocObject[]} */
   get value() {
     return JSON.parse(JSON.stringify(this._value));
   }
 
+  /**
+   * apply doc comment.
+   * @private
+   */
   _apply() {
     this['@kind']();
     this['@static']();
@@ -56,10 +72,12 @@ export default class AbstractDoc {
     this['@generator']();
   }
 
+  /** for @kind, does not need to use this tag */
   ['@kind']() {
     this._value.kind = this._findTagValue(['@kind']);
   }
 
+  /** for @static, does not need to use this tag */
   ['@static']() {
     let tag = this._find(['@static']);
     if (tag) {
@@ -77,18 +95,22 @@ export default class AbstractDoc {
     }
   }
 
+  /** for @variation */
   ['@variation']() {
     this._value.variation = this._findTagValue(['@variation']);
   }
 
+  /** for @name, does not need to use this tag */
   ['@name']() {
     this._value.name = this._findTagValue(['@name']);
   }
 
+  /** for @memberof, does not need to use this tag */
   ['@memberof']() {
     this._value.memberof = this._findTagValue(['@memberof']);
   }
 
+  /** for @longname, does not need to use this tag */
   ['@longname']() {
     let tag = this._find(['@longname']);
     if (tag) {
@@ -105,6 +127,7 @@ export default class AbstractDoc {
     }
   }
 
+  /** for @access, @public, @private, @protected */
   ['@access']() {
     let tag = this._find(['@access', '@public', '@private', '@protected']);
     if (tag) {
@@ -122,18 +145,22 @@ export default class AbstractDoc {
     }
   }
 
+  /** for @public */
   ['@public'](){
     // avoid unknown tag.
   }
 
+  /** for @protected */
   ['@protected']() {
     // avoid unknown tag.
   }
 
+  /** for @private */
   ['@private']() {
     // avoid unknown tag.
   }
 
+  /** for @export, does not need to use this tag */
   ['@export']() {
     let tag = this._find(['@export']);
     if (tag) {
@@ -161,6 +188,7 @@ export default class AbstractDoc {
     this._value.export = false;
   }
 
+  /** for @importPath, does not need to use this tag */
   ['@importPath']() {
     let tag = this._find(['@importPath']);
     if (tag) {
@@ -170,6 +198,7 @@ export default class AbstractDoc {
     }
   }
 
+  /** for @importStyle, does not need to use this tag */
   ['@importStyle']() {
     let tag = this._find(['@importStyle']);
     if (tag) {
@@ -193,10 +222,12 @@ export default class AbstractDoc {
     this._value.importStyle = null;
   }
 
+  /** for @desc */
   ['@desc']() {
     this._value.description = this._findTagValue(['@desc']);
   }
 
+  /** for @example. possible multi tag. */
   ['@example']() {
     let tags = this._findAll(['@example']);
     if (!tags) return;
@@ -208,6 +239,7 @@ export default class AbstractDoc {
     }
   }
 
+  /** for @see. possible multi tag. */
   ['@see']() {
     let tags = this._findAll(['@see']);
     if (!tags) return;
@@ -219,6 +251,7 @@ export default class AbstractDoc {
     }
   }
 
+  /** for @lineNumber, does not need to use this tag */
   ["@lineNumber"]() {
     let tag = this._find(['@lineNumber']);
     if (tag) {
@@ -232,6 +265,7 @@ export default class AbstractDoc {
     }
   }
 
+  /** for @deprecated */
   ['@deprecated']() {
     let tag = this._find(['@deprecated']);
     if (tag) {
@@ -243,6 +277,7 @@ export default class AbstractDoc {
     }
   }
 
+  /** for @experimental */
   ['@experimental'](){
     let tag = this._find(['@experimental']);
     if (tag) {
@@ -254,6 +289,7 @@ export default class AbstractDoc {
     }
   }
 
+  /** for @since */
   ['@since'](){
     let tag = this._find(['@since']);
     if (tag) {
@@ -261,6 +297,7 @@ export default class AbstractDoc {
     }
   }
 
+  /** for @version */
   ['@version'](){
     let tag = this._find(['@version']);
     if (tag) {
@@ -268,6 +305,7 @@ export default class AbstractDoc {
     }
   }
 
+  /** for @todo. possible multi tag. */
   ['@todo'](){
     let tags = this._findAll(['@todo']);
     if (tags) {
@@ -278,6 +316,7 @@ export default class AbstractDoc {
     }
   }
 
+  /** for @ignore. */
   ['@ignore'](){
     let tag = this._find(['@ignore']);
     if (tag) {
@@ -285,6 +324,7 @@ export default class AbstractDoc {
     }
   }
 
+  /** for @undocument, does not need to use this tag */
   ['@undocument']() {
     let tag = this._find(['@undocument']);
     if (tag) {
@@ -292,6 +332,7 @@ export default class AbstractDoc {
     }
   }
 
+  /** for @unknown, does not need to use this tag */
   ['@unknown']() {
     for (let tag of this._commentTags) {
       if (this[tag.tagName]) continue;
@@ -301,6 +342,7 @@ export default class AbstractDoc {
     }
   }
 
+  /** for @param. */
   ['@param']() {
     let values = this._findAllTagValues(['@param']);
     if (!values) return;
@@ -313,6 +355,7 @@ export default class AbstractDoc {
     }
   }
 
+  /** for @return, @returns. */
   ['@return']() {
     let value = this._findTagValue(['@return', '@returns']);
     if (!value) return;
@@ -322,6 +365,7 @@ export default class AbstractDoc {
     this._value.return = result;
   }
 
+  /** for @property. */
   ['@property']() {
     let values = this._findAllTagValues(['@property']);
     if (!values) return;
@@ -334,6 +378,7 @@ export default class AbstractDoc {
     }
   }
 
+  /** for @type. */
   ['@type']() {
     let value = this._findTagValue(['@type']);
     if (!value) return;
@@ -343,6 +388,7 @@ export default class AbstractDoc {
     this._value.type = result;
   }
 
+  /** for @abstract. */
   ['@abstract']() {
     let tag = this._find(['@abstract']);
     if (tag) {
@@ -350,6 +396,7 @@ export default class AbstractDoc {
     }
   }
 
+  /** for @voerride. */
   ['@override'](){
     let tag = this._find(['@override']);
     if (tag) {
@@ -357,6 +404,7 @@ export default class AbstractDoc {
     }
   }
 
+  /** for @throws. */
   ['@throws'](){
     let values = this._findAllTagValues(['@throws']);
     if (!values) return;
@@ -372,6 +420,7 @@ export default class AbstractDoc {
     }
   }
 
+  /** for @emits. */
   ['@emits'](){
     let values = this._findAllTagValues(['@emits']);
     if (!values) return;
@@ -387,6 +436,7 @@ export default class AbstractDoc {
     }
   }
 
+  /** for @listens. */
   ['@listens'](){
     let values = this._findAllTagValues(['@listens']);
     if (!values) return;
@@ -402,6 +452,7 @@ export default class AbstractDoc {
     }
   }
 
+  /** for @member. */
   ['@member']() {
     let value = this._findTagValue(['@member']);
     if (!value) return;
@@ -411,6 +462,7 @@ export default class AbstractDoc {
     this._value.type = result;
   }
 
+  /** for @content, does not need to use this tag */
   ['@content']() {
     let value = this._findTagValue(['@content']);
     if (value) {
@@ -418,6 +470,7 @@ export default class AbstractDoc {
     }
   }
 
+  /** for @generator, does not need to use this tag */
   ['@generator']() {
     let tag = this._find(['@generator']);
     if (tag) {
@@ -425,6 +478,12 @@ export default class AbstractDoc {
     }
   }
 
+  /**
+   * find all tags.
+   * @param {string[]} names - tag names.
+   * @returns {Tag[]|null} found tags.
+   * @private
+   */
   _findAll(names) {
     let results = [];
     for (let tag of this._commentTags) {
@@ -438,6 +497,12 @@ export default class AbstractDoc {
     }
   }
 
+  /**
+   * find last tag.
+   * @param {string[]} names - tag names.
+   * @returns {Tag|null} found tag.
+   * @private
+   */
   _find(names) {
     let results = this._findAll(names);
     if (results && results.length) {
@@ -447,9 +512,15 @@ export default class AbstractDoc {
     }
   }
 
+  /**
+   * find all tag values.
+   * @param {string[]} names - tag names.
+   * @returns {*[]|null} found values.
+   * @private
+   */
   _findAllTagValues(names) {
     let tags = this._findAll(names);
-    if (!tags) return;
+    if (!tags) return null;
 
     let results = [];
     for (let tag of tags) {
@@ -459,6 +530,12 @@ export default class AbstractDoc {
     return results;
   }
 
+  /**
+   * find ta value.
+   * @param {string[]} names - tag names.
+   * @returns {*|null} found value.
+   * @private
+   */
   _findTagValue(names) {
     let tag = this._find(names);
     if (tag) {
@@ -468,6 +545,13 @@ export default class AbstractDoc {
     }
   }
 
+  /**
+   * resolve long name.
+   * if the name relates import path, consider import path.
+   * @param {string} name - identifier name.
+   * @returns {string} resolved name.
+   * @private
+   */
   _resolveLongname(name) {
     let importPath = ASTUtil.findPathInImportDeclaration(this._ast, name);
     if (importPath) {
@@ -479,6 +563,13 @@ export default class AbstractDoc {
     return name;
   }
 
+  /**
+   * flatten member expression property name.
+   * if node structure is [foo [bar [baz [this] ] ] ], flatten is ``this.baz.bar.foo``
+   * @param {ASTNode} node - target member expression node.
+   * @returns {string} flatten property.
+   * @private
+   */
   _flattenMemberExpression(node) {
     let results = [];
     let target = node;
