@@ -1,7 +1,14 @@
 import IceCap from 'ice-cap';
 import DocBuilder from './DocBuilder.js';
 
+/**
+ * Class Output Builder class.
+ */
 export default class ClassDocBuilder extends DocBuilder {
+  /**
+   * execute building output.
+   * @param {function(html: string, filePath: string)} callback - is called each class.
+   */
   exec(callback) {
     let ice = this._buildLayoutDoc();
     ice.autoDrop = false;
@@ -10,14 +17,20 @@ export default class ClassDocBuilder extends DocBuilder {
       let fileName = this._getOutputFileName(doc);
       let baseUrl = this._getBaseUrl(fileName);
       let title = this._getTitle(doc);
-      ice.load('content', this._buildObjectDoc(doc), IceCap.MODE_WRITE);
+      ice.load('content', this._buildClassDoc(doc), IceCap.MODE_WRITE);
       ice.attr('baseUrl', 'href', baseUrl, IceCap.MODE_WRITE);
       ice.text('title', title, IceCap.MODE_WRITE);
       callback(ice.html, fileName);
     }
   }
 
-  _buildObjectDoc(doc) {
+  /**
+   * build class output.
+   * @param {DocObject} doc - class doc object.
+   * @returns {IceCap} built output.
+   * @private
+   */
+  _buildClassDoc(doc) {
     let extendsChain = this._buildExtendsChainHTML(doc);
     let directSubclass = this._buildDirectSubclassHTML(doc);
     let indirectSubclass = this._buildIndirectSubclassHTML(doc);
@@ -87,6 +100,13 @@ export default class ClassDocBuilder extends DocBuilder {
     return ice;
   }
 
+  /**
+   * build variation of doc.
+   * @param {DocObject} doc - target doc object.
+   * @returns {string} variation links html.
+   * @private
+   * @experimental
+   */
   _buildVariationHTML(doc) {
     var variationDocs = this._find({memberof: doc.memberof, name: doc.name});
     var html = [];
@@ -99,6 +119,12 @@ export default class ClassDocBuilder extends DocBuilder {
     return html.join(', ');
   }
 
+  /**
+   * build class ancestor extends chain.
+   * @param {DocObject} doc - target class doc.
+   * @returns {string} extends chain links html.
+   * @private
+   */
   _buildExtendsChainHTML(doc) {
     if (!doc._custom_extends_chains) return;
 
@@ -112,8 +138,14 @@ export default class ClassDocBuilder extends DocBuilder {
     return `<div>${links.join(' → ')}</div>`;
   }
 
+  /**
+   * build in-direct subclass list.
+   * @param {DocObject} doc - target class doc.
+   * @returns {string} html of in-direct subclass links.
+   * @private
+   */
   _buildIndirectSubclassHTML(doc) {
-    if (!doc._custom_indirect_subclasses) return;
+    if (!doc._custom_indirect_subclasses) return '';
 
     var links = [];
     for (var longname of doc._custom_indirect_subclasses) {
@@ -123,8 +155,14 @@ export default class ClassDocBuilder extends DocBuilder {
     return `<div>${links.join(', ')}</div>`;
   }
 
+  /**
+   * build direct subclass list.
+   * @param {DocObject} doc - target class doc.
+   * @returns {string} html of direct subclass links.
+   * @private
+   */
   _buildDirectSubclassHTML(doc) {
-    if (!doc._custom_direct_subclasses) return;
+    if (!doc._custom_direct_subclasses) return '';
 
     var links = [];
     for (var longname of doc._custom_direct_subclasses) {
@@ -134,8 +172,14 @@ export default class ClassDocBuilder extends DocBuilder {
     return `<div>${links.join(', ')}</div>`;
   }
 
+  /**
+   * build inherited method/member summary.
+   * @param {DocObject} doc - target class doc.
+   * @returns {string} html of inherited method/member from ancestor classes.
+   * @private
+   */
   _buildInheritedSummaryHTML(doc) {
-    if (['class', 'interface'].indexOf(doc.kind) === -1) return;
+    if (['class', 'interface'].indexOf(doc.kind) === -1) return '';
 
     let longnames = [
       ...doc._custom_extends_chains || []

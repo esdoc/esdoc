@@ -5,7 +5,15 @@ import IceCap from 'ice-cap';
 import {shorten} from './util.js';
 import DocResolver from './DocResolver.js';
 
+/**
+ * Builder base class.
+ */
 export default class DocBuilder {
+  /**
+   * create instance.
+   * @param {Taffy} data - doc object database.
+   * @param {ESDocConfig} config - esdoc config is used build output.
+   */
   constructor(data, config) {
     this._data = data;
     this._config = config;
@@ -13,16 +21,35 @@ export default class DocBuilder {
   }
 
   /**
+   * execute building output.
    * @abstract
-   * @param callback
+   * @param {function} callback - is called with some data.
    */
   exec(callback) {
   }
 
+  /**
+   * find doc object.
+   * @param {...Object} cond - find condition.
+   * @returns {DocObject[]} found doc objects.
+   * @private
+   */
   _find(...cond) {
     return this._orderedFind(null, ...cond);
   }
 
+  /**
+   * fuzzy find doc object by name.
+   * - equal with longname
+   * - equal with name
+   * - include in longname
+   * - include in ancestor
+   *
+   * @param {string} name - target identifier name.
+   * @param {string} [kind] - target kind.
+   * @returns {DocObject[]} found doc objects.
+   * @private
+   */
   _findByName(name, kind = null) {
     let docs;
 
@@ -65,6 +92,13 @@ export default class DocBuilder {
     return [];
   }
 
+  /**
+   * find doc objects that is ordered.
+   * @param {string} order - doc objects order(``column asec`` or ``column desc``).
+   * @param {...Object} cond - condition objects
+   * @returns {DocObject[]} found doc objects.
+   * @private
+   */
   _orderedFind(order, ...cond) {
     let data = this._data(...cond);
 
@@ -75,11 +109,22 @@ export default class DocBuilder {
     }
   }
 
+  /**
+   * read html template.
+   * @param {string} fileName - template file name.
+   * @return {string} html of template.
+   * @private
+   */
   _readTemplate(fileName) {
     let filePath = path.resolve(__dirname, `./template/${fileName}`);
     return fs.readFileSync(filePath, {encoding: 'utf-8'});
   }
 
+  /**
+   * get target's essential info.
+   * @returns {{title: string, version: string, url: string}}
+   * @private
+   */
   _getInfo() {
     let config = this._config;
     let packageObj = {};
@@ -100,6 +145,11 @@ export default class DocBuilder {
     return indexInfo;
   }
 
+  /**
+   * build common layout output.
+   * @return {IceCap} layout output.
+   * @private
+   */
   _buildLayoutDoc() {
     let info = this._getInfo();
 
@@ -107,7 +157,6 @@ export default class DocBuilder {
 
     ice.text('esdocVersion', `(${this._config._esdocVersion})`);
     ice.attr('repoURL', 'href', info.url);
-    //if (info.url.indexOf('https://github.com/') === 0) {
     if (info.url.match(new RegExp('^https?://github.com/'))) {
       ice.attr('repoURL', 'class', 'repo-url-github');
     }
@@ -127,6 +176,11 @@ export default class DocBuilder {
     return ice;
   }
 
+  /**
+   * build common navigation output.
+   * @return {IceCap} navigation output.
+   * @private
+   */
   _buildNavDoc() {
     let html = this._readTemplate('nav.html');
     let ice = new IceCap(html);
@@ -176,6 +230,17 @@ export default class DocBuilder {
     return ice;
   }
 
+  /**
+   * find doc object for each access.
+   * @param {DocObject} doc - parent doc object.
+   * @param {string} kind - kind property condition.
+   * @param {boolean} isStatic - static property condition
+   * @returns {Array[]} found doc objects.
+   * @property {Array[]} 0 - ['Public', DocObject[]]
+   * @property {Array[]} 1 - ['Protected', DocObject[]]
+   * @property {Array[]} 2 - ['Private', DocObject[]]
+   * @private
+   */
   _findAccessDocs(doc, kind, isStatic = true) {
     let cond = {kind, static: isStatic};
 
@@ -202,6 +267,15 @@ export default class DocBuilder {
     return accessDocs;
   }
 
+  /**
+   * build summary output html by parent doc.
+   * @param {DocObject} doc - parent doc object.
+   * @param {string} kind - target kind property.
+   * @param {string} title - summary title.
+   * @param {boolean} [isStatic=true] - target static property.
+   * @returns {string} html of summary.
+   * @private
+   */
   _buildSummaryHTML(doc, kind, title, isStatic = true) {
     let accessDocs = this._findAccessDocs(doc, kind, isStatic);
     let html = '';
@@ -222,6 +296,14 @@ export default class DocBuilder {
     return html;
   }
 
+  /**
+   * build summary output html by docs.
+   * @param {DocObject[]} docs - target docs.
+   * @param {string} title - summary title.
+   * @param {boolean} innerLink - if true, link in summary is inner link.
+   * @return {IceCap} summary output.
+   * @private
+   */
   _buildSummaryDoc(docs, title, innerLink) {
     if (docs.length === 0) return;
 
@@ -256,6 +338,15 @@ export default class DocBuilder {
     return ice;
   }
 
+  /**
+   * build detail output html by parent doc.
+   * @param {DocObject} doc - parent doc object.
+   * @param {string} kind - target kind property.
+   * @param {string} title - detail title.
+   * @param {boolean} [isStatic=true] - target static property.
+   * @returns {string} html of detail.
+   * @private
+   */
   _buildDetailHTML(doc, kind, title, isStatic = true) {
     let accessDocs = this._findAccessDocs(doc, kind, isStatic);
     let html = '';
@@ -274,6 +365,13 @@ export default class DocBuilder {
     return html;
   }
 
+  /**
+   * build detail output html by docs.
+   * @param {DocObject[]} docs - target docs.
+   * @param {string} title - detail title.
+   * @return {IceCap} detail output.
+   * @private
+   */
   _buildDetailDocs(docs, title) {
     let ice = new IceCap(this._readTemplate('details.html'));
 
@@ -392,6 +490,12 @@ export default class DocBuilder {
     return ice;
   }
 
+  /**
+   * get output html page title. use ``title`` in {@link ESDocConfig}.
+   * @param {DocObject} doc - target doc object.
+   * @returns {string} page title.
+   * @private
+   */
   _getTitle(doc = '') {
     let name = doc.name || doc.toString();
 
@@ -410,11 +514,23 @@ export default class DocBuilder {
     }
   }
 
+  /**
+   * get base url html page. it is used html base tag.
+   * @param {string} fileName - output file path.
+   * @returns {string} base url.
+   * @private
+   */
   _getBaseUrl(fileName) {
     let baseUrl = '../'.repeat(fileName.split('/').length - 1);
     return baseUrl;
   }
 
+  /**
+   * gat url of output html page.
+   * @param {DocObject} doc - target doc object.
+   * @returns {string} url of output html. it is relative path from output root dir.
+   * @private
+   */
   _getURL(doc) {
     let inner = false;
     if (['variable', 'function', 'member', 'typedef', 'method', 'constructor', 'get', 'set'].includes(doc.kind)) {
@@ -431,6 +547,12 @@ export default class DocBuilder {
     }
   }
 
+  /**
+   * get file name of output html page.
+   * @param {DocObject} doc - target doc object.
+   * @returns {string} file name.
+   * @private
+   */
   _getOutputFileName(doc) {
     switch (doc.kind) {
       case 'variable':
@@ -463,8 +585,15 @@ export default class DocBuilder {
     }
   }
 
+  /**
+   * build html link to file page.
+   * @param {DocObject} doc - target doc object.
+   * @param {string} text - link text.
+   * @returns {string} html of link.
+   * @private
+   */
   _buildFileDocLinkHTML(doc, text = null) {
-    if (!doc) return;
+    if (!doc) return '';
 
     let fileDoc;
     if (doc.kind === 'file' || doc.kind === 'testFile') {
@@ -474,7 +603,7 @@ export default class DocBuilder {
       fileDoc = this._find({kind: ['file', 'testFile'], longname: filePath})[0];
     }
 
-    if (!fileDoc) return;
+    if (!fileDoc) return '';
 
     if (!text) text = fileDoc.name;
 
@@ -485,9 +614,14 @@ export default class DocBuilder {
     }
   }
 
+  /**
+   * build html link of type.
+   * @param {string} typeName - type name(e.g. ``number[]``, ``Map<number, string}``)
+   * @returns {string} html of link.
+   * @private
+   * @todo re-implement with parser combinator.
+   */
   _buildTypeDocLinkHTML(typeName) {
-    // todo: re-implement with parse combinator
-
     // e.g. number[]
     let matched = typeName.match(/^(.*?)\[\]$/);
     if (matched) {
@@ -558,6 +692,15 @@ export default class DocBuilder {
     return this._buildDocLinkHTML(typeName, typeName);
   }
 
+  /**
+   * build html link to identifier.
+   * @param {string} longname - link to this.
+   * @param {string} [text] - link text. default is name property of doc object.
+   * @param {boolean} [inner=false] - if true, use inner link.
+   * @param {string} [kind] - specify target kind property.
+   * @returns {string} html of link.
+   * @private
+   */
   _buildDocLinkHTML(longname, text = null, inner = false, kind = null) {
     if (!longname) return '';
 
@@ -588,9 +731,18 @@ export default class DocBuilder {
     }
   }
 
+  /**
+   * build html links to identifiers
+   * @param {string[]} longnames - link to these.
+   * @param {string} [text] - link text. default is name property of doc object.
+   * @param {boolean} [inner=false] - if true, use inner link.
+   * @param {string} [separator='\n'] - used link separator.
+   * @returns {string} html links.
+   * @private
+   */
   _buildDocsLinkHTML(longnames, text = null, inner = false, separator = '\n') {
-    if (!longnames) return;
-    if (!longnames.length) return;
+    if (!longnames) return '';
+    if (!longnames.length) return '';
 
     let links = [];
     for (var longname of longnames) {
@@ -599,11 +751,17 @@ export default class DocBuilder {
       links.push(`<li>${link}</li>`);
     }
 
-    if (!links.length) return;
+    if (!links.length) return '';
 
     return `<ul>${links.join(separator)}</ul>`;
   }
 
+  /**
+   * build identifier signature html.
+   * @param {DocObject} doc - target doc object.
+   * @returns {string} signature html.
+   * @private
+   */
   _buildSignatureHTML(doc) {
     // call signature
     let callSignatures = [];
@@ -654,6 +812,13 @@ export default class DocBuilder {
     return html;
   }
 
+  /**
+   * build properties output.
+   * @param {ParsedParam[]} [properties=[]] - properties in doc object.
+   * @param {string} title - output title.
+   * @return {IceCap} built properties output.
+   * @private
+   */
   _buildProperties(properties = [], title = 'Properties:') {
     let ice = new IceCap(this._readTemplate('properties.html'));
 
@@ -697,6 +862,12 @@ export default class DocBuilder {
     return ice;
   }
 
+  /**
+   * build deprecated html.
+   * @param {DocObject} doc - target doc object.
+   * @returns {string} if doc is not deprecated, returns empty.
+   * @private
+   */
   _buildDeprecatedHTML(doc) {
     if (doc.deprecated) {
       let deprecated = [`this ${doc.kind} was deprecated.`];
@@ -707,6 +878,12 @@ export default class DocBuilder {
     }
   }
 
+  /**
+   * build experimental html.
+   * @param {DocObject} doc - target doc object.
+   * @returns {string} if doc is not experimental, returns empty.
+   * @private
+   */
   _buildExperimentalHTML(doc) {
     if (doc.experimental) {
       let experimental = [`this ${doc.kind} is experimental.`];
@@ -717,9 +894,15 @@ export default class DocBuilder {
     }
   }
 
+  /**
+   * build method of ancestor class link html.
+   * @param {DocObject} doc - target doc object.
+   * @returns {string} html link. if doc does not override ancestor method, returns empty.
+   * @private
+   */
   _buildOverrideMethod(doc) {
     let parentDoc = this._findByName(doc.memberof)[0];
-    if (!parentDoc) return;
+    if (!parentDoc) return '';
     if (!parentDoc._custom_extends_chains) return;
 
     let chains = [...parentDoc._custom_extends_chains].reverse();
@@ -734,6 +917,12 @@ export default class DocBuilder {
     }
   }
 
+  /**
+   * build coverage html.
+   * @param {CoverageObject} coverageObj - target coverage object.
+   * @returns {string} html of coverage badge.
+   * @private
+   */
   _buildCoverageHTML(coverageObj) {
     let coverage = Math.floor(100 * coverageObj.actualCount / coverageObj.expectCount);
     let colorClass;

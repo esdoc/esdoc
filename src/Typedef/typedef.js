@@ -47,6 +47,22 @@
  */
 
 /**
+ * @external {Taffy} http://www.taffydb.com/
+ */
+
+/**
+ * @external {IceCap} https://github.com/h13i32maru/ice-cap
+ */
+
+/**
+ * @typedef {Object} CoverageObject
+ * @property {string} coverage - ratio.
+ * @property {number} expectCount - all identifier count.
+ * @property {number} actualCount - documented identifier count.
+ * @property {Object<string, Object>} files - file name and coverage.
+ */
+
+/**
  * ESDocCLI uses argv
  * @typedef {Object} ESDocCLIArgv
  * @property {boolean} [h] - for help

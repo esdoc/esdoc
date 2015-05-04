@@ -5,7 +5,8 @@ isPage: true
 
 # FAQ
 
-### Difference From JSDoc
+### Difference between ESDoc and JSDoc
+JSDoc is most popular JavaScript API Documentation tool.
 ESDoc is inspired by JSDoc.
 
 - ESDoc
