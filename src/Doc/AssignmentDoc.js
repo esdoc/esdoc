@@ -1,7 +1,13 @@
 import Logger from 'color-logger';
 import AbstractDoc from './AbstractDoc.js';
 
+/**
+ * Doc Class for Assignment ASTNode.
+ */
 export default class AssignmentDoc extends AbstractDoc {
+  /**
+   * specify ``variable`` to kind.
+   */
   ['@kind']() {
     super['@kind']();
     if (this._value.kind) return;
@@ -9,6 +15,9 @@ export default class AssignmentDoc extends AbstractDoc {
     this._value.kind = 'variable';
   }
 
+  /**
+   * take out self name from self node.
+   */
   ['@name']() {
     super['@name']();
     if (this._value.name) return;
@@ -17,6 +26,9 @@ export default class AssignmentDoc extends AbstractDoc {
     this._value.name = name;
   }
 
+  /**
+   * take out self memberof from file path.
+   */
   ['@memberof']() {
     super['@memberof']();
     if (this._value.memberof) return;
