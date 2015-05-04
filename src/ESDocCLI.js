@@ -6,9 +6,23 @@ import minimist from 'minimist';
 import ESDoc from './ESDoc.js';
 import defaultPublisher from './Publisher/publish.js';
 
+/**
+ * Command Line Interface for ESDoc.
+ *
+ * @example
+ * let cli = new ESDocCLI(process.argv);
+ * cli.exec();
+ */
 export default class ESDocCLI {
+  /**
+   * Create instance.
+   * @param {Object} argv - this is node.js argv(``process.argv``)
+   */
   constructor(argv) {
+    /** @type {ESDocCLIArgv} */
     this._argv = minimist(argv.slice(2));
+
+    /** @type {NPMPackageObject} */
     this._packageObj = this._findPackageJSON();
 
     if (this._argv.h || this._argv.help) {
@@ -22,6 +36,9 @@ export default class ESDocCLI {
     }
   }
 
+  /**
+   * execute to generate document.
+   */
   exec() {
     let config;
     if (this._argv.c) {
@@ -37,6 +54,11 @@ export default class ESDocCLI {
     ESDoc.generate(config, defaultPublisher);
   }
 
+  /**
+   * find npm package.json
+   * @returns {NPMPackageObject|null} parsed package.json
+   * @private
+   */
   _findPackageJSON() {
     let packageObj = null;
     try {
@@ -52,14 +74,28 @@ export default class ESDocCLI {
     return packageObj;
   }
 
+  /**
+   * show help of ESDoc
+   * @private
+   */
   _showHelp() {
     console.log('usage: esdoc [-c esdoc.json | path/to/dir]');
   }
 
+  /**
+   * show version of ESDoc
+   * @private
+   */
   _showVersion() {
     console.log(this._packageObj.version);
   }
 
+  /**
+   * create config object from config file.
+   * @param {string} configFilePath - config file path.
+   * @return {ESDocConfig} config object.
+   * @private
+   */
   _createConfigFromJSONFile(configFilePath) {
     configFilePath = path.resolve(configFilePath);
     let configJSON = fs.readFileSync(configFilePath, {encode: 'utf8'});
@@ -68,6 +104,12 @@ export default class ESDocCLI {
     return config;
   }
 
+  /**
+   * create config object from target root directory.
+   * @param {string} targetPath - target root directory path.
+   * @return {{source: string, destination: string}} minimum config object.
+   * @private
+   */
   _createConfigFromPath(targetPath) {
     targetPath = path.resolve(targetPath);
     let stat = fs.statSync(targetPath);
@@ -87,11 +129,7 @@ export default class ESDocCLI {
 
     config = {
       source: targetPath,
-      pattern: '\\.js$|\\.es6$',
-      destination: '_esdoc_',
-      title: 'NO TITLE',
-      description: 'NO DESCRIPTION',
-      readme: readmeStat ? './README.md' : ''
+      destination: '_esdoc_'
     };
 
     return config;
