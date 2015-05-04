@@ -13,11 +13,27 @@ import ExternalDoc from '../Doc/ExternalDoc.js';
 let already = Symbol('already');
 let logger = new Logger('DocFactory');
 
+/**
+ * Doc factory class.
+ *
+ * @example
+ * let factory = new DocFactory(ast, pathResolver);
+ * factory.push(node, parentNode);
+ * let results = factory.results;
+ */
 export default class DocFactory {
+  /**
+   * @type {DocObject[]}
+   */
   get results() {
     return [...this._results];
   }
 
+  /**
+   * create instance.
+   * @param {AST} ast - AST of source code.
+   * @param {PathResolver} pathResolver - path resolver of source code.
+   */
   constructor(ast, pathResolver) {
     this._ast = ast;
     this._pathResolver = pathResolver;
@@ -35,6 +51,11 @@ export default class DocFactory {
     }
   }
 
+  /**
+   * push node, and factory processes node.
+   * @param {ASTNode} node - target node.
+   * @param {ASTNode} parentNode - parent node of target node.
+   */
   push(node, parentNode) {
     if (node === this._ast) return;
 
@@ -65,6 +86,14 @@ export default class DocFactory {
     }
   }
 
+  /**
+   * traverse comments of node, and create doc object.
+   * @param {ASTNode} parentNode - parent of target node.
+   * @param {ASTNode} node - target node.
+   * @param {ASTNode[]} comments - comment nodes.
+   * @returns {DocObject[]} created doc objects.
+   * @private
+   */
   _traverseComments(parentNode, node, comments) {
     if (!node) {
       let virtualNode = {};
@@ -117,6 +146,13 @@ export default class DocFactory {
     return results;
   }
 
+  /**
+   * create Doc.
+   * @param {ASTNode} node - target node.
+   * @param {Tag[]} tags - tags of target node.
+   * @returns {AbstractDoc} created Doc.
+   * @private
+   */
   _createDoc(node, tags) {
     let result = this._decideType(tags, node);
     let type = result.type;
@@ -146,6 +182,13 @@ export default class DocFactory {
     return new clazz(this._ast, node, this._pathResolver, tags);
   }
 
+  /**
+   * decide Doc type by using tags and node.
+   * @param {Tag[]} tags - tags of node.
+   * @param {ASTNode} node - target node.
+   * @returns {{type: string, node: ASTNode}} decided type.
+   * @private
+   */
   _decideType(tags, node) {
     let type = null;
     for (let tag of tags) {
@@ -183,12 +226,24 @@ export default class DocFactory {
     return {type: null, node: null};
   }
 
+  /**
+   * decide Doc type from class declaration node.
+   * @param {ASTNode} node - target node that is class declaration node.
+   * @returns {{type: string, node: ASTNode}} decided type.
+   * @private
+   */
   _decideClassDeclarationType(node) {
     if (!this._isTopDepthInBody(node, this._ast.body)) return {type: null, node: null};
 
     return {type: 'Class', node: node};
   }
 
+  /**
+   * decide Doc type from method definition node.
+   * @param {ASTNode} node - target node that is method definition node.
+   * @returns {{type: string, node: ASTNode}} decided type.
+   * @private
+   */
   _decideMethodDefinitionType(node) {
     let classNode = this._findUp(node, ['ClassDeclaration', 'ClassExpression']);
     if (this._processedClassNodes.includes(classNode)) {
@@ -199,12 +254,24 @@ export default class DocFactory {
     }
   }
 
+  /**
+   * decide Doc type from function declaration node.
+   * @param {ASTNode} node - target node that is function declaration node.
+   * @returns {{type: string, node: ASTNode}} decided type.
+   * @private
+   */
   _decideFunctionDeclarationType(node) {
     if (!this._isTopDepthInBody(node, this._ast.body)) return {type: null, node: null};
 
     return {type: 'Function', node: node};
   }
 
+  /**
+   * decide Doc type from expression statement node.
+   * @param {ASTNode} node - target node that is expression statement node.
+   * @returns {{type: string, node: ASTNode}} decided type.
+   * @private
+   */
   _decideExpressionStatementType(node) {
     let isTop = this._isTopDepthInBody(node, this._ast.body);
     Object.defineProperty(node.expression, 'parent', {value: node});
@@ -246,6 +313,12 @@ export default class DocFactory {
     return {type: innerType, node: innerNode};
   }
 
+  /**
+   * decide Doc type from variable node.
+   * @param {ASTNode} node - target node that is variable node.
+   * @returns {{type: string, node: ASTNode}} decided type.
+   * @private
+   */
   _decideVariableType(node) {
     if (!this._isTopDepthInBody(node, this._ast.body)) return {type: null, node: null};
 
@@ -273,6 +346,12 @@ export default class DocFactory {
     return {type: innerType, node: innerNode};
   }
 
+  /**
+   * decide Doc type from assignment node.
+   * @param {ASTNode} node - target node that is assignment node.
+   * @returns {{type: string, node: ASTNode}} decided type.
+   * @private
+   */
   _decideAssignmentType(node) {
     if (!this._isTopDepthInBody(node, this._ast.body)) return {type: null, node: null};
 
@@ -298,9 +377,15 @@ export default class DocFactory {
     return {type: innerType, node: innerNode};
   }
 
+  /**
+   * unwrap exported node.
+   * @param {ASTNode} node - target node that is export declaration node.
+   * @returns {ASTNode|null} unwrapped child node of exported node.
+   * @private
+   */
   _unwrapExportDeclaration(node) {
     // e.g. `export A from './A.js'` has not declaration
-    if (!node.declaration) return;
+    if (!node.declaration) return null;
 
     let exportedASTNode = node.declaration;
     if (!exportedASTNode.leadingComments) exportedASTNode.leadingComments = [];
@@ -312,6 +397,13 @@ export default class DocFactory {
     return exportedASTNode;
   }
 
+  /**
+   * judge node is last in parent.
+   * @param {ASTNode} node - target node.
+   * @param {ASTNode} parentNode - target parent node.
+   * @returns {boolean} if true, the node is last in parent.
+   * @private
+   */
   _isLastNodeInParent(node, parentNode) {
     if (parentNode && parentNode.body) {
       let lastNode = parentNode.body[parentNode.body.length - 1];
@@ -321,6 +413,13 @@ export default class DocFactory {
     return false;
   }
 
+  /**
+   * judge node is top in body.
+   * @param {ASTNode} node - target node.
+   * @param {ASTNode[]} body - target body node.
+   * @returns {boolean} if true, the node is top in body.
+   * @private
+   */
   _isTopDepthInBody(node, body) {
     if (!body) return false;
     if (!Array.isArray(body)) return false;
@@ -336,10 +435,23 @@ export default class DocFactory {
     return false;
   }
 
+  /**
+   * deep copy object.
+   * @param {Object} obj - target object.
+   * @return {Object} copied object.
+   * @private
+   */
   _copy(obj) {
     return JSON.parse(JSON.stringify(obj));
   }
 
+  /**
+   * find node while goes up.
+   * @param {ASTNode} node - start node.
+   * @param {string[]} types - ASTNode types.
+   * @returns {ASTNode|null} found first node.
+   * @private
+   */
   _findUp(node, types) {
     let parent = node.parent;
     while(parent) {

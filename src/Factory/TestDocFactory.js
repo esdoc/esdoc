@@ -5,24 +5,52 @@ import TestFileDoc from '../Doc/TestFileDoc.js';
 
 let already = Symbol('already');
 
+/**
+ * Test doc factory class.
+ * @example
+ * let factory = new TestDocFactory('mocha', ast, pathResolver);
+ * factory.push(node, parentNode);
+ * let results = factory.results;
+ */
 export default class TestDocFactory {
+  /**
+   * get unique id.
+   * @returns {number} unique id.
+   * @private
+   */
   static _getUniqueId() {
-    if (!this._sequence) this._sequence = 0;
+    if (!this._sequence) /** @type {number} */ this._sequence = 0;
 
     return this._sequence++;
   }
 
+  /**
+   * @type {DocObject[]}
+   */
   get results() {
     return [...this._results];
   }
 
+  /**
+   * create instance.
+   * @param {string} type - test type. now support only 'mocha'.
+   * @param {AST} ast - AST of test code.
+   * @param {PathResolver} pathResolver - path resolver of test code.
+   */
   constructor(type, ast, pathResolver) {
     type = type.toLowerCase();
     assert(type === 'mocha');
 
+    /** @type {string} */
     this._type = type;
+
+    /** @type {AST} */
     this._ast = ast;
+
+    /** @type {PathResolver} */
     this._pathResolver = pathResolver;
+
+    /** @type {DocObject[]} */
     this._results = [];
 
     // file doc
@@ -30,6 +58,11 @@ export default class TestDocFactory {
     this._results.push(doc.value);
   }
 
+  /**
+   * push node, and factory process the node.
+   * @param {ASTNode} node - target node.
+   * @param {ASTNode} parentNode - parent node of target node.
+   */
   push(node, parentNode) {
     if (node[already]) return;
 
@@ -39,6 +72,11 @@ export default class TestDocFactory {
     if (this._type === 'mocha') this._pushForMocha(node, parentNode);
   }
 
+  /**
+   * push node as mocha test code.
+   * @param {ASTNode} node - target node.
+   * @private
+   */
   _pushForMocha(node) {
     if (node.type !== 'ExpressionStatement') return;
 
