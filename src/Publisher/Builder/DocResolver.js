@@ -12,6 +12,7 @@ export default class DocResolver {
     this._resolveAccess();
     this._resolveOnlyExported();
     this._resolveUndocumentIdentifier();
+    this._resolveDuplication();
     this._resolveIgnore();
     this._resolveMarkdown();
     this._resolveLink();
@@ -296,5 +297,30 @@ export default class DocResolver {
     }
 
     this._data.__RESOLVED_TEST_RELATION__ = true;
+  }
+
+  _resolveDuplication() {
+    if (this._data.__RESOLVED_DUPLICATION__) return;
+
+    let docs = this._builder._find({kind: 'member'});
+    let ignoreId = [];
+    for (let doc of docs) {
+      let dup = this._builder._find({longname: doc.longname});
+      if (dup.length > 1) {
+        let ids = dup.map(v => v.___id);
+        ids.sort((a, b)=> {
+          return a < b ? -1 : 1;
+        });
+        ids.shift();
+        ignoreId.push(...ids)
+      }
+    }
+
+    this._data({___id: ignoreId}).update(function(){
+      this.ignore = true;
+      return this;
+    });
+
+    this._data.__RESOLVED_DUPLICATION__ = true;
   }
 }
