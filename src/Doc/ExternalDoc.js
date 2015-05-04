@@ -4,7 +4,14 @@ import ParamParser from '../Parser/ParamParser.js';
 
 let logger = new Logger('ExternalDoc');
 
+/**
+ * Doc Class from virtual comment node of external.
+ */
 export default class ExternalDoc extends AbstractDoc {
+  /**
+   * apply own tag.
+   * @private
+   */
   _apply() {
     super._apply();
 
@@ -13,12 +20,14 @@ export default class ExternalDoc extends AbstractDoc {
     delete this._value.importStyle;
   }
 
+  /** specify ``external`` to kind. */
   ['@kind']() {
     super['@kind']();
     if (this._value.kind) return;
     this._value.kind = 'external';
   }
 
+  /** take out self name from tag */
   ['@name']() {
     let value = this._findTagValue(['@name', '@external']);
     if (!value) {
@@ -48,18 +57,21 @@ export default class ExternalDoc extends AbstractDoc {
     this._value.name = name;
   }
 
+  /** take out self memberof from file path. */
   ['@memberof']() {
     super['@memberof']();
     if (this._value.memberof) return;
     this._value.memberof = this._pathResolver.filePath;
   }
 
+  /** specify name to longname */
   ['@longname']() {
     super['@longname']();
     if (this._value.longname) return;
     this._value.longname = this._value.name;
   }
 
+  /** for @external */
   ['@external']() {
     // avoid unknown tag.
   }

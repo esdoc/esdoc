@@ -2,7 +2,14 @@ import AbstractDoc from './AbstractDoc.js';
 import MethodDoc from './MethodDoc.js';
 import ParamParser from '../Parser/ParamParser.js'
 
+/**
+ * Doc Class from Member Expression AST node.
+ */
 export default class MemberDoc extends AbstractDoc {
+  /**
+   * apply own tag.
+   * @private
+   */
   _apply() {
     super._apply();
 
@@ -11,12 +18,14 @@ export default class MemberDoc extends AbstractDoc {
     delete this._value.importStyle;
   }
 
+  /** specify ``member`` to kind. */
   ['@kind']() {
     super['@kind']();
     if (this._value.kind) return;
     this._value.kind = 'member';
   }
 
+  /** use static property in class */
   ['@static']() {
     let tag = this._find(['@static']);
     if (tag) {
@@ -35,6 +44,7 @@ export default class MemberDoc extends AbstractDoc {
     }
   }
 
+  /** take out self name from self node */
   ['@name']() {
     let name;
     let tags = this._findAll(['@name', '@member']);
@@ -57,10 +67,12 @@ export default class MemberDoc extends AbstractDoc {
     this._value.name = name;
   }
 
+  /** borrow {@link MethodDoc#@memberof} */
   ['@memberof']() {
     MethodDoc.prototype['@memberof'].call(this);
   }
 
+  /** if @type is not exists, guess type by using self node */
   ['@type']() {
     super['@type']();
     if (this._value.type) return;

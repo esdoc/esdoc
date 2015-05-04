@@ -4,7 +4,14 @@ import ParamParser from '../Parser/ParamParser.js';
 
 let logger = new Logger('TypedefDoc');
 
+/**
+ * Doc class for virtual comment node of typedef.
+ */
 export default class TypedefDoc extends AbstractDoc {
+  /**
+   * apply own tag.
+   * @private
+   */
   _apply() {
     super._apply();
 
@@ -15,12 +22,14 @@ export default class TypedefDoc extends AbstractDoc {
     delete this._value.importStyle;
   }
 
+  /** specify ``typedef`` to kind. */
   ['@kind']() {
     super['@kind']();
     if (this._value.kind) return;
     this._value.kind = 'typedef';
   }
 
+  /** set name by using tag. */
   ['@name']() {
     let tags = this._findAll(['@name', '@typedef']);
     if (!tags) {
@@ -42,6 +51,7 @@ export default class TypedefDoc extends AbstractDoc {
     this._value.name = name;
   }
 
+  /** set memberof by using file path. */
   ['@memberof']() {
     super['@memberof']();
     if (this._value.memberof) return;
@@ -60,6 +70,7 @@ export default class TypedefDoc extends AbstractDoc {
     this._value.memberof = this._pathResolver.filePath;
   }
 
+  /** for @typedef */
   ['@typedef']() {
     let value = this._findTagValue(['@typedef']);
     if (!value) return;

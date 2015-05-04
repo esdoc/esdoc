@@ -1,7 +1,14 @@
 import AbstractDoc from './AbstractDoc.js';
 import ParamParser from '../Parser/ParamParser.js';
 
+/**
+ * Doc Class from test code file.
+ */
 export default class TestDoc extends AbstractDoc {
+  /**
+   * apply own tag.
+   * @private
+   */
   _apply() {
     super._apply();
 
@@ -12,6 +19,7 @@ export default class TestDoc extends AbstractDoc {
     delete this._value.importStyle;
   }
 
+  /** use name property of self node. */
   ['@kind']() {
     super['@kind']();
     if (this._value.kind) return;
@@ -31,6 +39,7 @@ export default class TestDoc extends AbstractDoc {
     }
   }
 
+  /** set name and testId from special esdoc property. */
   ['@name']() {
     super['@name']();
     if (this._value.name) return;
@@ -39,6 +48,7 @@ export default class TestDoc extends AbstractDoc {
     this._value.testId = this._node._esdocTestId;
   }
 
+  /** set memberof to use parent test nod and file path. */
   ['@memberof']() {
     super['@memberof']();
     if (this._value.memberof) return;
@@ -61,6 +71,7 @@ export default class TestDoc extends AbstractDoc {
     }
   }
 
+  /** set describe by using test node arguments. */
   ['@desc']() {
     super['@desc']();
     if (this._value.description) return;
@@ -68,6 +79,7 @@ export default class TestDoc extends AbstractDoc {
     this._value.description = this._node.arguments[0].value;
   }
 
+  /** for @testTarget. */
   ['@testTarget']() {
     let values = this._findAllTagValues(['@testTarget']);
     if (!values) return;

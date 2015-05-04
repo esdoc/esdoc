@@ -2,7 +2,7 @@ import Logger from 'color-logger';
 import AbstractDoc from './AbstractDoc.js';
 
 /**
- * Doc Class for Assignment ASTNode.
+ * Doc Class for Assignment AST node.
  */
 export default class AssignmentDoc extends AbstractDoc {
   /**

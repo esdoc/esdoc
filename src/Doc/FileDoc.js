@@ -1,7 +1,14 @@
 import fs from 'fs';
 import AbstractDoc from './AbstractDoc.js';
 
+/**
+ * Doc Class from source file.
+ */
 export default class FileDoc extends AbstractDoc {
+  /**
+   * apply own tag.
+   * @private
+   */
   _apply() {
     super._apply();
 
@@ -10,18 +17,21 @@ export default class FileDoc extends AbstractDoc {
     delete this._value.importStyle;
   }
 
+  /** specify ``file`` to kind. */
   ['@kind']() {
     super['@kind']();
     if (this._value.kind) return;
     this._value.kind = 'file';
   }
 
+  /** take out self name from file path */
   ['@name']() {
     super['@name']();
     if (this._value.name) return;
     this._value.name = this._pathResolver.filePath;
   }
 
+  /** specify name to longname */
   ['@longname']() {
     let value = this._findTagValue(['@longname']);
     if (value) {
@@ -31,6 +41,7 @@ export default class FileDoc extends AbstractDoc {
     }
   }
 
+  /** specify file content to value.content */
   ['@content']() {
     super['@content']();
     if ('content' in this._value) return;

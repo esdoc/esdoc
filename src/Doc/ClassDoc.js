@@ -1,7 +1,14 @@
 import AbstractDoc from './AbstractDoc.js';
 import ParamParser from '../Parser/ParamParser.js';
 
+/**
+ * Doc Class from Class Declaration AST node.
+ */
 export default class ClassDoc extends AbstractDoc {
+  /**
+   * apply own tag.
+   * @private
+   */
   _apply() {
     super._apply();
 
@@ -10,24 +17,28 @@ export default class ClassDoc extends AbstractDoc {
     this['@implements']();
   }
 
+  /** specify ``class`` to kind. */
   ['@kind']() {
     super['@kind']();
     if (this._value.kind) return;
     this._value.kind = 'class';
   }
 
+  /** take out self name from self node */
   ['@name']() {
     super['@name']();
     if (this._value.name) return;
     this._value.name = this._node.id.name;
   }
 
+  /** take out self memberof from file path. */
   ['@memberof']() {
     super['@memberof']();
     if (this._value.memberof) return;
     this._value.memberof = this._pathResolver.filePath;
   }
 
+  /** for @interface */
   ['@interface']() {
     let tag = this._find(['@interface']);
     if (tag) {
@@ -37,6 +48,7 @@ export default class ClassDoc extends AbstractDoc {
     }
   }
 
+  /** for @extends, does not need to use this tag. */
   ['@extends']() {
     let values = this._findAllTagValues(['@extends', '@extend']);
     if (values) {
@@ -55,6 +67,7 @@ export default class ClassDoc extends AbstractDoc {
     }
   }
 
+  /** for @implements */
   ['@implements'](){
     let values = this._findAllTagValues(['@implements', '@implement']);
     if (!values) return;
