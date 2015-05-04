@@ -510,6 +510,10 @@ table.test-summary tr.test-describe .toggle.closed:before {
   content: '▶';
 }
 
+.inner-link-active {
+  background: rgb(255, 255, 150);
+}
+
 /* search box */
 .search-box {
   position: absolute;
