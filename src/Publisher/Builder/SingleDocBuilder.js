@@ -1,7 +1,15 @@
 import IceCap from 'ice-cap';
 import DocBuilder from './DocBuilder.js';
 
+/**
+ * Single output builder class.
+ * "single" means function, variable, typedef, external, etc...
+ */
 export default class SingleDocBuilder extends DocBuilder {
+  /**
+   * execute building output.
+   * @param {function(html: string, filePath: string)} callback - is called with output.
+   */
   exec(callback) {
     let ice = this._buildLayoutDoc();
     ice.autoClose = false;
@@ -22,6 +30,12 @@ export default class SingleDocBuilder extends DocBuilder {
     }
   }
 
+  /**
+   * build single output.
+   * @param {string} kind - target kind property.
+   * @returns {string} html of single output
+   * @private
+   */
   _buildSingleDoc(kind) {
     let title = kind.replace(/^(\w)/, (c)=> c.toUpperCase() );
     let ice = new IceCap(this._readTemplate('single.html'));

@@ -4,12 +4,25 @@ import IceCap from 'ice-cap';
 import DocBuilder from './DocBuilder.js';
 import {dateForUTC} from './util.js';
 
+/**
+ * Source output html builder class.
+ */
 export default class SourceDocBuilder extends DocBuilder {
+  /**
+   * create instance.
+   * @param {Taffy} data - doc object database.
+   * @param {ESDocConfig} config - use config to build output.
+   * @param {CoverageObject} coverage - use coverage to build output.
+   */
   constructor(data, config, coverage) {
     super(data, config);
     this._coverage = coverage;
   }
 
+  /**
+   * execute building output html.
+   * @param {function(html: string, filePath: string)} callback - is called with output html.
+   */
   exec(callback) {
     let ice = this._buildLayoutDoc();
     let fileName = 'source.html';
@@ -17,13 +30,18 @@ export default class SourceDocBuilder extends DocBuilder {
     let title = this._getTitle('Source');
 
     ice.attr('baseUrl', 'href', baseUrl);
-    ice.load('content', this._buildFilesHTML());
+    ice.load('content', this._buildSourceHTML());
     ice.text('title', title, IceCap.MODE_WRITE);
 
     callback(ice.html, fileName);
   }
 
-  _buildFilesHTML() {
+  /**
+   * build source list output html.
+   * @returns {string} html of source list.
+   * @private
+   */
+  _buildSourceHTML() {
     let ice = new IceCap(this._readTemplate('source.html'));
     let docs = this._find({kind: 'file'});
     let config = this._config;

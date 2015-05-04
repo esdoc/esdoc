@@ -1,7 +1,14 @@
 import path from 'path';
 import DocBuilder from './DocBuilder.js';
 
+/**
+ * Search index of identifier builder class.
+ */
 export default class SearchIndexBuilder extends DocBuilder {
+  /**
+   * execute building output.
+   * @param {function(javascript: string, filePath: string)} callback - is called with output.
+   */
   exec(callback) {
     let searchIndex = [];
     let docs = this._find({});

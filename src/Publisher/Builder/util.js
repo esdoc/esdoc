@@ -1,5 +1,13 @@
 import marked from 'marked';
 
+/**
+ * shorten description.
+ * e.g. ``this is JavaScript. this is Java.`` => ``this is JavaScript.``.
+ *
+ * @param {DocObject} doc - target doc object.
+ * @returns {string} shorten description.
+ * @todo shorten before process markdown.
+ */
 export function shorten(doc) {
   if (!doc) return '';
 
@@ -38,6 +46,12 @@ export function shorten(doc) {
   return desc.substr(0, len);
 }
 
+/**
+ * convert markdown text to html.
+ * @param {string} text - markdown text.
+ * @param {boolean} [breaks=false] if true, break line. FYI gfm is not breaks.
+ * @return {string} html.
+ */
 export function markdown(text, breaks = false) {
   let compiled = marked(text, {
     gfm: true,
@@ -51,6 +65,11 @@ export function markdown(text, breaks = false) {
   return compiled;
 }
 
+/**
+ * get UTC date string.
+ * @param {Date} date - target date object.
+ * @returns {string} UTC date string(yyyy-mm-dd hh:mm:ss)
+ */
 export function dateForUTC(date) {
   function pad(num, len) {
     let count = Math.max(0, len - `${num}`.length);

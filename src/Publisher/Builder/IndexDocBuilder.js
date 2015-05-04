@@ -5,12 +5,25 @@ import IceCap from 'ice-cap';
 import DocBuilder from './DocBuilder.js';
 import {markdown} from './util.js';
 
+/**
+ * Index output builder class.
+ */
 export default class IndexDocBuilder extends DocBuilder {
+  /**
+   * create instance.
+   * @param {Taffy} data - doc object database.
+   * @param {ESDocConfig} config - use config to build output.
+   * @param {CoverageObject} coverage - use coverage to build output.
+   */
   constructor(data, config, coverage) {
     super(data, config);
     this._coverage = coverage;
   }
 
+  /**
+   * execute building output.
+   * @param {function(html: string, filePath: string)} callback - is called with output.
+   */
   exec(callback) {
     let ice = this._buildLayoutDoc();
     let title = this._getTitle();
@@ -19,6 +32,11 @@ export default class IndexDocBuilder extends DocBuilder {
     callback(ice.html, 'index.html');
   }
 
+  /**
+   * build index output.
+   * @returns {string} html of index output.
+   * @private
+   */
   _buildIndexDoc() {
     if (!this._config.index) return 'API Document';
 

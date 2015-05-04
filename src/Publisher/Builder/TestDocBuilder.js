@@ -1,7 +1,14 @@
 import IceCap from 'ice-cap';
 import DocBuilder from './DocBuilder.js';
 
+/**
+ * Test file output html builder class.
+ */
 export default class TestDocBuilder extends DocBuilder {
+  /**
+   * execute building output html.
+   * @param {function(html: string, filePath: string)} callback - is called with output html.
+   */
   exec(callback) {
     let testDescribeDoc = this._find({kind: 'testDescribe'})[0];
     if (!testDescribeDoc) return;
@@ -17,6 +24,11 @@ export default class TestDocBuilder extends DocBuilder {
     callback(ice.html, fileName);
   }
 
+  /**
+   * build whole test file output html.
+   * @returns {string} html of whole test file.
+   * @private
+   */
   _buildTestDocHTML() {
     let ice = new IceCap(this._readTemplate('test.html'));
     let testDescribeHTML = this._buildTestDescribeDocHTML();
@@ -24,6 +36,13 @@ export default class TestDocBuilder extends DocBuilder {
     return ice.html;
   }
 
+  /**
+   * build test describe list html.
+   * @param {number} [depth=0] - test depth.
+   * @param {string} [memberof] - target test.
+   * @returns {string} html of describe list.
+   * @private
+   */
   _buildTestDescribeDocHTML(depth = 0, memberof = null) {
     let cond = {kind: 'testDescribe', testDepth: depth};
     if (memberof) cond.memberof = memberof;

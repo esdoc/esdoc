@@ -387,7 +387,7 @@ describe('MyClass1:', ()=> {
           assert.includes(doc, '[data-ice="property"]:nth-of-type(8)', 'p8 Object this is p8(nest) desc.');
           assert.includes(doc, '[data-ice="property"]:nth-of-type(9)', 'p8.a number this is p8.a(nest) desc.');
           assert.includes(doc, '[data-ice="property"]:nth-of-type(10)', 'p8.b string this is p8.b(nest) desc.');
-          assert.includes(doc, '[data-ice="property"]:nth-of-type(11)', 'p9 MyClass2 | MyClass3[] | {a: number, b: string} nullable: false this is p9(complex) desc.this is second line.');
+          assert.includes(doc, '[data-ice="property"]:nth-of-type(11)', 'p9 MyClass2 | MyClass3[] | {a: number, b: string} nullable: false this is p9(complex) desc. this is second line.');
         });
 
         find(doc, '[data-ice="returnParams"]', (doc)=>{

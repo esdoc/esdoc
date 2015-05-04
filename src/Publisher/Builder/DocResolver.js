@@ -2,15 +2,25 @@ import fs from 'fs';
 import path from 'path';
 import {markdown} from './util.js';
 
+/**
+ * Resolve various properties in doc object.
+ */
 export default class DocResolver {
+  /**
+   * create instance.
+   * @param {DocBuilder} builder - target doc builder.
+   */
   constructor(builder) {
     this._builder = builder;
     this._data = builder._data;
   }
 
+  /**
+   * resolve various properties.
+   */
   resolve() {
     this._resolveAccess();
-    this._resolveOnlyExported();
+    this._resolveUnexportIdentifier();
     this._resolveUndocumentIdentifier();
     this._resolveDuplication();
     this._resolveIgnore();
@@ -20,6 +30,11 @@ export default class DocResolver {
     this._resolveTestRelation();
   }
 
+  /**
+   * resolve ignore property.
+   * remove docs that has ignore property.
+   * @private
+   */
   _resolveIgnore() {
     if (this._data.__RESOLVED_IGNORE__) return;
 
@@ -33,6 +48,12 @@ export default class DocResolver {
     this._data.__RESOLVED_IGNORE__ = true;
   }
 
+  /**
+   * resolve access property.
+   * if doc does not have access property, the doc is public.
+   * but name is started with '-', the doc is private.
+   * @private
+   */
   _resolveAccess() {
     if (this._data.__RESOLVED_ACCESS__) return;
 
@@ -43,13 +64,14 @@ export default class DocResolver {
     this._data().update(function(){
       if (!this.access) {
         if (autoPrivate && this.name.charAt(0) === '_') {
+          /** @ignore */
           this.access = 'private';
         } else {
           this.access = 'public';
         }
       }
 
-      if (!access.includes(this.access)) this.ignore = true;
+      if (!access.includes(this.access)) /** @ignore */ this.ignore = true;
 
       return this;
     });
@@ -57,17 +79,27 @@ export default class DocResolver {
     this._data.__RESOLVED_ACCESS__ = true;
   }
 
-  _resolveOnlyExported() {
-    if (this._data.__RESOLVED_ONLY_EXPORTED__) return;
+  /**
+   * resolve unexport identifier doc.
+   * doc is added ignore property that is not exported.
+   * @private
+   */
+  _resolveUnexportIdentifier() {
+    if (this._data.__RESOLVED_UNEXPORT_IDENTIFIER__) return;
 
     let config = this._builder._config;
     if (!config.unexportIdentifier) {
       this._data({export: false}).update({ignore: true});
     }
 
-    this._data.__RESOLVED_ONLY_EXPORTED__ = true;
+    this._data.__RESOLVED_UNEXPORT_IDENTIFIER__ = true;
   }
 
+  /**
+   * resolve undocument identifier doc.
+   * doc is added ignore property that does not have document tag.
+   * @private
+   */
   _resolveUndocumentIdentifier() {
     if (this._data.__RESOLVED_UNDOCUMENT_IDENTIFIER__) return;
 
@@ -78,6 +110,10 @@ export default class DocResolver {
     this._data.__RESOLVED_UNDOCUMENT_IDENTIFIER__ = true;
   }
 
+  /**
+   * resolve description as markdown.
+   * @private
+   */
   _resolveMarkdown() {
     if (this._data.__RESOLVED_MARKDOWN__) return;
 
@@ -86,7 +122,7 @@ export default class DocResolver {
         let value = obj[key];
         if (key === 'description' && typeof value === 'string') {
           obj[key + 'Raw'] = obj[key];
-          obj[key] = markdown(value, true);
+          obj[key] = markdown(value, false);
         } else if (typeof value === 'object' && value) {
           convert(value);
         }
@@ -101,6 +137,11 @@ export default class DocResolver {
     this._data.__RESOLVED_MARKDOWN__ = true;
   }
 
+  /**
+   * resolve @link as html link.
+   * @private
+   * @todo resolve all ``description`` property.
+   */
   _resolveLink() {
     if(this._data.__RESOLVED_LINK__) return;
 
@@ -147,6 +188,18 @@ export default class DocResolver {
     this._data.__RESOLVED_LINK__ = true;
   }
 
+  /**
+   * resolve class extends chain.
+   * add following special property.
+   * - ``_custom_extends_chain``: ancestor class chain.
+   * - ``_custom_direct_subclasses``: class list that direct extends target doc.
+   * - ``_custom_indirect_subclasses``: class list that indirect extends target doc.
+   * - ``_custom_indirect_implements``: class list that target doc indirect implements.
+   * - ``_custom_direct_implemented``: class list that direct implements target doc.
+   * - ``_custom_indirect_implemented``: class list that indirect implements target doc.
+   *
+   * @private
+   */
   _resolveExtendsChain() {
     if (this._data.__RESOLVED_EXTENDS_CHAIN__) return;
 
@@ -260,6 +313,13 @@ export default class DocResolver {
     this._data.__RESOLVED_EXTENDS_CHAIN__ = true;
   }
 
+  /**
+   * resolve test and identifier relation. add special property.
+   * - ``_custom_tests``: longnames of test doc.
+   * - ``_custom_test_targets``: longnames of identifier.
+   *
+   * @private
+   */
   _resolveTestRelation() {
     if (this._data.__RESOLVED_TEST_RELATION__) return;
 
@@ -299,6 +359,12 @@ export default class DocResolver {
     this._data.__RESOLVED_TEST_RELATION__ = true;
   }
 
+  /**
+   * resolve duplication identifier.
+   * member doc is possible duplication.
+   * other doc is not duplication.
+   * @private
+   */
   _resolveDuplication() {
     if (this._data.__RESOLVED_DUPLICATION__) return;
 

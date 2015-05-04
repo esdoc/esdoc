@@ -1,7 +1,14 @@
 import IceCap from 'ice-cap';
 import DocBuilder from './DocBuilder.js';
 
+/**
+ * File output html builder class.
+ */
 export default class FileDocBuilder extends DocBuilder {
+  /**
+   * execute building output html.
+   * @param {function(html: string, filePath: string)} callback - is called with each output.
+   */
   exec(callback) {
     let ice = this._buildLayoutDoc();
 
@@ -17,6 +24,12 @@ export default class FileDocBuilder extends DocBuilder {
     }
   }
 
+  /**
+   * build file output html.
+   * @param {DocObject} doc - target file doc object.
+   * @returns {string} html of file output.
+   * @private
+   */
   _buildFileDoc(doc) {
     let ice = new IceCap(this._readTemplate('file.html'));
     ice.text('title', doc.longname);

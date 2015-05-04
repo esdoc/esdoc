@@ -72,7 +72,8 @@ pre.prettyprint {
   margin: 4px 0;
 }
 
-p > code {
+p > code,
+li > code {
   padding: 0 4px;
   background: #ddd;
 }

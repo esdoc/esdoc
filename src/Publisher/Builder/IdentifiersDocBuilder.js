@@ -2,16 +2,27 @@ import fs from 'fs';
 import IceCap from 'ice-cap';
 import DocBuilder from './DocBuilder.js';
 
+/**
+ * Identifier output builder class.
+ */
 export default class IdentifiersDocBuilder extends DocBuilder {
+  /**
+   * execute building output.
+   * @param {function(html: string, filePath: string)} callback - is called with output.
+   */
   exec(callback) {
     let ice = this._buildLayoutDoc();
     let title = this._getTitle('Index');
-    ice.load('content', this._buildIndexDoc());
+    ice.load('content', this._buildIdentifierDoc());
     ice.text('title', title, IceCap.MODE_WRITE);
     callback(ice.html, 'identifiers.html');
   }
 
-  _buildIndexDoc() {
+  /**
+   * build identifier output.
+   * @private
+   */
+  _buildIdentifierDoc() {
     let indexInfo = this._getInfo();
 
     let ice = new IceCap(this._readTemplate('identifiers.html'));
