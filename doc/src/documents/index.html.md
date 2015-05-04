@@ -5,12 +5,13 @@ isPage: true
 
 **CAUTION: ESDoc is super alpha version!**
 
-ESDoc is API Documentation Generator for JavaScript.
+ESDoc is API Documentation Generator for JavaScript(ES6).
 
 # Feature
+- Generate detailed document.
+- Measure document coverage.
+- Associate test code to document.
 - Target at ES6 ``class`` and ``import/export`` style.
-- Document coverage of source code.
-- Generate document from test code.
 
 # Demo
 TODO: create more better demo.
