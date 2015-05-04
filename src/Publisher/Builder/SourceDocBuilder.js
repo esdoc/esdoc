@@ -33,6 +33,14 @@ export default class SourceDocBuilder extends DocBuilder {
 
     if (useCoverage) ice.load('coverageBadge', this._buildCoverageHTML(this._coverage));
     ice.attr('files', 'data-use-coverage', !!useCoverage);
+
+    if (useCoverage) {
+      let actual = this._coverage.actualCount;
+      let expect = this._coverage.expectCount;
+      let coverageCount = `${actual}/${expect}`;
+      ice.text('totalCoverageCount', coverageCount);
+    }
+
     ice.loop('file', docs, (i, doc, ice)=>{
       let filePath = doc.longname;
       let absFilePath = path.resolve(path.dirname(config.source), filePath);
@@ -40,18 +48,31 @@ export default class SourceDocBuilder extends DocBuilder {
       let lines = content.split('\n').length - 1;
       let stat = fs.statSync(absFilePath);
       let date = dateForUTC(stat.ctime);
-      let ratio;
+      let coverageRatio;
+      let coverageCount;
       if (useCoverage && coverage[filePath]) {
-        ratio = Math.floor(100 * coverage[filePath].actualCount / coverage[filePath].expectCount);
+        let actual = coverage[filePath].actualCount;
+        let expect = coverage[filePath].expectCount;
+        coverageRatio = `${Math.floor(100 * actual / expect)} %`;
+        coverageCount = `${actual}/${expect}`;
       } else {
-        ratio = 100;
+        coverageRatio = '-';
       }
 
+      let identifierDocs = this._find({
+        longname: {left: `${doc.longname}~`},
+        kind: ['class', 'function', 'variable']});
+      let identifiers = identifierDocs.map(doc =>{
+        return this._buildDocLinkHTML(doc.longname);
+      });
+
       ice.load('filePath', this._buildFileDocLinkHTML(doc));
-      ice.text('coverage', `${ratio} %`);
+      ice.text('coverage', coverageRatio);
+      ice.text('coverageCount', coverageCount);
       ice.text('lines', lines);
       ice.text('updated', date);
       ice.text('size', `${stat.size} byte`);
+      ice.load('identifier', identifiers.join(', ') || '-');
     });
     return ice.html;
   }

@@ -1,7 +1,7 @@
 {
   "source": "./src",
   "destination": "./doc/out/esdoc",
-  "excludes": ["Publisher/Builder/template/", "DefaultExternal/"],
+  "excludes": ["Publisher/Builder/template/", "BuiltinExternal/"],
   "access": ["public", "protected", "private"],
   "debug": false,
   "index": "./README.md",
