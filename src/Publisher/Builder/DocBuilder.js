@@ -156,9 +156,13 @@ export default class DocBuilder {
     let ice = new IceCap(this._readTemplate('layout.html'), {autoClose: false});
 
     ice.text('esdocVersion', `(${this._config._esdocVersion})`);
-    ice.attr('repoURL', 'href', info.url);
-    if (info.url.match(new RegExp('^https?://github.com/'))) {
-      ice.attr('repoURL', 'class', 'repo-url-github');
+    if (info.url) {
+      ice.attr('repoURL', 'href', info.url);
+      if (info.url.match(new RegExp('^https?://github.com/'))) {
+        ice.attr('repoURL', 'class', 'repo-url-github');
+      }
+    } else {
+      ice.drop('repoURL');
     }
 
     // see StaticFileBuilder#exec
