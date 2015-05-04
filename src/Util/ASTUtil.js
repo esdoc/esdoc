@@ -4,7 +4,15 @@ let ESTRAVERSE_KEYS = {
   Super: []
 };
 
+/**
+ * Utility for AST.
+ */
 export default class ASTUtil {
+  /**
+   * traverse ast nodes.
+   * @param {AST} ast - target AST.
+   * @param {function(node: Object, parent: Object)} callback - this is called with each node.
+   */
   static traverse(ast, callback) {
     estraverse.traverse(ast, {
       enter: function(node, parent) {
@@ -15,6 +23,13 @@ export default class ASTUtil {
     });
   }
 
+  /**
+   * find file path in import declaration by name.
+   * e.g. can find ``./foo/bar.js`` from ``import Bar from './foo/bar.js'`` by ``Bar``.
+   * @param {AST} ast - target AST.
+   * @param {string} name - identifier name.
+   * @returns {string|null} file path.
+   */
   static findPathInImportDeclaration(ast, name) {
     let path = null;
 
