@@ -66,6 +66,7 @@ class MyClass {
   - [Nullable And Not Nullable](#nullable-and-not-nullable)
   - [Spread](#spread)
   - [Optional And Default](#optional-and-default)
+- [Identifier Syntax](#identifier-syntax)
 
 ## For Common
 #### @access
@@ -408,6 +409,18 @@ class MyClass {
 }
 ```
 
+If you use ``get/set`` syntax, you can specify ``@type``.
+
+```javascript
+class MyClass {
+  /** @type {string} */
+  get value() {}
+
+  /** @type {string} */
+  set value(v){}
+}
+```
+
 If ``<type>`` is Object, you can use ``@property <type> <name> [description]`` for each properties.
 
 ```javascript
@@ -531,7 +544,7 @@ function myFunc(){...}
 ### Function
 ```javascript
 /**
- * @param {function(foo: number, bar: string)} param - this is function param.
+ * @param {function(foo: number, bar: string): boolean} param - this is function param.
  */
 function myFunc(param){...}
 ```
@@ -582,4 +595,17 @@ function myFunc(param){...}
  */
 function myFunc(param){...}
 ```
+
+## Identifier Syntax
+``<identifier>`` supports following syntax.
+- class: ``MyClass``
+- method and member: ``MyClass#foo``
+- static method and member: ``MyClass.bar``
+- function and variable: ``myFunc``, ``myVariable``
+
+if same names in your project, you can use full identifier syntax. full identifier is ``filePath~identifier``.
+
+e.g. If ``MyClass`` in ``src/foo1.js`` and ``src/foo2.js``, you can write following,
+- ``src/foo1.js~MyClass``
+- ``src/foo2.js~MyClass``
 
