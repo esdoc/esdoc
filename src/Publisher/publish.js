@@ -15,6 +15,12 @@ import SourceDocBuilder from './Builder/SourceDocBuilder.js';
 import TestDocBuilder from './Builder/TestDocBuilder.js';
 import TestFileDocBuilder from './Builder/TestFileDocBuilder.js';
 
+/**
+ * publish document as HTML.
+ * @param {DocObject[]} values - all doc objects.
+ * @param {AST[]} asts - all ASTs.
+ * @param {ESDocConfig} config - ESDoc config object.
+ */
 export default function publish(values, asts, config) {
   IceCap.debug = !!config.debug;
 
