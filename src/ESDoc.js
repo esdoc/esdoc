@@ -24,7 +24,7 @@ export default class ESDoc {
   /**
    * Generate documentation.
    * @param {ESDocConfig} config - config for generation.
-   * @param {function(results: Object, asts: Object[], config: ESDocConfig)} publisher - callback for output html.
+   * @param {function(results: Object[], asts: Object[], config: ESDocConfig)} publisher - callback for output html.
    */
   static generate(config, publisher) {
     assert(typeof publisher === 'function');
@@ -87,6 +87,13 @@ export default class ESDoc {
     publisher(results, asts, config);
   }
 
+  /**
+   * Generate document from test code.
+   * @param {ESDocConfig} config - config for generating.
+   * @param {DocObject[]} results - push DocObject to this.
+   * @param {AST[]} asts - push ast to this.
+   * @private
+   */
   static _generateForTest(config, results, asts) {
     let includes = config.test.includes.map((v) => new RegExp(v));
     let excludes = config.test.excludes.map((v) => new RegExp(v));
@@ -154,6 +161,13 @@ export default class ESDoc {
     }
   }
 
+  /**
+   * Use built-in external document.
+   * built-in external has number, string, boolean, etc...
+   * @param {DocObject[]} results - this method pushes DocObject to this param.
+   * @private
+   * @see {@link src/BuiltinExternal/ECMAScriptExternal.js}
+   */
   static _useBuiltinExternal(results) {
     let dirPath = path.resolve(__dirname, './BuiltinExternal/');
     this._walk(dirPath, (filePath)=>{
@@ -192,9 +206,9 @@ export default class ESDoc {
    * @param {string} [packageName] - npm package name of target.
    * @param {string} [mainFilePath] - npm main file path of target.
    * @param {string} [pathPrefix] - prefix of import path from root directory.
-   * @returns {Object}
-   * @property {DocObject[]} results
-   * @property {Object} ast
+   * @returns {Object} - return document that is traversed.
+   * @property {DocObject[]} results - this is contained JavaScript file.
+   * @property {AST} ast - this is AST of JavaScript file.
    * @private
    */
   static _traverse(inDirPath, filePath, packageName, mainFilePath, pathPrefix) {
@@ -216,6 +230,16 @@ export default class ESDoc {
     return {results: factory.results, ast: ast};
   }
 
+  /**
+   * traverse doc comment in test code file.
+   * @param {string} type - test code type.
+   * @param {string} inDirPath - root directory path.
+   * @param {string} filePath - target test code file path.
+   * @returns {Object} return document info that is traversed.
+   * @property {DocObject[]} results - this is contained test code.
+   * @property {AST} ast - this is AST of test code.
+   * @private
+   */
   static _traverseForTest(type, inDirPath, filePath) {
     let ast;
     try {

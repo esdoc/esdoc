@@ -28,6 +28,10 @@
  */
 
 /**
+ * @external {AST} https://github.com/estree/estree
+ */
+
+/**
  * @typedef {Object} DocTypedef
  */
 
