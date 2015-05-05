@@ -1,8 +1,10 @@
-import {readDoc, assert, find} from './util.js';
+import {readDoc, assert, find} from './../util.js';
 
+/** @testTarget {SingleDocBuilder} */
 describe('MyFunction:', ()=>{
   let doc = readDoc('function/index.html');
 
+  /** @testTarget {SingleDocBuilder#_buildSingleDoc} */
   it('has summary.', ()=>{
     find(doc, '[data-ice="summary"]', (doc)=>{
       assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public myFunction1() this is myFunction1 desc.');
@@ -18,6 +20,7 @@ describe('MyFunction:', ()=>{
     });
   });
 
+  /** @testTarget {SingleDocBuilder#_buildSingleDoc} */
   it('has detail.', ()=>{
     find(doc, '[data-ice="detail"]:nth-of-type(1)', (doc)=>{
       assert.includes(doc, '#static-function-myFunction1', 'public myFunction1()');

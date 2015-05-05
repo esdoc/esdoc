@@ -1,32 +1,15 @@
-import {readDoc, assert, find} from './util.js';
+import {readDoc, assert, find} from './../util.js';
 
 /** @testTarget {ClassDocBuilder} */
 describe('MyClass1:', ()=> {
   let doc = readDoc('class/src/MyClass.js~MyClass1.html');
 
-  /** @testTarget {ClassDoc#@unknown} */
-  it('has unknown tag.', ()=>{
-    let doc = global.db.find({name: 'MyClass1'})[0];
-    assert.equal(doc.unknown.length, 1);
-    assert.equal(doc.unknown[0].tagName, '@foobar');
-    assert.equal(doc.unknown[0].tagValue, 'this is unknown tag.');
-  });
-
-  /** @testTarget {AbstractDoc#@undocument} */
-  it('has undocument tag', ()=>{
-    let doc;
-
-    doc = global.db.find({name: 'method5', undocument: true})[0];
-    assert.equal(doc.undocument, true);
-
-    doc = global.db.find({name: 'method6', undocument: true})[0];
-    assert.equal(doc.undocument, true);
-  });
-
+  /** @testTarget {DocBuilder#_getTitle} */
   it('has document title', ()=>{
     assert.includes(doc, 'head title', 'MyClass1 | ESDoc Test Fixture API Document');
   });
 
+  /** @testTarget {ClassDocBuilder#_buildClassDoc} */
   it('has header notice.', ()=>{
     find(doc, '[data-ice="content"] .header-notice', (doc)=>{
       assert.includes(doc, '[data-ice="importPath"]', "import MyClass1 from 'esdoc-test-fixture'");
@@ -39,6 +22,12 @@ describe('MyClass1:', ()=> {
     });
   });
 
+  /**
+   * @testTarget {ClassDocBuilder#_buildClassDoc}
+   * @testTarget {ClassDocBuilder#_buildExtendsChainHTML}
+   * @testTarget {ClassDocBuilder#_buildIndirectSubclassHTML}
+   * @testTarget {ClassDocBuilder#_buildDirectSubclassHTML}
+   */
   it('has self detail.', ()=>{
     find(doc, '[data-ice="content"] .self-detail', (doc)=>{
       assert.includes(doc, '[data-ice="name"]', 'MyClass1');
@@ -91,6 +80,7 @@ describe('MyClass1:', ()=> {
     });
   });
 
+  /** @testTarget {ClassDocBuilder#_buildClassDoc} */
   it('has static member summary.', ()=>{
     find(doc, '[data-ice="staticMemberSummary"]', (doc)=>{
 
@@ -116,6 +106,7 @@ describe('MyClass1:', ()=> {
     });
   });
 
+  /** @testTarget {ClassDocBuilder#_buildClassDoc} */
   it('has static method summary.', ()=>{
     find(doc, '[data-ice="staticMethodSummary"]', (doc)=>{
       // public
@@ -134,6 +125,7 @@ describe('MyClass1:', ()=> {
     });
   });
 
+  /** @testTarget {ClassDocBuilder#_buildClassDoc} */
   it('has constructor summary.', ()=>{
     find(doc, '[data-ice="constructorSummary"]', (doc)=>{
       find(doc, 'table[data-ice="summary"]:nth-of-type(1)', (doc)=>{
@@ -143,6 +135,7 @@ describe('MyClass1:', ()=> {
     });
   });
 
+  /** @testTarget {ClassDocBuilder#_buildClassDoc} */
   it('has member summary.', ()=>{
     find(doc, '[data-ice="memberSummary"]', (doc)=>{
       // public
@@ -187,6 +180,7 @@ describe('MyClass1:', ()=> {
     });
   });
 
+  /** @testTarget {ClassDocBuilder#_buildClassDoc} */
   it('has method summary.', ()=>{
     find(doc, '[data-ice="methodSummary"]', (doc)=>{
       // public
@@ -216,6 +210,7 @@ describe('MyClass1:', ()=> {
     });
   });
 
+  /** @testTarget {ClassDocBuilder#_buildInheritedSummaryHTML} */
   it('has inherited summary.', ()=>{
     find(doc, '[data-ice="inheritedSummary"] [data-ice="summary"]:nth-of-type(1)', (doc)=>{
       assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public static get ultraStaticValue');
@@ -273,6 +268,7 @@ describe('MyClass1:', ()=> {
     });
   });
 
+  /** @testTarget {ClassDocBuilder#_buildClassDoc} */
   it('has static member detail.', ()=>{
     find(doc, '[data-ice="staticMemberDetails"]', (doc)=>{
       // public
@@ -297,6 +293,7 @@ describe('MyClass1:', ()=> {
     })
   });
 
+  /** @testTarget {ClassDocBuilder#_buildClassDoc} */
   it('has static method detail.', ()=>{
     find(doc, '[data-ice="staticMethodDetails"]', (doc)=>{
       // public
@@ -315,6 +312,7 @@ describe('MyClass1:', ()=> {
     })
   });
 
+  /** @testTarget {ClassDocBuilder#_buildClassDoc} */
   it('has constructor detail.', ()=>{
     find(doc, '[data-ice="constructorDetails"]', (doc)=>{
       // public
@@ -329,6 +327,7 @@ describe('MyClass1:', ()=> {
     })
   });
 
+  /** @testTarget {ClassDocBuilder#_buildClassDoc} */
   it('has member detail.', ()=>{
     find(doc, '[data-ice="memberDetails"]', (doc)=>{
       // public p1
@@ -364,6 +363,7 @@ describe('MyClass1:', ()=> {
     })
   });
 
+  /** @testTarget {ClassDocBuilder#_buildClassDoc} */
   it('has method detail.', ()=>{
     find(doc, '[data-ice="methodDetails"]', (doc)=>{
       // public
@@ -479,39 +479,3 @@ describe('MyClass1:', ()=> {
   });
 });
 
-describe('MyClass7', ()=>{
-  let doc = readDoc('class/src/MyClass.js~MyClass7.html');
-
-  it('is exists', ()=>{
-    assert.includes(doc, '.self-detail [data-ice="name"]', 'MyClass7');
-
-    find(doc, 'table[data-ice="summary"]:nth-of-type(1)', (doc)=>{
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public method1() this is method1 desc.');
-    });
-  });
-});
-
-describe('MyClass8', ()=>{
-  let doc = readDoc('class/src/MyClass.js~MyClass8.html');
-
-  it('is exists', ()=>{
-    assert.includes(doc, '.self-detail [data-ice="name"]', 'MyClass8');
-
-    find(doc, 'table[data-ice="summary"]:nth-of-type(1)', (doc)=>{
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public method1() this is method1 desc.');
-    });
-  });
-});
-
-describe('MyClass999:', ()=>{
-  it('is not exist.', ()=>{
-    try {
-      readDoc('class/src/MyClass.js~MyClass999.html');
-    } catch(e) {
-      assert(e instanceof Error);
-      assert(e.message.includes('no such file or directory'));
-      return;
-    }
-    assert(false, 'unreachable');
-  });
-});

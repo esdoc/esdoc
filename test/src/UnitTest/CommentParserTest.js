@@ -1,7 +1,9 @@
 import assert from 'assert';
 import CommentParser from '../../../src/Parser/CommentParser.js';
 
+/** @testTarget {CommentParser} */
 describe('CommentParser:', ()=>{
+  /** @testTarget {CommentParser.parse} */
   it('can parse doc comment.', ()=>{
     let value = `*
 * this is desc.
@@ -23,6 +25,7 @@ describe('CommentParser:', ()=>{
     assert.deepEqual(tags[4], {tagName: '@tag4', tagValue: 'tag4 value'});
   });
 
+  /** @testTarget {CommentParser.isESDoc} */
   it('return empty with non doc comment.', ()=>{
     let value = `\
 this is not doc comment.
@@ -32,9 +35,10 @@ this is not doc comment.
     assert.equal(tags.length, 0);
   });
 
+  /** @testTarget {CommentParser.parse} */
   it('return empty with line comment.', ()=>{
     let value = `this is line comment.`;
-    let comment = {type: 'Block', value: value};
+    let comment = {type: 'Line', value: value};
     let tags = CommentParser.parse(comment);
     assert.equal(tags.length, 0);
   });

@@ -3,7 +3,13 @@ import fs from 'fs-extra';
 import path from 'path';
 import ESDocCLI from '../../../src/ESDocCLI.js';
 
+/** @testTarget {ESDocCLI} */
 describe('ESDocCLI:', ()=>{
+
+  /**
+   * @testTarget {ESDocCLI#exec}
+   * @testTarget {ESDocCLI#_createConfigFromJSONFile}
+   */
   it('can execute with config file.', ()=>{
     let cliPath = path.resolve('./src/cli.js');
     let configPath = path.resolve('./test/fixture/esdoc.json');
@@ -13,6 +19,10 @@ describe('ESDocCLI:', ()=>{
     assert(true);
   });
 
+  /**
+   * @testTarget {ESDocCLI#exec}
+   * @testTarget {ESDocCLI#_createConfigFromPath}
+   */
   it('can execute with directory path', ()=>{
     let cliPath = path.resolve('./src/cli.js');
     let dirPath = path.resolve('./test/fixture/src');

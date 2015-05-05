@@ -20,6 +20,7 @@ export default class IdentifiersDocBuilder extends DocBuilder {
 
   /**
    * build identifier output.
+   * @return {IceCap} built output.
    * @private
    */
   _buildIdentifierDoc() {

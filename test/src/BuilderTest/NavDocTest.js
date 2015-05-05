@@ -1,8 +1,10 @@
-import {readDoc, assert, find} from './util.js';
+import {readDoc, assert, find} from './../util.js';
 
+/** @testTarget {DocBuilder#_buildNavDoc} */
 describe('Nav:', ()=> {
   let doc = readDoc('index.html');
 
+  /** @testTarget {DocBuilder#_buildNavDoc} */
   it('has class nav.', ()=>{
     find(doc, '[data-ice="nav"] [data-ice="classWrap"]', (doc)=>{
       assert.includes(doc, '[data-ice="classDoc"]:nth-of-type(4)', 'MyClass1');
@@ -10,6 +12,7 @@ describe('Nav:', ()=> {
     });
   });
 
+  /** @testTarget {DocBuilder#_buildNavDoc} */
   it('has interface nav.', ()=>{
     find(doc, '[data-ice="nav"] [data-ice="interfaceWrap"]', (doc)=>{
       assert.includes(doc, '[data-ice="interfaceDoc"]:nth-of-type(2)', 'MyInterface1');
@@ -17,6 +20,7 @@ describe('Nav:', ()=> {
     });
   });
 
+  /** @testTarget {DocBuilder#_buildNavDoc} */
   it('has function nav.', ()=>{
     find(doc, '[data-ice="nav"] [data-ice="functionWrap"]', (doc)=>{
       assert.includes(doc, '[data-ice="functionDoc"]:nth-of-type(1)', 'myFunction1');
@@ -24,6 +28,7 @@ describe('Nav:', ()=> {
     });
   });
 
+  /** @testTarget {DocBuilder#_buildNavDoc} */
   it('has variable nav.', ()=>{
     find(doc, '[data-ice="nav"] [data-ice="variableWrap"]', (doc)=>{
       assert.includes(doc, '[data-ice="variableDoc"]:nth-of-type(1)', 'myVariable1');
@@ -31,6 +36,7 @@ describe('Nav:', ()=> {
     });
   });
 
+  /** @testTarget {DocBuilder#_buildNavDoc} */
   it('has typedef nav.', ()=>{
     find(doc, '[data-ice="nav"] [data-ice="typedefWrap"]', (doc)=>{
       assert.includes(doc, '[data-ice="typedefDoc"]:nth-of-type(1)', 'MyTypedef1');
@@ -38,6 +44,7 @@ describe('Nav:', ()=> {
     });
   });
 
+  /** @testTarget {DocBuilder#_buildNavDoc} */
   it('has external nav.', ()=>{
     find(doc, '[data-ice="nav"] [data-ice="externalWrap"]', (doc)=>{
       assert.includes(doc, '[data-ice="externalDoc"]:nth-of-type(1)', 'MyError2');

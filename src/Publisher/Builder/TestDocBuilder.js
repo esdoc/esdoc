@@ -63,7 +63,7 @@ export default class TestDocBuilder extends DocBuilder {
         for (let testTarget of describeDoc._custom_test_targets || []) {
           testTargetsHTML.push(this._buildDocLinkHTML(testTarget[0], testTarget[1]));
         }
-        testTargetsHTML = testTargetsHTML.join(', ') || '-';
+        testTargetsHTML = testTargetsHTML.join('\n') || '-';
 
         ice.load('testDescription', descriptionHTML);
         ice.attr('testDescription', 'style', `padding-left: ${padding}px`);
@@ -80,7 +80,7 @@ export default class TestDocBuilder extends DocBuilder {
         for (let testTarget of itDoc._custom_test_targets || []) {
           testTargetsHTML.push(this._buildDocLinkHTML(testTarget[0], testTarget[1]));
         }
-        testTargetsHTML = testTargetsHTML.join(', ') || '-';
+        testTargetsHTML = testTargetsHTML.join('\n') || '-';
 
         ice.attr('testIt', 'data-test-depth', depth + 1);
         ice.load('testDescription', descriptionHTML);

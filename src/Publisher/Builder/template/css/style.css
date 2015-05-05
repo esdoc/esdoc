@@ -490,6 +490,10 @@ table.test-summary thead {
   color: white;
 }
 
+table.test-summary thead .test-description {
+  width: 50%;
+}
+
 table.test-summary {
   width: 100%;
   margin: 10px 0;
@@ -509,6 +513,7 @@ table.test-summary tbody tr:hover {
 table.test-summary td {
   border: solid 1px #ddd;
   padding: 4px 10px;
+  vertical-align: top;
 }
 
 table.test-summary td p {
@@ -528,6 +533,10 @@ table.test-summary tr.test-describe .toggle.opened:before {
 
 table.test-summary tr.test-describe .toggle.closed:before {
   content: '▶';
+}
+
+table.test-summary .test-target > span {
+  display: block;
 }
 
 .inner-link-active {
