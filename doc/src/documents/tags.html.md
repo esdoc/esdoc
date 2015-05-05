@@ -55,7 +55,7 @@ class MyClass {
   - [@external](#-external)
   - [@typedef](#-typedef)
 - [For Test](#for-test)
-  - [@testTarget](#-testtarget)
+  - [@test](#-test)
 - [Type Syntax](#type-syntax)
   - [Simple](#simple)
   - [Array](#array)
@@ -474,14 +474,14 @@ If ``<type>`` is Object, you can use ``@property <type> <name> [description]`` f
 ----
 
 ## For Test
-#### @testTarget
-syntax: ``@testTarget <identifier>``
+#### @test
+syntax: ``@test <identifier>``
 
 ```javascript
-/** @testTarget {MyClass} */
+/** @test {MyClass} */
 describe('MyClass has foo bar feature', ()=>{
 
-  /** @testTarget {MyClass#baz} */
+  /** @test {MyClass#baz} */
   it('MyClass#baz returns magic value', ()=>{
     assert(true);
   });

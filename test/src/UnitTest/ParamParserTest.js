@@ -1,10 +1,10 @@
 import assert from 'assert';
 import ParamParser from '../../../src/Parser/ParamParser.js';
 
-/** @testTarget {ParamParser} */
+/** @test {ParamParser} */
 describe('ParamParser:', ()=>{
 
-  /** @testTarget {ParamParser.parseParamValue} */
+  /** @test {ParamParser.parseParamValue} */
   it('parse param value.', ()=>{
     let value = '{number} p1 this is desc';
     let {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value);
@@ -13,7 +13,7 @@ describe('ParamParser:', ()=>{
     assert.equal(paramDesc, 'this is desc');
   });
 
-  /** @testTarget {ParamParser.parseParamValue} */
+  /** @test {ParamParser.parseParamValue} */
   it('parse param value with hyphen prefix.', ()=>{
     let value = '{number} p1 - this is desc';
     let {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value);
@@ -22,7 +22,7 @@ describe('ParamParser:', ()=>{
     assert.equal(paramDesc, 'this is desc');
   });
 
-  /** @testTarget {ParamParser.parseParamValue} */
+  /** @test {ParamParser.parseParamValue} */
   it('parse param value without param name', ()=>{
     let value = '{number} this is desc';
     let {typeText, paramDesc} = ParamParser.parseParamValue(value, true, false, true);
@@ -30,7 +30,7 @@ describe('ParamParser:', ()=>{
     assert.equal(paramDesc, 'this is desc');
   });
 
-  /** @testTarget {ParamParser.parseParamValue} */
+  /** @test {ParamParser.parseParamValue} */
   it('parse param value without param desc', ()=>{
     let value = '{number} p1';
     let {typeText, paramName} = ParamParser.parseParamValue(value, true, true, false);
@@ -38,7 +38,7 @@ describe('ParamParser:', ()=>{
     assert.equal(paramName, 'p1');
   });
 
-  /** @testTarget {ParamParser.parseParamValue} */
+  /** @test {ParamParser.parseParamValue} */
   it('parse param value with complex', ()=>{
     let value = '{!(number|string|boolean[])} [p1=10] this is desc';
     let {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value);
@@ -47,7 +47,7 @@ describe('ParamParser:', ()=>{
     assert.equal(paramDesc, 'this is desc');
   });
 
-  /** @testTarget {ParamParser.parseParam} */
+  /** @test {ParamParser.parseParam} */
   it('parse param.', ()=>{
     let value = '{number} p1 this is desc';
     let {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value);
@@ -62,7 +62,7 @@ describe('ParamParser:', ()=>{
     });
   });
 
-  /** @testTarget {ParamParser.parseParam} */
+  /** @test {ParamParser.parseParam} */
   it('parse param with complex.', ()=>{
     let value = '{?(number|string|boolean[])} [p1] this is desc';
     let {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value);
@@ -77,7 +77,7 @@ describe('ParamParser:', ()=>{
     });
   });
 
-  /** @testTarget {ParamParser.parseParam} */
+  /** @test {ParamParser.parseParam} */
   it('parse param with complex.', ()=>{
     let value = '{!(number|string|boolean[])} [p1=10] this is desc';
     let {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value);
@@ -94,7 +94,7 @@ describe('ParamParser:', ()=>{
     });
   });
 
-  /** @testTarget {ParamParser.parseParam} */
+  /** @test {ParamParser.parseParam} */
   it('parse param with complex.', ()=>{
     let value = '{...number} [p1=[10,20,30]] this is desc';
     let {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value);

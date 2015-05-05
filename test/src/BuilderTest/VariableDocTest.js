@@ -1,10 +1,10 @@
 import {readDoc, assert, find} from './../util.js';
 
-/** @testTarget {SingleDocBuilder} */
+/** @test {SingleDocBuilder} */
 describe('MyVariable:', ()=> {
   let doc = readDoc('variable/index.html');
 
-  /** @testTarget {SingleDocBuilder#_buildSingleDoc} */
+  /** @test {SingleDocBuilder#_buildSingleDoc} */
   it('has summary.', ()=>{
     find(doc, '[data-ice="summary"]', (doc)=>{
       assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public myVariable1: Object this is myVariable1 desc.');
@@ -15,7 +15,7 @@ describe('MyVariable:', ()=> {
     });
   });
 
-  /** @testTarget {SingleDocBuilder#_buildSingleDoc} */
+  /** @test {SingleDocBuilder#_buildSingleDoc} */
   it('has detail.', ()=> {
     find(doc, '[data-ice="detail"]:nth-of-type(1)', (doc)=> {
       assert.includes(doc, '#static-variable-myVariable1', 'public myVariable1: Object');

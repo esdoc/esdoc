@@ -1,15 +1,15 @@
 import {readDoc, assert, find} from './../util.js';
 
-/** @testTarget {ClassDocBuilder} */
+/** @test {ClassDocBuilder} */
 describe('MyClass1:', ()=> {
   let doc = readDoc('class/src/MyClass.js~MyClass1.html');
 
-  /** @testTarget {DocBuilder#_getTitle} */
+  /** @test {DocBuilder#_getTitle} */
   it('has document title', ()=>{
     assert.includes(doc, 'head title', 'MyClass1 | ESDoc Test Fixture API Document');
   });
 
-  /** @testTarget {ClassDocBuilder#_buildClassDoc} */
+  /** @test {ClassDocBuilder#_buildClassDoc} */
   it('has header notice.', ()=>{
     find(doc, '[data-ice="content"] .header-notice', (doc)=>{
       assert.includes(doc, '[data-ice="importPath"]', "import MyClass1 from 'esdoc-test-fixture'");
@@ -23,10 +23,10 @@ describe('MyClass1:', ()=> {
   });
 
   /**
-   * @testTarget {ClassDocBuilder#_buildClassDoc}
-   * @testTarget {ClassDocBuilder#_buildExtendsChainHTML}
-   * @testTarget {ClassDocBuilder#_buildIndirectSubclassHTML}
-   * @testTarget {ClassDocBuilder#_buildDirectSubclassHTML}
+   * @test {ClassDocBuilder#_buildClassDoc}
+   * @test {ClassDocBuilder#_buildExtendsChainHTML}
+   * @test {ClassDocBuilder#_buildIndirectSubclassHTML}
+   * @test {ClassDocBuilder#_buildDirectSubclassHTML}
    */
   it('has self detail.', ()=>{
     find(doc, '[data-ice="content"] .self-detail', (doc)=>{
@@ -80,7 +80,7 @@ describe('MyClass1:', ()=> {
     });
   });
 
-  /** @testTarget {ClassDocBuilder#_buildClassDoc} */
+  /** @test {ClassDocBuilder#_buildClassDoc} */
   it('has static member summary.', ()=>{
     find(doc, '[data-ice="staticMemberSummary"]', (doc)=>{
 
@@ -106,7 +106,7 @@ describe('MyClass1:', ()=> {
     });
   });
 
-  /** @testTarget {ClassDocBuilder#_buildClassDoc} */
+  /** @test {ClassDocBuilder#_buildClassDoc} */
   it('has static method summary.', ()=>{
     find(doc, '[data-ice="staticMethodSummary"]', (doc)=>{
       // public
@@ -125,7 +125,7 @@ describe('MyClass1:', ()=> {
     });
   });
 
-  /** @testTarget {ClassDocBuilder#_buildClassDoc} */
+  /** @test {ClassDocBuilder#_buildClassDoc} */
   it('has constructor summary.', ()=>{
     find(doc, '[data-ice="constructorSummary"]', (doc)=>{
       find(doc, 'table[data-ice="summary"]:nth-of-type(1)', (doc)=>{
@@ -135,7 +135,7 @@ describe('MyClass1:', ()=> {
     });
   });
 
-  /** @testTarget {ClassDocBuilder#_buildClassDoc} */
+  /** @test {ClassDocBuilder#_buildClassDoc} */
   it('has member summary.', ()=>{
     find(doc, '[data-ice="memberSummary"]', (doc)=>{
       // public
@@ -180,7 +180,7 @@ describe('MyClass1:', ()=> {
     });
   });
 
-  /** @testTarget {ClassDocBuilder#_buildClassDoc} */
+  /** @test {ClassDocBuilder#_buildClassDoc} */
   it('has method summary.', ()=>{
     find(doc, '[data-ice="methodSummary"]', (doc)=>{
       // public
@@ -210,7 +210,7 @@ describe('MyClass1:', ()=> {
     });
   });
 
-  /** @testTarget {ClassDocBuilder#_buildInheritedSummaryHTML} */
+  /** @test {ClassDocBuilder#_buildInheritedSummaryHTML} */
   it('has inherited summary.', ()=>{
     find(doc, '[data-ice="inheritedSummary"] [data-ice="summary"]:nth-of-type(1)', (doc)=>{
       assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public static get ultraStaticValue');
@@ -268,7 +268,7 @@ describe('MyClass1:', ()=> {
     });
   });
 
-  /** @testTarget {ClassDocBuilder#_buildClassDoc} */
+  /** @test {ClassDocBuilder#_buildClassDoc} */
   it('has static member detail.', ()=>{
     find(doc, '[data-ice="staticMemberDetails"]', (doc)=>{
       // public
@@ -293,7 +293,7 @@ describe('MyClass1:', ()=> {
     })
   });
 
-  /** @testTarget {ClassDocBuilder#_buildClassDoc} */
+  /** @test {ClassDocBuilder#_buildClassDoc} */
   it('has static method detail.', ()=>{
     find(doc, '[data-ice="staticMethodDetails"]', (doc)=>{
       // public
@@ -312,7 +312,7 @@ describe('MyClass1:', ()=> {
     })
   });
 
-  /** @testTarget {ClassDocBuilder#_buildClassDoc} */
+  /** @test {ClassDocBuilder#_buildClassDoc} */
   it('has constructor detail.', ()=>{
     find(doc, '[data-ice="constructorDetails"]', (doc)=>{
       // public
@@ -327,7 +327,7 @@ describe('MyClass1:', ()=> {
     })
   });
 
-  /** @testTarget {ClassDocBuilder#_buildClassDoc} */
+  /** @test {ClassDocBuilder#_buildClassDoc} */
   it('has member detail.', ()=>{
     find(doc, '[data-ice="memberDetails"]', (doc)=>{
       // public p1
@@ -363,7 +363,7 @@ describe('MyClass1:', ()=> {
     })
   });
 
-  /** @testTarget {ClassDocBuilder#_buildClassDoc} */
+  /** @test {ClassDocBuilder#_buildClassDoc} */
   it('has method detail.', ()=>{
     find(doc, '[data-ice="methodDetails"]', (doc)=>{
       // public

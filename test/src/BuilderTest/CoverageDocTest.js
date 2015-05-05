@@ -1,10 +1,10 @@
 import fs from 'fs';
 import {assert} from './../util.js';
 
-/** @testTarget {CoverageBuilder} */
+/** @test {CoverageBuilder} */
 describe('Coverage:', ()=> {
 
-  /** @testTarget {CoverageBuilder#exec} */
+  /** @test {CoverageBuilder#exec} */
   it('has coverage.json', ()=>{
     let json = fs.readFileSync('./test/fixture/esdoc/coverage.json', {encoding: 'utf8'}).toString();
     let coverage = JSON.parse(json);

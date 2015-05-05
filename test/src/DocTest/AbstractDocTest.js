@@ -1,9 +1,9 @@
 import {assert} from '../util.js';
 
-/** @testTarget {AbstractDoc} */
+/** @test {AbstractDoc} */
 describe('AbstractDoc:', ()=> {
 
-  /** @testTarget {AbstractDoc#@unknown} */
+  /** @test {AbstractDoc#@unknown} */
   it('has unknown tag.', ()=> {
     let doc = global.db.find({name: 'MyClass1'})[0];
     assert.equal(doc.unknown.length, 1);
@@ -11,7 +11,7 @@ describe('AbstractDoc:', ()=> {
     assert.equal(doc.unknown[0].tagValue, 'this is unknown tag.');
   });
 
-  /** @testTarget {AbstractDoc#@undocument} */
+  /** @test {AbstractDoc#@undocument} */
   it('has undocument tag.', ()=> {
     let doc;
 

@@ -1,10 +1,10 @@
 import {readDoc, assert, find} from './../util.js';
 
-/** @testTarget {IdentifiersDocBuilder} */
+/** @test {IdentifiersDocBuilder} */
 describe('Identifiers:', ()=> {
   let doc = readDoc('identifiers.html');
 
-  /** @testTarget {IdentifiersDocBuilder#_buildIdentifierDoc} */
+  /** @test {IdentifiersDocBuilder#_buildIdentifierDoc} */
   it('has class summary.', ()=>{
     find(doc, '[data-ice="classSummary"]', (doc)=>{
       assert.includes(doc, '[data-ice="target"]:nth-of-type(4)', 'public MyClass1 this class was deprecated. use MyClass1Ex instead of this class. this class is experimental. this class is dangerous. this is MyClass1 desc.');
@@ -12,14 +12,14 @@ describe('Identifiers:', ()=> {
     });
   });
 
-  /** @testTarget {IdentifiersDocBuilder#_buildIdentifierDoc} */
+  /** @test {IdentifiersDocBuilder#_buildIdentifierDoc} */
   it('has interface summary.', ()=>{
     find(doc, '[data-ice="interfaceSummary"]', (doc)=>{
       assert.includes(doc, '[data-ice="target"]:nth-of-type(4)', 'public MyInterface3 this is MyInterface3 desc.');
     });
   });
 
-  /** @testTarget {IdentifiersDocBuilder#_buildIdentifierDoc} */
+  /** @test {IdentifiersDocBuilder#_buildIdentifierDoc} */
   it('has function summary.', ()=>{
     find(doc, '[data-ice="functionSummary"]', (doc)=>{
       assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public myFunction1() this is myFunction1 desc.');
@@ -27,7 +27,7 @@ describe('Identifiers:', ()=> {
     });
   });
 
-  /** @testTarget {IdentifiersDocBuilder#_buildIdentifierDoc} */
+  /** @test {IdentifiersDocBuilder#_buildIdentifierDoc} */
   it('has variable summary.', ()=>{
     find(doc, '[data-ice="variableSummary"]', (doc)=>{
       assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public myVariable1: Object this is myVariable1 desc.');
@@ -35,7 +35,7 @@ describe('Identifiers:', ()=> {
     });
   });
 
-  /** @testTarget {IdentifiersDocBuilder#_buildIdentifierDoc} */
+  /** @test {IdentifiersDocBuilder#_buildIdentifierDoc} */
   it('has typedef summary.', ()=>{
     find(doc, '[data-ice="typedefSummary"]', (doc)=>{
       assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public MyTypedef1: Object this is MyTypedef1 desc.');

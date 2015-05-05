@@ -1,11 +1,11 @@
 import {readDoc, assert, find} from './../util.js';
 
-/** @testTarget {DocResolver} */
+/** @test {DocResolver} */
 describe('DocResolver:', ()=>{
   let docMyClass7 = readDoc('class/src/MyClass.js~MyClass7.html');
   let docMyClass8 = readDoc('class/src/MyClass.js~MyClass8.html');
 
-  /** @testTarget {DocResolver#_resolveIgnore} */
+  /** @test {DocResolver#_resolveIgnore} */
   it('does not ignore identifier that does not have @ignore.', ()=>{
     // MyClass7
     assert.includes(docMyClass7, '.self-detail [data-ice="name"]', 'MyClass7');
@@ -20,7 +20,7 @@ describe('DocResolver:', ()=>{
     });
   });
 
-  /** @testTarget {DocResolver#_resolveIgnore} */
+  /** @test {DocResolver#_resolveIgnore} */
   it('ignores identifier that have @ignore.', ()=>{
     try {
       readDoc('class/src/MyClass.js~MyClass999.html');

@@ -81,7 +81,7 @@ export default class TestDoc extends AbstractDoc {
 
   /** for @testTarget. */
   ['@testTarget']() {
-    let values = this._findAllTagValues(['@testTarget']);
+    let values = this._findAllTagValues(['@test', '@testTarget']);
     if (!values) return;
 
     this._value.testTargets = [];
