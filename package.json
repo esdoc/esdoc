@@ -1,7 +1,7 @@
 {
   "name": "esdoc",
-  "version": "0.0.2",
-  "description": "API Documentation Generator For JavaScript",
+  "version": "0.1.0",
+  "description": "An API Document Generator For JavaScript(ES6)",
   "author": "h13i32maru",
   "homepage": "https://esdoc.org/",
   "license": "MIT",
@@ -17,6 +17,7 @@
     "start": "bash ./script/server.sh"
   },
   "dependencies": {
+    "babel": "~5.2.9",
     "espree": "~2.0.2",
     "estraverse": "~4.1.0",
     "fs-extra": "~0.18.2",
@@ -29,7 +30,6 @@
     "marked": "~0.3.3"
   },
   "devDependencies": {
-    "babel": "~5.2.9",
     "coveralls": "~2.11.2",
     "http-server": "~0.8.0",
     "istanbul": "~0.3.13",
