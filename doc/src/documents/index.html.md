@@ -3,9 +3,9 @@ layout: "default"
 isPage: true
 ---
 
-**CAUTION: ESDoc is super alpha version!**
-
 ESDoc is API Documentation Generator for JavaScript(ES6).
+
+<img class="screen-shot" src="./image/top.png">
 
 # Feature
 - Generate detailed document.
@@ -14,10 +14,10 @@ ESDoc is API Documentation Generator for JavaScript(ES6).
 - Target at ES6 ``class`` and ``import/export`` style.
 
 # Demo
-TODO: create more better demo.
-
-- [http://h13i32maru.github.io/color-logger/](http://h13i32maru.github.io/color-logger/)
-- [http://h13i32maru.github.io/esdoc-test-fixture/](http://h13i32maru.github.io/esdoc-test-fixture/)
+- [ESDoc](https://esdoc.org/esdoc) (self hosting)
+- A ES6 software that does not have document tag.
+  - [Aurelia HTTP Client](https://esdoc.org/demo/aurelia-http-client/esdoc)
+  - [Aurelia Validation](https://esdoc.org/demo/aurelia-validation/esdoc)
 
 # Install
 

@@ -469,6 +469,15 @@ table.files-summary thead {
 table.files-summary td {
   border: solid 1px #ddd;
   padding: 4px 10px;
+  vertical-align: top;
+}
+
+table.files-summary td.identifiers > span {
+  display: block;
+  margin-top: 4px;
+}
+table.files-summary td.identifiers > span:first-child {
+  margin-top: 0;
 }
 
 table.files-summary .coverage-count {
@@ -537,6 +546,10 @@ table.test-summary tr.test-describe .toggle.closed:before {
 
 table.test-summary .test-target > span {
   display: block;
+  margin-top: 4px;
+}
+table.test-summary .test-target > span:first-child {
+  margin-top: 0;
 }
 
 .inner-link-active {

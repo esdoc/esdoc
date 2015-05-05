@@ -90,7 +90,7 @@ export default class SourceDocBuilder extends DocBuilder {
       ice.text('lines', lines);
       ice.text('updated', date);
       ice.text('size', `${stat.size} byte`);
-      ice.load('identifier', identifiers.join(', ') || '-');
+      ice.load('identifier', identifiers.join('\n') || '-');
     });
     return ice.html;
   }
