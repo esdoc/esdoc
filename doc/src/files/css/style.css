@@ -114,3 +114,17 @@ img.screen-shot {
   border: 1px solid rgba(0,0,0,0.1);
   box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
 }
+
+@media screen and (min-width: 0px) and (max-device-width: 600px) {
+  nav {
+    position: static;
+  }
+
+  article.content {
+    margin-top: 20px;
+  }
+
+  img.screen-shot {
+    max-width: 280px;
+  }
+}
