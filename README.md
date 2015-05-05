@@ -4,19 +4,19 @@
 
 # ESDoc
 
-ESDoc is API Documentation Generator for JavaScript(ES6).
+ESDoc is an API Documentation Generator for JavaScript(ES6).
 
 <img class="screen-shot" src="https://esdoc.org/image/top.png" style="max-width: 500px; border: 1px solid rgba(0,0,0,0.1); box-shadow: 1px 1px 1px rgba(0,0,0,0.5);">
 
 # Feature
-- Generate detailed document.
-- Measure document coverage.
-- Associate test code to document.
-- Target at ES6 ``class`` and ``import/export`` style.
+- Generates detailed document.
+- Measures document coverage.
+- Associates test code to document.
+- Targets at ES6 ``class`` and ``import/export`` style.
 
 # Demo
-- [ESDoc](https://esdoc.org/esdoc) (self hosting)
-- A ES6 software that does not have document tag.
+- [ESDoc](https://esdoc.org/esdoc) is self-hosting &#x1F604;
+- Libraries written by ES6 without document tags
   - [Aurelia HTTP Client](https://esdoc.org/demo/aurelia-http-client/esdoc)
   - [Aurelia Validation](https://esdoc.org/demo/aurelia-validation/esdoc)
 
