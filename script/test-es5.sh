@@ -2,7 +2,7 @@
 
 ./script/build.sh
 
-mocha_option="-t 5000 --recursive ./out/test/src -R spec"
+mocha_option="-t 10000 --recursive ./out/test/src -R spec"
 
 if [ "$TRAVIS" == "1" ]
 then

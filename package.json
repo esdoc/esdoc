@@ -14,28 +14,27 @@
     "test": "bash ./script/test.sh",
     "test-es5": "bash ./script/test-es5.sh",
     "esdoc": "bash ./script/esdoc.sh",
-    "prepublish": "npm run test-es5",
     "start": "bash ./script/server.sh"
   },
   "dependencies": {
-    "espree": "",
-    "estraverse": "",
-    "fs-extra": "",
-    "minimist": "^1.1.1",
-    "taffydb": "",
-    "escape-html": "",
-    "ice-cap": "",
+    "espree": "~2.0.2",
+    "estraverse": "~4.1.0",
+    "fs-extra": "~0.18.2",
+    "minimist": "~1.1.1",
+    "taffydb": "~2.7.2",
+    "escape-html": "~1.0.1",
+    "ice-cap": "~0.0.3",
     "color-logger": "0.0.3",
-    "cheerio": "",
-    "marked": ""
+    "cheerio": "~0.19.0",
+    "marked": "~0.3.3"
   },
   "devDependencies": {
-    "babel": "",
-    "coveralls": "",
-    "http-server": "",
-    "istanbul": "",
-    "mocha": "",
-    "docpad": ""
+    "babel": "~5.2.9",
+    "coveralls": "~2.11.2",
+    "http-server": "~0.8.0",
+    "istanbul": "~0.3.13",
+    "mocha": "~2.2.4",
+    "docpad": "~6.78.1"
   },
   "keywords": [
     "jsdoc",

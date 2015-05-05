@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mocha_option="-t 5000 --require ./node_modules/babel/register.js --recursive ./test/src -R spec"
+mocha_option="-t 10000 --require ./node_modules/babel/register.js --recursive ./test/src -R spec"
 
 if [ "$TRAVIS" == "1" ]
 then
