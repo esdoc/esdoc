@@ -3,21 +3,22 @@
 <span class="esdoc-coverage"></span>
 
 # ESDoc
-**CAUTION: ESDoc is super alpha version!**
 
-ESDoc is API Documentation Generator for JavaScript.
+ESDoc is API Documentation Generator for JavaScript(ES6).
+
+<img class="screen-shot" src="https://esdoc.org/image/top.png" style="max-width: 500px; border: 1px solid rgba(0,0,0,0.1); box-shadow: 1px 1px 1px rgba(0,0,0,0.5);">
 
 # Feature
+- Generate detailed document.
+- Measure document coverage.
+- Associate test code to document.
 - Target at ES6 ``class`` and ``import/export`` style.
-  - If you want to target at ES5, might better to use [JSDoc](http://usejsdoc.org/).
-- Document coverage of source code.
-- Generate document from test code.
 
 # Demo
-TODO: create more better demo.
-
-- [http://h13i32maru.github.io/color-logger/](http://h13i32maru.github.io/color-logger/)
-- [http://h13i32maru.github.io/esdoc-test-fixture/](http://h13i32maru.github.io/esdoc-test-fixture/)
+- [ESDoc](https://esdoc.org/esdoc) (self hosting)
+- A ES6 software that does not have document tag.
+  - [Aurelia HTTP Client](https://esdoc.org/demo/aurelia-http-client/esdoc)
+  - [Aurelia Validation](https://esdoc.org/demo/aurelia-validation/esdoc)
 
 # Install
 
