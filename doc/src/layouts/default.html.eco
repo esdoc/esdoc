@@ -29,5 +29,6 @@
 </footer>
 
 <script src="./script/pretty.js"></script>
+<script src="./script/analytics.js"></script>
 </body>
 </html>
