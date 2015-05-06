@@ -15,20 +15,20 @@ ESDoc is inspired by JSDoc.
   - generates detailed document
   - measures document coverage
   - associates test code to document.
-  - is slowly than JSDoc(I want to improve it)
+  - is slower than JSDoc(I want to improve it)
 - JSDoc
   - supports ES3/ES5 (JSDoc 3.3.0 will support ES6)
-  - targets at Class-base OOP and Prototype-base OOP
-  - has many flexible document tag
+  - targets Class-base OOP and Prototype-base OOP
+  - has many flexible document tags
 
-### Support Language
+### Supported Languages
 ESDoc supports ES6(ECMAScript-262 6th, ES2015).
 
-Under language is not supported.
+The languages below are not supported.
 - ES3, ES5: Use [JSDoc](https://github.com/jsdoc3/jsdoc)
 - ES7: Because ES7 is not stable.
-- Alt-JS(TypeScript, CoffeeScript, Dart, etc...): Because support too hard.
+- Alt-JS(TypeScript, CoffeeScript, Dart, etc...): Because supporting them is too hard.
 
-### Support Environment
+### Supported Environment
 ESDoc supports Node.js(v0.12) and io.js
 
