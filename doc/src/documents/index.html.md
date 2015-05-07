@@ -58,7 +58,7 @@ export default class MyClass {
 ```json
 {
   "source": "./src",
-  "destination": "./esdoc",
+  "destination": "./esdoc"
 }
 ```
 
