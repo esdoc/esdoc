@@ -13,6 +13,7 @@
 <nav>
   <a class="title" href="./">ESDoc</a>
   <ul>
+    <li><a href="./feature.html">Features</a></li>
     <li><a href="./tutorial.html">Tutorial</a></li>
     <li><a href="./config.html">Config</a></li>
     <li><a href="./tags.html">Tags</a></li>

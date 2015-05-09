@@ -95,6 +95,14 @@ h1, h2 {
   color: #E02130;
 }
 
+h1 {
+  font-size: 1.5em;
+}
+
+h2 {
+  font-size: 1.2em;
+}
+
 footer {
   padding: 60px 20px 30px 0;
   text-align: right;
