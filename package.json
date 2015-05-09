@@ -10,11 +10,11 @@
     "url": "https://github.com/h13i32maru/esdoc"
   },
   "scripts": {
-    "build": "bash ./script/build.sh",
-    "test": "bash ./script/test.sh",
-    "test-es5": "bash ./script/test-es5.sh",
-    "esdoc": "bash ./script/esdoc.sh",
-    "start": "bash ./script/server.sh"
+    "build": "node ./script/build.js",
+    "test": "node ./script/test.js",
+    "test-es5": "node ./script/test-es5.js",
+    "esdoc": "node ./script/esdoc.js",
+    "start": "node ./script/server.js"
   },
   "dependencies": {
     "babel": "~5.2.9",
