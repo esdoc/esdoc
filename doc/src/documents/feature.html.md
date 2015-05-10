@@ -42,12 +42,12 @@ ESDoc displays the import style in accordance with the export style.
 This is useful because you not need to see export style in source code.
 
 ## Document Coverage
-Unit test framework can measure test coverage. This leads motivation for test and inspects a leak of test.
+Unit test framework can measure test coverage. This leads motivation for test and inspects a missing of test.
 This is very important. So ESDoc supports document coverage.
 
 ESDoc processes only top-level class, function and variable.
 This is based on, ESDoc measures coverage by how much the document is being written out of all the processing target.
-And, ESDoc is also to measure coverage of each module, you will have become easier to also find a leak of the document.
+And, ESDoc is also to measure coverage of each module, you will have become easier to also find a missing of the document.
 For example, [this](./esdoc/source.html) is coverage of ESDoc itself.
 
 

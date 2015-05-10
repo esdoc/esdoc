@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ESDoc - An API Document Generator For JavaScript(ES6)</title>
+    <title>ESDoc - A Documentation Generator For JavaScript(ES6)</title>
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./prettify/prettify-tomorrow.css">
     <script src="./prettify/prettify.js"></script>
