@@ -1,5 +1,6 @@
 import path from 'path';
 import assert from 'assert';
+import os from 'os';
 
 /**
  * file path resolver.
@@ -57,11 +58,14 @@ export default class PathResolver {
     }
 
     let relativeFilePath = this.filePath;
+    let filePath;
     if (this._packageName) {
-      return path.normalize(`${this._packageName}${path.sep}${this._pathPrefix}${path.sep}${relativeFilePath}`);
+      filePath = path.normalize(`${this._packageName}${path.sep}${this._pathPrefix}${path.sep}${relativeFilePath}`);
     } else {
-      return `./${relativeFilePath}`;
+      filePath = `./${relativeFilePath}`;
     }
+
+    return this._slash(filePath);
   }
 
   /**
@@ -69,7 +73,7 @@ export default class PathResolver {
    * @type {string}
    */
   get fileFullPath() {
-    return this._filePath;
+    return this._slash(this._filePath);
   }
 
   /**
@@ -78,7 +82,7 @@ export default class PathResolver {
    */
   get filePath() {
     let relativeFilePath = path.relative(path.dirname(this._inDirPath), this._filePath);
-    return relativeFilePath;
+    return this._slash(relativeFilePath);
   }
 
   /**
@@ -89,6 +93,21 @@ export default class PathResolver {
     let selfDirPath = path.dirname(this._filePath);
     let resolvedPath = path.resolve(selfDirPath, relativePath);
     let resolvedRelativePath = path.relative(path.dirname(this._inDirPath), resolvedPath);
-    return resolvedRelativePath;
+    return this._slash(resolvedRelativePath);
+  }
+
+  /**
+   * convert 'back slash' to 'slash'.
+   * path separator is 'back slash' if platform is windows.
+   * @param {string} filePath - target file path.
+   * @returns {string} converted path.
+   * @private
+   */
+  _slash(filePath) {
+    if (os.platform() === 'win32') {
+      filePath = filePath.replace(/\\/g, '/');
+    }
+
+    return filePath;
   }
 }

@@ -21,6 +21,7 @@ export default class CommentParser {
     let comment = commentNode.value;
 
     // TODO: refactor
+    comment = comment.replace(/\r\n/gm, '\n'); // for windows
     comment = comment.replace(/^\*\s?/, ''); // remove first '*'
     comment = comment.replace(/ $/, ''); // remove last ' '
     comment = comment.replace(/^ *\* ?/gm, ''); // remove line head '*'
