@@ -565,7 +565,7 @@ function myFunc(param){...}
 function myFunc(param){...}
 
 /**
- * @param {!number} param - this is not nullable param.
+ * @param {!Object} param - this is not nullable param.
  */
 function myFunc(param){...}
 
