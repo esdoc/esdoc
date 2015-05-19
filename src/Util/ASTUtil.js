@@ -1,7 +1,8 @@
 import estraverse from 'estraverse';
 
 let ESTRAVERSE_KEYS = {
-  Super: []
+  Super: [],
+  JSXElement: []
 };
 
 /**
