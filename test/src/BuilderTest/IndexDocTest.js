@@ -11,6 +11,6 @@ describe('Index:', ()=> {
 
   /** @test {IndexDocBuilder#_buildIndexDoc} */
   it('has coverage badge', ()=>{
-    assert.includes(doc, '.esdoc-coverage .esdoc-coverage-ratio', '81%');
+    assert.includes(doc, '.esdoc-coverage .esdoc-coverage-ratio', '78%');
   });
 });

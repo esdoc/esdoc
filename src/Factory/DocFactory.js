@@ -40,6 +40,8 @@ export default class DocFactory {
     this._results = [];
     this._processedClassNodes = [];
 
+    this._joinSeparatedExport();
+
     // file doc
     let doc = new FileDoc(ast, ast, pathResolver, []);
     this._results.push(doc.value);
@@ -48,6 +50,37 @@ export default class DocFactory {
     if (ast.body.length === 0 && ast.leadingComments) {
       let results = this._traverseComments(ast, null, ast.leadingComments);
       this._results.push(...results);
+    }
+  }
+
+  /**
+   * join separated export declaration in AST internal.
+   *
+   * ```javascript
+   * class Foo {}
+   *
+   * export default Foo;
+   * ```
+   * ↓
+   * ```javascript
+   * export default class Foo {}
+   * ```
+   *
+   * @private
+   */
+  _joinSeparatedExport() {
+    for (let node1 of this._ast.body) {
+      if (!['ExportDefaultDeclaration', 'ExportNamedDeclaration'].includes(node1.type)) continue;
+
+      for (let node2 of this._ast.body) {
+        if (!node2.id) continue;
+        if (node2.id.type !== 'Identifier') continue;
+        if (node2.id.name !== node1.declaration.name) continue;
+
+        node1.declaration = this._copy(node2);
+        node2.type = 'Identifier'; // to ignore node2
+        break;
+      }
     }
   }
 
