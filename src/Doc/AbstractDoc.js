@@ -554,13 +554,16 @@ export default class AbstractDoc {
    */
   _resolveLongname(name) {
     let importPath = ASTUtil.findPathInImportDeclaration(this._ast, name);
-    if (importPath) {
+    if (!importPath) return name;
+
+    if (importPath.charAt(0) === '.' || importPath.charAt(0) === '/') {
       let resolvedPath = this._pathResolver.resolve(importPath);
       let longname = `${resolvedPath}~${name}`;
       return longname;
+    } else {
+      let longname = `${importPath}~${name}`;
+      return longname;
     }
-
-    return name;
   }
 
   /**

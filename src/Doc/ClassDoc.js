@@ -61,9 +61,22 @@ export default class ClassDoc extends AbstractDoc {
     }
 
     let node = this._node;
+    let longname;
     if (node.superClass) {
-      let longname = this._resolveLongname(node.superClass.name);
-      this._value.extends = [longname];
+      switch (node.superClass.type) {
+        case 'Identifier':
+          longname = this._resolveLongname(node.superClass.name);
+          this._value.extends = [longname];
+          break;
+        case 'MemberExpression':
+          let fullIdentifier = this._flattenMemberExpression(node.superClass);
+          let rootIdentifier = fullIdentifier.split('.')[0];
+          let rootLongname = this._resolveLongname(rootIdentifier);
+          let filePath = rootLongname.replace(/~.*/, '');
+          longname = `${filePath}~${fullIdentifier}`;
+          this._value.extends = [longname];
+          break;
+      }
     }
   }
 
