@@ -11,7 +11,7 @@ minimum config
 ```json
 {
   "source": "./path/to/src",
-  "destination": "./path/to/esdoc",
+  "destination": "./path/to/esdoc"
 }
 ```
 
