@@ -14,6 +14,7 @@
     "test": "node ./script/test.js",
     "test-es5": "node ./script/test-es5.js",
     "esdoc": "node ./script/esdoc.js",
+    "docpad": "node ./script/docpad.js",
     "start": "node ./script/server.js"
   },
   "dependencies": {

@@ -23,8 +23,13 @@ function cp(src, dst) {
   fs.copySync(src, dst);
 }
 
+function cd(dst) {
+  process.chdir(dst);
+}
+
 module.exports.rm = rm;
 module.exports.mkdir = mkdir;
 module.exports.exec = exec;
 module.exports.chmod = chmod;
 module.exports.cp = cp;
+module.exports.cd = cd;
