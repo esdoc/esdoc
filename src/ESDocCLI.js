@@ -43,8 +43,6 @@ export default class ESDocCLI {
     let config;
     if (this._argv.c) {
       config = this._createConfigFromJSONFile(this._argv.c);
-    } else if (this._argv._.length) {
-      config = this._createConfigFromPath(this._argv._[0]);
     } else {
       this._showHelp();
       process.exit(1);
@@ -79,7 +77,7 @@ export default class ESDocCLI {
    * @private
    */
   _showHelp() {
-    console.log('usage: esdoc [-c esdoc.json | path/to/dir]');
+    console.log('usage: esdoc [-c esdoc.json]');
   }
 
   /**
@@ -100,37 +98,6 @@ export default class ESDocCLI {
     configFilePath = path.resolve(configFilePath);
     let configJSON = fs.readFileSync(configFilePath, {encode: 'utf8'});
     let config = JSON.parse(configJSON);
-
-    return config;
-  }
-
-  /**
-   * create config object from target root directory.
-   * @param {string} targetPath - target root directory path.
-   * @return {{source: string, destination: string}} minimum config object.
-   * @private
-   */
-  _createConfigFromPath(targetPath) {
-    targetPath = path.resolve(targetPath);
-    let stat = fs.statSync(targetPath);
-    let config;
-
-    if (!stat.isDirectory()) {
-      this._showHelp();
-      process.exit(1);
-    }
-
-    let readmeStat = null;
-    try {
-      readmeStat = fs.statSync('./README.md');
-    } catch(e) {
-      // ignore
-    }
-
-    config = {
-      source: targetPath,
-      destination: '_esdoc_'
-    };
 
     return config;
   }

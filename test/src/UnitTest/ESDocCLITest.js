@@ -18,18 +18,4 @@ describe('ESDocCLI:', ()=>{
     cli.exec();
     assert(true);
   });
-
-  /**
-   * @test {ESDocCLI#exec}
-   * @test {ESDocCLI#_createConfigFromPath}
-   */
-  it('can execute with directory path', ()=>{
-    let cliPath = path.resolve('./src/cli.js');
-    let dirPath = path.resolve('./test/fixture/src');
-    let argv = ['node', cliPath, dirPath];
-    let cli = new ESDocCLI(argv);
-    cli.exec();
-    fs.removeSync('./_esdoc_');
-    assert(true);
-  });
 });
