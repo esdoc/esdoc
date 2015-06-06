@@ -35,23 +35,28 @@
  */
 
 /**
- * @external {AST} https://github.com/estree/estree
+ * @typedef {Object} AST
+ * @see https://github.com/estree/estree
  */
 
 /**
- * @external {ASTNode} https://github.com/estree/estree
+ * @typedef {Object} ASTNode
+ * @see https://github.com/estree/estree
  */
 
 /**
- * @external {NPMPackageObject} https://docs.npmjs.com/files/package.json
+ * @typedef {Object} NPMPackageObject
+ * @see https://docs.npmjs.com/files/package.json
  */
 
 /**
- * @external {Taffy} http://www.taffydb.com/
+ * @typedef {Object} Taffy
+ * @see http://www.taffydb.com/
  */
 
 /**
- * @external {IceCap} https://github.com/h13i32maru/ice-cap
+ * @typedef {Object} IceCap
+ * @see https://github.com/h13i32maru/ice-cap
  */
 
 /**

@@ -1,7 +1,7 @@
 # Changelog
 
 ## Next
-- **Breaking**
+- **Breaking Changes**
   - drop `esdoc ./path/to/dir` implementation ([b4d2121](https://github.com/h13i32maru/esdoc/commit/b4d21219221b8307a155fdee85e2ed5fed9c4429))
 - **Fix**
   - Fail parsing of React JSX syntax ([#3](https://github.com/h13i32maru/esdoc/pull/3)). Thank you [@koba04](https://github.com/koba04)
