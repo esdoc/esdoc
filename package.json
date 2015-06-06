@@ -17,7 +17,7 @@
     "start": "node ./script/server.js"
   },
   "dependencies": {
-    "babel": "~5.2.9",
+    "core-js": "~0.9.14",
     "espree": "~2.0.2",
     "estraverse": "~4.1.0",
     "fs-extra": "~0.18.2",
@@ -30,6 +30,7 @@
     "marked": "~0.3.3"
   },
   "devDependencies": {
+    "babel": "~5.2.9",
     "coveralls": "~2.11.2",
     "http-server": "~0.8.0",
     "istanbul": "~0.3.13",
