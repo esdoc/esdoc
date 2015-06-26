@@ -19,7 +19,6 @@ export default class CommentParser {
     if (!this.isESDoc(commentNode)) return [];
 
     let comment = commentNode.value;
-    console.log('comment', comment);
 
     // TODO: refactor
     comment = comment.replace(/\r\n/gm, '\n'); // for windows
