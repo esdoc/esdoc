@@ -31,12 +31,12 @@
     "marked": "~0.3.3"
   },
   "devDependencies": {
-    "babel": "~5.2.9",
+    "babel": "^5.6.10",
     "coveralls": "~2.11.2",
+    "docpad": "~6.78.1",
     "http-server": "~0.8.0",
     "istanbul": "~0.3.13",
-    "mocha": "~2.2.4",
-    "docpad": "~6.78.1"
+    "mocha": "~2.2.4"
   },
   "keywords": [
     "jsdoc",
