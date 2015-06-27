@@ -1,5 +1,9 @@
 # Changelog
 
+## Next
+- **Fix**
+  - Broken @desc when it has html code ([issue 12](https://github.com/h13i32maru/esdoc/issues/12))
+
 ## 0.1.2
 - **Breaking Changes**
   - drop `esdoc ./path/to/dir` implementation ([b4d2121](https://github.com/h13i32maru/esdoc/commit/b4d21219221b8307a155fdee85e2ed5fed9c4429))
