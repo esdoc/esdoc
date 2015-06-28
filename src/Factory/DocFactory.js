@@ -40,7 +40,8 @@ export default class DocFactory {
     this._results = [];
     this._processedClassNodes = [];
 
-    this._joinSeparatedExport();
+    this._inspectExportDefaultDeclaration();
+    this._inspectExportNamedDeclaration();
 
     // file doc
     let doc = new FileDoc(ast, ast, pathResolver, []);
@@ -54,34 +55,143 @@ export default class DocFactory {
   }
 
   /**
-   * join separated export declaration in AST internal.
+   * inspect ExportDefaultDeclaration.
+   *
+   * case1: separated export
    *
    * ```javascript
    * class Foo {}
-   *
    * export default Foo;
    * ```
-   * ↓
+   *
+   * case2: export instance(directly).
+   *
    * ```javascript
-   * export default class Foo {}
+   * class Foo {}
+   * export default new Foo();
+   * ```
+   *
+   * case3: export instance(indirectly).
+   *
+   * ```javascript
+   * class Foo {}
+   * let foo = new Foo();
+   * export default foo;
    * ```
    *
    * @private
+   * @todo support function export.
    */
-  _joinSeparatedExport() {
-    for (let node1 of this._ast.body) {
-      if (!['ExportDefaultDeclaration', 'ExportNamedDeclaration'].includes(node1.type)) continue;
+  _inspectExportDefaultDeclaration() {
+    for (let exportNode of this._ast.body) {
+      if (exportNode.type !== 'ExportDefaultDeclaration') continue;
+
+      let targetClassName = null;
+      let isInstanceExport = false;
+
+      switch(exportNode.declaration.type) {
+        case 'NewExpression':
+          targetClassName = exportNode.declaration.callee.name;
+          isInstanceExport = true;
+          break;
+        case 'Identifier':
+          for (let node2 of this._ast.body) {
+            if (node2.type === 'VariableDeclaration' &&
+              node2.declarations[0].init.type === 'NewExpression' &&
+              node2.declarations[0].id.name === exportNode.declaration.name) {
+              targetClassName = node2.declarations[0].init.callee.name;
+              isInstanceExport = true;
+              break;
+            }
+          }
+
+          if (!targetClassName) targetClassName = exportNode.declaration.name;
+          break;
+        default:
+          break;
+      }
 
       for (let node2 of this._ast.body) {
-        if (!node2.id) continue;
-        if (node2.id.type !== 'Identifier') continue;
-        if (node2.id.name !== node1.declaration.name) continue;
-
-        node1.declaration = this._copy(node2);
-        node2.type = 'Identifier'; // to ignore node2
-        break;
+        if (node2.type === 'ClassDeclaration' && node2.id.name === targetClassName) {
+          let exportedName = exportNode.declaration.name;
+          exportNode.declaration = this._copy(node2);
+          if (isInstanceExport) {
+            exportNode.declaration.__esdoc__instance_export = true;
+            exportNode.declaration.__esdoc__instance_name = exportedName;
+          }
+          node2.type = 'Identifier'; // to ignore
+        }
       }
     }
+  }
+
+  /**
+   * inspect ExportNamedDeclaration.
+   *
+   * case1: separated export
+   *
+   * ```javascript
+   * class Foo {}
+   * export {Foo};
+   * ```
+   *
+   * case2: export instance(indirectly).
+   *
+   * ```javascript
+   * class Foo {}
+   * let foo = new Foo();
+   * export {foo};
+   * ```
+   *
+   * @private
+   * @todo support function export.
+   */
+  _inspectExportNamedDeclaration() {
+    let pseudoExportNodes = [];
+
+    for (let exportNode of this._ast.body) {
+      if (exportNode.type !== 'ExportNamedDeclaration') continue;
+
+      if (exportNode.declaration) continue;
+
+      for (let specifier of exportNode.specifiers) {
+        if (specifier.type !== 'ExportSpecifier') continue;
+
+        let targetClassName = null;
+        let isInstanceExport = false;
+
+        for (let node2 of this._ast.body) {
+          if (node2.type === 'VariableDeclaration' &&
+            node2.declarations[0].init.type === 'NewExpression' &&
+            node2.declarations[0].id.name === specifier.exported.name) {
+            targetClassName = node2.declarations[0].init.callee.name;
+            isInstanceExport = true;
+            break;
+          }
+        }
+
+        if (!targetClassName) targetClassName = specifier.exported.name;
+
+        for (let node2 of this._ast.body) {
+          if (node2.type === 'ClassDeclaration' && node2.id.name === targetClassName) {
+            let pseudoExportNode = this._copy(exportNode);
+            pseudoExportNode.declaration = this._copy(node2);
+            pseudoExportNode.specifiers = null;
+            if (isInstanceExport) {
+              pseudoExportNode.declaration.__esdoc__instance_export = true;
+              pseudoExportNode.declaration.__esdoc__instance_name = specifier.exported.name;
+            }
+            pseudoExportNodes.push(pseudoExportNode);
+            node2.type = 'Identifier'; // to ignore
+            break;
+          }
+        }
+      }
+
+      exportNode.type = 'Identifier'; // to ignore
+    }
+
+    this._ast.body.push(...pseudoExportNodes);
   }
 
   /**

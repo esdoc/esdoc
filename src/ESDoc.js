@@ -212,6 +212,7 @@ export default class ESDoc {
    * @private
    */
   static _traverse(inDirPath, filePath, packageName, mainFilePath, pathPrefix) {
+    logger.i(`parsing: ${filePath}`);
     let ast;
     try {
       ast = ESParser.parse(filePath);

@@ -55,6 +55,7 @@ export default class AbstractDoc {
     this['@version']();
     this['@todo']();
     this['@ignore']();
+    this['@instanceExport']();
     this['@undocument']();
     this['@unknown']();
 
@@ -207,7 +208,7 @@ export default class AbstractDoc {
     }
 
     let parent = this._node.parent;
-    let name = this._value.name;
+    let name = this._node.__esdoc__instance_name || this._value.name;
     while (parent) {
       if (parent.type === 'ExportDefaultDeclaration') {
         this._value.importStyle = name;
@@ -321,6 +322,19 @@ export default class AbstractDoc {
     let tag = this._find(['@ignore']);
     if (tag) {
       this._value.ignore = true;
+    }
+  }
+
+  /** for @instanceExport, does not need to use this tag. */
+  ['@instanceExport'](){
+    let tag = this._find(['@instanceExport']);
+    if (tag) {
+      this._value.instanceExport = ['', 'true', true].includes(tag.tagValue);
+      return;
+    }
+
+    if (this._node.__esdoc__instance_export) {
+      this._value.instanceExport = true;
     }
   }
 

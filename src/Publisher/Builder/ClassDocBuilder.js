@@ -62,6 +62,7 @@ export default class ClassDocBuilder extends DocBuilder {
 
     // self
     ice.text('name', doc.name);
+    ice.drop('instanceExport', !doc.instanceExport);
     ice.load('description', doc.description);
     ice.load('deprecated', this._buildDeprecatedHTML(doc));
     ice.load('experimental', this._buildExperimentalHTML(doc));
