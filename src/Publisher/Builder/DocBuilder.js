@@ -560,34 +560,36 @@ export default class DocBuilder {
    * @private
    */
   _getOutputFileName(doc) {
-    switch (doc.kind) {
-      case 'variable':
-        return 'variable/index.html';
-      case 'function':
-        return 'function/index.html';
-      case 'member': // fall
-      case 'method': // fall
-      case 'constructor': // fall
-      case 'set': // fall
-      case 'get': // fal
-        let parentDoc = this._find({longname: doc.memberof})[0];
-        return this._getOutputFileName(parentDoc);
-      case 'external':
-        return 'external/index.html';
-      case 'typedef':
-        return 'typedef/index.html';
-      case 'class':
-        return `class/${doc.longname}.html`;
-      case 'file':
-        return `file/${doc.longname}.html`;
-      case 'testFile':
-        return `test-file/${doc.longname}.html`;
-      case 'testDescribe':
-        return `test.html`;
-      case 'testIt':
-        return `test.html`;
-      default:
-        throw new Error('DocBuilder: can not resolve file name.');
+    if(doc) {
+      switch (doc.kind) {
+        case 'variable':
+          return 'variable/index.html';
+        case 'function':
+          return 'function/index.html';
+        case 'member': // fall
+        case 'method': // fall
+        case 'constructor': // fall
+        case 'set': // fall
+        case 'get': // fal
+          let parentDoc = this._find({longname: doc.memberof})[0];
+          return this._getOutputFileName(parentDoc);
+        case 'external':
+          return 'external/index.html';
+        case 'typedef':
+          return 'typedef/index.html';
+        case 'class':
+          return `class/${doc.longname}.html`;
+        case 'file':
+          return `file/${doc.longname}.html`;
+        case 'testFile':
+          return `test-file/${doc.longname}.html`;
+        case 'testDescribe':
+          return `test.html`;
+        case 'testIt':
+          return `test.html`;
+        default:
+          throw new Error('DocBuilder: can not resolve file name.');
+      }
     }
   }
 
