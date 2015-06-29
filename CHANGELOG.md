@@ -1,8 +1,13 @@
 # Changelog
 
 ## Next
+- **Feat**
+  - Support instance export([957d61a](https://github.com/h13i32maru/esdoc/commit/957d61a8febb4fe3dda4d65bae8dc1cbc210250c))
+    - ``export default new Foo()``
 - **Fix**
   - Broken @desc when it has html code ([issue 12](https://github.com/h13i32maru/esdoc/issues/12))
+  - Crash complex ``ExportDefaultDeclaration`` and ``ExportNamedDeclaration``([957d61a](https://github.com/h13i32maru/esdoc/commit/957d61a8febb4fe3dda4d65bae8dc1cbc210250c))
+  - Crash when a class extends unexported class ([bf87643](https://github.com/h13i32maru/esdoc/commit/bf876430c49937932b2ba07602363b6927f211cc))
 
 ## 0.1.2
 - **Breaking Changes**
