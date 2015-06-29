@@ -101,6 +101,7 @@ export default class DocFactory {
               node2.declarations[0].id.name === exportNode.declaration.name) {
               targetClassName = node2.declarations[0].init.callee.name;
               isInstanceExport = true;
+              node2.type = 'Identifier'; // to ignore
               break;
             }
           }
@@ -108,6 +109,7 @@ export default class DocFactory {
           if (!targetClassName) targetClassName = exportNode.declaration.name;
           break;
         default:
+          logger.w(`unknown export declaration type. type = "${exportNode.declaration.type}"`);
           break;
       }
 
@@ -166,6 +168,7 @@ export default class DocFactory {
             node2.declarations[0].id.name === specifier.exported.name) {
             targetClassName = node2.declarations[0].init.callee.name;
             isInstanceExport = true;
+            node2.type = 'Identifier'; // to ignore
             break;
           }
         }
