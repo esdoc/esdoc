@@ -6,6 +6,7 @@
     - ``export default new Foo()``
   - Support anonymous class/function export ([#13](https://github.com/h13i32maru/esdoc/issues/13))
     - ``export default class{}`` and ``export default function(){}``
+  - Show a detail log when ESDoc could not process a input code ([#14](https://github.com/h13i32maru/esdoc/issues/14))
 - **Fix**
   - Broken @desc when it has html code ([issue 12](https://github.com/h13i32maru/esdoc/issues/12))
   - Crash complex ``ExportDefaultDeclaration`` and ``ExportNamedDeclaration``([957d61a](https://github.com/h13i32maru/esdoc/commit/957d61a8febb4fe3dda4d65bae8dc1cbc210250c))
