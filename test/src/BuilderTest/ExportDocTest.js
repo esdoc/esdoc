@@ -1,5 +1,9 @@
 import {readDoc, assert, find} from './../util.js';
 
+/**
+ * @test {DocFactory#_inspectExportDefaultDeclaration}
+ * @test {DocFactory#_inspectExportNamedDeclaration}
+ */
 describe('Export:', ()=>{
   describe('MyExport1:', ()=>{
     let doc = readDoc('class/src/Export.js~MyExport1.html');
