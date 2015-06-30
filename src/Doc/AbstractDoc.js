@@ -22,6 +22,8 @@ export default class AbstractDoc {
     this._commentTags = commentTags;
     this._value = {};
 
+    Object.defineProperty(this._node, 'doc', {value: this});
+
     this._apply();
   }
 
