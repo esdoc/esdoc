@@ -12,7 +12,7 @@ describe('ESDocCLI:', ()=>{
    */
   it('can execute with config file.', ()=>{
     let cliPath = path.resolve('./src/cli.js');
-    let configPath = path.resolve('./test/fixture/esdoc.json');
+    let configPath = path.resolve('./test/fixture/esdoc-cli.json');
     let argv = ['node', cliPath, '-c', configPath];
     let cli = new ESDocCLI(argv);
     cli.exec();
