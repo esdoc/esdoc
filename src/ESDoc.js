@@ -8,6 +8,7 @@ import ESParser from './Parser/ESParser';
 import PathResolver from './Util/PathResolver.js';
 import DocFactory from './Factory/DocFactory.js';
 import TestDocFactory from './Factory/TestDocFactory.js';
+import InvalidCodeLogger from './Util/InvalidCodeLogger.js';
 
 let logger = new Logger('ESDoc');
 
@@ -225,7 +226,12 @@ export default class ESDoc {
     let factory = new DocFactory(ast, pathResolver);
 
     ASTUtil.traverse(ast, (node, parent)=>{
-      factory.push(node, parent);
+      try {
+        factory.push(node, parent);
+      } catch(e) {
+        InvalidCodeLogger.show(filePath, node);
+        throw e;
+      }
     });
 
     return {results: factory.results, ast: ast};
@@ -253,7 +259,12 @@ export default class ESDoc {
     let factory = new TestDocFactory(type, ast, pathResolver);
 
     ASTUtil.traverse(ast, (node, parent)=>{
-      factory.push(node, parent);
+      try {
+        factory.push(node, parent);
+      } catch(e) {
+        InvalidCodeLogger.show(filePath, node);
+        throw e;
+      }
     });
 
     return {results: factory.results, ast: ast};
