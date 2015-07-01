@@ -16,7 +16,7 @@ describe('MyClass1:', ()=> {
       assert.includes(doc, '[data-ice="access"]', 'public');
       assert.includes(doc, '[data-ice="kind"]', 'class');
       assert.includes(doc, '[data-ice="source"]', 'source');
-      assert.includes(doc, '[data-ice="source"] a', 'file/src/MyClass.js.html#lineNumber43', 'href');
+      assert.includes(doc, '[data-ice="source"] a', 'file/src/MyClass.js.html#lineNumber52', 'href');
       assert.includes(doc, '[data-ice="version"]', 'version 0.0.1');
       assert.includes(doc, '[data-ice="since"]', 'since 1.2.3');
     });
@@ -77,6 +77,8 @@ describe('MyClass1:', ()=> {
         assert.includes(doc, 'li:nth-child(1)', 'this is todo1');
         assert.includes(doc, 'li:nth-child(2)', 'this is todo2');
       });
+
+      assert.includes(doc, 'code.lang-html', '<div>text</div>');
     });
   });
 

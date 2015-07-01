@@ -366,7 +366,7 @@ table.params td p {
   margin: 0;
 }
 
-.deprecated, .experimental {
+.deprecated, .experimental, .instance-export {
   border-left: solid 5px orange;
   padding-left: 4px;
   margin: 4px 0;

@@ -19,6 +19,8 @@ export default class DocResolver {
    * resolve various properties.
    */
   resolve() {
+    this._resolveExtendsChain();
+    this._resolveNecessary();
     this._resolveAccess();
     this._resolveUnexportIdentifier();
     this._resolveUndocumentIdentifier();
@@ -26,7 +28,6 @@ export default class DocResolver {
     this._resolveIgnore();
     this._resolveMarkdown();
     this._resolveLink();
-    this._resolveExtendsChain();
     this._resolveTestRelation();
   }
 
@@ -40,7 +41,8 @@ export default class DocResolver {
 
     let docs = this._builder._find({ignore: true});
     for (let doc of docs) {
-      var regex = new RegExp(`^${doc.longname}[.~#]`);
+      let longname = doc.longname.replace(/[$]/g, '\\$');
+      let regex = new RegExp(`^${longname}[.~#]`);
       this._data({longname: {regex: regex}}).remove();
     }
     this._data({ignore: true}).remove();
@@ -311,6 +313,42 @@ export default class DocResolver {
     }
 
     this._data.__RESOLVED_EXTENDS_CHAIN__ = true;
+  }
+
+  /**
+   * resolve necessary identifier.
+   *
+   * ```javascript
+   * class Foo {}
+   *
+   * export default Bar extends Foo {}
+   * ```
+   *
+   * ``Foo`` is not exported, but ``Bar`` extends ``Foo``.
+   * ``Foo`` is necessary.
+   * So, ``Foo`` must be exported by force.
+   *
+   * @private
+   */
+  _resolveNecessary() {
+    let builder = this._builder;
+    this._data({export: false}).update(function() {
+      let doc = this;
+      let childNames = [];
+      if (doc._custom_direct_subclasses) childNames.push(...doc._custom_direct_subclasses);
+      if (doc._custom_indirect_subclasses) childNames.push(...doc._custom_indirect_subclasses);
+      if (doc._custom_direct_implemented) childNames.push(...doc._custom_direct_implemented);
+      if (doc._custom_indirect_implemented) childNames.push(...doc._custom_indirect_implemented);
+
+      for (let childName of childNames) {
+        let childDoc = builder._find({longname: childName})[0];
+        if (!childDoc) continue;
+        if (!childDoc.ignore && childDoc.export) {
+          doc.export = true;
+          return doc;
+        }
+      }
+    });
   }
 
   /**

@@ -42,7 +42,7 @@ export default class MethodDoc extends AbstractDoc {
     let parent = this._node.parent;
     while (parent) {
       if (parent.type === 'ClassDeclaration' || parent.type === 'ClassExpression') {
-        memberof = `${this._pathResolver.filePath}~${parent.id.name}`;
+        memberof = `${this._pathResolver.filePath}~${parent.doc.value.name}`;
         this._value.memberof = memberof;
         return;
       }

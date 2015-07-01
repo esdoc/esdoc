@@ -1,5 +1,6 @@
 import AbstractDoc from './AbstractDoc.js';
 import ParamParser from '../Parser/ParamParser.js';
+import NamingUtil from '../Util/NamingUtil.js';
 
 /**
  * Doc Class from Function declaration AST node.
@@ -16,7 +17,12 @@ export default class FunctionDoc extends AbstractDoc {
   ['@name']() {
     super['@name']();
     if (this._value.name) return;
-    this._value.name = this._node.id.name;
+
+    if (this._node.id) {
+      this._value.name = this._node.id.name;
+    } else {
+      this._value.name = NamingUtil.filePathToName(this._pathResolver.filePath);
+    }
   }
 
   /** take out self name from file path */
