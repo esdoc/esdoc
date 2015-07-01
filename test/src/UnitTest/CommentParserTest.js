@@ -25,6 +25,7 @@ describe('CommentParser:', ()=>{
     assert.deepEqual(tags[4], {tagName: '@tag4', tagValue: 'tag4 value'});
   });
 
+    /** @test {CommentParser.parse} */
   it('can parse doc comments with trailing tabs', ()=>{
       let value = `*
 \t* this is desc.
