@@ -39,7 +39,6 @@ describe('CommentParser:', ()=>{
     let comment = {type: 'Block', value: value};
     let tags = CommentParser.parse(comment);
     assert.equal(tags.length, 5);
-    console.log('tags', tags);
     assert.deepEqual(tags[0], {tagName: '@desc', tagValue: 'this is desc.'});
     assert.deepEqual(tags[1], {tagName: '@tag1', tagValue: ''});
     assert.deepEqual(tags[2], {tagName: '@tag2', tagValue: 'tag2 value'});
