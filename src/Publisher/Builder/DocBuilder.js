@@ -142,6 +142,13 @@ export default class DocBuilder {
       url: packageObj.repository ? packageObj.repository.url : ''
     };
 
+    if (indexInfo.url.indexOf('git@github.com:') === 0) {
+      let matched = indexInfo.url.match(/^git@github\.com:(.*)\.git$/);
+      if (matched && matched[1]) {
+        indexInfo.url = `https://github.com/${matched[1]}`;
+      }
+    }
+
     return indexInfo;
   }
 
@@ -156,6 +163,7 @@ export default class DocBuilder {
     let ice = new IceCap(this._readTemplate('layout.html'), {autoClose: false});
 
     ice.text('esdocVersion', `(${this._config._esdocVersion})`);
+
     if (info.url) {
       ice.attr('repoURL', 'href', info.url);
       if (info.url.match(new RegExp('^https?://github.com/'))) {
