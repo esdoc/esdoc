@@ -1,5 +1,6 @@
 import AbstractDoc from './AbstractDoc.js';
 import ParamParser from '../Parser/ParamParser.js'
+import ASTUtil from '../Util/ASTUtil.js';
 
 /**
  * Doc Class from Variable Declaration AST node.
@@ -33,7 +34,13 @@ export default class VariableDoc extends AbstractDoc {
     super['@type']();
     if (this._value.type) return;
 
-    this._value.type = ParamParser.guessType(this._node.declarations[0].init);
+    if (this._node.declarations[0].init.type === 'NewExpression') {
+      let className = this._node.declarations[0].init.callee.name;
+      let longname = this._findClassLongname(className);
+      this._value.type = {types: [longname]};
+    } else {
+      this._value.type = ParamParser.guessType(this._node.declarations[0].init);
+    }
   }
 }
 

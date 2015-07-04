@@ -57,7 +57,7 @@ export default class AbstractDoc {
     this['@version']();
     this['@todo']();
     this['@ignore']();
-    this['@instanceExport']();
+    this['@pseudoExport']();
     this['@undocument']();
     this['@unknown']();
 
@@ -209,8 +209,13 @@ export default class AbstractDoc {
       return;
     }
 
+    if (this._node.__esdoc__pseudo_export) {
+      this._value.importStyle = null;
+      return;
+    }
+
     let parent = this._node.parent;
-    let name = this._node.__esdoc__instance_name || this._value.name;
+    let name = this._value.name;
     while (parent) {
       if (parent.type === 'ExportDefaultDeclaration') {
         this._value.importStyle = name;
@@ -327,16 +332,16 @@ export default class AbstractDoc {
     }
   }
 
-  /** for @instanceExport, does not need to use this tag. */
-  ['@instanceExport'](){
-    let tag = this._find(['@instanceExport']);
+  /** for @pseudoExport, does not need to use this tag. */
+  ['@pseudoExport'](){
+    let tag = this._find(['@pseudoExport']);
     if (tag) {
-      this._value.instanceExport = ['', 'true', true].includes(tag.tagValue);
+      this._value.pseudoExport = ['', 'true', true].includes(tag.tagValue);
       return;
     }
 
-    if (this._node.__esdoc__instance_export) {
-      this._value.instanceExport = true;
+    if (this._node.__esdoc__pseudo_export) {
+      this._value.pseudoExport = true;
     }
   }
 
@@ -607,5 +612,28 @@ export default class AbstractDoc {
     }
 
     return results.reverse().join('.');
+  }
+
+  /**
+   * find class in same file, import or external.
+   * @param {string} className - target class name.
+   * @returns {string} found class long name.
+   * @private
+   */
+  _findClassLongname(className) {
+    // find in same file.
+    for (let node of this._ast.body) {
+      if (!['ExportDefaultDeclaration', 'ExportNamedDeclaration'].includes(node.type)) continue;
+      if (node.declaration && node.declaration.type === 'ClassDeclaration' && node.declaration.id.name === className) {
+        return `${this._pathResolver.filePath}~${className}`;
+      }
+    }
+
+    // find in import.
+    let importPath = ASTUtil.findPathInImportDeclaration(this._ast, className);
+    if (importPath) return this._resolveLongname(className);
+
+    // find in external
+    return className;
   }
 }

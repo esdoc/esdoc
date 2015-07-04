@@ -52,4 +52,60 @@ export default class ASTUtil {
 
     return path;
   }
+
+  /**
+   * find VariableDeclaration node which has NewExpression.
+   * @param {string} name - variable name.
+   * @param {AST} ast - find in this ast.
+   * @returns {ASTNode|null} found ast node.
+   */
+  static findVariableDeclarationAndNewExpressionNode(name, ast) {
+    for (let node of ast.body) {
+      if (node.type === 'VariableDeclaration' &&
+        node.declarations[0].init.type === 'NewExpression' &&
+        node.declarations[0].id.name === name) {
+        return node;
+      }
+    }
+
+    return null;
+  }
+
+  /**
+   * find ClassDeclaration node.
+   * @param {string} name - class name.
+   * @param {AST} ast - find in this ast.
+   * @returns {ASTNode|null} found ast node.
+   */
+  static findClassDeclarationNode(name, ast) {
+    for (let node of ast.body) {
+      if (node.type === 'ClassDeclaration' && node.id.name === name) return node;
+    }
+
+    return null;
+  }
+
+  /**
+   * create VariableDeclaration node which has NewExpression.
+   * @param {string} name - variable name.
+   * @param {string} className - class name.
+   * @param {Object} loc - location.
+   * @returns {ASTNode} created node.
+   */
+  static createVariableDeclarationAndNewExpressionNode(name, className, loc) {
+    let node = {
+      type: 'VariableDeclaration',
+      kind: 'let',
+      loc: loc,
+      declarations: [
+        {
+          type: 'VariableDeclarator',
+          id: {type: 'Identifier', name: name},
+          init: {type: 'NewExpression', callee: {type: 'Identifier', name: className}}
+        }
+      ]
+    };
+
+    return node;
+  }
 }

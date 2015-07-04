@@ -9,6 +9,7 @@ import VariableDoc from '../Doc/VariableDoc.js';
 import AssignmentDoc from '../Doc/AssignmentDoc.js';
 import TypedefDoc from '../Doc/TypedefDoc.js';
 import ExternalDoc from '../Doc/ExternalDoc.js';
+import ASTUtil from '../Util/ASTUtil.js';
 
 let already = Symbol('already');
 let logger = new Logger('DocFactory');
@@ -83,48 +84,57 @@ export default class DocFactory {
    * @todo support function export.
    */
   _inspectExportDefaultDeclaration() {
+    let pseudoExportNodes = [];
+
     for (let exportNode of this._ast.body) {
       if (exportNode.type !== 'ExportDefaultDeclaration') continue;
 
       let targetClassName = null;
-      let isInstanceExport = false;
+      let targetVariableName = null;
+      let pseudoClassExport;
 
       switch(exportNode.declaration.type) {
         case 'NewExpression':
           targetClassName = exportNode.declaration.callee.name;
-          isInstanceExport = true;
+          targetVariableName = targetClassName.replace(/^./, c => c.toLowerCase());
+          pseudoClassExport = true;
           break;
         case 'Identifier':
-          for (let node2 of this._ast.body) {
-            if (node2.type === 'VariableDeclaration' &&
-              node2.declarations[0].init.type === 'NewExpression' &&
-              node2.declarations[0].id.name === exportNode.declaration.name) {
-              targetClassName = node2.declarations[0].init.callee.name;
-              isInstanceExport = true;
-              node2.type = 'Identifier'; // to ignore
-              break;
-            }
+          let varNode = ASTUtil.findVariableDeclarationAndNewExpressionNode(exportNode.declaration.name, this._ast);
+          if (varNode) {
+              targetClassName = varNode.declarations[0].init.callee.name;
+              targetVariableName = exportNode.declaration.name;
+              pseudoClassExport = true;
+              varNode.type = 'Identifier'; // to ignore
+          } else {
+            targetClassName = exportNode.declaration.name;
+            targetVariableName = targetClassName.replace(/^./, c => c.toLowerCase());
+            pseudoClassExport = false;
           }
-
-          if (!targetClassName) targetClassName = exportNode.declaration.name;
           break;
         default:
           logger.w(`unknown export declaration type. type = "${exportNode.declaration.type}"`);
           break;
       }
 
-      for (let node2 of this._ast.body) {
-        if (node2.type === 'ClassDeclaration' && node2.id.name === targetClassName) {
-          let exportedName = exportNode.declaration.name;
-          exportNode.declaration = this._copy(node2);
-          if (isInstanceExport) {
-            exportNode.declaration.__esdoc__instance_export = true;
-            exportNode.declaration.__esdoc__instance_name = exportedName;
-          }
-          node2.type = 'Identifier'; // to ignore
-        }
+      let classNode = ASTUtil.findClassDeclarationNode(targetClassName, this._ast);
+      if (classNode) {
+        let pseudoExportNode1 = this._copy(exportNode);
+        pseudoExportNode1.declaration = this._copy(classNode);
+        pseudoExportNode1.declaration.__esdoc__pseudo_export = pseudoClassExport;
+
+        let pseudoExportNode2 = this._copy(exportNode);
+        pseudoExportNode2.declaration = ASTUtil.createVariableDeclarationAndNewExpressionNode(targetVariableName, targetClassName, exportNode.loc);
+
+        pseudoExportNodes.push(pseudoExportNode1);
+        pseudoExportNodes.push(pseudoExportNode2);
+
+        classNode.type = 'Identifier'; // to ignore
+        exportNode.type = 'Identifier'; // to ignore
       }
     }
+
+    this._ast.body.push(...pseudoExportNodes);
   }
 
   /**
@@ -154,44 +164,54 @@ export default class DocFactory {
     for (let exportNode of this._ast.body) {
       if (exportNode.type !== 'ExportNamedDeclaration') continue;
 
-      if (exportNode.declaration) continue;
+      if (exportNode.declaration && exportNode.declaration.type === 'VariableDeclaration') {
+        for (let declaration of exportNode.declaration.declarations) {
+          if (declaration.init.type !== 'NewExpression') continue;
+
+          let classNode = ASTUtil.findClassDeclarationNode(declaration.init.callee.name, this._ast);
+          if (classNode) {
+            let pseudoExportNode = this._copy(exportNode);
+            pseudoExportNode.declaration = this._copy(classNode);
+            pseudoExportNodes.push(pseudoExportNode);
+            pseudoExportNode.declaration.__esdoc__pseudo_export = true;
+            classNode.type = 'Identifier'; // to ignore
+          }
+        }
+        continue;
+      }
 
       for (let specifier of exportNode.specifiers) {
         if (specifier.type !== 'ExportSpecifier') continue;
 
         let targetClassName = null;
-        let isInstanceExport = false;
+        let pseudoClassExport;
 
-        for (let node2 of this._ast.body) {
-          if (node2.type === 'VariableDeclaration' &&
-            node2.declarations[0].init.type === 'NewExpression' &&
-            node2.declarations[0].id.name === specifier.exported.name) {
-            targetClassName = node2.declarations[0].init.callee.name;
-            isInstanceExport = true;
-            node2.type = 'Identifier'; // to ignore
-            break;
-          }
+        let varNode = ASTUtil.findVariableDeclarationAndNewExpressionNode(specifier.exported.name, this._ast);
+        if (varNode) {
+          targetClassName = varNode.declarations[0].init.callee.name;
+          pseudoClassExport = true;
+
+          let pseudoExportNode = this._copy(exportNode);
+          pseudoExportNode.declaration = this._copy(varNode);
+          pseudoExportNode.specifiers = null;
+          pseudoExportNodes.push(pseudoExportNode);
+
+          varNode.type = 'Identifier'; // to ignore
+        } else {
+          targetClassName = specifier.exported.name;
+          pseudoClassExport = false;
         }
 
-        if (!targetClassName) targetClassName = specifier.exported.name;
-
-        for (let node2 of this._ast.body) {
-          if (node2.type === 'ClassDeclaration' && node2.id.name === targetClassName) {
-            let pseudoExportNode = this._copy(exportNode);
-            pseudoExportNode.declaration = this._copy(node2);
-            pseudoExportNode.specifiers = null;
-            if (isInstanceExport) {
-              pseudoExportNode.declaration.__esdoc__instance_export = true;
-              pseudoExportNode.declaration.__esdoc__instance_name = specifier.exported.name;
-            }
-            pseudoExportNodes.push(pseudoExportNode);
-            node2.type = 'Identifier'; // to ignore
-            break;
-          }
+        let classNode = ASTUtil.findClassDeclarationNode(targetClassName, this._ast);
+        if (classNode) {
+          let pseudoExportNode = this._copy(exportNode);
+          pseudoExportNode.declaration = this._copy(classNode);
+          pseudoExportNode.specifiers = null;
+          pseudoExportNode.declaration.__esdoc__pseudo_export = pseudoClassExport;
+          pseudoExportNodes.push(pseudoExportNode);
+          classNode.type = 'Identifier'; // to ignore
         }
       }
-
-      exportNode.type = 'Identifier'; // to ignore
     }
 
     this._ast.body.push(...pseudoExportNodes);
