@@ -34,6 +34,9 @@ export default class ClassDocBuilder extends DocBuilder {
     let extendsChain = this._buildExtendsChainHTML(doc);
     let directSubclass = this._buildDirectSubclassHTML(doc);
     let indirectSubclass = this._buildIndirectSubclassHTML(doc);
+    let instanceDocs = this._find({kind: 'variable'}).filter((v)=> {
+      return v.type && v.type.types.includes(doc.longname);
+    });
 
     let ice = new IceCap(this._readTemplate('class.html'));
 
@@ -62,12 +65,17 @@ export default class ClassDocBuilder extends DocBuilder {
 
     // self
     ice.text('name', doc.name);
-    ice.drop('instanceExport', !doc.instanceExport);
     ice.load('description', doc.description);
     ice.load('deprecated', this._buildDeprecatedHTML(doc));
     ice.load('experimental', this._buildExperimentalHTML(doc));
     ice.load('see', this._buildDocsLinkHTML(doc.see), 'append');
     ice.load('todo', this._buildDocsLinkHTML(doc.todo), 'append');
+
+    ice.into('instanceDocs', instanceDocs, (instanceDocs, ice)=>{
+      ice.loop('instanceDoc', instanceDocs, (i, instanceDoc, ice)=>{
+        ice.load('instanceDoc', this._buildDocLinkHTML(instanceDoc.longname));
+      });
+    });
 
     ice.into('exampleDocs', doc.examples, (examples, ice)=>{
       ice.loop('exampleDoc', examples, (i, example, ice)=>{

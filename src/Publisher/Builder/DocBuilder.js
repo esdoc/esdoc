@@ -687,7 +687,6 @@ export default class DocBuilder {
 
     // e.g. Map<number, string>
     matched = typeName.match(/^(.*?)\.?<(.*?)>$/);
-    if (typeName.includes('foo')) console.log(typeName);
     if (matched) {
       let mainType = matched[1];
       // bad hack: Map.<string, boolean> => Map.<string\Z boolean>
@@ -706,9 +705,9 @@ export default class DocBuilder {
 
     if (typeName.indexOf('...') === 0) {
       typeName = typeName.replace('...', '');
-      return '...' + this._buildDocLinkHTML(typeName, typeName);
+      return '...' + this._buildDocLinkHTML(typeName);
     } else {
-      return this._buildDocLinkHTML(typeName, typeName);
+      return this._buildDocLinkHTML(typeName);
     }
   }
 
