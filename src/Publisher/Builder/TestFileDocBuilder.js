@@ -4,7 +4,7 @@ import DocBuilder from './DocBuilder.js';
 /**
  * File output html builder class.
  */
-export default class FileDocBuilder extends DocBuilder {
+export default class TestFileDocBuilder extends DocBuilder {
   /**
    * execute building output html.
    * @param {function(html: string, filePath: string)} callback - is called with each output.
