@@ -31,8 +31,9 @@ describe('Nav:', ()=> {
   /** @test {DocBuilder#_buildNavDoc} */
   it('has variable nav.', ()=>{
     find(doc, '[data-ice="nav"] [data-ice="variableWrap"]', (doc)=>{
-      assert.includes(doc, '[data-ice="variableDoc"]:nth-of-type(1)', 'myVariable1');
-      assert.includes(doc, '[data-ice="variableDoc"]:nth-of-type(1) a', 'variable/index.html#static-variable-myVariable1', 'href');
+      assert.includes(doc, '[data-ice="variableDoc"]:nth-of-type(1)', 'myExport1');
+      assert.includes(doc, '[data-ice="variableDoc"]:nth-of-type(7)', 'myVariable1');
+      assert.includes(doc, '[data-ice="variableDoc"]:nth-of-type(7) a', 'variable/index.html#static-variable-myVariable1', 'href');
     });
   });
 
