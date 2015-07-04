@@ -2,8 +2,9 @@
 
 ## Next
 - **Feat**
-  - Support instance export([957d61a](https://github.com/h13i32maru/esdoc/commit/957d61a8febb4fe3dda4d65bae8dc1cbc210250c))
+  - Support instance export([#11](https://github.com/h13i32maru/esdoc/issues/11), [#19](https://github.com/h13i32maru/esdoc/issues/19))
     - ``export default new Foo()``
+    - ``export let foo = new Foo()``
   - Support anonymous class/function export ([#13](https://github.com/h13i32maru/esdoc/issues/13))
     - ``export default class{}`` and ``export default function(){}``
   - Show a detail log when ESDoc could not process a input code ([#14](https://github.com/h13i32maru/esdoc/issues/14))
