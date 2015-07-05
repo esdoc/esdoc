@@ -8,10 +8,9 @@ ESDoc is a documentation generator for JavaScript(ES6).
 <img class="screen-shot" src="./image/top.png">
 
 # Feature
-- Generates detailed document.
-- Measures document coverage.
-- Cross reference of test and document.
-- Targets at ES6 ``class`` and ``import/export`` style.
+- Generates detailed documentation.
+- Measures documentation coverage.
+- Integrate test codes into documentation.
 
 # Demo
 - [ESDoc](https://esdoc.org/esdoc) is self-hosting &#x1F604;
@@ -38,7 +37,7 @@ esdoc -c esdoc.json
 └── src/MyClass.js
 ```
 
-``src/MyClass.js``
+<p class="file-path">src/MyClass.js</p>
 
 ```javascript
 /**
@@ -53,7 +52,7 @@ export default class MyClass {
 }
 ```
 
-``esdoc.json``
+<p class="file-path">esdoc.json</p>
 
 ```json
 {

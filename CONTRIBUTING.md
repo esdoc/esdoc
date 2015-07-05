@@ -23,3 +23,15 @@ You can see output documentation after runt tests.
 # see http://localhost:8080/test/fixture/esdoc
 npm run start
 ```
+
+## Install From Head
+Install ESDoc from head revision.
+
+```
+git clone git@github.com:h13i32maru/esdoc.git
+cd esdoc
+npm install
+npm run test-es5
+npm install -g ./
+esdoc -h
+```

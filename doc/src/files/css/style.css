@@ -123,6 +123,15 @@ img.screen-shot {
   box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
 }
 
+.file-path {
+  margin-bottom: 4px;
+  font-style: italic;
+}
+
+.file-path + pre {
+  margin-top: 0;
+}
+
 @media screen and (min-width: 0px) and (max-device-width: 600px) {
   nav {
     position: static;

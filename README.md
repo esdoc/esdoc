@@ -11,8 +11,7 @@ ESDoc is a documentation generator for JavaScript(ES6).
 # Feature
 - Generates detailed document.
 - Measures document coverage.
-- Cross reference of test and document.
-- Targets at ES6 ``class`` and ``import/export`` style.
+- Integrate test codes into documentation.
 
 # Demo
 - [ESDoc](https://esdoc.org/esdoc) is self-hosting &#x1F604;

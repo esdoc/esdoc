@@ -12,9 +12,9 @@ If you want to see all features, you visit [Demo](./#demo) page.
 
 - [ES6 Class](#es6-class)
 - [ES6 Module](#es6-module)
-- [Document Coverage](#document-coverage)
-- [Test Codes And Document](#test-codes-and-document)
-- [Search Document](#search-document)
+- [Documentation Coverage](#documentation-coverage)
+- [Integration Test Codes](#integration-test-codes)
+- [Search Documentation](#search-documentation)
 - [Guess Type](#guess-type)
 - [Customize](#customize)
 
@@ -41,17 +41,17 @@ ESDoc displays the import style in accordance with the export style.
 
 This is useful because you not need to see export style in source code.
 
-## Document Coverage
-Unit test framework can measure test coverage. This leads motivation for test and inspects a missing of test.
-This is very important. So ESDoc supports document coverage.
+## Documentation Coverage
+ESDoc measures a documentation coverage. This is useful information for following.
+- This leads the motivation of documentation.
+- This inspects a missing of documentation.
 
 ESDoc processes only top-level class, function and variable.
 This is based on, ESDoc measures coverage by how much the document is being written out of all the processing target.
 And, ESDoc is also to measure coverage of each module, you will have become easier to also find a missing of the document.
 For example, [this](./esdoc/source.html) is coverage of ESDoc itself.
 
-
-## Test Codes And Document
+## Integration Test Codes
 Test codes are important information.
 So, ESDoc generates a cross reference of test codes and document.
 You need to use @test tag for this function.
@@ -70,7 +70,7 @@ describe('MyClass is super useful class.', ()=>{
 
 However, for now, ESDoc supports only Mocha.
 
-## Search Document
+## Search Documentation
 ESDoc supports searching in document with only JavaScript(without server implementation).
 The implementation of searching:
 - ESDoc made the index(JSON) at the time of document generation.
