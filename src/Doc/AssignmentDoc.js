@@ -8,8 +8,8 @@ export default class AssignmentDoc extends AbstractDoc {
   /**
    * specify ``variable`` to kind.
    */
-  ['@kind']() {
-    super['@kind']();
+  ['@_kind']() {
+    super['@_kind']();
     if (this._value.kind) return;
 
     this._value.kind = 'variable';
@@ -18,8 +18,8 @@ export default class AssignmentDoc extends AbstractDoc {
   /**
    * take out self name from self node.
    */
-  ['@name']() {
-    super['@name']();
+  ['@_name']() {
+    super['@_name']();
     if (this._value.name) return;
 
     let name = this._flattenMemberExpression(this._node.left).replace(/^this\./, '');
@@ -29,8 +29,8 @@ export default class AssignmentDoc extends AbstractDoc {
   /**
    * take out self memberof from file path.
    */
-  ['@memberof']() {
-    super['@memberof']();
+  ['@_memberof']() {
+    super['@_memberof']();
     if (this._value.memberof) return;
     this._value.memberof = this._pathResolver.filePath;
   }

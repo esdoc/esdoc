@@ -7,15 +7,15 @@ import NamingUtil from '../Util/NamingUtil.js';
  */
 export default class FunctionDoc extends AbstractDoc {
   /** specify ``function`` to kind. */
-  ['@kind']() {
-    super['@kind']();
+  ['@_kind']() {
+    super['@_kind']();
     if (this._value.kind) return;
     this._value.kind = 'function';
   }
 
   /** take out self name from self node */
-  ['@name']() {
-    super['@name']();
+  ['@_name']() {
+    super['@_name']();
     if (this._value.name) return;
 
     if (this._node.id) {
@@ -26,15 +26,15 @@ export default class FunctionDoc extends AbstractDoc {
   }
 
   /** take out self name from file path */
-  ['@memberof']() {
-    super['@memberof']();
+  ['@_memberof']() {
+    super['@_memberof']();
     if (this._value.memberof) return;
     this._value.memberof = this._pathResolver.filePath;
   }
 
   /** check generator property in self node */
-  ['@generator']() {
-    super['@generator']();
+  ['@_generator']() {
+    super['@_generator']();
     if ('generator' in this._value) return;
 
     this._value.generator = this._node.generator;

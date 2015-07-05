@@ -18,15 +18,15 @@ export default class MethodDoc extends AbstractDoc {
   }
 
   /** use kind property of self node. */
-  ['@kind']() {
-    AbstractDoc.prototype['@kind'].call(this);
+  ['@_kind']() {
+    AbstractDoc.prototype['@_kind'].call(this);
     if (this._value.kind) return;
     this._value.kind = this._node.kind;
   }
 
   /** take out self name from self node */
-  ['@name']() {
-    AbstractDoc.prototype['@name'].call(this);
+  ['@_name']() {
+    AbstractDoc.prototype['@_name'].call(this);
     if (this._value.name) return;
 
     // normally `key.name`, but computed value(aka ['foo']) refers `key.value`.
@@ -34,8 +34,8 @@ export default class MethodDoc extends AbstractDoc {
   }
 
   /** take out memberof from parent class node */
-  ['@memberof']() {
-    AbstractDoc.prototype['@memberof'].call(this);
+  ['@_memberof']() {
+    AbstractDoc.prototype['@_memberof'].call(this);
     if (this._value.memberof) return;
 
     let memberof;
@@ -90,8 +90,8 @@ export default class MethodDoc extends AbstractDoc {
   }
 
   /** use generator property of self node. */
-  ['@generator']() {
-    super['@generator']();
+  ['@_generator']() {
+    super['@_generator']();
     if ('generator' in this._value) return;
 
     this._value.generator = this._node.value.generator;

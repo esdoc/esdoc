@@ -7,24 +7,24 @@ import ASTUtil from '../Util/ASTUtil.js';
  */
 export default class VariableDoc extends AbstractDoc {
   /** specify ``variable`` to kind. */
-  ['@kind']() {
-    super['@kind']();
+  ['@_kind']() {
+    super['@_kind']();
     if (this._value.kind) return;
 
     this._value.kind = 'variable';
   }
 
   /** set name by using self node. */
-  ['@name']() {
-    super['@name']();
+  ['@_name']() {
+    super['@_name']();
     if (this._value.name) return;
 
     this._value.name = this._node.declarations[0].id.name;
   }
 
   /** set memberof by using file path. */
-  ['@memberof']() {
-    super['@memberof']();
+  ['@_memberof']() {
+    super['@_memberof']();
     if (this._value.memberof) return;
     this._value.memberof = this._pathResolver.filePath;
   }

@@ -18,22 +18,22 @@ export default class FileDoc extends AbstractDoc {
   }
 
   /** specify ``file`` to kind. */
-  ['@kind']() {
-    super['@kind']();
+  ['@_kind']() {
+    super['@_kind']();
     if (this._value.kind) return;
     this._value.kind = 'file';
   }
 
   /** take out self name from file path */
-  ['@name']() {
-    super['@name']();
+  ['@_name']() {
+    super['@_name']();
     if (this._value.name) return;
     this._value.name = this._pathResolver.filePath;
   }
 
   /** specify name to longname */
-  ['@longname']() {
-    let value = this._findTagValue(['@longname']);
+  ['@_longname']() {
+    let value = this._findTagValue(['@_longname']);
     if (value) {
       this._value.longname = value;
     } else {
@@ -42,8 +42,8 @@ export default class FileDoc extends AbstractDoc {
   }
 
   /** specify file content to value.content */
-  ['@content']() {
-    super['@content']();
+  ['@_content']() {
+    super['@_content']();
     if ('content' in this._value) return;
 
     let filePath = this._pathResolver.fileFullPath;

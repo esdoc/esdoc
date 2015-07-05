@@ -19,15 +19,15 @@ export default class MemberDoc extends AbstractDoc {
   }
 
   /** specify ``member`` to kind. */
-  ['@kind']() {
-    super['@kind']();
+  ['@_kind']() {
+    super['@_kind']();
     if (this._value.kind) return;
     this._value.kind = 'member';
   }
 
   /** use static property in class */
-  ['@static']() {
-    let tag = this._find(['@static']);
+  ['@_static']() {
+    let tag = this._find(['@_static']);
     if (tag) {
       let value = ['', 'true', true].includes(tag.tagValue);
       this._value.static = value;
@@ -45,15 +45,15 @@ export default class MemberDoc extends AbstractDoc {
   }
 
   /** take out self name from self node */
-  ['@name']() {
+  ['@_name']() {
     let name;
-    let tags = this._findAll(['@name', '@member']);
+    let tags = this._findAll(['@_name', '@_member']);
     if (tags) {
       for (let tag of tags) {
         let {tagName, tagValue} = tag;
-        if (tagName === '@name') {
+        if (tagName === '@_name') {
           name = tagValue;
-        } else if (tagName === '@member') {
+        } else if (tagName === '@_member') {
           let {paramName} = ParamParser.parseParamValue(value, true, true, false);
           name = paramName;
         }
@@ -67,9 +67,9 @@ export default class MemberDoc extends AbstractDoc {
     this._value.name = name;
   }
 
-  /** borrow {@link MethodDoc#@memberof} */
-  ['@memberof']() {
-    MethodDoc.prototype['@memberof'].call(this);
+  /** borrow {@link MethodDoc#@_memberof} */
+  ['@_memberof']() {
+    MethodDoc.prototype['@_memberof'].call(this);
   }
 
   /** if @type is not exists, guess type by using self node */

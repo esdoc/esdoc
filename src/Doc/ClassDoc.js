@@ -19,15 +19,15 @@ export default class ClassDoc extends AbstractDoc {
   }
 
   /** specify ``class`` to kind. */
-  ['@kind']() {
-    super['@kind']();
+  ['@_kind']() {
+    super['@_kind']();
     if (this._value.kind) return;
     this._value.kind = 'class';
   }
 
   /** take out self name from self node */
-  ['@name']() {
-    super['@name']();
+  ['@_name']() {
+    super['@_name']();
     if (this._value.name) return;
 
     if (this._node.id) {
@@ -38,8 +38,8 @@ export default class ClassDoc extends AbstractDoc {
   }
 
   /** take out self memberof from file path. */
-  ['@memberof']() {
-    super['@memberof']();
+  ['@_memberof']() {
+    super['@_memberof']();
     if (this._value.memberof) return;
     this._value.memberof = this._pathResolver.filePath;
   }

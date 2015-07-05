@@ -292,7 +292,7 @@ export default class DocFactory {
     }
 
     if (comments.length === 0) {
-      comments = [{type: 'Block', value: '* @undocument'}];
+      comments = [{type: 'Block', value: '* @_undocument'}];
     }
 
     let results = [];
@@ -363,11 +363,11 @@ export default class DocFactory {
     for (let tag of tags) {
       let tagName = tag.tagName;
       switch (tagName) {
-        case '@class':    type = 'Class'; break;
-        case '@member':   type = 'Member'; break;
-        case '@method':   type = 'Method'; break;
-        case '@function': type = 'Function'; break;
-        case '@var':      type = 'Variable'; break;
+        case '@_class':    type = 'Class'; break;
+        case '@_member':   type = 'Member'; break;
+        case '@_method':   type = 'Method'; break;
+        case '@_function': type = 'Function'; break;
+        case '@_var':      type = 'Variable'; break;
         case '@typedef':  type = 'Typedef'; break;
         case '@external': type = 'External'; break;
       }
