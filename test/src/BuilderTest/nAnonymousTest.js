@@ -2,7 +2,7 @@ import {readDoc, assert, find} from './../util.js';
 
 describe('Anonymous', ()=>{
   /**
-   * @test {ClassDoc#@name}
+   * @test {ClassDoc#@_name}
    */
   describe('Anonymous Class',()=>{
     let doc = readDoc('class/src/nMyAnonymous.js~nMyAnonymous.html');
@@ -13,7 +13,7 @@ describe('Anonymous', ()=>{
   });
 
   /**
-   * @test {FunctionDoc#@name}
+   * @test {FunctionDoc#@_name}
    */
   describe('Anonymous Function',()=>{
     let doc = readDoc('function/index.html');

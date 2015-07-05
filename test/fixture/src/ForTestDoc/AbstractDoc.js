@@ -1,5 +1,5 @@
 export default class AbstractDoc {
-  ['@undocument'](){}
+  ['@_undocument'](){}
 
-  ['@unknown'](){}
+  ['@_unknown'](){}
 }
