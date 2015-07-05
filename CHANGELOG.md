@@ -1,6 +1,6 @@
 # Changelog
 
-## Next
+## 0.1.3 (2015-07-05)
 - **Feat**
   - Support instance export([#11](https://github.com/h13i32maru/esdoc/issues/11), [#19](https://github.com/h13i32maru/esdoc/issues/19))
     - ``export default new Foo()``
