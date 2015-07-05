@@ -1,10 +1,18 @@
 /**
- * this is MyExport.
+ * this is MyExport1.
+ * @example
+ * let myExport1 = new MyExport1();
  */
 class MyExport1 {
   /** this is method1. */
   method1(){}
 }
+
+/**
+ * this is MyExport1 instance.
+ * @example
+ * myExport.method1();
+ */
 export default MyExport1;
 
 /**
@@ -14,6 +22,10 @@ class MyExport2 {
   /** this is method1. */
   method1(){}
 }
+
+/**
+ * this is MyExport2 instance.
+ */
 export default new MyExport2();
 
 /**
@@ -24,6 +36,9 @@ class MyExport3 {
   method1(){}
 }
 let myExport3 = new MyExport3();
+/**
+ * this is MyExport3 instance.
+ */
 export default myExport3;
 
 /**
@@ -52,6 +67,8 @@ class MyExport6 {
 
 let myExport4 = new MyExport4();
 let myExport5 = new MyExport5();
+
+/** this is multiple export */
 export {myExport4, myExport5, MyExport6};
 
 /**
@@ -75,4 +92,7 @@ class MyExport10 {
   method1() {}
 }
 
+/**
+ * this is MyExport10 instance.
+ */
 export let myExport10 = new MyExport10();

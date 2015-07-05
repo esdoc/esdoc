@@ -121,6 +121,7 @@ export default class DocFactory {
       if (classNode) {
         let pseudoExportNode1 = this._copy(exportNode);
         pseudoExportNode1.declaration = this._copy(classNode);
+        pseudoExportNode1.leadingComments = null;
         pseudoExportNode1.declaration.__esdoc__pseudo_export = pseudoClassExport;
 
         let pseudoExportNode2 = this._copy(exportNode);
@@ -172,6 +173,7 @@ export default class DocFactory {
           if (classNode) {
             let pseudoExportNode = this._copy(exportNode);
             pseudoExportNode.declaration = this._copy(classNode);
+            pseudoExportNode.leadingComments = null;
             pseudoExportNodes.push(pseudoExportNode);
             pseudoExportNode.declaration.__esdoc__pseudo_export = true;
             classNode.type = 'Identifier'; // to ignore
@@ -206,6 +208,7 @@ export default class DocFactory {
         if (classNode) {
           let pseudoExportNode = this._copy(exportNode);
           pseudoExportNode.declaration = this._copy(classNode);
+          pseudoExportNode.leadingComments = null;
           pseudoExportNode.specifiers = null;
           pseudoExportNode.declaration.__esdoc__pseudo_export = pseudoClassExport;
           pseudoExportNodes.push(pseudoExportNode);
