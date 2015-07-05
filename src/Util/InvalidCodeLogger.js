@@ -1,6 +1,15 @@
 import fs from 'fs-extra';
 
+/**
+ * logger for invalid code which can not be parsed with ESDoc.
+ */
 class InvalidCodeLogger {
+
+  /**
+   * show log.
+   * @param {string} filePath - invalid code in this file.
+   * @param {ASTNode} node - fail parsing node.
+   */
   show(filePath, node) {
     let lines = fs.readFileSync(filePath).toString().split('\n');
     let targetLines = [];
@@ -24,4 +33,7 @@ class InvalidCodeLogger {
   }
 }
 
+/**
+ * singleton for {@link InvalidCodeLogger}
+ */
 export default new InvalidCodeLogger();
