@@ -245,6 +245,10 @@ export default class MyClass1 extends SuperMyClass1 {
  * this is MyClass2 desc.
  */
 export class MyClass2 extends MyClass1 {
+  /**
+   * this is method1.
+   */
+  method1({p1, p2}, {p3, p4, p5} = {p3: 123, p4: 'abc'}) {}
 }
 
 /**

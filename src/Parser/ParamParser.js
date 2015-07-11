@@ -152,7 +152,8 @@ export default class ParamParser {
    */
   static guessParams(params) {
     let _params = [];
-    for (let param of params) {
+    for (let i = 0; i < params.length; i++) {
+      let param = params[i];
       let result = {};
 
       switch (param.type) {
@@ -166,11 +167,7 @@ export default class ParamParser {
           if (param.left.type === 'Identifier') {
             result.name = param.left.name;
           } else if (param.left.type === 'ObjectPattern') {
-            let names = [];
-            for (let prop of param.left.properties) {
-              names.push(prop.key.name);
-            }
-            result.name = `{${names.join(',')}}`;
+            result.name = `objectPattern${i === 0 ? '' : i}`;
           }
 
           result.optional = true;
@@ -186,13 +183,24 @@ export default class ParamParser {
             result.defaultRaw = param.right.elements.map((elm)=> elm.value);
             result.defaultValue = `${JSON.stringify(result.defaultRaw)}`;
           } else if(param.right.type === 'ObjectExpression'){
+            let typeMap = {};
+            for (let prop of param.left.properties || []) {
+              typeMap[prop.key.name] = '*';
+            }
+
             // e.g. func(a = {key: 123}){}
             let obj = {};
             for (let prop of param.right.properties) {
               obj[prop.key.name] = prop.value.value;
+              typeMap[prop.key.name] = typeof prop.value.value;
             }
 
-            result.types = [`${JSON.stringify(obj)}`];
+            let types = [];
+            for (let key of Object.keys(typeMap)) {
+              types.push(`"${key}": ${typeMap[key]}`);
+            }
+
+            result.types = [`{${types.join(', ')}}`];
             result.defaultRaw = obj;
             result.defaultValue = `${JSON.stringify(result.defaultRaw)}`;
           } else if (param.right.type === 'Identifier') {
@@ -211,6 +219,18 @@ export default class ParamParser {
           result.name = `${param.argument.name}`;
           result.types = ['...*'];
           result.spread = true;
+          break;
+        case 'ObjectPattern':
+          let objectPattern = [];
+          let raw = {};
+          for (let property of param.properties) {
+            objectPattern.push(`"${property.key.name}": *`);
+            raw[property.key.name] = null;
+          }
+          result.name = `objectPattern${i === 0 ? '' : i}`;
+          result.types = [`{${objectPattern.join(', ')}}`];
+          result.defaultRaw = raw;
+          result.defaultValue = `${JSON.stringify(result.defaultRaw)}`;
           break;
         default:
           logger.w('unknown param.type', param);
