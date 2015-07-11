@@ -1,5 +1,9 @@
 # Changelog
 
+## Next
+- **Fix**
+  - Crash when object pattern argument do not have @param ([#24](https://github.com/h13i32maru/esdoc/issues/24))
+
 ## 0.1.3 (2015-07-05)
 - **Feat**
   - Support instance export([#11](https://github.com/h13i32maru/esdoc/issues/11), [#19](https://github.com/h13i32maru/esdoc/issues/19))
