@@ -60,6 +60,7 @@ class MyClass {
   - [Simple](#simple)
   - [Array](#array)
   - [Object](#object)
+  - [Record](#record)
   - [Generics](#generics)
   - [Function](#function)
   - [Union](#union)
@@ -518,9 +519,26 @@ function myFunc(param){...}
 function myFunc(param){...}
 
 /**
- * @param {{foo: number, bar: string}} param - this is object param(short hand).
+ * this is object destructuring.
+ * @param {Object} param - this is object param.
+ * @param {number} param.foo - this is property param.
+ * @param {string} param.bar - this is property param.
+ */
+function myFunc({foo, bar}){...}
+```
+
+### Record
+```javascript
+/**
+ * @param {{foo: number, bar: string}} param - this is object param.
  */
 function myFunc(param){...}
+
+/**
+ * this is object destructuring.
+ * @param {{foo: number, bar: string}} param - this is object param.
+ */
+function myFunc({foo, bar}){...}
 ```
 
 ### Generics
