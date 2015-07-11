@@ -98,6 +98,8 @@ export default class ParamParser {
       if (typeText[0] === '(') {
         typeText = typeText.replace(/^[(]/, '').replace(/[)]$/, '');
         result.types = typeText.split('|');
+      } else if(typeText.includes('|')){
+        result.types = typeText.split('|');
       } else {
         result.types = [typeText];
       }
