@@ -1,3 +1,4 @@
+import fs from 'fs-extra';
 import AbstractDoc from './AbstractDoc.js';
 import ParamParser from '../Parser/ParamParser.js';
 import NamingUtil from '../Util/NamingUtil.js';
@@ -66,23 +67,44 @@ export default class ClassDoc extends AbstractDoc {
       return;
     }
 
-    let node = this._node;
-    let longname;
-    if (node.superClass) {
-      switch (node.superClass.type) {
-        case 'Identifier':
-          longname = this._resolveLongname(node.superClass.name);
-          this._value.extends = [longname];
-          break;
-        case 'MemberExpression':
-          let fullIdentifier = this._flattenMemberExpression(node.superClass);
-          let rootIdentifier = fullIdentifier.split('.')[0];
-          let rootLongname = this._resolveLongname(rootIdentifier);
-          let filePath = rootLongname.replace(/~.*/, '');
-          longname = `${filePath}~${fullIdentifier}`;
-          this._value.extends = [longname];
-          break;
+    if (this._node.superClass) {
+      let node = this._node;
+      let longnames = [];
+      let targets = [];
+
+      if (node.superClass.type === 'CallExpression') {
+        targets.push(node.superClass.callee, ...node.superClass.arguments);
+      } else {
+        targets.push(node.superClass);
       }
+
+      for (let target of targets) {
+        switch (target.type) {
+          case 'Identifier':
+            longnames.push(this._resolveLongname(target.name));
+            break;
+          case 'MemberExpression':
+            let fullIdentifier = this._flattenMemberExpression(target);
+            let rootIdentifier = fullIdentifier.split('.')[0];
+            let rootLongname = this._resolveLongname(rootIdentifier);
+            let filePath = rootLongname.replace(/~.*/, '');
+            longnames.push(`${filePath}~${fullIdentifier}`);
+            break;
+        }
+      }
+
+      if (node.superClass.type === 'CallExpression') {
+        // expression extends may have non-class, so filter only class by name rule.
+        longnames = longnames.filter((v)=> v.match(/^[A-Z]|^[$_][A-Z]/));
+
+        let filePath = this._pathResolver.fileFullPath;
+        let line = node.superClass.loc.start.line;
+        let start = node.superClass.loc.start.column;
+        let end = node.superClass.loc.end.column;
+        this._value.expressionExtends = this._readSelection(filePath, line, start, end);
+      }
+
+      if (longnames.length) this._value.extends = longnames;
     }
   }
 
@@ -96,5 +118,25 @@ export default class ClassDoc extends AbstractDoc {
       let {typeText} = ParamParser.parseParamValue(value, true, false, false);
       this._value.implements.push(typeText);
     }
+  }
+
+  /**
+   * read selection text in file.
+   * @param {string} filePath - target file full path.
+   * @param {number} line - line number (one origin).
+   * @param {number} startColumn - start column number (one origin).
+   * @param {number} endColumn - end column number (one origin).
+   * @returns {string} selection text
+   * @private
+   */
+  _readSelection(filePath, line, startColumn, endColumn) {
+    let code = fs.readFileSync(filePath).toString();
+    let lines = code.split('\n');
+    let selectionLine = lines[line - 1];
+    let tmp = [];
+    for (let i = startColumn; i < endColumn; i++) {
+      tmp.push(selectionLine.charAt(i));
+    }
+    return tmp.join('');
   }
 }

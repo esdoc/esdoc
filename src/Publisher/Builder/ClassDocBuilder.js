@@ -31,6 +31,8 @@ export default class ClassDocBuilder extends DocBuilder {
    * @private
    */
   _buildClassDoc(doc) {
+    let expressionExtends = this._buildExpressionExtendsHTML(doc);
+    let mixinClasses = this._buildMixinClassesHTML(doc);
     let extendsChain = this._buildExtendsChainHTML(doc);
     let directSubclass = this._buildDirectSubclassHTML(doc);
     let indirectSubclass = this._buildIndirectSubclassHTML(doc);
@@ -54,7 +56,8 @@ export default class ClassDocBuilder extends DocBuilder {
     ice.text('version', doc.version, 'append');
     ice.load('variation', this._buildVariationHTML(doc), 'append');
 
-    // extends chain
+    ice.into('expressionExtends', expressionExtends, (expressionExtends, ice)=> ice.load('expressionExtendsCode', expressionExtends));
+    ice.load('mixinExtends', mixinClasses, 'append');
     ice.load('extendsChain', extendsChain, 'append');
     ice.load('directSubclass', directSubclass, 'append');
     ice.load('indirectSubclass', indirectSubclass, 'append');
@@ -129,13 +132,46 @@ export default class ClassDocBuilder extends DocBuilder {
   }
 
   /**
+   * build mixin extends html.
+   * @param {DocObject} doc - target class doc.
+   * @return {string} mixin extends html.
+   */
+  _buildMixinClassesHTML(doc) {
+    if (!doc.extends) return '';
+    if (doc.extends.length <= 1) return '';
+
+    let links = [];
+    for (var longname of doc.extends) {
+      links.push(this._buildDocLinkHTML(longname));
+    }
+
+    return `<div>${links.join(', ')}</div>`;
+  }
+
+  /**
+   * build expression extends html.
+   * @param {DocObject} doc - target class doc.
+   * @return {string} expression extends html.
+   */
+  _buildExpressionExtendsHTML(doc) {
+    if (!doc.expressionExtends) return '';
+
+    let html = doc.expressionExtends.replace(/[A-Z_$][a-zA-Z0-9_$]*/g, (v)=>{
+      return this._buildDocLinkHTML(v);
+    });
+
+    return `class ${doc.name} extends ${html}`;
+  }
+
+  /**
    * build class ancestor extends chain.
    * @param {DocObject} doc - target class doc.
    * @returns {string} extends chain links html.
    * @private
    */
   _buildExtendsChainHTML(doc) {
-    if (!doc._custom_extends_chains) return;
+    if (!doc._custom_extends_chains) return '';
+    if (doc.extends.length > 1) return '';
 
     var links = [];
     for (var longname of doc._custom_extends_chains) {
