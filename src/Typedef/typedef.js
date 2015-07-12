@@ -42,6 +42,7 @@
 /**
  * @typedef {Object} ASTNode
  * @see https://github.com/estree/estree
+ * @property {Object} superClass
  */
 
 /**
