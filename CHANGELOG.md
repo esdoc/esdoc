@@ -1,6 +1,8 @@
 # Changelog
 
 ## Next
+- **Feat**
+  - Support Complex class extends ([#26](https://github.com/h13i32maru/esdoc/issues/26))
 - **Fix**
   - Crash when object pattern argument do not have @param ([#24](https://github.com/h13i32maru/esdoc/issues/24))
 
