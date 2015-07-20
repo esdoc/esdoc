@@ -1,6 +1,6 @@
 # Changelog
 
-## Next
+## 0.1.4 (2015-07-20)
 - **Feat**
   - Support Complex class extends ([#26](https://github.com/h13i32maru/esdoc/issues/26))
   - Support caption tag in ``@example`` ([#33](https://github.com/h13i32maru/esdoc/issues/33))
