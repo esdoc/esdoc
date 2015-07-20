@@ -102,10 +102,10 @@ export default class DocFactory {
         case 'Identifier':
           let varNode = ASTUtil.findVariableDeclarationAndNewExpressionNode(exportNode.declaration.name, this._ast);
           if (varNode) {
-              targetClassName = varNode.declarations[0].init.callee.name;
-              targetVariableName = exportNode.declaration.name;
-              pseudoClassExport = true;
-              varNode.type = 'Identifier'; // to ignore
+            targetClassName = varNode.declarations[0].init.callee.name;
+            targetVariableName = exportNode.declaration.name;
+            pseudoClassExport = true;
+            varNode.type = 'Identifier'; // to ignore
           } else {
             targetClassName = exportNode.declaration.name;
             targetVariableName = targetClassName.replace(/^./, c => c.toLowerCase());
@@ -132,6 +132,15 @@ export default class DocFactory {
 
         classNode.type = 'Identifier'; // to ignore
         exportNode.type = 'Identifier'; // to ignore
+      }
+
+      let functionNode = ASTUtil.findFunctionDeclarationNode(exportNode.declaration.name, this._ast);
+      if (functionNode) {
+        let pseudoExportNode = this._copy(exportNode);
+        pseudoExportNode.declaration = this._copy(functionNode);
+        exportNode.type = 'Identifier'; // to ignore
+        functionNode.type = 'Identifier'; // to ignore
+        pseudoExportNodes.push(pseudoExportNode);
       }
     }
 
@@ -213,6 +222,16 @@ export default class DocFactory {
           pseudoExportNode.declaration.__esdoc__pseudo_export = pseudoClassExport;
           pseudoExportNodes.push(pseudoExportNode);
           classNode.type = 'Identifier'; // to ignore
+        }
+
+        let functionNode = ASTUtil.findFunctionDeclarationNode(specifier.exported.name, this._ast);
+        if (functionNode) {
+          let pseudoExportNode = this._copy(exportNode);
+          pseudoExportNode.declaration = this._copy(functionNode);
+          pseudoExportNode.leadingComments = null;
+          pseudoExportNode.specifiers = null;
+          functionNode.type = 'Identifier'; // to ignore
+          pseudoExportNodes.push(pseudoExportNode);
         }
       }
     }

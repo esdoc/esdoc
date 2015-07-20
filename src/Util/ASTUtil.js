@@ -86,6 +86,20 @@ export default class ASTUtil {
   }
 
   /**
+   * find FunctionDeclaration node.
+   * @param {string} name - function name.
+   * @param {AST} ast - find in this ast.
+   * @returns {ASTNode|null} found ast node.
+   */
+  static findFunctionDeclarationNode(name, ast) {
+    for (let node of ast.body) {
+      if (node.type === 'FunctionDeclaration' && node.id.name === name) return node;
+    }
+
+    return null;
+  }
+
+  /**
    * create VariableDeclaration node which has NewExpression.
    * @param {string} name - variable name.
    * @param {string} className - class name.
