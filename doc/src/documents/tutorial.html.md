@@ -25,7 +25,7 @@ my-project/
     └── MySuperClass.js
 ```
 
-<p class="file-path">my-project/src/MySuperClass.js</p>
+<p class="file-path">my-project/src/MyClass.js</p>
 
 ```javascript
 import MySuperClass from './MySuperClass.js';
@@ -42,7 +42,7 @@ export default class MyClass extends MySuperClass {
 }
 ```
 
-<p class="file-path">my-project/src/MyClass.js</p>
+<p class="file-path">my-project/src/MySuperClass.js</p>
 
 ```javascript
 export default class MySuperClass {
