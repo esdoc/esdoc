@@ -14,9 +14,6 @@ ESDoc is a documentation generator for JavaScript(ES6).
 
 # Demo
 - [ESDoc](https://esdoc.org/esdoc) is self-hosting &#x1F604;
-- Libraries written by ES6 without document tags
-  - [Aurelia HTTP Client](https://esdoc.org/demo/aurelia-http-client/esdoc)
-  - [Aurelia Validation](https://esdoc.org/demo/aurelia-validation/esdoc)
 
 # Install
 
