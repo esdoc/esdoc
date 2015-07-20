@@ -5,6 +5,7 @@ import path from 'path';
 import minimist from 'minimist';
 import ESDoc from './ESDoc.js';
 import defaultPublisher from './Publisher/publish.js';
+import NPMUtil from './Util/NPMUtil.js';
 
 /**
  * Command Line Interface for ESDoc.
@@ -21,9 +22,6 @@ export default class ESDocCLI {
   constructor(argv) {
     /** @type {ESDocCLIArgv} */
     this._argv = minimist(argv.slice(2));
-
-    /** @type {NPMPackageObject} */
-    this._packageObj = this._findPackageJSON();
 
     if (this._argv.h || this._argv.help) {
       this._showHelp();
@@ -48,28 +46,7 @@ export default class ESDocCLI {
       process.exit(1);
     }
 
-    config._esdocVersion = this._packageObj.version;
     ESDoc.generate(config, defaultPublisher);
-  }
-
-  /**
-   * find npm package.json
-   * @returns {NPMPackageObject|null} parsed package.json
-   * @private
-   */
-  _findPackageJSON() {
-    let packageObj = null;
-    try {
-      let packageFilePath = path.resolve(__dirname, '../package.json');
-      let json = fs.readFileSync(packageFilePath, {encode: 'utf8'});
-      packageObj = JSON.parse(json);
-    } catch (e) {
-      let packageFilePath = path.resolve(__dirname, '../../package.json');
-      let json = fs.readFileSync(packageFilePath, {encode: 'utf8'});
-      packageObj = JSON.parse(json);
-    }
-
-    return packageObj;
   }
 
   /**
@@ -85,7 +62,12 @@ export default class ESDocCLI {
    * @private
    */
   _showVersion() {
-    console.log(this._packageObj.version);
+    let packageObj = NPMUtil.findPackage();
+    if (packageObj) {
+      console.log(packageObj.version);
+    } else {
+      console.log('0.0.0');
+    }
   }
 
   /**

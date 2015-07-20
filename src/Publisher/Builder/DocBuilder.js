@@ -4,6 +4,7 @@ import escape from 'escape-html';
 import IceCap from 'ice-cap';
 import {shorten, parseExample} from './util.js';
 import DocResolver from './DocResolver.js';
+import NPMUtil from '../../Util/NPMUtil.js';
 
 /**
  * Builder base class.
@@ -162,7 +163,12 @@ export default class DocBuilder {
 
     let ice = new IceCap(this._readTemplate('layout.html'), {autoClose: false});
 
-    ice.text('esdocVersion', `(${this._config._esdocVersion})`);
+    let packageObj = NPMUtil.findPackage();
+    if (packageObj) {
+      ice.text('esdocVersion', `(${packageObj.version})`);
+    } else {
+      ice.drop('esdocVersion');
+    }
 
     if (info.url) {
       ice.attr('repoURL', 'href', info.url);
