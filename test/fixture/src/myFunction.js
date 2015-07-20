@@ -1,5 +1,9 @@
 /**
  * this is myFunction1 desc.
+ * @example <caption>This is example caption</caption>
+ * let foo = 123;
+ * @example
+ * let bar = 456;
  */
 export default function myFunction1(){
 }

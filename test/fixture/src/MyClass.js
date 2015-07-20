@@ -31,7 +31,7 @@ import SuperMyClass1 from './OtherClass/SuperMyClass.js';
  * @implements {MyInterface1}
  * @implements {XMLHttpRequest}
  *
- * @example
+ * @example <caption>This is example caption</caption>
  * let foo = 10;
  * let bar = 20;
  * @example

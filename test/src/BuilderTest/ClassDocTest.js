@@ -79,6 +79,13 @@ describe('MyClass1:', ()=> {
       });
 
       assert.includes(doc, 'code.lang-html', '<div>text</div>');
+
+      find(doc, '[data-ice="exampleDocs"]', (doc)=>{
+        assert.includes(doc, 'div.example-doc:nth-of-type(1)', 'This is example caption');
+        assert.includes(doc, 'div.example-doc:nth-of-type(1)', 'let foo = 10; let bar = 20;');
+
+        assert.includes(doc, 'div.example-doc:nth-of-type(2)', 'for (let v of values) { let foo = v; }');
+      });
     });
   });
 

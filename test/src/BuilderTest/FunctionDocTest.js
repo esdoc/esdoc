@@ -25,6 +25,13 @@ describe('MyFunction:', ()=>{
     find(doc, '[data-ice="detail"]:nth-of-type(1)', (doc)=>{
       assert.includes(doc, '#static-function-myFunction1', 'public myFunction1()');
       assert.includes(doc, '[data-ice="importPath"]', "import myFunction1 from 'esdoc-test-fixture/out/src/myFunction.js'");
+
+      find(doc, '[data-ice="example"]', (doc)=>{
+        assert.includes(doc, 'div.example-doc:nth-of-type(1)', 'This is example caption');
+        assert.includes(doc, 'div.example-doc:nth-of-type(1)', 'let foo = 123;');
+
+        assert.includes(doc, 'div.example-doc:nth-of-type(2)', 'let bar = 456;');
+      });
     });
 
     find(doc, '[data-ice="detail"]:nth-of-type(2)', (doc)=>{
