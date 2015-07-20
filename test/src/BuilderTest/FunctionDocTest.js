@@ -15,6 +15,8 @@ describe('MyFunction:', ()=>{
       assert.includes(doc, '[data-ice="target"]:nth-of-type(6)', 'public * myFunction6(): Generator this is myFunction6 desc.');
       assert.includes(doc, '[data-ice="target"]:nth-of-type(7)', 'public myFunction7(p1: *[], p2: number[], p3: {}, p4: {"a": number, "b": string}): *');
       assert.includes(doc, '[data-ice="target"]:nth-of-type(8)', 'public myFunction8(p1: *)');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(9)', 'public myFunctionSeparateExport1(p1: number) this is myFunctionSeparateExport1.');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(10)', 'public myFunctionSeparateExport2(p1: number) this is myFunctionSeparateExport2.');
 
       assert.includes(doc, '[data-ice="target"]:nth-of-type(1) [data-ice="name"] a', 'function/index.html#static-function-myFunction1', 'href');
     });
@@ -62,6 +64,16 @@ describe('MyFunction:', ()=>{
 
     find(doc, '[data-ice="detail"]:nth-of-type(8)', (doc)=>{
       assert.includes(doc, '#static-function-myFunction8', 'public myFunction8(p1: *)');
+    });
+
+    find(doc, '[data-ice="detail"]:nth-of-type(9)', (doc)=>{
+      assert.includes(doc, '#static-function-myFunctionSeparateExport1', 'public myFunctionSeparateExport1(p1: number)');
+      assert.includes(doc, '[data-ice="importPath"]', "import myFunctionSeparateExport1 from 'esdoc-test-fixture/out/src/myFunction.js'");
+    });
+
+    find(doc, '[data-ice="detail"]:nth-of-type(10)', (doc)=>{
+      assert.includes(doc, '#static-function-myFunctionSeparateExport2', 'public myFunctionSeparateExport2(p1: number)');
+      assert.includes(doc, '[data-ice="importPath"]', "import {myFunctionSeparateExport2} from 'esdoc-test-fixture/out/src/myFunction.js'");
     });
   });
 });

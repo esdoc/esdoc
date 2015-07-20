@@ -54,3 +54,17 @@ export function myFunction7(p1 = [], p2 = [1,2,3], p3 = {}, p4 = {a: 123, b: 'ab
 // this is undocument
 export function myFunction8(p1) {
 }
+
+/**
+ * this is myFunctionSeparateExport1.
+ * @param {number} p1 - this is p1.
+ */
+function myFunctionSeparateExport1(p1) {}
+export default myFunctionSeparateExport1;
+
+/**
+ * this is myFunctionSeparateExport2.
+ * @param {number} p1 - this is p1.
+ */
+function myFunctionSeparateExport2(p1) {}
+export {myFunctionSeparateExport2};
