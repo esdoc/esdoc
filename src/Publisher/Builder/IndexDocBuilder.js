@@ -38,9 +38,14 @@ export default class IndexDocBuilder extends DocBuilder {
    * @private
    */
   _buildIndexDoc() {
-    if (!this._config.index) return 'API Document';
+    if (!this._config.index) return 'Please create README.md';
 
-    let indexContent = fs.readFileSync(this._config.index, {encode: 'utf8'}).toString();
+    let indexContent;
+    try {
+      indexContent = fs.readFileSync(this._config.index, {encode: 'utf8'}).toString();
+    } catch (e) {
+      return 'Please create README.md';
+    }
 
     let html = this._readTemplate('index.html');
     let ice = new IceCap(html);
