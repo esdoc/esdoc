@@ -100,6 +100,20 @@ export default class ASTUtil {
   }
 
   /**
+   * find VariableDeclaration node.
+   * @param {string} name - variable name.
+   * @param {AST} ast - find in this ast.
+   * @returns {ASTNode|null} found ast node.
+   */
+  static findVariableDeclarationNode(name, ast) {
+    for (let node of ast.body) {
+      if (node.type === 'VariableDeclaration' && node.declarations[0].id.name === name) return node;
+    }
+
+    return null;
+  }
+
+  /**
    * create VariableDeclaration node which has NewExpression.
    * @param {string} name - variable name.
    * @param {string} className - class name.

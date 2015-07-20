@@ -142,6 +142,15 @@ export default class DocFactory {
         functionNode.type = 'Identifier'; // to ignore
         pseudoExportNodes.push(pseudoExportNode);
       }
+
+      let variableNode = ASTUtil.findVariableDeclarationNode(exportNode.declaration.name, this._ast);
+      if (variableNode) {
+        let pseudoExportNode = this._copy(exportNode);
+        pseudoExportNode.declaration = this._copy(variableNode);
+        exportNode.type = 'Identifier'; // to ignore
+        variableNode.type = 'Identifier'; // to ignore
+        pseudoExportNodes.push(pseudoExportNode);
+      }
     }
 
     this._ast.body.push(...pseudoExportNodes);
@@ -231,6 +240,16 @@ export default class DocFactory {
           pseudoExportNode.leadingComments = null;
           pseudoExportNode.specifiers = null;
           functionNode.type = 'Identifier'; // to ignore
+          pseudoExportNodes.push(pseudoExportNode);
+        }
+
+        let variableNode = ASTUtil.findVariableDeclarationNode(specifier.exported.name, this._ast);
+        if (variableNode) {
+          let pseudoExportNode = this._copy(exportNode);
+          pseudoExportNode.declaration = this._copy(variableNode);
+          pseudoExportNode.leadingComments = null;
+          pseudoExportNode.specifiers = null;
+          variableNode.type = 'Identifier'; // to ignore
           pseudoExportNodes.push(pseudoExportNode);
         }
       }
