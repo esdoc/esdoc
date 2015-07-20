@@ -133,8 +133,18 @@ syntax: ``@example <JavaScript>``
  * console.log(result);
  * 
  * @example
- * let result MyClass.bar();
+ * let result = MyClass.bar();
  * console.log(result);
+ */
+class MyClass{...}
+```
+
+And you can use ``<caption>...</caption>`` at first line.
+
+```javascript
+/**
+ * @example <caption>This is caption</caption>
+ * let myClass = new MyClass();
  */
 class MyClass{...}
 ```
