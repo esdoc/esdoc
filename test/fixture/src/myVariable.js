@@ -21,3 +21,19 @@ let myVariable3 = 123;
 // this is undocument
 export let myVariable4 = 123;
 export let myVariable5 = [];
+
+/**
+ * this is myVariableSeparateExport1.
+ * @type {{foo: number, bar: string}}
+ */
+let myVariableSeparateExport1 = {};
+export default myVariableSeparateExport1;
+
+/**
+ * this is myVariableSeparateExport2.
+ * @type {Object}
+ * @property {number} foo - this is foo.
+ * @property {string} bar - this is bar.
+ */
+let myVariableSeparateExport2 = {};
+export {myVariableSeparateExport2};
