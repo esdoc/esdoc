@@ -86,3 +86,24 @@ export function dateForUTC(date) {
 
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds} (UTC)`;
 }
+
+/**
+ * parse ``@example`` value.
+ * ``@example`` value can have ``<caption>`` tag.
+ *
+ * @param {string} example - target example value.
+ * @returns {{body: string, caption: string}} parsed example value.
+ */
+export function parseExample(example) {
+  let body = example;
+  let caption = '';
+
+  let regexp = new RegExp("^<caption>(.*?)</caption>\n");
+  let matched = example.match(regexp);
+  if (matched) {
+    body = example.replace(regexp, '');
+    caption = matched[1].trim();
+  }
+
+  return {body, caption};
+}

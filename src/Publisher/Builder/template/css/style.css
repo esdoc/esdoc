@@ -405,6 +405,26 @@ h3 .right-info {
   margin: 4px 0;
 }
 
+.content .detail h4 + .example-doc {
+  margin: 6px 0;
+}
+
+.example-caption {
+  position: relative;
+  bottom: -1px;
+  display: inline-block;
+  padding: 4px;
+  border: solid 1px #ddd;
+  border-bottom: none;
+  font-style: italic;
+  background-color: #eee;
+  font-weight: bold;
+}
+
+.example-caption + pre.source-code {
+  margin-top: 0;
+}
+
 footer, .file-footer {
   text-align: right;
   font-style: italic;

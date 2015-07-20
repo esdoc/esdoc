@@ -1,5 +1,6 @@
 import IceCap from 'ice-cap';
 import DocBuilder from './DocBuilder.js';
+import {parseExample} from './util.js';
 
 /**
  * Class Output Builder class.
@@ -82,7 +83,9 @@ export default class ClassDocBuilder extends DocBuilder {
 
     ice.into('exampleDocs', doc.examples, (examples, ice)=>{
       ice.loop('exampleDoc', examples, (i, example, ice)=>{
-        ice.text('exampleCode', example);
+        let parsed = parseExample(example);
+        ice.text('exampleCode', parsed.body);
+        ice.text('exampleCaption', parsed.caption);
       });
     });
 

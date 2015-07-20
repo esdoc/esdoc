@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import escape from 'escape-html';
 import IceCap from 'ice-cap';
-import {shorten} from './util.js';
+import {shorten, parseExample} from './util.js';
 import DocResolver from './DocResolver.js';
 
 /**
@@ -488,7 +488,9 @@ export default class DocBuilder {
       // example
       ice.into('example', doc.examples, (examples, ice)=>{
         ice.loop('exampleDoc', examples, (i, exampleDoc, ice)=>{
-          ice.text('exampleCode', exampleDoc);
+          let parsed = parseExample(exampleDoc);
+          ice.text('exampleCode', parsed.body);
+          ice.text('exampleCaption', parsed.caption);
         });
       });
 
