@@ -4,6 +4,7 @@
 - **Feat**
   - Support Complex class extends ([#26](https://github.com/h13i32maru/esdoc/issues/26))
   - Support caption tag in ``@example`` ([#33](https://github.com/h13i32maru/esdoc/issues/33))
+  - Support separate function and variable export ([#30](https://github.com/h13i32maru/esdoc/issues/30))
 - **Fix**
   - Crash when object pattern argument do not have @param ([#24](https://github.com/h13i32maru/esdoc/issues/24))
 
