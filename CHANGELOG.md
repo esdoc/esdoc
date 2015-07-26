@@ -1,5 +1,9 @@
 # Changelog
 
+## Next
+- **Feat**
+  - Support coverage badge ([#34](https://github.com/h13i32maru/esdoc/issues/34))
+
 ## 0.1.4 (2015-07-20)
 - **Feat**
   - Support Complex class extends ([#26](https://github.com/h13i32maru/esdoc/issues/26))
