@@ -957,6 +957,7 @@ export default class DocBuilder {
    * @param {CoverageObject} coverageObj - target coverage object.
    * @returns {string} html of coverage badge.
    * @private
+   * @deprecated
    */
   _buildCoverageHTML(coverageObj) {
     let coverage = Math.floor(100 * coverageObj.actualCount / coverageObj.expectCount);

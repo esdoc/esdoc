@@ -74,4 +74,13 @@ describe('Coverage:', ()=> {
       }
     });
   });
+
+  /** @test {CoverageBuilder#exec} */
+  it('creates coverage badge', ()=>{
+    let json = fs.readFileSync('./test/fixture/esdoc/coverage.json', {encoding: 'utf8'}).toString();
+    let coverage = JSON.parse(json);
+    let badge = fs.readFileSync('./test/fixture/esdoc/badge.svg', {encoding: 'utf8'}).toString();
+    let ratio = Math.floor(100 * coverage.actualCount / coverage.expectCount) + '%';
+    assert(badge.includes(ratio));
+  });
 });

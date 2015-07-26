@@ -57,6 +57,7 @@ export default class IndexDocBuilder extends DocBuilder {
     }
 
     let result = ice.html;
+    // fixme: purge this code when esdoc hosting is shipped.
     if (this._config.coverage) {
       let $ = cheerio.load(result);
       $('.esdoc-coverage').html(this._buildCoverageHTML(this._coverage));

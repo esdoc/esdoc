@@ -49,7 +49,7 @@ export default class SourceDocBuilder extends DocBuilder {
     let coverage;
     if (useCoverage) coverage = this._coverage.files;
 
-    if (useCoverage) ice.load('coverageBadge', this._buildCoverageHTML(this._coverage));
+    ice.drop('coverageBadge', !useCoverage);
     ice.attr('files', 'data-use-coverage', !!useCoverage);
 
     if (useCoverage) {

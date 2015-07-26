@@ -513,6 +513,8 @@ table.files-summary .coverage-count {
 }
 
 .total-coverage-count {
+  position: relative;
+  bottom: 2px;
   font-size: 12px;
   color: #666;
   font-weight: 500;

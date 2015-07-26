@@ -47,6 +47,12 @@ export default function publish(values, asts, config) {
     fs.outputFileSync(filePath, json, {encoding: 'utf8'});
   }
 
+  function writeBadge(badge, fileName) {
+    log(fileName);
+    let filePath = path.resolve(config.destination, fileName);
+    fs.outputFileSync(filePath, badge, {encoding: 'utf8'});
+  }
+
   function writeAST(astJSON, fileName) {
     let filePath = path.resolve(config.destination, fileName);
     fs.outputFileSync(filePath, astJSON, {encoding: 'utf8'});
@@ -58,7 +64,7 @@ export default function publish(values, asts, config) {
   }
 
   if (config.coverage) {
-    new CoverageBuilder(data, config).exec(writeCoverage);
+    new CoverageBuilder(data, config).exec(writeCoverage, writeBadge);
   }
 
   new IdentifiersDocBuilder(data, config).exec(writeHTML);
