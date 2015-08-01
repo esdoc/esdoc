@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "core-js": "~0.9.18",
-    "espree": "~2.0.4",
+    "espree": "~2.2.0",
     "estraverse": "~4.1.0",
     "fs-extra": "~0.20.1",
     "minimist": "~1.1.1",
