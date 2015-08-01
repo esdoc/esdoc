@@ -3,6 +3,8 @@
 ## Next
 - **Feat**
   - Support coverage badge ([#34](https://github.com/h13i32maru/esdoc/issues/34))
+- **Fix**
+  - Anonymous class document tag ([#38](https://github.com/h13i32maru/esdoc/issues/38))
 
 ## 0.1.4 (2015-07-20)
 - **Feat**
