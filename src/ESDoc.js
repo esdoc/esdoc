@@ -218,7 +218,7 @@ export default class ESDoc {
     try {
       ast = ESParser.parse(filePath);
     } catch(e) {
-      logger.w(`fail parse: ${filePath}`);
+      InvalidCodeLogger.show(filePath);
       return null;
     }
 
@@ -252,7 +252,7 @@ export default class ESDoc {
     try {
       ast = ESParser.parse(filePath);
     } catch(e) {
-      logger.w(`fail parse: ${filePath}`);
+      InvalidCodeLogger.show(filePath);
       return null;
     }
     let pathResolver = new PathResolver(inDirPath, filePath);

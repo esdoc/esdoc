@@ -8,9 +8,14 @@ class InvalidCodeLogger {
   /**
    * show log.
    * @param {string} filePath - invalid code in this file.
-   * @param {ASTNode} node - fail parsing node.
+   * @param {ASTNode} [node] - fail parsing node.
    */
   show(filePath, node) {
+    if (!node) {
+      this.showFile(filePath);
+      return;
+    }
+
     let lines = fs.readFileSync(filePath).toString().split('\n');
     let targetLines = [];
     let start;
@@ -30,6 +35,14 @@ class InvalidCodeLogger {
     console.log(filePath);
     console.log(targetLines.join('\n'));
     console.log('[0m');
+  }
+
+  /**
+   * show log.
+   * @param {string} filePath - invalid code in this file.
+   */
+  showFile(filePath) {
+    console.log(`[31merror: could not parse ${filePath}[0m`);
   }
 }
 
