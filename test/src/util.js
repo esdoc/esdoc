@@ -3,9 +3,8 @@ import fs from 'fs';
 import path from 'path';
 import cheerio from 'cheerio';
 
-export function readDoc(fileName) {
-  //let html = fs.readFileSync(path.resolve(__dirname, `../jsdoc/${fileName}`), {encoding: 'utf-8'});
-  let html = fs.readFileSync(`./test/fixture/esdoc/${fileName}`, {encoding: 'utf-8'});
+export function readDoc(fileName, dirName = 'esdoc') {
+  let html = fs.readFileSync(`./test/fixture/${dirName}/${fileName}`, {encoding: 'utf-8'});
   let $ = cheerio.load(html);
   return $('html').first();
 }
@@ -58,3 +57,12 @@ _assert.notIncludes = function($el, selector, expect, attr) {
 };
 
 export var assert = _assert;
+
+const consoleLog = console.log;
+export function consoleLogSwitch(on) {
+  if (on) {
+    console.log = consoleLog;
+  } else {
+    console.log = ()=>{};
+  }
+}

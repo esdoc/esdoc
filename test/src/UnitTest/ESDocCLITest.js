@@ -2,6 +2,7 @@ import assert from 'assert';
 import fs from 'fs-extra';
 import path from 'path';
 import ESDocCLI from '../../../src/ESDocCLI.js';
+import {consoleLogSwitch} from '../util.js';
 
 /** @test {ESDocCLI} */
 describe('ESDocCLI:', ()=>{
@@ -15,7 +16,9 @@ describe('ESDocCLI:', ()=>{
     let configPath = path.resolve('./test/fixture/esdoc-cli.json');
     let argv = ['node', cliPath, '-c', configPath];
     let cli = new ESDocCLI(argv);
+    consoleLogSwitch(false);
     cli.exec();
+    consoleLogSwitch(true);
     assert(true);
   });
 });
