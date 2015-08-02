@@ -9,6 +9,7 @@ import PathResolver from './Util/PathResolver.js';
 import DocFactory from './Factory/DocFactory.js';
 import TestDocFactory from './Factory/TestDocFactory.js';
 import InvalidCodeLogger from './Util/InvalidCodeLogger.js';
+import Plugin from './Plugin/Plugin.js';
 
 let logger = new Logger('ESDoc');
 
@@ -31,6 +32,10 @@ export default class ESDoc {
     assert(typeof publisher === 'function');
     assert(config.source);
     assert(config.destination);
+
+    Plugin.init(config.plugins);
+    Plugin.onStart();
+    config = Plugin.onHandleConfig(config);
 
     this._setDefaultConfig(config);
 
@@ -85,7 +90,11 @@ export default class ESDoc {
       this._generateForTest(config, results, asts);
     }
 
+    results = Plugin.onHandleTag(results);
+
     publisher(results, asts, config);
+
+    Plugin.onComplete();
   }
 
   /**

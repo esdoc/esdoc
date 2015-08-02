@@ -1,6 +1,7 @@
 import fs from 'fs-extra';
 import path from 'path';
 import espree from 'espree';
+import Plugin from '../Plugin/Plugin.js';
 
 /**
  * ECMAScript Parser class.
@@ -16,6 +17,8 @@ export default class ESParser {
    */
   static parse(filePath) {
     let code = fs.readFileSync(filePath, {encode: 'utf8'}).toString();
+
+    code = Plugin.onHandleCode(code);
 
     if (code.charAt(0) === '#') {
       code = code.replace(/^#!/, '//');
@@ -51,7 +54,15 @@ export default class ESParser {
       }
     };
 
-    let ast = espree.parse(code, option);
+    let parser = (code) => {
+      return espree.parse(code, option);
+    };
+
+    parser = Plugin.onHandleCodeParser(parser);
+
+    let ast = parser(code);
+
+    ast = Plugin.onHandleAST(ast);
 
     return ast;
   }

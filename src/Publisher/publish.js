@@ -14,6 +14,7 @@ import ASTDocBuilder from './Builder/ASTDocBuilder.js';
 import SourceDocBuilder from './Builder/SourceDocBuilder.js';
 import TestDocBuilder from './Builder/TestDocBuilder.js';
 import TestFileDocBuilder from './Builder/TestFileDocBuilder.js';
+import Plugin from '../Plugin/Plugin.js';
 
 /**
  * publish document as HTML.
@@ -36,6 +37,7 @@ export default function publish(values, asts, config) {
 
   function writeHTML(html, fileName) {
     log(fileName);
+    html = Plugin.onHandleHTML(html);
     let filePath = path.resolve(config.destination, fileName);
     fs.outputFileSync(filePath, html, {encoding: 'utf8'});
   }
