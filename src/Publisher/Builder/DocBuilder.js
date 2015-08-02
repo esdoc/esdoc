@@ -140,7 +140,7 @@ export default class DocBuilder {
       //desc: config.description || packageObj.description,
       version: config.version || packageObj.version,
       //url: config.url || packageObj.repository ? packageObj.repository.url : ''
-      url: packageObj.repository ? packageObj.repository.url : ''
+      url: packageObj.repository && typeof packageObj.repository === 'object' ? packageObj.repository.url : ''
     };
 
     if (indexInfo.url.indexOf('git@github.com:') === 0) {
