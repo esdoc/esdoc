@@ -39,7 +39,10 @@ full config
   }
   "title": "My Software Name",
   "styles": ["./path/to/style.css"],
-  "scripts": ["./path/to/script.js"]
+  "scripts": ["./path/to/script.js"],
+  "plugins": [
+    {"name": "plugin-name-or-file-path", "option": null}
+  ]
 }
 ```
 
@@ -66,5 +69,8 @@ full config
 | ``title`` | - | "" | Use title for output. |
 | ``styles`` | - | ``null`` | Includes styles into output document. |
 | ``scripts`` | - | ``null`` | Includes scripts into output document. |
+| ``plugins`` | - | ``null`` | If specified, use each plugins. To see [Plugin Feature](./api.html#plugin-feature) for more information. |
+| ``plugins[].name`` | true | - | Plugin module name(e.g. ``your-awesome-plugin``) or plugin file path(e.g. ``./your-awesome-plugin.js``). |
+| ``plugins[].option`` | - | null | If specified, the plugin get the option. |
 
 Note: A file path in config is based on current directory.
