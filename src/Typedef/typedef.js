@@ -42,7 +42,11 @@
 /**
  * @typedef {Object} ASTNode
  * @see https://github.com/estree/estree
- * @property {Object} superClass
+ * @property {Object} [superClass]
+ * @property {Object[]} [leadingComments]
+ * @property {Object[]} [trailingComments]
+ * @property {Object[]} [body]
+ * @property {ASTNode} [parent] - this is customize by ESDoc
  */
 
 /**
