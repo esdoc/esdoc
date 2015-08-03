@@ -105,7 +105,7 @@ export default class DocFactory {
             targetClassName = varNode.declarations[0].init.callee.name;
             targetVariableName = exportNode.declaration.name;
             pseudoClassExport = true;
-            varNode.type = 'Identifier'; // to ignore
+            ASTUtil.sanitize(varNode);
           } else {
             targetClassName = exportNode.declaration.name;
             targetVariableName = targetClassName.replace(/^./, c => c.toLowerCase());
@@ -130,16 +130,16 @@ export default class DocFactory {
         pseudoExportNodes.push(pseudoExportNode1);
         pseudoExportNodes.push(pseudoExportNode2);
 
-        classNode.type = 'Identifier'; // to ignore
-        exportNode.type = 'Identifier'; // to ignore
+        ASTUtil.sanitize(classNode);
+        ASTUtil.sanitize(exportNode);
       }
 
       let functionNode = ASTUtil.findFunctionDeclarationNode(exportNode.declaration.name, this._ast);
       if (functionNode) {
         let pseudoExportNode = this._copy(exportNode);
         pseudoExportNode.declaration = this._copy(functionNode);
-        exportNode.type = 'Identifier'; // to ignore
-        functionNode.type = 'Identifier'; // to ignore
+        ASTUtil.sanitize(exportNode);
+        ASTUtil.sanitize(functionNode);
         pseudoExportNodes.push(pseudoExportNode);
       }
 
@@ -147,8 +147,8 @@ export default class DocFactory {
       if (variableNode) {
         let pseudoExportNode = this._copy(exportNode);
         pseudoExportNode.declaration = this._copy(variableNode);
-        exportNode.type = 'Identifier'; // to ignore
-        variableNode.type = 'Identifier'; // to ignore
+        ASTUtil.sanitize(exportNode);
+        ASTUtil.sanitize(variableNode);
         pseudoExportNodes.push(pseudoExportNode);
       }
     }
@@ -194,7 +194,7 @@ export default class DocFactory {
             pseudoExportNode.leadingComments = null;
             pseudoExportNodes.push(pseudoExportNode);
             pseudoExportNode.declaration.__esdoc__pseudo_export = true;
-            classNode.type = 'Identifier'; // to ignore
+            ASTUtil.sanitize(classNode);
           }
         }
         continue;
@@ -216,7 +216,7 @@ export default class DocFactory {
           pseudoExportNode.specifiers = null;
           pseudoExportNodes.push(pseudoExportNode);
 
-          varNode.type = 'Identifier'; // to ignore
+          ASTUtil.sanitize(varNode);
         } else {
           targetClassName = specifier.exported.name;
           pseudoClassExport = false;
@@ -230,7 +230,7 @@ export default class DocFactory {
           pseudoExportNode.specifiers = null;
           pseudoExportNode.declaration.__esdoc__pseudo_export = pseudoClassExport;
           pseudoExportNodes.push(pseudoExportNode);
-          classNode.type = 'Identifier'; // to ignore
+          ASTUtil.sanitize(classNode);
         }
 
         let functionNode = ASTUtil.findFunctionDeclarationNode(specifier.exported.name, this._ast);
@@ -239,7 +239,7 @@ export default class DocFactory {
           pseudoExportNode.declaration = this._copy(functionNode);
           pseudoExportNode.leadingComments = null;
           pseudoExportNode.specifiers = null;
-          functionNode.type = 'Identifier'; // to ignore
+          ASTUtil.sanitize(functionNode);
           pseudoExportNodes.push(pseudoExportNode);
         }
 
@@ -249,7 +249,7 @@ export default class DocFactory {
           pseudoExportNode.declaration = this._copy(variableNode);
           pseudoExportNode.leadingComments = null;
           pseudoExportNode.specifiers = null;
-          variableNode.type = 'Identifier'; // to ignore
+          ASTUtil.sanitize(variableNode);
           pseudoExportNodes.push(pseudoExportNode);
         }
       }

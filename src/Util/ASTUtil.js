@@ -10,6 +10,19 @@ let ESTRAVERSE_KEYS = {
  */
 export default class ASTUtil {
   /**
+   * sanitize node.
+   * change node type to `Identifier` and empty comment.
+   * @param {ASTNode} node - target node.
+   */
+  static sanitize(node) {
+    if (!node) return;
+    node.type = 'Identifier';
+    node.name = '_';
+    node.leadingComments = [];
+    node.trailingComments = [];
+  }
+
+  /**
    * traverse ast nodes.
    * @param {AST} ast - target AST.
    * @param {function(node: Object, parent: Object)} callback - this is called with each node.
