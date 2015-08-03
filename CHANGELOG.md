@@ -6,6 +6,7 @@
   - Plugin feature ([#27](https://github.com/h13i32maru/esdoc/issues/27))
 - **Fix**
   - Anonymous class document tag ([#38](https://github.com/h13i32maru/esdoc/issues/38))
+  - Repeat @typedef in document ([#40](https://github.com/esdoc/esdoc/issues/40))
 
 ## 0.1.4 (2015-07-20)
 - **Feat**
