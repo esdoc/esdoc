@@ -15,6 +15,8 @@ You can includes your style sheets and scripts into output documentation.
 To see ``styles`` and ``scripts`` in [Config](config.html)
 
 # Plugin Feature
+You can modify data(config, code, parser, AST, tag and HTML) at hook points with plugins.
+
 First, you set ``plugins`` property in config.
 
 <p class="file-path">esdoc.json</p>
