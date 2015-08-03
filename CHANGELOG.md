@@ -1,11 +1,12 @@
 # Changelog
 
-## Next
+## 0.2.0 (2015-08-03)
 - **Feat**
   - Support coverage badge ([#34](https://github.com/h13i32maru/esdoc/issues/34))
   - Plugin feature ([#27](https://github.com/h13i32maru/esdoc/issues/27))
 - **Fix**
   - Anonymous class document tag ([#38](https://github.com/h13i32maru/esdoc/issues/38))
+  - Repository style in package.json ([#39](https://github.com/esdoc/esdoc/pull/39)) Thanks [@r7kamura](https://github.com/r7kamura)
   - Repeat @typedef in document ([#40](https://github.com/esdoc/esdoc/issues/40))
 
 ## 0.1.4 (2015-07-20)
