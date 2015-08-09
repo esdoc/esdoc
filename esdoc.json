@@ -6,10 +6,19 @@
   "debug": false,
   "index": "./README.md",
   "package": "./package.json",
-  "importPathPrefix": "out",
   "title": "ESDoc",
   "test": {
     "type": "mocha",
     "source": "./test/src"
-  }
+  },
+  "plugins": [
+    {
+      "name": "esdoc-importpath-plugin",
+      "option": {
+        "replaces": [
+          {"from": "^src/", "to": "out/src/"}
+        ]
+      }
+    }
+  ]
 }
