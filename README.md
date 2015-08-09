@@ -71,3 +71,6 @@ please visit [esdoc.org](https://esdoc.org) to see more document.
 
 # License
 MIT
+
+# Author
+[Ryo Maruyama@h13i32maru](https://twitter.com/h13i32maru)
