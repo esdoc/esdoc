@@ -75,6 +75,8 @@ exports.onComplete = function(ev) {
 };
 ```
 
+FYI: [esdoc-es7-plugin](https://github.com/esdoc/esdoc-es7-plugin) and [esdoc-importpath-plugin](https://github.com/esdoc/esdoc-importpath-plugin)
+
 # Publisher
 This is useful for programmable operation ESDoc(e.g. making grunt plugin of ESDoc)
 

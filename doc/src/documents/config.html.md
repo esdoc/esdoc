@@ -27,7 +27,6 @@ full config
   "unexportIdentifier": false,
   "undocumentIdentifier": true,
   "builtinExternal": true,
-  "importPathPrefix": "",
   "index": "./README.md",
   "package": "./package.json",
   "coverage": true,
@@ -57,7 +56,6 @@ full config
 | ``unexportIdentifier`` | - | ``false`` | If true, also process unexported Identifiers. <br> e.g. ``export class MyClass`` is exported, ``class MyClass`` is not exported. |
 | ``undocumentIdentifier`` | - | ``true`` | If true, also process undocument Identifiers. <br> e.g. ``/** @foo bar */ class MyClass`` is document identifier, ``class MyClass`` is undocument identifier. |
 | ``builtinExternal`` | - | ``true`` | If true, use built-in external tag. The built-in external has number, string, boolean, Promise, Map, etc... |
-| ``importPathPrefix`` | - | ``""`` | Display identifier's import path with the prefix. <br> e.g. if ``MyClass`` in ``src/foo/MyClass.js``, import path is ``import MyClass from 'src/foo/MyClass.js'``. <br> but specified the prefix with ``importPathPrefix: "out"``, import path is ``import MyClass from 'out/src/foo/MyClass.js'``. |
 | ``index`` | - | ``./README.md``| Includes file into index page of document |
 | ``package`` | - | ``./package.json`` | Use package.json info. |
 | ``coverage`` | - | ``true`` | If true, output document coverage. |

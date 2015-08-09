@@ -17,6 +17,7 @@ If you want to see all features, you visit [Demo](./#demo) page.
 - [Search Documentation](#search-documentation)
 - [Guess Type](#guess-type)
 - [Customize](#customize)
+- [ESDoc Hosting Service](#esdoc-hosting-service)
 
 
 ## ES6 Class
@@ -85,4 +86,8 @@ ESDoc guesses type of function return in the same way if there is not ``@return`
 
 ## Customize
 If you want to customize a document, you can includes your stylesheets and scripts to the document.
-And, ESDoc will release plugin system for full customize in future. But, ESDoc has goal that generates the useful document without user plugins.
+And, ESDoc support to plugin feature. But, ESDoc has goal that generates the useful document without user plugins.
+Please read [API](/api.html) for more information.
+
+## ESDoc Hosting Service
+[ESDoc Hosting Service](https://doc.esdoc.org) generates your documentation via GitHub and hosts it.
