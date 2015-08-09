@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.1 (2015-08-09)
+- **Fix**
+  - Fail loading plugin ([#44](https://github.com/esdoc/esdoc/issues/44))
+
 ## 0.2.0 (2015-08-03)
 - **Feat**
   - Support coverage badge ([#34](https://github.com/h13i32maru/esdoc/issues/34))

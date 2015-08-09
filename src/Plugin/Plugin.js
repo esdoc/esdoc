@@ -16,7 +16,9 @@ class Plugin {
         const pluginPath = path.resolve(item.name);
         plugin = require(pluginPath);
       } else {
+        module.paths.push('./node_modules');
         plugin = require(item.name);
+        module.paths.pop();
       }
 
       if (!plugin[handlerName]) continue;
