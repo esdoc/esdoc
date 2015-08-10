@@ -41,10 +41,10 @@ export default class CoverageBuilder extends DocBuilder {
     let color;
     if (ratio < 50) {
       color = '#db654f';
-    } else if (coverage < 90) {
+    } else if (ratio < 90) {
       color = '#dab226';
     } else {
-      color = '#4fc921';
+      color = '#4c1';
     }
     let badge = this._readTemplate('image/badge.svg');
     badge = badge.replace(/@ratio@/g, ratio + '%');
