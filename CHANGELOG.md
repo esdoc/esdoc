@@ -1,5 +1,9 @@
 # Changelog
 
+## Next
+- **Fix**
+  - Badge color ([645a256](https://github.com/esdoc/esdoc/commit/645a2569c4d814a0a494d3759d2b3be47c68f25f))
+
 ## 0.2.1 (2015-08-09)
 - **Fix**
   - Fail loading plugin ([#44](https://github.com/esdoc/esdoc/issues/44))
