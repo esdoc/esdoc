@@ -135,20 +135,34 @@ export default class DocBuilder {
       packageObj = JSON.parse(json);
     }
 
-    let indexInfo = {
-      title: config.title || packageObj.name,
-      //desc: config.description || packageObj.description,
-      version: config.version || packageObj.version,
-      //url: config.url || packageObj.repository ? packageObj.repository.url : ''
-      url: packageObj.repository && typeof packageObj.repository === 'object' ? packageObj.repository.url : ''
-    };
+    // repository url
+    let url = '';
+    if (packageObj.repository) {
+      if (packageObj.repository.url) {
+        url = packageObj.repository.url;
+      } else {
+        url = packageObj.repository;
+      }
 
-    if (indexInfo.url.indexOf('git@github.com:') === 0) {
-      let matched = indexInfo.url.match(/^git@github\.com:(.*)\.git$/);
-      if (matched && matched[1]) {
-        indexInfo.url = `https://github.com/${matched[1]}`;
+      // url: git@github.com:foo/bar.git
+      if (url.indexOf('git@github.com:') === 0) {
+        let matched = url.match(/^git@github\.com:(.*)\.git$/);
+        if (matched && matched[1]) {
+          url = `https://github.com/${matched[1]}`;
+        }
+      }
+
+      // url: foo/bar
+      if (url.match(/^[\w\d\-_]+\/[\w\d\-_]+$/)) {
+        url = `https://github.com/${url}`;
       }
     }
+
+    let indexInfo = {
+      title: config.title || packageObj.name,
+      version: config.version || packageObj.version,
+      url: url
+    };
 
     return indexInfo;
   }
