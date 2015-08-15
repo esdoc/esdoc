@@ -9,7 +9,7 @@ describe('Export:', ()=>{
     let doc = readDoc('class/src/Export.js~MyExport1.html');
 
     it('has instance notice.', ()=>{
-      assert.includes(doc, '[data-ice="importPath"]', "import MyExport1 from 'esdoc-test-fixture/out/src/Export.js'");
+      assert.includes(doc, '[data-ice="importPath"]', "import MyExport1 from 'esdoc-test-fixture/src/Export.js'");
       assert.includes(doc, '.self-detail', 'You can directly use instance of this class. myExport1');
     });
   });
@@ -18,7 +18,7 @@ describe('Export:', ()=>{
     let doc = readDoc('class/src/Export.js~MyExport2.html');
 
     it('has instance notice.', ()=>{
-      assert.notIncludes(doc, '[data-ice="importPath"]', "esdoc-test-fixture/out/src/Export.js");
+      assert.notIncludes(doc, '[data-ice="importPath"]', "esdoc-test-fixture/src/Export.js");
       assert.includes(doc, '.self-detail', 'You can directly use instance of this class. myExport2');
     });
   });
@@ -27,7 +27,7 @@ describe('Export:', ()=>{
     let doc = readDoc('class/src/Export.js~MyExport3.html');
 
     it('has instance notice.', ()=>{
-      assert.notIncludes(doc, '[data-ice="importPath"]', "esdoc-test-fixture/out/src/Export.js");
+      assert.notIncludes(doc, '[data-ice="importPath"]', "esdoc-test-fixture/src/Export.js");
       assert.includes(doc, '.self-detail', 'You can directly use instance of this class. myExport3');
     });
   });
@@ -36,7 +36,7 @@ describe('Export:', ()=>{
     let doc = readDoc('class/src/Export.js~MyExport4.html');
 
     it('has instance notice.', ()=>{
-      assert.notIncludes(doc, '[data-ice="importPath"]', "esdoc-test-fixture/out/src/Export.js");
+      assert.notIncludes(doc, '[data-ice="importPath"]', "esdoc-test-fixture/src/Export.js");
       assert.includes(doc, '.self-detail', 'You can directly use instance of this class. myExport4');
     });
   });
@@ -45,7 +45,7 @@ describe('Export:', ()=>{
     let doc = readDoc('class/src/Export.js~MyExport5.html');
 
     it('has instance notice.', ()=>{
-      assert.notIncludes(doc, '[data-ice="importPath"]', "esdoc-test-fixture/out/src/Export.js");
+      assert.notIncludes(doc, '[data-ice="importPath"]', "esdoc-test-fixture/src/Export.js");
       assert.includes(doc, '.self-detail', 'You can directly use instance of this class. myExport5');
     });
   });
@@ -54,7 +54,7 @@ describe('Export:', ()=>{
     let doc = readDoc('class/src/Export.js~MyExport6.html');
 
     it('does not have instance notice.', ()=>{
-      assert.includes(doc, '[data-ice="importPath"]', "import {MyExport6} from 'esdoc-test-fixture/out/src/Export.js'");
+      assert.includes(doc, '[data-ice="importPath"]', "import {MyExport6} from 'esdoc-test-fixture/src/Export.js'");
       assert.notIncludes(doc, '.self-detail', 'You can directly use instance of this class.');
     });
   });
@@ -63,7 +63,7 @@ describe('Export:', ()=>{
     let doc = readDoc('class/src/Export.js~MyExport9.html');
 
     it('has instance notice.', ()=>{
-      assert.notIncludes(doc, '[data-ice="importPath"]', "esdoc-test-fixture/out/src/Export.js");
+      assert.notIncludes(doc, '[data-ice="importPath"]', "esdoc-test-fixture/src/Export.js");
       assert.notIncludes(doc, '.self-detail', 'You can directly use instance of this class.');
     });
   });
@@ -72,7 +72,7 @@ describe('Export:', ()=>{
     let doc = readDoc('class/src/Export.js~MyExport99.html');
 
     it('does not have instance notice.', ()=>{
-      assert.includes(doc, '[data-ice="importPath"]', "import {MyExport99} from 'esdoc-test-fixture/out/src/Export.js'");
+      assert.includes(doc, '[data-ice="importPath"]', "import {MyExport99} from 'esdoc-test-fixture/src/Export.js'");
       assert.notIncludes(doc, '.self-detail', 'You can directly use instance of this class.');
     });
   });

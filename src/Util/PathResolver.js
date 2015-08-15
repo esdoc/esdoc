@@ -5,7 +5,7 @@ import os from 'os';
 /**
  * file path resolver.
  * @example
- * let pathResolver = new PathResolver('./src', 'foo/bar.js', 'foo-bar', 'out/foo/bar.js', 'out');
+ * let pathResolver = new PathResolver('./src', 'foo/bar.js', 'foo-bar', 'foo/bar.js');
  * pathResolver.importPath; // 'foo-bar'
  * pathResolver.filePath; // 'src/foo/bar.js'
  * pathResolver.resolve('./baz.js'); // 'src/foo/baz.js'
@@ -17,9 +17,8 @@ export default class PathResolver {
    * @param {string} filePath - relative file path from root directory path.
    * @param {string} [packageName] - npm package name.
    * @param {string} [mainFilePath] - npm main file path.
-   * @param {string} [pathPrefix] - import path prefix.
    */
-  constructor(inDirPath, filePath, packageName = null, mainFilePath = null, pathPrefix = '') {
+  constructor(inDirPath, filePath, packageName = null, mainFilePath = null) {
     assert(inDirPath);
     assert(filePath);
 
@@ -36,16 +35,6 @@ export default class PathResolver {
       /** @type {string} */
       this._mainFilePath = path.resolve(mainFilePath);
     }
-
-    /** @type {string} */
-    this._pathPrefix = pathPrefix || '';
-
-    if (this._pathPrefix) {
-      /** @type {string} */
-      this._prefixedFilePath = path.resolve(`${this._pathPrefix}${path.sep}${this.filePath}`);
-    } else {
-      this._prefixedFilePath = path.resolve(this.filePath);
-    }
   }
 
   /**
@@ -53,14 +42,15 @@ export default class PathResolver {
    * @type {string}
    */
   get importPath() {
-    if (this._mainFilePath === this._prefixedFilePath) {
+    let relativeFilePath = this.filePath;
+
+    if (this._mainFilePath === path.resolve(relativeFilePath)) {
       return this._packageName;
     }
 
-    let relativeFilePath = this.filePath;
     let filePath;
     if (this._packageName) {
-      filePath = path.normalize(`${this._packageName}${path.sep}${this._pathPrefix}${path.sep}${relativeFilePath}`);
+      filePath = path.normalize(`${this._packageName}${path.sep}${relativeFilePath}`);
     } else {
       filePath = `./${relativeFilePath}`;
     }

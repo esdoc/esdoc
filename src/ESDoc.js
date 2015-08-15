@@ -38,11 +38,11 @@ export default class ESDoc {
     config = Plugin.onHandleConfig(config);
 
     this._setDefaultConfig(config);
+    this._deprecatedConfig(config);
 
     Logger.debug = !!config.debug;
     let includes = config.includes.map((v) => new RegExp(v));
     let excludes = config.excludes.map((v) => new RegExp(v));
-    let pathPrefix = config.importPathPrefix;
 
     let packageName = null;
     let mainFilePath = null;
@@ -74,7 +74,7 @@ export default class ESDoc {
         if (filePath.match(reg)) return;
       }
 
-      let temp = this._traverse(config.source, filePath, packageName, mainFilePath, pathPrefix);
+      let temp = this._traverse(config.source, filePath, packageName, mainFilePath);
       if (!temp) return;
       results.push(...temp.results);
 
@@ -157,8 +157,6 @@ export default class ESDoc {
 
     if (!config.package) config.package = './package.json';
 
-    if (!config.importPathPrefix) config.importPathPrefix = '';
-
     if (!config.styles) config.styles = [];
 
     if (!config.scripts) config.scripts = [];
@@ -168,6 +166,12 @@ export default class ESDoc {
       assert(config.test.source);
       if (!config.test.includes) config.test.includes = ['(spec|Spec|test|Test)\\.(js|es6)$'];
       if (!config.test.excludes) config.test.excludes = ['\\.config\\.(js|es6)$'];
+    }
+  }
+
+  static _deprecatedConfig(config) {
+    if (config.importPathPrefix) {
+      console.log('[deprecated] config.importPathPrefix is deprecated. Use esdoc-importpath-plugin(https://github.com/esdoc/esdoc-importpath-plugin)');
     }
   }
 
@@ -215,13 +219,12 @@ export default class ESDoc {
    * @param {string} filePath - target JavaScript file path.
    * @param {string} [packageName] - npm package name of target.
    * @param {string} [mainFilePath] - npm main file path of target.
-   * @param {string} [pathPrefix] - prefix of import path from root directory.
    * @returns {Object} - return document that is traversed.
    * @property {DocObject[]} results - this is contained JavaScript file.
    * @property {AST} ast - this is AST of JavaScript file.
    * @private
    */
-  static _traverse(inDirPath, filePath, packageName, mainFilePath, pathPrefix) {
+  static _traverse(inDirPath, filePath, packageName, mainFilePath) {
     logger.i(`parsing: ${filePath}`);
     let ast;
     try {
@@ -231,7 +234,7 @@ export default class ESDoc {
       return null;
     }
 
-    let pathResolver = new PathResolver(inDirPath, filePath, packageName, mainFilePath, pathPrefix);
+    let pathResolver = new PathResolver(inDirPath, filePath, packageName, mainFilePath);
     let factory = new DocFactory(ast, pathResolver);
 
     ASTUtil.traverse(ast, (node, parent)=>{

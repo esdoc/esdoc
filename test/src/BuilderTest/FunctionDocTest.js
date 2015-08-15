@@ -26,7 +26,7 @@ describe('MyFunction:', ()=>{
   it('has detail.', ()=>{
     find(doc, '[data-ice="detail"]:nth-of-type(1)', (doc)=>{
       assert.includes(doc, '#static-function-myFunction1', 'public myFunction1()');
-      assert.includes(doc, '[data-ice="importPath"]', "import myFunction1 from 'esdoc-test-fixture/out/src/myFunction.js'");
+      assert.includes(doc, '[data-ice="importPath"]', "import myFunction1 from 'esdoc-test-fixture/src/myFunction.js'");
 
       find(doc, '[data-ice="example"]', (doc)=>{
         assert.includes(doc, 'div.example-doc:nth-of-type(1)', 'This is example caption');
@@ -38,12 +38,12 @@ describe('MyFunction:', ()=>{
 
     find(doc, '[data-ice="detail"]:nth-of-type(2)', (doc)=>{
       assert.includes(doc, '#static-function-myFunction2', 'public myFunction2(p1: number, p2: string)');
-      assert.includes(doc, '[data-ice="importPath"]', "import {myFunction2} from 'esdoc-test-fixture/out/src/myFunction.js'");
+      assert.includes(doc, '[data-ice="importPath"]', "import {myFunction2} from 'esdoc-test-fixture/src/myFunction.js'");
     });
 
     find(doc, '[data-ice="detail"]:nth-of-type(3)', (doc)=>{
       assert.includes(doc, '#static-function-myFunction3', 'public myFunction3(): number');
-      assert.includes(doc, '[data-ice="importPath"]', "import {myFunction3} from 'esdoc-test-fixture/out/src/myFunction.js'");
+      assert.includes(doc, '[data-ice="importPath"]', "import {myFunction3} from 'esdoc-test-fixture/src/myFunction.js'");
     });
 
     find(doc, '[data-ice="detail"]:nth-of-type(4)', (doc)=>{
@@ -68,12 +68,12 @@ describe('MyFunction:', ()=>{
 
     find(doc, '[data-ice="detail"]:nth-of-type(9)', (doc)=>{
       assert.includes(doc, '#static-function-myFunctionSeparateExport1', 'public myFunctionSeparateExport1(p1: number)');
-      assert.includes(doc, '[data-ice="importPath"]', "import myFunctionSeparateExport1 from 'esdoc-test-fixture/out/src/myFunction.js'");
+      assert.includes(doc, '[data-ice="importPath"]', "import myFunctionSeparateExport1 from 'esdoc-test-fixture/src/myFunction.js'");
     });
 
     find(doc, '[data-ice="detail"]:nth-of-type(10)', (doc)=>{
       assert.includes(doc, '#static-function-myFunctionSeparateExport2', 'public myFunctionSeparateExport2(p1: number)');
-      assert.includes(doc, '[data-ice="importPath"]', "import {myFunctionSeparateExport2} from 'esdoc-test-fixture/out/src/myFunction.js'");
+      assert.includes(doc, '[data-ice="importPath"]', "import {myFunctionSeparateExport2} from 'esdoc-test-fixture/src/myFunction.js'");
     });
   });
 });
