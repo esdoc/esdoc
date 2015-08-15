@@ -11,13 +11,15 @@ html
   font-family: 'Roboto', sans-serif;
   overflow: auto;
   font-size: 14px;
-  color: #4d4e53;
-  background-color: #F9F9F9;
+  /*color: #4d4e53;*/
+  color: rgba(0, 0, 0, .68);
+  background-color: #fff;
 }
 
 a {
   /*color: #0095dd;*/
-  color:rgb(37, 138, 175);
+  /*color:rgb(37, 138, 175);*/
+  color: #039BE5;
 }
 
 code a:hover {
