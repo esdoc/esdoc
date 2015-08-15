@@ -63,26 +63,47 @@ h3 {
   font-weight: 300;
 }
 
+del {
+  text-decoration: line-through;
+}
+
 p {
   margin-bottom: 15px;
   line-height: 19px;
 }
 
-pre.prettyprint {
+p > code {
+  background-color: #f5f5f5;
+  border-radius: 3px;
+}
+
+pre > code {
+  display: block;
+}
+
+pre.prettyprint, pre > code {
   padding: 4px;
-  border: solid 1px #ddd;
-  margin: 4px 0;
+  margin: 1em 0;
+  background-color: #f5f5f5;
+  border-radius: 3px;
+}
+
+pre.prettyprint > code {
+  margin: 0;
 }
 
 p > code,
 li > code {
   padding: 0 4px;
-  background: #ddd;
+  border-radius: 3px;
 }
 
-.import-path pre.prettyprint {
-  border: none;
+.import-path pre.prettyprint,
+.import-path pre.prettyprint code {
+  margin: 0;
   padding: 0;
+  border: none;
+  background: white;
 }
 
 .layout-container {
@@ -416,15 +437,17 @@ h3 .right-info {
   bottom: -1px;
   display: inline-block;
   padding: 4px;
-  border: solid 1px #ddd;
-  border-bottom: none;
   font-style: italic;
-  background-color: #eee;
+  background-color: #f5f5f5;
   font-weight: bold;
+  border-radius: 3px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .example-caption + pre.source-code {
   margin-top: 0;
+  border-top-left-radius: 0;
 }
 
 footer, .file-footer {
@@ -441,9 +464,13 @@ footer, .file-footer {
 }
 
 pre.source-code {
-  background: white;
-  border: solid 1px #ddd;
+  background: #f5f5f5;
   padding: 4px;
+}
+
+pre.raw-source-code > code {
+  padding: 0;
+  margin: 0;
 }
 
 pre.source-code.line-number {
@@ -716,4 +743,76 @@ h1 .esdoc-coverage {
 
 .esdoc-coverage-high {
   background: linear-gradient(to bottom, #4fc921 0%,#3eb810 100%);
+}
+
+/* github markdown */
+.github-markdown {
+  font-size: 16px;
+}
+
+.github-markdown h1,
+.github-markdown h2,
+.github-markdown h3,
+.github-markdown h4,
+.github-markdown h5 {
+  margin-top: 1em;
+  margin-bottom: 16px;
+  font-weight: bold;
+  padding: 0;
+}
+
+.github-markdown h1:nth-of-type(1) {
+  margin-top: 0;
+}
+
+.github-markdown h1 {
+  font-size: 2em;
+  padding-bottom: 0.3em;
+}
+
+.github-markdown h2 {
+  font-size: 1.75em;
+  padding-bottom: 0.3em;
+}
+
+.github-markdown h3 {
+  font-size: 1.5em;
+  background-color: transparent;
+}
+
+.github-markdown h4 {
+  font-size: 1.25em;
+}
+
+.github-markdown h5 {
+  font-size: 1em;
+}
+
+.github-markdown ul, .github-markdown ol {
+  padding-left: 2em;
+}
+
+.github-markdown pre > code {
+  font-size: 0.85em;
+}
+
+.github-markdown table {
+  margin-bottom: 1em;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.github-markdown table tr {
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+}
+
+.github-markdown table th,
+.github-markdown table td {
+  padding: 6px 13px;
+  border: 1px solid #ddd;
+}
+
+.github-markdown table tr:nth-child(2n) {
+  background-color: #f8f8f8;
 }

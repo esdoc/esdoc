@@ -59,7 +59,8 @@ export function markdown(text, breaks = false) {
     tables: true,
     breaks: breaks,
     highlight: function (code) {
-      return `<pre class="source-code"><code class="prettyprint">${escape(code)}</code></pre>`;
+      //return `<pre class="source-code"><code class="prettyprint">${escape(code)}</code></pre>`;
+      return `<code class="source-code prettyprint">${escape(code)}</code>`;
     }
   });
 

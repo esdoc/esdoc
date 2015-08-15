@@ -23,3 +23,18 @@ export default class Foo {
 }
 var foo = 123;
 ```
+
+| First Header  | Second Header |
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
+
+**text**
+
+~~text~~
+
+# text
+## text
+### text
+#### text
+##### text
