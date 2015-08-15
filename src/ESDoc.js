@@ -230,7 +230,7 @@ export default class ESDoc {
     try {
       ast = ESParser.parse(filePath);
     } catch(e) {
-      InvalidCodeLogger.show(filePath);
+      InvalidCodeLogger.showFile(filePath, e);
       return null;
     }
 
@@ -264,7 +264,7 @@ export default class ESDoc {
     try {
       ast = ESParser.parse(filePath);
     } catch(e) {
-      InvalidCodeLogger.show(filePath);
+      InvalidCodeLogger.showFile(filePath, e);
       return null;
     }
     let pathResolver = new PathResolver(inDirPath, filePath);

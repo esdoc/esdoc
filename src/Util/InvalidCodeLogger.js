@@ -40,9 +40,20 @@ class InvalidCodeLogger {
   /**
    * show log.
    * @param {string} filePath - invalid code in this file.
+   * @param {Error} error - error object.
    */
-  showFile(filePath) {
-    console.log(`[31merror: could not parse ${filePath}[0m`);
+  showFile(filePath, error) {
+    const lines = fs.readFileSync(filePath).toString().split('\n');
+    const start = Math.max(error.lineNumber - 3, 1);
+    const end = Math.min(error.lineNumber + 3, lines.length);
+    const targetLines = [];
+    for (let i = start - 1; i < end; i++) {
+      targetLines.push(`${i}| ` + lines[i]);
+    }
+
+    console.log('[31merror: could not parse the following code. if you want to use ES7, see esdoc-es7-plugin(https://github.com/esdoc/esdoc-es7-plugin)[32m');
+    console.log(filePath);
+    console.log(targetLines.join('\n') + '[0m');
   }
 }
 
