@@ -178,15 +178,7 @@ See ``my-project/out/esdoc/source.html``
 
 <img class="screen-shot" src="./image/tutorial/document-coverage1.png">
 
-If you want to display document coverage badge in index page, write ``<span class="esdoc-coverage"></span>`` in README.md file.
-
-<p class="file-path">my-project/README.md</p>
-
-```markdown
-<span class="esdoc-coverage"></span>
-# My Project
-this is My Project README
-```
+If you want to display documentation coverage badge, use badge of [ESDoc Hosting Service](https://doc.esdoc.org).
 
 <img class="screen-shot" src="./image/tutorial/document-coverage2.png">
 

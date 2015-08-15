@@ -4,10 +4,18 @@ isPage: true
 ---
 
 # FAQ
+- [Goal](#goal)
 - [Difference between ESDoc and JSDoc](#difference-between-esdoc-and-jsdoc)
 - [Supported Languages](#supported-languages)
 - [Supported Environment](#supported-environment)
 - [Import Path In Documentation](#import-path-in-documentation)
+
+## Goal
+ESDoc has two goals.
+The first goal is reducing the cost to write an documentation, it is able to continuously maintenance.
+The second goal is without looking the source code of a library, it is to be able to use the library.
+
+In order to achieve this two goals, ESDoc produces a practical document, measures the coverage, integrates the test code and more.
 
 ## Difference between ESDoc and JSDoc
 JSDoc is most popular JavaScript API Documentation tool.
