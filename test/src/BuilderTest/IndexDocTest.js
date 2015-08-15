@@ -8,9 +8,4 @@ describe('Index:', ()=> {
   it('has README.md', ()=>{
     assert.includes(doc, '[data-ice="index"]', 'this is ESDoc Test Fixture README.');
   });
-
-  /** @test {IndexDocBuilder#_buildIndexDoc} */
-  it('has coverage badge', ()=>{
-    assert.includes(doc, '.esdoc-coverage .esdoc-coverage-ratio', '87%');
-  });
 });

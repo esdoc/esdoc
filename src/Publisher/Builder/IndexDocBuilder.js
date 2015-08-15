@@ -57,11 +57,13 @@ export default class IndexDocBuilder extends DocBuilder {
     }
 
     let result = ice.html;
-    // fixme: purge this code when esdoc hosting is shipped.
+
+    // fixme: deprecated
     if (this._config.coverage) {
       let $ = cheerio.load(result);
-      $('.esdoc-coverage').html(this._buildCoverageHTML(this._coverage));
-      result = $.root().html();
+      if ($('.esdoc-coverage').length) {
+        console.log('[31m[deprecated] coverage badge is deprecated. use badge of ESDoc Hosting Service(https://doc.esdoc.org)[0m');
+      }
     }
 
     return result;
