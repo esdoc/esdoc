@@ -122,7 +122,7 @@ li > code {
   position: fixed;
   width: 100%;
   z-index: 1;
-  background-color: #F9F9F9;
+  background-color: white;
   top: 0;
   border-bottom: solid 1px #E02130;
 }
