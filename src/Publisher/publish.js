@@ -79,6 +79,15 @@ export default function publish(values, asts, config) {
   new ASTDocBuilder(data, asts, config).exec(writeAST);
   new SourceDocBuilder(data, config, _coverage).exec(writeHTML);
 
+  // package.json
+  try {
+    const json = fs.readFileSync(config.package, {encoding: 'utf-8'});
+    let filePath = path.resolve(config.destination, 'package.json');
+    fs.outputFileSync(filePath, json, {encoding: 'utf8'});
+  } catch (e) {
+    // ignore
+  }
+
   if (config.test) {
     new TestDocBuilder(data, config).exec(writeHTML);
     new TestFileDocBuilder(data, config).exec(writeHTML);
