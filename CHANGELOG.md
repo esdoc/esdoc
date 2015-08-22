@@ -3,6 +3,7 @@
 ## Next
 - **Fix**
   - Badge color ([645a256](https://github.com/esdoc/esdoc/commit/645a2569c4d814a0a494d3759d2b3be47c68f25f))
+  - Crash if package.json is not exits ([#50](https://github.com/esdoc/esdoc/issues/50))
 - **Deprecated**
   - config.importPathPrefix ([#46](https://github.com/esdoc/esdoc/issues/46))
   - coverage badge in README.md ([#47](https://github.com/esdoc/esdoc/issues/47))
