@@ -131,8 +131,12 @@ export default class DocBuilder {
     let packageObj = {};
     if (config.package) {
       let packagePath = config.package;
-      let json = fs.readFileSync(packagePath, {encoding: 'utf-8'});
-      packageObj = JSON.parse(json);
+      try {
+        let json = fs.readFileSync(packagePath, {encoding: 'utf-8'});
+        packageObj = JSON.parse(json);
+      } catch (e) {
+        // ignore
+      }
     }
 
     // repository url
