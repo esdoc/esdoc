@@ -1,6 +1,6 @@
 # Changelog
 
-## Next
+## 0.2.2 (2015-08-23)
 - **Fix**
   - Badge color ([645a256](https://github.com/esdoc/esdoc/commit/645a2569c4d814a0a494d3759d2b3be47c68f25f))
   - Crash if package.json is not exits ([#50](https://github.com/esdoc/esdoc/issues/50))
