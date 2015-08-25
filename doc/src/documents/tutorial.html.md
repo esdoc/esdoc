@@ -7,7 +7,7 @@ isPage: true
 
 - [Install ESDoc](#install-esdoc)
 - [Create Config File](#create-config-file)
-- [Write Document Tag](#write-document-tag)
+- [Write Documentation Tags](#write-documentation-tags)
 - [Document Coverage](#document-coverage)
 - [Generate Document From Test Code](#generate-document-from-test-code)
 - [Appendix](#appendix)
