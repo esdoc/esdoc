@@ -4,6 +4,7 @@
 - **Fix**
   - Fail if config.source is ``./`` ([#56](https://github.com/esdoc/esdoc/issues/56))
   - Not match ``includes, excludes`` in config ([#57](https://github.com/esdoc/esdoc/issues/57))
+  - Not process ``@param`` in ``@typedef`` of function ([#58](https://github.com/esdoc/esdoc/issues/58))
 
 ## 0.2.2 (2015-08-23)
 - **Fix**
