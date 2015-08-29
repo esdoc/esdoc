@@ -2,6 +2,7 @@ import assert from 'assert';
 import fs from 'fs';
 import ParamParser from '../Parser/ParamParser.js';
 import ASTUtil from '../Util/ASTUtil.js';
+import InvalidCodeLogger from '../Util/InvalidCodeLogger.js';
 
 /**
  * Abstract Doc Class.
@@ -371,6 +372,10 @@ export default class AbstractDoc {
     this._value.params = [];
     for (let value of values) {
       let {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value);
+      if (!typeText || !paramName) {
+        InvalidCodeLogger.show(this._pathResolver.fileFullPath, this._node);
+        continue;
+      }
       let result = ParamParser.parseParam(typeText, paramName, paramDesc);
       this._value.params.push(result);
     }

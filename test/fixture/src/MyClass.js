@@ -239,6 +239,12 @@ export default class MyClass1 extends SuperMyClass1 {
    * @private
    */
   method8(p1, p2, p3, p4, p5, p6){}
+
+  /**
+   * @private
+   * @param {number}
+   */
+  method999Invalid(p1){}
 }
 
 /**
