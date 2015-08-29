@@ -3,6 +3,7 @@
 ## Next
 - **Fix**
   - Fail if config.source is ``./`` ([#56](https://github.com/esdoc/esdoc/issues/56))
+  - Not match ``includes, excludes`` in config ([#57](https://github.com/esdoc/esdoc/issues/57))
 
 ## 0.2.2 (2015-08-23)
 - **Fix**

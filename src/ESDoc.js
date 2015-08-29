@@ -59,11 +59,13 @@ export default class ESDoc {
 
     let results = [];
     let asts = [];
+    let sourceDirPath = path.resolve(config.source);
 
     this._walk(config.source, (filePath)=>{
+      const relativeFilePath = path.relative(sourceDirPath, filePath);
       let match = false;
       for (let reg of includes) {
-        if (filePath.match(reg)) {
+        if (relativeFilePath.match(reg)) {
           match = true;
           break;
         }
@@ -71,14 +73,13 @@ export default class ESDoc {
       if (!match) return;
 
       for (let reg of excludes) {
-        if (filePath.match(reg)) return;
+        if (relativeFilePath.match(reg)) return;
       }
 
       let temp = this._traverse(config.source, filePath, packageName, mainFilePath);
       if (!temp) return;
       results.push(...temp.results);
 
-      let relativeFilePath = path.relative(path.dirname(config.source), filePath);
       asts.push({filePath: 'source' + path.sep + relativeFilePath, ast: temp.ast});
     });
 
@@ -107,11 +108,13 @@ export default class ESDoc {
   static _generateForTest(config, results, asts) {
     let includes = config.test.includes.map((v) => new RegExp(v));
     let excludes = config.test.excludes.map((v) => new RegExp(v));
+    let sourceDirPath = path.resolve(config.test.source);
 
     this._walk(config.test.source, (filePath)=>{
+      const relativeFilePath = path.relative(sourceDirPath, filePath);
       let match = false;
       for (let reg of includes) {
-        if (filePath.match(reg)) {
+        if (relativeFilePath.match(reg)) {
           match = true;
           break;
         }
@@ -119,14 +122,13 @@ export default class ESDoc {
       if (!match) return;
 
       for (let reg of excludes) {
-        if (filePath.match(reg)) return;
+        if (relativeFilePath.match(reg)) return;
       }
 
       let temp = this._traverseForTest(config.test.type, config.test.source, filePath);
       if (!temp) return;
       results.push(...temp.results);
 
-      let relativeFilePath = path.relative(path.dirname(config.test.source), filePath);
       asts.push({filePath: 'test' + path.sep + relativeFilePath, ast: temp.ast});
     });
   }
