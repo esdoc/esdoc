@@ -1,6 +1,6 @@
 # Changelog
 
-## Next
+## 0.2.3 (2015-08-29)
 - **Fix**
   - Fail if config.source is ``./`` ([#56](https://github.com/esdoc/esdoc/issues/56))
   - Not match ``includes, excludes`` in config ([#57](https://github.com/esdoc/esdoc/issues/57))
