@@ -454,7 +454,11 @@ export default class DocBuilder {
       ice.load('todo', this._buildDocsLinkHTML(doc.todo), 'append');
       ice.load('override', this._buildOverrideMethod(doc));
 
-      if (['method', 'constructor', 'function'].indexOf(doc.kind) !== -1) {
+      let isFunction = false;
+      if (['method', 'constructor', 'function'].indexOf(doc.kind) !== -1) isFunction = true;
+      if (doc.kind === 'typedef' && doc.params && doc.type.types[0] === 'function') isFunction = true;
+
+      if (isFunction) {
         ice.load('properties', this._buildProperties(doc.params, 'Params:'));
       } else {
         ice.load('properties', this._buildProperties(doc.properties, 'Properties:'));
