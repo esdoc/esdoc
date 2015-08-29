@@ -1,5 +1,9 @@
 # Changelog
 
+## Next
+- **Fix**
+  - Fail if config.source is ``./`` ([#56](https://github.com/esdoc/esdoc/issues/56))
+
 ## 0.2.2 (2015-08-23)
 - **Fix**
   - Badge color ([645a256](https://github.com/esdoc/esdoc/commit/645a2569c4d814a0a494d3759d2b3be47c68f25f))
