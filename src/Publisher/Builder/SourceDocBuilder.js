@@ -60,8 +60,9 @@ export default class SourceDocBuilder extends DocBuilder {
     }
 
     ice.loop('file', docs, (i, doc, ice)=>{
+      let sourceDirPath = path.resolve(config.source);
       let filePath = doc.longname;
-      let absFilePath = path.resolve(path.dirname(config.source), filePath);
+      let absFilePath = path.resolve(path.dirname(sourceDirPath), filePath);
       let content = fs.readFileSync(absFilePath).toString();
       let lines = content.split('\n').length - 1;
       let stat = fs.statSync(absFilePath);
