@@ -75,6 +75,7 @@ export default class ASTUtil {
   static findVariableDeclarationAndNewExpressionNode(name, ast) {
     for (let node of ast.body) {
       if (node.type === 'VariableDeclaration' &&
+        node.declarations[0].init &&
         node.declarations[0].init.type === 'NewExpression' &&
         node.declarations[0].id.name === name) {
         return node;
