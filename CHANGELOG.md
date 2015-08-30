@@ -3,6 +3,7 @@
 ## Next
 - **Fix**
   - Crash if un-initialized let/const variables are exist ([#60](https://github.com/esdoc/esdoc/issues/60))
+  - Invalid documentation when computed members(``this[prop] = 123``) are exist ([#59](https://github.com/esdoc/esdoc/issues/59))
 
 ## 0.2.3 (2015-08-29)
 - **Fix**
