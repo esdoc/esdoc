@@ -141,6 +141,10 @@ export default class MyClass1 extends SuperMyClass1 {
     this.p5 = 123;
     this.p6 = {};
     this.p7 = null;
+
+    // this is undocument
+    const prop = 'p999';
+    this[prop] = 123;
   }
 
   /**
