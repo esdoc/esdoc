@@ -3,6 +3,8 @@
 ## Next
 - **Feat**
   - Support JavaScript code as esdoc config ([#71](https://github.com/esdoc/esdoc/pull/71) Thanks @raveclassic)
+- **Fix**
+  - Excludes member that has same name getter/setter/method ([#64](https://github.com/esdoc/esdoc/issues/64), [#70](https://github.com/esdoc/esdoc/issues/70))
 
 ## 0.2.4 (2015-08-30)
 - **Fix**

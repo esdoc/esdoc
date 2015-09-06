@@ -409,7 +409,16 @@ export default class DocResolver {
     let docs = this._builder._find({kind: 'member'});
     let ignoreId = [];
     for (let doc of docs) {
-      let dup = this._builder._find({longname: doc.longname});
+      // member duplicate with getter/setter/method.
+      // when it, remove member.
+      // getter/setter/method are high priority.
+      const nonMemberDup = this._builder._find({longname: doc.longname, kind: {'!is': 'member'}});
+      if (nonMemberDup.length) {
+        ignoreId.push(doc.___id);
+        continue;
+      }
+
+      let dup = this._builder._find({longname: doc.longname, kind: 'member'});
       if (dup.length > 1) {
         let ids = dup.map(v => v.___id);
         ids.sort((a, b)=> {

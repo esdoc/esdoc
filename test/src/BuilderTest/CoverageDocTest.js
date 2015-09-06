@@ -8,9 +8,9 @@ describe('Coverage:', ()=> {
   it('has coverage.json', ()=>{
     let json = fs.readFileSync('./test/fixture/esdoc/coverage.json', {encoding: 'utf8'}).toString();
     let coverage = JSON.parse(json);
-    assert.equal(coverage.coverage, '87.28%');
-    assert.equal(coverage.expectCount, 118);
-    assert.equal(coverage.actualCount, 103);
+    assert.equal(coverage.coverage, '87.8%');
+    assert.equal(coverage.expectCount, 123);
+    assert.equal(coverage.actualCount, 108);
     assert.deepEqual(coverage.files, {
       "src/ForTestDoc/AbstractDoc.js": {
         "expectCount": 3,
@@ -55,6 +55,10 @@ describe('Coverage:', ()=> {
       "src/ReactJSX.js": {
         "expectCount": 2,
         "actualCount": 2
+      },
+      "src/Z001_MyDuplicationPropertyClass.js": {
+        "actualCount": 5,
+        "expectCount": 5
       },
       "src/OtherClass/SuperMyClass.js": {
         "expectCount": 19,
