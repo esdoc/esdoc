@@ -77,11 +77,7 @@ export default class ESDocCLI {
    * @private
    */
   _createConfigFromJSONFile(configFilePath) {
-    configFilePath = path.resolve(configFilePath);
-    let configJSON = fs.readFileSync(configFilePath, {encode: 'utf8'});
-    let config = JSON.parse(configJSON);
-
-    return config;
+    return require(path.resolve(configFilePath));
   }
 }
 
