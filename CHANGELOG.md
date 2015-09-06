@@ -1,6 +1,6 @@
 # Changelog
 
-## Next
+## 0.2.5 (2015-09-06)
 - **Feat**
   - Support JavaScript code as esdoc config ([#71](https://github.com/esdoc/esdoc/pull/71) Thanks @raveclassic)
   - Add ``config.includeSource`` ([#67](https://github.com/esdoc/esdoc/issues/67), [#68](https://github.com/esdoc/esdoc/issues/68))
