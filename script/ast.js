@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 require('babel/register');
 var ESParser = require('../src/Parser/ESParser.js');
+var Plugin = require('../src/Plugin/Plugin.js').default;
+
+Plugin.init([]);
 
 if (!process.argv[2]) {
   console.log('usage: ast.js path/to/file');
