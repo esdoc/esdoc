@@ -25,6 +25,14 @@ import Plugin from '../Plugin/Plugin.js';
 export default function publish(values, asts, config) {
   IceCap.debug = !!config.debug;
 
+  if (!config.includeSource) {
+    for (let value of values) {
+      if (['file', 'testFile'].includes(value.kind) && 'content' in value) {
+        value.content = '';
+      }
+    }
+  }
+
   let dumpPath = path.resolve(config.destination, 'dump.json');
   fs.outputFileSync(dumpPath, JSON.stringify(values, null, 2));
 

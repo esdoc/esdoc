@@ -34,6 +34,7 @@ export default class FileDocBuilder extends DocBuilder {
     let ice = new IceCap(this._readTemplate('file.html'));
     ice.text('title', doc.longname);
     ice.text('content', doc.content);
+    ice.drop('emptySourceCode', !!doc.content);
     return ice.html;
   }
 }

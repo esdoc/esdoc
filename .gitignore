@@ -6,3 +6,4 @@ npm-debug.log
 /test/fixture/esdoc
 /test/fixture/esdoc-cli
 /test/fixture/esdoc-plugin
+/test/fixture/esdoc-non-source
