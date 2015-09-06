@@ -1,6 +1,9 @@
 // inner link(#foo) can not correctly scroll, because page has fixed header,
 // so, I manually scroll.
 (function(){
+  var matched = location.hash.match(/errorLines=([\d,]+)/);
+  if (matched) return;
+
   function adjust() {
     window.scrollBy(0, -55);
     var el = document.querySelector('.inner-link-active');

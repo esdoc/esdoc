@@ -69,11 +69,13 @@ export default class SourceDocBuilder extends DocBuilder {
       let date = dateForUTC(stat.ctime);
       let coverageRatio;
       let coverageCount;
+      let undocumentLines;
       if (useCoverage && coverage[filePath]) {
         let actual = coverage[filePath].actualCount;
         let expect = coverage[filePath].expectCount;
         coverageRatio = `${Math.floor(100 * actual / expect)} %`;
         coverageCount = `${actual}/${expect}`;
+        undocumentLines = coverage[filePath].undocumentLines.sort().join(',');
       } else {
         coverageRatio = '-';
       }
@@ -85,7 +87,13 @@ export default class SourceDocBuilder extends DocBuilder {
         return this._buildDocLinkHTML(doc.longname);
       });
 
-      ice.load('filePath', this._buildFileDocLinkHTML(doc));
+      if (undocumentLines) {
+        const url = this._getURL(doc);
+        const link = this._buildFileDocLinkHTML(doc).replace(/href=".*\.html"/, `href="${url}#errorLines=${undocumentLines}"`);
+        ice.load('filePath', link);
+      } else {
+        ice.load('filePath', this._buildFileDocLinkHTML(doc));
+      }
       ice.text('coverage', coverageRatio);
       ice.text('coverageCount', coverageCount);
       ice.text('lines', lines);

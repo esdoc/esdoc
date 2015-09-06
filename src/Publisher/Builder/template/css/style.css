@@ -493,6 +493,10 @@ pre.source-code.line-number li.active {
   background: rgb(255, 255, 150);
 }
 
+pre.source-code.line-number li.error-line {
+  background: #ffb8bf;
+}
+
 table.files-summary {
   width: 100%;
   margin: 10px 0;
