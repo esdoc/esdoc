@@ -1,5 +1,9 @@
 # Changelog
 
+## Next
+- **Feat**
+  - Support JavaScript code as esdoc config ([#71](https://github.com/esdoc/esdoc/pull/71) Thanks @raveclassic)
+
 ## 0.2.4 (2015-08-30)
 - **Fix**
   - Crash if un-initialized let/const variables are exist ([#60](https://github.com/esdoc/esdoc/issues/60))
