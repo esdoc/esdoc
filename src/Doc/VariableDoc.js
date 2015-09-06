@@ -19,7 +19,15 @@ export default class VariableDoc extends AbstractDoc {
     super['@_name']();
     if (this._value.name) return;
 
-    this._value.name = this._node.declarations[0].id.name;
+    switch (this._node.declarations[0].id.type) {
+      case 'Identifier':
+        this._value.name = this._node.declarations[0].id.name;
+        break;
+      case 'ObjectPattern':
+        // TODO: optimize
+        this._value.name = this._node.declarations[0].id.properties[0].key.name;
+        break;
+    }
   }
 
   /** set memberof by using file path. */

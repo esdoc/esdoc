@@ -313,3 +313,8 @@ global.MyClass8 = class {
  */
 export class MyClass999 {
 }
+
+/**
+ * @see https://github.com/esdoc/esdoc/issues/65
+ */
+let {xxx, yyy, zzz} = obj;

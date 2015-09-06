@@ -73,6 +73,8 @@ export default class ASTUtil {
    * @returns {ASTNode|null} found ast node.
    */
   static findVariableDeclarationAndNewExpressionNode(name, ast) {
+    if (!name) return null;
+
     for (let node of ast.body) {
       if (node.type === 'VariableDeclaration' &&
         node.declarations[0].init &&
@@ -92,6 +94,8 @@ export default class ASTUtil {
    * @returns {ASTNode|null} found ast node.
    */
   static findClassDeclarationNode(name, ast) {
+    if (!name) return null;
+
     for (let node of ast.body) {
       if (node.type === 'ClassDeclaration' && node.id.name === name) return node;
     }
@@ -106,6 +110,8 @@ export default class ASTUtil {
    * @returns {ASTNode|null} found ast node.
    */
   static findFunctionDeclarationNode(name, ast) {
+    if (!name) return null;
+
     for (let node of ast.body) {
       if (node.type === 'FunctionDeclaration' && node.id.name === name) return node;
     }
@@ -120,6 +126,8 @@ export default class ASTUtil {
    * @returns {ASTNode|null} found ast node.
    */
   static findVariableDeclarationNode(name, ast) {
+    if (!name) return null;
+
     for (let node of ast.body) {
       if (node.type === 'VariableDeclaration' && node.declarations[0].id.name === name) return node;
     }
