@@ -315,6 +315,7 @@ export class MyClass999 {
 }
 
 /**
+ * object destructuring used to fail.
  * @see https://github.com/esdoc/esdoc/issues/65
  */
 let {xxx, yyy, zzz} = obj;
