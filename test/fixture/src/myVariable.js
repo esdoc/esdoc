@@ -37,3 +37,9 @@ export default myVariableSeparateExport1;
  */
 let myVariableSeparateExport2 = {};
 export {myVariableSeparateExport2};
+
+/**
+ * this is unknown type.
+ * @see https://github.com/esdoc/esdoc/issues/75
+ */
+let myVariableZ006 = new foo.Bar();

@@ -49,6 +49,7 @@ export default class VariableDoc extends AbstractDoc {
     if (this._node.declarations[0].init.type === 'NewExpression') {
       let className = this._node.declarations[0].init.callee.name;
       let longname = this._findClassLongname(className);
+      if (!longname) longname = '*';
       this._value.type = {types: [longname]};
     } else {
       this._value.type = ParamParser.guessType(this._node.declarations[0].init);
