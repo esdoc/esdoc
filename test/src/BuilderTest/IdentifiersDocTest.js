@@ -8,7 +8,7 @@ describe('Identifiers:', ()=> {
   it('has class summary.', ()=>{
     find(doc, '[data-ice="classSummary"]', (doc)=>{
       assert.includes(doc, '[data-ice="target"]:nth-of-type(4)', 'public MyClass1 this class was deprecated. use MyClass1Ex instead of this class. this class is experimental. this class is dangerous. this is MyClass1 desc.');
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(25)', 'public SuperMyClass1 this is SuperMyClass1.');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(24)', 'public SuperMyClass1 this is SuperMyClass1.');
     });
   });
 

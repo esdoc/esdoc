@@ -315,17 +315,6 @@ export class MyClass999 {
 }
 
 /**
- * this is desc of a class to test computed property names.
- */
-class MyClass10 {
-  [foo](){}
-  [foo.bar](){}
-  [foo.bar.baz](){}
-  [foo + bar](){}
-  [foo()](){}
-}
-
-/**
  * object destructuring used to fail.
  * @see https://github.com/esdoc/esdoc/issues/65
  */

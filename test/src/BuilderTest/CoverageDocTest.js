@@ -8,17 +8,17 @@ describe('Coverage:', ()=> {
   it('has coverage.json', ()=>{
     let json = fs.readFileSync('./test/fixture/esdoc/coverage.json', {encoding: 'utf8'}).toString();
     let coverage = JSON.parse(json);
-    assert.equal(coverage.coverage, '84.73%');
-    assert.equal(coverage.expectCount, 131);
-    assert.equal(coverage.actualCount, 111);
+    assert.equal(coverage.coverage, '88.88%');
+    assert.equal(coverage.expectCount, 135);
+    assert.equal(coverage.actualCount, 120);
     assert.deepEqual(coverage.files, {
       "src/ForTestDoc/AbstractDoc.js": {
         "expectCount": 3,
         "actualCount": 0,
         "undocumentLines": [
+          1,
           2,
-          4,
-          1
+          4
         ]
       },
       "src/ForTestDoc/ClassDoc.js": {
@@ -37,14 +37,9 @@ describe('Coverage:', ()=> {
         ]
       },
       "src/MyClass.js": {
-        "expectCount": 46,
-        "actualCount": 36,
+        "expectCount": 40,
+        "actualCount": 35,
         "undocumentLines": [
-          321,
-          324,
-          325,
-          322,
-          323,
           222,
           227,
           141,
@@ -95,6 +90,11 @@ describe('Coverage:', ()=> {
       "src/Z001_MyDuplicationPropertyClass.js": {
         "expectCount": 5,
         "actualCount": 5,
+        "undocumentLines": []
+      },
+      "src/Z002_MyComputedMethodClass.js": {
+        "expectCount": 10,
+        "actualCount": 10,
         "undocumentLines": []
       },
       "src/nMyAnonymous.js": {

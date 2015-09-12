@@ -3,6 +3,7 @@
 ## Next
 - **Fix**
   - Crash when array destructuring is exist ([#77](https://github.com/esdoc/esdoc/pull/77) Thanks @noraesae, [#76](https://github.com/esdoc/esdoc/issues/76))
+  - Crash when computed property method is exist ([#78](https://github.com/esdoc/esdoc/pull/78) Thanks @noraesae, [#73](https://github.com/esdoc/esdoc/issues/73))
 
 ## 0.2.5 (2015-09-06)
 - **Feat**

@@ -1,5 +1,5 @@
+import escodegen from 'escodegen';
 import AbstractDoc from './AbstractDoc.js';
-import Escodegen from 'escodegen';
 import ParamParser from '../Parser/ParamParser.js';
 
 /**
@@ -30,7 +30,12 @@ export default class MethodDoc extends AbstractDoc {
     AbstractDoc.prototype['@_name'].call(this);
     if (this._value.name) return;
 
-    this._value.name = Escodegen.generate(this._node.key);
+    if (this._node.computed) {
+      const expression = escodegen.generate(this._node.key);
+      this._value.name = `[${expression}]`;
+    } else {
+      this._value.name = this._node.key.name;
+    }
   }
 
   /** take out memberof from parent class node */
