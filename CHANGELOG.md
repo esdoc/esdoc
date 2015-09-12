@@ -1,5 +1,9 @@
 # Changelog
 
+## Next
+- **Fix**
+  - Crash when array destructuring is exist ([#77](https://github.com/esdoc/esdoc/pull/77) Thanks @noraesae, [#76](https://github.com/esdoc/esdoc/issues/76))
+
 ## 0.2.5 (2015-09-06)
 - **Feat**
   - Support JavaScript code as esdoc config ([#71](https://github.com/esdoc/esdoc/pull/71) Thanks @raveclassic)
