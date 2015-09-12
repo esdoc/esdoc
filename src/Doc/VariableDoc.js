@@ -27,6 +27,10 @@ export default class VariableDoc extends AbstractDoc {
         // TODO: optimize
         this._value.name = this._node.declarations[0].id.properties[0].key.name;
         break;
+      case 'ArrayPattern':
+        // TODO: optimize
+        this._value.name = this._node.declarations[0].id.elements[0].name;
+        break;
     }
   }
 
