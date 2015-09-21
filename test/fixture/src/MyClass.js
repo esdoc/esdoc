@@ -15,9 +15,12 @@ import SuperMyClass1 from './OtherClass/SuperMyClass.js';
  * </ul>
  * ```
  *
+ * # Inner Link
  * - item1
  * - item2
  * - item3
+ *
+ * [inner link](#inner-link)
  *
  * ```js
  * let foo = 'this is code block'

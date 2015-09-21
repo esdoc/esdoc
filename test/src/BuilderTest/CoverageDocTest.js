@@ -40,11 +40,11 @@ describe('Coverage:', ()=> {
         "expectCount": 40,
         "actualCount": 35,
         "undocumentLines": [
-          222,
-          227,
-          141,
-          142,
-          143
+          225,
+          230,
+          144,
+          145,
+          146
         ]
       },
       "src/MyError.js": {

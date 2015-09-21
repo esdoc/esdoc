@@ -19,3 +19,11 @@
     setTimeout(adjust, 0);
   }
 })();
+
+(function(){
+  var els = document.querySelectorAll('[href^="#"]');
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    el.href = location.href + el.getAttribute('href'); // because el.href is absolute path
+  }
+})();
