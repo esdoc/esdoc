@@ -1,5 +1,9 @@
 # Changelog
 
+## Next
+- **Breaking**
+  - Change side bar navigation style ([#84](https://github.com/esdoc/esdoc/issues/84))
+
 ## 0.2.6 (2015-09-13)
 - **Fix**
   - Crash when array destructuring is exist ([#77](https://github.com/esdoc/esdoc/pull/77) Thanks @noraesae, [#76](https://github.com/esdoc/esdoc/issues/76))

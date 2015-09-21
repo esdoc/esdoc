@@ -223,46 +223,39 @@ export default class DocBuilder {
     let html = this._readTemplate('nav.html');
     let ice = new IceCap(html);
 
-    // class
-    let classDocs = this._find({kind: 'class', interface: false});
-    ice.drop('classWrap', !classDocs.length);
-    ice.loop('classDoc', classDocs, (i, classDoc, ice)=>{
-      ice.load('classDoc', this._buildDocLinkHTML(classDoc.longname));
+    const kinds = ['class', 'function', 'variable', 'typedef', 'external'];
+    const allDocs = this._find({kind: kinds}).filter(v => !v.builtinExternal);
+    const kindOrder = {class: 0, interface: 1, function: 2, variable: 3, typedef: 4, external: 5};
+    allDocs.sort((a, b)=>{
+      const filePathA = a.longname.split('~')[0].replace('src/', '');
+      const filePathB = b.longname.split('~')[0].replace('src/', '');
+      const dirPathA = path.dirname(filePathA);
+      const dirPathB = path.dirname(filePathB);
+      const kindA = a.interface ? 'interface' : a.kind;
+      const kindB = b.interface ? 'interface' : b.kind;
+      if (dirPathA === dirPathB) {
+        if (kindA === kindB) {
+          return a.longname > b.longname ? 1 : -1;
+        } else {
+          return kindOrder[kindA] > kindOrder[kindB] ? 1 : -1;
+        }
+      } else {
+        return dirPathA > dirPathB ? 1 : -1;
+      }
     });
-
-    // interface
-    let interfaceDocs = this._find({kind: 'class', interface: true});
-    ice.drop('interfaceWrap', !interfaceDocs.length);
-    ice.loop('interfaceDoc', interfaceDocs, (i, interfaceDoc, ice)=>{
-      ice.load('interfaceDoc', this._buildDocLinkHTML(interfaceDoc.longname));
-    });
-
-    // function
-    let functionDocs = this._find({kind: 'function'});
-    ice.drop('functionWrap', !functionDocs.length);
-    ice.loop('functionDoc', functionDocs, (i, functionDoc, ice)=>{
-      ice.load('functionDoc', this._buildDocLinkHTML(functionDoc.longname));
-    });
-
-    // variable
-    let variableDocs = this._find({kind: 'variable'});
-    ice.drop('variableWrap', !variableDocs.length);
-    ice.loop('variableDoc', variableDocs, (i, variableDoc, ice)=>{
-      ice.load('variableDoc', this._buildDocLinkHTML(variableDoc.longname));
-    });
-
-    // typedef
-    let typedefDocs = this._find({kind: 'typedef'});
-    ice.drop('typedefWrap', !typedefDocs.length);
-    ice.loop('typedefDoc', typedefDocs, (i, typedefDoc, ice)=>{
-      ice.load('typedefDoc', this._buildDocLinkHTML(typedefDoc.longname));
-    });
-
-    // external
-    let externalDocs = this._find({kind: 'external'}).filter(v => !v.builtinExternal);
-    ice.drop('externalWrap', !externalDocs.length);
-    ice.loop('externalDoc', externalDocs, (i, externalDoc, ice)=>{
-      ice.load('externalDoc', this._buildDocLinkHTML(externalDoc.longname));
+    let lastDirPath = '.';
+    ice.loop('doc', allDocs, (i, doc, ice)=>{
+      const filePath = doc.longname.split('~')[0].replace(/^.*?[/]/, '');
+      const dirPath = path.dirname(filePath);
+      const kind = doc.interface ? 'interface' : doc.kind;
+      const kindText = kind.charAt(0).toUpperCase();
+      const kindClass = `kind-${kind}`;
+      ice.load('name', this._buildDocLinkHTML(doc.longname));
+      ice.load('kind', kindText);
+      ice.attr('kind', 'class', kindClass);
+      ice.text('dirPath', dirPath);
+      ice.drop('dirPath', lastDirPath === dirPath);
+      lastDirPath = dirPath;
     });
 
     return ice;
