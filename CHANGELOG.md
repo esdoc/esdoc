@@ -1,6 +1,6 @@
 # Changelog
 
-## Next
+## 0.3.0 (2015-09-21)
 - **Breaking**
   - Change side bar navigation style ([#84](https://github.com/esdoc/esdoc/issues/84))
 - **Fix**
