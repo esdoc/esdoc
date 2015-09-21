@@ -3,6 +3,8 @@
 ## Next
 - **Breaking**
   - Change side bar navigation style ([#84](https://github.com/esdoc/esdoc/issues/84))
+- **Fix**
+  - Inner link in user markdown ([#80](https://github.com/esdoc/esdoc/issues/80))
 
 ## 0.2.6 (2015-09-13)
 - **Fix**
