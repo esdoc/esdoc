@@ -178,9 +178,7 @@ See ``my-project/out/esdoc/source.html``
 
 <img class="screen-shot" src="./image/tutorial/document-coverage1.png">
 
-If you want to display documentation coverage badge, use badge of [ESDoc Hosting Service](https://doc.esdoc.org).
-
-<img class="screen-shot" src="./image/tutorial/document-coverage2.png">
+If you want to display documentation coverage badge, use badge of [ESDoc Hosting Service](https://doc.esdoc.org/-/faq.html).
 
 ## Generate Document From Test Code
 ESDoc can generate document from test code.
