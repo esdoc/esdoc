@@ -9,6 +9,7 @@ isPage: true
 - [Supported Languages](#supported-languages)
 - [Supported Environment](#supported-environment)
 - [Import Path In Documentation](#import-path-in-documentation)
+- [Articles](#articles)
 
 ## Goal
 ESDoc has two goals.
@@ -49,3 +50,12 @@ ESDoc displays the import path of class/function into the document.
 However, the import path may be different from real import path because usually ES6 is transpiled to use it.
 
 So, [ESDoc Import Path Plugin](https://github.com/esdoc/esdoc-importpath-plugin) converts import path to real import path.
+
+## Articles
+- [ESDocというJavaScript向けのAPIドキュメントツールを作りました | maru source](http://blog.h13i32maru.jp/entry/2015/05/06/221041)
+- [Write a documentation React and ES6 project by ESDoc | en.blog.koba04](http://en.blog.koba04.com/2015/06/28/esdoc-documentation-for-react-and-es6/)
+- <a href="http://jser.info/2015/05/06/iojs2.0.0-msedge-isomorphic/#esdoc---an-api-document-generator-for-javascript(es6)">ESDoc - An API Document Generator For JavaScript(ES6) | JSer.info</a>
+- [ESDoc - ES6時代のドキュメンテーションツール | Speacker Deck](https://speakerdeck.com/h13i32maru/esdoc-es6shi-dai-falsedokiyumentesiyonturu)
+- [ESDoc を試す | アカベコマイリ](http://akabeko.me/blog/2015/07/esdoc/)
+- [ECMAScript 6 documentation generators | stackoverflow](http://stackoverflow.com/questions/27334309/ecmascript-6-documentation-generators)
+- [ESDoc – A Documentation Generator for JavaScript(ES6) | Hacker News](https://news.ycombinator.com/item?id=10002867)
