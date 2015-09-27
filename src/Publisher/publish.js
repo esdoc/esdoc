@@ -38,13 +38,24 @@ export default function publish(values, asts, config) {
 
   let data = taffy(values);
   let _coverage = null;
+  let _counter = {
+    html : 0,
+    badge: 0,
+    copy : 0
+  };
 
-  function log(text) {
-    console.log(text);
+  function log(text, counterKey) {
+    if (counterKey) {
+      _counter[counterKey]++;
+    }
+
+    if (config.verbose || !counterKey) {
+      console.log(text);
+    }
   }
 
   function writeHTML(html, fileName) {
-    log(fileName);
+    log(fileName, 'html');
     html = Plugin.onHandleHTML(html);
     let filePath = path.resolve(config.destination, fileName);
     fs.outputFileSync(filePath, html, {encoding: 'utf8'});
@@ -58,7 +69,7 @@ export default function publish(values, asts, config) {
   }
 
   function writeBadge(badge, fileName) {
-    log(fileName);
+    log(fileName, 'badge');
     let filePath = path.resolve(config.destination, fileName);
     fs.outputFileSync(filePath, badge, {encoding: 'utf8'});
   }
@@ -69,7 +80,7 @@ export default function publish(values, asts, config) {
   }
 
   function copy(srcPath, destPath) {
-    log(destPath);
+    log(destPath, 'copy');
     fs.copySync(srcPath, path.resolve(config.destination, destPath));
   }
 
@@ -105,5 +116,13 @@ export default function publish(values, asts, config) {
     console.log('==================================');
     console.log(`Coverage: ${_coverage.coverage} (${_coverage.actualCount}/${_coverage.expectCount})`);
     console.log('==================================');
+  }
+
+  if (!config.verbose) {
+    const reportHtml  = `${_counter.html} HTML file${_counter.html && _counter.html > 1 ? 's' : ''}`;
+    const reportBadge = `${_counter.badge} badge${_counter.badge && _counter.badge > 1 ? 's' : ''}`;
+    const reportCopy  = `${_counter.copy} file${_counter.copy && _counter.copy > 1 ? 's were' : ' was'}`;
+
+    console.log(`Total ${reportHtml} and ${reportBadge} were created, ${reportCopy} copied`);
   }
 };

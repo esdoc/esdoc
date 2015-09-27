@@ -155,6 +155,8 @@ export default class ESDoc {
 
     if (!('coverage' in config)) config.coverage = true;
 
+    if (!('verbose' in config)) config.verbose = true;
+
     if (!('includeSource' in config)) config.includeSource = true;
 
     if (!config.index) config.index = './README.md';

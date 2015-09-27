@@ -30,6 +30,7 @@ full config
   "index": "./README.md",
   "package": "./package.json",
   "coverage": true,
+  "verbose": true,
   "includeSource": true,
   "test": {
     "type": "mocha",
@@ -60,6 +61,7 @@ full config
 | ``index`` | - | ``./README.md``| Includes file into index page of document |
 | ``package`` | - | ``./package.json`` | Use package.json info. |
 | ``coverage`` | - | ``true`` | If true, output document coverage. |
+| ``verbose`` | - | ``true`` | If true, output full list of files. If false - only total info |
 | ``includeSource`` | - | ``true`` | If true, output includes source codes. |
 | ``test`` | - | ``null`` | If specified, Generate document from test code. |
 | ``test.type`` | true | - | Test code type. Now only support "mocha". |

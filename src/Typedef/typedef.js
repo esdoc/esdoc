@@ -11,6 +11,7 @@
  * @property {boolean} [builtinExternal=true]
  * @property {boolean} [unexportIdentifier=false]
  * @property {boolean} [undocumentIdentifier=true]
+ * @property {boolean} [verbose=true]
  * @property {boolean} [coverage=true]
  * @property {boolean} [debug=false]
  * @property {string} [index="./README.md"]
