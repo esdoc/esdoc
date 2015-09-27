@@ -308,6 +308,28 @@ global.MyClass8 = class {
    * this is method1 desc.
    */
   method1(){}
+
+  /**
+   * Ideally, this is all in one line, but sometimes it is just
+   * a bit longer.
+   */
+  method2(){}
+
+  /**
+   * Ideally, this is all in one line, but sometimes it is just
+   * a bit longer
+   *
+   * Here comes more detailed descriptions. Note I forgot the
+   * dot above.
+   */
+  method3(){}
+
+  /**
+   * Ideally, this is all in one line, but sometimes it is just
+   * a bit longer
+   * @return {string}
+   */
+  method4(){}
 };
 
 /**

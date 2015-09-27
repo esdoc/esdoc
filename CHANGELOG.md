@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.1 (2015-09-27)
+- **Fix**
+  - Multi-line description truncated in summary ([#85](https://github.com/esdoc/esdoc/issues/85))
+
 ## 0.3.0 (2015-09-21)
 - **Breaking**
   - Change side bar navigation style ([#84](https://github.com/esdoc/esdoc/issues/84))

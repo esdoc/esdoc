@@ -14,7 +14,7 @@ export function shorten(doc) {
 
   if (doc.summary) return doc.summary;
 
-  let desc = doc.description;
+  let desc = doc.descriptionRaw;
   if (!desc) return '';
 
   let len = desc.length;
@@ -38,7 +38,7 @@ export function shorten(doc) {
         len = i + 1;
         break;
       }
-    } else if (char1 === '\n') {
+    } else if (char1 === '\n' && char2 === '\n') {
       len = i + 1;
       break;
     }
