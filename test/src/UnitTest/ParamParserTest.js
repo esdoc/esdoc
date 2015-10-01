@@ -79,7 +79,7 @@ describe('ParamParser:', ()=>{
 
   /** @test {ParamParser.parseParam} */
   it('parse param with complex.', ()=>{
-    let value = '{!(number|string|boolean[])} [p1=10] this is desc';
+    let value = '{!(number|string|boolean[])} [p1={}] this is desc';
     let {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value);
     let result = ParamParser.parseParam(typeText, paramName, paramDesc);
     assert.deepEqual(result, {
@@ -89,8 +89,8 @@ describe('ParamParser:', ()=>{
       optional: true,
       name: 'p1',
       description: 'this is desc',
-      defaultValue: '10',
-      defaultRaw: 10
+      defaultValue: '{}',
+      defaultRaw: {}
     });
   });
 
