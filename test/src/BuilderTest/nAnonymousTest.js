@@ -19,7 +19,7 @@ describe('Anonymous', ()=>{
     let doc = readDoc('function/index.html');
 
     it('has anonymous function', ()=>{
-      assert.includes(doc, '[data-ice="summary"] [data-ice="target"]:nth-of-type(11)', 'nMyAnonymous1');
+      assert.includes(doc, '[data-ice="summary"] [data-ice="target"]:nth-of-type(12)', 'nMyAnonymous1');
     });
   });
 });
