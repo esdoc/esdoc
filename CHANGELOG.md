@@ -3,6 +3,7 @@
 ## Next
 - **Feat**
   - Support manual(overview, installation, usage, etc) into documentation ([#102](https://github.com/esdoc/esdoc/issues/102))
+  - Support documentation lint ([#103](https://github.com/esdoc/esdoc/issues/103))
 
 ## 0.3.1 (2015-09-27)
 - **Fix**
