@@ -7,6 +7,12 @@ isPage: true
 
 ESDoc config file.
 
+- [Minimum Config](#minimum-config)
+- [Integrate Test Codes Config](#integrate-test-codes-config)
+- [Integrate Manual Config](#integrate-manual-config)
+- [Use ES7 Config](#use-es7-config)
+- [Full Config](#full-config)
+
 ## Minimum Config
 ```json
 {
@@ -15,7 +21,7 @@ ESDoc config file.
 }
 ```
 
-## Integrate Test Code Into Documentation Config
+## Integrate Test Codes Config
 ```json
 {
   "source": "./src"
@@ -40,7 +46,7 @@ describe('MyClass has foo bar feature', ()=>{
 });
 ```
 
-## Integrate Manual Into Documentation Config
+## Integrate Manual Config
 ```json
 {
   "source": "./src",
@@ -56,7 +62,7 @@ describe('MyClass has foo bar feature', ()=>{
 }
 ```
 
-## Use ES7 With Plugin Config
+## Use ES7 Config
 ```sh
 npm install esdoc-es7-plugin
 ```

@@ -8,8 +8,6 @@ ESDoc has some features.
 I will introduce part of the features.
 If you want to see all features, you visit [Demo](./#demo) page.
 
-([Japanese](http://blog.h13i32maru.jp/entry/2015/05/06/221041))
-
 - [ES6 Class](#es6-class)
 - [ES6 Module](#es6-module)
 - [Documentation Coverage](#documentation-coverage)
