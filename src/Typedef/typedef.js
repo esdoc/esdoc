@@ -19,6 +19,7 @@
  * @property {string[]} [styles=[]]
  * @property {string[]} [scripts=[]]
  * @property {{type: string, source: string, includes: string[], excludes: string[]}} test
+ * @property {{overview: string, installation: string, usage: string, example: string, faq: string, changelog: string}} manual
  * @see https://esdoc.org/config.html
  */
 
@@ -121,4 +122,12 @@
  * @todo remove this typedef.
  * @typedef {Object} TaffyCursor
  * @property {function} each
+ */
+
+/**
+ * @typedef {Object} ManualConfigItem
+ * @property {string} label
+ * @property {string} path
+ * @property {string} [fileName]
+ * @property {string} [reference]
  */

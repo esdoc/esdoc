@@ -789,6 +789,53 @@ h1 .esdoc-coverage {
   background: linear-gradient(to bottom, #4fc921 0%,#3eb810 100%);
 }
 
+.github-markdown .manual-toc {
+  padding-left: 0;
+}
+
+.manual-toc-title a {
+  color: inherit;
+}
+
+.manual-toc-title a:hover {
+  color: #039BE5;
+}
+
+.manual-toc li {
+  margin: 0.75em 0;
+  list-style-type: none;
+}
+
+.manual-toc .indent-h1 {
+  margin-left: 0;
+}
+.manual-toc .indent-h2 {
+  margin-left: 1em;
+}
+.manual-toc .indent-h3 {
+  margin-left: 3em;
+}
+.manual-toc .indent-h4 {
+  margin-left: 4em;
+}
+.manual-toc .indent-h5 {
+  margin-left: 5em;
+}
+
+.manual-nav li {
+  margin: 0.75em 0;
+}
+
+.manual-dot {
+  margin-left: 0.75em;
+  width: 0.6em;
+  height: 0.6em;
+  display: inline-block;
+  border-radius: 0.3em;
+  margin-right: 0.3em;
+  background-color: #bfe5bf;
+}
+
 /* github markdown */
 .github-markdown {
   font-size: 16px;

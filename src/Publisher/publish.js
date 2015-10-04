@@ -14,6 +14,7 @@ import ASTDocBuilder from './Builder/ASTDocBuilder.js';
 import SourceDocBuilder from './Builder/SourceDocBuilder.js';
 import TestDocBuilder from './Builder/TestDocBuilder.js';
 import TestFileDocBuilder from './Builder/TestFileDocBuilder.js';
+import ManualDocBuilder from './Builder/ManualDocBuilder.js';
 import Plugin from '../Plugin/Plugin.js';
 
 /**
@@ -86,6 +87,7 @@ export default function publish(values, asts, config) {
   new SearchIndexBuilder(data, config).exec(writeHTML);
   new ASTDocBuilder(data, asts, config).exec(writeAST);
   new SourceDocBuilder(data, config, _coverage).exec(writeHTML);
+  new ManualDocBuilder(data, config).exec(writeHTML);
 
   // package.json
   try {

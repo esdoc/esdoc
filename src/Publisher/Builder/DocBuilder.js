@@ -40,6 +40,23 @@ export default class DocBuilder {
   }
 
   /**
+   * find all identifiers with kind grouping.
+   * @returns {{class: DocObject[], interface: DocObject[], function: DocObject[], variable: DocObject[], typedef: DocObject[], external: DocObject[]}} found doc objects.
+   * @private
+   */
+  _findAllIdentifiersKindGrouping() {
+    const result = {
+      class: this._find([{kind: 'class', interface: false}]),
+      interface: this._find([{kind: 'class', interface: true}]),
+      function: this._find([{kind: 'function'}]),
+      variable: this._find([{kind: 'variable'}]),
+      typedef: this._find([{kind: 'typedef'}]),
+      external: this._find([{kind: 'external'}]).filter(v => !v.builtinExternal)
+    };
+    return result;
+  }
+
+  /**
    * fuzzy find doc object by name.
    * - equal with longname
    * - equal with name
@@ -210,6 +227,8 @@ export default class DocBuilder {
       ice.attr('userStyle', 'href', name);
     });
 
+    ice.drop('manualHeaderLink', !this._config.manual);
+
     ice.load('nav', this._buildNavDoc());
     return ice;
   }
@@ -290,9 +309,9 @@ export default class DocBuilder {
         break;
     }
 
-    let publicDocs = this._find(cond, {access: 'public'});
-    let protectedDocs = this._find(cond, {access: 'protected'});
-    let privateDocs = this._find(cond, {access: 'private'});
+    let publicDocs = this._find(cond, {access: 'public'}).filter(v => !v.builtinExternal);
+    let protectedDocs = this._find(cond, {access: 'protected'}).filter(v => !v.builtinExternal);
+    let privateDocs = this._find(cond, {access: 'private'}).filter(v => !v.builtinExternal);
     let accessDocs = [['Public', publicDocs], ['Protected', protectedDocs], ['Private', privateDocs]];
 
     return accessDocs;
