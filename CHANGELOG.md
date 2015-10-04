@@ -1,6 +1,6 @@
 # Changelog
 
-## Next
+## 0.4.0 (2015-10-04)
 - **Feat**
   - Support manual(overview, installation, usage, etc) into documentation ([#102](https://github.com/esdoc/esdoc/issues/102))
   - Support documentation lint ([#103](https://github.com/esdoc/esdoc/issues/103))
