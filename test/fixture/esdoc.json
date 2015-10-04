@@ -12,5 +12,13 @@
     "type": "mocha",
     "source": "./test/src",
     "includes": ["Test.js$"]
+  },
+  "manual": {
+    "overview": "./test/fixture/manual/overview.md",
+    "installation": "./test/fixture/manual/installation.md",
+    "usage": "./test/fixture/manual/usage.md",
+    "example": "./test/fixture/manual/example.md",
+    "faq": "./test/fixture/manual/faq.md",
+    "changelog": "./test/fixture/CHANGELOG.md"
   }
 }
