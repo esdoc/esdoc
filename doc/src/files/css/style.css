@@ -121,6 +121,7 @@ footer {
 
 img.screen-shot {
   max-width: 500px;
+  max-height: 500px;
   box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
 }
 
