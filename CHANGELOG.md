@@ -1,5 +1,9 @@
 # Changelog
 
+## Next
+- **Feat**
+  - Support manual(overview, installation, usage, etc) into documentation ([#102](https://github.com/esdoc/esdoc/issues/102))
+
 ## 0.3.1 (2015-09-27)
 - **Fix**
   - Multi-line description truncated in summary ([#85](https://github.com/esdoc/esdoc/issues/85))
