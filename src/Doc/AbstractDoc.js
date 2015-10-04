@@ -3,6 +3,7 @@ import fs from 'fs';
 import ParamParser from '../Parser/ParamParser.js';
 import ASTUtil from '../Util/ASTUtil.js';
 import InvalidCodeLogger from '../Util/InvalidCodeLogger.js';
+import ASTNodeContainer from '../Util/ASTNodeContainer.js';
 
 /**
  * Abstract Doc Class.
@@ -24,6 +25,8 @@ export default class AbstractDoc {
     this._value = {};
 
     Object.defineProperty(this._node, 'doc', {value: this});
+
+    this._value.__docId__ = ASTNodeContainer.addNode(node);
 
     this._apply();
   }

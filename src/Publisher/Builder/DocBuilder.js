@@ -672,7 +672,7 @@ export default class DocBuilder {
 
   /**
    * build html link of type.
-   * @param {string} typeName - type name(e.g. ``number[]``, ``Map<number, string}``)
+   * @param {string} typeName - type name(e.g. ``number[]``, ``Map<number, string>``)
    * @returns {string} html of link.
    * @private
    * @todo re-implement with parser combinator.

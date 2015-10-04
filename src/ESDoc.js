@@ -157,6 +157,8 @@ export default class ESDoc {
 
     if (!('includeSource' in config)) config.includeSource = true;
 
+    if (!('lint' in config)) config.lint = true;
+
     if (!config.index) config.index = './README.md';
 
     if (!config.package) config.package = './package.json';
