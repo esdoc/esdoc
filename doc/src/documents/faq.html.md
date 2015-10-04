@@ -52,10 +52,13 @@ However, the import path may be different from real import path because usually 
 So, [ESDoc Import Path Plugin](https://github.com/esdoc/esdoc-importpath-plugin) converts import path to real import path.
 
 ## Articles
-- [ESDocというJavaScript向けのAPIドキュメントツールを作りました | maru source](http://blog.h13i32maru.jp/entry/2015/05/06/221041)
-- [Write a documentation React and ES6 project by ESDoc | en.blog.koba04](http://en.blog.koba04.com/2015/06/28/esdoc-documentation-for-react-and-es6/)
-- <a href="http://jser.info/2015/05/06/iojs2.0.0-msedge-isomorphic/#esdoc---an-api-document-generator-for-javascript(es6)">ESDoc - An API Document Generator For JavaScript(ES6) | JSer.info</a>
-- [ESDoc - ES6時代のドキュメンテーションツール | Speacker Deck](https://speakerdeck.com/h13i32maru/esdoc-es6shi-dai-falsedokiyumentesiyonturu)
-- [ESDoc を試す | アカベコマイリ](http://akabeko.me/blog/2015/07/esdoc/)
-- [ECMAScript 6 documentation generators | stackoverflow](http://stackoverflow.com/questions/27334309/ecmascript-6-documentation-generators)
-- [ESDoc – A Documentation Generator for JavaScript(ES6) | Hacker News](https://news.ycombinator.com/item?id=10002867)
+- English
+  - [Write a documentation React and ES6 project by ESDoc | en.blog.koba04](http://en.blog.koba04.com/2015/06/28/esdoc-documentation-for-react-and-es6/)
+  - [ECMAScript 6 documentation generators | stackoverflow](http://stackoverflow.com/questions/27334309/ecmascript-6-documentation-generators)
+  - [ESDoc – A Documentation Generator for JavaScript(ES6) | Hacker News](https://news.ycombinator.com/item?id=10002867)
+  - [Document ES6 with ESDoc](http://jonathancreamer.com/document-es6-with-esdoc/)
+- Japanese
+  - [ESDocというJavaScript向けのAPIドキュメントツールを作りました | maru source](http://blog.h13i32maru.jp/entry/2015/05/06/221041)
+  - <a href="http://jser.info/2015/05/06/iojs2.0.0-msedge-isomorphic/#esdoc---an-api-document-generator-for-javascript(es6)">ESDoc - An API Document Generator For JavaScript(ES6) | JSer.info</a>
+  - [ESDoc - ES6時代のドキュメンテーションツール | Speacker Deck](https://speakerdeck.com/h13i32maru/esdoc-es6shi-dai-falsedokiyumentesiyonturu)
+  - [ESDoc を試す | アカベコマイリ](http://akabeko.me/blog/2015/07/esdoc/)

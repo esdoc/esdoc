@@ -9,7 +9,8 @@ isPage: true
 - [Create Config File](#create-config-file)
 - [Write Documentation Tags](#write-documentation-tags)
 - [Document Coverage](#document-coverage)
-- [Generate Document From Test Code](#generate-document-from-test-code)
+- [Integrate Test Codes](#integrate-test-codes)
+- [Integrate Manual](#integrate-manual)
 - [Appendix](#appendix)
   - [Target Code Style](#target-code-style)
   - [Target Identifier](#target-identifier)
@@ -180,8 +181,11 @@ See ``my-project/out/esdoc/source.html``
 
 If you want to display documentation coverage badge, use badge of [ESDoc Hosting Service](https://doc.esdoc.org/-/faq.html).
 
-## Generate Document From Test Code
-ESDoc can generate document from test code.
+
+
+
+## Integrate Test Codes
+ESDoc can integrate test codes into documentation.
 (Now, support only [Mocha](http://mochajs.org/))
 
 Write test code.
@@ -246,6 +250,55 @@ describe('MyClass is super useful class.', ()=>{
 <img class="screen-shot" src="./image/tutorial/generate-document-from-test-code2.png">
 
 <img class="screen-shot" src="./image/tutorial/generate-document-from-test-code3.png">
+
+## Integrate Manual
+ESDoc can integrate manual into documentation.
+Write manual that is overview, installation, usage, example, FAQ and changelog.
+
+<p class="file-path">my-project/manual/overview.md</p>
+
+```markdown
+# Overview
+This is my project overview.
+
+## Author
+Alice
+
+## License
+MIT
+```
+
+And add manual configuration.
+
+```json
+{
+  "source": "./src",
+  "destination": "./out/esdoc",
+  "test": {
+    "type": "mocha",
+    "source": "./test"
+  },
+  "manual": {
+    "overview": "./manual/overview.md",
+    "installation": "./manual/installation.md",
+    "usage": "./manual/usage.md",
+    "example": "./manual/example.md",
+    "faq": "./manual/faq.md",
+    "changelog": "./CHANGELOG.md"
+  }
+}
+```
+
+Execute ESDoc and see output document.
+
+```
+esdoc -c ./esdoc.json
+open ./out/esdoc/index.html
+```
+
+<img class="screen-shot" src="./image/tutorial/manual1.png">
+
+<img class="screen-shot" src="./image/tutorial/manual2.png">
 
 ----
 

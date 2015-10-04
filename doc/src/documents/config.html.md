@@ -7,7 +7,7 @@ isPage: true
 
 ESDoc config file.
 
-minimum config
+## Minimum Config
 ```json
 {
   "source": "./path/to/src",
@@ -15,7 +15,63 @@ minimum config
 }
 ```
 
-full config
+## Integrate Test Code Into Documentation Config
+```json
+{
+  "source": "./src"
+  "destination": "./doc",
+  "test": {
+    "type": "mocha",
+    "source": "./test"
+  }
+}
+```
+
+And if use ``@test``, more better integration.
+
+```javascript
+/** @test {MyClass} */
+describe('MyClass has foo bar feature', ()=>{
+
+  /** @test {MyClass#baz} */
+  it('MyClass#baz returns magic value', ()=>{
+    assert(true);
+  });
+});
+```
+
+## Integrate Manual Into Documentation Config
+```json
+{
+  "source": "./src",
+  "destination": "./doc",
+  "manual": {
+    "overview": "./manual/overview.md",
+    "installation": "./manual/installation.md",
+    "usage": "./manual/usage.md",
+    "example": "./manual/example.md",
+    "faq": "./manual/faq.md",
+    "changelog": "./CHANGELOG.md"
+  }
+}
+```
+
+## Use ES7 With Plugin Config
+```sh
+npm install esdoc-es7-plugin
+```
+
+```json
+{
+  "source": "./src",
+  "destination": "./doc",
+  "plugins": [
+    {"name": "esdoc-es7-plugin"}
+  ]
+}
+```
+
+## Full Config
 ```json
 {
   "source": "./path/to/src",
@@ -36,13 +92,22 @@ full config
     "source": "./test/src",
     "includes": ["Test\\.(js|es6)$"],
     "excludes": ["\\.config\\.(js|es6)$"]
-  }
+  },
   "title": "My Software Name",
   "styles": ["./path/to/style.css"],
   "scripts": ["./path/to/script.js"],
   "plugins": [
     {"name": "plugin-name-or-file-path", "option": null}
-  ]
+  ],
+  "manual": {
+    "overview": "./manual/overview.md",
+    "installation": "./manual/installation.md",
+    "usage": "./manual/usage.md",
+    "example": "./manual/example.md",
+    "faq": "./manual/faq.md",
+    "changelog": "./CHANGELOG.md"
+  },
+  "lint": true
 }
 ```
 
@@ -61,7 +126,7 @@ full config
 | ``package`` | - | ``./package.json`` | Use package.json info. |
 | ``coverage`` | - | ``true`` | If true, output document coverage. |
 | ``includeSource`` | - | ``true`` | If true, output includes source codes. |
-| ``test`` | - | ``null`` | If specified, Generate document from test code. |
+| ``test`` | - | ``null`` | If specified, generate document from test code. |
 | ``test.type`` | true | - | Test code type. Now only support "mocha". |
 | ``test.source`` | true | - | Test codes directory path. |
 | ``test.includes`` | - | <code>["(spec&#124;Spec&#124;test&#124;Test)\\\\.(js&#124;es6)$"]</code> | Process files that are matched with the regexp at any one. |
@@ -72,5 +137,13 @@ full config
 | ``plugins`` | - | ``null`` | If specified, use each plugins. To see [Plugin Feature](./api.html#plugin-feature) for more information. |
 | ``plugins[].name`` | true | - | Plugin module name(e.g. ``your-awesome-plugin``) or plugin file path(e.g. ``./your-awesome-plugin.js``). |
 | ``plugins[].option`` | - | null | If specified, the plugin get the option. |
+| ``manual`` | - | null | If specified, generate manual from markdown. |
+| ``manual.overview`` | - | null | markdown file path |
+| ``manual.installation`` | - | null | markdown file path |
+| ``manual.usage`` | - | null | markdown file path |
+| ``manual.example`` | - | null | markdown file path |
+| ``manual.faq`` | - | null | markdown file path |
+| ``manual.changelog`` | - | null | markdown file path |
+| ``lint`` | - | true | If specified, execute documentation lint. |
 
 Note: A file path in config is based on current directory.
