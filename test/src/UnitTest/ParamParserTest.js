@@ -78,7 +78,7 @@ describe('ParamParser:', ()=>{
   });
 
   /** @test {ParamParser.parseParam} */
-  it('parse param with complex.', ()=>{
+  it('parse param with object ({}) as default.', ()=>{
     let value = '{!(number|string|boolean[])} [p1={}] this is desc';
     let {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value);
     let result = ParamParser.parseParam(typeText, paramName, paramDesc);
