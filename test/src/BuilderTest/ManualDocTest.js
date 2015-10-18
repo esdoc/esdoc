@@ -15,18 +15,22 @@ describe('Manual:', ()=>{
       assert.includes(doc, '[data-ice="navItem"]:nth-of-type(1)', 'Overview');
       assert.includes(doc, '[data-ice="navItem"]:nth-of-type(2)', 'Installation');
       assert.includes(doc, '[data-ice="navItem"]:nth-of-type(3)', 'Usage');
-      assert.includes(doc, '[data-ice="navItem"]:nth-of-type(4)', 'Example');
-      assert.includes(doc, '[data-ice="navItem"]:nth-of-type(5)', 'Reference');
-      assert.includes(doc, '[data-ice="navItem"]:nth-of-type(6)', 'FAQ');
-      assert.includes(doc, '[data-ice="navItem"]:nth-of-type(7)', 'Changelog');
+      assert.includes(doc, '[data-ice="navItem"]:nth-of-type(4)', 'Tutorial');
+      assert.includes(doc, '[data-ice="navItem"]:nth-of-type(5)', 'Configuration');
+      assert.includes(doc, '[data-ice="navItem"]:nth-of-type(6)', 'Example');
+      assert.includes(doc, '[data-ice="navItem"]:nth-of-type(7)', 'Reference');
+      assert.includes(doc, '[data-ice="navItem"]:nth-of-type(8)', 'FAQ');
+      assert.includes(doc, '[data-ice="navItem"]:nth-of-type(9)', 'Changelog');
 
       assert.includes(doc, '[data-ice="navItem"]:nth-of-type(1) a', 'manual/overview.html', 'href');
       assert.includes(doc, '[data-ice="navItem"]:nth-of-type(2) a', 'manual/installation.html', 'href');
       assert.includes(doc, '[data-ice="navItem"]:nth-of-type(3) a', 'manual/usage.html', 'href');
-      assert.includes(doc, '[data-ice="navItem"]:nth-of-type(4) a', 'manual/example.html', 'href');
-      assert.includes(doc, '[data-ice="navItem"]:nth-of-type(5) a', 'identifiers.html', 'href');
-      assert.includes(doc, '[data-ice="navItem"]:nth-of-type(6) a', 'manual/faq.html', 'href');
-      assert.includes(doc, '[data-ice="navItem"]:nth-of-type(7) a', 'manual/changelog.html', 'href');
+      assert.includes(doc, '[data-ice="navItem"]:nth-of-type(4) a', 'manual/tutorial.html', 'href');
+      assert.includes(doc, '[data-ice="navItem"]:nth-of-type(5) a', 'manual/configuration.html', 'href');
+      assert.includes(doc, '[data-ice="navItem"]:nth-of-type(6) a', 'manual/example.html', 'href');
+      assert.includes(doc, '[data-ice="navItem"]:nth-of-type(7) a', 'identifiers.html', 'href');
+      assert.includes(doc, '[data-ice="navItem"]:nth-of-type(8) a', 'manual/faq.html', 'href');
+      assert.includes(doc, '[data-ice="navItem"]:nth-of-type(9) a', 'manual/changelog.html', 'href');
     });
   });
 
@@ -69,8 +73,18 @@ describe('Manual:', ()=>{
       assert.includes(doc, '.manual-toc-title', 'Usage');
     });
 
-    // example
+    // tutorial
     find(doc, '[data-ice="manual"]:nth-of-type(4)', (doc)=>{
+      assert.includes(doc, '.manual-toc-title', 'Tutorial');
+    });
+
+    // configuration
+    find(doc, '[data-ice="manual"]:nth-of-type(5)', (doc)=>{
+      assert.includes(doc, '.manual-toc-title', 'Configuration');
+    });
+
+    // example
+    find(doc, '[data-ice="manual"]:nth-of-type(6)', (doc)=>{
       assert.includes(doc, '.manual-toc-title', 'Example');
 
       assert.includes(doc, '.indent-h1[data-ice="manualNav"]:nth-of-type(1)', 'Minimum Config');
@@ -81,7 +95,7 @@ describe('Manual:', ()=>{
     });
 
     // reference
-    find(doc, '[data-ice="manual"]:nth-of-type(5)', (doc)=>{
+    find(doc, '[data-ice="manual"]:nth-of-type(7)', (doc)=>{
       assert.includes(doc, '.manual-toc-title', 'Reference');
 
       assert.includes(doc, '.indent-h1[data-ice="manualNav"]:nth-of-type(1)', 'Class');
@@ -100,7 +114,7 @@ describe('Manual:', ()=>{
     });
 
     // faq
-    find(doc, '[data-ice="manual"]:nth-of-type(6)', (doc)=>{
+    find(doc, '[data-ice="manual"]:nth-of-type(8)', (doc)=>{
       assert.includes(doc, '.manual-toc-title', 'FAQ');
 
       assert.includes(doc, '.indent-h1[data-ice="manualNav"]:nth-of-type(1)', 'Goal');
@@ -109,7 +123,7 @@ describe('Manual:', ()=>{
     });
 
     // changelog
-    find(doc, '[data-ice="manual"]:nth-of-type(7)', (doc)=>{
+    find(doc, '[data-ice="manual"]:nth-of-type(9)', (doc)=>{
       assert.includes(doc, '.manual-toc-title', 'Changelog');
 
       assert.includes(doc, '.indent-h1[data-ice="manualNav"]:nth-of-type(1)', '0.0.1');
@@ -137,6 +151,20 @@ describe('Manual:', ()=>{
     const doc = readDoc('manual/usage.html');
     assert.includes(doc, '.github-markdown h1', 'Usage');
     assert.includes(doc, '.github-markdown [data-ice="content"]', 'esdoc -c esdoc.json');
+  });
+
+  /** @test {ManualDocBuilder#_buldManual} */
+  it('has tutorial', ()=>{
+    const doc = readDoc('manual/tutorial.html');
+    assert.includes(doc, '.github-markdown h1', 'Tutorial');
+    assert.includes(doc, '.github-markdown [data-ice="content"]', 'this is tutorial');
+  });
+
+  /** @test {ManualDocBuilder#_buldManual} */
+  it('has configuration', ()=>{
+    const doc = readDoc('manual/configuration.html');
+    assert.includes(doc, '.github-markdown h1', 'Configuration');
+    assert.includes(doc, '.github-markdown [data-ice="content"]', 'this is configuration');
   });
 
   /** @test {ManualDocBuilder#_buldManual} */

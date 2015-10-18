@@ -19,7 +19,7 @@
  * @property {string[]} [styles=[]]
  * @property {string[]} [scripts=[]]
  * @property {{type: string, source: string, includes: string[], excludes: string[]}} test
- * @property {{overview: string, installation: string, usage: string, example: string, faq: string, changelog: string}} manual
+ * @property {{overview: string, installation: string, usage: string, tutorial: string, configuration: string, example: string, faq: string, changelog: string}} manual
  * @see https://esdoc.org/config.html
  */
 

@@ -53,6 +53,8 @@ export default class ManualDocBuilder extends DocBuilder {
     if (m.overview) manualConfig.push({label: 'Overview', path: m.overview});
     if (m.installation) manualConfig.push({label: 'Installation', path: m.installation});
     if (m.usage) manualConfig.push({label: 'Usage', path: m.usage});
+    if (m.tutorial) manualConfig.push({label: 'Tutorial', path: m.tutorial});
+    if (m.configuration) manualConfig.push({label: 'Configuration', path: m.configuration});
     if (m.example) manualConfig.push({label: 'Example', path: m.example});
     manualConfig.push({label: 'Reference', fileName: 'identifiers.html', references: true});
     if (m.faq) manualConfig.push({label: 'FAQ', path: m.faq});
@@ -157,7 +159,7 @@ export default class ManualDocBuilder extends DocBuilder {
    * if markdown has only one ``h1`` and it's text is ``item.label``, remove the ``h1``.
    * because duplication ``h1`` in output html.
    * @param {ManualConfigItem} item - target.
-   * @returns {string} coverted html.
+   * @returns {string} converted html.
    * @private
    */
   _convertMDToHTML(item) {
@@ -184,6 +186,10 @@ export default class ManualDocBuilder extends DocBuilder {
         return ['overview'];
       case 'installation':
         return ['installation', 'install'];
+      case 'tutorial':
+        return ['tutorial'];
+      case 'configuration':
+        return ['configuration', 'config'];
       case 'usage':
         return ['usage'];
       case 'example':
