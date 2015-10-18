@@ -69,7 +69,7 @@ del {
 
 p {
   margin-bottom: 15px;
-  line-height: 19px;
+  line-height: 1.5;
 }
 
 p > code {
@@ -937,7 +937,8 @@ h1 .esdoc-coverage {
   background-color: #f8f8f8;
 }
 
-.github-markdown img {
+/** badge(.svg) does not have border */
+.github-markdown img:not([src*=".svg"]) {
   max-width: 100%;
   box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
 }
