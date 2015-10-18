@@ -4,6 +4,7 @@
 - **Fix**
   - Crash if method is generator + computed + member-expression ([#107](https://github.com/esdoc/esdoc/issues/107))
   - Not resolved ``@link`` in summary ([#110](https://github.com/esdoc/esdoc/issues/110))
+  - Invalid param name when description has ``@link`` ([#119](https://github.com/esdoc/esdoc/issues/119))
 
 ## 0.4.0 (2015-10-04)
 - **Feat**
