@@ -52,12 +52,12 @@ describe('MyClass has foo bar feature', ()=>{
   "source": "./src",
   "destination": "./doc",
   "manual": {
-    "overview": "./manual/overview.md",
-    "installation": "./manual/installation.md",
-    "usage": "./manual/usage.md",
-    "example": "./manual/example.md",
-    "faq": "./manual/faq.md",
-    "changelog": "./CHANGELOG.md"
+    "overview": ["./manual/overview.md"],
+    "installation": ["./manual/installation.md"],
+    "usage": ["./manual/usage.md"],
+    "example": ["./manual/example.md"],
+    "faq": ["./manual/faq.md"],
+    "changelog": ["./CHANGELOG.md"]
   }
 }
 ```
@@ -107,14 +107,14 @@ npm install esdoc-es7-plugin
   ],
   "manual": {
     "asset": "./manual/asset"
-    "overview": "./manual/overview.md",
-    "installation": "./manual/installation.md",
-    "usage": "./manual/usage.md",
-    "tutorial": "./manual/tutorial.md",
-    "configuration": "./manual/configuration.md",
-    "example": "./manual/example.md",
-    "faq": "./manual/faq.md",
-    "changelog": "./CHANGELOG.md"
+    "overview": ["./manual/overview.md",
+    "installation": ["./manual/installation.md"],
+    "usage": ["./manual/usage.md"],
+    "tutorial": ["./manual/tutorial.md"],
+    "configuration": ["./manual/configuration.md"],
+    "example": ["./manual/example.md"],
+    "faq": ["./manual/faq.md"],
+    "changelog": ["./CHANGELOG.md"]
   },
   "lint": true
 }
@@ -148,14 +148,14 @@ npm install esdoc-es7-plugin
 | ``plugins[].option`` | - | null | If specified, the plugin get the option. |
 | ``manual`` | - | null | If specified, generate manual from markdown. |
 | ``manual.asset`` | - | null | if specify asset(image) directory path, include the directory into manual. |
-| ``manual.overview`` | - | null | if specify markdown file path, show overview. |
-| ``manual.installation`` | - | null | if specify markdown file path, show installation. |
-| ``manual.usage`` | - | null | if specify markdown file path, show usage. |
-| ``manual.tutorial`` | - | null | if specify markdown file path, show tutorial. |
-| ``manual.configuration`` | - | null | if specify markdown file path, show configuration. |
-| ``manual.example`` | - | null | if specify markdown file path, show example. |
-| ``manual.faq`` | - | null | if specify markdown file path, show FAQ. |
-| ``manual.changelog`` | - | null | if specify markdown file path, show changelog. |
+| ``manual.overview`` | - | null | if specify markdown files, show overview. |
+| ``manual.installation`` | - | null | if specify markdown files, show installation. |
+| ``manual.usage`` | - | null | if specify markdown files, show usage. |
+| ``manual.tutorial`` | - | null | if specify markdown files, show tutorial. |
+| ``manual.configuration`` | - | null | if specify markdown files, show configuration. |
+| ``manual.example`` | - | null | if specify markdown files, show example. |
+| ``manual.faq`` | - | null | if specify markdown files, show FAQ. |
+| ``manual.changelog`` | - | null | if specify markdown files, show changelog. |
 | ``lint`` | - | true | If specified, execute documentation lint. |
 
 Note: A file path in config is based on current directory.

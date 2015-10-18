@@ -1,6 +1,8 @@
 # Changelog
 
 ## Next
+- **Breaking**
+  - Support multi files in manual ([#124](https://github.com/esdoc/esdoc/issues/124))
 - **Feat**
   - Support tutorial and configuration in manual ([#122](https://github.com/esdoc/esdoc/issues/122))
   - Support image in manual ([#123](https://github.com/esdoc/esdoc/issues/123))

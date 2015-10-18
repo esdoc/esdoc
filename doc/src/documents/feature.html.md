@@ -101,14 +101,14 @@ You write manual as markdown and add ``manual`` config.
   "source": "./src",
   "destination": "./doc",
   "manual": {
-    "overview": "./manual/overview.md",
-    "installation": "./manual/installation.md",
-    "usage": "./manual/usage.md",
-    "tutorial": "./manual/tutorial.md",
-    "configuration": "./manual/configuration.md",
-    "example": "./manual/example.md",
-    "faq": "./manual/faq.md",
-    "changelog": "./CHANGELOG.md"
+    "overview": ["./manual/overview.md"],
+    "installation": ["./manual/installation.md"],
+    "usage": ["./manual/usage.md"],
+    "tutorial": ["./manual/tutorial.md"],
+    "configuration": ["./manual/configuration.md"],
+    "example": ["./manual/example.md"],
+    "faq": ["./manual/faq.md"],
+    "changelog": ["./CHANGELOG.md"]
   }
 }
 ```

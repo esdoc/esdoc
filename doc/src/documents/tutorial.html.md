@@ -280,15 +280,15 @@ And add manual configuration.
     "source": "./test"
   },
   "manual": {
-    "asset": "./manual/asset"
-    "overview": "./manual/overview.md",
-    "installation": "./manual/installation.md",
-    "usage": "./manual/usage.md",
-    "tutorial": "./manual/tutorial.md",
-    "configuration": "./manual/configuration.md",
-    "example": "./manual/example.md",
-    "faq": "./manual/faq.md",
-    "changelog": "./CHANGELOG.md"
+    "asset": "./manual/asset",
+    "overview": ["./manual/overview.md"],
+    "installation": ["./manual/installation.md"],
+    "usage": ["./manual/usage.md"],
+    "tutorial": ["./manual/tutorial.md"],
+    "configuration": ["./manual/configuration.md"],
+    "example": ["./manual/example.md"],
+    "faq": ["./manual/faq.md"],
+    "changelog": ["./CHANGELOG.md]"
   }
 }
 ```
