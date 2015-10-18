@@ -97,13 +97,22 @@ export default class ManualDocBuilder extends DocBuilder {
 
     // convert relative src to base url relative src.
     const $root = cheerio.load(ice.html).root();
-    $root.find('.github-markdown img').each((i, el)=>{
+    $root.find('img').each((i, el)=>{
       const $el = cheerio(el);
       const src = $el.attr('src');
       if (!src) return;
       if (src.match(/^http[s]?:/)) return;
       if (src.charAt(0) === '/') return;
       $el.attr('src', './manual/' + src);
+    });
+    $root.find('a').each((i, el)=>{
+      const $el = cheerio(el);
+      const href = $el.attr('href');
+      if (!href) return;
+      if (href.match(/^http[s]?:/)) return;
+      if (href.charAt(0) === '/') return;
+      if (href.charAt(0) === '#') return;
+      $el.attr('href', './manual/' + href);
     });
 
     return $root.html();
