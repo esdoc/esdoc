@@ -793,8 +793,37 @@ h1 .esdoc-coverage {
   padding-left: 0;
 }
 
-.manual-toc-title a {
+/** manual */
+
+.manual-root .navigation {
+  padding-left: 0;
+}
+
+.navigation .manual-toc-title {
+  margin: 0;
+  padding: 0.5em 0 0.5em 1em;
+  border: none;
+  font-size: 1em;
+  font-weight: normal;
+}
+
+.navigation .manual-toc-title:first-child {
+  margin-top: 0;
+}
+
+.navigation .manual-toc {
+  display: none;
+  margin-left: 0.5em;
+  margin-top: -0.25em;
+}
+
+.github-markdown .manual-toc-title a {
   color: inherit;
+}
+
+.manual-breadcrumb-list {
+  font-size: 0.8em;
+  margin-bottom: 1em;
 }
 
 .manual-toc-title a:hover {

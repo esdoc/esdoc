@@ -19,6 +19,7 @@ export default class ManualDocBuilder extends DocBuilder {
     const manualConfig = this._getManualConfig();
     const ice = this._buildLayoutDoc();
     ice.autoDrop = false;
+    ice.attr('rootContainer', 'class', ' manual-root');
 
     {
       const fileName = 'manual/index.html';
@@ -32,7 +33,7 @@ export default class ManualDocBuilder extends DocBuilder {
     }
 
     for (let item of manualConfig) {
-      if (!item.path) continue;
+      if (!item.paths) continue;
       const fileName = this._getManualOutputFileName(item);
       const baseUrl = this._getBaseUrl(fileName);
       ice.load('content', this._buildManual(item), IceCap.MODE_WRITE);
@@ -55,15 +56,15 @@ export default class ManualDocBuilder extends DocBuilder {
   _getManualConfig() {
     const m = this._config.manual;
     const manualConfig = [];
-    if (m.overview) manualConfig.push({label: 'Overview', path: m.overview});
-    if (m.installation) manualConfig.push({label: 'Installation', path: m.installation});
-    if (m.usage) manualConfig.push({label: 'Usage', path: m.usage});
-    if (m.tutorial) manualConfig.push({label: 'Tutorial', path: m.tutorial});
-    if (m.configuration) manualConfig.push({label: 'Configuration', path: m.configuration});
-    if (m.example) manualConfig.push({label: 'Example', path: m.example});
+    if (m.overview) manualConfig.push({label: 'Overview', paths: m.overview});
+    if (m.installation) manualConfig.push({label: 'Installation', paths: m.installation});
+    if (m.tutorial) manualConfig.push({label: 'Tutorial', paths: m.tutorial});
+    if (m.usage) manualConfig.push({label: 'Usage', paths: m.usage});
+    if (m.configuration) manualConfig.push({label: 'Configuration', paths: m.configuration});
+    if (m.example) manualConfig.push({label: 'Example', paths: m.example});
     manualConfig.push({label: 'Reference', fileName: 'identifiers.html', references: true});
-    if (m.faq) manualConfig.push({label: 'FAQ', path: m.faq});
-    if (m.changelog) manualConfig.push({label: 'Changelog', path: m.changelog});
+    if (m.faq) manualConfig.push({label: 'FAQ', paths: m.faq});
+    if (m.changelog) manualConfig.push({label: 'Changelog', paths: m.changelog});
     return manualConfig;
   }
 
@@ -74,12 +75,10 @@ export default class ManualDocBuilder extends DocBuilder {
    * @private
    */
   _buildManualNav(manualConfig) {
-    const ice = new IceCap(this._readTemplate('manualNav.html'));
-    ice.loop('navItem', manualConfig, (i, item, ice)=>{
-      ice.text('link', item.label);
-      ice.attr('link', 'href', this._getManualOutputFileName(item));
-    });
-    return ice;
+    const ice = this._buildManualIndex(manualConfig);
+    const $root = cheerio.load(ice.html).root();
+    $root.find('.github-markdown').removeClass('github-markdown');
+    return $root.html();
   }
 
   /**
@@ -92,7 +91,6 @@ export default class ManualDocBuilder extends DocBuilder {
     const html = this._convertMDToHTML(item);
     const ice = new IceCap(this._readTemplate('manual.html'));
     ice.text('title', item.label);
-    ice.attr('title', 'id', item.label.toLowerCase());
     ice.load('content', html);
 
     // convert relative src to base url relative src.
@@ -157,6 +155,7 @@ export default class ManualDocBuilder extends DocBuilder {
         });
       }
 
+      ice.attr('manual', 'data-toc-name', item.label.toLowerCase());
       ice.text('title', item.label);
       ice.attr('title', 'href', this._getManualOutputFileName(item));
       ice.loop('manualNav', toc, (i, item, ice)=>{
@@ -189,14 +188,13 @@ export default class ManualDocBuilder extends DocBuilder {
    * @private
    */
   _convertMDToHTML(item) {
-    const content = fs.readFileSync(item.path).toString();
+    const contents = [];
+    for (let path of item.paths) {
+      contents.push(fs.readFileSync(path).toString());
+    }
+    const content = contents.join('\n\n');
     const html = markdown(content);
     const $root = cheerio.load(html).root();
-    const $h1 = $root.find('h1');
-    const synonyms = this._getLabelSynonyms(item.label);
-    if ($h1.length === 1 && synonyms.includes($h1.text().toLowerCase())) {
-      $h1.remove();
-    }
     return $root.html();
   }
 

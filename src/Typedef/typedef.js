@@ -19,7 +19,16 @@
  * @property {string[]} [styles=[]]
  * @property {string[]} [scripts=[]]
  * @property {{type: string, source: string, includes: string[], excludes: string[]}} test
- * @property {{asset: string, overview: string, installation: string, usage: string, tutorial: string, configuration: string, example: string, faq: string, changelog: string}} manual
+ * @property {Object} [manual]
+ * @property {string} manual.asset
+ * @property {string[]} manual.overview
+ * @property {string[]} manual.installation
+ * @property {string[]} manual.usage
+ * @property {string[]} manual.tutorial
+ * @property {string[]} manual.configuration
+ * @property {string[]} manual.example
+ * @property {string[]} manual.faq
+ * @property {string[]} manual.changelog
  * @see https://esdoc.org/config.html
  */
 
@@ -127,7 +136,7 @@
 /**
  * @typedef {Object} ManualConfigItem
  * @property {string} label
- * @property {string} path
+ * @property {string[]} paths
  * @property {string} [fileName]
  * @property {string} [reference]
  */
