@@ -12,6 +12,7 @@ ESDoc is a documentation generator for JavaScript(ES6).
 - Generates detailed documentation.
 - Measures documentation coverage.
 - Integrate test codes into documentation.
+- Integrate manual into documentation.
 - [ESDoc Hosting Service](https://doc.esdoc.org)
 
 # Demo
