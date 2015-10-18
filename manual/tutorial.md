@@ -88,7 +88,7 @@ esdoc -c ./esdoc.json
 open ./out/esdoc/index.html
 ```
 
-<img class="screen-shot" src="./image/tutorial/create-config-file1.png">
+<img class="screen-shot" src="./asset/image/tutorial/create-config-file1.png" width="500px">
 
 This is minimum configuration.
 You can see full configuration in the [Config](./config.html) page.
@@ -157,7 +157,7 @@ esdoc -c ./esdoc.json
 open ./out/esdoc/index.html
 ```
 
-<img class="screen-shot" src="./image/tutorial/write-document-tag1.png">
+<img class="screen-shot" src="./asset/image/tutorial/write-document-tag1.png" width="500px">
 
 Congratulation! The document is good!
 
@@ -172,7 +172,7 @@ ESDoc measures document coverage.
 
 See ``my-project/out/esdoc/source.html``
 
-<img class="screen-shot" src="./image/tutorial/document-coverage1.png">
+<img class="screen-shot" src="./asset/image/tutorial/document-coverage1.png" width="500px">
 
 If you want to display documentation coverage badge, use badge of [ESDoc Hosting Service](https://doc.esdoc.org/-/faq.html).
 
@@ -221,7 +221,7 @@ esdoc -c ./esdoc.json
 open ./out/esdoc/index.html
 ```
 
-<img class="screen-shot" src="./image/tutorial/generate-document-from-test-code1.png">
+<img class="screen-shot" src="./asset/image/tutorial/generate-document-from-test-code1.png" width="500px">
 
 Write tags for test code
 
@@ -242,9 +242,9 @@ describe('MyClass is super useful class.', ()=>{
 });
 ```
 
-<img class="screen-shot" src="./image/tutorial/generate-document-from-test-code2.png">
+<img class="screen-shot" src="./asset/image/tutorial/generate-document-from-test-code2.png" width="500px">
 
-<img class="screen-shot" src="./image/tutorial/generate-document-from-test-code3.png">
+<img class="screen-shot" src="./asset/image/tutorial/generate-document-from-test-code3.png" width="500px">
 
 ## Integrate Manual
 ESDoc can integrate manual into documentation.
@@ -295,9 +295,9 @@ esdoc -c ./esdoc.json
 open ./out/esdoc/index.html
 ```
 
-<img class="screen-shot" src="./image/tutorial/manual1.png">
+<img class="screen-shot" src="./asset/image/tutorial/manual1.png" width="500px">
 
-<img class="screen-shot" src="./image/tutorial/manual2.png">
+<img class="screen-shot" src="./asset/image/tutorial/manual2.png" width="500px">
 
 ----
 

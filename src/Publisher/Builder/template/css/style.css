@@ -907,3 +907,8 @@ h1 .esdoc-coverage {
 .github-markdown table tr:nth-child(2n) {
   background-color: #f8f8f8;
 }
+
+.github-markdown img {
+  max-width: 100%;
+  box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+}

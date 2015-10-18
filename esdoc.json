@@ -22,6 +22,7 @@
     }
   ],
   "manual": {
+    "asset": "./manual/asset",
     "overview": "./manual/overview.md",
     "installation": "./manual/installation.md",
     "usage": "./manual/usage.md",

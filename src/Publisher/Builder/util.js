@@ -64,6 +64,17 @@ export function markdown(text, breaks = false) {
     gfm: true,
     tables: true,
     breaks: breaks,
+    sanitize: true,
+    sanitizer: (tag) =>{
+      if (tag.substr(0, 5) === '<img ') {
+        const src = tag.match(/src=['"].*?['"]/);
+        const width = tag.match(/width=['"].*?['"]/);
+        const height = tag.match(/height=['"].*?['"]/);
+
+        return `<img ${src ? src[0] : ''} ${width ? width[0] : ''} ${height ? height[0] : ''}>`;
+      }
+      return escape(tag);
+    },
     highlight: function (code) {
       //return `<pre class="source-code"><code class="prettyprint">${escape(code)}</code></pre>`;
       return `<code class="source-code prettyprint">${escape(code)}</code>`;

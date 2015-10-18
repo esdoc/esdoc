@@ -11,8 +11,9 @@ export default class ManualDocBuilder extends DocBuilder {
   /**
    * execute building output.
    * @param {function(html: string, filePath: string)} callback - is called each manual.
+   * @param {function(src: string, dest: string)} callbackForCopy - is called asset.
    */
-  exec(callback) {
+  exec(callback, callbackForCopy) {
     if (!this._config.manual) return;
 
     const manualConfig = this._getManualConfig();
@@ -39,6 +40,10 @@ export default class ManualDocBuilder extends DocBuilder {
       ice.text('title', item.label, IceCap.MODE_WRITE);
       ice.attr('baseUrl', 'href', baseUrl, IceCap.MODE_WRITE);
       callback(ice.html, fileName);
+    }
+
+    if (this._config.manual.asset) {
+      callbackForCopy(this._config.manual.asset, 'manual/asset');
     }
   }
 
@@ -89,7 +94,19 @@ export default class ManualDocBuilder extends DocBuilder {
     ice.text('title', item.label);
     ice.attr('title', 'id', item.label.toLowerCase());
     ice.load('content', html);
-    return ice;
+
+    // convert relative src to base url relative src.
+    const $root = cheerio.load(ice.html).root();
+    $root.find('.github-markdown img').each((i, el)=>{
+      const $el = cheerio(el);
+      const src = $el.attr('src');
+      if (!src) return;
+      if (src.match(/^http[s]?:/)) return;
+      if (src.charAt(0) === '/') return;
+      $el.attr('src', './manual/' + src);
+    });
+
+    return $root.html();
   }
 
   /**
