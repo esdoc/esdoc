@@ -6,10 +6,11 @@ import escape from 'escape-html';
  * e.g. ``this is JavaScript. this is Java.`` => ``this is JavaScript.``.
  *
  * @param {DocObject} doc - target doc object.
+ * @param {boolean} [asMarkdown=false] - is true, test as markdown and convert to html.
  * @returns {string} shorten description.
  * @todo shorten before process markdown.
  */
-export function shorten(doc) {
+export function shorten(doc, asMarkdown = false) {
   if (!doc) return '';
 
   if (doc.summary) return doc.summary;
@@ -44,7 +45,12 @@ export function shorten(doc) {
     }
   }
 
-  return desc.substr(0, len);
+  let result = desc.substr(0, len);
+  if (asMarkdown) {
+    result = markdown(result);
+  }
+
+  return result;
 }
 
 /**

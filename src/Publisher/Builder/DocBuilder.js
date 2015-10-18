@@ -364,7 +364,7 @@ export default class DocBuilder {
       ice.text('generator', doc.generator ? '*' : '');
       ice.load('name', this._buildDocLinkHTML(doc.longname, null, innerLink, doc.kind));
       ice.load('signature', this._buildSignatureHTML(doc));
-      ice.load('description', shorten(doc));
+      ice.load('description', shorten(doc, true));
       ice.text('abstract', doc.abstract ? 'abstract' : '');
       ice.text('access', doc.access);
       if (['get', 'set'].includes(doc.kind)) {

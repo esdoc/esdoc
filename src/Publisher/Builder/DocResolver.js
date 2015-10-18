@@ -26,8 +26,8 @@ export default class DocResolver {
     this._resolveUndocumentIdentifier();
     this._resolveDuplication();
     this._resolveIgnore();
-    this._resolveMarkdown();
     this._resolveLink();
+    this._resolveMarkdown();
     this._resolveTestRelation();
   }
 
