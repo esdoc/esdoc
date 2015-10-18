@@ -1,5 +1,9 @@
 # Changelog
 
+## Next
+- **Fix**
+  - Crash if method is generator + computed + member-expression ([#107](https://github.com/esdoc/esdoc/issues/107))
+
 ## 0.4.0 (2015-10-04)
 - **Feat**
   - Support manual(overview, installation, usage, etc) into documentation ([#102](https://github.com/esdoc/esdoc/issues/102))
