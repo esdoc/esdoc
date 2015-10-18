@@ -106,6 +106,7 @@ npm install esdoc-es7-plugin
     {"name": "plugin-name-or-file-path", "option": null}
   ],
   "manual": {
+    "asset": "./manual/asset"
     "overview": "./manual/overview.md",
     "installation": "./manual/installation.md",
     "usage": "./manual/usage.md",
@@ -146,6 +147,7 @@ npm install esdoc-es7-plugin
 | ``plugins[].name`` | true | - | Plugin module name(e.g. ``your-awesome-plugin``) or plugin file path(e.g. ``./your-awesome-plugin.js``). |
 | ``plugins[].option`` | - | null | If specified, the plugin get the option. |
 | ``manual`` | - | null | If specified, generate manual from markdown. |
+| ``manual.asset`` | - | null | if specify asset(image) directory path, include the directory into manual. |
 | ``manual.overview`` | - | null | if specify markdown file path, show overview. |
 | ``manual.installation`` | - | null | if specify markdown file path, show installation. |
 | ``manual.usage`` | - | null | if specify markdown file path, show usage. |

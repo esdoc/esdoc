@@ -260,6 +260,7 @@ Write manual that is overview, installation, usage, example, FAQ and changelog.
 ```markdown
 # Overview
 This is my project overview.
+<img src="./asset/overview.png">
 
 ## Author
 Alice
@@ -279,6 +280,7 @@ And add manual configuration.
     "source": "./test"
   },
   "manual": {
+    "asset": "./manual/asset"
     "overview": "./manual/overview.md",
     "installation": "./manual/installation.md",
     "usage": "./manual/usage.md",
