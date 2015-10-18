@@ -1,6 +1,8 @@
 # Changelog
 
 ## Next
+- **Feat**
+  - Support tutorial and configuration in manual ([#122](https://github.com/esdoc/esdoc/issues/122))
 - **Fix**
   - Crash if method is generator + computed + member-expression ([#107](https://github.com/esdoc/esdoc/issues/107))
   - Not resolved ``@link`` in summary ([#110](https://github.com/esdoc/esdoc/issues/110))
