@@ -30,7 +30,11 @@ export default class MethodDoc extends AbstractDoc {
     AbstractDoc.prototype['@_name'].call(this);
     if (this._value.name) return;
 
-    if (this._node.computed) {
+    // todo: espree parses ``*[foo.bar](){}`` as not computed.
+    // so, I hacked ``!this._node.key.name`` condition.
+    // this condition is not needed with acorn.
+    // see https://github.com/esdoc/esdoc/issues/107
+    if (this._node.computed || !this._node.key.name) {
       const expression = escodegen.generate(this._node.key);
       this._value.name = `[${expression}]`;
     } else {
