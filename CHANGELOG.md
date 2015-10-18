@@ -1,6 +1,6 @@
 # Changelog
 
-## Next
+## 0.4.1 (2015-10-18)
 - **Breaking**
   - Support multi files in manual ([#124](https://github.com/esdoc/esdoc/issues/124))
 - **Feat**
