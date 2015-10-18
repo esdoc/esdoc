@@ -310,7 +310,8 @@ export default class DocFactory {
 
     // hack: leadingComment of MethodDefinition with Literal is not valid by espree(v2.0.2)
     //if (node.type === 'MethodDefinition' && node.key.type === 'Literal') {
-    if (node.type === 'MethodDefinition' && node.computed) {
+    // todo: switch espree to acorn
+    if (node.type === 'MethodDefinition' && (node.computed || !node.key.name)) {
       let line = node.loc.start.line - 1;
       for (let comment of this._ast.comments || []) {
         if (comment.loc.end.line === line) {

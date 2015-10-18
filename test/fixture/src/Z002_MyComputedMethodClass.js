@@ -28,4 +28,7 @@ export default class Z002_MyComputedMethodClass {
 
   /** this is [`${foo}`] */
   [`${foo}`](){}
+
+  /** this is *[foo.bar] */
+  *[foo.bar](){}
 }
