@@ -56,6 +56,14 @@ export function myFunction8(p1) {
 }
 
 /**
+ * this is myFunction9 desc.
+ * @param  {Object} [p1={}] p1
+ * @return {Object}    this is return desc
+ */
+export function myFunction9(p1 = {}) {
+}
+
+/**
  * this is myFunctionSeparateExport1.
  * @param {number} p1 - this is p1.
  */

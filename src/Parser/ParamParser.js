@@ -40,7 +40,7 @@ export default class ParamParser {
       match = value.match(/^\{(.*)\}(\s+|$)/);
       if (match) {
         typeText = match[1];
-        value = value.replace(/^\{.*\}\s*/, '');
+        value = value.replace(/^\{(.*)\}(\s+|$)/, '');
       } else {
         typeText = '*';
       }
