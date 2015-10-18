@@ -1,8 +1,3 @@
----
-layout: "default"
-isPage: true
----
-
 # Config
 
 ESDoc config file.

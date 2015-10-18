@@ -88,6 +88,8 @@ You can integrate manual into documentation. The manual is:
 - Overview
 - Installation
 - Usage
+- Tutorial
+- Configuration
 - Example
 - FAQ
 - Changelog
@@ -102,12 +104,16 @@ You write manual as markdown and add ``manual`` config.
     "overview": "./manual/overview.md",
     "installation": "./manual/installation.md",
     "usage": "./manual/usage.md",
+    "tutorial": "./manual/tutorial.md",
+    "configuration": "./manual/configuration.md",
     "example": "./manual/example.md",
     "faq": "./manual/faq.md",
     "changelog": "./CHANGELOG.md"
   }
 }
 ```
+
+You can specify a only part of these manuals (e.g. only overview and installation).
 
 <img src="./image/feature/manual1.png" class="screen-shot">
 

@@ -1,8 +1,3 @@
----
-layout: "default"
-isPage: true
----
-
 # Tutorial
 
 - [Install ESDoc](#install-esdoc)
@@ -291,7 +286,7 @@ And add manual configuration.
 }
 ```
 
-You can specify a only part of these manuals (e.g. only overview and installation).
+You can specify a only part of these manuals (e.g. overview and installation).
 
 Execute ESDoc and see output document.
 
