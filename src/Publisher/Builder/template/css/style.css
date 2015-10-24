@@ -175,6 +175,7 @@ li > code {
 
 .kind-class,
 .kind-interface,
+.kind-decorator,
 .kind-function,
 .kind-typedef,
 .kind-variable,
@@ -197,6 +198,11 @@ li > code {
 .kind-interface {
   color: #fbca04;
   background-color: #fef2c0;
+}
+
+.kind-decorator {
+  color: #6b60d0;
+  background-color: #86bdde;
 }
 
 .kind-function {

@@ -36,6 +36,7 @@ export default class IdentifiersDocBuilder extends DocBuilder {
 
     ice.load('classSummary', this._buildSummaryHTML(null, 'class', 'Class Summary'), 'append');
     ice.load('interfaceSummary', this._buildSummaryHTML(null, 'interface', 'Interface Summary'), 'append');
+    ice.load('decoratorSummary', this._buildSummaryHTML(null, 'decorator', 'Decorator Summary'), 'append');
     ice.load('functionSummary', this._buildSummaryHTML(null, 'function', 'Function Summary'), 'append');
     ice.load('variableSummary', this._buildSummaryHTML(null, 'variable', 'Variable Summary'), 'append');
     ice.load('typedefSummary', this._buildSummaryHTML(null, 'typedef', 'Typedef Summary'), 'append');

@@ -20,6 +20,14 @@ describe('Identifiers:', ()=> {
   });
 
   /** @test {IdentifiersDocBuilder#_buildIdentifierDoc} */
+  it('has decorator summary.', ()=>{
+    find(doc, '[data-ice="decoratorSummary"]', (doc)=>{
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public classDecorator(target: class): class class decorator desc.');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(5)', 'public methodDecorator(target: class | Object, attr: string, descriptor: Object): Object static/instance method decorator desc.');
+    });
+  });
+
+  /** @test {IdentifiersDocBuilder#_buildIdentifierDoc} */
   it('has function summary.', ()=>{
     find(doc, '[data-ice="functionSummary"]', (doc)=>{
       assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public myFunction1() this is myFunction1 desc.');

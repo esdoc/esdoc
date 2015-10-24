@@ -190,3 +190,16 @@
 /**
  * @external {Proxy} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy
  */
+
+// Class, Method, Property
+/**
+ * @external {class} http://www.2ality.com/2015/02/es6-classes-final.html
+ */
+
+/**
+ * @external {method} http://www.2ality.com/2015/02/es6-classes-final.html
+ */
+
+/**
+ * @external {property} http://www.2ality.com/2015/02/es6-classes-final.html
+ */
