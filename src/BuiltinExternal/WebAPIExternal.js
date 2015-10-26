@@ -27,3 +27,7 @@
 /**
  * @external {XMLHttpRequest} https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest
  */
+ 
+ /**
+ * @external {AudioContext} https://developer.mozilla.org/en/docs/Web/API/AudioContext
+ */
