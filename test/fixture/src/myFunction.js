@@ -63,6 +63,10 @@ export function myFunction8(p1) {
 export function myFunction9(p1 = {}) {
 }
 
+/** @param {string} x The only parameter of {@link myFunction99}. */
+export function myFunction99(x) {
+}
+
 /**
  * this is myFunctionSeparateExport1.
  * @param {number} p1 - this is p1.

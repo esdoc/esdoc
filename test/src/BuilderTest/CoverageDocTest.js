@@ -8,9 +8,9 @@ describe('Coverage:', ()=> {
   it('has coverage.json', ()=>{
     let json = fs.readFileSync('./test/fixture/esdoc/coverage.json', {encoding: 'utf8'}).toString();
     let coverage = JSON.parse(json);
-    assert.equal(coverage.coverage, '89.72%');
-    assert.equal(coverage.expectCount, 146);
-    assert.equal(coverage.actualCount, 131);
+    assert.equal(coverage.coverage, '89.79%');
+    assert.equal(coverage.expectCount, 147);
+    assert.equal(coverage.actualCount, 132);
     assert.deepEqual(coverage.files, {
       "src/ForTestDoc/AbstractDoc.js": {
         "expectCount": 3,
@@ -108,8 +108,8 @@ describe('Coverage:', ()=> {
         "undocumentLines": []
       },
       "src/myFunction.js": {
-        "expectCount": 11,
-        "actualCount": 9,
+        "expectCount": 12,
+        "actualCount": 10,
         "undocumentLines": [
           50,
           55

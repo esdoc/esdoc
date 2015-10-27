@@ -16,8 +16,8 @@ describe('MyFunction:', ()=>{
       assert.includes(doc, '[data-ice="target"]:nth-of-type(7)', 'public myFunction7(p1: *[], p2: number[], p3: {}, p4: {"a": number, "b": string}): *');
       assert.includes(doc, '[data-ice="target"]:nth-of-type(8)', 'public myFunction8(p1: *)');
       assert.includes(doc, '[data-ice="target"]:nth-of-type(9)', 'public myFunction9(p1: Object): Object this is myFunction9 desc.');
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(10)', 'public myFunctionSeparateExport1(p1: number) this is myFunctionSeparateExport1.');
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(11)', 'public myFunctionSeparateExport2(p1: number) this is myFunctionSeparateExport2.');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(11)', 'public myFunctionSeparateExport1(p1: number) this is myFunctionSeparateExport1.');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(12)', 'public myFunctionSeparateExport2(p1: number) this is myFunctionSeparateExport2.');
 
       assert.includes(doc, '[data-ice="target"]:nth-of-type(1) [data-ice="name"] a', 'function/index.html#static-function-myFunction1', 'href');
     });
@@ -72,11 +72,15 @@ describe('MyFunction:', ()=>{
     });
 
     find(doc, '[data-ice="detail"]:nth-of-type(10)', (doc)=>{
+      assert.includes(doc, '[data-ice="description"] a', 'function/index.html#static-function-myFunction99', 'href');
+    });
+
+    find(doc, '[data-ice="detail"]:nth-of-type(11)', (doc)=>{
       assert.includes(doc, '#static-function-myFunctionSeparateExport1', 'public myFunctionSeparateExport1(p1: number)');
       assert.includes(doc, '[data-ice="importPath"]', "import myFunctionSeparateExport1 from 'esdoc-test-fixture/src/myFunction.js'");
     });
 
-    find(doc, '[data-ice="detail"]:nth-of-type(11)', (doc)=>{
+    find(doc, '[data-ice="detail"]:nth-of-type(12)', (doc)=>{
       assert.includes(doc, '#static-function-myFunctionSeparateExport2', 'public myFunctionSeparateExport2(p1: number)');
       assert.includes(doc, '[data-ice="importPath"]', "import {myFunctionSeparateExport2} from 'esdoc-test-fixture/src/myFunction.js'");
     });

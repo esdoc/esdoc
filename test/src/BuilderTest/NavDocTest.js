@@ -20,17 +20,17 @@ describe('Nav:', ()=> {
       assert.includes(doc, '[data-ice="doc"]:nth-of-type(31) a', 'function/index.html#static-function-myFunction1', 'href');
 
       // variable
-      assert.includes(doc, '[data-ice="doc"]:nth-of-type(43)', 'myExport1');
-      assert.includes(doc, '[data-ice="doc"]:nth-of-type(51)', 'myVariable1');
-      assert.includes(doc, '[data-ice="doc"]:nth-of-type(51) a', 'variable/index.html#static-variable-myVariable1', 'href');
+      assert.includes(doc, '[data-ice="doc"]:nth-of-type(44)', 'myExport1');
+      assert.includes(doc, '[data-ice="doc"]:nth-of-type(52)', 'myVariable1');
+      assert.includes(doc, '[data-ice="doc"]:nth-of-type(52) a', 'variable/index.html#static-variable-myVariable1', 'href');
 
       // typedef
-      assert.includes(doc, '[data-ice="doc"]:nth-of-type(59)', 'MyTypedef1');
-      assert.includes(doc, '[data-ice="doc"]:nth-of-type(59) a', 'typedef/index.html#static-typedef-MyTypedef1', 'href');
+      assert.includes(doc, '[data-ice="doc"]:nth-of-type(60)', 'MyTypedef1');
+      assert.includes(doc, '[data-ice="doc"]:nth-of-type(60) a', 'typedef/index.html#static-typedef-MyTypedef1', 'href');
 
       // external
-      assert.includes(doc, '[data-ice="doc"]:nth-of-type(61)', 'MyError2');
-      assert.includes(doc, '[data-ice="doc"]:nth-of-type(61) a', 'example.com', 'href');
+      assert.includes(doc, '[data-ice="doc"]:nth-of-type(62)', 'MyError2');
+      assert.includes(doc, '[data-ice="doc"]:nth-of-type(62) a', 'example.com', 'href');
     });
   });
 });
