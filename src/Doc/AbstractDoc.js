@@ -231,9 +231,9 @@ export default class AbstractDoc {
     this._value.importStyle = null;
   }
 
-  /** for @desc */
+  /** for @desc, @description */
   ['@desc']() {
-    this._value.description = this._findTagValue(['@desc']);
+    this._value.description = this._findTagValue(['@desc', '@description']);
   }
 
   /** for @example. possible multi tag. */
