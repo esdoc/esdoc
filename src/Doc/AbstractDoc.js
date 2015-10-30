@@ -391,9 +391,9 @@ export default class AbstractDoc {
     this._value.return = result;
   }
 
-  /** for @property. */
+  /** for @property, @prop */
   ['@property']() {
-    let values = this._findAllTagValues(['@property']);
+    let values = this._findAllTagValues(['@property', '@prop']);
     if (!values) return;
 
     this._value.properties = [];
