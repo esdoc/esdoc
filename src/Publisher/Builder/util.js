@@ -60,20 +60,27 @@ export function shorten(doc, asMarkdown = false) {
  * @return {string} html.
  */
 export function markdown(text, breaks = false) {
+  const availableTags = ['span', 'a', 'p', 'div', 'img', 'h1', 'h2', 'h3', 'h4', 'h5', 'br', 'hr', 'li', 'ul', 'ol', 'code', 'pre'];
+  const availableAttributes = ['src', 'href', 'title', 'class', 'id', 'name', 'width', 'height'];
+
   let compiled = marked(text, {
     gfm: true,
     tables: true,
     breaks: breaks,
     sanitize: true,
     sanitizer: (tag) =>{
-      if (tag.substr(0, 5) === '<img ') {
-        const src = tag.match(/src=['"].*?['"]/);
-        const width = tag.match(/width=['"].*?['"]/);
-        const height = tag.match(/height=['"].*?['"]/);
-
-        return `<img ${src ? src[0] : ''} ${width ? width[0] : ''} ${height ? height[0] : ''}>`;
+      const tagName = tag.match(/^<\/?(\w+)/)[1];
+      if (!availableTags.includes(tagName)) {
+        return escape(tag);
       }
-      return escape(tag);
+
+      const sanitizedTag = tag.replace(/([\w\-]+)=(["'].*?["'])/g, (_, attr, val)=>{
+        if (!availableAttributes.includes(attr)) return '';
+        if (val.indexOf('javascript:') !== -1) return '';
+        return `${attr}=${val}`;
+      });
+
+      return sanitizedTag;
     },
     highlight: function (code) {
       //return `<pre class="source-code"><code class="prettyprint">${escape(code)}</code></pre>`;
