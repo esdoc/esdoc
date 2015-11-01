@@ -37,10 +37,11 @@ export default class ParamParser {
 
     // e.g {number}
     if (type) {
-      match = value.match(/^\{(.*)\}(\s+|$)/);
+      const reg = /^\{([^@]*)\}(\s+|$)/; // ``@`` is special char in ``{@link foo}``
+      match = value.match(reg);
       if (match) {
         typeText = match[1];
-        value = value.replace(/^\{(.*)\}(\s+|$)/, '');
+        value = value.replace(reg, '');
       } else {
         typeText = '*';
       }

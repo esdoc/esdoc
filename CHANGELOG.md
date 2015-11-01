@@ -3,6 +3,7 @@
 ## Next
 - **Fix**
   - Crash when not initialized declaration ([#126](https://github.com/esdoc/esdoc/issues/126))
+  - Crash when ``@param`` description has ``{@link foo}`` ([#129](https://github.com/esdoc/esdoc/issues/129))
 
 ## 0.4.1 (2015-10-18)
 - **Breaking**
