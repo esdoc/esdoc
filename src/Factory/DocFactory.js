@@ -185,7 +185,7 @@ export default class DocFactory {
 
       if (exportNode.declaration && exportNode.declaration.type === 'VariableDeclaration') {
         for (let declaration of exportNode.declaration.declarations) {
-          if (declaration.init.type !== 'NewExpression') continue;
+          if (!declaration.init || declaration.init.type !== 'NewExpression') continue;
 
           let classNode = ASTUtil.findClassDeclarationNode(declaration.init.callee.name, this._ast);
           if (classNode) {
