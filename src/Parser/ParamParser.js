@@ -95,8 +95,11 @@ export default class ParamParser {
       }
       typeText = typeText.replace(/^[?!]/, '');
 
-      // check union
-      if (typeText[0] === '(') {
+      // check record and union
+      if (typeText[0] === '{') {
+        result.types = [typeText];
+      }
+      else if (typeText[0] === '(') {
         typeText = typeText.replace(/^[(]/, '').replace(/[)]$/, '');
         result.types = typeText.split('|');
       } else if(typeText.includes('|')){

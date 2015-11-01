@@ -40,8 +40,8 @@ describe('Coverage:', ()=> {
         "expectCount": 43,
         "actualCount": 38,
         "undocumentLines": [
-          225,
-          230,
+          226,
+          231,
           144,
           145,
           146

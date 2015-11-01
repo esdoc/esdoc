@@ -194,7 +194,7 @@ describe('MyClass1:', ()=> {
     find(doc, '[data-ice="methodSummary"]', (doc)=>{
       // public
       find(doc, 'table[data-ice="summary"]:nth-of-type(1)', (doc)=>{
-        assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public abstract method1(p1: number[], p2: number, p3: number, p4: number | string[], p5: number, p6: number, p7: {a: number, b: string}, p8: Object, p9: MyClass2 | MyClass3[] | {a: number, b: string}): Object');
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public abstract method1(p1: number[], p2: number, p3: number, p4: number | string[], p5: number, p6: number, p7: {a: number, b: string}, p8: Object, p9: MyClass2 | MyClass3[] | {a: number, b: string}, p10: {foo: string, bar: number|number[], baz: boolean|boolean[], fiz: Object}): Object');
         assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'this method was deprecated.');
         assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'this method is experimental.');
         assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'this is method1 desc.');
@@ -377,7 +377,7 @@ describe('MyClass1:', ()=> {
     find(doc, '[data-ice="methodDetails"]', (doc)=>{
       // public
       find(doc, '[data-ice="detail"]:nth-of-type(1)', (doc)=>{
-        assert.includes(doc, '#instance-method-method1', 'public abstract method1(p1: number[], p2: number, p3: number, p4: number | string[], p5: number, p6: number, p7: {a: number, b: string}, p8: Object, p9: MyClass2 | MyClass3[] | {a: number, b: string}): Object');
+        assert.includes(doc, '#instance-method-method1', 'public abstract method1(p1: number[], p2: number, p3: number, p4: number | string[], p5: number, p6: number, p7: {a: number, b: string}, p8: Object, p9: MyClass2 | MyClass3[] | {a: number, b: string}, p10: {foo: string, bar: number|number[], baz: boolean|boolean[], fiz: Object}): Object');
         assert.includes(doc, '#instance-method-method1 [data-ice="version"]', 'version 0.0.1');
         assert.includes(doc, '#instance-method-method1 [data-ice="since"]', 'since 1.2.3');
         assert.includes(doc, '#instance-method-method1 ~ [data-ice="description"]', 'this is method1 desc.');
@@ -397,6 +397,7 @@ describe('MyClass1:', ()=> {
           assert.includes(doc, '[data-ice="property"]:nth-of-type(9)', 'p8.a number this is p8.a(nest) desc.');
           assert.includes(doc, '[data-ice="property"]:nth-of-type(10)', 'p8.b string this is p8.b(nest) desc.');
           assert.includes(doc, '[data-ice="property"]:nth-of-type(11)', 'p9 MyClass2 | MyClass3[] | {a: number, b: string} nullable: false this is p9(complex) desc. this is second line.');
+          assert.includes(doc, '[data-ice="property"]:nth-of-type(12)', 'p10 {foo: string, bar: number|number[], baz: boolean|boolean[], fiz: Object} this is p10(record + union) desc.');
         });
 
         find(doc, '[data-ice="returnParams"]', (doc)=>{

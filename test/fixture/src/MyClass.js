@@ -178,6 +178,7 @@ export default class MyClass1 extends SuperMyClass1 {
    * @param {string} p8.b this is p8.b(nest) desc.
    * @param {!(MyClass2|MyClass3[]|{a: number, b: string})} p9 - this is p9(complex) desc.
    * this is second line.
+   * @param {{foo: string, bar: number|number[], baz: boolean|boolean[], fiz: Object}} p10 - this is p10(record + union) desc.
    *
    * @return {Object} this is return desc.
    * @property {number} p1 this is p1 of return desc.
@@ -200,7 +201,7 @@ export default class MyClass1 extends SuperMyClass1 {
    * @listens {MyEvent1} this is listens MyEvent1 desc.
    * @listens {MyEvent2} this is listens MyEvent2 desc.
    */
-  method1(p1, p2, p3, p4, p5, p6, p7, p8, p9) {
+  method1(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10) {
   }
 
   /**

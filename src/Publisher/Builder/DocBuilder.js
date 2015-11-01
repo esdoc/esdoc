@@ -729,7 +729,17 @@ export default class DocBuilder {
         let tmp = v.split(':').map((v)=> v.trim());
         let paramName = tmp[0];
         let typeName = tmp[1].replace(/\\Z/g, ',').replace(/\\Y/g, ':');
-        return `${paramName}: ${this._buildTypeDocLinkHTML(typeName)}`;
+        if (typeName.includes('|')) {
+          typeName = typeName.replace(/^\(/, '').replace(/\)$/, '');
+          let typeNames = typeName.split('|').map(v => v.trim());
+          let html = [];
+          for (let unionType of typeNames) {
+            html.push(this._buildTypeDocLinkHTML(unionType));
+          }
+          return `${paramName}: ${html.join('|')}`;
+        } else {
+          return `${paramName}: ${this._buildTypeDocLinkHTML(typeName)}`;
+        }
       });
 
       return `{${innerTypes.join(', ')}}`;
