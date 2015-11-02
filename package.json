@@ -24,7 +24,7 @@
     "escape-html": "~1.0.2",
     "escodegen": "^1.7.0",
     "espree": "~2.2.0",
-    "estraverse": "~4.1.0",
+    "estraverse": "4.1.0",
     "fs-extra": "~0.20.1",
     "ice-cap": "~0.0.3",
     "marked": ">=0.3.5",
