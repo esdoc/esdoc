@@ -908,7 +908,7 @@ export default class DocBuilder {
       ice.attr('property', 'data-depth', prop.name.split('.').length - 1);
       ice.text('name', prop.name);
       ice.attr('name', 'data-depth', prop.name.split('.').length - 1);
-      ice.load('description', prop.description);
+      ice.load('description', prop.descriptionRaw);
 
       let typeNames = [];
       for (var typeName of prop.types) {
