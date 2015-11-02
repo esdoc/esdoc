@@ -18,27 +18,27 @@
     "start": "node ./script/server.js"
   },
   "dependencies": {
-    "cheerio": "~0.19.0",
-    "color-logger": "~0.0.3",
-    "core-js": "~0.9.18",
-    "escape-html": "~1.0.2",
-    "escodegen": "^1.7.0",
-    "espree": "~2.2.0",
+    "cheerio": "0.19.0",
+    "color-logger": "0.0.3",
+    "core-js": "0.9.18",
+    "escape-html": "1.0.2",
+    "escodegen": "1.7.0",
+    "espree": "2.2.0",
     "estraverse": "4.1.0",
-    "fs-extra": "~0.20.1",
-    "ice-cap": "~0.0.3",
-    "marked": ">=0.3.5",
-    "minimist": "~1.1.1",
-    "taffydb": "~2.7.2"
+    "fs-extra": "0.20.1",
+    "ice-cap": "0.0.3",
+    "marked": "0.3.5",
+    "minimist": "1.1.1",
+    "taffydb": "2.7.2"
   },
   "devDependencies": {
-    "babel": "~5.6.14",
-    "coveralls": "~2.11.2",
-    "docpad": "~6.78.1",
+    "babel": "5.6.14",
+    "coveralls": "2.11.2",
+    "docpad": "6.78.1",
     "esdoc-importpath-plugin": "0.0.1",
-    "http-server": "~0.8.0",
-    "istanbul": "~0.3.16",
-    "mocha": "~2.2.5"
+    "http-server": "0.8.0",
+    "istanbul": "0.3.16",
+    "mocha": "2.2.5"
   },
   "keywords": [
     "jsdoc",

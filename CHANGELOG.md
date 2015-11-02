@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.3 (2015-11-02)
+- **Fix**
+  - Lock npm modules
+
 ## 0.4.2 (2015-11-01)
 - **Fix**
   - Crash when not initialized declaration ([#126](https://github.com/esdoc/esdoc/issues/126))
