@@ -11,6 +11,7 @@ export default class FunctionDoc extends AbstractDoc {
     super['@_kind']();
     if (this._value.kind) return;
     this._value.kind = 'function';
+    this._value.decorator = false;
   }
 
   /** take out self name from self node */
@@ -57,5 +58,20 @@ export default class FunctionDoc extends AbstractDoc {
     if (result) {
       this._value.return = result;
     }
+  }
+
+  ['@decorator']() {
+    let value = this._findTagValue(['@decorator']);
+    if (!value) return;
+
+    let {typeText} = ParamParser.parseParamValue(value, true, false, false);
+    let result = ParamParser.parseParam(typeText);
+    this._value.decorator = true;
+    this._value.decorates = result;
+  }
+
+  _apply() {
+    super._apply();
+    this['@decorator']();
   }
 }

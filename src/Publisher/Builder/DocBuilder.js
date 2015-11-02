@@ -41,14 +41,15 @@ export default class DocBuilder {
 
   /**
    * find all identifiers with kind grouping.
-   * @returns {{class: DocObject[], interface: DocObject[], function: DocObject[], variable: DocObject[], typedef: DocObject[], external: DocObject[]}} found doc objects.
+   * @returns {{class: DocObject[], interface: DocObject[], decorator: DocObject[], function: DocObject[], variable: DocObject[], typedef: DocObject[], external: DocObject[]}} found doc objects.
    * @private
    */
   _findAllIdentifiersKindGrouping() {
     const result = {
       class: this._find([{kind: 'class', interface: false}]),
       interface: this._find([{kind: 'class', interface: true}]),
-      function: this._find([{kind: 'function'}]),
+      decorator: this._find([{kind: 'function', decorator: true}]),
+      function: this._find([{kind: 'function', decorator: false}]),
       variable: this._find([{kind: 'variable'}]),
       typedef: this._find([{kind: 'typedef'}]),
       external: this._find([{kind: 'external'}]).filter(v => !v.builtinExternal)
@@ -242,16 +243,20 @@ export default class DocBuilder {
     let html = this._readTemplate('nav.html');
     let ice = new IceCap(html);
 
-    const kinds = ['class', 'function', 'variable', 'typedef', 'external'];
-    const allDocs = this._find({kind: kinds}).filter(v => !v.builtinExternal);
-    const kindOrder = {class: 0, interface: 1, function: 2, variable: 3, typedef: 4, external: 5};
+    const cond = [
+        {kind: 'function', decorator: true},
+        {kind: 'function', decorator: false},
+        {kind: ['class', 'variable', 'typedef', 'external']}
+    ];
+    const allDocs = this._find(cond).filter(v => !v.builtinExternal);
+    const kindOrder = {class: 0, interface: 1, decorator: 2, function: 3, variable: 4, typedef: 5, external: 6};
     allDocs.sort((a, b)=>{
       const filePathA = a.longname.split('~')[0].replace('src/', '');
       const filePathB = b.longname.split('~')[0].replace('src/', '');
       const dirPathA = path.dirname(filePathA);
       const dirPathB = path.dirname(filePathB);
-      const kindA = a.interface ? 'interface' : a.kind;
-      const kindB = b.interface ? 'interface' : b.kind;
+      const kindA = a.interface ? 'interface' : a.decorator ? 'decorator' : a.kind;
+      const kindB = b.interface ? 'interface' : b.decorator ? 'decorator' : b.kind;
       if (dirPathA === dirPathB) {
         if (kindA === kindB) {
           return a.longname > b.longname ? 1 : -1;
@@ -266,7 +271,7 @@ export default class DocBuilder {
     ice.loop('doc', allDocs, (i, doc, ice)=>{
       const filePath = doc.longname.split('~')[0].replace(/^.*?[/]/, '');
       const dirPath = path.dirname(filePath);
-      const kind = doc.interface ? 'interface' : doc.kind;
+      const kind = doc.interface ? 'interface' : doc.decorator ? 'decorator' : doc.kind;
       const kindText = kind.charAt(0).toUpperCase();
       const kindClass = `kind-${kind}`;
       ice.load('name', this._buildDocLinkHTML(doc.longname));
@@ -303,6 +308,13 @@ export default class DocBuilder {
       case 'interface':
         cond.kind = 'class';
         cond.interface = true;
+        break;
+      case 'decorator':
+        cond.kind = 'function';
+        cond.decorator = true;
+        break;
+      case 'function':
+        cond.decorator = false;
         break;
       case 'member':
         cond.kind = ['member', 'get', 'set'];
@@ -362,6 +374,11 @@ export default class DocBuilder {
     ice.text('title', title);
     ice.loop('target', docs, (i, doc, ice)=>{
       ice.text('generator', doc.generator ? '*' : '');
+      if (doc.decorator) {
+        ice.text('decorator', '<type-of-decorator>');
+      } else {
+        ice.drop('decorator');
+      }
       ice.load('name', this._buildDocLinkHTML(doc.longname, null, innerLink, doc.kind));
       ice.load('signature', this._buildSignatureHTML(doc));
       ice.load('description', shorten(doc, true));
@@ -430,15 +447,21 @@ export default class DocBuilder {
 
     ice.loop('detail', docs, (i, doc, ice)=>{
       let scope = doc.static ? 'static' : 'instance';
-      ice.attr('anchor', 'id', `${scope}-${doc.kind}-${doc.name}`);
+      let kind = doc.decorator ? 'decorator' : doc.kind;
+      ice.attr('anchor', 'id', `${scope}-${kind}-${doc.name}`);
       ice.text('generator', doc.generator ? '*' : '');
+      if (doc.decorator) {
+        ice.text('decorator', '<type-of-decorator>');
+      } else {
+        ice.drop('decorator');
+      }
       ice.text('name', doc.name);
       ice.load('signature', this._buildSignatureHTML(doc));
       ice.load('description', doc.description);
       ice.text('abstract', doc.abstract ? 'abstract' : '');
       ice.text('access', doc.access);
-      if (['get', 'set'].includes(doc.kind)) {
-        ice.text('kind', doc.kind);
+      if (['get', 'set'].includes(kind)) {
+        ice.text('kind', kind);
       } else {
         ice.drop('kind');
       }
@@ -451,7 +474,7 @@ export default class DocBuilder {
         ice.drop('importPath');
       }
 
-      if (['member', 'method', 'get', 'set'].includes(doc.kind)) {
+      if (['member', 'method', 'get', 'set'].includes(kind)) {
         ice.text('static', doc.static ? 'static' : '');
       } else {
         ice.drop('static');
@@ -467,8 +490,8 @@ export default class DocBuilder {
       ice.load('override', this._buildOverrideMethod(doc));
 
       let isFunction = false;
-      if (['method', 'constructor', 'function'].indexOf(doc.kind) !== -1) isFunction = true;
-      if (doc.kind === 'typedef' && doc.params && doc.type.types[0] === 'function') isFunction = true;
+      if (['method', 'constructor', 'function'].indexOf(kind) !== -1) isFunction = true;
+      if (kind === 'typedef' && doc.params && doc.type.types[0] === 'function') isFunction = true;
 
       if (isFunction) {
         ice.load('properties', this._buildProperties(doc.params, 'Params:'));
@@ -596,7 +619,8 @@ export default class DocBuilder {
     if (inner) {
       let scope = doc.static ? 'static' : 'instance';
       let fileName = this._getOutputFileName(doc);
-      return `${fileName}#${scope}-${doc.kind}-${doc.name}`;
+      let kind = doc.decorator ? 'decorator' : doc.kind;
+      return `${fileName}#${scope}-${kind}-${doc.name}`;
     } else {
       let fileName = this._getOutputFileName(doc);
       return fileName;
@@ -614,7 +638,7 @@ export default class DocBuilder {
       case 'variable':
         return 'variable/index.html';
       case 'function':
-        return 'function/index.html';
+        return doc.decorator ? 'decorator/index.html' : 'function/index.html';
       case 'member': // fall
       case 'method': // fall
       case 'constructor': // fall

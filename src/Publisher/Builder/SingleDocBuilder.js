@@ -14,16 +14,21 @@ export default class SingleDocBuilder extends DocBuilder {
     let ice = this._buildLayoutDoc();
     ice.autoClose = false;
 
-    let kinds = ['function', 'variable', 'typedef'];
+    let kinds = [
+        {kind: 'function', decorator: true},
+        {kind: 'function', decorator: false},
+        {kind: 'variable'},
+        {kind: 'typedef'}
+    ];
     for (let kind of kinds) {
-      let docs = this._find({kind: kind});
+      let docs = this._find(kind);
       if (!docs.length) continue;
       let fileName = this._getOutputFileName(docs[0]);
       let baseUrl = this._getBaseUrl(fileName);
-      let title = kind.replace(/^(\w)/, (c)=> c.toUpperCase() );
+      let title = kind.kind.replace(/^(\w)/, (c)=> c.toUpperCase() );
       title = this._getTitle(title);
 
-      ice.load('content', this._buildSingleDoc(kind), IceCap.MODE_WRITE);
+      ice.load('content', this._buildSingleDoc(kind.decorator ? 'decorator' : kind.kind), IceCap.MODE_WRITE);
       ice.attr('baseUrl', 'href', baseUrl, IceCap.MODE_WRITE);
       ice.text('title', title, IceCap.MODE_WRITE);
       callback(ice.html, fileName);
