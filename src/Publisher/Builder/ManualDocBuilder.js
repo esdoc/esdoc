@@ -65,6 +65,16 @@ export default class ManualDocBuilder extends DocBuilder {
     manualConfig.push({label: 'Reference', fileName: 'identifiers.html', references: true});
     if (m.faq) manualConfig.push({label: 'FAQ', paths: m.faq});
     if (m.changelog) manualConfig.push({label: 'Changelog', paths: m.changelog});
+
+    find_page:
+    for (const key of Object.keys(m)) {
+      for (const existing of manualConfig) {
+        if (existing.label.toLowerCase() === key.toLowerCase()) {
+          continue find_page;
+        }
+      }
+      manualConfig.push({label: key, paths: m[key]});
+    }
     return manualConfig;
   }
 
