@@ -1,5 +1,6 @@
 import assert from 'assert';
 import fs from 'fs';
+import path from 'path';
 import ParamParser from '../Parser/ParamParser.js';
 import ASTUtil from '../Util/ASTUtil.js';
 import InvalidCodeLogger from '../Util/InvalidCodeLogger.js';
@@ -586,6 +587,8 @@ export default class AbstractDoc {
     if (!importPath) return name;
 
     if (importPath.charAt(0) === '.' || importPath.charAt(0) === '/') {
+      if (!path.extname(importPath)) importPath += '.js';
+
       let resolvedPath = this._pathResolver.resolve(importPath);
       let longname = `${resolvedPath}~${name}`;
       return longname;
