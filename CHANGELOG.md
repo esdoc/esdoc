@@ -1,5 +1,9 @@
 # Changelog
 
+## Next
+- **Feat**
+  - Can resolve import file path that has no file extension ([#160](https://github.com/esdoc/esdoc/issues/160))
+
 ## 0.4.3 (2015-11-02)
 - **Fix**
   - Lock npm modules
