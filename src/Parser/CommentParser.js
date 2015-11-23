@@ -22,10 +22,11 @@ export default class CommentParser {
 
     // TODO: refactor
     comment = comment.replace(/\r\n/gm, '\n'); // for windows
-    comment = comment.replace(/^\t*\s?/gm, ''); // remove trailing tab
+    comment = comment.replace(/(^\t*\s?|\t+$)/gm, ''); // remove trailing tab
     comment = comment.replace(/^\*\s?/, ''); // remove first '*'
     comment = comment.replace(/ $/, ''); // remove last ' '
     comment = comment.replace(/^ *\* ?/gm, ''); // remove line head '*'
+    comment = comment.replace(/^\t*\s?/gm, ''); // remove leading tab
     if (comment.charAt(0) !== '@')  comment = '@desc ' + comment; // auto insert @desc
     comment = comment.replace(/\s*$/, ''); // remove tail space.
     comment = comment.replace(/^(@\w+)$/gm, '$1 \\TRUE'); // auto insert tag text to non-text tag (e.g. @interface)
