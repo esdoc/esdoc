@@ -114,6 +114,13 @@ export default class ParamParser {
         result.spread = false;
       }
     }
+    else {
+      result.types = [''];
+    }
+    
+    if (result.types.some(t => !t)) {
+      throw new Error(`Empty Type found name=${paramName} desc=${paramDesc}`);
+    }
 
     if (paramName) {
       // check optional
