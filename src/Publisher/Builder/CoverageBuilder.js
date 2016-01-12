@@ -29,8 +29,10 @@ export default class CoverageBuilder extends DocBuilder {
       }
     }
 
+    let coveragePercent = (expectCount === 0 ? 0 : Math.floor(10000 * actualCount / expectCount) / 100);
+
     let coverage = {
-      coverage: `${Math.floor(10000 * actualCount / expectCount) / 100 }%`,
+      coverage: `${coveragePercent}%`,
       expectCount: expectCount,
       actualCount: actualCount,
       files: files
