@@ -95,7 +95,7 @@ export default class DocFactory {
 
       switch(exportNode.declaration.type) {
         case 'NewExpression':
-          targetClassName = exportNode.declaration.callee.name;
+          targetClassName = exportNode.declaration.callee.name || '';
           targetVariableName = targetClassName.replace(/^./, c => c.toLowerCase());
           pseudoClassExport = true;
           break;

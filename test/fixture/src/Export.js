@@ -96,3 +96,14 @@ class MyExport10 {
  * this is MyExport10 instance.
  */
 export let myExport10 = new MyExport10();
+
+/**
+ * this is MyExport11 instance.
+ */
+class MyExport11 {
+  constructor() {
+    this.MyExport11 = MyExport10;
+  }
+};
+const myexport11 = new MyExport11();
+export default new myexport11.MyExport11();
