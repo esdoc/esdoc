@@ -6,6 +6,7 @@
   - ``onHandleHTML`` has the target filename ([#175](https://github.com/esdoc/esdoc/pull/175)) Thanks [@skratchdot](https://github.com/skratchdot)
 - **Fix**
   - Breaking document if comment has tab ([#127](https://github.com/esdoc/esdoc/issues/127)) Thanks [@developit](https://github.com/developit)
+  - Crash indirect instance export ([#166](https://github.com/esdoc/esdoc/issues/166)) Thanks [@kogai](https://github.com/kogai)
 
 ## 0.4.3 (2015-11-02)
 - **Fix**
