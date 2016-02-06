@@ -47,7 +47,7 @@ export default function publish(values, asts, config) {
 
   function writeHTML(html, fileName) {
     log(fileName);
-    html = Plugin.onHandleHTML(html);
+    html = Plugin.onHandleHTML(html, fileName);
     let filePath = path.resolve(config.destination, fileName);
     fs.outputFileSync(filePath, html, {encoding: 'utf8'});
   }
