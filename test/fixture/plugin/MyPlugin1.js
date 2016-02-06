@@ -44,7 +44,7 @@ exports.onHandleHTML = function(ev) {
   // insert ev.data.fileName into <head />
   ev.data.html = ev.data.html.replace(
     '</head>',
-    '<meta name="x-from-plugin" content="fileName:' + ev.data.fileName + '" />\n</head>'
+    `<meta name="x-from-plugin" content="fileName:${ev.data.fileName}" />\n</head>`
   );
 };
 
