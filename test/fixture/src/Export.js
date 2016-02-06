@@ -96,3 +96,15 @@ class MyExport10 {
  * this is MyExport10 instance.
  */
 export let myExport10 = new MyExport10();
+
+/**
+ * this is MyExport11
+ */
+class MyExport11 {}
+/** @ignore */
+let obj = {};
+obj.MyExport11 = MyExport11;
+/**
+ * this is indirect instance export
+ */
+export default new obj.MyExport11();

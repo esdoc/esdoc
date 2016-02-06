@@ -8,7 +8,7 @@ describe('Identifiers:', ()=> {
   it('has class summary.', ()=>{
     find(doc, '[data-ice="classSummary"]', (doc)=>{
       assert.includes(doc, '[data-ice="target"]:nth-of-type(4)', 'public MyClass1 this class was deprecated. use MyClass1Ex instead of this class. this class is experimental. this class is dangerous. this is MyClass1 desc.');
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(24)', 'public SuperMyClass1 this is SuperMyClass1.');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(25)', 'public SuperMyClass1 this is SuperMyClass1.');
     });
   });
 
@@ -30,7 +30,7 @@ describe('Identifiers:', ()=> {
   /** @test {IdentifiersDocBuilder#_buildIdentifierDoc} */
   it('has variable summary.', ()=>{
     find(doc, '[data-ice="variableSummary"]', (doc)=>{
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public myExport1: MyExport1');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public myExport10: MyExport10');
       assert.includes(doc, '[data-ice="target"]:nth-of-type(7)', 'public myVariable1: Object this is myVariable1 desc.');
       assert.includes(doc, '[data-ice="target"]:nth-of-type(9)', 'public myVariable3: number this is myVariable3 desc.');
     });

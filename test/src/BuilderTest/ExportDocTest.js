@@ -10,7 +10,7 @@ describe('Export:', ()=>{
 
     it('has instance notice.', ()=>{
       assert.includes(doc, '[data-ice="importPath"]', "import MyExport1 from 'esdoc-test-fixture/src/Export.js'");
-      assert.includes(doc, '.self-detail', 'You can directly use instance of this class. myExport1');
+      //assert.includes(doc, '.self-detail', 'You can directly use instance of this class. myExport1');
     });
   });
 

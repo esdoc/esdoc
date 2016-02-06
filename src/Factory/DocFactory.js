@@ -95,7 +95,13 @@ export default class DocFactory {
 
       switch(exportNode.declaration.type) {
         case 'NewExpression':
-          targetClassName = exportNode.declaration.callee.name;
+          if (exportNode.declaration.callee.type === 'Identifier') {
+            targetClassName = exportNode.declaration.callee.name;
+          } else if (exportNode.declaration.callee.type === 'MemberExpression') {
+            targetClassName = exportNode.declaration.callee.property.name;
+          } else {
+            targetClassName = '';
+          }
           targetVariableName = targetClassName.replace(/^./, c => c.toLowerCase());
           pseudoClassExport = true;
           break;
@@ -108,7 +114,6 @@ export default class DocFactory {
             ASTUtil.sanitize(varNode);
           } else {
             targetClassName = exportNode.declaration.name;
-            targetVariableName = targetClassName.replace(/^./, c => c.toLowerCase());
             pseudoClassExport = false;
           }
           break;
@@ -123,12 +128,13 @@ export default class DocFactory {
         pseudoExportNode1.declaration = this._copy(classNode);
         pseudoExportNode1.leadingComments = null;
         pseudoExportNode1.declaration.__esdoc__pseudo_export = pseudoClassExport;
-
-        let pseudoExportNode2 = this._copy(exportNode);
-        pseudoExportNode2.declaration = ASTUtil.createVariableDeclarationAndNewExpressionNode(targetVariableName, targetClassName, exportNode.loc);
-
         pseudoExportNodes.push(pseudoExportNode1);
-        pseudoExportNodes.push(pseudoExportNode2);
+
+        if (targetVariableName) {
+          let pseudoExportNode2 = this._copy(exportNode);
+          pseudoExportNode2.declaration = ASTUtil.createVariableDeclarationAndNewExpressionNode(targetVariableName, targetClassName, exportNode.loc);
+          pseudoExportNodes.push(pseudoExportNode2);
+        }
 
         ASTUtil.sanitize(classNode);
         ASTUtil.sanitize(exportNode);
