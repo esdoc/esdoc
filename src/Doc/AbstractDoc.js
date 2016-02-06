@@ -235,9 +235,9 @@ export default class AbstractDoc {
     this._value.importStyle = null;
   }
 
-  /** for @desc */
+  /** for @desc, @description */
   ['@desc']() {
-    this._value.description = this._findTagValue(['@desc']);
+    this._value.description = this._findTagValue(['@desc', '@description']);
   }
 
   /** for @example. possible multi tag. */
@@ -395,9 +395,9 @@ export default class AbstractDoc {
     this._value.return = result;
   }
 
-  /** for @property. */
+  /** for @property, @prop */
   ['@property']() {
-    let values = this._findAllTagValues(['@property']);
+    let values = this._findAllTagValues(['@property', '@prop']);
     if (!values) return;
 
     this._value.properties = [];
