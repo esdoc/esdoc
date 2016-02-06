@@ -1,6 +1,6 @@
 # Changelog
 
-## Next
+## 0.4.4 (2016-02-06)
 - **Feat**
   - Can resolve import file path that has no file extension ([#160](https://github.com/esdoc/esdoc/issues/160))
   - ``onHandleHTML`` has the target filename ([#175](https://github.com/esdoc/esdoc/pull/175)) Thanks [@skratchdot](https://github.com/skratchdot)
