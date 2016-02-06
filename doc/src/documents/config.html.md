@@ -24,7 +24,7 @@ ESDoc config file.
 ## Integrate Test Codes Config
 ```json
 {
-  "source": "./src"
+  "source": "./src",
   "destination": "./doc",
   "test": {
     "type": "mocha",
@@ -106,8 +106,8 @@ npm install esdoc-es7-plugin
     {"name": "plugin-name-or-file-path", "option": null}
   ],
   "manual": {
-    "asset": "./manual/asset"
-    "overview": ["./manual/overview.md",
+    "asset": "./manual/asset",
+    "overview": ["./manual/overview.md"],
     "installation": ["./manual/installation.md"],
     "usage": ["./manual/usage.md"],
     "tutorial": ["./manual/tutorial.md"],
