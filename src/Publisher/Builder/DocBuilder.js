@@ -165,17 +165,18 @@ export default class DocBuilder {
         url = packageObj.repository;
       }
 
-      // url: git@github.com:foo/bar.git
-      if (url.indexOf('git@github.com:') === 0) {
-        let matched = url.match(/^git@github\.com:(.*)\.git$/);
-        if (matched && matched[1]) {
-          url = `https://github.com/${matched[1]}`;
+      if (typeof url === 'string') {
+        // url: git@github.com:foo/bar.git
+        if (url.indexOf('git@github.com:') === 0) {
+          let matched = url.match(/^git@github\.com:(.*)\.git$/);
+          if (matched && matched[1]) {
+            url = `https://github.com/${matched[1]}`;
+          }
         }
-      }
-
-      // url: foo/bar
-      if (url.match(/^[\w\d\-_]+\/[\w\d\-_]+$/)) {
-        url = `https://github.com/${url}`;
+        // url: foo/bar
+        if (url.match(/^[\w\d\-_]+\/[\w\d\-_]+$/)) {
+          url = `https://github.com/${url}`;
+        }
       }
     }
 
