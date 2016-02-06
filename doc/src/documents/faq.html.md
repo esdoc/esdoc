@@ -43,7 +43,7 @@ The languages below are not supported.
 - Alt-JS(TypeScript, CoffeeScript, Dart, etc...): Because supporting them is too hard.
 
 ## Supported Environment
-ESDoc supports Node.js(v0.12)
+ESDoc supports Node.js(v4.1 or later)
 
 ## Import Path In Documentation
 ESDoc displays the import path of class/function into the document.
