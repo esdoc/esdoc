@@ -3,6 +3,8 @@
 ## Next
 - **Feat**
   - Can resolve import file path that has no file extension ([#160](https://github.com/esdoc/esdoc/issues/160))
+- **Fix**
+  - Breaking document if comment has tab ([#127](https://github.com/esdoc/esdoc/issues/127)) Thanks [@developit](https://github.com/developit)
 
 ## 0.4.3 (2015-11-02)
 - **Fix**
