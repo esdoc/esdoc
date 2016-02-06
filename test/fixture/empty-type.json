@@ -1,7 +1,0 @@
-{
-  "source": "./test/fixture/src-error",
-  "destination": "./test/fixture/empty-type",
-  "includes": ["EmptyType.js"],
-  "index": "./test/fixture/README.md",
-  "package": "./test/fixture/package.json"
-}

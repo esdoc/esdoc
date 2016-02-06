@@ -110,4 +110,17 @@ describe('ParamParser:', ()=>{
       defaultRaw: [10, 20, 30]
     });
   });
+
+  it('throws error when empty type.', ()=>{
+    let value = '{} foo bar';
+    let {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value);
+
+    try {
+      ParamParser.parseParam(typeText, paramName, paramDesc);
+    } catch(e) {
+      assert.equal(e.message, 'Empty Type found name=foo desc=bar');
+      return;
+    }
+    assert(false);
+  });
 });
