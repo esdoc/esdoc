@@ -1,0 +1,7 @@
+module.exports = {
+  source: './test/fixture/src',
+  destination: './test/fixture/esdoc-cli',
+  includes: ['MyClass\\.js'],
+  index: './test/fixture/README.md',
+  package: './test/fixture/package.json'
+};

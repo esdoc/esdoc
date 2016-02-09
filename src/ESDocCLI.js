@@ -32,6 +32,12 @@ export default class ESDocCLI {
       this._showVersion();
       process.exit(0)
     }
+
+    if (this._argv.rcdir) {
+      this._rcFileDir = this._argv.rcdir;
+    } else {
+      this._rcFileDir = path.dirname(NPMUtil.findPackagePath());
+    }
   }
 
   /**
@@ -42,11 +48,37 @@ export default class ESDocCLI {
     if (this._argv.c) {
       config = this._createConfigFromJSONFile(this._argv.c);
     } else {
-      this._showHelp();
-      process.exit(1);
+      const localConfigFile = this._getLocalConfigFilePath();
+      if (localConfigFile) {
+        config = this._createConfigFromJSONFile(localConfigFile);
+      } else {
+        this._showHelp();
+        process.exit(1);
+      }
     }
 
     ESDoc.generate(config, defaultPublisher);
+  }
+
+  /**
+   * get local config file path
+   * @return {string} esdoc rcfile path.
+   * @private
+   */
+  _getLocalConfigFilePath() {
+    const configFiles = [
+      'esdoc.json',
+      '.esdocrc.js',
+      '.esdocrc.json',
+      '.esdocrc'
+    ];
+    for (const configFile of configFiles) {
+      const configFilePath = path.join(this._rcFileDir, configFile);
+      if (fs.existsSync(configFilePath)) {
+        return configFilePath;
+      }
+    }
+    return null;
   }
 
   /**
@@ -54,7 +86,7 @@ export default class ESDocCLI {
    * @private
    */
   _showHelp() {
-    console.log('usage: esdoc [-c esdoc.json]');
+    console.log('usage: esdoc [-c esdoc.json] [--rcdir rcfile dir]');
   }
 
   /**
@@ -83,8 +115,7 @@ export default class ESDocCLI {
       return require(configFilePath);
     } else {
       const configJSON = fs.readFileSync(configFilePath, {encode: 'utf8'});
-      const config = JSON.parse(configJSON);
-      return config;
+      return JSON.parse(configJSON);
     }
   }
 }

@@ -24,4 +24,21 @@ export default class NPMUtil {
 
     return packageObj;
   }
+
+  /**
+   * Find the closest package.json file, working up from process.cwd to root.
+   * @returns {string} package.json path.
+   */
+  static findPackagePath(startDir) {
+    let dir = path.resolve(startDir || process.cwd());
+    do {
+      const packagePath = path.join(dir, 'package.json');
+      if (!fs.existsSync(packagePath)) {
+        dir = path.join(dir, '..');
+        continue;
+      }
+      return packagePath;
+    } while (dir !== path.resolve(dir, '..'));
+    return null;
+  }
 }
