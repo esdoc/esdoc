@@ -111,6 +111,21 @@ describe('ParamParser:', ()=>{
     });
   });
 
+  it('parse param even if description has {}.', ()=>{
+    let value = '{number} p1 foo {a: number} bar';
+    let {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value);
+    let result = ParamParser.parseParam(typeText, paramName, paramDesc);
+    assert.deepEqual(result, {
+      nullable: null,
+      types: ['number'],
+      spread: false,
+      optional: false,
+      name: 'p1',
+      description: 'foo {a: number} bar'
+    });
+  });
+
+  /** @test {ParamParser.parseParam} */
   it('throws error when empty type.', ()=>{
     let value = '{} foo bar';
     let {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value);
