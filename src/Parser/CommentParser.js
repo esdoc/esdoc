@@ -22,14 +22,14 @@ export default class CommentParser {
 
     // TODO: refactor
     comment = comment.replace(/\r\n/gm, '\n'); // for windows
-    comment = comment.replace(/^\t*\s?/gm, ''); // remove line head space
-    comment = comment.replace(/^\*\s?/, ''); // remove first '*'
-    comment = comment.replace(/\s$/, ''); // remove last space
-    comment = comment.replace(/^\s*\*\s?/gm, ''); // remove line head '*'
+    comment = comment.replace(/^[\t ]*/gm, ''); // remove line head space
+    comment = comment.replace(/^\*[\t ]?/, ''); // remove first '*'
+    comment = comment.replace(/[\t ]$/, ''); // remove last space
+    comment = comment.replace(/^\*[\t ]?/gm, ''); // remove line head '*'
     if (comment.charAt(0) !== '@')  comment = '@desc ' + comment; // auto insert @desc
-    comment = comment.replace(/\s*$/, ''); // remove tail space.
-    comment = comment.replace(/^(@\w+)$/gm, '$1 \\TRUE'); // auto insert tag text to non-text tag (e.g. @interface)
-    comment = comment.replace(/^(@\w+)\s(.*)/gm, '\\Z$1\\Z$2'); // insert separator (\\Z@tag\\Ztext)
+    comment = comment.replace(/[\t ]*$/, ''); // remove tail space.
+    comment = comment.replace(/^[\t ]*(@\w+)$/gm, '$1 \\TRUE'); // auto insert tag text to non-text tag (e.g. @interface)
+    comment = comment.replace(/^[\t ]*(@\w+)[\t ](.*)/gm, '\\Z$1\\Z$2'); // insert separator (\\Z@tag\\Ztext)
     let lines = comment.split('\\Z');
 
     let tagName = '';
