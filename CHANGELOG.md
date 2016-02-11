@@ -1,5 +1,9 @@
 # Changelog
 
+## Next
+- **Fix**
+  - Make a mistake lint for array destructuring ([#178](https://github.com/esdoc/esdoc/issues/178))
+
 ## 0.4.4 (2016-02-06)
 - **Feat**
   - Can resolve import file path that has no file extension ([#160](https://github.com/esdoc/esdoc/issues/160))
