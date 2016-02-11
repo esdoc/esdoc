@@ -4,6 +4,7 @@
 - **Fix**
   - Make a mistake lint for array destructuring ([#178](https://github.com/esdoc/esdoc/issues/178))
   - Comment syntax(white space) is too strict ([#181](https://github.com/esdoc/esdoc/issues/181))
+  - Broken param parsed result if description has ``{}`` ([#185](https://github.com/esdoc/esdoc/issues/185))
 
 ## 0.4.4 (2016-02-06)
 - **Feat**
