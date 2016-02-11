@@ -71,6 +71,10 @@ export default class LintDocBuilder extends DocBuilder {
           break;
         case 'ObjectPattern':
           result.push('*');
+          break;
+        case 'ArrayPattern':
+          result.push('*');
+          break;
       }
     }
 
