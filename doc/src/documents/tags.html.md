@@ -545,6 +545,12 @@ function myFunc({foo, bar}){...}
 function myFunc(param){...}
 
 /**
+ * this is nullable property
+ * @param {{foo: ?number, bar: string}} param - this is object param.
+ */
+function myFunc(param){...}
+
+/**
  * this is object destructuring.
  * @param {{foo: number, bar: string}} param - this is object param.
  */

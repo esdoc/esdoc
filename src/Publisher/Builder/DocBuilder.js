@@ -767,6 +767,9 @@ export default class DocBuilder {
     if (typeName.indexOf('...') === 0) {
       typeName = typeName.replace('...', '');
       return '...' + this._buildDocLinkHTML(typeName);
+    } else if (typeName.indexOf('?') === 0){
+      typeName = typeName.replace('?', '');
+      return '?' + this._buildDocLinkHTML(typeName);
     } else {
       return this._buildDocLinkHTML(typeName);
     }
