@@ -46,12 +46,15 @@
 
 /**
  * @typedef {Object} AST
+ * @property {Object} body
+ * @property {Object[]} leadingComments
  * @see https://github.com/estree/estree
  */
 
 /**
  * @typedef {Object} ASTNode
  * @see https://github.com/estree/estree
+ * @property {string} type
  * @property {Object} [superClass]
  * @property {Object[]} [leadingComments]
  * @property {Object[]} [trailingComments]

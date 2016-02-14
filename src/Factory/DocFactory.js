@@ -288,21 +288,22 @@ export default class DocFactory {
       Object.defineProperty(node, 'parent', {value: parentNode});
     }
 
-    let results = this._traverseComments(parentNode, node, node.leadingComments);
+    let results;
+    results = this._traverseComments(parentNode, node, node.leadingComments);
     this._results.push(...results);
 
     // for trailing comments.
     // traverse with only last node, because prevent duplication of trailing comments.
     if (node.trailingComments && isLastNodeInParent) {
-      let results = this._traverseComments(parentNode, null, node.trailingComments);
+      results = this._traverseComments(parentNode, null, node.trailingComments);
       this._results.push(...results);
     }
   }
 
   /**
    * traverse comments of node, and create doc object.
-   * @param {ASTNode} parentNode - parent of target node.
-   * @param {ASTNode} node - target node.
+   * @param {ASTNode|AST} parentNode - parent of target node.
+   * @param {?ASTNode} node - target node.
    * @param {ASTNode[]} comments - comment nodes.
    * @returns {DocObject[]} created doc objects.
    * @private
@@ -401,7 +402,7 @@ export default class DocFactory {
    * decide Doc type by using tags and node.
    * @param {Tag[]} tags - tags of node.
    * @param {ASTNode} node - target node.
-   * @returns {{type: string, node: ASTNode}} decided type.
+   * @returns {{type: ?string, node: ?ASTNode}} decided type.
    * @private
    */
   _decideType(tags, node) {
@@ -456,7 +457,7 @@ export default class DocFactory {
   /**
    * decide Doc type from method definition node.
    * @param {ASTNode} node - target node that is method definition node.
-   * @returns {{type: string, node: ASTNode}} decided type.
+   * @returns {{type: ?string, node: ?ASTNode}} decided type.
    * @private
    */
   _decideMethodDefinitionType(node) {
@@ -484,7 +485,7 @@ export default class DocFactory {
   /**
    * decide Doc type from expression statement node.
    * @param {ASTNode} node - target node that is expression statement node.
-   * @returns {{type: string, node: ASTNode}} decided type.
+   * @returns {{type: ?string, node: ?ASTNode}} decided type.
    * @private
    */
   _decideExpressionStatementType(node) {
