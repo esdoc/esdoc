@@ -150,7 +150,7 @@ export default class DocResolver {
     let link = (str)=>{
       if (!str) return str;
 
-      return str.replace(/\{@link ([\w\#_\-.:\~\/]+)}/g, (str, longname)=>{
+      return str.replace(/\{@link ([\w\#_\-.:\~\/$]+)}/g, (str, longname)=>{
         return this._builder._buildDocLinkHTML(longname, longname);
       });
     };
