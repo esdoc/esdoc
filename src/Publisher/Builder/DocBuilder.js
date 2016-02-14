@@ -687,7 +687,7 @@ export default class DocBuilder {
     }
 
     // e.g. function(a: number, b: string): boolean
-    matched = typeName.match(/function\((.*?)\)(.*)/);
+    matched = typeName.match(/function *\((.*?)\)(.*)/);
     if (matched) {
       let functionLink = this._buildDocLinkHTML('function');
       if (!matched[1] && !matched[2]) return `<span>${functionLink}<span>()</span></span>`;
