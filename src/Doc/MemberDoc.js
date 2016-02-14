@@ -54,7 +54,7 @@ export default class MemberDoc extends AbstractDoc {
         if (tagName === '@_name') {
           name = tagValue;
         } else if (tagName === '@_member') {
-          let {paramName} = ParamParser.parseParamValue(value, true, true, false);
+          let {paramName} = ParamParser.parseParamValue(tagValue, true, true, false);
           name = paramName;
         }
       }
