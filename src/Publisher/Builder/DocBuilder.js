@@ -701,9 +701,15 @@ export default class DocBuilder {
           .replace(/{.*?}/g, (a)=> a.replace(/,/g, '\\Z').replace(/:/g, '\\Y'));
         innerTypes = inner.split(',').map((v)=>{
           let tmp = v.split(':').map((v)=> v.trim());
-          let paramName = tmp[0];
-          let typeName = tmp[1].replace(/\\Z/g, ',').replace(/\\Y/g, ':');
-          return `${paramName}: ${this._buildTypeDocLinkHTML(typeName)}`;
+	    if (tmp.length === 1) {
+            return this._buildTypeDocLinkHTML(tmp[0]);
+	    } else if (tmp.length === 2) {
+            let paramName = tmp[0];
+            let typeName = tmp[1].replace(/\\Z/g, ',').replace(/\\Y/g, ':');
+            return `${paramName}: ${this._buildTypeDocLinkHTML(typeName)}`;
+	    } else {
+	      throw TypeError( `Invalid parameter description “${v}”` );
+	    }
         });
       }
 
