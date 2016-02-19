@@ -3,6 +3,10 @@ import fs from 'fs';
 import path from 'path';
 import cheerio from 'cheerio';
 
+export function getEsdoc() {
+  return fs.readFileSync(`./test/fixture/esdoc.json`, {encoding: 'utf-8'});
+}
+
 export function readDoc(fileName, dirName = 'esdoc') {
   let html = fs.readFileSync(`./test/fixture/${dirName}/${fileName}`, {encoding: 'utf-8'});
   let $ = cheerio.load(html);
