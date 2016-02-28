@@ -110,7 +110,8 @@ npm install esdoc-es7-plugin
     "faq": "./manual/faq.md",
     "changelog": "./CHANGELOG.md"
   },
-  "lint": true
+  "lint": true,
+  "badge": "badge-flat-square"
 }
 ```
 
@@ -150,5 +151,6 @@ npm install esdoc-es7-plugin
 | ``manual.faq`` | - | null | if specify markdown file path, show FAQ. |
 | ``manual.changelog`` | - | null | if specify markdown file path, show changelog. |
 | ``lint`` | - | true | If specified, execute documentation lint. |
+| ``badge`` | - | 'badge' | If 'badge-flat-square' specified, use flat-square layout. |
 
 Note: A file path in config is based on current directory.

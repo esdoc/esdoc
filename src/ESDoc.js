@@ -173,6 +173,8 @@ export default class ESDoc {
       if (!config.test.includes) config.test.includes = ['(spec|Spec|test|Test)\\.(js|es6)$'];
       if (!config.test.excludes) config.test.excludes = ['\\.config\\.(js|es6)$'];
     }
+
+    if (!config.badge) config.badge = 'badge';
   }
 
   static _deprecatedConfig(config) {
