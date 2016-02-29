@@ -177,6 +177,11 @@ export default class DocBuilder {
         if (url.match(/^[\w\d\-_]+\/[\w\d\-_]+$/)) {
           url = `https://github.com/${url}`;
         }
+        // url: git+https://
+        if (/^git\+http.+$/.test(url)) {
+          // https://regex101.com/r/nW4wC2/2
+          url = url.match(/^git\+(.+)$/)[1];
+        }
       }
     }
 
