@@ -1,5 +1,5 @@
 # CustomManual File
 
-## Whith no content
+## With no content
 
 * at the moment
