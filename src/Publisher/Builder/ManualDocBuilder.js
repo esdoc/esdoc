@@ -57,9 +57,9 @@ export default class ManualDocBuilder extends DocBuilder {
     const m = this._config.manual;
     const manualConfig = [];
 
-    for (var file in m) {
-      if (file != 'asset') {
-        let label = file.charAt(0).toUpperCase() + file.slice(1);
+    for (let file in m) {
+      if (file !== 'asset' && file !== 'reference') {
+        const label = file.charAt(0).toUpperCase() + file.slice(1);
         manualConfig.push({label: label, paths: m[file]});
       }
     }
