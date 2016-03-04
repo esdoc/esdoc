@@ -1,6 +1,6 @@
 import {getEsdoc, readDoc, assert, find} from './../util.js';
 
-let m = JSON.parse( getEsdoc() ).manual;
+const m = JSON.parse( getEsdoc() ).manual;
 
 /** @test {ManualDocBuilder} */
 describe('Manual:', ()=>{
@@ -15,12 +15,12 @@ describe('Manual:', ()=>{
   it('has manual navigation', ()=>{
     const doc = readDoc('manual/index.html');
 
-    var i = 1;
-    for (var file in m) {
-      if (file != 'asset') {
+    let i = 1;
+    for (let file in m) {
+      if (file !== 'asset' && file !== 'reference') {
 
-        let label = file.charAt(0).toUpperCase() + file.slice(1);
-        let f = file.split('.')[0]+'.html';
+        const label = file.charAt(0).toUpperCase() + file.slice(1);
+        const f = file.split('.')[0]+'.html';
 
         find(doc, '[data-ice="nav"]', (doc)=>{
           assert.includes(doc, '[data-ice="manual"]:nth-of-type('+i+')', ''+label);
