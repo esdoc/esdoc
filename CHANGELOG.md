@@ -3,6 +3,7 @@
 ## Next
 - **Fix**
   - Crash when the manual has HTML comments ([#231](https://github.com/esdoc/esdoc/issues/231), [#239](https://github.com/esdoc/esdoc/pull/239)) Thanks [@staltz](https://github.com/staltz)
+  - Broken output when repository url is ``git+https://`` style ([#235](https://github.com/esdoc/esdoc/issues/235), [#236](https://github.com/esdoc/esdoc/pull/236)) Thanks [@jamsyoung](https://github.com/jamsyoung)
 
 ## 0.4.5 (2016-02-14)
 - **Fix**
