@@ -157,7 +157,7 @@ export default class DocBuilder {
     }
 
     // repository url
-    let url = '';
+    let url = null;
     if (packageObj.repository) {
       if (packageObj.repository.url) {
         url = packageObj.repository.url;
@@ -166,17 +166,24 @@ export default class DocBuilder {
       }
 
       if (typeof url === 'string') {
-        // url: git@github.com:foo/bar.git
-        if (url.indexOf('git@github.com:') === 0) {
+        if (url.indexOf('git@github.com:') === 0) { // url: git@github.com:foo/bar.git
           let matched = url.match(/^git@github\.com:(.*)\.git$/);
           if (matched && matched[1]) {
             url = `https://github.com/${matched[1]}`;
           }
-        }
-        // url: foo/bar
-        if (url.match(/^[\w\d\-_]+\/[\w\d\-_]+$/)) {
+        } else if (url.match(/^[\w\d\-_]+\/[\w\d\-_]+$/)) { // url: foo/bar
           url = `https://github.com/${url}`;
+        } else if(url.match(/^git\+https:\/\/github.com\/.*\.git$/)) { // git+https://github.com/foo/bar.git
+          const matched = url.match(/^git\+(https:\/\/github.com\/.*)\.git$/);
+          url = matched[1];
+        } else if(url.match(/(https?:\/\/.*$)/)){ // other url
+          const matched = url.match(/(https?:\/\/.*$)/);
+          url = matched[1];
+        } else {
+          url = '';
         }
+      } else {
+        url = null;
       }
     }
 
