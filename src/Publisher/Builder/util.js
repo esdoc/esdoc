@@ -69,6 +69,9 @@ export function markdown(text, breaks = false) {
     breaks: breaks,
     sanitize: true,
     sanitizer: (tag) =>{
+      if (tag.match(/<!--.*-->/)) {
+        return tag;
+      }
       const tagName = tag.match(/^<\/?(\w+)/)[1];
       if (!availableTags.includes(tagName)) {
         return escape(tag);
