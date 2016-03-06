@@ -1,5 +1,9 @@
 # Changelog
 
+## Next
+- **Fix**
+  - Crash when the manual has HTML comments ([#231](https://github.com/esdoc/esdoc/issues/231), [#239](https://github.com/esdoc/esdoc/pull/239)) Thanks [@staltz](https://github.com/staltz)
+
 ## 0.4.5 (2016-02-14)
 - **Fix**
   - Make a mistake lint for array destructuring ([#178](https://github.com/esdoc/esdoc/issues/178))
