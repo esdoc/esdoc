@@ -1,5 +1,9 @@
 # Changelog
 
+## Next
+- **Fix**
+  - Broken if identifier name is stared with ``B`` ([#224](https://github.com/esdoc/esdoc/issues/224))
+
 ## 0.4.6 (2016-03-06)
 - **Fix**
   - Crash when the manual has HTML comments ([#231](https://github.com/esdoc/esdoc/issues/231), [#239](https://github.com/esdoc/esdoc/pull/239)) Thanks [@staltz](https://github.com/staltz)
