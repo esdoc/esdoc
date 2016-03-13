@@ -56,15 +56,15 @@ export default class ManualDocBuilder extends DocBuilder {
   _getManualConfig() {
     const m = this._config.manual;
     const manualConfig = [];
-    if (m.overview) manualConfig.push({label: 'Overview', paths: m.overview});
-    if (m.installation) manualConfig.push({label: 'Installation', paths: m.installation});
-    if (m.tutorial) manualConfig.push({label: 'Tutorial', paths: m.tutorial});
-    if (m.usage) manualConfig.push({label: 'Usage', paths: m.usage});
-    if (m.configuration) manualConfig.push({label: 'Configuration', paths: m.configuration});
-    if (m.example) manualConfig.push({label: 'Example', paths: m.example});
+
+    for (let file in m) {
+      if (file !== 'asset' && file !== 'reference') {
+        const label = file.charAt(0).toUpperCase() + file.slice(1);
+        manualConfig.push({label: label, paths: m[file]});
+      }
+    }
     manualConfig.push({label: 'Reference', fileName: 'identifiers.html', references: true});
-    if (m.faq) manualConfig.push({label: 'FAQ', paths: m.faq});
-    if (m.changelog) manualConfig.push({label: 'Changelog', paths: m.changelog});
+
     return manualConfig;
   }
 
