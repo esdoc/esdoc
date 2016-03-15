@@ -50,7 +50,7 @@ export default class CoverageBuilder extends DocBuilder {
     } else {
       color = '#4fc921';
     }
-    let badge = this._readTemplate('image/badge.svg');
+    let badge = this._readTemplate(`image/${this._config.badge}.svg`);
     badge = badge.replace(/@ratio@/g, ratio + '%');
     badge = badge.replace(/@color@/g, color);
     badgeCallback(badge, 'badge.svg');
