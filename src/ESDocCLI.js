@@ -91,6 +91,11 @@ export default class ESDocCLI {
     }
   }
 
+  /**
+   * Creates a configuration object by parsing the root package.json.
+   * @return {ESDocConfig} config object, or undefined if it was not found.
+   * @private
+   */
   _createConfigFromPackageJSON() {
     const pkgPath = path.resolve('./package.json');
 
