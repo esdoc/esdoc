@@ -27,9 +27,61 @@ esdoc -h
 ```
 
 # Usage
+## Create a separate configuration file
+You can create a separate configuration file in JSON or JavaScript format.
+To use it, you should pass the location of this file to ESDoc; ESDoc does not search for files.
 
-```
+JSON example:
+```bash
 esdoc -c esdoc.json
+```
+
+```json
+{
+  "source": "./src",
+  "destination": "./doc/out/esdoc"
+}
+```
+
+JavaScript example:
+```bash
+esdoc -c esdoc.js
+```
+
+```javascript
+module.exports = {
+  source: './src',
+  destination: './doc/out/esdoc'
+}
+```
+
+## Add configuration to your package.json
+You can also add the configuration for ESDoc inside your package.json.
+Simply add a new object with `esdoc` as its key and provide JSON-formatted configuration.
+
+
+Package example:
+```bash
+esdoc
+```
+
+```json
+{
+  "name": "esdoc",
+  "version": "0.4.6",
+  "description": "Documentation Generator For JavaScript(ES6)",
+  "author": "h13i32maru",
+  "homepage": "https://esdoc.org/",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/esdoc/esdoc"
+  },
+  "esdoc": {
+    "source": "./src",
+    "destination": "./doc/out/esdoc"
+  }
+}
 ```
 
 # Example

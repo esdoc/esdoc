@@ -38,10 +38,11 @@ export default class ESDocCLI {
    * execute to generate document.
    */
   exec() {
-    let config;
-    if (this._argv.c) {
-      config = this._createConfigFromJSONFile(this._argv.c);
-    } else {
+    const config = this._argv.c
+      ? this._createConfigFromJSONFile(this._argv.c)
+      : this._createConfigFromPackageJSON();
+
+    if (!config) {
       this._showHelp();
       process.exit(1);
     }
@@ -54,7 +55,9 @@ export default class ESDocCLI {
    * @private
    */
   _showHelp() {
-    console.log('usage: esdoc [-c esdoc.json]');
+    console.log('Could not find configuration file!');
+    console.log('Provide a configuration file: esdoc [-c esdoc.json]');
+    console.log('or add the configuration to your package.json with "esdoc" as key.');
   }
 
   /**
@@ -85,6 +88,18 @@ export default class ESDocCLI {
       const configJSON = fs.readFileSync(configFilePath, {encode: 'utf8'});
       const config = JSON.parse(configJSON);
       return config;
+    }
+  }
+
+  _createConfigFromPackageJSON() {
+    const pkgPath = path.resolve('./package.json');
+
+    try {
+      const configJSON = fs.readFileSync(pkgPath, {encode: 'utf8'});
+      const config = JSON.parse(configJSON);
+      return config.esdoc;
+    } catch (err) {
+      return undefined;
     }
   }
 }
