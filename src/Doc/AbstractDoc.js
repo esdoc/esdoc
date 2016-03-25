@@ -24,6 +24,7 @@ export default class AbstractDoc {
     this._pathResolver = pathResolver;
     this._commentTags = commentTags;
     this._value = {};
+    this._extras = [];
 
     Object.defineProperty(this._node, 'doc', {value: this});
 
@@ -35,6 +36,10 @@ export default class AbstractDoc {
   /** @type {DocObject[]} */
   get value() {
     return JSON.parse(JSON.stringify(this._value));
+  }
+
+  get extras() {
+    return JSON.parse(JSON.stringify(this._extras));
   }
 
   /**
@@ -506,6 +511,15 @@ export default class AbstractDoc {
     if (tag) {
       this._value.generator = true;
     }
+  }
+
+
+  /**
+   * Saves an additional documentation node value to be added to the db.
+   * @param  {object} extra Extra node value
+   */
+  _addExtraValue(extra) {
+    this._extras.push(extra);
   }
 
   /**

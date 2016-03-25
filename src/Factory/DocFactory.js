@@ -356,9 +356,10 @@ export default class DocFactory {
         doc = this._createDoc(virtualNode, tags);
       }
 
-      if (doc) results.push(doc.value);
+      if (doc) {
+        results = [...results, doc.value, ...doc.extras];
+      }
     }
-
     return results;
   }
 
