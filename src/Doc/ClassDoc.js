@@ -2,6 +2,7 @@ import fs from 'fs-extra';
 import AbstractDoc from './AbstractDoc.js';
 import ParamParser from '../Parser/ParamParser.js';
 import NamingUtil from '../Util/NamingUtil.js';
+import ASTNodeContainer from '../Util/ASTNodeContainer.js';
 
 /**
  * Doc Class from Class Declaration AST node.
@@ -17,6 +18,32 @@ export default class ClassDoc extends AbstractDoc {
     this['@interface']();
     this['@extends']();
     this['@implements']();
+    this['@member']();
+  }
+
+  ['@member']() {
+    let values = this._findAllTagValues(['@member']);
+    if (!values) return;
+
+    this._value.members = [];
+    for (let value of values) {
+      let {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value);
+      let result = ParamParser.parseParam(typeText, paramName, paramDesc);
+      let types = result.types;
+      this._addExtraValue({
+        __docId__: ASTNodeContainer.addNode(this._node),
+        kind: 'member',
+        static: false,
+        name: result.name,
+        description: result.description,
+        type: {types},
+        variation: null,
+        access: 'public',
+        lineNumber: this._value.lineNumber,
+        memberof: this._value.longname,
+        longname: this._value.longname + '#' + result.name
+      });
+    }
   }
 
   /** specify ``class`` to kind. */

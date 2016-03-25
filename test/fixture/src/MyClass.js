@@ -50,6 +50,9 @@ import SuperMyClass1 from './OtherClass/SuperMyClass.js';
  * @see {@link SuperMyClass1#superMethod}
  * @since 1.2.3
  * @version 0.0.1
+ * @member {number} userDefined This member is defined using the `member` tag
+ * @member {number} userDefinedHidden This member is hidden by a getter
+ * @member {number} userDefinedVisible This member is defined on top of an `ignore`d getter.
  * @foobar this is unknown tag.
  */
 export default class MyClass1 extends SuperMyClass1 {
@@ -148,6 +151,19 @@ export default class MyClass1 extends SuperMyClass1 {
     // this is undocument
     const prop = 'p999';
     this[prop] = 123;
+  }
+
+  /**
+   * This getter hides the member of the same name defined with @member
+   */
+  get userDefinedHidden() {
+  }
+
+  /**
+   * This getter is ignored so it gives way to the member of the same name defined with @member
+   * @ignore
+   */
+  get userDefinedVisible() {
   }
 
   /**
