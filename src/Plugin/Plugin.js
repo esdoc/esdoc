@@ -68,10 +68,12 @@ class Plugin {
   /**
    * handle code.
    * @param {string} code - original code.
+   * @param {string} filePath - source code file path.
    * @returns {string} handled code.
    */
-  onHandleCode(code) {
+  onHandleCode(code, filePath) {
     const ev = new PluginEvent({code});
+    ev.data.filePath = filePath;
     this._execHandler('onHandleCode', ev);
     return ev.data.code;
   }
@@ -79,11 +81,14 @@ class Plugin {
   /**
    * handle code parser.
    * @param {function(code: string)} parser - original js parser.
+   * @param {object} option - default Espree options.
+   * @param {string} filePath - source code file path.
+   * @param {string} code - original code.
    * @returns {function(code: string)} handled parser.
    */
-  onHandleCodeParser(parser) {
+  onHandleCodeParser(parser, option, filePath, code) {
     const ev = new PluginEvent();
-    ev.data.parser = parser;
+    ev.data = { parser: parser, option: option, filePath: filePath, code: code };
     this._execHandler('onHandleCodeParser', ev);
     return ev.data.parser;
   }
@@ -91,10 +96,14 @@ class Plugin {
   /**
    * handle AST.
    * @param {AST} ast - original ast.
+   * @param {string} filePath - source code file path.
+   * @param {string} code - original code.
    * @returns {AST} handled AST.
    */
-  onHandleAST(ast) {
+  onHandleAST(ast, filePath, code) {
     const ev = new PluginEvent({ast});
+    ev.data.filePath = filePath;
+    ev.data.code = code;
     this._execHandler('onHandleAST', ev);
     return ev.data.ast;
   }
