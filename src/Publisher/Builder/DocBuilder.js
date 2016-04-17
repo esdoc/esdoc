@@ -258,11 +258,13 @@ export default class DocBuilder {
       const filePathB = b.longname.split('~')[0].replace('src/', '');
       const dirPathA = path.dirname(filePathA);
       const dirPathB = path.dirname(filePathB);
+      const shortNameA = a.longname.split('~')[1];
+      const shortNameB = b.longname.split('~')[1];
       const kindA = a.interface ? 'interface' : a.kind;
       const kindB = b.interface ? 'interface' : b.kind;
-      if (dirPathA === dirPathB) {
-        if (kindA === kindB) {
-          return a.longname > b.longname ? 1 : -1;
+      if (dirPathA == dirPathB) {
+        if (kindA == kindB) {
+          return shortNameA > shortNameB ? 1 : -1;
         } else {
           return kindOrder[kindA] > kindOrder[kindB] ? 1 : -1;
         }

@@ -8,8 +8,8 @@ describe('Nav:', ()=> {
   it('has each nav.', ()=>{
     find(doc, '[data-ice="nav"]', (doc)=>{
       // class
-      assert.includes(doc, '[data-ice="doc"]:nth-of-type(12)', 'MyClass1');
-      assert.includes(doc, '[data-ice="doc"]:nth-of-type(12) a', 'class/src/MyClass.js~MyClass1.html', 'href');
+      assert.includes(doc, '[data-ice="doc"]:nth-of-type(12)', 'MyExport11');
+      assert.includes(doc, '[data-ice="doc"]:nth-of-type(12) a', 'class/src/Export.js~MyExport11.html', 'href');
 
       // interface
       assert.includes(doc, '[data-ice="doc"]:nth-of-type(29)', 'MyInterface1');
@@ -21,8 +21,8 @@ describe('Nav:', ()=> {
 
       // variable
       assert.includes(doc, '[data-ice="doc"]:nth-of-type(44)', 'myExport10');
-      assert.includes(doc, '[data-ice="doc"]:nth-of-type(52)', 'myVariable1');
-      assert.includes(doc, '[data-ice="doc"]:nth-of-type(52) a', 'variable/index.html#static-variable-myVariable1', 'href');
+      assert.includes(doc, '[data-ice="doc"]:nth-of-type(52)', 'VmyVariable3');
+      assert.includes(doc, '[data-ice="doc"]:nth-of-type(52) a', 'variable/index.html#static-variable-myVariable3', 'href');
 
       // typedef
       assert.includes(doc, '[data-ice="doc"]:nth-of-type(60)', 'MyTypedef1');
