@@ -3,6 +3,7 @@
 ## Next
 - **Fix**
   - Broken if identifier name is stared with ``B`` ([#224](https://github.com/esdoc/esdoc/issues/224))
+  - Broken dependency package
 
 ## 0.4.6 (2016-03-06)
 - **Fix**
