@@ -19,7 +19,7 @@ class MyClass {
    * this is constructor description.
    * @param {number} arg1 this is arg1 description.
    * @param {string[]} arg2 this is arg2 description.
-   */ 
+   */
   constructor(arg1, arg2) {...}
 }
 ```
@@ -41,6 +41,7 @@ class MyClass {
   - [@extends](#-extends)
   - [@implements](#-implements)
   - [@interface](#-interface)
+  - [@member](#-member)
 - [For Method And Function](#for-method-and-function)
   - [@abstract](#-abstract)
   - [@emits](#-emits)
@@ -131,7 +132,7 @@ syntax: ``@example <JavaScript>``
  * let myClass = new MyClass();
  * let result = myClass.foo();
  * console.log(result);
- * 
+ *
  * @example
  * let result = MyClass.bar();
  * console.log(result);
@@ -279,6 +280,22 @@ syntax: ``@interface``
  * @interface
  */
 class MyInterface {...}
+```
+
+----
+
+#### @member
+syntax: ``@member``
+
+Specify a class member.   
+ESDoc normally finds class members in your code by itself. Use this tag if you want
+to explicitly document a class member.
+
+```javascript
+/**
+ * @member {number} foo
+ */
+class MyClass {...}
 ```
 
 ----
@@ -642,4 +659,3 @@ if same names in your project, you can use full identifier syntax. full identifi
 e.g. If ``MyClass`` in ``src/foo1.js`` and ``src/foo2.js``, you can write following,
 - ``src/foo1.js~MyClass``
 - ``src/foo2.js~MyClass``
-

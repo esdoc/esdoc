@@ -16,7 +16,7 @@ describe('MyClass1:', ()=> {
       assert.includes(doc, '[data-ice="access"]', 'public');
       assert.includes(doc, '[data-ice="kind"]', 'class');
       assert.includes(doc, '[data-ice="source"]', 'source');
-      assert.includes(doc, '[data-ice="source"] a', 'file/src/MyClass.js.html#lineNumber55', 'href');
+      assert.includes(doc, '[data-ice="source"] a', 'file/src/MyClass.js.html#lineNumber58', 'href');
       assert.includes(doc, '[data-ice="version"]', 'version 0.0.1');
       assert.includes(doc, '[data-ice="since"]', 'since 1.2.3');
     });
@@ -164,12 +164,12 @@ describe('MyClass1:', ()=> {
         assert.includes(doc, '[data-ice="target"]:nth-of-type(4)', 'public p7: *');
 
         // value
-        assert.includes(doc, '[data-ice="target"]:nth-of-type(5)', 'public get value: number this is value(get) desc.');
-        assert.includes(doc, '[data-ice="target"]:nth-of-type(5) [data-ice="name"] a', 'class/src/MyClass.js~MyClass1.html#instance-get-value', 'href');
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(8)', 'public get value: number this is value(get) desc.');
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(8) [data-ice="name"] a', 'class/src/MyClass.js~MyClass1.html#instance-get-value', 'href');
 
         // value
-        assert.includes(doc, '[data-ice="target"]:nth-of-type(6)', 'public set value: number this is value(set) desc.');
-        assert.includes(doc, '[data-ice="target"]:nth-of-type(6) [data-ice="name"] a', 'class/src/MyClass.js~MyClass1.html#instance-set-value', 'href');
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(9)', 'public set value: number this is value(set) desc.');
+        assert.includes(doc, '[data-ice="target"]:nth-of-type(9) [data-ice="name"] a', 'class/src/MyClass.js~MyClass1.html#instance-set-value', 'href');
       });
 
       // protected
@@ -351,22 +351,22 @@ describe('MyClass1:', ()=> {
       });
 
       // public value
-      find(doc, '[data-ice="detail"]:nth-of-type(5)', (doc)=> {
+      find(doc, '[data-ice="detail"]:nth-of-type(8)', (doc)=> {
         assert.includes(doc, '#instance-get-value', 'public get value: number');
       });
 
       // public value
-      find(doc, '[data-ice="detail"]:nth-of-type(6)', (doc)=> {
+      find(doc, '[data-ice="detail"]:nth-of-type(9)', (doc)=> {
         assert.includes(doc, '#instance-set-value', 'public set value: number');
       });
 
       // protected p2
-      find(doc, '[data-ice="detail"]:nth-of-type(7)', (doc)=>{
+      find(doc, '[data-ice="detail"]:nth-of-type(10)', (doc)=>{
         assert.includes(doc, '#instance-member-p2', 'protected p2: number');
       });
 
       // private p3
-      find(doc, '[data-ice="detail"]:nth-of-type(8)', (doc)=>{
+      find(doc, '[data-ice="detail"]:nth-of-type(11)', (doc)=>{
         assert.includes(doc, '#instance-member-p3', 'private p3: number');
       });
     })
@@ -488,4 +488,3 @@ describe('MyClass1:', ()=> {
     })
   });
 });
-

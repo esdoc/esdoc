@@ -412,7 +412,12 @@ export default class DocResolver {
       // member duplicate with getter/setter/method.
       // when it, remove member.
       // getter/setter/method are high priority.
-      const nonMemberDup = this._builder._find({longname: doc.longname, kind: {'!is': 'member'}});
+      const nonMemberDup = this._builder._find(
+        {longname: doc.longname, kind: {'!is': 'member'}},
+        // should use isUndefined here but using a function instead
+        // because of https://github.com/typicaljoe/taffydb/issues/114
+        function() { return !this.ignore; });
+
       if (nonMemberDup.length) {
         ignoreId.push(doc.___id);
         continue;
@@ -429,10 +434,7 @@ export default class DocResolver {
       }
     }
 
-    this._data({___id: ignoreId}).update(function(){
-      this.ignore = true;
-      return this;
-    });
+    this._data({___id: ignoreId}).update({ignore: true});
 
     this._data.__RESOLVED_DUPLICATION__ = true;
   }
