@@ -288,7 +288,7 @@ And add manual configuration.
     "configuration": ["./manual/configuration.md"],
     "example": ["./manual/example.md"],
     "faq": ["./manual/faq.md"],
-    "changelog": ["./CHANGELOG.md]"
+    "changelog": ["./CHANGELOG.md"]
   }
 }
 ```
