@@ -1,4 +1,3 @@
-import Logger from 'color-logger';
 import AbstractDoc from './AbstractDoc.js';
 
 /**

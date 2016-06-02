@@ -3,6 +3,8 @@ import path from 'path';
 import espree from 'espree';
 import Plugin from '../Plugin/Plugin.js';
 
+const esmRegex = /(^\s*|[}\);\n]\s*)(import\s*(['"]|(\*\s+as\s+)?[^"'\(\)\n;]+\s*from\s*['"]|\{)|export\s+\*\s+from\s+["']|export\s* (\{|default|function|class|var|const|let|async\s+function))/;
+
 /**
  * ECMAScript Parser class.
  *
@@ -28,33 +30,15 @@ export default class ESParser {
       comments: true,
       attachComment: true,
       loc: true,
-      ecmaFeatures: {
-        arrowFunctions: true,
-        blockBindings: true,
-        destructuring: true,
-        regexYFlag: true,
-        regexUFlag: true,
-        templateStrings: true,
-        binaryLiterals: true,
-        octalLiterals: true,
-        unicodeCodePointEscapes: true,
-        defaultParams: true,
-        restParams: true,
-        forOf: true,
-        objectLiteralComputedProperties: true,
-        objectLiteralShorthandMethods: true,
-        objectLiteralShorthandProperties: true,
-        objectLiteralDuplicateProperties: true,
-        generators: true,
-        spread: true,
-        classes: true,
-        modules: true,
-        jsx: true,
-        globalReturn: true
+      ecmaVersion: 6,
+      ecmaFeatures:
+      {
+        jsx: true
       }
     };
 
     let parser = (code) => {
+      option.sourceType = esmRegex.test(code) ? 'module' : 'script';
       return espree.parse(code, option);
     };
 

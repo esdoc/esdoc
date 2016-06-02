@@ -1,8 +1,6 @@
-import Logger from 'color-logger';
+import logger from 'color-logger';
 import AbstractDoc from './AbstractDoc.js';
 import ParamParser from '../Parser/ParamParser.js';
-
-let logger = new Logger('ExternalDoc');
 
 /**
  * Doc Class from virtual comment node of external.

@@ -1,4 +1,4 @@
-import Logger from 'color-logger';
+import logger from 'color-logger';
 import CommentParser from '../Parser/CommentParser.js';
 import FileDoc from '../Doc/FileDoc.js';
 import ClassDoc from '../Doc/ClassDoc.js';
@@ -12,7 +12,6 @@ import ExternalDoc from '../Doc/ExternalDoc.js';
 import ASTUtil from '../Util/ASTUtil.js';
 
 let already = Symbol('already');
-let logger = new Logger('DocFactory');
 
 /**
  * Doc factory class.
@@ -49,8 +48,8 @@ export default class DocFactory {
     this._results.push(doc.value);
 
     // ast does not child, so only comment.
-    if (ast.body.length === 0 && ast.leadingComments) {
-      let results = this._traverseComments(ast, null, ast.leadingComments);
+    if (ast.body.length === 0 && (ast.leadingComments || ast.trailingComments)) {
+      let results = this._traverseComments(ast, null, ast.leadingComments || ast.trailingComments);
       this._results.push(...results);
     }
   }

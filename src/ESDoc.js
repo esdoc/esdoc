@@ -2,7 +2,7 @@ import es6shim from 'core-js/shim';
 import fs from 'fs';
 import path from 'path';
 import assert from 'assert';
-import Logger from 'color-logger';
+import logger from 'color-logger';
 import ASTUtil from './Util/ASTUtil.js';
 import ESParser from './Parser/ESParser';
 import PathResolver from './Util/PathResolver.js';
@@ -10,8 +10,6 @@ import DocFactory from './Factory/DocFactory.js';
 import TestDocFactory from './Factory/TestDocFactory.js';
 import InvalidCodeLogger from './Util/InvalidCodeLogger.js';
 import Plugin from './Plugin/Plugin.js';
-
-let logger = new Logger('ESDoc');
 
 /**
  * API Documentation Generator.
@@ -40,7 +38,7 @@ export default class ESDoc {
     this._setDefaultConfig(config);
     this._deprecatedConfig(config);
 
-    Logger.debug = !!config.debug;
+    logger.debug = !!config.debug;
     let includes = config.includes.map((v) => new RegExp(v));
     let excludes = config.excludes.map((v) => new RegExp(v));
 

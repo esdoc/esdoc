@@ -1,8 +1,6 @@
-import Logger from 'color-logger';
+import logger from 'color-logger';
 import assert from 'assert';
 import ASTUtil from '../Util/ASTUtil.js';
-
-let logger = new Logger('ParamParser');
 
 /**
  * Param Type Parser class.
