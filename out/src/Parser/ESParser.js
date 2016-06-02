@@ -51,7 +51,7 @@ var ESParser = function () {
     value: function parse(filePath) {
       var code = _fsExtra2.default.readFileSync(filePath, { encode: 'utf8' }).toString();
 
-      code = _Plugin2.default.onHandleCode(code);
+      code = _Plugin2.default.onHandleCode(code, filePath);
 
       if (code.charAt(0) === '#') {
         code = code.replace(/^#!/, '//');
@@ -72,11 +72,11 @@ var ESParser = function () {
         return _espree2.default.parse(code, option);
       };
 
-      parser = _Plugin2.default.onHandleCodeParser(parser);
+      parser = _Plugin2.default.onHandleCodeParser(parser, option, filePath, code);
 
       var ast = parser(code);
 
-      ast = _Plugin2.default.onHandleAST(ast);
+      ast = _Plugin2.default.onHandleAST(ast, filePath, code);
 
       return ast;
     }

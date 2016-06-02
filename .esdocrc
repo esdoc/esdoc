@@ -1,6 +1,6 @@
 {
-  "source": "./src",
-  "destination": "./docs",
+  "source": "src",
+  "destination": "docs",
   "excludes": ["Publisher/Builder/template/", "BuiltinExternal/"],
   "access": ["public", "protected", "private"],
   "debug": false,
