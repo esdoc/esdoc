@@ -1,7 +1,12 @@
-![Owner Status](https://img.shields.io/badge/owner-busy-red.svg)
-[![Build Status](https://travis-ci.org/esdoc/esdoc.svg?branch=master)](https://travis-ci.org/esdoc/esdoc)
-[![Coverage Status](https://coveralls.io/repos/esdoc/esdoc/badge.svg)](https://coveralls.io/r/esdoc/esdoc)
-[![Document](https://doc.esdoc.org/github.com/esdoc/esdoc/badge.svg?t=0)](https://doc.esdoc.org/github.com/esdoc/esdoc)
+[![Build Status](https://travis-ci.org/typhonjs-node-esdoc/esdoc.svg?branch=master)](https://travis-ci.org/typhonjs-node-esdoc/esdoc)
+[![Coverage](https://img.shields.io/codecov/c/github/typhonjs-node-esdoc/esdoc.svg)](https://codecov.io/github/typhonjs-node-esdoc/esdoc)
+[![Documentation](http://docs.typhonjs.io/typhonjs-node-esdoc/esdoc/badge.svg)](http://docs.typhonjs.io/typhonjs-node-esdoc/esdoc/)
+[![Dependency Status](https://www.versioneye.com/user/projects/5750850d91bfda00363192af/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5750850d91bfda00363192af)
+[![Gitter](https://img.shields.io/gitter/room/typhonjs/TyphonJS.svg)](https://gitter.im/typhonjs/TyphonJS)
+
+This is a maintained fork of ESDoc that will rapidly see new features and bug fixes. Hopefully one day it can be contributed upstream when the original author is ready. Stay tuned to [Ongoing Refactoring](https://github.com/typhonjs-node-esdoc/esdoc/issues/1) to keep informed on current progress.
+
+Fork maintainer: [Mike Leahy](https://github.com/typhonrt)
 
 # ESDoc
 
@@ -9,7 +14,7 @@ ESDoc is a documentation generator for JavaScript(ES6).
 
 <img class="screen-shot" src="https://esdoc.org/image/top.png" width="500px" style="max-width: 500px; border: 1px solid rgba(0,0,0,0.1); box-shadow: 1px 1px 1px rgba(0,0,0,0.5);">
 
-# Feature
+# Features
 - Generates detailed documentation.
 - Measures documentation coverage.
 - Integrate test codes into documentation.
@@ -69,7 +74,7 @@ esdoc -c esdoc.json
 open ./esdoc/index.html
 ```
 
-# Document
+# Documentation
 please visit [esdoc.org](https://esdoc.org) to see more documentation.
 
 # License
