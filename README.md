@@ -6,6 +6,8 @@
 
 This is a maintained fork of ESDoc that will rapidly see new features and bug fixes. Hopefully one day it can be contributed upstream when the original author is ready. Stay tuned to [Ongoing Refactoring](https://github.com/typhonjs-node-esdoc/esdoc/issues/1) to keep informed on current progress.
 
+To include in your project add to `package.json` in devDependencies: `"esdoc": "git+https://git@github.com/typhonjs-node-esdoc/esdoc.git"`. Please note that this directly links to Github. If you want to pull in the latest version on Github just delete your `./node_modules/esdoc` directory and run `npm install` again. 
+
 Fork maintainer: [Mike Leahy](https://github.com/typhonrt)
 
 # ESDoc
