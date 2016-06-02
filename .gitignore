@@ -5,6 +5,7 @@ npm-debug.log
 coverage/
 docs/
 _temp/
+out/test/
 test/fixture/esdoc/
 test/fixture/esdoc-cli/
 test/fixture/esdoc-plugin/
