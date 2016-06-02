@@ -20,7 +20,7 @@ export default class ESParser {
   static parse(filePath) {
     let code = fs.readFileSync(filePath, {encode: 'utf8'}).toString();
 
-    code = Plugin.onHandleCode(code);
+    code = Plugin.onHandleCode(code, filePath);
 
     if (code.charAt(0) === '#') {
       code = code.replace(/^#!/, '//');
@@ -42,11 +42,11 @@ export default class ESParser {
       return espree.parse(code, option);
     };
 
-    parser = Plugin.onHandleCodeParser(parser);
+    parser = Plugin.onHandleCodeParser(parser, option, filePath, code);
 
     let ast = parser(code);
 
-    ast = Plugin.onHandleAST(ast);
+    ast = Plugin.onHandleAST(ast, filePath, code);
 
     return ast;
   }
