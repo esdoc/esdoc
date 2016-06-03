@@ -18,9 +18,9 @@
   ],
   "scripts": {
     "build": "node ./script/build.js",
-    "test": "babel-node ./script/test.js",
-    "test-es5": "node ./script/test-es5.js",
-    "esdoc": "node ./script/esdoc.js"
+    "esdoc": "babel-node ./src/ESDocCLI.js -c .esdocrc",
+    "test": "babel-node ./node_modules/typhonjs-npm-scripts-test-mocha/scripts/mocha.js",
+    "test-coverage": "babel-node ./node_modules/typhonjs-npm-scripts-test-mocha/scripts/mocha-istanbul.js"
   },
   "dependencies": {
     "cheerio": "^0.20.0",
@@ -37,12 +37,7 @@
     "taffydb": "^2.0.0"
   },
   "devDependencies": {
-    "babel-core": "^6.0.0",
-    "babel-cli": "^6.0.0",
-    "babel-preset-es2015": "^6.0.0",
-    "codecov": "^1.0.0",
-    "istanbul": "^1.0.0-alpha.2",
-    "mocha": "^2.0.0"
+    "typhonjs-npm-build-test": "^0.2.0"
   },
   "keywords": [
     "jsdoc",

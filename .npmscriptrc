@@ -1,0 +1,26 @@
+/**
+ * You can provide comments in `.npmscriptrc`
+ */
+{
+   "build":
+   {
+      "babel": { "source": "src", "destination": "dist" }
+   },
+
+   "publish":
+   {
+      "prepublish": { "scripts": ["npm run eslint", "npm run test", "npm run build"] }
+   },
+
+   "test":
+   {
+      // Provides a `coverage` handling command that is appended when running on Travis CI.
+      "travis":
+      {
+         "istanbul": { "command": "cover", "options": ["--report lcovonly"] }
+      },
+
+      "istanbul": { "command": "cover", "options": ["--include-all-sources --root src -x '**/template/**'"] },
+      "mocha": { "source": "./test/src", "options": ["--compilers js:babel-register", "-t 120000 --recursive"] }
+   }
+}

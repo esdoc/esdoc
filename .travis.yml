@@ -2,4 +2,4 @@ language: node_js
 node_js:
   - "5.8.0"
 script:
-  - TRAVIS=1 npm run test
+  - TRAVIS=1 npm run test-coverage
