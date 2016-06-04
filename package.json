@@ -4,7 +4,7 @@
   "description": "Documentation Generator For JavaScript(ES6)",
   "author": "h13i32maru",
   "homepage": "https://esdoc.org/",
-  "license": "MIT",
+  "license": "MPL-2.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/typhonjs-node-esdoc/esdoc.git"
@@ -17,7 +17,7 @@
     }
   ],
   "scripts": {
-    "build": "node ./script/build.js",
+    "build": "babel-node ./node_modules/typhonjs-npm-scripts-build-babel/scripts/build.js",
     "esdoc": "babel-node ./src/ESDocCLI.js -c .esdocrc",
     "test": "babel-node ./node_modules/typhonjs-npm-scripts-test-mocha/scripts/mocha.js",
     "test-coverage": "babel-node ./node_modules/typhonjs-npm-scripts-test-mocha/scripts/mocha-istanbul.js"
@@ -36,7 +36,7 @@
     "taffydb": "^2.0.0"
   },
   "devDependencies": {
-    "typhonjs-npm-build-test": "^0.2.0"
+    "typhonjs-npm-build-test": "^0.3.0"
   },
   "keywords": [
     "jsdoc",

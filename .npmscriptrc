@@ -4,12 +4,18 @@
 {
    "build":
    {
-      "babel": { "source": "src", "destination": "out/src" }
+      "babel": { "source": "src", "destination": "out/src" },
+
+      // Copy templates
+      "copy": [{ "source": "./src/Publisher/Builder/template", "destination": "./out/src/Publisher/Builder/template/" }],
+
+      // chmod the CLI entry point to executable.
+      "chmod": [{ "path": "./out/src/ESDocCLI.js", "mode": "755" }]
    },
 
    "publish":
    {
-      "prepublish": { "scripts": ["npm run eslint", "npm run test", "npm run build"] }
+      "prepublish": { "scripts": ["npm run test", "npm run build"] }
    },
 
    "test":
