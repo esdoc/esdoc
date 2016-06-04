@@ -1,9 +1,4 @@
-import estraverse from 'estraverse';
-
-let ESTRAVERSE_KEYS = {
-  Super: [],
-  JSXElement: []
-};
+import walker from 'typhonjs-ast-walker';
 
 /**
  * Utility for AST.
@@ -28,12 +23,10 @@ export default class ASTUtil {
    * @param {function(node: Object, parent: Object)} callback - this is called with each node.
    */
   static traverse(ast, callback) {
-    estraverse.traverse(ast, {
-      enter: function(node, parent) {
+    walker.traverse(ast, {
+      enterNode: function(node, parent) {
         callback.call(this, node, parent);
-      },
-
-      keys: ESTRAVERSE_KEYS
+      }
     });
   }
 
@@ -47,20 +40,18 @@ export default class ASTUtil {
   static findPathInImportDeclaration(ast, name) {
     let path = null;
 
-    estraverse.traverse(ast, {
-      enter: function(node, parent) {
+    walker.traverse(ast, {
+      enterNode: function(node) {
         if (node.type !== 'ImportDeclaration') return;
 
         for (let spec of node.specifiers) {
           let localName = spec.local.name;
           if (localName === name) {
             path = node.source.value;
-            this.break();
+            return null;  // Quit traversal
           }
         }
-      },
-
-      keys: ESTRAVERSE_KEYS
+      }
     });
 
     return path;
