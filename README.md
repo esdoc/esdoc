@@ -80,7 +80,7 @@ open ./esdoc/index.html
 please visit [esdoc.org](https://esdoc.org) to see more documentation.
 
 # License
-MIT
+MPLv2
 
-# Author
+# Original Author
 [Ryo Maruyama@h13i32maru](https://twitter.com/h13i32maru)
