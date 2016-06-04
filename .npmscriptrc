@@ -4,7 +4,7 @@
 {
    "build":
    {
-      "babel": { "source": "src", "destination": "dist" }
+      "babel": { "source": "src", "destination": "out/src" }
    },
 
    "publish":
@@ -17,7 +17,8 @@
       // Provides a `coverage` handling command that is appended when running on Travis CI.
       "travis":
       {
-         "istanbul": { "command": "cover", "options": ["--report lcovonly"] }
+         "istanbul": { "command": "cover", "options": ["--report lcovonly"] },
+         "report": "./node_modules/.bin/codecov"
       },
 
       "istanbul": { "command": "cover", "options": ["--include-all-sources --root src -x '**/template/**'"] },

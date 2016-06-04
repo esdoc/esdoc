@@ -1,4 +1,4 @@
-import es6shim from 'core-js/shim';
+import 'babel-polyfill';
 import fs from 'fs';
 import path from 'path';
 import assert from 'assert';
