@@ -35,7 +35,7 @@ export default class DocFactory {
    * @param {PathResolver} pathResolver - path resolver of source code.
    */
   constructor(ast, pathResolver) {
-    this._ast = ast;
+    this._ast = Array.isArray(ast.body) ? ast : ast.program;
     this._pathResolver = pathResolver;
     this._results = [];
     this._processedClassNodes = [];
@@ -44,12 +44,12 @@ export default class DocFactory {
     this._inspectExportNamedDeclaration();
 
     // file doc
-    let doc = new FileDoc(ast, ast, pathResolver, []);
+    let doc = new FileDoc(this._ast, this._ast, pathResolver, []);
     this._results.push(doc.value);
 
     // ast does not child, so only comment.
-    if (ast.body.length === 0 && (ast.leadingComments || ast.trailingComments)) {
-      let results = this._traverseComments(ast, null, ast.leadingComments || ast.trailingComments);
+    if (this._ast.body.length === 0 && (this._ast.leadingComments || this._ast.trailingComments)) {
+      let results = this._traverseComments(this._ast, null, this._ast.leadingComments || this._ast.trailingComments);
       this._results.push(...results);
     }
   }
@@ -271,6 +271,7 @@ export default class DocFactory {
   push(node, parentNode) {
     if (node === this._ast) return;
 
+// console.log('!! DocFactory - push - node.type: ' + node.type);
     if (node[already]) return;
 
     let isLastNodeInParent = this._isLastNodeInParent(node, parentNode);
@@ -338,7 +339,7 @@ export default class DocFactory {
     }
 
     if (comments.length === 0) {
-      comments = [{type: 'Block', value: '* @_undocument'}];
+      comments = [{type: 'CommentBlock', value: '* @_undocument'}];
     }
 
     let results = [];
@@ -418,6 +419,8 @@ export default class DocFactory {
         case '@external': type = 'External'; break;
       }
     }
+
+//console.log('!! DocFactory - _decideType - node.type: ' + node.type);
 
     if (type) return {type, node};
 

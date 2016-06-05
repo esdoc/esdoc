@@ -1,7 +1,8 @@
-import fs from 'fs-extra';
-import path from 'path';
-import espree from 'espree';
-import Plugin from '../Plugin/Plugin.js';
+import * as babylon from 'babylon';
+import fs           from 'fs-extra';
+import path         from 'path';
+import espree       from 'espree';
+import Plugin       from '../Plugin/Plugin.js';
 
 const esmRegex = /(^\s*|[}\);\n]\s*)(import\s*(['"]|(\*\s+as\s+)?[^"'\(\)\n;]+\s*from\s*['"]|\{)|export\s+\*\s+from\s+["']|export\s* (\{|default|function|class|var|const|let|async\s+function))/;
 
@@ -26,20 +27,32 @@ export default class ESParser {
       code = code.replace(/^#!/, '//');
     }
 
-    let option = {
-      comments: true,
-      attachComment: true,
-      loc: true,
-      ecmaVersion: 6,
-      ecmaFeatures:
-      {
-        jsx: true
-      }
+    //let option = {
+    //  comments: true,
+    //  attachComment: true,
+    //  loc: true,
+    //  ecmaVersion: 6,
+    //  ecmaFeatures:
+    //  {
+    //    jsx: true
+    //  }
+    //};
+    //
+    //let parser = (code) => {
+    //  option.sourceType = esmRegex.test(code) ? 'module' : 'script';
+    //  return espree.parse(code, option);
+    //};
+
+    let option =
+    {
+      plugins: ['asyncFunctions', 'asyncGenerators', 'classConstructorCall', 'classProperties', 'decorators',
+       'doExpressions', 'exportExtensions', 'exponentiationOperator', 'flow', 'functionBind', 'functionSent',
+        'jsx', 'objectRestSpread', 'trailingFunctionCommas']
     };
 
     let parser = (code) => {
       option.sourceType = esmRegex.test(code) ? 'module' : 'script';
-      return espree.parse(code, option);
+      return babylon.parse(code, option);
     };
 
     parser = Plugin.onHandleCodeParser(parser, option, filePath, code);

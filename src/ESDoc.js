@@ -11,6 +11,8 @@ import TestDocFactory from './Factory/TestDocFactory.js';
 import InvalidCodeLogger from './Util/InvalidCodeLogger.js';
 import Plugin from './Plugin/Plugin.js';
 
+let firstError = false;
+
 /**
  * API Documentation Generator.
  *
@@ -190,9 +192,12 @@ export default class ESDoc {
     let dirPath = path.resolve(__dirname, './BuiltinExternal/');
     this._walk(dirPath, (filePath)=>{
       let temp = this._traverse(dirPath, filePath);
-      temp.results.forEach((v)=> v.builtinExternal = true);
-      let res = temp.results.filter(v => v.kind === 'external');
-      results.push(...res);
+
+      if (temp) {
+        temp.results.forEach((v)=> v.builtinExternal = true);
+        let res = temp.results.filter(v => v.kind === 'external');
+        results.push(...res);
+      }
     });
   }
 
@@ -239,18 +244,51 @@ export default class ESDoc {
     }
 
     let pathResolver = new PathResolver(inDirPath, filePath, packageName, mainFilePath);
-    let factory = new DocFactory(ast, pathResolver);
+//    let factory = new DocFactory(ast, pathResolver);
 
-    ASTUtil.traverse(ast, (node, parent)=>{
-      try {
-        factory.push(node, parent);
-      } catch(e) {
-        InvalidCodeLogger.show(filePath, node);
-        throw e;
+    let factory;
+
+    try
+    {
+      //console.log('!! esdoc - _traverse err - filePath: ' + filePath);
+      //console.log('!! esdoc - _traverse err - ast: ' + JSON.stringify(ast));
+      factory = new DocFactory(ast, pathResolver);
+    }
+    catch(err)
+    {
+      if (!firstError)
+      {
+        firstError = true;
+        //console.log('!! esdoc - _traverse err - filePath: ' + filePath);
+        //console.log('!! esdoc - _traverse err - err: ' + err);
+        //console.log(err.stack);
+//        console.trace();
       }
-    });
+    }
 
-    return {results: factory.results, ast: ast};
+    try
+    {
+      ASTUtil.traverse(ast, (node, parent)=>{
+        try {
+          factory.push(node, parent);
+        } catch(e) {
+          //console.log('!! esdoc - _traverse err - filePath: ' + filePath);
+          //console.log('!! esdoc - _traverse err - e: ' + e);
+
+          InvalidCodeLogger.show(filePath, node);
+          throw e;
+        }
+      });
+    }
+    catch(err)
+    {
+
+    }
+
+//    if (typeof factory === 'undefined') { console.log('!! esdoc - _traverse err - filePath: ' + filePath); }
+
+    //return {results: factory.results, ast: ast};
+    return typeof factory !== 'undefined' ? {results: factory.results, ast: ast} : undefined;
   }
 
   /**

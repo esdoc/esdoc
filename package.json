@@ -23,6 +23,7 @@
     "test-coverage": "babel-node ./node_modules/typhonjs-npm-scripts-test-mocha/scripts/mocha-istanbul.js"
   },
   "dependencies": {
+    "babylon": "^6.0.0",
     "cheerio": "^0.20.0",
     "color-logger": "^0.0.6",
     "escape-html": "^1.0.0",

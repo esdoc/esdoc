@@ -35,6 +35,7 @@ class InvalidCodeLogger {
     console.log(filePath);
     console.log(targetLines.join('\n'));
     console.log('[0m');
+    console.trace();
   }
 
   /**
@@ -51,7 +52,8 @@ class InvalidCodeLogger {
       targetLines.push(`${i}| ` + lines[i]);
     }
 
-    console.log('[31mwarning: could not parse the following code. if you want to use ES7, see esdoc-es7-plugin(https://github.com/esdoc/esdoc-es7-plugin)[32m');
+    console.log('[31mwarning: could not parse the following code. if you want to use ES7, see esdoc-es7-plugin(https://github.com/esdoc/esdoc-es7-plugin)[32m'
+     +'\n error: ' + error);
     console.log(filePath);
     console.log(targetLines.join('\n') + '[0m');
   }
