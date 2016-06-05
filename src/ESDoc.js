@@ -192,12 +192,9 @@ export default class ESDoc {
     let dirPath = path.resolve(__dirname, './BuiltinExternal/');
     this._walk(dirPath, (filePath)=>{
       let temp = this._traverse(dirPath, filePath);
-
-      if (temp) {
-        temp.results.forEach((v)=> v.builtinExternal = true);
-        let res = temp.results.filter(v => v.kind === 'external');
-        results.push(...res);
-      }
+      temp.results.forEach((v)=> v.builtinExternal = true);
+      let res = temp.results.filter(v => v.kind === 'external');
+      results.push(...res);
     });
   }
 
@@ -266,25 +263,18 @@ export default class ESDoc {
       }
     }
 
-    try
-    {
-      ASTUtil.traverse(ast, (node, parent)=>{
-        try {
-          factory.push(node, parent);
-        } catch(e) {
-          console.log('!! esdoc - _traverse err - filePath: ' + filePath);
-          console.log('!! esdoc - _traverse err - e: ' + e);
-          console.log('!! esdoc - _traverse err - e.stack: ' + e.stack);
+    ASTUtil.traverse(ast, (node, parent)=>{
+      try {
+        factory.push(node, parent);
+      } catch(e) {
+        console.log('!! esdoc - _traverse err - filePath: ' + filePath);
+        console.log('!! esdoc - _traverse err - e: ' + e);
+        console.log('!! esdoc - _traverse err - e.stack: ' + e.stack);
 
-          InvalidCodeLogger.show(filePath, node);
-          throw e;
-        }
-      });
-    }
-    catch(err)
-    {
-
-    }
+        InvalidCodeLogger.show(filePath, node);
+        throw e;
+      }
+    });
 
 //    if (typeof factory === 'undefined') { console.log('!! esdoc - _traverse err - filePath: ' + filePath); }
 

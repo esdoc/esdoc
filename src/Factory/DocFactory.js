@@ -49,9 +49,21 @@ export default class DocFactory {
     this._results.push(doc.value);
 
     // ast does not child, so only comment.
-    if (this._ast.body.length === 0 && (this._ast.leadingComments || this._ast.trailingComments)) {
-      let results = this._traverseComments(this._ast, null, this._ast.leadingComments || this._ast.trailingComments);
-      this._results.push(...results);
+    if (this._ast.body.length === 0) {
+      if (this._ast.leadingComments) {
+        let results = this._traverseComments(this._ast, null, this._ast.leadingComments);
+        this._results.push(...results);
+      }
+
+      if (this._ast.trailingComments) {
+        let results = this._traverseComments(this._ast, null, this._ast.trailingComments);
+        this._results.push(...results);
+      }
+
+      if (this._ast.innerComments) {
+        let results = this._traverseComments(this._ast, null, this._ast.innerComments);
+        this._results.push(...results);
+      }
     }
   }
 
