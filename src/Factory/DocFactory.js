@@ -1,5 +1,6 @@
 import logger from 'color-logger';
 import CommentParser from '../Parser/CommentParser.js';
+import ParamParser from '../Parser/ParamParser.js';
 import FileDoc from '../Doc/FileDoc.js';
 import ClassDoc from '../Doc/ClassDoc.js';
 import MethodDoc from '../Doc/MethodDoc.js';
@@ -318,7 +319,8 @@ export default class DocFactory {
     // hack: leadingComment of MethodDefinition with Literal is not valid by espree(v2.0.2)
     //if (node.type === 'MethodDefinition' && node.key.type === 'Literal') {
     // todo: switch espree to acorn
-    if (node.type === 'ClassMethod' && (node.computed || !node.key.name)) {
+//TODO REMOVE    if (node.type === 'ClassMethod' && (node.computed || !node.key.name)) {
+    if (node.type === 'ClassMethod' && ParamParser.isLiteral(node.key.type)) {
       let line = node.loc.start.line - 1;
       for (let comment of this._ast.comments || []) {
         if (comment.loc.end.line === line) {
