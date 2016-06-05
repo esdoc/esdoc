@@ -35,7 +35,6 @@ class InvalidCodeLogger {
     console.log(filePath);
     console.log(targetLines.join('\n'));
     console.log('[0m');
-    console.trace();
   }
 
   /**

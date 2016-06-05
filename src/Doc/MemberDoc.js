@@ -36,7 +36,7 @@ export default class MemberDoc extends AbstractDoc {
 
     let parent = this._node.parent;
     while (parent) {
-      if (parent.type === 'MethodDefinition') {
+      if (parent.type === 'ClassMethod') {
         this._value.static = parent.static;
         break;
       }

@@ -272,8 +272,9 @@ export default class ESDoc {
         try {
           factory.push(node, parent);
         } catch(e) {
-          //console.log('!! esdoc - _traverse err - filePath: ' + filePath);
-          //console.log('!! esdoc - _traverse err - e: ' + e);
+          console.log('!! esdoc - _traverse err - filePath: ' + filePath);
+          console.log('!! esdoc - _traverse err - e: ' + e);
+          console.log('!! esdoc - _traverse err - e.stack: ' + e.stack);
 
           InvalidCodeLogger.show(filePath, node);
           throw e;

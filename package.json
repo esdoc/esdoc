@@ -24,11 +24,10 @@
   },
   "dependencies": {
     "babylon": "^6.0.0",
+    "babel-generator": "^6.0.0",
     "cheerio": "^0.20.0",
     "color-logger": "^0.0.6",
     "escape-html": "^1.0.0",
-    "escodegen": "^1.0.0",
-    "espree": "^3.0.0",
     "fs-extra": "^0.30.0",
     "ice-cap": "^0.0.4",
     "marked": "^0.3.0",
