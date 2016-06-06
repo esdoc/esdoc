@@ -11,8 +11,6 @@ import TestDocFactory from './Factory/TestDocFactory.js';
 import InvalidCodeLogger from './Util/InvalidCodeLogger.js';
 import Plugin from './Plugin/Plugin.js';
 
-let firstError = false;
-
 /**
  * API Documentation Generator.
  *
@@ -241,36 +239,12 @@ export default class ESDoc {
     }
 
     let pathResolver = new PathResolver(inDirPath, filePath, packageName, mainFilePath);
-//    let factory = new DocFactory(ast, pathResolver);
-
-    let factory;
-
-    try
-    {
-      //console.log('!! esdoc - _traverse err - filePath: ' + filePath);
-      //console.log('!! esdoc - _traverse err - ast: ' + JSON.stringify(ast));
-      factory = new DocFactory(ast, pathResolver);
-    }
-    catch(err)
-    {
-      if (!firstError)
-      {
-        firstError = true;
-        //console.log('!! esdoc - _traverse err - filePath: ' + filePath);
-        //console.log('!! esdoc - _traverse err - err: ' + err);
-        //console.log(err.stack);
-//        console.trace();
-      }
-    }
+    let factory = new DocFactory(ast, pathResolver);
 
     ASTUtil.traverse(ast, (node, parent)=>{
       try {
         factory.push(node, parent);
       } catch(e) {
-        console.log('!! esdoc - _traverse err - filePath: ' + filePath);
-        console.log('!! esdoc - _traverse err - e: ' + e);
-        console.log('!! esdoc - _traverse err - e.stack: ' + e.stack);
-
         InvalidCodeLogger.show(filePath, node);
         throw e;
       }

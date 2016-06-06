@@ -283,8 +283,6 @@ export default class DocFactory {
    */
   push(node, parentNode) {
     if (node === this._ast) return;
-
-// console.log('!! DocFactory - push - node.type: ' + node.type);
     if (node[already]) return;
 
     let isLastNodeInParent = this._isLastNodeInParent(node, parentNode);
@@ -433,8 +431,6 @@ export default class DocFactory {
         case '@external': type = 'External'; break;
       }
     }
-
-//console.log('!! DocFactory - _decideType - node.type: ' + node.type);
 
     if (type) return {type, node};
 

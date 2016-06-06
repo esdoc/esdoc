@@ -11,7 +11,6 @@ describe('Coverage:', ()=> {
     assert.equal(coverage.coverage, '89.93%');
     assert.equal(coverage.expectCount, 149);
     assert.equal(coverage.actualCount, 134);
-console.log('!! coverage.files: ' + JSON.stringify(coverage.files));
 
     assert.deepEqual(coverage.files, {
       "src\/ForTestDoc\/AbstractDoc.js": {
