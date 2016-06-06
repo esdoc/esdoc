@@ -152,3 +152,4 @@ var TestDocFactory = function () {
 }();
 
 exports.default = TestDocFactory;
+module.exports = exports['default'];

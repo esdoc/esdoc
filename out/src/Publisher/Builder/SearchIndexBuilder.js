@@ -128,3 +128,4 @@ var SearchIndexBuilder = function (_DocBuilder) {
 }(_DocBuilder3.default);
 
 exports.default = SearchIndexBuilder;
+module.exports = exports['default'];

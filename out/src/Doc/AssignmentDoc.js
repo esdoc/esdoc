@@ -77,3 +77,4 @@ var AssignmentDoc = function (_AbstractDoc) {
 }(_AbstractDoc3.default);
 
 exports.default = AssignmentDoc;
+module.exports = exports['default'];

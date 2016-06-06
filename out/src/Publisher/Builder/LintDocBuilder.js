@@ -113,8 +113,8 @@ var LintDocBuilder = function (_DocBuilder) {
         case 'FunctionDeclaration':
           params = node.params || [];
           break;
-        case 'MethodDefinition':
-          params = node.value.params || [];
+        case 'ClassMethod':
+          params = node.params || [];
           break;
         default:
           throw new Error('unknown node type. type = ' + node.type);

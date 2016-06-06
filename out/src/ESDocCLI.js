@@ -150,3 +150,4 @@ if (executedFilePath === __filename) {
   var cli = new ESDocCLI(process.argv);
   cli.exec();
 }
+module.exports = exports['default'];

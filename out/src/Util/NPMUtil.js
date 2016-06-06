@@ -55,3 +55,4 @@ var NPMUtil = function () {
 }();
 
 exports.default = NPMUtil;
+module.exports = exports['default'];

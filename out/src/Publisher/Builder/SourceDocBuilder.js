@@ -154,3 +154,4 @@ var SourceDocBuilder = function (_DocBuilder) {
 }(_DocBuilder3.default);
 
 exports.default = SourceDocBuilder;
+module.exports = exports['default'];

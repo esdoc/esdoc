@@ -34,8 +34,26 @@ var ParamParser = function () {
   }
 
   _createClass(ParamParser, null, [{
-    key: 'parseParamValue',
+    key: 'isLiteral',
 
+    /**
+     * Determines if a node type is a literal. Babylon defines specific literal nodes compared to ESTree generic
+     * `Literal`.
+     *
+     * @param {string}  type - Node type field.
+     */
+    value: function isLiteral(type) {
+      switch (type) {
+        case 'BooleanLiteral':
+        case 'DirectiveLiteral':
+        case 'NullLiteral':
+        case 'NumericLiteral':
+        case 'StringLiteral':
+          return true;
+      }
+
+      return false;
+    }
 
     /**
      * parse param value.
@@ -55,6 +73,9 @@ var ParamParser = function () {
      * let value = '{number}';
      * let {typeText} = ParamParser.parseParamValue(value, true, false, false);
      */
+
+  }, {
+    key: 'parseParamValue',
     value: function parseParamValue(value) {
       var type = arguments.length <= 1 || arguments[1] === undefined ? true : arguments[1];
       var name = arguments.length <= 2 || arguments[2] === undefined ? true : arguments[2];
@@ -227,7 +248,7 @@ var ParamParser = function () {
 
             result.optional = true;
 
-            if (param.right.type === 'Literal') {
+            if (ParamParser.isLiteral(param.right.type)) {
               // e.g. func(a = 10){}
               result.types = param.right.value === null ? ['*'] : [_typeof(param.right.value)];
               result.defaultRaw = param.right.value;
@@ -408,7 +429,11 @@ var ParamParser = function () {
         if (!node.argument) return;
 
         switch (node.argument.type) {
-          case 'Literal':
+          case 'BooleanLiteral':
+          case 'DirectiveLiteral':
+          case 'NullLiteral':
+          case 'NumericLiteral':
+          case 'StringLiteral':
             if (node.argument.value === null) {
               result.types = result.types || ['*'];
             } else {
@@ -440,7 +465,7 @@ var ParamParser = function () {
   }, {
     key: 'guessType',
     value: function guessType(right) {
-      var value = right && right.type === 'Literal' ? right.value : null;
+      var value = right && ParamParser.isLiteral(right.type) ? right.value : null;
 
       if (value === null || value === undefined) {
         return { types: ['*'] };
@@ -454,3 +479,4 @@ var ParamParser = function () {
 }();
 
 exports.default = ParamParser;
+module.exports = exports['default'];

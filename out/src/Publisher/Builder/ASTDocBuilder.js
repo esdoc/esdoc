@@ -83,3 +83,4 @@ var ASTDocBuilder = function (_DocBuilder) {
 }(_DocBuilder3.default);
 
 exports.default = ASTDocBuilder;
+module.exports = exports['default'];

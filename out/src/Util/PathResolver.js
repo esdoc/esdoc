@@ -149,3 +149,4 @@ var PathResolver = function () {
 }();
 
 exports.default = PathResolver;
+module.exports = exports['default'];

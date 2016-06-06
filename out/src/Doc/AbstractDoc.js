@@ -1130,3 +1130,4 @@ var AbstractDoc = function () {
 }();
 
 exports.default = AbstractDoc;
+module.exports = exports['default'];

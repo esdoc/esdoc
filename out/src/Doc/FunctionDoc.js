@@ -117,3 +117,4 @@ var FunctionDoc = function (_AbstractDoc) {
 }(_AbstractDoc3.default);
 
 exports.default = FunctionDoc;
+module.exports = exports['default'];

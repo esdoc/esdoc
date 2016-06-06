@@ -214,3 +214,4 @@ var TestDocBuilder = function (_DocBuilder) {
 }(_DocBuilder3.default);
 
 exports.default = TestDocBuilder;
+module.exports = exports['default'];

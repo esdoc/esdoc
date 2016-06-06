@@ -103,3 +103,4 @@ var FileDoc = function (_AbstractDoc) {
 }(_AbstractDoc3.default);
 
 exports.default = FileDoc;
+module.exports = exports['default'];

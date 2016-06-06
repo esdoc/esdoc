@@ -100,3 +100,4 @@ var FileDocBuilder = function (_DocBuilder) {
 }(_DocBuilder3.default);
 
 exports.default = FileDocBuilder;
+module.exports = exports['default'];

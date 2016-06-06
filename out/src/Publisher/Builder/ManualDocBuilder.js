@@ -338,3 +338,4 @@ var ManualDocBuilder = function (_DocBuilder) {
 }(_DocBuilder3.default);
 
 exports.default = ManualDocBuilder;
+module.exports = exports['default'];

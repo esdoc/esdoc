@@ -120,3 +120,4 @@ var IndexDocBuilder = function (_DocBuilder) {
 }(_DocBuilder3.default);
 
 exports.default = IndexDocBuilder;
+module.exports = exports['default'];

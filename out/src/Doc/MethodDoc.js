@@ -8,9 +8,9 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-var _escodegen = require('escodegen');
+var _babelGenerator = require('babel-generator');
 
-var _escodegen2 = _interopRequireDefault(_escodegen);
+var _babelGenerator2 = _interopRequireDefault(_babelGenerator);
 
 var _AbstractDoc2 = require('./AbstractDoc.js');
 
@@ -79,8 +79,8 @@ var MethodDoc = function (_AbstractDoc) {
       // this condition is not needed with acorn.
       // see https://github.com/esdoc/esdoc/issues/107
       if (this._node.computed || !this._node.key.name) {
-        var expression = _escodegen2.default.generate(this._node.key);
-        this._value.name = '[' + expression + ']';
+        var result = (0, _babelGenerator2.default)(this._node.key);
+        this._value.name = '[' + result.code + ']';
       } else {
         this._value.name = this._node.key.name;
       }
@@ -116,7 +116,7 @@ var MethodDoc = function (_AbstractDoc) {
 
       if (['set', 'get'].includes(this._value.kind)) return;
 
-      this._value.params = _ParamParser2.default.guessParams(this._node.value.params);
+      this._value.params = _ParamParser2.default.guessParams(this._node.params);
     }
 
     /** if @type is not exists, guess type by using self node. only ``get`` and ``set`` are guess. */
@@ -132,7 +132,7 @@ var MethodDoc = function (_AbstractDoc) {
           this._value.type = _ParamParser2.default.guessType(this._node.right);
           break;
         case 'get':
-          var result = _ParamParser2.default.guessReturnParam(this._node.value.body);
+          var result = _ParamParser2.default.guessReturnParam(this._node.body);
           if (result) this._value.type = result;
           break;
       }
@@ -148,7 +148,7 @@ var MethodDoc = function (_AbstractDoc) {
 
       if (['constructor', 'set', 'get'].includes(this._value.kind)) return;
 
-      var result = _ParamParser2.default.guessReturnParam(this._node.value.body);
+      var result = _ParamParser2.default.guessReturnParam(this._node.body);
       if (result) {
         this._value.return = result;
       }
@@ -162,7 +162,7 @@ var MethodDoc = function (_AbstractDoc) {
       _get(Object.getPrototypeOf(MethodDoc.prototype), '@_generator', this).call(this);
       if ('generator' in this._value) return;
 
-      this._value.generator = this._node.value.generator;
+      this._value.generator = this._node.generator;
     }
   }]);
 
@@ -170,3 +170,4 @@ var MethodDoc = function (_AbstractDoc) {
 }(_AbstractDoc3.default);
 
 exports.default = MethodDoc;
+module.exports = exports['default'];

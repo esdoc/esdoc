@@ -158,3 +158,4 @@ var ExternalDoc = function (_AbstractDoc) {
 }(_AbstractDoc3.default);
 
 exports.default = ExternalDoc;
+module.exports = exports['default'];

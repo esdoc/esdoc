@@ -487,3 +487,4 @@ var ClassDocBuilder = function (_DocBuilder) {
 }(_DocBuilder3.default);
 
 exports.default = ClassDocBuilder;
+module.exports = exports['default'];

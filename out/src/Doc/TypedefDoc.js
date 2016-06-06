@@ -170,3 +170,4 @@ var TypedefDoc = function (_AbstractDoc) {
 }(_AbstractDoc3.default);
 
 exports.default = TypedefDoc;
+module.exports = exports['default'];

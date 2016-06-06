@@ -1505,3 +1505,4 @@ var DocBuilder = function () {
 }();
 
 exports.default = DocBuilder;
+module.exports = exports['default'];

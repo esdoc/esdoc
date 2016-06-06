@@ -50,3 +50,4 @@ var NamingUtil = function () {
 }();
 
 exports.default = NamingUtil;
+module.exports = exports['default'];

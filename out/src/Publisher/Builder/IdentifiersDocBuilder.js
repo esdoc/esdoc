@@ -88,3 +88,4 @@ var IdentifiersDocBuilder = function (_DocBuilder) {
 }(_DocBuilder3.default);
 
 exports.default = IdentifiersDocBuilder;
+module.exports = exports['default'];

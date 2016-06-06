@@ -68,3 +68,4 @@ var StaticFileBuilder = function (_DocBuilder) {
 }(_DocBuilder3.default);
 
 exports.default = StaticFileBuilder;
+module.exports = exports['default'];

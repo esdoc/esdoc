@@ -170,3 +170,4 @@ var TestDoc = function (_AbstractDoc) {
 }(_AbstractDoc3.default);
 
 exports.default = TestDoc;
+module.exports = exports['default'];

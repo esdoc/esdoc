@@ -108,3 +108,4 @@ var VariableDoc = function (_AbstractDoc) {
 }(_AbstractDoc3.default);
 
 exports.default = VariableDoc;
+module.exports = exports['default'];

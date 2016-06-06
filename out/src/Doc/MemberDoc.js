@@ -80,7 +80,7 @@ var MemberDoc = function (_AbstractDoc) {
 
       var parent = this._node.parent;
       while (parent) {
-        if (parent.type === 'MethodDefinition') {
+        if (parent.type === 'ClassMethod') {
           this._value.static = parent.static;
           break;
         }
@@ -162,3 +162,4 @@ var MemberDoc = function (_AbstractDoc) {
 }(_AbstractDoc3.default);
 
 exports.default = MemberDoc;
+module.exports = exports['default'];

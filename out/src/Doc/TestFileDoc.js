@@ -44,3 +44,4 @@ var TestFileDoc = function (_FileDoc) {
 }(_FileDoc3.default);
 
 exports.default = TestFileDoc;
+module.exports = exports['default'];

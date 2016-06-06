@@ -198,3 +198,4 @@ function publish(values, asts, config) {
     new _LintDocBuilder2.default(data, config).exec();
   }
 };
+module.exports = exports['default'];

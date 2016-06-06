@@ -281,3 +281,4 @@ var ClassDoc = function (_AbstractDoc) {
 }(_AbstractDoc3.default);
 
 exports.default = ClassDoc;
+module.exports = exports['default'];

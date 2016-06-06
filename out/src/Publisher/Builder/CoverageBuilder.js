@@ -115,3 +115,4 @@ var CoverageBuilder = function (_DocBuilder) {
 }(_DocBuilder3.default);
 
 exports.default = CoverageBuilder;
+module.exports = exports['default'];

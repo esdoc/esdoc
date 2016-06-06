@@ -80,7 +80,7 @@ var CommentParser = function () {
   }, {
     key: 'isESDoc',
     value: function isESDoc(commentNode) {
-      if (commentNode.type !== 'Block') return false;
+      if (commentNode.type !== 'CommentBlock') return false;
       return commentNode.value.charAt(0) === '*';
     }
   }]);
@@ -89,3 +89,4 @@ var CommentParser = function () {
 }();
 
 exports.default = CommentParser;
+module.exports = exports['default'];

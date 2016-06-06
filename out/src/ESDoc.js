@@ -492,3 +492,4 @@ var ESDoc = function () {
 }();
 
 exports.default = ESDoc;
+module.exports = exports['default'];

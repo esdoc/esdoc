@@ -852,3 +852,4 @@ var DocResolver = function () {
 }();
 
 exports.default = DocResolver;
+module.exports = exports['default'];

@@ -14,6 +14,10 @@ var _CommentParser = require('../Parser/CommentParser.js');
 
 var _CommentParser2 = _interopRequireDefault(_CommentParser);
 
+var _ParamParser = require('../Parser/ParamParser.js');
+
+var _ParamParser2 = _interopRequireDefault(_ParamParser);
+
 var _FileDoc = require('../Doc/FileDoc.js');
 
 var _FileDoc2 = _interopRequireDefault(_FileDoc);
@@ -93,7 +97,7 @@ var DocFactory = function () {
   function DocFactory(ast, pathResolver) {
     _classCallCheck(this, DocFactory);
 
-    this._ast = ast;
+    this._ast = Array.isArray(ast.body) ? ast : ast.program;
     this._pathResolver = pathResolver;
     this._results = [];
     this._processedClassNodes = [];
@@ -102,15 +106,31 @@ var DocFactory = function () {
     this._inspectExportNamedDeclaration();
 
     // file doc
-    var doc = new _FileDoc2.default(ast, ast, pathResolver, []);
+    var doc = new _FileDoc2.default(this._ast, this._ast, pathResolver, []);
     this._results.push(doc.value);
 
     // ast does not child, so only comment.
-    if (ast.body.length === 0 && (ast.leadingComments || ast.trailingComments)) {
-      var _results;
+    if (this._ast.body.length === 0) {
+      if (this._ast.leadingComments) {
+        var _results;
 
-      var results = this._traverseComments(ast, null, ast.leadingComments || ast.trailingComments);
-      (_results = this._results).push.apply(_results, _toConsumableArray(results));
+        var results = this._traverseComments(this._ast, null, this._ast.leadingComments);
+        (_results = this._results).push.apply(_results, _toConsumableArray(results));
+      }
+
+      if (this._ast.trailingComments) {
+        var _results3;
+
+        var _results2 = this._traverseComments(this._ast, null, this._ast.trailingComments);
+        (_results3 = this._results).push.apply(_results3, _toConsumableArray(_results2));
+      }
+
+      if (this._ast.innerComments) {
+        var _results5;
+
+        var _results4 = this._traverseComments(this._ast, null, this._ast.innerComments);
+        (_results5 = this._results).push.apply(_results5, _toConsumableArray(_results4));
+      }
     }
   }
 
@@ -430,10 +450,9 @@ var DocFactory = function () {
   }, {
     key: 'push',
     value: function push(node, parentNode) {
-      var _results2;
+      var _results6;
 
       if (node === this._ast) return;
-
       if (node[already]) return;
 
       var isLastNodeInParent = this._isLastNodeInParent(node, parentNode);
@@ -452,15 +471,15 @@ var DocFactory = function () {
 
       var results = void 0;
       results = this._traverseComments(parentNode, node, node.leadingComments);
-      (_results2 = this._results).push.apply(_results2, _toConsumableArray(results));
+      (_results6 = this._results).push.apply(_results6, _toConsumableArray(results));
 
       // for trailing comments.
       // traverse with only last node, because prevent duplication of trailing comments.
       if (node.trailingComments && isLastNodeInParent) {
-        var _results3;
+        var _results7;
 
         results = this._traverseComments(parentNode, null, node.trailingComments);
-        (_results3 = this._results).push.apply(_results3, _toConsumableArray(results));
+        (_results7 = this._results).push.apply(_results7, _toConsumableArray(results));
       }
     }
 
@@ -485,7 +504,8 @@ var DocFactory = function () {
       // hack: leadingComment of MethodDefinition with Literal is not valid by espree(v2.0.2)
       //if (node.type === 'MethodDefinition' && node.key.type === 'Literal') {
       // todo: switch espree to acorn
-      if (node.type === 'MethodDefinition' && (node.computed || !node.key.name)) {
+      //TODO REMOVE    if (node.type === 'ClassMethod' && (node.computed || !node.key.name)) {
+      if (node.type === 'ClassMethod' && _ParamParser2.default.isLiteral(node.key.type)) {
         var line = node.loc.start.line - 1;
         var _iteratorNormalCompletion5 = true;
         var _didIteratorError5 = false;
@@ -549,7 +569,7 @@ var DocFactory = function () {
       }
 
       if (comments.length === 0) {
-        comments = [{ type: 'Block', value: '* @_undocument' }];
+        comments = [{ type: 'CommentBlock', value: '* @_undocument' }];
       }
 
       var results = [];
@@ -700,7 +720,7 @@ var DocFactory = function () {
       switch (node.type) {
         case 'ClassDeclaration':
           return this._decideClassDeclarationType(node);
-        case 'MethodDefinition':
+        case 'ClassMethod':
           return this._decideMethodDefinitionType(node);
         case 'ExpressionStatement':
           return this._decideExpressionStatementType(node);
@@ -1019,3 +1039,4 @@ var DocFactory = function () {
 }();
 
 exports.default = DocFactory;
+module.exports = exports['default'];

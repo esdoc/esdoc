@@ -33,3 +33,4 @@ var ASTNodeContainer = function () {
 }();
 
 exports.default = new ASTNodeContainer();
+module.exports = exports["default"];

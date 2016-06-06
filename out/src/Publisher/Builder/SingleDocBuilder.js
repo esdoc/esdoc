@@ -111,3 +111,4 @@ var SingleDocBuilder = function (_DocBuilder) {
 }(_DocBuilder3.default);
 
 exports.default = SingleDocBuilder;
+module.exports = exports['default'];
