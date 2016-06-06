@@ -8,11 +8,13 @@ describe('Coverage:', ()=> {
   it('has coverage.json', ()=>{
     let json = fs.readFileSync('./test/fixture/esdoc/coverage.json', {encoding: 'utf8'}).toString();
     let coverage = JSON.parse(json);
-    assert.equal(coverage.coverage, '89.79%');
-    assert.equal(coverage.expectCount, 147);
-    assert.equal(coverage.actualCount, 132);
+    assert.equal(coverage.coverage, '89.93%');
+    assert.equal(coverage.expectCount, 149);
+    assert.equal(coverage.actualCount, 134);
+console.log('!! coverage.files: ' + JSON.stringify(coverage.files));
+
     assert.deepEqual(coverage.files, {
-      "src/ForTestDoc/AbstractDoc.js": {
+      "src\/ForTestDoc\/AbstractDoc.js": {
         "expectCount": 3,
         "actualCount": 0,
         "undocumentLines": [
@@ -21,14 +23,14 @@ describe('Coverage:', ()=> {
           4
         ]
       },
-      "src/ForTestDoc/ClassDoc.js": {
+      "src\/ForTestDoc\/ClassDoc.js": {
         "expectCount": 1,
         "actualCount": 0,
         "undocumentLines": [
           3
         ]
       },
-      "src/ForTestDoc/ClassDocBuilder.js": {
+      "src\/ForTestDoc\/ClassDocBuilder.js": {
         "expectCount": 2,
         "actualCount": 0,
         "undocumentLines": [
@@ -36,7 +38,7 @@ describe('Coverage:', ()=> {
           2
         ]
       },
-      "src/MyClass.js": {
+      "src\/MyClass.js": {
         "expectCount": 43,
         "actualCount": 38,
         "undocumentLines": [
@@ -47,67 +49,98 @@ describe('Coverage:', ()=> {
           146
         ]
       },
-      "src/MyError.js": {
+      "src\/MyError.js": {
         "expectCount": 1,
         "actualCount": 1,
-        "undocumentLines": []
+        "undocumentLines": [
+
+        ]
       },
-      "src/MyEvent.js": {
+      "src\/MyEvent.js": {
         "expectCount": 1,
         "actualCount": 1,
-        "undocumentLines": []
+        "undocumentLines": [
+
+        ]
       },
-      "src/Export.js": {
+      "src\/Export.js": {
         "expectCount": 24,
         "actualCount": 24,
-        "undocumentLines": []
+        "undocumentLines": [
+
+        ]
       },
-      "src/MyExpressionExtend.js": {
+      "src\/MyExpressionExtend.js": {
         "expectCount": 2,
         "actualCount": 2,
-        "undocumentLines": []
+        "undocumentLines": [
+
+        ]
       },
-      "src/MyInterface.js": {
+      "src\/MyInterface.js": {
         "expectCount": 3,
         "actualCount": 3,
-        "undocumentLines": []
+        "undocumentLines": [
+
+        ]
       },
-      "src/ExtendNest.js": {
+      "src\/ExtendNest.js": {
         "expectCount": 2,
         "actualCount": 2,
-        "undocumentLines": []
+        "undocumentLines": [
+
+        ]
       },
-      "src/ReactJSX.js": {
+      "src\/ReactJSX.js": {
         "expectCount": 2,
         "actualCount": 2,
-        "undocumentLines": []
+        "undocumentLines": [
+
+        ]
       },
-      "src/OtherClass/SuperMyClass.js": {
+      "src\/OtherClass\/SuperMyClass.js": {
         "expectCount": 19,
         "actualCount": 19,
-        "undocumentLines": []
+        "undocumentLines": [
+
+        ]
       },
-      "src/Z001_MyDuplicationPropertyClass.js": {
+      "src\/UnknownSyntax.js": {
+        "expectCount": 2,
+        "actualCount": 2,
+        "undocumentLines": [
+
+        ]
+      },
+      "src\/Z001_MyDuplicationPropertyClass.js": {
         "expectCount": 5,
         "actualCount": 5,
-        "undocumentLines": []
+        "undocumentLines": [
+
+        ]
       },
-      "src/Z002_MyComputedMethodClass.js": {
+      "src\/Z002_MyComputedMethodClass.js": {
         "expectCount": 11,
         "actualCount": 11,
-        "undocumentLines": []
+        "undocumentLines": [
+
+        ]
       },
-      "src/nMyAnonymous.js": {
+      "src\/Z003_MyInvalidLintClass.js": {
+        "expectCount": 5,
+        "actualCount": 5,
+        "undocumentLines": [
+
+        ]
+      },
+      "src\/nMyAnonymous.js": {
         "expectCount": 4,
         "actualCount": 4,
-        "undocumentLines": []
+        "undocumentLines": [
+
+        ]
       },
-      "src/Z003_MyInvalidLintClass.js": {
-        "actualCount": 5,
-        "expectCount": 5,
-        "undocumentLines": []
-      },
-      "src/myFunction.js": {
+      "src\/myFunction.js": {
         "expectCount": 11,
         "actualCount": 9,
         "undocumentLines": [
@@ -115,7 +148,7 @@ describe('Coverage:', ()=> {
           55
         ]
       },
-      "src/myVariable.js": {
+      "src\/myVariable.js": {
         "expectCount": 8,
         "actualCount": 6,
         "undocumentLines": [
