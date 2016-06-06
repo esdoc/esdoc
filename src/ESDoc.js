@@ -276,10 +276,7 @@ export default class ESDoc {
       }
     });
 
-//    if (typeof factory === 'undefined') { console.log('!! esdoc - _traverse err - filePath: ' + filePath); }
-
-    //return {results: factory.results, ast: ast};
-    return typeof factory !== 'undefined' ? {results: factory.results, ast: ast} : undefined;
+    return {results: factory.results, ast: ast};
   }
 
   /**

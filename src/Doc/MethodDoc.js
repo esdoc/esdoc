@@ -36,8 +36,8 @@ export default class MethodDoc extends AbstractDoc {
     // this condition is not needed with acorn.
     // see https://github.com/esdoc/esdoc/issues/107
     if (this._node.computed || !this._node.key.name) {
-      const expression = generate(this._node.key);
-      this._value.name = `[${expression}]`;
+      const result = generate(this._node.key);
+      this._value.name = `[${result.code}]`;
     } else {
       this._value.name = this._node.key.name;
     }
