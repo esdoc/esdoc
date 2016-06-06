@@ -22,8 +22,8 @@ describe('Identifiers:', ()=> {
   /** @test {IdentifiersDocBuilder#_buildIdentifierDoc} */
   it('has function summary.', ()=>{
     find(doc, '[data-ice="functionSummary"]', (doc)=>{
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(1)', 'public myFunction1() this is myFunction1 desc.');
-      assert.includes(doc, '[data-ice="target"]:nth-of-type(5)', 'public myFunction5(p1: number, p2: string): Object this is myFunction5 desc.');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(2)', 'public myFunction1() this is myFunction1 desc.');
+      assert.includes(doc, '[data-ice="target"]:nth-of-type(6)', 'public myFunction5(p1: number, p2: string): Object this is myFunction5 desc.');
     });
   });
 
