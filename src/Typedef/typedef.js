@@ -48,6 +48,7 @@
  * @typedef {Object} AST
  * @property {Object} body
  * @property {Object[]} leadingComments
+ * @property {Object[]} trailingComments
  * @see https://github.com/estree/estree
  */
 

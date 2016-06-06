@@ -1,44 +1,42 @@
 {
   "name": "esdoc",
-  "version": "0.4.7",
+  "version": "0.5.0-alpha",
   "description": "Documentation Generator For JavaScript(ES6)",
   "author": "h13i32maru",
   "homepage": "https://esdoc.org/",
-  "license": "MIT",
+  "license": "MPL-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/esdoc/esdoc"
+    "url": "https://github.com/typhonjs-node-esdoc/esdoc.git"
   },
+  "maintainers": [
+    {
+      "name": "Mike Leahy",
+      "email": "support@typhonjs.io",
+      "url": "https://github.com/typhonrt"
+    }
+  ],
   "scripts": {
-    "build": "node ./script/build.js",
-    "test": "node ./script/test.js",
-    "test-es5": "node ./script/test-es5.js",
-    "esdoc": "node ./script/esdoc.js",
-    "docpad": "node ./script/docpad.js",
-    "start": "node ./script/server.js"
+    "build": "babel-node ./node_modules/typhonjs-npm-scripts-build-babel/scripts/build.js",
+    "esdoc": "babel-node ./src/ESDocCLI.js -c .esdocrc",
+    "test": "babel-node ./node_modules/typhonjs-npm-scripts-test-mocha/scripts/mocha.js",
+    "test-coverage": "babel-node ./node_modules/typhonjs-npm-scripts-test-mocha/scripts/mocha-istanbul.js"
   },
   "dependencies": {
-    "cheerio": "0.19.0",
-    "color-logger": "0.0.3",
-    "core-js": "0.9.18",
-    "escape-html": "1.0.2",
-    "escodegen": "1.7.0",
-    "espree": "2.2.0",
-    "estraverse": "4.1.0",
-    "fs-extra": "0.26.5",
-    "ice-cap": "0.0.4",
-    "marked": "0.3.5",
-    "minimist": "1.1.1",
-    "taffydb": "2.7.2"
+    "babylon": "^6.0.0",
+    "babel-generator": "^6.0.0",
+    "cheerio": "^0.20.0",
+    "color-logger": "^0.0.6",
+    "escape-html": "^1.0.0",
+    "fs-extra": "^0.30.0",
+    "ice-cap": "^0.0.4",
+    "marked": "^0.3.0",
+    "minimist": "^1.0.0",
+    "taffydb": "^2.0.0",
+    "typhonjs-ast-walker": "^0.1.0"
   },
   "devDependencies": {
-    "babel": "5.6.14",
-    "coveralls": "2.11.2",
-    "docpad": "6.78.1",
-    "esdoc-importpath-plugin": "0.0.1",
-    "http-server": "0.8.0",
-    "istanbul": "0.3.16",
-    "mocha": "2.2.5"
+    "typhonjs-npm-build-test": "^0.3.0"
   },
   "keywords": [
     "jsdoc",
@@ -51,7 +49,7 @@
   ],
   "files": [
     "out/src",
-    "README.md"
+    "src"
   ],
   "main": "out/src/ESDoc.js",
   "bin": {

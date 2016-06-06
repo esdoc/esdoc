@@ -1,0 +1,25 @@
+{
+  "source": "src",
+  "destination": "docs",
+  "excludes": ["Publisher/Builder/template/", "BuiltinExternal/"],
+  "access": ["public", "protected", "private"],
+  "debug": false,
+  "index": "./README.md",
+  "package": "./package.json",
+  "title": "ESDoc",
+  "test": {
+    "type": "mocha",
+    "source": "./test/src"
+  },
+  "manual": {
+    "asset": "./manual/asset",
+    "overview": ["./manual/overview.md", "./manual/feature.md"],
+    "installation": ["./manual/installation.md"],
+    "usage": ["./manual/usage.md", "./manual/api.md"],
+    "tutorial": ["./manual/tutorial.md"],
+    "configuration": ["./manual/configuration.md"],
+    "example": ["./manual/example.md"],
+    "faq": ["./manual/faq.md"],
+    "changelog": ["./CHANGELOG.md"]
+  }
+}

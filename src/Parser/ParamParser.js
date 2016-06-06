@@ -1,13 +1,29 @@
-import Logger from 'color-logger';
+import logger from 'color-logger';
 import assert from 'assert';
 import ASTUtil from '../Util/ASTUtil.js';
-
-let logger = new Logger('ParamParser');
 
 /**
  * Param Type Parser class.
  */
 export default class ParamParser {
+  /**
+   * Determines if a node type is a literal. Babylon defines specific literal nodes compared to ESTree generic
+   * `Literal`.
+   *
+   * @param {string}  type - Node type field.
+   */
+  static isLiteral(type) {
+    switch(type) {
+      case 'BooleanLiteral':
+      case 'DirectiveLiteral':
+      case 'NullLiteral':
+      case 'NumericLiteral':
+      case 'StringLiteral':
+        return true;
+    }
+
+    return false;
+  }
 
   /**
    * parse param value.
@@ -185,7 +201,7 @@ export default class ParamParser {
 
           result.optional = true;
 
-          if (param.right.type === 'Literal') {
+          if (ParamParser.isLiteral(param.right.type)) {
             // e.g. func(a = 10){}
             result.types = param.right.value === null ? ['*'] : [typeof param.right.value];
             result.defaultRaw = param.right.value;
@@ -275,7 +291,11 @@ export default class ParamParser {
       if (!node.argument) return;
 
       switch (node.argument.type) {
-        case 'Literal':
+        case 'BooleanLiteral':
+        case 'DirectiveLiteral':
+        case 'NullLiteral':
+        case 'NumericLiteral':
+        case 'StringLiteral':
           if (node.argument.value === null) {
             result.types = result.types || ['*'];
           } else {
@@ -304,7 +324,7 @@ export default class ParamParser {
    * @returns {ParsedParam}
    */
   static guessType(right) {
-    let value = right && right.type === 'Literal' ? right.value : null;
+    let value = right && ParamParser.isLiteral(right.type) ? right.value : null;
 
     if (value === null || value === undefined) {
       return {types: ['*']};

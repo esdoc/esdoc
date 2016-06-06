@@ -30,7 +30,7 @@ exports.onHandleCodeParser = function(ev) {
 
 exports.onHandleAST = function(ev) {
   callInfo.handlerNames.onHandleAST = ['MyPlugin1'];
-  ev.data.ast.body[0].declaration.id.name += '_ModifiedAST';
+  ev.data.ast.program.body[0].declaration.id.name += '_ModifiedAST';
 };
 
 exports.onHandleTag = function(ev) {

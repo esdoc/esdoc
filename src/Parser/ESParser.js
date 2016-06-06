@@ -1,7 +1,9 @@
-import fs from 'fs-extra';
-import path from 'path';
-import espree from 'espree';
-import Plugin from '../Plugin/Plugin.js';
+import * as babylon from 'babylon';
+import fs           from 'fs-extra';
+import path         from 'path';
+import Plugin       from '../Plugin/Plugin.js';
+
+const esmRegex = /(^\s*|[}\);\n]\s*)(import\s*(['"]|(\*\s+as\s+)?[^"'\(\)\n;]+\s*from\s*['"]|\{)|export\s+\*\s+from\s+["']|export\s* (\{|default|function|class|var|const|let|async\s+function))/;
 
 /**
  * ECMAScript Parser class.
@@ -18,51 +20,29 @@ export default class ESParser {
   static parse(filePath) {
     let code = fs.readFileSync(filePath, {encode: 'utf8'}).toString();
 
-    code = Plugin.onHandleCode(code);
+    code = Plugin.onHandleCode(code, filePath);
 
     if (code.charAt(0) === '#') {
       code = code.replace(/^#!/, '//');
     }
 
-    let option = {
-      comments: true,
-      attachComment: true,
-      loc: true,
-      ecmaFeatures: {
-        arrowFunctions: true,
-        blockBindings: true,
-        destructuring: true,
-        regexYFlag: true,
-        regexUFlag: true,
-        templateStrings: true,
-        binaryLiterals: true,
-        octalLiterals: true,
-        unicodeCodePointEscapes: true,
-        defaultParams: true,
-        restParams: true,
-        forOf: true,
-        objectLiteralComputedProperties: true,
-        objectLiteralShorthandMethods: true,
-        objectLiteralShorthandProperties: true,
-        objectLiteralDuplicateProperties: true,
-        generators: true,
-        spread: true,
-        classes: true,
-        modules: true,
-        jsx: true,
-        globalReturn: true
-      }
+    let option =
+    {
+      plugins: ['asyncFunctions', 'asyncGenerators', 'classConstructorCall', 'classProperties', 'decorators',
+       'doExpressions', 'exportExtensions', 'exponentiationOperator', 'flow', 'functionBind', 'functionSent',
+        'jsx', 'objectRestSpread', 'trailingFunctionCommas']
     };
 
     let parser = (code) => {
-      return espree.parse(code, option);
+      option.sourceType = esmRegex.test(code) ? 'module' : 'script';
+      return babylon.parse(code, option);
     };
 
-    parser = Plugin.onHandleCodeParser(parser);
+    parser = Plugin.onHandleCodeParser(parser, option, filePath, code);
 
     let ast = parser(code);
 
-    ast = Plugin.onHandleAST(ast);
+    ast = Plugin.onHandleAST(ast, filePath, code);
 
     return ast;
   }

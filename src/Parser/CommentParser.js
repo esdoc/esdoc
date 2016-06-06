@@ -59,7 +59,7 @@ export default class CommentParser {
    * @returns {boolean} if true, this comment node is doc comment.
    */
   static isESDoc(commentNode) {
-    if (commentNode.type !== 'Block') return false;
+    if (commentNode.type !== 'CommentBlock') return false;
     return commentNode.value.charAt(0) === '*';
   }
 }

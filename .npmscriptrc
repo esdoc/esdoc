@@ -1,0 +1,33 @@
+/**
+ * You can provide comments in `.npmscriptrc`
+ */
+{
+   "build":
+   {
+      "babel": { "source": "src", "destination": "out/src" },
+
+      // Copy templates
+      "copy": [{ "source": "./src/Publisher/Builder/template", "destination": "./out/src/Publisher/Builder/template/" }],
+
+      // chmod the CLI entry point to executable.
+      "chmod": [{ "path": "./out/src/ESDocCLI.js", "mode": "755" }]
+   },
+
+   "publish":
+   {
+      "prepublish": { "scripts": ["npm run test", "npm run build"] }
+   },
+
+   "test":
+   {
+      // Provides a `coverage` handling command that is appended when running on Travis CI.
+      "travis":
+      {
+         "istanbul": { "command": "cover", "options": ["--report lcovonly"] },
+         "report": "./node_modules/.bin/codecov"
+      },
+
+      "istanbul": { "command": "cover", "options": ["--include-all-sources --root src -x '**/template/**'"] },
+      "mocha": { "source": "./test/src", "options": ["--compilers js:babel-register", "-t 120000 --recursive"] }
+   }
+}

@@ -1,5 +1,6 @@
-import Logger from 'color-logger';
+import logger from 'color-logger';
 import CommentParser from '../Parser/CommentParser.js';
+import ParamParser from '../Parser/ParamParser.js';
 import FileDoc from '../Doc/FileDoc.js';
 import ClassDoc from '../Doc/ClassDoc.js';
 import MethodDoc from '../Doc/MethodDoc.js';
@@ -12,7 +13,6 @@ import ExternalDoc from '../Doc/ExternalDoc.js';
 import ASTUtil from '../Util/ASTUtil.js';
 
 let already = Symbol('already');
-let logger = new Logger('DocFactory');
 
 /**
  * Doc factory class.
@@ -36,7 +36,7 @@ export default class DocFactory {
    * @param {PathResolver} pathResolver - path resolver of source code.
    */
   constructor(ast, pathResolver) {
-    this._ast = ast;
+    this._ast = Array.isArray(ast.body) ? ast : ast.program;
     this._pathResolver = pathResolver;
     this._results = [];
     this._processedClassNodes = [];
@@ -45,13 +45,25 @@ export default class DocFactory {
     this._inspectExportNamedDeclaration();
 
     // file doc
-    let doc = new FileDoc(ast, ast, pathResolver, []);
+    let doc = new FileDoc(this._ast, this._ast, pathResolver, []);
     this._results.push(doc.value);
 
     // ast does not child, so only comment.
-    if (ast.body.length === 0 && ast.leadingComments) {
-      let results = this._traverseComments(ast, null, ast.leadingComments);
-      this._results.push(...results);
+    if (this._ast.body.length === 0) {
+      if (this._ast.leadingComments) {
+        let results = this._traverseComments(this._ast, null, this._ast.leadingComments);
+        this._results.push(...results);
+      }
+
+      if (this._ast.trailingComments) {
+        let results = this._traverseComments(this._ast, null, this._ast.trailingComments);
+        this._results.push(...results);
+      }
+
+      if (this._ast.innerComments) {
+        let results = this._traverseComments(this._ast, null, this._ast.innerComments);
+        this._results.push(...results);
+      }
     }
   }
 
@@ -271,7 +283,6 @@ export default class DocFactory {
    */
   push(node, parentNode) {
     if (node === this._ast) return;
-
     if (node[already]) return;
 
     let isLastNodeInParent = this._isLastNodeInParent(node, parentNode);
@@ -318,7 +329,8 @@ export default class DocFactory {
     // hack: leadingComment of MethodDefinition with Literal is not valid by espree(v2.0.2)
     //if (node.type === 'MethodDefinition' && node.key.type === 'Literal') {
     // todo: switch espree to acorn
-    if (node.type === 'MethodDefinition' && (node.computed || !node.key.name)) {
+//TODO REMOVE    if (node.type === 'ClassMethod' && (node.computed || !node.key.name)) {
+    if (node.type === 'ClassMethod' && ParamParser.isLiteral(node.key.type)) {
       let line = node.loc.start.line - 1;
       for (let comment of this._ast.comments || []) {
         if (comment.loc.end.line === line) {
@@ -339,7 +351,7 @@ export default class DocFactory {
     }
 
     if (comments.length === 0) {
-      comments = [{type: 'Block', value: '* @_undocument'}];
+      comments = [{type: 'CommentBlock', value: '* @_undocument'}];
     }
 
     let results = [];
@@ -427,7 +439,7 @@ export default class DocFactory {
     switch (node.type) {
       case 'ClassDeclaration':
         return this._decideClassDeclarationType(node);
-      case 'MethodDefinition':
+      case 'ClassMethod':
         return this._decideMethodDefinitionType(node);
       case 'ExpressionStatement':
         return this._decideExpressionStatementType(node);

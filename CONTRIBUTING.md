@@ -2,36 +2,30 @@
 
 ## Setup
 ```
-git clone git@github.com:h13i32maru/esdoc.git
+git clone https://github.com/typhonjs-node-esdoc/esdoc.git
 cd esdoc
 npm install
 ```
 
 ## Running Tests
-Quick run tests(ES6 on the fly over babel).
+Just the tests:
 ```
 npm run test
 ```
 
-Build ES6 to ES5 and run tests.
+Runs test w/ coverage:
 ```
-npm run test-es5
-```
-
-You can see output documentation after runt tests.
-```
-# see http://localhost:8080/test/fixture/esdoc
-npm run start
+npm run test-coverage
 ```
 
 ## Install From Head
 Install ESDoc from head revision.
 
 ```
-git clone git@github.com:h13i32maru/esdoc.git
+git clone https://github.com/typhonjs-node-esdoc/esdoc.git
 cd esdoc
 npm install
-npm run test-es5
+npm run test
 npm install -g ./
 esdoc -h
 ```
