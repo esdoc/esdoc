@@ -54,7 +54,13 @@ export default class ESDocCLI {
    * @private
    */
   _showHelp() {
-    console.log('usage: esdoc [-c esdoc.json]');
+    console.log('Usage: esdoc [-c esdoc.json]');
+    console.log('');
+    console.log('Options:');
+    console.log('  -c', 'create the documents');
+    console.log('  -h', 'output usage information');
+    console.log('  -v', 'output the version number');
+    console.log('');
   }
 
   /**
