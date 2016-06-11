@@ -1,5 +1,9 @@
 # Changelog
 
+## Next
+- **Feat**
+  - Through more info to plugins ([#263](https://github.com/esdoc/esdoc/pull/263)) Thanks [@typhonrt](https://github.com/typhonrt)
+
 ## 0.4.7 (2016-05-02)
 - **Fix**
   - Broken if identifier name is stared with ``B`` ([#224](https://github.com/esdoc/esdoc/issues/224))
