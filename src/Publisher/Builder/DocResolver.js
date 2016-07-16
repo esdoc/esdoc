@@ -164,6 +164,12 @@ export default class DocResolver {
         }
       }
 
+      if (v.properties) {
+        for (let property of v.properties) {
+          property.description = link(property.description);
+        }
+      }
+
       if (v.return) {
         v.return.description = link(v.return.description);
       }
