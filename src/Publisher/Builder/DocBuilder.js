@@ -254,8 +254,8 @@ export default class DocBuilder {
     const allDocs = this._find({kind: kinds}).filter(v => !v.builtinExternal);
     const kindOrder = {class: 0, interface: 1, function: 2, variable: 3, typedef: 4, external: 5};
     allDocs.sort((a, b)=>{
-      const filePathA = a.longname.split('~')[0].replace('src/', '');
-      const filePathB = b.longname.split('~')[0].replace('src/', '');
+      const filePathA = a.longname.split('~')[0];
+      const filePathB = b.longname.split('~')[0];
       const dirPathA = path.dirname(filePathA);
       const dirPathB = path.dirname(filePathB);
       const kindA = a.interface ? 'interface' : a.kind;
