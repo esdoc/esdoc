@@ -39,12 +39,12 @@ describe('MyClass has foo bar feature', ()=>{
   "source": "./src",
   "destination": "./doc",
   "manual": {
-    "overview": "./manual/overview.md",
-    "installation": "./manual/installation.md",
-    "usage": "./manual/usage.md",
-    "example": "./manual/example.md",
-    "faq": "./manual/faq.md",
-    "changelog": "./CHANGELOG.md"
+    "overview": ["./manual/overview.md"],
+    "installation": ["./manual/installation.md"],
+    "usage": ["./manual/usage.md"],
+    "example": ["./manual/example.md"],
+    "faq": ["./manual/faq.md"],
+    "changelog": ["./CHANGELOG.md"]
   }
 }
 ```
