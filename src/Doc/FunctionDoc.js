@@ -1,6 +1,7 @@
 import AbstractDoc from './AbstractDoc.js';
 import ParamParser from '../Parser/ParamParser.js';
 import NamingUtil from '../Util/NamingUtil.js';
+import ASTUtil from '../Util/ASTUtil.js';
 
 /**
  * Doc Class from Function declaration AST node.
@@ -19,7 +20,11 @@ export default class FunctionDoc extends AbstractDoc {
     if (this._value.name) return;
 
     if (this._node.id) {
-      this._value.name = this._node.id.name;
+      if (this._node.id.type === 'MemberExpression') {
+        this._value.name = ASTUtil.flattenMemberExpression(this._node.id);
+      } else {
+        this._value.name = this._node.id.name;
+      }
     } else {
       this._value.name = NamingUtil.filePathToName(this._pathResolver.filePath);
     }
