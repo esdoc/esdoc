@@ -5,6 +5,7 @@
   - Through more info to plugins ([#263](https://github.com/esdoc/esdoc/pull/263)) Thanks [@typhonrt](https://github.com/typhonrt)
 - **Fix**
   - Not work ``@link`` at property description ([#246](https://github.com/esdoc/esdoc/issues/246))
+  - Crash when function name includes member expression ([#297](https://github.com/esdoc/esdoc/issues/297))
 
 ## 0.4.7 (2016-05-02)
 - **Fix**
