@@ -61,7 +61,7 @@ export default class ESDoc {
     let asts = [];
     let sourceDirPath = path.resolve(config.source);
 
-    this._walk(config.source, (filePath)=>{
+    const processFile = (filePath)=>{
       const relativeFilePath = path.relative(sourceDirPath, filePath);
       let match = false;
       for (let reg of includes) {
@@ -81,7 +81,13 @@ export default class ESDoc {
       results.push(...temp.results);
 
       asts.push({filePath: 'source' + path.sep + relativeFilePath, ast: temp.ast});
-    });
+    };
+
+    if (Array.isArray(config.files)) {
+      config.files.forEach(processFile);
+    } else {
+      this._walk(config.source, processFile);
+    }
 
     if (config.builtinExternal) {
       this._useBuiltinExternal(results);

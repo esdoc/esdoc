@@ -4,6 +4,7 @@
  * @property {!string} source - directory path of javascript source code.
  * @property {!string} destination - directory path of output.
  * @property {string} [title]
+ * @property {string[]} [files]
  * @property {string[]} [includes=["\\.(js|es6)$"]]
  * @property {string[]} [excludes=["\\.config\\.(js|es6)$"]]
  * @property {string[]} [access=["public", "protected"]]
