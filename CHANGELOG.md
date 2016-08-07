@@ -1,6 +1,6 @@
 # Changelog
 
-## Next
+## 0.4.8 (2016-08-07)
 - **Feat**
   - Through more info to plugins ([#263](https://github.com/esdoc/esdoc/pull/263)) Thanks [@typhonrt](https://github.com/typhonrt)
 - **Fix**
