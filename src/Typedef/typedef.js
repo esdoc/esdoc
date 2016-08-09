@@ -90,7 +90,7 @@
  * @typedef {Object} ESDocCLIArgv
  * @property {boolean} [h] - for help
  * @property {boolean} [help] - for help
- * @property {boolean [v] - for version
+ * @property {boolean} [v] - for version
  * @property {boolean} [version] - for version
  * @property {string} [c] - for config file path
  * @property {string[]} [_] - for source directory path
