@@ -7,7 +7,7 @@ var istanbulOption = ' cover --include-all-sources --root ./out/src/ -x "**/temp
 sh.exec('node ./script/build.js');
 
 if (process.env.TRAVIS) {
-  sh.exec('./node_modules/.bin/istanbul' + istanbulOption + ' && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js');
+  sh.exec('./node_modules/.bin/istanbul' + istanbulOption + ' && ./node_modules/.bin/codecov');
 } else {
   sh.exec('./node_modules/.bin/istanbul' + istanbulOption);
 }
