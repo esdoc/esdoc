@@ -49,8 +49,8 @@ export default class DocFactory {
     this._results.push(doc.value);
 
     // ast does not child, so only comment.
-    if (ast.body.length === 0 && ast.leadingComments) {
-      let results = this._traverseComments(ast, null, ast.leadingComments);
+    if (ast.program.body.length === 0 && ast.program.innerComments) {
+      let results = this._traverseComments(ast, null, ast.program.innerComments);
       this._results.push(...results);
     }
   }
@@ -86,7 +86,7 @@ export default class DocFactory {
   _inspectExportDefaultDeclaration() {
     let pseudoExportNodes = [];
 
-    for (let exportNode of this._ast.body) {
+    for (let exportNode of this._ast.program.body) {
       if (exportNode.type !== 'ExportDefaultDeclaration') continue;
 
       let targetClassName = null;
@@ -159,7 +159,7 @@ export default class DocFactory {
       }
     }
 
-    this._ast.body.push(...pseudoExportNodes);
+    this._ast.program.body.push(...pseudoExportNodes);
   }
 
   /**
@@ -186,7 +186,7 @@ export default class DocFactory {
   _inspectExportNamedDeclaration() {
     let pseudoExportNodes = [];
 
-    for (let exportNode of this._ast.body) {
+    for (let exportNode of this._ast.program.body) {
       if (exportNode.type !== 'ExportNamedDeclaration') continue;
 
       if (exportNode.declaration && exportNode.declaration.type === 'VariableDeclaration') {
@@ -261,7 +261,7 @@ export default class DocFactory {
       }
     }
 
-    this._ast.body.push(...pseudoExportNodes);
+    this._ast.program.body.push(...pseudoExportNodes);
   }
 
   /**
@@ -315,19 +315,6 @@ export default class DocFactory {
       node = virtualNode;
     }
 
-    // hack: leadingComment of MethodDefinition with Literal is not valid by espree(v2.0.2)
-    //if (node.type === 'MethodDefinition' && node.key.type === 'Literal') {
-    // todo: switch espree to acorn
-    if (node.type === 'MethodDefinition' && (node.computed || !node.key.name)) {
-      let line = node.loc.start.line - 1;
-      for (let comment of this._ast.comments || []) {
-        if (comment.loc.end.line === line) {
-          comments = [comment];
-          break;
-        }
-      }
-    }
-
     if (comments && comments.length) {
       let temp = [];
       for (let comment of comments) {
@@ -339,7 +326,7 @@ export default class DocFactory {
     }
 
     if (comments.length === 0) {
-      comments = [{type: 'Block', value: '* @_undocument'}];
+      comments = [{type: 'CommentBlock', value: '* @_undocument'}];
     }
 
     let results = [];
@@ -427,7 +414,7 @@ export default class DocFactory {
     switch (node.type) {
       case 'ClassDeclaration':
         return this._decideClassDeclarationType(node);
-      case 'MethodDefinition':
+      case 'ClassMethod': // for babylon
         return this._decideMethodDefinitionType(node);
       case 'ExpressionStatement':
         return this._decideExpressionStatementType(node);
@@ -449,7 +436,7 @@ export default class DocFactory {
    * @private
    */
   _decideClassDeclarationType(node) {
-    if (!this._isTopDepthInBody(node, this._ast.body)) return {type: null, node: null};
+    if (!this._isTopDepthInBody(node, this._ast.program.body)) return {type: null, node: null};
 
     return {type: 'Class', node: node};
   }
@@ -477,7 +464,7 @@ export default class DocFactory {
    * @private
    */
   _decideFunctionDeclarationType(node) {
-    if (!this._isTopDepthInBody(node, this._ast.body)) return {type: null, node: null};
+    if (!this._isTopDepthInBody(node, this._ast.program.body)) return {type: null, node: null};
 
     return {type: 'Function', node: node};
   }
@@ -489,7 +476,7 @@ export default class DocFactory {
    * @private
    */
   _decideExpressionStatementType(node) {
-    let isTop = this._isTopDepthInBody(node, this._ast.body);
+    let isTop = this._isTopDepthInBody(node, this._ast.program.body);
     Object.defineProperty(node.expression, 'parent', {value: node});
     node = node.expression;
     node[already] = true;
@@ -542,7 +529,7 @@ export default class DocFactory {
    * @private
    */
   _decideVariableType(node) {
-    if (!this._isTopDepthInBody(node, this._ast.body)) return {type: null, node: null};
+    if (!this._isTopDepthInBody(node, this._ast.program.body)) return {type: null, node: null};
 
     let innerType = null;
     let innerNode = null;
@@ -575,7 +562,7 @@ export default class DocFactory {
    * @private
    */
   _decideAssignmentType(node) {
-    if (!this._isTopDepthInBody(node, this._ast.body)) return {type: null, node: null};
+    if (!this._isTopDepthInBody(node, this._ast.program.body)) return {type: null, node: null};
 
     let innerType;
     let innerNode;

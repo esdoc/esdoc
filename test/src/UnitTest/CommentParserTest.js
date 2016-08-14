@@ -15,7 +15,7 @@ describe('CommentParser:', ()=>{
 * @tag4 tag4 value
 *
 `;
-    let comment = {type: 'Block', value: value};
+    let comment = {type: 'CommentBlock', value: value};
     let tags = CommentParser.parse(comment);
     assert.equal(tags.length, 5);
     assert.deepEqual(tags[0], {tagName: '@desc', tagValue: 'this is desc.'});
@@ -37,7 +37,7 @@ describe('CommentParser:', ()=>{
 \t* @tag4 tag4 value
 \t*
 `;
-    let comment = {type: 'Block', value: value};
+    let comment = {type: 'CommentBlock', value: value};
     let tags = CommentParser.parse(comment);
     assert.equal(tags.length, 5);
     assert.deepEqual(tags[0], {tagName: '@desc', tagValue: 'this is desc.'});
@@ -52,7 +52,7 @@ describe('CommentParser:', ()=>{
     let value = `\
 this is not doc comment.
 `;
-    let comment = {type: 'Block', value: value};
+    let comment = {type: 'CommentBlock', value: value};
     let tags = CommentParser.parse(comment);
     assert.equal(tags.length, 0);
   });
@@ -60,7 +60,7 @@ this is not doc comment.
   /** @test {CommentParser.parse} */
   it('return empty with line comment.', ()=>{
     let value = `this is line comment.`;
-    let comment = {type: 'Line', value: value};
+    let comment = {type: 'CommentLine', value: value};
     let tags = CommentParser.parse(comment);
     assert.equal(tags.length, 0);
   });

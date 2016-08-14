@@ -1,6 +1,6 @@
-import escodegen from 'escodegen';
 import AbstractDoc from './AbstractDoc.js';
 import ParamParser from '../Parser/ParamParser.js';
+import babelGenerator from 'babel-generator';
 
 /**
  * Doc Class from Method Definition AST node.
@@ -30,12 +30,8 @@ export default class MethodDoc extends AbstractDoc {
     AbstractDoc.prototype['@_name'].call(this);
     if (this._value.name) return;
 
-    // todo: espree parses ``*[foo.bar](){}`` as not computed.
-    // so, I hacked ``!this._node.key.name`` condition.
-    // this condition is not needed with acorn.
-    // see https://github.com/esdoc/esdoc/issues/107
-    if (this._node.computed || !this._node.key.name) {
-      const expression = escodegen.generate(this._node.key);
+    if (this._node.computed) {
+      const expression = babelGenerator(this._node.key).code;
       this._value.name = `[${expression}]`;
     } else {
       this._value.name = this._node.key.name;
@@ -66,7 +62,7 @@ export default class MethodDoc extends AbstractDoc {
 
     if (['set', 'get'].includes(this._value.kind)) return;
 
-    this._value.params = ParamParser.guessParams(this._node.value.params);
+    this._value.params = ParamParser.guessParams(this._node.params);
   }
 
   /** if @type is not exists, guess type by using self node. only ``get`` and ``set`` are guess. */
@@ -79,7 +75,7 @@ export default class MethodDoc extends AbstractDoc {
         this._value.type = ParamParser.guessType(this._node.right);
         break;
       case 'get':
-        let result = ParamParser.guessReturnParam(this._node.value.body);
+        let result = ParamParser.guessReturnParam(this._node.body);
         if (result) this._value.type = result;
         break;
     }
@@ -92,7 +88,7 @@ export default class MethodDoc extends AbstractDoc {
 
     if (['constructor', 'set', 'get'].includes(this._value.kind)) return;
 
-    let result = ParamParser.guessReturnParam(this._node.value.body);
+    let result = ParamParser.guessReturnParam(this._node.body);
     if (result) {
       this._value.return = result;
     }
@@ -103,6 +99,6 @@ export default class MethodDoc extends AbstractDoc {
     super['@_generator']();
     if ('generator' in this._value) return;
 
-    this._value.generator = this._node.value.generator;
+    this._value.generator = this._node.generator;
   }
 }

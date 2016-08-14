@@ -117,7 +117,7 @@ export default class ParamParser {
     else {
       result.types = [''];
     }
-    
+
     if (result.types.some(t => !t)) {
       throw new Error(`Empty Type found name=${paramName} desc=${paramDesc}`);
     }
@@ -185,7 +185,7 @@ export default class ParamParser {
 
           result.optional = true;
 
-          if (param.right.type === 'Literal') {
+          if (param.right.type.includes('Literal')) {
             // e.g. func(a = 10){}
             result.types = param.right.value === null ? ['*'] : [typeof param.right.value];
             result.defaultRaw = param.right.value;
@@ -274,7 +274,8 @@ export default class ParamParser {
 
       if (!node.argument) return;
 
-      switch (node.argument.type) {
+      const type = node.argument.type.includes('Literal') ? 'Literal' : node.argument.type;
+      switch (type) {
         case 'Literal':
           if (node.argument.value === null) {
             result.types = result.types || ['*'];
@@ -304,7 +305,7 @@ export default class ParamParser {
    * @returns {ParsedParam}
    */
   static guessType(right) {
-    let value = right && right.type === 'Literal' ? right.value : null;
+    let value = right && right.type.includes('Literal') ? right.value : null;
 
     if (value === null || value === undefined) {
       return {types: ['*']};

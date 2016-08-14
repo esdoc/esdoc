@@ -1,9 +1,4 @@
-import estraverse from 'estraverse';
-
-let ESTRAVERSE_KEYS = {
-  Super: [],
-  JSXElement: []
-};
+import babelTraverse from 'babel-traverse';
 
 /**
  * Utility for AST.
@@ -28,12 +23,11 @@ export default class ASTUtil {
    * @param {function(node: Object, parent: Object)} callback - this is called with each node.
    */
   static traverse(ast, callback) {
-    estraverse.traverse(ast, {
-      enter: function(node, parent) {
-        callback.call(this, node, parent);
-      },
-
-      keys: ESTRAVERSE_KEYS
+    babelTraverse(ast, {
+      noScope: true,
+      enter: function(path){
+        callback.call(this, path.node, path.parent);
+      }
     });
   }
 
@@ -47,20 +41,20 @@ export default class ASTUtil {
   static findPathInImportDeclaration(ast, name) {
     let path = null;
 
-    estraverse.traverse(ast, {
-      enter: function(node, parent) {
+    babelTraverse(ast, {
+      noScope: true,
+      enter: function(_path){
+        const node = _path.node;
         if (node.type !== 'ImportDeclaration') return;
 
         for (let spec of node.specifiers) {
           let localName = spec.local.name;
           if (localName === name) {
             path = node.source.value;
-            this.break();
+            _path.stop();
           }
         }
-      },
-
-      keys: ESTRAVERSE_KEYS
+      }
     });
 
     return path;
@@ -75,7 +69,7 @@ export default class ASTUtil {
   static findVariableDeclarationAndNewExpressionNode(name, ast) {
     if (!name) return null;
 
-    for (let node of ast.body) {
+    for (let node of ast.program.body) {
       if (node.type === 'VariableDeclaration' &&
         node.declarations[0].init &&
         node.declarations[0].init.type === 'NewExpression' &&
@@ -96,7 +90,7 @@ export default class ASTUtil {
   static findClassDeclarationNode(name, ast) {
     if (!name) return null;
 
-    for (let node of ast.body) {
+    for (let node of ast.program.body) {
       if (node.type === 'ClassDeclaration' && node.id.name === name) return node;
     }
 
@@ -112,7 +106,7 @@ export default class ASTUtil {
   static findFunctionDeclarationNode(name, ast) {
     if (!name) return null;
 
-    for (let node of ast.body) {
+    for (let node of ast.program.body) {
       if (node.type === 'FunctionDeclaration' && node.id.name === name) return node;
     }
 
@@ -128,7 +122,7 @@ export default class ASTUtil {
   static findVariableDeclarationNode(name, ast) {
     if (!name) return null;
 
-    for (let node of ast.body) {
+    for (let node of ast.program.body) {
       if (node.type === 'VariableDeclaration' && node.declarations[0].id.name === name) return node;
     }
 

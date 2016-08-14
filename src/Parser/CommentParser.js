@@ -12,7 +12,7 @@ export default class CommentParser {
    * parse comment to tags.
    * @param {ASTNode} commentNode - comment node.
    * @param {string} commentNode.value - comment body.
-   * @param {string} commentNode.type - Block or Line.
+   * @param {string} commentNode.type - CommentBlock or CommentLine.
    * @returns {Tag[]} parsed comment.
    */
   static parse(commentNode) {
@@ -59,7 +59,7 @@ export default class CommentParser {
    * @returns {boolean} if true, this comment node is doc comment.
    */
   static isESDoc(commentNode) {
-    if (commentNode.type !== 'Block') return false;
+    if (commentNode.type !== 'CommentBlock') return false;
     return commentNode.value.charAt(0) === '*';
   }
 }

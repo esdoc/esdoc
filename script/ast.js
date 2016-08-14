@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-require('babel/register');
-var ESParser = require('../src/Parser/ESParser.js');
+require('babel-register');
+var ESParser = require('../src/Parser/ESParser.js').default;
 var Plugin = require('../src/Plugin/Plugin.js').default;
 
 Plugin.init([]);

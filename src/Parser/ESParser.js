@@ -1,7 +1,7 @@
 import fs from 'fs-extra';
-import path from 'path';
 import espree from 'espree';
 import Plugin from '../Plugin/Plugin.js';
+import * as babylon from 'babylon';
 
 /**
  * ECMAScript Parser class.
@@ -16,6 +16,11 @@ export default class ESParser {
    * @returns {AST} AST of source code.
    */
   static parse(filePath) {
+    return this.parseWithBabylon(filePath);
+    // return this.parseWithEspree(filePath);
+  }
+
+  static parseWithEspree(filePath) {
     let code = fs.readFileSync(filePath, {encode: 'utf8'}).toString();
 
     code = Plugin.onHandleCode(code, filePath);
@@ -56,6 +61,29 @@ export default class ESParser {
 
     let parser = (code) => {
       return espree.parse(code, option);
+    };
+
+    parser = Plugin.onHandleCodeParser(parser, option, filePath, code);
+
+    let ast = parser(code);
+
+    ast = Plugin.onHandleAST(ast, filePath, code);
+
+    return ast;
+  }
+
+  static parseWithBabylon(filePath) {
+    let code = fs.readFileSync(filePath, {encode: 'utf8'}).toString();
+    code = Plugin.onHandleCode(code, filePath);
+    if (code.charAt(0) === '#') code = code.replace(/^#!/, '//');
+
+    const option = {
+      sourceType: 'module',
+      plugins: ['jsx']
+    };
+
+    let parser = (code) => {
+      return babylon.parse(code, option);
     };
 
     parser = Plugin.onHandleCodeParser(parser, option, filePath, code);
