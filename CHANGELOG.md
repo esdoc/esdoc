@@ -1,5 +1,11 @@
 # Changelog
 
+## Next
+- **Breaking**
+  - Require node v6 or later ([a5b37bd](https://github.com/esdoc/esdoc/commit/a5b37bd0c68304214185f765f617b1077bee81b7))
+- **Internal**
+  - Update to babel6 ([149914e](https://github.com/esdoc/esdoc/commit/149914e84cb3bb061f2bdf2e43af00178b131a9e))
+
 ## 0.4.8 (2016-08-07)
 - **Feat**
   - Through more info to plugins ([#263](https://github.com/esdoc/esdoc/pull/263)) Thanks [@typhonrt](https://github.com/typhonrt)
