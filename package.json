@@ -34,12 +34,12 @@
   "devDependencies": {
     "babel-register": "6.11.6",
     "babel-cli": "6.11.4",
-    "babel-preset-es2015": "6.13.2",
+    "babel-plugin-transform-es2015-modules-commonjs": "6.11.5",
     "coveralls": "2.11.2",
     "docpad": "6.78.1",
     "esdoc-importpath-plugin": "0.0.1",
     "http-server": "0.8.0",
-    "istanbul": "0.3.16",
+    "istanbul": "0.4.4",
     "mocha": "2.2.5"
   },
   "keywords": [
