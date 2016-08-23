@@ -10,6 +10,7 @@ import DocFactory from './Factory/DocFactory.js';
 import TestDocFactory from './Factory/TestDocFactory.js';
 import InvalidCodeLogger from './Util/InvalidCodeLogger.js';
 import Plugin from './Plugin/Plugin.js';
+import defaultPublisher from './Publisher/publish.js';
 
 let logger = new Logger('ESDoc');
 
@@ -28,7 +29,7 @@ export default class ESDoc {
    * @param {ESDocConfig} config - config for generation.
    * @param {function(results: Object[], asts: Object[], config: ESDocConfig)} publisher - callback for output html.
    */
-  static generate(config, publisher) {
+  static generate(config, publisher = defaultPublisher) {
     assert(typeof publisher === 'function');
     assert(config.source);
     assert(config.destination);
