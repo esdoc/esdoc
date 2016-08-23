@@ -47,14 +47,19 @@ export default class ESDoc {
     let packageName = null;
     let mainFilePath = null;
     if (config.package) {
-      try {
-        let packageJSON = fs.readFileSync(config.package, {encode: 'utf8'});
-        let packageConfig = JSON.parse(packageJSON);
-        packageName = packageConfig.name;
-        mainFilePath = packageConfig.main;
-      } catch (e) {
-        // ignore
+      let packageConfig;
+      if (typeof config.package === 'object') {
+        packageConfig = config.package;
+      } else {
+        try {
+          let packageJSON = fs.readFileSync(config.package, {encode: 'utf8'});
+          packageConfig = JSON.parse(packageJSON);
+        } catch (e) {
+          // ignore
+        }
       }
+      packageName = packageConfig.name;
+      mainFilePath = packageConfig.main;
     }
 
     let results = [];
