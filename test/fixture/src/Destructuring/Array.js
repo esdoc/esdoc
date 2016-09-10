@@ -2,7 +2,6 @@
  * this is TestDestructuringArray.
  */
 export default class TestDestructuringArray {
-  // fixme: invalid lint
   /**
    * this is method1.
    * @param {number[]} p - this is p.

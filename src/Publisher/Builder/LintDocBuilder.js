@@ -89,7 +89,7 @@ export default class LintDocBuilder extends DocBuilder {
    */
   _getParamsFromDoc(doc) {
     const params = doc.params || [];
-    return params.map(v => v.name).filter(v => !v.includes('.'));
+    return params.map(v => v.name).filter(v => !v.includes('.')).filter(v => !v.includes('['));
   }
 
   _match(codeParams, docParams) {
