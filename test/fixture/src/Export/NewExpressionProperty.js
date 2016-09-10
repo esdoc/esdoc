@@ -1,12 +1,12 @@
 /**
- * this is TestNewExpressionProperty.
+ * this is TestExportNewExpressionProperty.
  */
-class TestNewExpressionProperty {}
+class TestExportNewExpressionProperty {}
 
 const obj = {};
-obj.TestNewExpressionProperty = TestNewExpressionProperty;
+obj.TestExportNewExpressionProperty = TestExportNewExpressionProperty;
 
 /**
- * this is instance of TestNewExpressionProperty.
+ * this is instance of TestExportNewExpressionProperty.
  */
-export default new obj.TestNewExpressionProperty();
+export default new obj.TestExportNewExpressionProperty();

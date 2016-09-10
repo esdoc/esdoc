@@ -6,4 +6,4 @@ class TestExportExtendsInner {}
 /**
  * this is TestExportExtends.
  */
-export class TestExportExtends extends  TestExportExtendsInner {}
+export class TestExportExtends extends TestExportExtendsInner {}

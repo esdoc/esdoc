@@ -42,4 +42,4 @@ export {testExportVariable7};
  * this is testExportVariable8 with unknown type.
  * @see https://github.com/esdoc/esdoc/issues/75
  */
-const testExportVariable8 = new foo.Bar();
+export const testExportVariable8 = new foo.Bar();
