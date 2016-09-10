@@ -4,7 +4,7 @@ import {readDoc, assert, find} from './../util.js';
 describe('ASTUtil:', ()=> {
   /** @test {ASTUtil.traverse} */
   it('can traverse React JSX.', ()=> {
-    let doc = global.db.find({name: 'ReactJSXClass'})[0];
-    assert.equal(doc.name, 'ReactJSXClass');
+    let doc = global.db.find({name: 'TestJSX'})[0];
+    assert.equal(doc.name, 'TestJSX');
   });
 });

@@ -1,4 +1,3 @@
-import fs from 'fs-extra';
 import path from 'path';
 import ESDocCLI from '../../../src/ESDocCLI.js';
 import {readDoc, assert, find, consoleLogSwitch} from '../util.js';
