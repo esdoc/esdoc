@@ -893,7 +893,7 @@ export default class DocBuilder {
     let html = '';
     if (callSignatures.length) {
       html = `(${callSignatures.join(', ')})`;
-    } else if (['function', 'method'].includes(doc.kind)) {
+    } else if (['function', 'method', 'constructor'].includes(doc.kind)) {
       html = '()';
     }
     if (returnSignatures.length) html = `${html}: ${returnSignatures.join(' | ')}`;

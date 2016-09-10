@@ -495,10 +495,6 @@ export default class DocFactory {
         break;
       default:
         if (node.left.type === 'MemberExpression' && node.left.object.type === 'ThisExpression') {
-          // ``this[prop] = 123`` is dynamic member. so it cat not generate documentation.
-          if (node.left.computed) {
-            return {type: null, node: null};
-          }
 
           let classNode = this._findUp(node, ['ClassExpression', 'ClassDeclaration']);
           if (!this._processedClassNodes.includes(classNode)) {
