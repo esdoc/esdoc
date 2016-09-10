@@ -2,4 +2,4 @@
  * this is testDeprecatedVariable.
  * @deprecated
  */
-export const testDeprecatedVarialbe = 123;
+export const testDeprecatedVariable = 123;
