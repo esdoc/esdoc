@@ -17,6 +17,17 @@ export function find($el, selector, callback) {
   callback($els.first());
 }
 
+export function findParent($el, selector, parentSelector, callback) {
+  find($el, selector, ($child)=>{
+    const $parents = $child.parents(parentSelector);
+
+    if (!$parents.length) assert(false, `parent is not found. selector = "${parentSelector}"`);
+    if ($parents.length !== 1) assert(false, `many parents are found. selector = "${parentSelector}"`);
+
+    callback($parents.first());
+  });
+}
+
 function getActual($el, selector, attr) {
   let $target;
   if (selector) {
