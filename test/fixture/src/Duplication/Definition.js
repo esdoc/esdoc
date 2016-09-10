@@ -11,12 +11,21 @@ export default class TestDuplicationDefinition {
     this.onClick = this.onClick.bind(this);
   }
 
-  /** @type {number} */
+  /**
+   * this is set value.
+   * @type {number}
+   */
   set value(v){}
 
-  /** @type {number} */
+  /**
+   * this is get value.
+   * @type {number}
+   */
   get value(){}
 
-  /** this is onClick */
-  onClick(){}
+  /**
+   * this is onClick.
+   * @param {number} p - this is p.
+   */
+  onClick(p){}
 }
