@@ -9,4 +9,11 @@ export default class TestReturnMethod {
   method1(){
     return 123;
   }
+
+  /**
+   * this is method2.
+   * @returns {TestClassDefinition} - this is return value.
+   */
+  method2(){
+  }
 }
