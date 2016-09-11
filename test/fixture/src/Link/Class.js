@@ -10,8 +10,8 @@ export default class TestLinkClass {
   constructor(){
     /**
      * this is p1.
-     * @type {number}
      * link to {@link testLinkFunction}
+     * @type {number}
      */
     this.p1 = 123;
   }
