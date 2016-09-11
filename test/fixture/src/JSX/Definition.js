@@ -1,7 +1,7 @@
 /**
- * this is TestJSX.
+ * this is TestJSXDefinition.
  */
-export default class TestJSX {
+export default class TestJSXDefinition {
   /**
    * this is method1.
    */
