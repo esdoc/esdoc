@@ -6,8 +6,7 @@ export default class TestGuessParam {
 
   method2(p1 = [123, 456], p2 = {x1: "text", x2: true}){}
 
-  // fixme: this method crashes esdoc.
-  // method3([p1, p2] = [123, 456]){}
+  method3([p1, p2] = [123, 456]){}
 
   method4({x1, x2} = {x1: 123, x2: "text"}){}
 }
