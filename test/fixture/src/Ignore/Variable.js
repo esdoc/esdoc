@@ -1,5 +1,5 @@
 /**
- * this is testIgnoreVarible.
+ * this is testIgnoreVariable.
  * @type {number}
  * @ignore
  */

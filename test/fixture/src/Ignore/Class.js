@@ -2,7 +2,9 @@
  * this is TestIgnoreClass1.
  * @ignore
  */
-export default class TestIgnoreClass1 {}
+export default class TestIgnoreClass1 {
+  method1(){}
+}
 
 /**
  * this is TestIgnoreClass2.
