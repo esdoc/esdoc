@@ -11,12 +11,12 @@ export class TestExtendsDeepShape extends Array {
 
   set valueShape(v){}
 
-  staticMethod() {
-    this.staticP = 123;
+  methodShape() {
+    this.pShape = 123;
   }
 }
 
-export class TestExtendsDeepRectangle extends TestExtendsShape {
+export class TestExtendsDeepRectangle extends TestExtendsDeepShape {
   static get staticValueRectangle(){}
 
   static set staticValueRectangle(v){}
@@ -25,11 +25,11 @@ export class TestExtendsDeepRectangle extends TestExtendsShape {
     this.staticPRectangle = 123;
   }
 
-  static get valueRectangle(){}
+  get valueRectangle(){}
 
-  static set valueRectangle(v){}
+  set valueRectangle(v){}
 
-  static methodRectangle(){
+  methodRectangle(){
     this.pRectangle = 123;
   }
 }
@@ -43,11 +43,11 @@ export default class TestExtendsDeepSquare extends TestExtendsDeepRectangle {
     this.staticPSquare = 123;
   }
 
-  static get valueSquare(){}
+  get valueSquare(){}
 
-  static set valueSquare(v){}
+  set valueSquare(v){}
 
-  static methodSquare(){
+  methodSquare(){
     this.pSquare = 123;
   }
 }

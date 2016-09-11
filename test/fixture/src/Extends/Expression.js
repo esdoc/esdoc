@@ -1,5 +1,5 @@
 /**
- * @ignore
+ * this is TestExtendsExpressionInner.
  */
 function TestExtendsExpressionInner(){}
 

@@ -5,13 +5,14 @@
  */
 function mixin(a, b){}
 
-class TestExtendsMixinInner1 {
+export class TestExtendsMixinInner1 {
   /**
    * this is method1.
    */
   method1(){}
 }
-class TestExtendsMixinInner2 {
+
+export class TestExtendsMixinInner2 {
   /**
    * this is method2.
    */
