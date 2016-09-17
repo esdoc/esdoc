@@ -10,7 +10,7 @@
   "title": "ESDoc Test Fixture",
   "test": {
     "type": "mocha",
-    "source": "./test/src",
+    "source": "./test/fixture/test",
     "includes": ["Test.js$"]
   },
   "manual": {
