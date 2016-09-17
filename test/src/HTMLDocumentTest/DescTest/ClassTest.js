@@ -2,11 +2,11 @@ import {readDoc, assert, findParent} from './../../util.js';
 
 /** @test {AbstractDoc#@desc} */
 describe('TestDescClass', ()=> {
-  const doc = readDoc('class/src/Desc/Class.js~TestDescDefinition.html');
+  const doc = readDoc('class/src/Desc/Class.js~TestDescClass.html');
 
   describe('in self detail', ()=> {
     it('has desc.', ()=> {
-      assert.includes(doc, '.self-detail [data-ice="description"]', 'this is TestDescDefinition.');
+      assert.includes(doc, '.self-detail [data-ice="description"]', 'this is TestDescClass.');
     });
   });
 

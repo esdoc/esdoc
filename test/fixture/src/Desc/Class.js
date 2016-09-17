@@ -1,7 +1,7 @@
 /**
- * @desc this is TestDescDefinition.
+ * @desc this is TestDescClass.
  */
-export default class TestDescDefinition {
+export default class TestDescClass {
   /**
    * @desc this is constructor.
    */
