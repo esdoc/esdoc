@@ -62,6 +62,28 @@ _assert.includes = function($el, selector, expect, attr) {
   assert(actual.includes(expect) === true, `selector: "${selector}",\nactual: ${actual}\nexpect: ${expect}`);
 };
 
+_assert.multiIncludes = function($el, selector, expects, attr) {
+  const $targets = $el.find(selector);
+  if ($targets.length !== expects.length) assert(false, `node length and expects length is mismatch. selector = "${selector}"`);
+
+  for (let i = 0; i < $targets.length; i++) {
+    const $target = $targets.eq(i);
+    let actual;
+    if (attr) {
+      actual = $target.attr(attr);
+    } else {
+      actual = $target.text().replace(/\s+/g, ' ');
+    }
+
+    if (actual === null) {
+      assert(false, `actual is null. selector = ${selector}, attr = ${attr}`);
+    }
+
+    const expect = expects[i];
+    assert(actual.includes(expect) === true, `selector: "${selector}",\nactual: ${actual}\nexpect: ${expect}`);
+  }
+};
+
 _assert.notIncludes = function($el, selector, expect, attr) {
   let actual = getActual($el, selector, attr);
   assert(actual.includes(expect) === false, `selector: "${selector}"`);

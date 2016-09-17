@@ -1,5 +1,5 @@
 /**
- * @typedef {Object} TestTypeTypedefInner.
+ * @typedef {Object} TestTypeTypedefInner
  */
 
 /**
