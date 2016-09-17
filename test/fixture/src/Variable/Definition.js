@@ -1,5 +1,5 @@
 /**
- * this is testVariableDefinition1.
+ * this is testVariableDefinition.
  * @type {number}
  */
-export const testVariableDefinition1 = 123;
+export const testVariableDefinition = 123;
