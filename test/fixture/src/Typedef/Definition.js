@@ -1,5 +1,5 @@
 /**
- * this is TestTypeDefinition.
- * @typedef {Object} TestTypeDefinition
+ * this is TestTypedefDefinition.
+ * @typedef {Object} TestTypedefDefinition
  * @property {number} p1 - this is p1.
  */
