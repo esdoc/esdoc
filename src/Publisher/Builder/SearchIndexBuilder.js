@@ -26,6 +26,10 @@ export default class SearchIndexBuilder extends DocBuilder {
         let filePath = doc.longname.split('~')[0];
         let fileDoc = this._find({kind: 'testFile', longname: filePath})[0];
         url = `${this._getURL(fileDoc)}#lineNumber${doc.lineNumber}`;
+      } else if(doc.kind === 'external') {
+        displayText = doc.longname;
+        indexText = displayText.toLowerCase();
+        url = doc.externalLink;
       } else {
         displayText = doc.longname;
         indexText = displayText.toLowerCase();
