@@ -32,7 +32,7 @@ describe('Plugin:', ()=>{
   });
 
   it('custom document by each handlers', ()=>{
-    const doc = readDoc('index.html', 'esdoc-plugin');
+    const doc = readDoc('index.html', './test/fixture/esdoc-plugin');
 
     assert.includes(doc, 'head title', 'Modified Config');
     assert.includes(doc, '.navigation', 'MyClass_ModifiedCode_ModifiedAST_ModifiedTag_ModifiedHTML');

@@ -1,7 +1,7 @@
 {
   "source": "./test/fixture/src",
   "destination": "./test/fixture/esdoc-cli",
-  "includes": ["MyClass\\.js"],
+  "includes": ["Desc/.*\\.js$"],
   "index": "./test/fixture/README.md",
   "package": "./test/fixture/package.json"
 }

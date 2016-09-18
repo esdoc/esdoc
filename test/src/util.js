@@ -1,9 +1,19 @@
 import _assert from 'assert';
 import fs from 'fs';
 import cheerio from 'cheerio';
+import path from 'path';
+import ESDocCLI from '../../src/ESDocCLI.js';
 
-export function readDoc(fileName, dirName = 'esdoc') {
-  let html = fs.readFileSync(`./test/fixture/${dirName}/${fileName}`, {encoding: 'utf-8'});
+export function cli(configPath) {
+  const cliPath = path.resolve('./src/cli.js');
+  configPath = path.resolve(configPath);
+  const argv = ['node', cliPath, '-c', configPath];
+  const cli = new ESDocCLI(argv);
+  cli.exec();
+}
+
+export function readDoc(fileName, dirName = './test/fixture/esdoc') {
+  let html = fs.readFileSync(`${dirName}/${fileName}`, {encoding: 'utf-8'});
   let $ = cheerio.load(html);
   return $('html').first();
 }
