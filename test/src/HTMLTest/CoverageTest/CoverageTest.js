@@ -7,9 +7,9 @@ describe('test coverage', ()=> {
   const badge = fs.readFileSync('./test/fixture/dest/esdoc/badge.svg', {encoding: 'utf8'}).toString();
 
   it('has coverage summary', ()=> {
-    assert(badge.includes('78%'));
+    assert(badge.includes('79%'));
     assert.includes(doc, '[data-ice="coverageBadge"]', './badge.svg', 'src');
-    assert.includes(doc, '[data-ice="totalCoverageCount"]', '251/318');
+    assert.includes(doc, '[data-ice="totalCoverageCount"]', '253/320');
     assert.equal(doc.find('[data-ice="file"] [data-ice="coverage"]').length, 106);
   });
 
@@ -59,7 +59,7 @@ describe('test coverage', ()=> {
     test('file/src/Export/Function.js.html#errorLines=32', '85 %6/7');
     test('file/src/Export/Multiple.js.html', '100 %2/2');
     test('file/src/Export/Named.js.html', '100 %1/1');
-    test('file/src/Export/NewExpression.js.html', '100 %2/2');
+    test('file/src/Export/NewExpression.js.html', '100 %4/4');
     test('file/src/Export/NewExpressionIndirect.js.html', '100 %2/2');
     test('file/src/Export/NewExpressionProperty.js.html', '100 %2/2');
     test('file/src/Export/Variable.js.html#errorLines=22,23', '71 %5/7');
