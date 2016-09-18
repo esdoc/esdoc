@@ -1,6 +1,6 @@
 {
   "source": "./test/fixture/src",
-  "destination": "./test/fixture/esdoc-cli",
+  "destination": "./test/fixture-config/esdoc-cli",
   "includes": ["Desc/.*\\.js$"],
   "index": "./test/fixture/README.md",
   "package": "./test/fixture/package.json"
