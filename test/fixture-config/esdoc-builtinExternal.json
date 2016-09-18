@@ -1,0 +1,8 @@
+{
+  "source": "./test/fixture/src",
+  "destination": "./test/fixture-config/esdoc-builtinExternal",
+  "includes": ["Type/Array\\.js"],
+  "builtinExternal": false,
+  "index": "./test/fixture/README.md",
+  "package": "./test/fixture/package.json"
+}
