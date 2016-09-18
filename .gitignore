@@ -19,3 +19,6 @@ npm-debug.log
 /test/fixture-config/esdoc-test
 /test/fixture-config/esdoc-undocumentIdentifier
 /test/fixture-config/esdoc-unexportIdentifier
+/test/fixture-config/esdoc-cli
+/test/fixture-config/esdoc-includeSource
+/test/fixture-config/esdoc-plugins

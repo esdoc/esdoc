@@ -1,7 +1,7 @@
 {
   "source": "./test/fixture/src",
-  "destination": "./test/fixture/esdoc-plugin",
-  "includes": ["^Class/Definition\\.js"],
+  "destination": "./test/fixture-config/esdoc-plugins",
+  "includes": ["Desc/.*\\.js"],
   "index": "./test/fixture/README.md",
   "package": "./test/fixture/package.json",
   "plugins": [
