@@ -1,5 +1,5 @@
 import assert from 'assert';
-import CommentParser from '../../../../src/Parser/CommentParser.js';
+import CommentParser from '../../../src/Parser/CommentParser.js';
 
 /** @test {CommentParser} */
 describe('CommentParser:', ()=>{

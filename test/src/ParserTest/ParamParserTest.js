@@ -1,5 +1,5 @@
 import assert from 'assert';
-import ParamParser from '../../../../src/Parser/ParamParser.js';
+import ParamParser from '../../../src/Parser/ParamParser.js';
 
 /** @test {ParamParser} */
 describe('ParamParser:', ()=>{

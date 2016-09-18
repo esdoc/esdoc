@@ -1,5 +1,5 @@
 import assert from 'assert';
-import ESParser from '../../../../src/Parser/ESParser.js';
+import ESParser from '../../../src/Parser/ESParser.js';
 
 /** @test {ESParser} */
 describe('ESParser', ()=>{
