@@ -814,11 +814,6 @@
       "from": "esdoc-importpath-plugin@0.0.1",
       "resolved": "https://registry.npmjs.org/esdoc-importpath-plugin/-/esdoc-importpath-plugin-0.0.1.tgz"
     },
-    "espree": {
-      "version": "2.2.0",
-      "from": "espree@2.2.0",
-      "resolved": "https://registry.npmjs.org/espree/-/espree-2.2.0.tgz"
-    },
     "esprima": {
       "version": "2.7.2",
       "from": "esprima@>=2.7.1 <3.0.0",

@@ -32,7 +32,6 @@
     "taffydb": "2.7.2"
   },
   "devDependencies": {
-    "espree": "2.2.0",
     "babel-register": "6.11.6",
     "babel-cli": "6.11.4",
     "babel-plugin-transform-es2015-modules-commonjs": "6.11.5",
