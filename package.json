@@ -12,7 +12,7 @@
   "scripts": {
     "build": "node ./script/build.js",
     "test": "node ./script/test.js",
-    "test-es5": "node ./script/test-es5.js",
+    "test-prod": "node ./script/test-prod.js",
     "esdoc": "node ./script/esdoc.js",
     "docpad": "node ./script/docpad.js",
     "start": "node ./script/server.js"
