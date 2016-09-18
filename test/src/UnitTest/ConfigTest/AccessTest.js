@@ -1,7 +1,7 @@
 import {readDoc as _readDoc, assert, cli, consoleLogSwitch} from '../../util.js';
 
 /** @test {DocResolver#_resolveAccess} */
-describe('test config.access:', ()=>{
+describe('test config.access: ["public", "protected"]', ()=>{
   consoleLogSwitch(false);
   cli('./test/fixture-config/esdoc-access.json');
   consoleLogSwitch(true);
