@@ -1,4 +1,4 @@
-import {readDoc as _readDoc, assert, cli, consoleLogSwitch} from '../../util.js';
+import {readDoc as _readDoc, assert, cli, consoleLogSwitch} from '../util.js';
 
 /** @test {publish} */
 describe('test config.includeSource: false', ()=>{

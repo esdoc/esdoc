@@ -1,4 +1,4 @@
-import {readDoc as _readDoc, assert, cli, consoleLogSwitch} from '../../util.js';
+import {readDoc as _readDoc, assert, cli, consoleLogSwitch} from '../util.js';
 
 /** @test {DocResolver#_resolveAccess} */
 describe('test config.access: ["public", "protected"]', ()=>{

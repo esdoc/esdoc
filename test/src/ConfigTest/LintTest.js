@@ -1,5 +1,5 @@
-import {assert, cli, consoleLogSwitch} from '../../util.js';
-import {_results} from '../../../../src/Publisher/Builder/LintDocBuilder.js';
+import {assert, cli, consoleLogSwitch} from '../util.js';
+import {_results} from '../../../src/Publisher/Builder/LintDocBuilder.js';
 
 /** @test {publish} */
 describe('test config.lint: false', ()=>{

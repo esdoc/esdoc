@@ -1,4 +1,4 @@
-import {assert, cli, consoleLogSwitch} from '../../util.js';
+import {assert, cli, consoleLogSwitch} from '../util.js';
 
 /**
  * @test {ESDocCLI#exec}
