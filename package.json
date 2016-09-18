@@ -12,7 +12,7 @@
   "scripts": {
     "build": "node ./script/build.js",
     "test": "node ./script/test.js",
-    "test-es5": "node ./script/test-es5.js",
+    "test-prod": "node ./script/test-prod.js",
     "esdoc": "node ./script/esdoc.js",
     "docpad": "node ./script/docpad.js",
     "start": "node ./script/server.js"
@@ -32,7 +32,6 @@
     "taffydb": "2.7.2"
   },
   "devDependencies": {
-    "espree": "2.2.0",
     "babel-register": "6.11.6",
     "babel-cli": "6.11.4",
     "babel-plugin-transform-es2015-modules-commonjs": "6.11.5",

@@ -858,7 +858,8 @@ export default class DocBuilder {
     if (doc.params) {
       for (let param of doc.params) {
         let paramName = param.name;
-        if (paramName.indexOf('.') !== -1) continue;
+        if (paramName.indexOf('.') !== -1) continue; // for object property
+        if (paramName.indexOf('[') !== -1) continue; // for array property
 
         let types = [];
         for (let typeName of param.types) {
@@ -893,7 +894,7 @@ export default class DocBuilder {
     let html = '';
     if (callSignatures.length) {
       html = `(${callSignatures.join(', ')})`;
-    } else if (['function', 'method'].includes(doc.kind)) {
+    } else if (['function', 'method', 'constructor'].includes(doc.kind)) {
       html = '()';
     }
     if (returnSignatures.length) html = `${html}: ${returnSignatures.join(' | ')}`;

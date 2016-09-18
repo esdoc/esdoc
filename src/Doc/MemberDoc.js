@@ -1,6 +1,7 @@
 import AbstractDoc from './AbstractDoc.js';
 import MethodDoc from './MethodDoc.js';
 import ParamParser from '../Parser/ParamParser.js'
+import babelGenerator from 'babel-generator';
 
 /**
  * Doc Class from Member Expression AST node.
@@ -60,8 +61,12 @@ export default class MemberDoc extends AbstractDoc {
       }
 
     } else {
-      let node = this._node;
-      name = this._flattenMemberExpression(node.left).replace(/^this\./, '');
+      if (this._node.left.computed) {
+        const expression = babelGenerator(this._node.left.property).code.replace(/^this/, '');
+        name = `[${expression}]`;
+      } else {
+        name = this._flattenMemberExpression(this._node.left).replace(/^this\./, '');
+      }
     }
 
     this._value.name = name;

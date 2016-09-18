@@ -3,7 +3,4 @@ out
 npm-debug.log
 /coverage
 /_temp
-/test/fixture/esdoc
-/test/fixture/esdoc-cli
-/test/fixture/esdoc-plugin
-/test/fixture/esdoc-non-source
+/test/fixture/dest

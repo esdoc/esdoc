@@ -197,31 +197,4 @@ export default class ManualDocBuilder extends DocBuilder {
     const $root = cheerio.load(html).root();
     return $root.html();
   }
-
-  /**
-   * get label synonyms.
-   * @param {string} label - target item label.
-   * @returns {string[]} synonyms
-   * @private
-   */
-  _getLabelSynonyms(label) {
-    switch (label.toLowerCase()) {
-      case 'overview':
-        return ['overview'];
-      case 'installation':
-        return ['installation', 'install'];
-      case 'tutorial':
-        return ['tutorial'];
-      case 'configuration':
-        return ['configuration', 'config'];
-      case 'usage':
-        return ['usage'];
-      case 'example':
-        return ['example', 'examples'];
-      case 'faq':
-        return ['faq'];
-      case 'changelog':
-        return ['changelog', 'change log'];
-    }
-  }
 }

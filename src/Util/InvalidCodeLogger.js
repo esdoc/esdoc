@@ -5,6 +5,10 @@ import fs from 'fs-extra';
  */
 class InvalidCodeLogger {
 
+  constructor() {
+    this._logs = [];
+  }
+
   /**
    * show log.
    * @param {string} filePath - invalid code in this file.
@@ -28,13 +32,15 @@ class InvalidCodeLogger {
     }
 
     for (let i = start - 1; i < end; i++) {
-      targetLines.push(`${i}| ` + lines[i]);
+      targetLines.push(`${i + 1}| ` + lines[i]);
     }
 
     console.log('[31merror: could not process the following code.[32m');
     console.log(filePath);
     console.log(targetLines.join('\n'));
     console.log('[0m');
+
+    this._logs.push({filePath: filePath, log: [start, end]});
   }
 
   /**
@@ -44,16 +50,18 @@ class InvalidCodeLogger {
    */
   showFile(filePath, error) {
     const lines = fs.readFileSync(filePath).toString().split('\n');
-    const start = Math.max(error.lineNumber - 3, 1);
-    const end = Math.min(error.lineNumber + 3, lines.length);
+    const start = Math.max(error.loc.line - 3, 1);
+    const end = Math.min(error.loc.line + 3, lines.length);
     const targetLines = [];
     for (let i = start - 1; i < end; i++) {
-      targetLines.push(`${i}| ` + lines[i]);
+      targetLines.push(`${i + 1}| ` + lines[i]);
     }
 
     console.log('[31mwarning: could not parse the following code. if you want to use ES7, see esdoc-es7-plugin(https://github.com/esdoc/esdoc-es7-plugin)[32m');
     console.log(filePath);
     console.log(targetLines.join('\n') + '[0m');
+
+    this._logs.push({filePath: filePath, log: [start, end]});
   }
 }
 

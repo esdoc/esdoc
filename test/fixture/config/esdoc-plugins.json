@@ -1,0 +1,11 @@
+{
+  "source": "./test/fixture/package/src",
+  "destination": "./test/fixture/dest/esdoc-plugins",
+  "includes": ["Desc/.*\\.js"],
+  "index": "./test/fixture/package/README.md",
+  "package": "./test/fixture/package/package.json",
+  "plugins": [
+    {"name": "./test/fixture/package/plugin/MyPlugin1.js", "option": {"foo": 1}},
+    {"name": "./test/fixture/package/plugin/MyPlugin2.js"}
+  ]
+}

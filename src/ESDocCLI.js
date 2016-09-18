@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import assert from 'assert';
 import fs from 'fs';
 import path from 'path';
 import minimist from 'minimist';

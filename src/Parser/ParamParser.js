@@ -181,6 +181,8 @@ export default class ParamParser {
             result.name = param.left.name;
           } else if (param.left.type === 'ObjectPattern') {
             result.name = `objectPattern${i === 0 ? '' : i}`;
+          } else if (param.left.type === 'ArrayPattern') {
+            result.name = `arrayPattern${i === 0 ? '' : i}`;
           }
 
           result.optional = true;
@@ -262,6 +264,7 @@ export default class ParamParser {
    */
   static guessReturnParam(body) {
     let result = {};
+    const guessType = this.guessType.bind(this);
 
     ASTUtil.traverse(body, function(node, parent){
       // `return` in Function is not the body's `return`
@@ -274,22 +277,7 @@ export default class ParamParser {
 
       if (!node.argument) return;
 
-      const type = node.argument.type.includes('Literal') ? 'Literal' : node.argument.type;
-      switch (type) {
-        case 'Literal':
-          if (node.argument.value === null) {
-            result.types = result.types || ['*'];
-          } else {
-            result.types = [typeof node.argument.value];
-          }
-          break;
-        case 'TemplateLiteral':
-          result.types = ['string'];
-          break;
-        default:
-          // todo: more better guess.
-          result.types = ['*'];
-      }
+      result.types = guessType(node.argument).types;
     });
 
     if (result.types) {
@@ -305,12 +293,40 @@ export default class ParamParser {
    * @returns {ParsedParam}
    */
   static guessType(right) {
-    let value = right && right.type.includes('Literal') ? right.value : null;
-
-    if (value === null || value === undefined) {
+    if (!right) {
       return {types: ['*']};
-    } else {
-      return {types: [typeof value]};
     }
+
+    if (right.type === 'TemplateLiteral') {
+      return {types: ['string']};
+    }
+
+    if (right.type.includes('Literal')) {
+      return {types: [typeof right.value]};
+    }
+
+    if (right.type === 'ArrayExpression') {
+      if (right.elements.length) {
+        return {types: [`${typeof right.elements[0].value}[]`]}
+      } else {
+        return {types: ['*[]']};
+      }
+    }
+
+    if (right.type === 'ObjectExpression') {
+      const typeMap = {};
+      for (let prop of right.properties) {
+        typeMap[prop.key.name] = typeof prop.value.value;
+      }
+
+      let types = [];
+      for (let key of Object.keys(typeMap)) {
+        types.push(`"${key}": ${typeMap[key]}`);
+      }
+
+      return {types: [`{${types.join(', ')}}`]};
+    }
+
+    return {types: ['*']};
   }
 }
