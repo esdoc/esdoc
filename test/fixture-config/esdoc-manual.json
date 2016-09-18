@@ -1,0 +1,8 @@
+{
+  "source": "./test/fixture/src",
+  "destination": "./test/fixture-config/esdoc-manual",
+  "includes": ["Desc/.*\\.js"],
+  "manual": null,
+  "index": "./test/fixture/README.md",
+  "package": "./test/fixture/package.json"
+}
