@@ -9,8 +9,8 @@ describe('test coverage', ()=> {
   it('has coverage summary', ()=> {
     assert(badge.includes('79%'));
     assert.includes(doc, '[data-ice="coverageBadge"]', './badge.svg', 'src');
-    assert.includes(doc, '[data-ice="totalCoverageCount"]', '253/320');
-    assert.equal(doc.find('[data-ice="file"] [data-ice="coverage"]').length, 106);
+    assert.includes(doc, '[data-ice="totalCoverageCount"]', '255/322');
+    assert.equal(doc.find('[data-ice="file"] [data-ice="coverage"]').length, 108);
   });
 
   it('has coverage details', ()=>{
@@ -124,11 +124,13 @@ describe('test coverage', ()=> {
     test('file/src/Typedef/Definition.js.html', '-');
     test('file/src/Undocument/Definition.js.html#errorLines=2', '0 %0/1');
     test('file/src/Unknown/Definition.js.html', '100 %1/1');
+    test('file/src/Variable/ArrayPattern.js.html', '100 %1/1');
     test('file/src/Variable/Definition.js.html', '100 %1/1');
+    test('file/src/Variable/ObjectPattern.js.html', '100 %1/1');
     test('file/src/Version/Class.js.html', '100 %4/4');
     test('file/src/Version/Function.js.html', '100 %1/1');
     test('file/src/Version/Variable.js.html', '100 %1/1');
 
-    assert.equal(count, 106);
+    assert.equal(count, 108);
   });
 });
