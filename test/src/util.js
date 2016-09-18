@@ -16,7 +16,7 @@ export function cli(configPath) {
   consoleLogSwitch(true);
 }
 
-export function readDoc(fileName, dirName = './test/fixture/esdoc') {
+export function readDoc(fileName, dirName = './test/fixture/dest/esdoc') {
   let html = fs.readFileSync(`${dirName}/${fileName}`, {encoding: 'utf-8'});
   let $ = cheerio.load(html);
   return $('html').first();

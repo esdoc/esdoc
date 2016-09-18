@@ -3,14 +3,14 @@ import {cli, readDoc as _readDoc, assert} from '../util.js';
 
 /** @test {Plugin} */
 describe('test config.plugins: [...]', ()=>{
-  cli('./test/fixture-config/esdoc-plugins.json');
+  cli('./test/fixture/config/esdoc-plugins.json');
 
   function readDoc(filePath) {
-    return _readDoc(filePath, './test/fixture-config/esdoc-plugins');
+    return _readDoc(filePath, './test/fixture/dest/esdoc-plugins');
   }
 
   it('call each handlers', ()=>{
-    const pluginPath = path.resolve('./test/fixture/plugin/MyPlugin1.js');
+    const pluginPath = path.resolve('./test/fixture/package/plugin/MyPlugin1.js');
     const plugin = require(pluginPath);
 
     assert(plugin.callInfo.handlerNames.onStart);
@@ -34,7 +34,7 @@ describe('test config.plugins: [...]', ()=>{
   });
 
   it('call multi plugins', ()=>{
-    const pluginPath = path.resolve('./test/fixture/plugin/MyPlugin1.js');
+    const pluginPath = path.resolve('./test/fixture/package/plugin/MyPlugin1.js');
     const plugin = require(pluginPath);
 
     assert.deepEqual(plugin.callInfo.handlerNames.onStart, ['MyPlugin1', 'MyPlugin2']);

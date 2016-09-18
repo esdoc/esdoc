@@ -2,10 +2,10 @@ import {readDoc as _readDoc, assert, cli} from '../util.js';
 
 /** @test {DocResolver#_resolveAccess} */
 describe('test config.access: ["public", "protected"]', ()=>{
-  cli('./test/fixture-config/esdoc-access.json');
+  cli('./test/fixture/config/esdoc-access.json');
 
   function readDoc(filePath) {
-    return _readDoc(filePath, './test/fixture-config/esdoc-access');
+    return _readDoc(filePath, './test/fixture/dest/esdoc-access');
   }
 
   describe('class', ()=>{

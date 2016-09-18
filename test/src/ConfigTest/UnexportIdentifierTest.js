@@ -2,10 +2,10 @@ import {readDoc as _readDoc, assert, cli} from '../util.js';
 
 /** @test {DocResolver#_resolveUnexportIdentifier} */
 describe('test config.unexportIdentifier: true', ()=>{
-  cli('./test/fixture-config/esdoc-unexportIdentifier.json');
+  cli('./test/fixture/config/esdoc-unexportIdentifier.json');
 
   function readDoc(filePath) {
-    return _readDoc(filePath, './test/fixture-config/esdoc-unexportIdentifier');
+    return _readDoc(filePath, './test/fixture/dest/esdoc-unexportIdentifier');
   }
 
   it('has unexport identifier', ()=>{

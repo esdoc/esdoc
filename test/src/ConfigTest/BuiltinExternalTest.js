@@ -2,10 +2,10 @@ import {readDoc as _readDoc, assert, cli} from '../util.js';
 
 /** @test {ESDoc._useBuiltinExternal} */
 describe('test config.builtinExternal: false', ()=>{
-  cli('./test/fixture-config/esdoc-builtinExternal.json');
+  cli('./test/fixture/config/esdoc-builtinExternal.json');
 
   function readDoc(filePath) {
-    return _readDoc(filePath, './test/fixture-config/esdoc-builtinExternal');
+    return _readDoc(filePath, './test/fixture/dest/esdoc-builtinExternal');
   }
 
   it('does not have builtin external link', ()=>{

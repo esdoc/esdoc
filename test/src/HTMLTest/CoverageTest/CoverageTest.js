@@ -4,7 +4,7 @@ import {readDoc, assert, findParent} from './../../util.js';
 /** @test {CoverageBuilder} */
 describe('test coverage', ()=> {
   const doc = readDoc('source.html');
-  const badge = fs.readFileSync('./test/fixture/esdoc/badge.svg', {encoding: 'utf8'}).toString();
+  const badge = fs.readFileSync('./test/fixture/dest/esdoc/badge.svg', {encoding: 'utf8'}).toString();
 
   it('has coverage summary', ()=> {
     assert(badge.includes('79%'));

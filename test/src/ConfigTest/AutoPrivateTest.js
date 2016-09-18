@@ -2,10 +2,10 @@ import {readDoc as _readDoc, assert, cli} from '../util.js';
 
 /** @test {DocResolver#_resolveAccess} */
 describe('test config.autoPrivate: false', ()=>{
-  cli('./test/fixture-config/esdoc-autoPrivate.json');
+  cli('./test/fixture/config/esdoc-autoPrivate.json');
 
   function readDoc(filePath) {
-    return _readDoc(filePath, './test/fixture-config/esdoc-autoPrivate');
+    return _readDoc(filePath, './test/fixture/dest/esdoc-autoPrivate');
   }
 
   it('treat _class as public', ()=>{

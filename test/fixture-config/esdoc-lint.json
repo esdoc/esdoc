@@ -1,8 +1,0 @@
-{
-  "source": "./test/fixture/src",
-  "destination": "./test/fixture-config/esdoc-lint",
-  "includes": ["Lint/.*\\.js"],
-  "lint": false,
-  "index": "./test/fixture/README.md",
-  "package": "./test/fixture/package.json"
-}

@@ -2,10 +2,10 @@ import {readDoc as _readDoc, assert, cli} from '../util.js';
 
 /** @test {DocBuilder#_buildLayoutDoc} */
 describe('test config.scripts: ["./test/fixture/script/custom.js"]', ()=>{
-  cli('./test/fixture-config/esdoc-scripts.json');
+  cli('./test/fixture/config/esdoc-scripts.json');
 
   function readDoc(filePath) {
-    return _readDoc(filePath, './test/fixture-config/esdoc-scripts');
+    return _readDoc(filePath, './test/fixture/dest/esdoc-scripts');
   }
 
   it('has custom script', ()=>{

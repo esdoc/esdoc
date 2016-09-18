@@ -3,7 +3,7 @@ import {taffy} from 'taffydb';
 import ESDoc from '../../src/ESDoc.js';
 import defaultPublisher from '../../src/Publisher/publish.js';
 
-let configFilePath = './test/fixture/esdoc.json';
+let configFilePath = './test/fixture/package/esdoc.json';
 let configJSON = fs.readFileSync(configFilePath, {encode: 'utf8'});
 let config = JSON.parse(configJSON);
 

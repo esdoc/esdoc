@@ -2,7 +2,7 @@ import fs from 'fs';
 import assert from 'assert';
 
 describe('test search', ()=>{
-  const searchIndexJS = fs.readFileSync('./test/fixture/esdoc/script/search_index.js', {encoding: 'utf8'}).toString();
+  const searchIndexJS = fs.readFileSync('./test/fixture/dest/esdoc/script/search_index.js', {encoding: 'utf8'}).toString();
   const searchIndexJSON = searchIndexJS.replace('window.esdocSearchIndex = ', '');
   const searchIndex = JSON.parse(searchIndexJSON);
 

@@ -6,7 +6,7 @@ import {assert, cli} from '../util.js';
  */
 describe('test cli', ()=>{
   it('can execute with config file.', ()=>{
-    cli('./test/fixture-config/esdoc-cli.json');
+    cli('./test/fixture/config/esdoc-cli.json');
     assert(true);
   });
 });
