@@ -1,6 +1,5 @@
 import _assert from 'assert';
 import fs from 'fs';
-import path from 'path';
 import cheerio from 'cheerio';
 
 export function readDoc(fileName, dirName = 'esdoc') {
