@@ -1,0 +1,9 @@
+{
+  "source": "./test/fixture/src",
+  "destination": "./test/fixture-config/esdoc-excludes",
+  "access": ["public", "protected"],
+  "includes": ["Desc/.*\\.js"],
+  "excludes": ["Class\\.js"],
+  "index": "./test/fixture/README.md",
+  "package": "./test/fixture/package.json"
+}
