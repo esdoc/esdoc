@@ -1,0 +1,8 @@
+{
+  "source": "./test/fixture/src",
+  "destination": "./test/fixture-config/esdoc-unexportIdentifier",
+  "includes": ["Export/Class\\.js"],
+  "unexportIdentifier": true,
+  "index": "./test/fixture/README.md",
+  "package": "./test/fixture/package.json"
+}
