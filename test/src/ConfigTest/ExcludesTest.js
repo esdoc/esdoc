@@ -1,10 +1,8 @@
-import {readDoc as _readDoc, assert, cli, consoleLogSwitch} from '../util.js';
+import {readDoc as _readDoc, assert, cli} from '../util.js';
 
 /** @test {ESDoc.generate} */
 describe('test config.excludes: ["Class\\.js"]', ()=>{
-  consoleLogSwitch(false);
   cli('./test/fixture-config/esdoc-excludes.json');
-  consoleLogSwitch(true);
 
   function readDoc(filePath) {
     return _readDoc(filePath, './test/fixture-config/esdoc-excludes');

@@ -1,10 +1,8 @@
-import {readDoc as _readDoc, assert, cli, consoleLogSwitch} from '../util.js';
+import {readDoc as _readDoc, assert, cli} from '../util.js';
 
 /** @test {publish} */
 describe('test config.includeSource: false', ()=>{
-  consoleLogSwitch(false);
   cli('./test/fixture-config/esdoc-includeSource.json');
-  consoleLogSwitch(true);
 
   function readDoc(filePath) {
     return _readDoc(filePath, './test/fixture-config/esdoc-includeSource');

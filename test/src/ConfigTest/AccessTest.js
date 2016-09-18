@@ -1,10 +1,8 @@
-import {readDoc as _readDoc, assert, cli, consoleLogSwitch} from '../util.js';
+import {readDoc as _readDoc, assert, cli} from '../util.js';
 
 /** @test {DocResolver#_resolveAccess} */
 describe('test config.access: ["public", "protected"]', ()=>{
-  consoleLogSwitch(false);
   cli('./test/fixture-config/esdoc-access.json');
-  consoleLogSwitch(true);
 
   function readDoc(filePath) {
     return _readDoc(filePath, './test/fixture-config/esdoc-access');

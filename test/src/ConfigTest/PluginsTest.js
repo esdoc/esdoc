@@ -1,11 +1,9 @@
 import path from 'path';
-import {cli, readDoc as _readDoc, assert, consoleLogSwitch} from '../util.js';
+import {cli, readDoc as _readDoc, assert} from '../util.js';
 
 /** @test {Plugin} */
 describe('test config.plugins: [...]', ()=>{
-  consoleLogSwitch(false);
   cli('./test/fixture-config/esdoc-plugins.json');
-  consoleLogSwitch(true);
 
   function readDoc(filePath) {
     return _readDoc(filePath, './test/fixture-config/esdoc-plugins');

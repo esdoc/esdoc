@@ -9,7 +9,11 @@ export function cli(configPath) {
   configPath = path.resolve(configPath);
   const argv = ['node', cliPath, '-c', configPath];
   const cli = new ESDocCLI(argv);
+
+  console.log(`process: ${configPath}`);
+  consoleLogSwitch(false);
   cli.exec();
+  consoleLogSwitch(true);
 }
 
 export function readDoc(fileName, dirName = './test/fixture/esdoc') {
