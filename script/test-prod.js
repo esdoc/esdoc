@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 var sh = require('./sh');
 
-var mochaOption = " -t 10000 --recursive ./out/test/src -R spec";
+var mochaOption = " -t 10000 --require ./out/test/src/init.js --recursive ./out/test/src -R spec";
 var istanbulOption = ' cover --include-all-sources --root ./out/src/ -x "**/template/**" ./node_modules/mocha/bin/_mocha  -- ' + mochaOption;
 
 sh.exec('node ./script/build.js');
