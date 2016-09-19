@@ -1,6 +1,5 @@
 [![Build Status](https://travis-ci.org/esdoc/esdoc.svg?branch=master)](https://travis-ci.org/esdoc/esdoc)
 [![Coverage Status](https://coveralls.io/repos/esdoc/esdoc/badge.svg)](https://coveralls.io/r/esdoc/esdoc)
-<span class="esdoc-coverage"></span>
 
 # ESDoc Test Fixture
 this is ESDoc Test Fixture README.

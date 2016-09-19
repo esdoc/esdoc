@@ -1008,31 +1008,6 @@ export default class DocBuilder {
     }
   }
 
-  /**
-   * build coverage html.
-   * @param {CoverageObject} coverageObj - target coverage object.
-   * @returns {string} html of coverage badge.
-   * @private
-   * @deprecated
-   */
-  _buildCoverageHTML(coverageObj) {
-    let coverage = Math.floor(100 * coverageObj.actualCount / coverageObj.expectCount);
-    let colorClass;
-    if (coverage < 50) {
-      colorClass = 'esdoc-coverage-low';
-    } else if (coverage < 90) {
-      colorClass = 'esdoc-coverage-middle';
-    } else {
-      colorClass = 'esdoc-coverage-high';
-    }
-
-    let html = `<a href="https://esdoc.org" class="esdoc-coverage-wrap">
-    <span class="esdoc-coverage-label">document</span><span class="esdoc-coverage-ratio ${colorClass}">${coverage}%</span>
-    </a>`;
-
-    return html;
-  }
-
   //_buildAuthorHTML(doc, separator = '\n') {
   //  if (!doc.author) return '';
   //

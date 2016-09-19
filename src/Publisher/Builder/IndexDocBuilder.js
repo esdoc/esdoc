@@ -56,16 +56,6 @@ export default class IndexDocBuilder extends DocBuilder {
       ice.load('index', indexContent);
     }
 
-    let result = ice.html;
-
-    // fixme: deprecated
-    if (this._config.coverage) {
-      let $ = cheerio.load(result);
-      if ($('.esdoc-coverage').length) {
-        console.log('[31m[deprecated] coverage badge is deprecated. use badge of ESDoc Hosting Service(https://doc.esdoc.org)[0m');
-      }
-    }
-
-    return result;
+    return ice.html;
   }
 }
