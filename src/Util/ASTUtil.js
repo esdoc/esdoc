@@ -26,7 +26,7 @@ export default class ASTUtil {
     babelTraverse(ast, {
       noScope: true,
       enter: function(path){
-        callback.call(this, path.node, path.parent);
+        callback.call(path, path.node, path.parent);
       }
     });
   }
