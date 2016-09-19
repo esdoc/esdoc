@@ -598,7 +598,7 @@ export default class DocBuilder {
   _getURL(doc) {
     let inner = false;
     if (['variable', 'function', 'member', 'typedef', 'method', 'constructor', 'get', 'set'].includes(doc.kind)) {
-      inner = true
+      inner = true;
     }
 
     if (inner) {
@@ -641,9 +641,9 @@ export default class DocBuilder {
       case 'testFile':
         return `test-file/${doc.longname}.html`;
       case 'testDescribe':
-        return `test.html`;
+        return 'test.html';
       case 'testIt':
-        return `test.html`;
+        return 'test.html';
       default:
         throw new Error('DocBuilder: can not resolve file name.');
     }

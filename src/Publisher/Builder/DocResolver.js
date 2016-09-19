@@ -1,5 +1,3 @@
-import fs from 'fs';
-import path from 'path';
 import {markdown} from './util.js';
 
 /**
@@ -431,7 +429,7 @@ export default class DocResolver {
           return a < b ? -1 : 1;
         });
         ids.shift();
-        ignoreId.push(...ids)
+        ignoreId.push(...ids);
       }
     }
 

@@ -52,7 +52,7 @@ export default class ParamParser {
       match = value.match(/^(\S+)/);
       if (match) {
         paramName = match[1];
-        value = value.replace(/^\S+\s*/, '')
+        value = value.replace(/^\S+\s*/, '');
       }
     }
 
@@ -307,7 +307,7 @@ export default class ParamParser {
 
     if (right.type === 'ArrayExpression') {
       if (right.elements.length) {
-        return {types: [`${typeof right.elements[0].value}[]`]}
+        return {types: [`${typeof right.elements[0].value}[]`]};
       } else {
         return {types: ['*[]']};
       }

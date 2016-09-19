@@ -27,7 +27,7 @@ export function shorten(doc, asMarkdown = false) {
     let char2 = desc.charAt(i + 1);
     let char4 = desc.substr(i, 6);
     let char5 = desc.substr(i, 7);
-    if (char1 === "'") inSQuote = !inSQuote;
+    if (char1 === '\'') inSQuote = !inSQuote;
     else if (char1 === '"') inWQuote = !inWQuote;
     else if (char4 === '<code>') inCode = true;
     else if (char5 === '</code>') inCode = false;
@@ -126,7 +126,7 @@ export function parseExample(example) {
   let body = example;
   let caption = '';
 
-  let regexp = new RegExp("^<caption>(.*?)</caption>\n");
+  let regexp = new RegExp('^<caption>(.*?)</caption>\n');
   let matched = example.match(regexp);
   if (matched) {
     body = example.replace(regexp, '');

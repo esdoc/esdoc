@@ -32,7 +32,7 @@ export default class TypedefDoc extends AbstractDoc {
   _$name() {
     let tags = this._findAll(['@typedef']);
     if (!tags) {
-      logger.w(`can not resolve name.`);
+      logger.w('can not resolve name.');
       return;
     }
 

@@ -30,14 +30,14 @@ export default class ExternalDoc extends AbstractDoc {
   _$name() {
     let value = this._findTagValue(['@external']);
     if (!value) {
-      logger.w(`can not resolve name.`);
+      logger.w('can not resolve name.');
     }
 
     this._value.name = value;
 
     let tags = this._findAll(['@external']);
     if (!tags) {
-      logger.w(`can not resolve name.`);
+      logger.w('can not resolve name.');
       return;
     }
 

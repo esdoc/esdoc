@@ -1,6 +1,6 @@
 import AbstractDoc from './AbstractDoc.js';
 import MethodDoc from './MethodDoc.js';
-import ParamParser from '../Parser/ParamParser.js'
+import ParamParser from '../Parser/ParamParser.js';
 import babelGenerator from 'babel-generator';
 
 /**

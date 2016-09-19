@@ -24,12 +24,12 @@ export default class ESDocCLI {
 
     if (this._argv.h || this._argv.help) {
       this._showHelp();
-      process.exit(0)
+      process.exit(0);
     }
 
     if (this._argv.v || this._argv.version) {
       this._showVersion();
-      process.exit(0)
+      process.exit(0);
     }
   }
 
