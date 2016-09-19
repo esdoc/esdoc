@@ -7,17 +7,14 @@ import ASTUtil from '../Util/ASTUtil.js';
  */
 export default class VariableDoc extends AbstractDoc {
   /** specify ``variable`` to kind. */
-  ['@_kind']() {
-    super['@_kind']();
-    if (this._value.kind) return;
-
+  _$kind() {
+    super._$kind();
     this._value.kind = 'variable';
   }
 
   /** set name by using self node. */
-  ['@_name']() {
-    super['@_name']();
-    if (this._value.name) return;
+  _$name() {
+    super._$name();
 
     switch (this._node.declarations[0].id.type) {
       case 'Identifier':
@@ -35,15 +32,14 @@ export default class VariableDoc extends AbstractDoc {
   }
 
   /** set memberof by using file path. */
-  ['@_memberof']() {
-    super['@_memberof']();
-    if (this._value.memberof) return;
+  _$memberof() {
+    super._$memberof();
     this._value.memberof = this._pathResolver.filePath;
   }
 
   /** if @type is not exists, guess type by using self node. */
-  ['@type']() {
-    super['@type']();
+  _$type() {
+    super._$type();
     if (this._value.type) return;
 
     if (this._node.declarations[0].init.type === 'NewExpression') {

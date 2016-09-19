@@ -26,7 +26,7 @@ export default class ASTUtil {
     babelTraverse(ast, {
       noScope: true,
       enter: function(path){
-        callback.call(this, path.node, path.parent);
+        callback.call(path, path.node, path.parent);
       }
     });
   }
@@ -153,23 +153,23 @@ export default class ASTUtil {
     return node;
   }
 
-  /**
-   * flatten name of MemberExpression.
-   * @param {ASTNode} memberExpression - MemberExpression Node.
-   * @returns {string} flatten node name.
-   */
-  static flattenMemberExpression(memberExpression) {
-    const names = [];
-    let object = memberExpression;
-    while (object) {
-      if (object.name) {
-        names.push(object.name);
-        break;
-      } else {
-        names.push(object.property.name);
-        object = object.object;
-      }
-    }
-    return names.reverse().join('.');
-  }
+  // /**
+  //  * flatten name of MemberExpression.
+  //  * @param {ASTNode} memberExpression - MemberExpression Node.
+  //  * @returns {string} flatten node name.
+  //  */
+  // static flattenMemberExpression(memberExpression) {
+  //   const names = [];
+  //   let object = memberExpression;
+  //   while (object) {
+  //     if (object.name) {
+  //       names.push(object.name);
+  //       break;
+  //     } else {
+  //       names.push(object.property.name);
+  //       object = object.object;
+  //     }
+  //   }
+  //   return names.reverse().join('.');
+  // }
 }

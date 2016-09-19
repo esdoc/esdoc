@@ -1,5 +1,3 @@
-import assert from 'assert';
-import fs from 'fs';
 import path from 'path';
 import ParamParser from '../Parser/ParamParser.js';
 import ASTUtil from '../Util/ASTUtil.js';
@@ -39,104 +37,121 @@ export default class AbstractDoc {
 
   /**
    * apply doc comment.
-   * @private
+   * @protected
    */
   _apply() {
-    this['@_kind']();
-    this['@_static']();
-    this['@_variation']();
-    this['@_name']();
-    this['@_memberof']();
-    this['@_longname']();
-    this['@access']();
-    this['@_export']();
-    this['@_importPath']();
-    this['@_importStyle']();
-    this['@desc']();
-    this['@example']();
-    this['@see']();
-    this['@_lineNumber']();
-    this['@deprecated']();
-    this['@experimental']();
-    this['@since']();
-    this['@version']();
-    this['@todo']();
-    this['@ignore']();
-    this['@_pseudoExport']();
-    this['@_undocument']();
-    this['@_unknown']();
+    this._$kind();
+    this._$variation();
+    this._$name();
+    this._$memberof();
+    this._$member();
+    this._$content();
+    this._$generator();
 
-    this['@param']();
-    this['@property']();
-    this['@return']();
-    this['@type']();
-    this['@abstract']();
-    this['@override']();
-    this['@throws']();
-    this['@emits']();
-    this['@listens']();
-    this['@_member']();
-    this['@_content']();
-    this['@_generator']();
+    this._$static();
+    this._$longname();
+    this._$access();
+    this._$export();
+    this._$importPath();
+    this._$importStyle();
+    this._$desc();
+    this._$example();
+    this._$see();
+    this._$lineNumber();
+    this._$deprecated();
+    this._$experimental();
+    this._$since();
+    this._$version();
+    this._$todo();
+    this._$ignore();
+    this._$pseudoExport();
+    this._$undocument();
+    this._$unknown();
+    this._$param();
+    this._$property();
+    this._$return();
+    this._$type();
+    this._$abstract();
+    this._$override();
+    this._$throws();
+    this._$emits();
+    this._$listens();
   }
 
-  /** for @_kind, does not need to use this tag */
-  ['@_kind']() {
-    this._value.kind = this._findTagValue(['@_kind']);
-  }
-
-  /** for @_static, does not need to use this tag */
-  ['@_static']() {
-    let tag = this._find(['@_static']);
-    if (tag) {
-      if (tag.tagValue === '' || tag.tagValue === 'true') {
-        this._value.static = true;
-      } else {
-        this._value.static = false;
-      }
-    } else {
-      if ('static' in this._node) {
-        this._value.static = this._node.static;
-      } else {
-        this._value.static = true;
-      }
-    }
-  }
+  /**
+   * decide `kind`.
+   * @abstract
+   */
+  _$kind() {}
 
   /** for @_variation */
-  ['@_variation']() {
-    this._value.variation = this._findTagValue(['@_variation']);
-  }
+  /**
+   * decide `variation`.
+   * @todo implements `@variation`.
+   * @abstract
+   */
+  _$variation() {}
 
-  /** for @_name, does not need to use this tag */
-  ['@_name']() {
-    this._value.name = this._findTagValue(['@_name']);
-  }
+  /**
+   * decide `name`
+   * @abstract
+   */
+  _$name() {}
 
-  /** for @_memberof, does not need to use this tag */
-  ['@_memberof']() {
-    this._value.memberof = this._findTagValue(['@_memberof']);
-  }
+  /**
+   * decide `memberof`.
+   * @abstract
+   */
+  _$memberof() {}
 
-  /** for @_longname, does not need to use this tag */
-  ['@_longname']() {
-    let tag = this._find(['@_longname']);
-    if (tag) {
-      this._value.longname = tag.tagValue;
+  /**
+   * decide `member`.
+   * @abstract
+   */
+  _$member() {}
+
+  /**
+   * decide `content`.
+   * @abstract
+   */
+  _$content() {}
+
+  /**
+   * decide `generator`.
+   * @abstract
+   */
+  _$generator() {}
+
+  /**
+   * decide `static`.
+   */
+  _$static() {
+    if ('static' in this._node) {
+      this._value.static = this._node.static;
     } else {
-      let memberof = this._value.memberof;
-      let name = this._value.name;
-      let scope = this._value.static ? '.' : '#';
-      if (memberof.includes('~')) {
-        this._value.longname = `${memberof}${scope}${name}`;
-      } else {
-        this._value.longname = `${memberof}~${name}`;
-      }
+      this._value.static = true;
     }
   }
 
-  /** for @access, @public, @private, @protected */
-  ['@access']() {
+  /**
+   * decide `longname`.
+   */
+  _$longname() {
+    let memberof = this._value.memberof;
+    let name = this._value.name;
+    let scope = this._value.static ? '.' : '#';
+    if (memberof.includes('~')) {
+      this._value.longname = `${memberof}${scope}${name}`;
+    } else {
+      this._value.longname = `${memberof}~${name}`;
+    }
+  }
+
+  /**
+   * decide `access`.
+   * process also @public, @private and @protected.
+   */
+  _$access() {
     let tag = this._find(['@access', '@public', '@private', '@protected']);
     if (tag) {
       let access;
@@ -153,33 +168,25 @@ export default class AbstractDoc {
     }
   }
 
-  /** for @public */
-  ['@public'](){
-    // avoid unknown tag.
-  }
+  /**
+   * avoid unknown tag.
+   */
+  _$public(){}
 
-  /** for @protected */
-  ['@protected']() {
-    // avoid unknown tag.
-  }
+  /**
+   * avoid unknown tag.
+   */
+  _$protected() {}
 
-  /** for @private */
-  ['@private']() {
-    // avoid unknown tag.
-  }
+  /**
+   * avoid unknown tag.
+   */
+  _$private() {}
 
-  /** for @_export, does not need to use this tag */
-  ['@_export']() {
-    let tag = this._find(['@_export']);
-    if (tag) {
-      if (tag.tagValue === '' || tag.tagValue === 'true') {
-        this._value.export = true;
-      } else {
-        this._value.export = false;
-      }
-      return;
-    }
-
+  /**
+   * decide `export`.
+   */
+  _$export() {
     let parent = this._node.parent;
     while (parent) {
       if (parent.type === 'ExportDefaultDeclaration') {
@@ -196,24 +203,17 @@ export default class AbstractDoc {
     this._value.export = false;
   }
 
-  /** for @_importPath, does not need to use this tag */
-  ['@_importPath']() {
-    let tag = this._find(['@_importPath']);
-    if (tag) {
-      this._value.importPath = tag.tagValue;
-    } else {
-      this._value.importPath = this._pathResolver.importPath;
-    }
+  /**
+   * decide `importPath`.
+   */
+  _$importPath() {
+    this._value.importPath = this._pathResolver.importPath;
   }
 
-  /** for @_importStyle, does not need to use this tag */
-  ['@_importStyle']() {
-    let tag = this._find(['@_importStyle']);
-    if (tag) {
-      this._value.importStyle = tag.tagValue;
-      return;
-    }
-
+  /**
+   * decide `importStyle`.
+   */
+  _$importStyle() {
     if (this._node.__esdoc__pseudo_export) {
       this._value.importStyle = null;
       return;
@@ -235,13 +235,17 @@ export default class AbstractDoc {
     this._value.importStyle = null;
   }
 
-  /** for @desc */
-  ['@desc']() {
+  /**
+   * decide `description`.
+   */
+  _$desc() {
     this._value.description = this._findTagValue(['@desc']);
   }
 
-  /** for @example. possible multi tag. */
-  ['@example']() {
+  /**
+   * decide `examples`.
+   */
+  _$example() {
     let tags = this._findAll(['@example']);
     if (!tags) return;
     if (!tags.length) return;
@@ -252,8 +256,10 @@ export default class AbstractDoc {
     }
   }
 
-  /** for @see. possible multi tag. */
-  ['@see']() {
+  /**
+   * decide `see`.
+   */
+  _$see() {
     let tags = this._findAll(['@see']);
     if (!tags) return;
     if (!tags.length) return;
@@ -264,22 +270,20 @@ export default class AbstractDoc {
     }
   }
 
-  /** for @_lineNumber, does not need to use this tag */
-  ["@_lineNumber"]() {
-    let tag = this._find(['@_lineNumber']);
-    if (tag) {
-      this._value.lineNumber = tag.tagValue;
-      return;
-    }
-
+  /**
+   * decide `lineNumber`.
+   */
+  _$lineNumber() {
     let node = this._node;
     if (node.loc) {
       this._value.lineNumber = node.loc.start.line;
     }
   }
 
-  /** for @deprecated */
-  ['@deprecated']() {
+  /**
+   * decide `deprecated`.
+   */
+  _$deprecated() {
     let tag = this._find(['@deprecated']);
     if (tag) {
       if (tag.tagValue) {
@@ -290,8 +294,10 @@ export default class AbstractDoc {
     }
   }
 
-  /** for @experimental */
-  ['@experimental'](){
+  /**
+   * decide `experimental`.
+   */
+  _$experimental(){
     let tag = this._find(['@experimental']);
     if (tag) {
       if (tag.tagValue) {
@@ -302,24 +308,30 @@ export default class AbstractDoc {
     }
   }
 
-  /** for @since */
-  ['@since'](){
+  /**
+   * decide `since`.
+   */
+  _$since(){
     let tag = this._find(['@since']);
     if (tag) {
       this._value.since = tag.tagValue;
     }
   }
 
-  /** for @version */
-  ['@version'](){
+  /**
+   * decide `version`.
+   */
+  _$version(){
     let tag = this._find(['@version']);
     if (tag) {
       this._value.version = tag.tagValue;
     }
   }
 
-  /** for @todo. possible multi tag. */
-  ['@todo'](){
+  /**
+   * decide `todo`.
+   */
+  _$todo(){
     let tags = this._findAll(['@todo']);
     if (tags) {
       this._value.todo = [];
@@ -329,47 +341,52 @@ export default class AbstractDoc {
     }
   }
 
-  /** for @ignore. */
-  ['@ignore'](){
+  /**
+   * decide `ignore`.
+   */
+  _$ignore(){
     let tag = this._find(['@ignore']);
     if (tag) {
       this._value.ignore = true;
     }
   }
 
-  /** for @_pseudoExport, does not need to use this tag. */
-  ['@_pseudoExport'](){
-    let tag = this._find(['@_pseudoExport']);
-    if (tag) {
-      this._value.pseudoExport = ['', 'true', true].includes(tag.tagValue);
-      return;
-    }
-
+  /**
+   * decide `pseudoExport`.
+   */
+  _$pseudoExport(){
     if (this._node.__esdoc__pseudo_export) {
       this._value.pseudoExport = true;
     }
   }
 
-  /** for @_undocument, does not need to use this tag */
-  ['@_undocument']() {
+  /**
+   * decide `undocument` with internal tag.
+   */
+  _$undocument() {
     let tag = this._find(['@_undocument']);
     if (tag) {
       this._value.undocument = true;
     }
   }
 
-  /** for @_unknown, does not need to use this tag */
-  ['@_unknown']() {
+  /**
+   * decide `unknown`.
+   */
+  _$unknown() {
     for (let tag of this._commentTags) {
-      if (this[tag.tagName]) continue;
+      const methodName = tag.tagName.replace(/^[@]/, '_$');
+      if (this[methodName]) continue;
 
       if (!this._value.unknown) this._value.unknown = [];
       this._value.unknown.push(tag);
     }
   }
 
-  /** for @param. */
-  ['@param']() {
+  /**
+   * decide `param`.
+   */
+  _$param() {
     let values = this._findAllTagValues(['@param']);
     if (!values) return;
 
@@ -385,8 +402,10 @@ export default class AbstractDoc {
     }
   }
 
-  /** for @return, @returns. */
-  ['@return']() {
+  /**
+   * decide `return`.
+   */
+  _$return() {
     let value = this._findTagValue(['@return', '@returns']);
     if (!value) return;
 
@@ -395,8 +414,10 @@ export default class AbstractDoc {
     this._value.return = result;
   }
 
-  /** for @property. */
-  ['@property']() {
+  /**
+   * decide `property`.
+   */
+  _$property() {
     let values = this._findAllTagValues(['@property']);
     if (!values) return;
 
@@ -408,8 +429,10 @@ export default class AbstractDoc {
     }
   }
 
-  /** for @type. */
-  ['@type']() {
+  /**
+   * decide `type`.
+   */
+  _$type() {
     let value = this._findTagValue(['@type']);
     if (!value) return;
 
@@ -418,24 +441,30 @@ export default class AbstractDoc {
     this._value.type = result;
   }
 
-  /** for @abstract. */
-  ['@abstract']() {
+  /**
+   * decide `abstract`.
+   */
+  _$abstract() {
     let tag = this._find(['@abstract']);
     if (tag) {
       this._value.abstract = true;
     }
   }
 
-  /** for @voerride. */
-  ['@override'](){
+  /**
+   * decide `override`.
+   */
+  _$override(){
     let tag = this._find(['@override']);
     if (tag) {
       this._value.override = true;
     }
   }
 
-  /** for @throws. */
-  ['@throws'](){
+  /**
+   * decide `throws`.
+   */
+  _$throws(){
     let values = this._findAllTagValues(['@throws']);
     if (!values) return;
 
@@ -450,8 +479,10 @@ export default class AbstractDoc {
     }
   }
 
-  /** for @emits. */
-  ['@emits'](){
+  /**
+   * decide `emits`.
+   */
+  _$emits(){
     let values = this._findAllTagValues(['@emits']);
     if (!values) return;
 
@@ -466,8 +497,10 @@ export default class AbstractDoc {
     }
   }
 
-  /** for @listens. */
-  ['@listens'](){
+  /**
+   * decide `listens`.
+   */
+  _$listens(){
     let values = this._findAllTagValues(['@listens']);
     if (!values) return;
 
@@ -479,32 +512,6 @@ export default class AbstractDoc {
         types: result.types,
         description: result.description
       });
-    }
-  }
-
-  /** for @_member. */
-  ['@_member']() {
-    let value = this._findTagValue(['@_member']);
-    if (!value) return;
-
-    let {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value, true, true, false);
-    let result = ParamParser.parseParam(typeText, paramName, paramDesc);
-    this._value.type = result;
-  }
-
-  /** for @_content, does not need to use this tag */
-  ['@_content']() {
-    let value = this._findTagValue(['@_content']);
-    if (value) {
-      this._value.content = value;
-    }
-  }
-
-  /** for @_generator, does not need to use this tag */
-  ['@_generator']() {
-    let tag = this._find(['@_generator']);
-    if (tag) {
-      this._value.generator = true;
     }
   }
 
@@ -531,7 +538,7 @@ export default class AbstractDoc {
    * find last tag.
    * @param {string[]} names - tag names.
    * @returns {Tag|null} found tag.
-   * @private
+   * @protected
    */
   _find(names) {
     let results = this._findAll(names);

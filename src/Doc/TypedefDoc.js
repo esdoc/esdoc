@@ -15,7 +15,7 @@ export default class TypedefDoc extends AbstractDoc {
   _apply() {
     super._apply();
 
-    this['@typedef']();
+    this._$typedef();
 
     delete this._value.export;
     delete this._value.importPath;
@@ -23,15 +23,14 @@ export default class TypedefDoc extends AbstractDoc {
   }
 
   /** specify ``typedef`` to kind. */
-  ['@_kind']() {
-    super['@_kind']();
-    if (this._value.kind) return;
+  _$kind() {
+    super._$kind();
     this._value.kind = 'typedef';
   }
 
   /** set name by using tag. */
-  ['@_name']() {
-    let tags = this._findAll(['@_name', '@typedef']);
+  _$name() {
+    let tags = this._findAll(['@typedef']);
     if (!tags) {
       logger.w(`can not resolve name.`);
       return;
@@ -40,21 +39,16 @@ export default class TypedefDoc extends AbstractDoc {
     let name;
     for (let tag of tags) {
       let {tagName, tagValue} = tag;
-      if (tagName === '@_name') {
-        name = tagValue;
-      } else if (tagName === '@typedef') {
-        let {typeText, paramName, paramDesc} = ParamParser.parseParamValue(tagValue, true, true, false);
-        name = paramName;
-      }
+      let {typeText, paramName, paramDesc} = ParamParser.parseParamValue(tagValue, true, true, false);
+      name = paramName;
     }
 
     this._value.name = name;
   }
 
   /** set memberof by using file path. */
-  ['@_memberof']() {
-    super['@_memberof']();
-    if (this._value.memberof) return;
+  _$memberof() {
+    super._$memberof();
 
     let memberof;
     let parent = this._node.parent;
@@ -71,7 +65,7 @@ export default class TypedefDoc extends AbstractDoc {
   }
 
   /** for @typedef */
-  ['@typedef']() {
+  _$typedef() {
     let value = this._findTagValue(['@typedef']);
     if (!value) return;
 

@@ -12,7 +12,7 @@ export default class TestDoc extends AbstractDoc {
   _apply() {
     super._apply();
 
-    this['@testTarget']();
+    this._$testTarget();
 
     delete this._value.export;
     delete this._value.importPath;
@@ -20,9 +20,8 @@ export default class TestDoc extends AbstractDoc {
   }
 
   /** use name property of self node. */
-  ['@_kind']() {
-    super['@_kind']();
-    if (this._value.kind) return;
+  _$kind() {
+    super._$kind();
 
     switch (this._node.callee.name) {
       case 'suite': //fall
@@ -40,18 +39,16 @@ export default class TestDoc extends AbstractDoc {
   }
 
   /** set name and testId from special esdoc property. */
-  ['@_name']() {
-    super['@_name']();
-    if (this._value.name) return;
+  _$name() {
+    super._$name();
 
     this._value.name = this._node._esdocTestName;
     this._value.testId = this._node._esdocTestId;
   }
 
   /** set memberof to use parent test nod and file path. */
-  ['@_memberof']() {
-    super['@_memberof']();
-    if (this._value.memberof) return;
+  _$memberof() {
+    super._$memberof();
 
     let chain = [];
     let parent = this._node.parent;
@@ -72,15 +69,15 @@ export default class TestDoc extends AbstractDoc {
   }
 
   /** set describe by using test node arguments. */
-  ['@desc']() {
-    super['@desc']();
+  _$desc() {
+    super._$desc();
     if (this._value.description) return;
 
     this._value.description = this._node.arguments[0].value;
   }
 
   /** for @testTarget. */
-  ['@testTarget']() {
+  _$testTarget() {
     let values = this._findAllTagValues(['@test', '@testTarget']);
     if (!values) return;
 

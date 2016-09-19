@@ -8,20 +8,19 @@ import ASTUtil from '../Util/ASTUtil.js';
  */
 export default class FunctionDoc extends AbstractDoc {
   /** specify ``function`` to kind. */
-  ['@_kind']() {
-    super['@_kind']();
-    if (this._value.kind) return;
+  _$kind() {
+    super._$kind();
     this._value.kind = 'function';
   }
 
   /** take out self name from self node */
-  ['@_name']() {
-    super['@_name']();
-    if (this._value.name) return;
+  _$name() {
+    super._$name();
 
     if (this._node.id) {
       if (this._node.id.type === 'MemberExpression') {
-        this._value.name = ASTUtil.flattenMemberExpression(this._node.id);
+        // todo: can not reproduce this condition.
+        // this._value.name = ASTUtil.flattenMemberExpression(this._node.id);
       } else {
         this._value.name = this._node.id.name;
       }
@@ -31,31 +30,28 @@ export default class FunctionDoc extends AbstractDoc {
   }
 
   /** take out self name from file path */
-  ['@_memberof']() {
-    super['@_memberof']();
-    if (this._value.memberof) return;
+  _$memberof() {
+    super._$memberof();
     this._value.memberof = this._pathResolver.filePath;
   }
 
   /** check generator property in self node */
-  ['@_generator']() {
-    super['@_generator']();
-    if ('generator' in this._value) return;
-
+  _$generator() {
+    super._$generator();
     this._value.generator = this._node.generator;
   }
 
   /** if @param is not exists, guess type of param by using self node. */
-  ['@param']() {
-    super['@param']();
+  _$param() {
+    super._$param();
     if (this._value.params) return;
 
     this._value.params = ParamParser.guessParams(this._node.params);
   }
 
   /** if @return is not exists, guess type of return by using self node. */
-  ['@return']() {
-    super['@return']();
+  _$return() {
+    super._$return();
     if (this._value.return) return;
 
     let result = ParamParser.guessReturnParam(this._node.body);

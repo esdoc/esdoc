@@ -18,33 +18,25 @@ export default class FileDoc extends AbstractDoc {
   }
 
   /** specify ``file`` to kind. */
-  ['@_kind']() {
-    super['@_kind']();
-    if (this._value.kind) return;
+  _$kind() {
+    super._$kind();
     this._value.kind = 'file';
   }
 
   /** take out self name from file path */
-  ['@_name']() {
-    super['@_name']();
-    if (this._value.name) return;
+  _$name() {
+    super._$name();
     this._value.name = this._pathResolver.filePath;
   }
 
   /** specify name to longname */
-  ['@_longname']() {
-    let value = this._findTagValue(['@_longname']);
-    if (value) {
-      this._value.longname = value;
-    } else {
-      this._value.longname = this._value.name;
-    }
+  _$longname() {
+    this._value.longname = this._value.name;
   }
 
   /** specify file content to value.content */
-  ['@_content']() {
-    super['@_content']();
-    if ('content' in this._value) return;
+  _$content() {
+    super._$content();
 
     let filePath = this._pathResolver.fileFullPath;
     let content = fs.readFileSync(filePath, {encode: 'utf8'}).toString();

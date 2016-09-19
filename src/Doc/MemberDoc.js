@@ -20,21 +20,13 @@ export default class MemberDoc extends AbstractDoc {
   }
 
   /** specify ``member`` to kind. */
-  ['@_kind']() {
-    super['@_kind']();
-    if (this._value.kind) return;
+  _$kind() {
+    super._$kind();
     this._value.kind = 'member';
   }
 
   /** use static property in class */
-  ['@_static']() {
-    let tag = this._find(['@_static']);
-    if (tag) {
-      let value = ['', 'true', true].includes(tag.tagValue);
-      this._value.static = value;
-      return;
-    }
-
+  _$static() {
     let parent = this._node.parent;
     while (parent) {
       if (parent.type === 'ClassMethod') {
@@ -46,40 +38,25 @@ export default class MemberDoc extends AbstractDoc {
   }
 
   /** take out self name from self node */
-  ['@_name']() {
+  _$name() {
     let name;
-    let tags = this._findAll(['@_name', '@_member']);
-    if (tags) {
-      for (let tag of tags) {
-        let {tagName, tagValue} = tag;
-        if (tagName === '@_name') {
-          name = tagValue;
-        } else if (tagName === '@_member') {
-          let {paramName} = ParamParser.parseParamValue(tagValue, true, true, false);
-          name = paramName;
-        }
-      }
-
+    if (this._node.left.computed) {
+      const expression = babelGenerator(this._node.left.property).code.replace(/^this/, '');
+      name = `[${expression}]`;
     } else {
-      if (this._node.left.computed) {
-        const expression = babelGenerator(this._node.left.property).code.replace(/^this/, '');
-        name = `[${expression}]`;
-      } else {
-        name = this._flattenMemberExpression(this._node.left).replace(/^this\./, '');
-      }
+      name = this._flattenMemberExpression(this._node.left).replace(/^this\./, '');
     }
-
     this._value.name = name;
   }
 
   /** borrow {@link MethodDoc#@_memberof} */
-  ['@_memberof']() {
-    MethodDoc.prototype['@_memberof'].call(this);
+  _$memberof() {
+    MethodDoc.prototype._$memberof.call(this);
   }
 
   /** if @type is not exists, guess type by using self node */
-  ['@type']() {
-    super['@type']();
+  _$type() {
+    super._$type();
     if (this._value.type) return;
 
     this._value.type = ParamParser.guessType(this._node.right);

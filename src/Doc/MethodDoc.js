@@ -19,16 +19,14 @@ export default class MethodDoc extends AbstractDoc {
   }
 
   /** use kind property of self node. */
-  ['@_kind']() {
-    AbstractDoc.prototype['@_kind'].call(this);
-    if (this._value.kind) return;
+  _$kind() {
+    super._$kind();
     this._value.kind = this._node.kind;
   }
 
   /** take out self name from self node */
-  ['@_name']() {
-    AbstractDoc.prototype['@_name'].call(this);
-    if (this._value.name) return;
+  _$name() {
+    super._$name();
 
     if (this._node.computed) {
       const expression = babelGenerator(this._node.key).code;
@@ -39,9 +37,8 @@ export default class MethodDoc extends AbstractDoc {
   }
 
   /** take out memberof from parent class node */
-  ['@_memberof']() {
-    AbstractDoc.prototype['@_memberof'].call(this);
-    if (this._value.memberof) return;
+  _$memberof() {
+    super._$memberof();
 
     let memberof;
     let parent = this._node.parent;
@@ -56,8 +53,8 @@ export default class MethodDoc extends AbstractDoc {
   }
 
   /** if @param is not exists, guess type of param by using self node. but ``get`` and ``set`` are not guessed. */
-  ['@param']() {
-    super['@param']();
+  _$param() {
+    super._$param();
     if (this._value.params) return;
 
     if (['set', 'get'].includes(this._value.kind)) return;
@@ -66,8 +63,8 @@ export default class MethodDoc extends AbstractDoc {
   }
 
   /** if @type is not exists, guess type by using self node. only ``get`` and ``set`` are guess. */
-  ['@type']() {
-    super['@type']();
+  _$type() {
+    super._$type();
     if (this._value.type) return;
 
     switch (this._value.kind) {
@@ -82,8 +79,8 @@ export default class MethodDoc extends AbstractDoc {
   }
 
   /** if @return is not exists, guess type of return by usigin self node. but ``constructor``, ``get`` and ``set``are not guessed. */
-  ['@return']() {
-    super['@return']();
+  _$return() {
+    super._$return();
     if (this._value.return) return;
 
     if (['constructor', 'set', 'get'].includes(this._value.kind)) return;
@@ -95,9 +92,8 @@ export default class MethodDoc extends AbstractDoc {
   }
 
   /** use generator property of self node. */
-  ['@_generator']() {
-    super['@_generator']();
-    if ('generator' in this._value) return;
+  _$generator() {
+    super._$generator();
 
     this._value.generator = this._node.generator;
   }
