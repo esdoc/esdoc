@@ -20,13 +20,13 @@ export default class MemberDoc extends AbstractDoc {
   }
 
   /** specify ``member`` to kind. */
-  ['@_kind']() {
-    super['@_kind']();
+  _$kind() {
+    super._$kind();
     this._value.kind = 'member';
   }
 
   /** use static property in class */
-  ['@_static']() {
+  _$static() {
     let parent = this._node.parent;
     while (parent) {
       if (parent.type === 'ClassMethod') {
@@ -38,7 +38,7 @@ export default class MemberDoc extends AbstractDoc {
   }
 
   /** take out self name from self node */
-  ['@_name']() {
+  _$name() {
     let name;
     if (this._node.left.computed) {
       const expression = babelGenerator(this._node.left.property).code.replace(/^this/, '');
@@ -50,13 +50,13 @@ export default class MemberDoc extends AbstractDoc {
   }
 
   /** borrow {@link MethodDoc#@_memberof} */
-  ['@_memberof']() {
-    MethodDoc.prototype['@_memberof'].call(this);
+  _$memberof() {
+    MethodDoc.prototype._$memberof.call(this);
   }
 
   /** if @type is not exists, guess type by using self node */
-  ['@type']() {
-    super['@type']();
+  _$type() {
+    super._$type();
     if (this._value.type) return;
 
     this._value.type = ParamParser.guessType(this._node.right);

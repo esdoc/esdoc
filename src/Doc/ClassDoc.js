@@ -14,20 +14,20 @@ export default class ClassDoc extends AbstractDoc {
   _apply() {
     super._apply();
 
-    this['@interface']();
-    this['@extends']();
-    this['@implements']();
+    this._$interface();
+    this._$extends();
+    this._$implements();
   }
 
   /** specify ``class`` to kind. */
-  ['@_kind']() {
-    super['@_kind']();
+  _$kind() {
+    super._$kind();
     this._value.kind = 'class';
   }
 
   /** take out self name from self node */
-  ['@_name']() {
-    super['@_name']();
+  _$name() {
+    super._$name();
 
     if (this._node.id) {
       this._value.name = this._node.id.name;
@@ -37,13 +37,13 @@ export default class ClassDoc extends AbstractDoc {
   }
 
   /** take out self memberof from file path. */
-  ['@_memberof']() {
-    super['@_memberof']();
+  _$memberof() {
+    super._$memberof();
     this._value.memberof = this._pathResolver.filePath;
   }
 
   /** for @interface */
-  ['@interface']() {
+  _$interface() {
     let tag = this._find(['@interface']);
     if (tag) {
       this._value.interface = ['', 'true', true].includes(tag.tagValue);
@@ -53,7 +53,7 @@ export default class ClassDoc extends AbstractDoc {
   }
 
   /** for @extends, does not need to use this tag. */
-  ['@extends']() {
+  _$extends() {
     let values = this._findAllTagValues(['@extends', '@extend']);
     if (values) {
       this._value.extends = [];
@@ -106,7 +106,7 @@ export default class ClassDoc extends AbstractDoc {
   }
 
   /** for @implements */
-  ['@implements'](){
+  _$implements(){
     let values = this._findAllTagValues(['@implements', '@implement']);
     if (!values) return;
 

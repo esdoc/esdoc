@@ -21,13 +21,13 @@ export default class ExternalDoc extends AbstractDoc {
   }
 
   /** specify ``external`` to kind. */
-  ['@_kind']() {
-    super['@_kind']();
+  _$kind() {
+    super._$kind();
     this._value.kind = 'external';
   }
 
   /** take out self name from tag */
-  ['@_name']() {
+  _$name() {
     let value = this._findTagValue(['@external']);
     if (!value) {
       logger.w(`can not resolve name.`);
@@ -53,19 +53,19 @@ export default class ExternalDoc extends AbstractDoc {
   }
 
   /** take out self memberof from file path. */
-  ['@_memberof']() {
-    super['@_memberof']();
+  _$memberof() {
+    super._$memberof();
     this._value.memberof = this._pathResolver.filePath;
   }
 
   /** specify name to longname */
-  ['@_longname']() {
-    super['@_longname']();
+  _$longname() {
+    super._$longname();
     if (this._value.longname) return;
     this._value.longname = this._value.name;
   }
 
   /** avoid unknown tag */
-  ['@external']() {}
+  _$external() {}
 }
 

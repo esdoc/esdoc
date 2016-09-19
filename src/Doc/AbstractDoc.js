@@ -40,49 +40,49 @@ export default class AbstractDoc {
    * @protected
    */
   _apply() {
-    this['@_kind']();
-    this['@_static']();
-    this['@_variation']();
-    this['@_name']();
-    this['@_memberof']();
-    this['@_longname']();
-    this['@access']();
-    this['@_export']();
-    this['@_importPath']();
-    this['@_importStyle']();
-    this['@desc']();
-    this['@example']();
-    this['@see']();
-    this['@_lineNumber']();
-    this['@deprecated']();
-    this['@experimental']();
-    this['@since']();
-    this['@version']();
-    this['@todo']();
-    this['@ignore']();
-    this['@_pseudoExport']();
-    this['@_undocument']();
-    this['@_unknown']();
+    this._$kind();
+    this._$variation();
+    this._$name();
+    this._$memberof();
+    this._$member();
+    this._$content();
+    this._$generator();
 
-    this['@param']();
-    this['@property']();
-    this['@return']();
-    this['@type']();
-    this['@abstract']();
-    this['@override']();
-    this['@throws']();
-    this['@emits']();
-    this['@listens']();
-    this['@_member']();
-    this['@_content']();
-    this['@_generator']();
+    this._$static();
+    this._$longname();
+    this._$access();
+    this._$export();
+    this._$importPath();
+    this._$importStyle();
+    this._$desc();
+    this._$example();
+    this._$see();
+    this._$lineNumber();
+    this._$deprecated();
+    this._$experimental();
+    this._$since();
+    this._$version();
+    this._$todo();
+    this._$ignore();
+    this._$pseudoExport();
+    this._$undocument();
+    this._$unknown();
+    this._$param();
+    this._$property();
+    this._$return();
+    this._$type();
+    this._$abstract();
+    this._$override();
+    this._$throws();
+    this._$emits();
+    this._$listens();
   }
 
   /**
    * decide `kind`.
    * @abstract
    */
-  ['@_kind']() {}
+  _$kind() {}
 
   /** for @_variation */
   /**
@@ -90,42 +90,42 @@ export default class AbstractDoc {
    * @todo implements `@variation`.
    * @abstract
    */
-  ['@_variation']() {}
+  _$variation() {}
 
   /**
    * decide `name`
    * @abstract
    */
-  ['@_name']() {}
+  _$name() {}
 
   /**
    * decide `memberof`.
    * @abstract
    */
-  ['@_memberof']() {}
+  _$memberof() {}
 
   /**
    * decide `member`.
    * @abstract
    */
-  ['@_member']() {}
+  _$member() {}
 
   /**
    * decide `content`.
    * @abstract
    */
-  ['@_content']() {}
+  _$content() {}
 
   /**
    * decide `generator`.
    * @abstract
    */
-  ['@_generator']() {}
+  _$generator() {}
 
   /**
    * decide `static`.
    */
-  ['@_static']() {
+  _$static() {
     if ('static' in this._node) {
       this._value.static = this._node.static;
     } else {
@@ -136,7 +136,7 @@ export default class AbstractDoc {
   /**
    * decide `longname`.
    */
-  ['@_longname']() {
+  _$longname() {
     let memberof = this._value.memberof;
     let name = this._value.name;
     let scope = this._value.static ? '.' : '#';
@@ -151,7 +151,7 @@ export default class AbstractDoc {
    * decide `access`.
    * process also @public, @private and @protected.
    */
-  ['@access']() {
+  _$access() {
     let tag = this._find(['@access', '@public', '@private', '@protected']);
     if (tag) {
       let access;
@@ -171,22 +171,22 @@ export default class AbstractDoc {
   /**
    * avoid unknown tag.
    */
-  ['@public'](){}
+  _$public(){}
 
   /**
    * avoid unknown tag.
    */
-  ['@protected']() {}
+  _$protected() {}
 
   /**
    * avoid unknown tag.
    */
-  ['@private']() {}
+  _$private() {}
 
   /**
    * decide `export`.
    */
-  ['@_export']() {
+  _$export() {
     let parent = this._node.parent;
     while (parent) {
       if (parent.type === 'ExportDefaultDeclaration') {
@@ -206,14 +206,14 @@ export default class AbstractDoc {
   /**
    * decide `importPath`.
    */
-  ['@_importPath']() {
+  _$importPath() {
     this._value.importPath = this._pathResolver.importPath;
   }
 
   /**
    * decide `importStyle`.
    */
-  ['@_importStyle']() {
+  _$importStyle() {
     if (this._node.__esdoc__pseudo_export) {
       this._value.importStyle = null;
       return;
@@ -238,14 +238,14 @@ export default class AbstractDoc {
   /**
    * decide `description`.
    */
-  ['@desc']() {
+  _$desc() {
     this._value.description = this._findTagValue(['@desc']);
   }
 
   /**
    * decide `examples`.
    */
-  ['@example']() {
+  _$example() {
     let tags = this._findAll(['@example']);
     if (!tags) return;
     if (!tags.length) return;
@@ -259,7 +259,7 @@ export default class AbstractDoc {
   /**
    * decide `see`.
    */
-  ['@see']() {
+  _$see() {
     let tags = this._findAll(['@see']);
     if (!tags) return;
     if (!tags.length) return;
@@ -273,7 +273,7 @@ export default class AbstractDoc {
   /**
    * decide `lineNumber`.
    */
-  ["@_lineNumber"]() {
+  _$lineNumber() {
     let node = this._node;
     if (node.loc) {
       this._value.lineNumber = node.loc.start.line;
@@ -283,7 +283,7 @@ export default class AbstractDoc {
   /**
    * decide `deprecated`.
    */
-  ['@deprecated']() {
+  _$deprecated() {
     let tag = this._find(['@deprecated']);
     if (tag) {
       if (tag.tagValue) {
@@ -297,7 +297,7 @@ export default class AbstractDoc {
   /**
    * decide `experimental`.
    */
-  ['@experimental'](){
+  _$experimental(){
     let tag = this._find(['@experimental']);
     if (tag) {
       if (tag.tagValue) {
@@ -311,7 +311,7 @@ export default class AbstractDoc {
   /**
    * decide `since`.
    */
-  ['@since'](){
+  _$since(){
     let tag = this._find(['@since']);
     if (tag) {
       this._value.since = tag.tagValue;
@@ -321,7 +321,7 @@ export default class AbstractDoc {
   /**
    * decide `version`.
    */
-  ['@version'](){
+  _$version(){
     let tag = this._find(['@version']);
     if (tag) {
       this._value.version = tag.tagValue;
@@ -331,7 +331,7 @@ export default class AbstractDoc {
   /**
    * decide `todo`.
    */
-  ['@todo'](){
+  _$todo(){
     let tags = this._findAll(['@todo']);
     if (tags) {
       this._value.todo = [];
@@ -344,7 +344,7 @@ export default class AbstractDoc {
   /**
    * decide `ignore`.
    */
-  ['@ignore'](){
+  _$ignore(){
     let tag = this._find(['@ignore']);
     if (tag) {
       this._value.ignore = true;
@@ -354,7 +354,7 @@ export default class AbstractDoc {
   /**
    * decide `pseudoExport`.
    */
-  ['@_pseudoExport'](){
+  _$pseudoExport(){
     if (this._node.__esdoc__pseudo_export) {
       this._value.pseudoExport = true;
     }
@@ -363,7 +363,7 @@ export default class AbstractDoc {
   /**
    * decide `undocument` with internal tag.
    */
-  ['@_undocument']() {
+  _$undocument() {
     let tag = this._find(['@_undocument']);
     if (tag) {
       this._value.undocument = true;
@@ -373,9 +373,10 @@ export default class AbstractDoc {
   /**
    * decide `unknown`.
    */
-  ['@_unknown']() {
+  _$unknown() {
     for (let tag of this._commentTags) {
-      if (this[tag.tagName]) continue;
+      const methodName = tag.tagName.replace(/^[@]/, '_$');
+      if (this[methodName]) continue;
 
       if (!this._value.unknown) this._value.unknown = [];
       this._value.unknown.push(tag);
@@ -385,7 +386,7 @@ export default class AbstractDoc {
   /**
    * decide `param`.
    */
-  ['@param']() {
+  _$param() {
     let values = this._findAllTagValues(['@param']);
     if (!values) return;
 
@@ -404,7 +405,7 @@ export default class AbstractDoc {
   /**
    * decide `return`.
    */
-  ['@return']() {
+  _$return() {
     let value = this._findTagValue(['@return', '@returns']);
     if (!value) return;
 
@@ -416,7 +417,7 @@ export default class AbstractDoc {
   /**
    * decide `property`.
    */
-  ['@property']() {
+  _$property() {
     let values = this._findAllTagValues(['@property']);
     if (!values) return;
 
@@ -431,7 +432,7 @@ export default class AbstractDoc {
   /**
    * decide `type`.
    */
-  ['@type']() {
+  _$type() {
     let value = this._findTagValue(['@type']);
     if (!value) return;
 
@@ -443,7 +444,7 @@ export default class AbstractDoc {
   /**
    * decide `abstract`.
    */
-  ['@abstract']() {
+  _$abstract() {
     let tag = this._find(['@abstract']);
     if (tag) {
       this._value.abstract = true;
@@ -453,7 +454,7 @@ export default class AbstractDoc {
   /**
    * decide `override`.
    */
-  ['@override'](){
+  _$override(){
     let tag = this._find(['@override']);
     if (tag) {
       this._value.override = true;
@@ -463,7 +464,7 @@ export default class AbstractDoc {
   /**
    * decide `throws`.
    */
-  ['@throws'](){
+  _$throws(){
     let values = this._findAllTagValues(['@throws']);
     if (!values) return;
 
@@ -481,7 +482,7 @@ export default class AbstractDoc {
   /**
    * decide `emits`.
    */
-  ['@emits'](){
+  _$emits(){
     let values = this._findAllTagValues(['@emits']);
     if (!values) return;
 
@@ -499,7 +500,7 @@ export default class AbstractDoc {
   /**
    * decide `listens`.
    */
-  ['@listens'](){
+  _$listens(){
     let values = this._findAllTagValues(['@listens']);
     if (!values) return;
 
