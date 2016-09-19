@@ -216,6 +216,8 @@ export default class DocResolver {
 
       // traverse super class.
       let chains = [];
+
+      /* eslint-disable */
       while (1) {
         if (!doc.extends) break;
 
