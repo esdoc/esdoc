@@ -84,17 +84,6 @@ export default class AbstractDoc {
    */
   ['@_kind']() {}
 
-  /**
-   * decide `static`.
-   */
-  ['@_static']() {
-    if ('static' in this._node) {
-      this._value.static = this._node.static;
-    } else {
-      this._value.static = true;
-    }
-  }
-
   /** for @_variation */
   /**
    * decide `variation`.
@@ -114,6 +103,35 @@ export default class AbstractDoc {
    * @abstract
    */
   ['@_memberof']() {}
+
+  /**
+   * decide `member`.
+   * @abstract
+   */
+  ['@_member']() {}
+
+  /**
+   * decide `content`.
+   * @abstract
+   */
+  ['@_content']() {}
+
+  /**
+   * decide `generator`.
+   * @abstract
+   */
+  ['@_generator']() {}
+
+  /**
+   * decide `static`.
+   */
+  ['@_static']() {
+    if ('static' in this._node) {
+      this._value.static = this._node.static;
+    } else {
+      this._value.static = true;
+    }
+  }
 
   /**
    * decide `longname`.
@@ -495,23 +513,6 @@ export default class AbstractDoc {
       });
     }
   }
-
-  /**
-   * decide `member`.
-   */
-  ['@_member']() {}
-
-  /**
-   * decide `content`.
-   * @abstract
-   */
-  ['@_content']() {}
-
-  /**
-   * decide `generator`.
-   * @abstract
-   */
-  ['@_generator']() {}
 
   /**
    * find all tags.
