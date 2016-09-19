@@ -5,7 +5,6 @@
   "debug": false,
   "index": "./test/fixture/package/README.md",
   "package": "./test/fixture/package/package.json",
-  "importPathPrefix": "out",
   "title": "ESDoc Test Fixture",
   "test": {
     "type": "mocha",

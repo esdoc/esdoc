@@ -176,9 +176,7 @@ export default class ESDoc {
   }
 
   static _deprecatedConfig(config) {
-    if (config.importPathPrefix) {
-      console.log('[31m[deprecated] config.importPathPrefix is deprecated. use esdoc-importpath-plugin(https://github.com/esdoc/esdoc-importpath-plugin)[0m');
-    }
+    // do nothing
   }
 
   /**

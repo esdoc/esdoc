@@ -15,7 +15,6 @@
  * @property {boolean} [debug=false]
  * @property {string} [index="./README.md"]
  * @property {string} [package="./package.json"]
- * @property {string} [importPathPrefix=""]
  * @property {string[]} [styles=[]]
  * @property {string[]} [scripts=[]]
  * @property {{type: string, source: string, includes: string[], excludes: string[]}} test
