@@ -9,6 +9,9 @@
     "type": "git",
     "url": "https://github.com/esdoc/esdoc"
   },
+  "engines" : {
+    "node" : ">= 6.0.0"
+  },
   "scripts": {
     "build": "node ./script/build.js",
     "test": "node ./script/test.js",
