@@ -23,20 +23,19 @@ export default class ExternalDoc extends AbstractDoc {
   /** specify ``external`` to kind. */
   ['@_kind']() {
     super['@_kind']();
-    if (this._value.kind) return;
     this._value.kind = 'external';
   }
 
   /** take out self name from tag */
   ['@_name']() {
-    let value = this._findTagValue(['@_name', '@external']);
+    let value = this._findTagValue(['@external']);
     if (!value) {
       logger.w(`can not resolve name.`);
     }
 
     this._value.name = value;
 
-    let tags = this._findAll(['@_name', '@external']);
+    let tags = this._findAll(['@external']);
     if (!tags) {
       logger.w(`can not resolve name.`);
       return;
@@ -45,13 +44,9 @@ export default class ExternalDoc extends AbstractDoc {
     let name;
     for (let tag of tags) {
       let {tagName, tagValue} = tag;
-      if (tagName === '@_name') {
-        name = tagValue;
-      } else if (tagName === '@external') {
-        let {typeText, paramDesc} = ParamParser.parseParamValue(tagValue, true, false, true);
-        name = typeText;
-        this._value.externalLink = paramDesc;
-      }
+      let {typeText, paramDesc} = ParamParser.parseParamValue(tagValue, true, false, true);
+      name = typeText;
+      this._value.externalLink = paramDesc;
     }
 
     this._value.name = name;
@@ -60,7 +55,6 @@ export default class ExternalDoc extends AbstractDoc {
   /** take out self memberof from file path. */
   ['@_memberof']() {
     super['@_memberof']();
-    if (this._value.memberof) return;
     this._value.memberof = this._pathResolver.filePath;
   }
 
@@ -71,9 +65,7 @@ export default class ExternalDoc extends AbstractDoc {
     this._value.longname = this._value.name;
   }
 
-  /** for @external */
-  ['@external']() {
-    // avoid unknown tag.
-  }
+  /** avoid unknown tag */
+  ['@external']() {}
 }
 

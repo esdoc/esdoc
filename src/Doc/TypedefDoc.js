@@ -25,13 +25,13 @@ export default class TypedefDoc extends AbstractDoc {
   /** specify ``typedef`` to kind. */
   ['@_kind']() {
     super['@_kind']();
-    if (this._value.kind) return;
+    // if (this._value.kind) return;
     this._value.kind = 'typedef';
   }
 
   /** set name by using tag. */
   ['@_name']() {
-    let tags = this._findAll(['@_name', '@typedef']);
+    let tags = this._findAll(['@typedef']);
     if (!tags) {
       logger.w(`can not resolve name.`);
       return;
@@ -40,12 +40,8 @@ export default class TypedefDoc extends AbstractDoc {
     let name;
     for (let tag of tags) {
       let {tagName, tagValue} = tag;
-      if (tagName === '@_name') {
-        name = tagValue;
-      } else if (tagName === '@typedef') {
-        let {typeText, paramName, paramDesc} = ParamParser.parseParamValue(tagValue, true, true, false);
-        name = paramName;
-      }
+      let {typeText, paramName, paramDesc} = ParamParser.parseParamValue(tagValue, true, true, false);
+      name = paramName;
     }
 
     this._value.name = name;
@@ -54,7 +50,6 @@ export default class TypedefDoc extends AbstractDoc {
   /** set memberof by using file path. */
   ['@_memberof']() {
     super['@_memberof']();
-    if (this._value.memberof) return;
 
     let memberof;
     let parent = this._node.parent;

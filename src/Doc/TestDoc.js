@@ -22,7 +22,6 @@ export default class TestDoc extends AbstractDoc {
   /** use name property of self node. */
   ['@_kind']() {
     super['@_kind']();
-    if (this._value.kind) return;
 
     switch (this._node.callee.name) {
       case 'suite': //fall
@@ -42,7 +41,6 @@ export default class TestDoc extends AbstractDoc {
   /** set name and testId from special esdoc property. */
   ['@_name']() {
     super['@_name']();
-    if (this._value.name) return;
 
     this._value.name = this._node._esdocTestName;
     this._value.testId = this._node._esdocTestId;
@@ -51,7 +49,6 @@ export default class TestDoc extends AbstractDoc {
   /** set memberof to use parent test nod and file path. */
   ['@_memberof']() {
     super['@_memberof']();
-    if (this._value.memberof) return;
 
     let chain = [];
     let parent = this._node.parent;

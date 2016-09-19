@@ -20,15 +20,13 @@ export default class MethodDoc extends AbstractDoc {
 
   /** use kind property of self node. */
   ['@_kind']() {
-    AbstractDoc.prototype['@_kind'].call(this);
-    if (this._value.kind) return;
+    super['@_kind']();
     this._value.kind = this._node.kind;
   }
 
   /** take out self name from self node */
   ['@_name']() {
-    AbstractDoc.prototype['@_name'].call(this);
-    if (this._value.name) return;
+    super['@_name']();
 
     if (this._node.computed) {
       const expression = babelGenerator(this._node.key).code;
@@ -40,8 +38,7 @@ export default class MethodDoc extends AbstractDoc {
 
   /** take out memberof from parent class node */
   ['@_memberof']() {
-    AbstractDoc.prototype['@_memberof'].call(this);
-    if (this._value.memberof) return;
+    super['@_memberof']();
 
     let memberof;
     let parent = this._node.parent;
@@ -97,7 +94,6 @@ export default class MethodDoc extends AbstractDoc {
   /** use generator property of self node. */
   ['@_generator']() {
     super['@_generator']();
-    if ('generator' in this._value) return;
 
     this._value.generator = this._node.generator;
   }

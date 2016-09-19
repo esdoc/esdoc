@@ -9,15 +9,12 @@ export default class VariableDoc extends AbstractDoc {
   /** specify ``variable`` to kind. */
   ['@_kind']() {
     super['@_kind']();
-    if (this._value.kind) return;
-
     this._value.kind = 'variable';
   }
 
   /** set name by using self node. */
   ['@_name']() {
     super['@_name']();
-    if (this._value.name) return;
 
     switch (this._node.declarations[0].id.type) {
       case 'Identifier':
@@ -37,7 +34,7 @@ export default class VariableDoc extends AbstractDoc {
   /** set memberof by using file path. */
   ['@_memberof']() {
     super['@_memberof']();
-    if (this._value.memberof) return;
+    // if (this._value.memberof) return;
     this._value.memberof = this._pathResolver.filePath;
   }
 

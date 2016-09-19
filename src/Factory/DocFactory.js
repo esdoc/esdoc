@@ -397,11 +397,6 @@ export default class DocFactory {
     for (let tag of tags) {
       let tagName = tag.tagName;
       switch (tagName) {
-        case '@_class':    type = 'Class'; break;
-        case '@_member':   type = 'Member'; break;
-        case '@_method':   type = 'Method'; break;
-        case '@_function': type = 'Function'; break;
-        case '@_var':      type = 'Variable'; break;
         case '@typedef':  type = 'Typedef'; break;
         case '@external': type = 'External'; break;
       }

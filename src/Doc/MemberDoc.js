@@ -22,19 +22,11 @@ export default class MemberDoc extends AbstractDoc {
   /** specify ``member`` to kind. */
   ['@_kind']() {
     super['@_kind']();
-    if (this._value.kind) return;
     this._value.kind = 'member';
   }
 
   /** use static property in class */
   ['@_static']() {
-    let tag = this._find(['@_static']);
-    if (tag) {
-      let value = ['', 'true', true].includes(tag.tagValue);
-      this._value.static = value;
-      return;
-    }
-
     let parent = this._node.parent;
     while (parent) {
       if (parent.type === 'ClassMethod') {
@@ -48,27 +40,12 @@ export default class MemberDoc extends AbstractDoc {
   /** take out self name from self node */
   ['@_name']() {
     let name;
-    let tags = this._findAll(['@_name', '@_member']);
-    if (tags) {
-      for (let tag of tags) {
-        let {tagName, tagValue} = tag;
-        if (tagName === '@_name') {
-          name = tagValue;
-        } else if (tagName === '@_member') {
-          let {paramName} = ParamParser.parseParamValue(tagValue, true, true, false);
-          name = paramName;
-        }
-      }
-
+    if (this._node.left.computed) {
+      const expression = babelGenerator(this._node.left.property).code.replace(/^this/, '');
+      name = `[${expression}]`;
     } else {
-      if (this._node.left.computed) {
-        const expression = babelGenerator(this._node.left.property).code.replace(/^this/, '');
-        name = `[${expression}]`;
-      } else {
-        name = this._flattenMemberExpression(this._node.left).replace(/^this\./, '');
-      }
+      name = this._flattenMemberExpression(this._node.left).replace(/^this\./, '');
     }
-
     this._value.name = name;
   }
 
