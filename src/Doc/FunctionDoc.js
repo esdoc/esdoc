@@ -19,7 +19,8 @@ export default class FunctionDoc extends AbstractDoc {
 
     if (this._node.id) {
       if (this._node.id.type === 'MemberExpression') {
-        this._value.name = ASTUtil.flattenMemberExpression(this._node.id);
+        // todo: can not reproduce this condition.
+        // this._value.name = ASTUtil.flattenMemberExpression(this._node.id);
       } else {
         this._value.name = this._node.id.name;
       }
