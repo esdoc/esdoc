@@ -10,6 +10,7 @@ import DocFactory from './Factory/DocFactory.js';
 import TestDocFactory from './Factory/TestDocFactory.js';
 import InvalidCodeLogger from './Util/InvalidCodeLogger.js';
 import Plugin from './Plugin/Plugin.js';
+import defaultPublisher from './Publisher/publish.js';
 
 let logger = new Logger('ESDoc');
 
@@ -28,7 +29,7 @@ export default class ESDoc {
    * @param {ESDocConfig} config - config for generation.
    * @param {function(results: Object[], asts: Object[], config: ESDocConfig)} publisher - callback for output html.
    */
-  static generate(config, publisher) {
+  static generate(config, publisher = defaultPublisher) {
     assert(typeof publisher === 'function');
     assert(config.source);
     assert(config.destination);
@@ -47,14 +48,19 @@ export default class ESDoc {
     let packageName = null;
     let mainFilePath = null;
     if (config.package) {
-      try {
-        let packageJSON = fs.readFileSync(config.package, {encode: 'utf8'});
-        let packageConfig = JSON.parse(packageJSON);
-        packageName = packageConfig.name;
-        mainFilePath = packageConfig.main;
-      } catch (e) {
-        // ignore
+      let packageConfig;
+      if (typeof config.package === 'object') {
+        packageConfig = config.package;
+      } else {
+        try {
+          let packageJSON = fs.readFileSync(config.package, {encode: 'utf8'});
+          packageConfig = JSON.parse(packageJSON);
+        } catch (e) {
+          // ignore
+        }
       }
+      packageName = packageConfig.name;
+      mainFilePath = packageConfig.main;
     }
 
     let results = [];
