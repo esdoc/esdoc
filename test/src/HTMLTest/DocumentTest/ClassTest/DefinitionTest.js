@@ -105,7 +105,7 @@ describe('TestClassDefinition:', ()=> {
           assert.includes(doc, '#static-method-method1', 'public static method1()');
           assert.includes(doc, '[data-ice="description"]', 'this is static method1.');
         });
-      })
+      });
     });
 
     it('has member.', ()=>{
@@ -124,7 +124,7 @@ describe('TestClassDefinition:', ()=> {
           assert.includes(doc, '#instance-set-value2', 'public set value2: number');
           assert.includes(doc, '#instance-set-value2 + [data-ice="description"]', 'this is set value2.');
         });
-      })
+      });
     });
 
     it('has constructor detail.', ()=>{
@@ -133,7 +133,7 @@ describe('TestClassDefinition:', ()=> {
           assert.includes(doc, '#instance-constructor-constructor', 'public constructor()');
           assert.includes(doc, '#instance-constructor-constructor + [data-ice="description"]', 'this is constructor.');
         });
-      })
+      });
     });
 
     it('has method detail.', ()=>{
@@ -142,7 +142,7 @@ describe('TestClassDefinition:', ()=> {
           assert.includes(doc, '#instance-method-method1', 'public method1()');
           assert.includes(doc, '#instance-method-method1 ~ [data-ice="description"]', 'this is method1.');
         });
-      })
+      });
     });
   });
 });

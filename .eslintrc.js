@@ -12,6 +12,7 @@ module.exports = {
     'no-duplicate-case': ['error'],
     'no-empty-character-class': ['error'],
     'no-empty': ['error'],
+    'no-ex-assign': ['error'],
     semi: ['error', 'always'],
     quotes: ['error', 'single']
   }

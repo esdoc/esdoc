@@ -49,7 +49,7 @@ function getActual($el, selector, attr) {
     if ($els.length !== 1) assert(false, `many nodes are found. selector = "${selector}"`);
     $target = $els.first();
   } else {
-    $target = $el
+    $target = $el;
   }
 
   if (!$target.length) {
