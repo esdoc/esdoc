@@ -10,6 +10,7 @@ module.exports = {
     'no-dupe-args': ['error'],
     'no-dupe-keys': ['error'],
     'no-duplicate-case': ['error'],
+    'no-empty-character-class': ['error'],
     semi: ['error', 'always'],
     quotes: ['error', 'single']
   }
