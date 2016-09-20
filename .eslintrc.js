@@ -11,6 +11,7 @@ module.exports = {
     'no-dupe-keys': ['error'],
     'no-duplicate-case': ['error'],
     'no-empty-character-class': ['error'],
+    'no-empty': ['error'],
     semi: ['error', 'always'],
     quotes: ['error', 'single']
   }
