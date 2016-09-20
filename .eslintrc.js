@@ -13,6 +13,7 @@ module.exports = {
     'no-empty-character-class': ['error'],
     'no-empty': ['error'],
     'no-ex-assign': ['error'],
+    'no-extra-boolean-cast': ['error'],
     semi: ['error', 'always'],
     quotes: ['error', 'single', {avoidEscape: true, allowTemplateLiterals: true }]
   }
