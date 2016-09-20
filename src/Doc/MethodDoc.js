@@ -71,10 +71,11 @@ export default class MethodDoc extends AbstractDoc {
       case 'set':
         this._value.type = ParamParser.guessType(this._node.right);
         break;
-      case 'get':
+      case 'get': {
         let result = ParamParser.guessReturnParam(this._node.body);
         if (result) this._value.type = result;
         break;
+      }
     }
   }
 

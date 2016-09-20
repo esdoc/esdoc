@@ -363,7 +363,7 @@ export default class DocBuilder {
    * @private
    */
   _buildSummaryDoc(docs, title, innerLink) {
-    if (docs.length === 0) return;
+    if (docs.length === 0) return null;
 
     let ice = new IceCap(this._readTemplate('summary.html'));
 
@@ -627,9 +627,10 @@ export default class DocBuilder {
       case 'method': // fall
       case 'constructor': // fall
       case 'set': // fall
-      case 'get': // fal
+      case 'get': { // fal
         let parentDoc = this._find({longname: doc.memberof})[0];
         return this._getOutputFileName(parentDoc);
+      }
       case 'external':
         return 'external/index.html';
       case 'typedef':
@@ -994,7 +995,7 @@ export default class DocBuilder {
   _buildOverrideMethod(doc) {
     let parentDoc = this._findByName(doc.memberof)[0];
     if (!parentDoc) return '';
-    if (!parentDoc._custom_extends_chains) return;
+    if (!parentDoc._custom_extends_chains) return '';
 
     let chains = [...parentDoc._custom_extends_chains].reverse();
     for (let longname of chains) {
@@ -1006,6 +1007,8 @@ export default class DocBuilder {
 
       return this._buildDocLinkHTML(superMethodDoc.longname, `${superClassDoc.name}#${superMethodDoc.name}`, true);
     }
+
+    return '';
   }
 
   //_buildAuthorHTML(doc, separator = '\n') {

@@ -235,7 +235,7 @@ export default class ParamParser {
           result.types = ['...*'];
           result.spread = true;
           break;
-        case 'ObjectPattern':
+        case 'ObjectPattern': {
           let objectPattern = [];
           let raw = {};
           for (let property of param.properties) {
@@ -247,6 +247,7 @@ export default class ParamParser {
           result.defaultRaw = raw;
           result.defaultValue = `${JSON.stringify(result.defaultRaw)}`;
           break;
+        }
         default:
           logger.w('unknown param.type', param);
       }

@@ -252,7 +252,7 @@ export default class ClassDocBuilder extends DocBuilder {
         }
 
         order = {public: 0, protected: 1, private: 2};
-        if (a.access != b.access) return order[a.access] - order[b.access];
+        if (a.access !== b.access) return order[a.access] - order[b.access];
 
         if (a.name !== b.name) return a.name < b.name ? -1 : 1;
 

@@ -80,12 +80,13 @@ export default class ClassDoc extends AbstractDoc {
           case 'Identifier':
             longnames.push(this._resolveLongname(target.name));
             break;
-          case 'MemberExpression':
+          case 'MemberExpression': {
             let fullIdentifier = this._flattenMemberExpression(target);
             let rootIdentifier = fullIdentifier.split('.')[0];
             let rootLongname = this._resolveLongname(rootIdentifier);
             let filePath = rootLongname.replace(/~.*/, '');
             longnames.push(`${filePath}~${fullIdentifier}`);
+          }
             break;
         }
       }

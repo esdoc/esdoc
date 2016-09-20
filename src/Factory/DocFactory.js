@@ -105,7 +105,7 @@ export default class DocFactory {
           targetVariableName = targetClassName.replace(/^./, c => c.toLowerCase());
           pseudoClassExport = true;
           break;
-        case 'Identifier':
+        case 'Identifier': {
           let varNode = ASTUtil.findVariableDeclarationAndNewExpressionNode(exportNode.declaration.name, this._ast);
           if (varNode) {
             targetClassName = varNode.declarations[0].init.callee.name;
@@ -117,6 +117,7 @@ export default class DocFactory {
             pseudoClassExport = false;
           }
           break;
+        }
         default:
           logger.w(`unknown export declaration type. type = "${exportNode.declaration.type}"`);
           break;
@@ -379,7 +380,7 @@ export default class DocFactory {
       case 'External': clazz = ExternalDoc; break;
     }
 
-    if (!clazz) return;
+    if (!clazz) return null;
     if (!node.type) node.type = type;
 
     return new clazz(this._ast, node, this._pathResolver, tags);
