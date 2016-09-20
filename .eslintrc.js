@@ -16,6 +16,7 @@ module.exports = {
     'no-extra-boolean-cast': ['error'],
     // 'no-extra-parens': ['error'],
     'no-extra-semi': ['error'],
+    'no-func-assign': ['error'],
     semi: ['error', 'always'],
     quotes: ['error', 'single', {avoidEscape: true, allowTemplateLiterals: true }]
   }
