@@ -9,6 +9,7 @@ module.exports = {
     'no-control-regex': ['error'],
     'no-dupe-args': ['error'],
     'no-dupe-keys': ['error'],
+    'no-duplicate-case': ['error'],
     semi: ['error', 'always'],
     quotes: ['error', 'single']
   }
