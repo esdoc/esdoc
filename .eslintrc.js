@@ -23,6 +23,8 @@ module.exports = {
     'no-obj-calls': ['error'],
     'no-prototype-builtins': ['error'],
     'no-regex-spaces': ['error'],
+    'no-sparse-arrays': ['error'],
+    'no-template-curly-in-string': ['error'],
     semi: ['error', 'always'],
     quotes: ['error', 'single', {avoidEscape: true, allowTemplateLiterals: true }]
   }

@@ -1,3 +1,4 @@
+/* eslint-disable no-template-curly-in-string */
 import {readDoc, assert, find} from './../../../util.js';
 
 /** @test {MemberDoc#@_name} */
