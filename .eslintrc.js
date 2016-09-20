@@ -14,6 +14,8 @@ module.exports = {
     'no-empty': ['error'],
     'no-ex-assign': ['error'],
     'no-extra-boolean-cast': ['error'],
+    // 'no-extra-parens': ['error'],
+    'no-extra-semi': ['error'],
     semi: ['error', 'always'],
     quotes: ['error', 'single', {avoidEscape: true, allowTemplateLiterals: true }]
   }

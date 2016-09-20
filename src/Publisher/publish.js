@@ -113,4 +113,4 @@ export default function publish(values, asts, config) {
   if (config.lint) {
     new LintDocBuilder(data, config).exec();
   }
-};
+}
