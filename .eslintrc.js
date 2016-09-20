@@ -6,6 +6,7 @@ module.exports = {
   rules: {
     'no-cond-assign': ['error'],
     'no-constant-condition': ['error'],
+    'no-control-regex': ['error'],
     semi: ['error', 'always'],
     quotes: ['error', 'single']
   }

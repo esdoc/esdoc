@@ -126,6 +126,7 @@ export function parseExample(example) {
   let body = example;
   let caption = '';
 
+  /* eslint-disable no-control-regex */
   let regexp = new RegExp('^<caption>(.*?)</caption>\n');
   let matched = example.match(regexp);
   if (matched) {
