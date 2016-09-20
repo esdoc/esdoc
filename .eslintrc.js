@@ -21,6 +21,7 @@ module.exports = {
     'no-invalid-regexp': ['error'],
     'no-irregular-whitespace': ['error'],
     'no-obj-calls': ['error'],
+    'no-prototype-builtins': ['error'],
     semi: ['error', 'always'],
     quotes: ['error', 'single', {avoidEscape: true, allowTemplateLiterals: true }]
   }
