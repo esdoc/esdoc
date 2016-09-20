@@ -96,7 +96,7 @@ describe('TestClassDefinition:', ()=> {
           assert.includes(doc, '#static-member-p1', 'public static p1: number');
           assert.includes(doc, '[data-ice="description"]', 'this is static p1.');
         });
-      })
+      });
     });
 
     it('has static method.', ()=>{
