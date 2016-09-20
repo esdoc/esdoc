@@ -20,6 +20,7 @@ module.exports = {
     'no-inner-declarations': ['error'],
     'no-invalid-regexp': ['error'],
     'no-irregular-whitespace': ['error'],
+    'no-obj-calls': ['error'],
     semi: ['error', 'always'],
     quotes: ['error', 'single', {avoidEscape: true, allowTemplateLiterals: true }]
   }
