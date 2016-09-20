@@ -19,6 +19,7 @@ module.exports = {
     'no-func-assign': ['error'],
     'no-inner-declarations': ['error'],
     'no-invalid-regexp': ['error'],
+    'no-irregular-whitespace': ['error'],
     semi: ['error', 'always'],
     quotes: ['error', 'single', {avoidEscape: true, allowTemplateLiterals: true }]
   }
