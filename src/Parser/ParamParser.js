@@ -239,8 +239,12 @@ export default class ParamParser {
           let objectPattern = [];
           let raw = {};
           for (let property of param.properties) {
-            objectPattern.push(`"${property.key.name}": *`);
-            raw[property.key.name] = null;
+            if ('key' in property) {
+              objectPattern.push(`"${property.key.name}": *`);
+              raw[property.key.name] = null;
+            } else {
+              logger.w('unknown property.key', property);
+            }
           }
           result.name = `objectPattern${i === 0 ? '' : i}`;
           result.types = [`{${objectPattern.join(', ')}}`];
