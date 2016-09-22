@@ -1,6 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import cheerio from 'cheerio';
 import IceCap from 'ice-cap';
 import DocBuilder from './DocBuilder.js';
 import {markdown} from './util.js';

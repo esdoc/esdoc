@@ -1,4 +1,3 @@
-import fs from 'fs';
 import IceCap from 'ice-cap';
 import DocBuilder from './DocBuilder.js';
 

@@ -1,6 +1,8 @@
 module.exports = {
   env: {
-    node: true
+    node: true,
+    es6: true,
+    mocha: true
   },
   parserOptions: {
     'ecmaVersion': 6,
@@ -102,6 +104,19 @@ module.exports = {
     'vars-on-top': ['error'],
     'wrap-iife': ['error'],
     'yoda': ['error', 'never'],
+    'strict': ['error'],
+    // 'init-declarations': ['error', 'always'],
+    'no-catch-shadow': ['error'],
+    'no-delete-var': ['error'],
+    'no-label-var': ['error'],
+    'no-restricted-globals': ['error'],
+    'no-shadow-restricted-names': ['error'],
+    // 'no-shadow': ['error'],
+    'no-undef-init': ['error'],
+    'no-undef': ['error'],
+    'no-undefined': ['error'],
+    'no-unused-vars': ['error'],
+    'no-use-before-define': ['error', { "functions": false, "classes": false }],
     semi: ['error', 'always'],
     quotes: ['error', 'single', {avoidEscape: true, allowTemplateLiterals: true }]
   }

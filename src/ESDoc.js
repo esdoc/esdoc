@@ -1,4 +1,3 @@
-import es6shim from 'core-js/shim';
 import fs from 'fs';
 import path from 'path';
 import assert from 'assert';
@@ -175,6 +174,7 @@ export default class ESDoc {
     }
   }
 
+  /* eslint-disable no-unused-vars */
   static _deprecatedConfig(config) {
     // do nothing
   }

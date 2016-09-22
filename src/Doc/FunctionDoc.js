@@ -1,7 +1,6 @@
 import AbstractDoc from './AbstractDoc.js';
 import ParamParser from '../Parser/ParamParser.js';
 import NamingUtil from '../Util/NamingUtil.js';
-import ASTUtil from '../Util/ASTUtil.js';
 
 /**
  * Doc Class from Function declaration AST node.

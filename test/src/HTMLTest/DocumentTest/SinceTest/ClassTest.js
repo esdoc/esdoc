@@ -1,4 +1,4 @@
-import {readDoc, assert, find, findParent} from './../../../util.js';
+import {readDoc, assert, findParent} from './../../../util.js';
 
 /** @test {AbstractDoc#@since} */
 describe('TestSinceClass', ()=> {

@@ -24,7 +24,6 @@
   "dependencies": {
     "cheerio": "0.20.0",
     "color-logger": "0.0.3",
-    "core-js": "2.4.1",
     "escape-html": "1.0.3",
     "babylon": "6.8.4",
     "babel-generator": "6.11.4",

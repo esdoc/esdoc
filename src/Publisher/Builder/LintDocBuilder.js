@@ -2,7 +2,6 @@ import path from 'path';
 import fs from 'fs-extra';
 import DocBuilder from './DocBuilder.js';
 import ASTNodeContainer from '../../Util/ASTNodeContainer.js';
-import InvalidCodeLogger from '../../Util/InvalidCodeLogger.js';
 
 /** @ignore */
 export const _results = [];

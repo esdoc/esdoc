@@ -18,7 +18,7 @@ describe('test export variable', ()=> {
 
   it('is not documented with direct variable definition', ()=> {
     try {
-      findParent(doc, '[id="static-variable-testExportVariable3"]', '[data-ice="detail"]', (doc)=>{});
+      findParent(doc, '[id="static-variable-testExportVariable3"]', '[data-ice="detail"]', ()=>{});
     } catch(e) {
       return;
     }

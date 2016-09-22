@@ -38,8 +38,7 @@ export default class TypedefDoc extends AbstractDoc {
 
     let name;
     for (let tag of tags) {
-      let {tagName, tagValue} = tag;
-      let {typeText, paramName, paramDesc} = ParamParser.parseParamValue(tagValue, true, true, false);
+      let {paramName} = ParamParser.parseParamValue(tag.tagValue, true, true, false);
       name = paramName;
     }
 

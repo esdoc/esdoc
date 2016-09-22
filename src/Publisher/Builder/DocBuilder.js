@@ -21,6 +21,7 @@ export default class DocBuilder {
     new DocResolver(this).resolve();
   }
 
+  /* eslint-disable no-unused-vars */
   /**
    * execute building output.
    * @abstract

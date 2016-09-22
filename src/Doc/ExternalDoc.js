@@ -43,8 +43,7 @@ export default class ExternalDoc extends AbstractDoc {
 
     let name;
     for (let tag of tags) {
-      let {tagName, tagValue} = tag;
-      let {typeText, paramDesc} = ParamParser.parseParamValue(tagValue, true, false, true);
+      let {typeText, paramDesc} = ParamParser.parseParamValue(tag.tagValue, true, false, true);
       name = typeText;
       this._value.externalLink = paramDesc;
     }

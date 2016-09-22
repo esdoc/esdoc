@@ -1,4 +1,3 @@
-import path from 'path';
 import DocBuilder from './DocBuilder.js';
 
 /**
