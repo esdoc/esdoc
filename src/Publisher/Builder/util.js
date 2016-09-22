@@ -79,6 +79,7 @@ export function markdown(text, breaks = false) {
 
       const sanitizedTag = tag.replace(/([\w\-]+)=(["'].*?["'])/g, (_, attr, val)=>{
         if (!availableAttributes.includes(attr)) return '';
+        /* eslint-disable no-script-url */
         if (val.indexOf('javascript:') !== -1) return '';
         return `${attr}=${val}`;
       });

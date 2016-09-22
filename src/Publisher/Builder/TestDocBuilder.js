@@ -56,6 +56,7 @@ export default class TestDocBuilder extends DocBuilder {
       let testCount = this._find({kind: 'testIt', longname: {regex: new RegExp(`^${describeDoc.longname}\\.`)}}).length;
       padding = 10 * (depth + 1);
       ice.attr('testDescribe', 'data-test-depth', depth);
+      /* eslint-disable no-loop-func */
       ice.into('testDescribe', describeDoc, (describeDoc, ice)=>{
         let descriptionHTML = this._buildFileDocLinkHTML(describeDoc, describeDoc.description);
 
@@ -73,6 +74,7 @@ export default class TestDocBuilder extends DocBuilder {
 
       padding = 10 * (depth + 2);
       let itDocs = this._orderedFind('testId asec', {kind: 'testIt', testDepth: depth + 1, memberof: describeDoc.longname});
+      /* eslint-disable no-loop-func */
       ice.loop('testIt', itDocs, (i, itDoc, ice)=>{
         let descriptionHTML = this._buildFileDocLinkHTML(itDoc, itDoc.description);
 

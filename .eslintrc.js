@@ -1,4 +1,7 @@
 module.exports = {
+  env: {
+    node: true
+  },
   parserOptions: {
     'ecmaVersion': 6,
     'sourceType': 'module'
@@ -65,6 +68,40 @@ module.exports = {
     'no-implicit-globals': ['error'],
     'no-implied-eval': ['error'],
     'no-invalid-this': ['error'],
+    'no-iterator': ['error'],
+    'no-labels': ['error'],
+    'no-lone-blocks': ['error'],
+    'no-loop-func': ['error'],
+    // 'no-magic-numbers': ['error'], // considering
+    'no-multi-spaces': ['error'],
+    'no-multi-str': ['error'],
+    'no-new-func': ['error'],
+    'no-new-wrappers': ['error'],
+    'no-new': ['error'],
+    'no-octal-escape': ['error'],
+    'no-octal': ['error'],
+    // 'no-param-reassign': ['error'],
+    'no-proto': ['error'],
+    'no-redeclare': ['error'],
+    'no-return-assign': ['error'],
+    'no-script-url': ['error'],
+    'no-self-assign': ['error'],
+    'no-self-compare': ['error'],
+    'no-sequences': ['error'],
+    'no-throw-literal': ['error'],
+    'no-unmodified-loop-condition': ['error'],
+    'no-unused-expressions': ['error'],
+    'no-unused-labels': ['error'],
+    'no-useless-call': ['error'],
+    'no-useless-concat': ['error'],
+    'no-useless-escape': ['error'],
+    'no-void': ['error'],
+    'no-warning-comments': ['warn'], // warnings
+    'no-with': ['error'],
+    'radix': ['error'],
+    'vars-on-top': ['error'],
+    'wrap-iife': ['error'],
+    'yoda': ['error', 'never'],
     semi: ['error', 'always'],
     quotes: ['error', 'single', {avoidEscape: true, allowTemplateLiterals: true }]
   }

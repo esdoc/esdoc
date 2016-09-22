@@ -190,6 +190,7 @@ export default class ESDoc {
     let dirPath = path.resolve(__dirname, './BuiltinExternal/');
     this._walk(dirPath, (filePath)=>{
       let temp = this._traverse(dirPath, filePath);
+      /* eslint-disable no-return-assign */
       temp.results.forEach((v)=> v.builtinExternal = true);
       let res = temp.results.filter(v => v.kind === 'external');
       results.push(...res);

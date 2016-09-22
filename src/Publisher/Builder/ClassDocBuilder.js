@@ -123,9 +123,9 @@ export default class ClassDocBuilder extends DocBuilder {
    * @experimental
    */
   _buildVariationHTML(doc) {
-    var variationDocs = this._find({memberof: doc.memberof, name: doc.name});
-    var html = [];
-    for (var variationDoc of variationDocs) {
+    const variationDocs = this._find({memberof: doc.memberof, name: doc.name});
+    const html = [];
+    for (const variationDoc of variationDocs) {
       if (variationDoc.variation === doc.variation) continue;
 
       html.push(this._buildDocLinkHTML(variationDoc.longname, `(${variationDoc.variation || 1})`));
@@ -144,7 +144,7 @@ export default class ClassDocBuilder extends DocBuilder {
     if (doc.extends.length <= 1) return '';
 
     let links = [];
-    for (var longname of doc.extends) {
+    for (const longname of doc.extends) {
       links.push(this._buildDocLinkHTML(longname));
     }
 
@@ -176,8 +176,8 @@ export default class ClassDocBuilder extends DocBuilder {
     if (!doc._custom_extends_chains) return '';
     if (doc.extends.length > 1) return '';
 
-    var links = [];
-    for (var longname of doc._custom_extends_chains) {
+    const links = [];
+    for (const longname of doc._custom_extends_chains) {
       links.push(this._buildDocLinkHTML(longname));
     }
 
@@ -195,8 +195,8 @@ export default class ClassDocBuilder extends DocBuilder {
   _buildIndirectSubclassHTML(doc) {
     if (!doc._custom_indirect_subclasses) return '';
 
-    var links = [];
-    for (var longname of doc._custom_indirect_subclasses) {
+    const links = [];
+    for (const longname of doc._custom_indirect_subclasses) {
       links.push(this._buildDocLinkHTML(longname));
     }
 
@@ -212,8 +212,8 @@ export default class ClassDocBuilder extends DocBuilder {
   _buildDirectSubclassHTML(doc) {
     if (!doc._custom_direct_subclasses) return '';
 
-    var links = [];
-    for (var longname of doc._custom_direct_subclasses) {
+    const links = [];
+    for (const longname of doc._custom_direct_subclasses) {
       links.push(this._buildDocLinkHTML(longname));
     }
 

@@ -370,9 +370,9 @@ export default class DocFactory {
 
     let clazz;
     switch (type) {
-      case 'Class':   clazz = ClassDoc; break;
-      case 'Method':  clazz = MethodDoc; break;
-      case 'Member':  clazz = MemberDoc; break;
+      case 'Class': clazz = ClassDoc; break;
+      case 'Method': clazz = MethodDoc; break;
+      case 'Member': clazz = MemberDoc; break;
       case 'Function': clazz = FunctionDoc; break;
       case 'Variable': clazz = VariableDoc; break;
       case 'Assignment': clazz = AssignmentDoc; break;
@@ -398,7 +398,7 @@ export default class DocFactory {
     for (let tag of tags) {
       let tagName = tag.tagName;
       switch (tagName) {
-        case '@typedef':  type = 'Typedef'; break;
+        case '@typedef': type = 'Typedef'; break;
         case '@external': type = 'External'; break;
       }
     }

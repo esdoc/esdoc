@@ -102,7 +102,7 @@ _assert.notIncludes = function($el, selector, expect, attr) {
   assert(actual.includes(expect) === false, `selector: "${selector}"`);
 };
 
-export var assert = _assert;
+export const assert = _assert;
 
 const consoleLog = console.log;
 export function consoleLogSwitch(on) {

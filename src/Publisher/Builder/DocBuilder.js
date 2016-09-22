@@ -836,7 +836,7 @@ export default class DocBuilder {
     if (!longnames.length) return '';
 
     let links = [];
-    for (var longname of longnames) {
+    for (const longname of longnames) {
       if (!longname) continue;
       let link = this._buildDocLinkHTML(longname, text, inner);
       links.push(`<li>${link}</li>`);
@@ -924,7 +924,7 @@ export default class DocBuilder {
       ice.load('description', prop.description);
 
       let typeNames = [];
-      for (var typeName of prop.types) {
+      for (const typeName of prop.types) {
         typeNames.push(this._buildTypeDocLinkHTML(typeName));
       }
       ice.load('type', typeNames.join(' | '));

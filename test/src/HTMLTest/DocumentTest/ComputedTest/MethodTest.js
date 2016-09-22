@@ -1,4 +1,4 @@
-/* eslint-disable no-template-curly-in-string */
+/* eslint-disable no-template-curly-in-string, no-multi-spaces */
 import {readDoc, assert, find} from './../../../util.js';
 
 /** @test {MethodDoc#@_name} */
@@ -8,7 +8,7 @@ describe('TestComputedMethod:', ()=> {
   describe('in summary:', ()=>{
     it('has computed methods.', ()=> {
       find(doc, '[data-ice="summary"]', (doc)=>{
-        assert.includes(doc, `[href="class/src/Computed/Method.js~TestComputedMethod.html#instance-method-['foo']"]`,             `['foo']`);
+        assert.includes(doc, `[href="class/src/Computed/Method.js~TestComputedMethod.html#instance-method-['foo']"]`,            `['foo']`);
         assert.includes(doc, `[href="class/src/Computed/Method.js~TestComputedMethod.html#instance-method-[Symbol.iterator]"]`,  `[Symbol.iterator]`);
         assert.includes(doc, '[href="class/src/Computed/Method.js~TestComputedMethod.html#instance-method-[`${ foo }`]"]',       '[`${ foo }`]');
         assert.includes(doc, `[href="class/src/Computed/Method.js~TestComputedMethod.html#instance-method-[foo + bar]"]`,        `[foo + bar]`);

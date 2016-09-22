@@ -7,7 +7,7 @@ class Plugin {
   /**
    * create instance.
    */
-  constructor()  {
+  constructor() {
     this._plugins = null;
   }
 
