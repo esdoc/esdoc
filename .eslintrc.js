@@ -49,6 +49,22 @@ module.exports = {
     'no-alert': ['error'],
     'no-caller': ['error'],
     'no-case-declarations': ['error'],
+    'no-div-regex': ['error'],
+    // 'no-else-return': ['error'],
+    // 'no-empty-function': ['error'], // considering
+    'no-empty-pattern': ['error'],
+    'no-eq-null': ['error'],
+    'no-eval': ['error'],
+    'no-extend-native': ['error'],
+    'no-extra-bind': ['error'],
+    'no-extra-label': ['error'],
+    'no-fallthrough': ['error'],
+    'no-floating-decimal': ['error'],
+    'no-global-assign': ['error'],
+    'no-implicit-coercion': ['error', {boolean: false}],
+    'no-implicit-globals': ['error'],
+    'no-implied-eval': ['error'],
+    'no-invalid-this': ['error'],
     semi: ['error', 'always'],
     quotes: ['error', 'single', {avoidEscape: true, allowTemplateLiterals: true }]
   }

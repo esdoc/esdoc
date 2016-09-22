@@ -267,10 +267,10 @@ export default class ParamParser {
     let result = {};
     const guessType = this.guessType.bind(this);
 
-    ASTUtil.traverse(body, function(node, parent){
+    ASTUtil.traverse(body, function(node, parent, path){
       // `return` in Function is not the body's `return`
       if (node.type.includes('Function')) {
-        this.skip();
+        path.skip();
         return;
       }
 

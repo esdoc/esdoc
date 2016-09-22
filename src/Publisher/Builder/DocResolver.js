@@ -61,6 +61,7 @@ export default class DocResolver {
     let access = config.access || ['public', 'protected', 'private'];
     let autoPrivate = config.autoPrivate;
 
+    /* eslint-disable no-invalid-this */
     this._data().update(function(){
       if (!this.access) {
         if (autoPrivate && this.name.charAt(0) === '_') {

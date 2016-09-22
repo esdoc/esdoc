@@ -20,13 +20,13 @@ export default class ASTUtil {
   /**
    * traverse ast nodes.
    * @param {AST} ast - target AST.
-   * @param {function(node: Object, parent: Object)} callback - this is called with each node.
+   * @param {function(node: Object, parent: Object, path: Object)} callback - this is called with each node.
    */
   static traverse(ast, callback) {
     babelTraverse(ast, {
       noScope: true,
       enter: function(path){
-        callback.call(path, path.node, path.parent);
+        callback(path.node, path.parent, path);
       }
     });
   }
