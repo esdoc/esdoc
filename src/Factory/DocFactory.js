@@ -11,8 +11,8 @@ import TypedefDoc from '../Doc/TypedefDoc.js';
 import ExternalDoc from '../Doc/ExternalDoc.js';
 import ASTUtil from '../Util/ASTUtil.js';
 
-let already = Symbol('already');
-let logger = new Logger('DocFactory');
+const already = Symbol('already');
+const logger = new Logger('DocFactory');
 
 /**
  * Doc factory class.
@@ -45,12 +45,12 @@ export default class DocFactory {
     this._inspectExportNamedDeclaration();
 
     // file doc
-    let doc = new FileDoc(ast, ast, pathResolver, []);
+    const doc = new FileDoc(ast, ast, pathResolver, []);
     this._results.push(doc.value);
 
     // ast does not child, so only comment.
     if (ast.program.body.length === 0 && ast.program.innerComments) {
-      let results = this._traverseComments(ast, null, ast.program.innerComments);
+      const results = this._traverseComments(ast, null, ast.program.innerComments);
       this._results.push(...results);
     }
   }
@@ -84,9 +84,9 @@ export default class DocFactory {
    * @todo support function export.
    */
   _inspectExportDefaultDeclaration() {
-    let pseudoExportNodes = [];
+    const pseudoExportNodes = [];
 
-    for (let exportNode of this._ast.program.body) {
+    for (const exportNode of this._ast.program.body) {
       if (exportNode.type !== 'ExportDefaultDeclaration') continue;
 
       let targetClassName = null;
@@ -106,7 +106,7 @@ export default class DocFactory {
           pseudoClassExport = true;
           break;
         case 'Identifier': {
-          let varNode = ASTUtil.findVariableDeclarationAndNewExpressionNode(exportNode.declaration.name, this._ast);
+          const varNode = ASTUtil.findVariableDeclarationAndNewExpressionNode(exportNode.declaration.name, this._ast);
           if (varNode) {
             targetClassName = varNode.declarations[0].init.callee.name;
             targetVariableName = exportNode.declaration.name;
@@ -123,16 +123,16 @@ export default class DocFactory {
           break;
       }
 
-      let classNode = ASTUtil.findClassDeclarationNode(targetClassName, this._ast);
+      const classNode = ASTUtil.findClassDeclarationNode(targetClassName, this._ast);
       if (classNode) {
-        let pseudoExportNode1 = this._copy(exportNode);
+        const pseudoExportNode1 = this._copy(exportNode);
         pseudoExportNode1.declaration = this._copy(classNode);
         pseudoExportNode1.leadingComments = null;
         pseudoExportNode1.declaration.__PseudoExport__ = pseudoClassExport;
         pseudoExportNodes.push(pseudoExportNode1);
 
         if (targetVariableName) {
-          let pseudoExportNode2 = this._copy(exportNode);
+          const pseudoExportNode2 = this._copy(exportNode);
           pseudoExportNode2.declaration = ASTUtil.createVariableDeclarationAndNewExpressionNode(targetVariableName, targetClassName, exportNode.loc);
           pseudoExportNodes.push(pseudoExportNode2);
         }
@@ -141,18 +141,18 @@ export default class DocFactory {
         ASTUtil.sanitize(exportNode);
       }
 
-      let functionNode = ASTUtil.findFunctionDeclarationNode(exportNode.declaration.name, this._ast);
+      const functionNode = ASTUtil.findFunctionDeclarationNode(exportNode.declaration.name, this._ast);
       if (functionNode) {
-        let pseudoExportNode = this._copy(exportNode);
+        const pseudoExportNode = this._copy(exportNode);
         pseudoExportNode.declaration = this._copy(functionNode);
         ASTUtil.sanitize(exportNode);
         ASTUtil.sanitize(functionNode);
         pseudoExportNodes.push(pseudoExportNode);
       }
 
-      let variableNode = ASTUtil.findVariableDeclarationNode(exportNode.declaration.name, this._ast);
+      const variableNode = ASTUtil.findVariableDeclarationNode(exportNode.declaration.name, this._ast);
       if (variableNode) {
-        let pseudoExportNode = this._copy(exportNode);
+        const pseudoExportNode = this._copy(exportNode);
         pseudoExportNode.declaration = this._copy(variableNode);
         ASTUtil.sanitize(exportNode);
         ASTUtil.sanitize(variableNode);
@@ -186,18 +186,18 @@ export default class DocFactory {
    * @todo support function export.
    */
   _inspectExportNamedDeclaration() {
-    let pseudoExportNodes = [];
+    const pseudoExportNodes = [];
 
-    for (let exportNode of this._ast.program.body) {
+    for (const exportNode of this._ast.program.body) {
       if (exportNode.type !== 'ExportNamedDeclaration') continue;
 
       if (exportNode.declaration && exportNode.declaration.type === 'VariableDeclaration') {
-        for (let declaration of exportNode.declaration.declarations) {
+        for (const declaration of exportNode.declaration.declarations) {
           if (!declaration.init || declaration.init.type !== 'NewExpression') continue;
 
-          let classNode = ASTUtil.findClassDeclarationNode(declaration.init.callee.name, this._ast);
+          const classNode = ASTUtil.findClassDeclarationNode(declaration.init.callee.name, this._ast);
           if (classNode) {
-            let pseudoExportNode = this._copy(exportNode);
+            const pseudoExportNode = this._copy(exportNode);
             pseudoExportNode.declaration = this._copy(classNode);
             pseudoExportNode.leadingComments = null;
             pseudoExportNodes.push(pseudoExportNode);
@@ -208,18 +208,18 @@ export default class DocFactory {
         continue;
       }
 
-      for (let specifier of exportNode.specifiers) {
+      for (const specifier of exportNode.specifiers) {
         if (specifier.type !== 'ExportSpecifier') continue;
 
         let targetClassName = null;
         let pseudoClassExport;
 
-        let varNode = ASTUtil.findVariableDeclarationAndNewExpressionNode(specifier.exported.name, this._ast);
+        const varNode = ASTUtil.findVariableDeclarationAndNewExpressionNode(specifier.exported.name, this._ast);
         if (varNode) {
           targetClassName = varNode.declarations[0].init.callee.name;
           pseudoClassExport = true;
 
-          let pseudoExportNode = this._copy(exportNode);
+          const pseudoExportNode = this._copy(exportNode);
           pseudoExportNode.declaration = this._copy(varNode);
           pseudoExportNode.specifiers = null;
           pseudoExportNodes.push(pseudoExportNode);
@@ -230,9 +230,9 @@ export default class DocFactory {
           pseudoClassExport = false;
         }
 
-        let classNode = ASTUtil.findClassDeclarationNode(targetClassName, this._ast);
+        const classNode = ASTUtil.findClassDeclarationNode(targetClassName, this._ast);
         if (classNode) {
-          let pseudoExportNode = this._copy(exportNode);
+          const pseudoExportNode = this._copy(exportNode);
           pseudoExportNode.declaration = this._copy(classNode);
           pseudoExportNode.leadingComments = null;
           pseudoExportNode.specifiers = null;
@@ -241,9 +241,9 @@ export default class DocFactory {
           ASTUtil.sanitize(classNode);
         }
 
-        let functionNode = ASTUtil.findFunctionDeclarationNode(specifier.exported.name, this._ast);
+        const functionNode = ASTUtil.findFunctionDeclarationNode(specifier.exported.name, this._ast);
         if (functionNode) {
-          let pseudoExportNode = this._copy(exportNode);
+          const pseudoExportNode = this._copy(exportNode);
           pseudoExportNode.declaration = this._copy(functionNode);
           pseudoExportNode.leadingComments = null;
           pseudoExportNode.specifiers = null;
@@ -251,9 +251,9 @@ export default class DocFactory {
           pseudoExportNodes.push(pseudoExportNode);
         }
 
-        let variableNode = ASTUtil.findVariableDeclarationNode(specifier.exported.name, this._ast);
+        const variableNode = ASTUtil.findVariableDeclarationNode(specifier.exported.name, this._ast);
         if (variableNode) {
-          let pseudoExportNode = this._copy(exportNode);
+          const pseudoExportNode = this._copy(exportNode);
           pseudoExportNode.declaration = this._copy(variableNode);
           pseudoExportNode.leadingComments = null;
           pseudoExportNode.specifiers = null;
@@ -276,7 +276,7 @@ export default class DocFactory {
 
     if (node[already]) return;
 
-    let isLastNodeInParent = this._isLastNodeInParent(node, parentNode);
+    const isLastNodeInParent = this._isLastNodeInParent(node, parentNode);
 
     node[already] = true;
     Object.defineProperty(node, 'parent', {value: parentNode});
@@ -312,14 +312,14 @@ export default class DocFactory {
    */
   _traverseComments(parentNode, node, comments) {
     if (!node) {
-      let virtualNode = {};
+      const virtualNode = {};
       Object.defineProperty(virtualNode, 'parent', {value: parentNode});
       node = virtualNode;
     }
 
     if (comments && comments.length) {
-      let temp = [];
-      for (let comment of comments) {
+      const temp = [];
+      for (const comment of comments) {
         if (CommentParser.isESDoc(comment)) temp.push(comment);
       }
       comments = temp;
@@ -331,16 +331,16 @@ export default class DocFactory {
       comments = [{type: 'CommentBlock', value: '* @_undocument'}];
     }
 
-    let results = [];
-    let lastComment = comments[comments.length - 1];
-    for (let comment of comments) {
-      let tags = CommentParser.parse(comment);
+    const results = [];
+    const lastComment = comments[comments.length - 1];
+    for (const comment of comments) {
+      const tags = CommentParser.parse(comment);
 
       let doc;
       if (comment === lastComment) {
         doc = this._createDoc(node, tags);
       } else {
-        let virtualNode = {};
+        const virtualNode = {};
         Object.defineProperty(virtualNode, 'parent', {value: parentNode});
         doc = this._createDoc(virtualNode, tags);
       }
@@ -359,8 +359,8 @@ export default class DocFactory {
    * @private
    */
   _createDoc(node, tags) {
-    let result = this._decideType(tags, node);
-    let type = result.type;
+    const result = this._decideType(tags, node);
+    const type = result.type;
     node = result.node;
 
     if (!type) return null;
@@ -397,8 +397,8 @@ export default class DocFactory {
    */
   _decideType(tags, node) {
     let type = null;
-    for (let tag of tags) {
-      let tagName = tag.tagName;
+    for (const tag of tags) {
+      const tagName = tag.tagName;
       switch (tagName) {
         case '@typedef': type = 'Typedef'; break;
         case '@external': type = 'External'; break;
@@ -446,7 +446,7 @@ export default class DocFactory {
    * @private
    */
   _decideMethodDefinitionType(node) {
-    let classNode = this._findUp(node, ['ClassDeclaration', 'ClassExpression']);
+    const classNode = this._findUp(node, ['ClassDeclaration', 'ClassExpression']);
     if (this._processedClassNodes.includes(classNode)) {
       return {type: 'Method', node: node};
     } else {
@@ -474,7 +474,7 @@ export default class DocFactory {
    * @private
    */
   _decideExpressionStatementType(node) {
-    let isTop = this._isTopDepthInBody(node, this._ast.program.body);
+    const isTop = this._isTopDepthInBody(node, this._ast.program.body);
     Object.defineProperty(node.expression, 'parent', {value: node});
     node = node.expression;
     node[already] = true;
@@ -494,7 +494,7 @@ export default class DocFactory {
       default:
         if (node.left.type === 'MemberExpression' && node.left.object.type === 'ThisExpression') {
 
-          let classNode = this._findUp(node, ['ClassExpression', 'ClassDeclaration']);
+          const classNode = this._findUp(node, ['ClassExpression', 'ClassDeclaration']);
           if (!this._processedClassNodes.includes(classNode)) {
             logger.w('this member is not in class.', this._pathResolver.filePath, node);
             return {type: null, node: null};
@@ -508,6 +508,7 @@ export default class DocFactory {
 
     if (!isTop) return {type: null, node: null};
 
+    /* eslint-disable prefer-const */
     innerNode = node.right;
     innerNode.id = this._copy(node.left.id || node.left.property);
     Object.defineProperty(innerNode, 'parent', {value: node});
@@ -572,6 +573,7 @@ export default class DocFactory {
         return {type: 'Assignment', node: node};
     }
 
+    /* eslint-disable prefer-const */
     innerNode = node.right;
     innerNode.id = this._copy(node.left.id || node.left.property);
     Object.defineProperty(innerNode, 'parent', {value: node});
@@ -590,7 +592,7 @@ export default class DocFactory {
     // e.g. `export A from './A.js'` has not declaration
     if (!node.declaration) return null;
 
-    let exportedASTNode = node.declaration;
+    const exportedASTNode = node.declaration;
     if (!exportedASTNode.leadingComments) exportedASTNode.leadingComments = [];
     exportedASTNode.leadingComments.push(...node.leadingComments || []);
 
@@ -609,7 +611,7 @@ export default class DocFactory {
    */
   _isLastNodeInParent(node, parentNode) {
     if (parentNode && parentNode.body) {
-      let lastNode = parentNode.body[parentNode.body.length - 1];
+      const lastNode = parentNode.body[parentNode.body.length - 1];
       return node === lastNode;
     }
 
@@ -627,12 +629,12 @@ export default class DocFactory {
     if (!body) return false;
     if (!Array.isArray(body)) return false;
 
-    let parentNode = node.parent;
+    const parentNode = node.parent;
     if (['ExportDefaultDeclaration', 'ExportNamedDeclaration'].includes(parentNode.type)) {
       node = parentNode;
     }
 
-    for (let _node of body) {
+    for (const _node of body) {
       if (node === _node) return true;
     }
     return false;

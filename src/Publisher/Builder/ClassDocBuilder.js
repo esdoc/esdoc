@@ -11,13 +11,13 @@ export default class ClassDocBuilder extends DocBuilder {
    * @param {function(html: string, filePath: string)} callback - is called each class.
    */
   exec(callback) {
-    let ice = this._buildLayoutDoc();
+    const ice = this._buildLayoutDoc();
     ice.autoDrop = false;
-    let docs = this._find({kind: ['class']});
-    for (let doc of docs) {
-      let fileName = this._getOutputFileName(doc);
-      let baseUrl = this._getBaseUrl(fileName);
-      let title = this._getTitle(doc);
+    const docs = this._find({kind: ['class']});
+    for (const doc of docs) {
+      const fileName = this._getOutputFileName(doc);
+      const baseUrl = this._getBaseUrl(fileName);
+      const title = this._getTitle(doc);
       ice.load('content', this._buildClassDoc(doc), IceCap.MODE_WRITE);
       ice.attr('baseUrl', 'href', baseUrl, IceCap.MODE_WRITE);
       ice.text('title', title, IceCap.MODE_WRITE);
@@ -32,20 +32,20 @@ export default class ClassDocBuilder extends DocBuilder {
    * @private
    */
   _buildClassDoc(doc) {
-    let expressionExtends = this._buildExpressionExtendsHTML(doc);
-    let mixinClasses = this._buildMixinClassesHTML(doc);
-    let extendsChain = this._buildExtendsChainHTML(doc);
-    let directSubclass = this._buildDirectSubclassHTML(doc);
-    let indirectSubclass = this._buildIndirectSubclassHTML(doc);
-    let instanceDocs = this._find({kind: 'variable'}).filter((v)=> {
+    const expressionExtends = this._buildExpressionExtendsHTML(doc);
+    const mixinClasses = this._buildMixinClassesHTML(doc);
+    const extendsChain = this._buildExtendsChainHTML(doc);
+    const directSubclass = this._buildDirectSubclassHTML(doc);
+    const indirectSubclass = this._buildIndirectSubclassHTML(doc);
+    const instanceDocs = this._find({kind: 'variable'}).filter((v)=> {
       return v.type && v.type.types.includes(doc.longname);
     });
 
-    let ice = new IceCap(this._readTemplate('class.html'));
+    const ice = new IceCap(this._readTemplate('class.html'));
 
     // header
     if (doc.export && doc.importPath && doc.importStyle) {
-      let link = this._buildFileDocLinkHTML(doc, doc.importPath);
+      const link = this._buildFileDocLinkHTML(doc, doc.importPath);
       ice.into('importPath', `import ${doc.importStyle} from '${link}'`, (code, ice)=>{
         ice.load('importPathCode', code);
       });
@@ -83,7 +83,7 @@ export default class ClassDocBuilder extends DocBuilder {
 
     ice.into('exampleDocs', doc.examples, (examples, ice)=>{
       ice.loop('exampleDoc', examples, (i, example, ice)=>{
-        let parsed = parseExample(example);
+        const parsed = parseExample(example);
         ice.text('exampleCode', parsed.body);
         ice.text('exampleCaption', parsed.caption);
       });
@@ -91,7 +91,7 @@ export default class ClassDocBuilder extends DocBuilder {
 
     ice.into('tests', doc._custom_tests, (tests, ice)=>{
       ice.loop('test', tests, (i, test, ice)=>{
-        let testDoc = this._find({longname: test})[0];
+        const testDoc = this._find({longname: test})[0];
         ice.load('test', this._buildFileDocLinkHTML(testDoc, testDoc.testFullDescription));
       });
     });
@@ -143,7 +143,7 @@ export default class ClassDocBuilder extends DocBuilder {
     if (!doc.extends) return '';
     if (doc.extends.length <= 1) return '';
 
-    let links = [];
+    const links = [];
     for (const longname of doc.extends) {
       links.push(this._buildDocLinkHTML(longname));
     }
@@ -159,7 +159,7 @@ export default class ClassDocBuilder extends DocBuilder {
   _buildExpressionExtendsHTML(doc) {
     if (!doc.expressionExtends) return '';
 
-    let html = doc.expressionExtends.replace(/[A-Z_$][a-zA-Z0-9_$]*/g, (v)=>{
+    const html = doc.expressionExtends.replace(/[A-Z_$][a-zA-Z0-9_$]*/g, (v)=>{
       return this._buildDocLinkHTML(v);
     });
 
@@ -229,19 +229,19 @@ export default class ClassDocBuilder extends DocBuilder {
   _buildInheritedSummaryHTML(doc) {
     if (['class', 'interface'].indexOf(doc.kind) === -1) return '';
 
-    let longnames = [
+    const longnames = [
       ...doc._custom_extends_chains || []
       // ...doc.implements || [],
       // ...doc._custom_indirect_implements || [],
     ];
 
-    let html = [];
-    for (let longname of longnames) {
-      let superDoc = this._find({longname})[0];
+    const html = [];
+    for (const longname of longnames) {
+      const superDoc = this._find({longname})[0];
 
       if (!superDoc) continue;
 
-      let targetDocs = this._find({memberof: longname, kind: ['member', 'method', 'get', 'set']});
+      const targetDocs = this._find({memberof: longname, kind: ['member', 'method', 'get', 'set']});
 
       targetDocs.sort((a, b)=>{
         if (a.static !== b.static) return -(a.static - b.static);
@@ -260,8 +260,8 @@ export default class ClassDocBuilder extends DocBuilder {
         return order[a.kind] - order[b.kind];
       });
 
-      let title = `<span class="toggle closed"></span> From ${superDoc.kind} ${this._buildDocLinkHTML(longname, superDoc.name)}`;
-      let result = this._buildSummaryDoc(targetDocs, '----------', false, superDoc.kind);
+      const title = `<span class="toggle closed"></span> From ${superDoc.kind} ${this._buildDocLinkHTML(longname, superDoc.name)}`;
+      const result = this._buildSummaryDoc(targetDocs, '----------', false, superDoc.kind);
       if (result) {
         result.load('title', title, IceCap.MODE_WRITE);
         html.push(result.html);

@@ -5,7 +5,7 @@ import CommentParser from '../../../src/Parser/CommentParser.js';
 describe('CommentParser:', ()=>{
   /** @test {CommentParser.parse} */
   it('can parse doc comment.', ()=>{
-    let value = `*
+    const value = `*
 * this is desc.
 * @tag1
 * @tag2 tag2 value
@@ -15,8 +15,8 @@ describe('CommentParser:', ()=>{
 * @tag4 tag4 value
 *
 `;
-    let comment = {type: 'CommentBlock', value: value};
-    let tags = CommentParser.parse(comment);
+    const comment = {type: 'CommentBlock', value: value};
+    const tags = CommentParser.parse(comment);
     assert.equal(tags.length, 5);
     assert.deepEqual(tags[0], {tagName: '@desc', tagValue: 'this is desc.'});
     assert.deepEqual(tags[1], {tagName: '@tag1', tagValue: ''});
@@ -27,7 +27,7 @@ describe('CommentParser:', ()=>{
 
     /** @test {CommentParser.parse} */
   it('can parse doc comments with trailing tabs', ()=>{
-    let value = `*
+    const value = `*
 \t* this is desc.
 \t* @tag1
 \t* @tag2 tag2 value
@@ -37,8 +37,8 @@ describe('CommentParser:', ()=>{
 \t* @tag4 tag4 value
 \t*
 `;
-    let comment = {type: 'CommentBlock', value: value};
-    let tags = CommentParser.parse(comment);
+    const comment = {type: 'CommentBlock', value: value};
+    const tags = CommentParser.parse(comment);
     assert.equal(tags.length, 5);
     assert.deepEqual(tags[0], {tagName: '@desc', tagValue: 'this is desc.'});
     assert.deepEqual(tags[1], {tagName: '@tag1', tagValue: ''});
@@ -49,19 +49,19 @@ describe('CommentParser:', ()=>{
 
   /** @test {CommentParser.isESDoc} */
   it('return empty with non doc comment.', ()=>{
-    let value = `\
+    const value = `\
 this is not doc comment.
 `;
-    let comment = {type: 'CommentBlock', value: value};
-    let tags = CommentParser.parse(comment);
+    const comment = {type: 'CommentBlock', value: value};
+    const tags = CommentParser.parse(comment);
     assert.equal(tags.length, 0);
   });
 
   /** @test {CommentParser.parse} */
   it('return empty with line comment.', ()=>{
-    let value = `this is line comment.`;
-    let comment = {type: 'CommentLine', value: value};
-    let tags = CommentParser.parse(comment);
+    const value = `this is line comment.`;
+    const comment = {type: 'CommentLine', value: value};
+    const tags = CommentParser.parse(comment);
     assert.equal(tags.length, 0);
   });
 });

@@ -53,7 +53,7 @@ export default class FunctionDoc extends AbstractDoc {
     super._$return();
     if (this._value.return) return;
 
-    let result = ParamParser.guessReturnParam(this._node.body);
+    const result = ParamParser.guessReturnParam(this._node.body);
     if (result) {
       this._value.return = result;
     }

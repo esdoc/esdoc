@@ -3,7 +3,7 @@ import CommentParser from '../Parser/CommentParser.js';
 import TestDoc from '../Doc/TestDoc.js';
 import TestFileDoc from '../Doc/TestFileDoc.js';
 
-let already = Symbol('already');
+const already = Symbol('already');
 
 /**
  * Test doc factory class.
@@ -54,7 +54,7 @@ export default class TestDocFactory {
     this._results = [];
 
     // file doc
-    let doc = new TestFileDoc(ast, ast, pathResolver, []);
+    const doc = new TestFileDoc(ast, ast, pathResolver, []);
     this._results.push(doc.value);
   }
 
@@ -80,7 +80,7 @@ export default class TestDocFactory {
   _pushForMocha(node) {
     if (node.type !== 'ExpressionStatement') return;
 
-    let expression = node.expression;
+    const expression = node.expression;
     if (expression.type !== 'CallExpression') return;
 
     if (!['describe', 'it', 'context', 'suite', 'test'].includes(expression.callee.name)) return;
@@ -90,15 +90,15 @@ export default class TestDocFactory {
 
     let tags = [];
     if (node.leadingComments && node.leadingComments.length) {
-      let comment = node.leadingComments[node.leadingComments.length - 1];
+      const comment = node.leadingComments[node.leadingComments.length - 1];
       tags = CommentParser.parse(comment);
     }
 
-    let uniqueId = this.constructor._getUniqueId();
+    const uniqueId = this.constructor._getUniqueId();
     expression._esdocTestId = uniqueId;
     expression._esdocTestName = expression.callee.name + uniqueId;
 
-    let testDoc = new TestDoc(this._ast, expression, this._pathResolver, tags);
+    const testDoc = new TestDoc(this._ast, expression, this._pathResolver, tags);
 
     this._results.push(testDoc.value);
   }

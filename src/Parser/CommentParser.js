@@ -30,16 +30,16 @@ export default class CommentParser {
     comment = comment.replace(/[\t ]*$/, ''); // remove tail space.
     comment = comment.replace(/^[\t ]*(@\w+)$/gm, '$1 \\TRUE'); // auto insert tag text to non-text tag (e.g. @interface)
     comment = comment.replace(/^[\t ]*(@\w+)[\t ](.*)/gm, '\\Z$1\\Z$2'); // insert separator (\\Z@tag\\Ztext)
-    let lines = comment.split('\\Z');
+    const lines = comment.split('\\Z');
 
     let tagName = '';
     let tagValue = '';
-    let tags = [];
+    const tags = [];
     for (let i = 0; i < lines.length; i++) {
-      let line = lines[i];
+      const line = lines[i];
       if (line.charAt(0) === '@') {
         tagName = line;
-        let nextLine = lines[i + 1];
+        const nextLine = lines[i + 1];
         if (nextLine.charAt(0) === '@') {
           tagValue = '';
         } else {

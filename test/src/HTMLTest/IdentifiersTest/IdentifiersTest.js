@@ -2,7 +2,7 @@ import {readDoc, assert, findParent} from './../../util.js';
 
 /** @test {IdentifiersDocBuilder} */
 describe('test identifiers', ()=> {
-  let doc = readDoc('identifiers.html');
+  const doc = readDoc('identifiers.html');
 
   it('has class summary.', ()=>{
     findParent(doc, '[data-ice="classSummary"] a[href="class/src/Desc/Class.js~TestDescClass.html"]', '[data-ice="target"]', (doc)=>{

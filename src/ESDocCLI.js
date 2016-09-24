@@ -67,7 +67,7 @@ export default class ESDocCLI {
    * @private
    */
   _showVersion() {
-    let packageObj = NPMUtil.findPackage();
+    const packageObj = NPMUtil.findPackage();
     if (packageObj) {
       console.log(packageObj.version);
     } else {
@@ -96,8 +96,8 @@ export default class ESDocCLI {
 }
 
 // if this file is directory executed, work as CLI.
-let executedFilePath = fs.realpathSync(process.argv[1]);
+const executedFilePath = fs.realpathSync(process.argv[1]);
 if (executedFilePath === __filename) {
-  let cli = new ESDocCLI(process.argv);
+  const cli = new ESDocCLI(process.argv);
   cli.exec();
 }

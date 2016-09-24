@@ -38,8 +38,8 @@ export default class FileDoc extends AbstractDoc {
   _$content() {
     super._$content();
 
-    let filePath = this._pathResolver.fileFullPath;
-    let content = fs.readFileSync(filePath, {encode: 'utf8'}).toString();
+    const filePath = this._pathResolver.fileFullPath;
+    const content = fs.readFileSync(filePath, {encode: 'utf8'}).toString();
     this._value.content = content;
   }
 }

@@ -72,7 +72,7 @@ export default class MethodDoc extends AbstractDoc {
         this._value.type = ParamParser.guessType(this._node.right);
         break;
       case 'get': {
-        let result = ParamParser.guessReturnParam(this._node.body);
+        const result = ParamParser.guessReturnParam(this._node.body);
         if (result) this._value.type = result;
         break;
       }
@@ -89,7 +89,7 @@ export default class MethodDoc extends AbstractDoc {
 
     if (['constructor', 'set', 'get'].includes(this._value.kind)) return;
 
-    let result = ParamParser.guessReturnParam(this._node.body);
+    const result = ParamParser.guessReturnParam(this._node.body);
     if (result) {
       this._value.return = result;
     }

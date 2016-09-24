@@ -47,8 +47,8 @@ export default class ASTUtil {
         const node = _path.node;
         if (node.type !== 'ImportDeclaration') return;
 
-        for (let spec of node.specifiers) {
-          let localName = spec.local.name;
+        for (const spec of node.specifiers) {
+          const localName = spec.local.name;
           if (localName === name) {
             path = node.source.value;
             _path.stop();
@@ -69,7 +69,7 @@ export default class ASTUtil {
   static findVariableDeclarationAndNewExpressionNode(name, ast) {
     if (!name) return null;
 
-    for (let node of ast.program.body) {
+    for (const node of ast.program.body) {
       if (node.type === 'VariableDeclaration' &&
         node.declarations[0].init &&
         node.declarations[0].init.type === 'NewExpression' &&
@@ -90,7 +90,7 @@ export default class ASTUtil {
   static findClassDeclarationNode(name, ast) {
     if (!name) return null;
 
-    for (let node of ast.program.body) {
+    for (const node of ast.program.body) {
       if (node.type === 'ClassDeclaration' && node.id.name === name) return node;
     }
 
@@ -106,7 +106,7 @@ export default class ASTUtil {
   static findFunctionDeclarationNode(name, ast) {
     if (!name) return null;
 
-    for (let node of ast.program.body) {
+    for (const node of ast.program.body) {
       if (node.type === 'FunctionDeclaration' && node.id.name === name) return node;
     }
 
@@ -122,7 +122,7 @@ export default class ASTUtil {
   static findVariableDeclarationNode(name, ast) {
     if (!name) return null;
 
-    for (let node of ast.program.body) {
+    for (const node of ast.program.body) {
       if (node.type === 'VariableDeclaration' && node.declarations[0].id.name === name) return node;
     }
 
@@ -137,7 +137,7 @@ export default class ASTUtil {
    * @returns {ASTNode} created node.
    */
   static createVariableDeclarationAndNewExpressionNode(name, className, loc) {
-    let node = {
+    const node = {
       type: 'VariableDeclaration',
       kind: 'let',
       loc: loc,

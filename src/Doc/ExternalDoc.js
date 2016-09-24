@@ -2,7 +2,7 @@ import Logger from 'color-logger';
 import AbstractDoc from './AbstractDoc.js';
 import ParamParser from '../Parser/ParamParser.js';
 
-let logger = new Logger('ExternalDoc');
+const logger = new Logger('ExternalDoc');
 
 /**
  * Doc Class from virtual comment node of external.
@@ -28,22 +28,22 @@ export default class ExternalDoc extends AbstractDoc {
 
   /** take out self name from tag */
   _$name() {
-    let value = this._findTagValue(['@external']);
+    const value = this._findTagValue(['@external']);
     if (!value) {
       logger.w('can not resolve name.');
     }
 
     this._value.name = value;
 
-    let tags = this._findAll(['@external']);
+    const tags = this._findAll(['@external']);
     if (!tags) {
       logger.w('can not resolve name.');
       return;
     }
 
     let name;
-    for (let tag of tags) {
-      let {typeText, paramDesc} = ParamParser.parseParamValue(tag.tagValue, true, false, true);
+    for (const tag of tags) {
+      const {typeText, paramDesc} = ParamParser.parseParamValue(tag.tagValue, true, false, true);
       name = typeText;
       this._value.externalLink = paramDesc;
     }

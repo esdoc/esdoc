@@ -17,13 +17,13 @@ export function cli(configPath) {
 }
 
 export function readDoc(fileName, dirName = './test/fixture/dest/esdoc') {
-  let html = fs.readFileSync(`${dirName}/${fileName}`, {encoding: 'utf-8'});
-  let $ = cheerio.load(html);
+  const html = fs.readFileSync(`${dirName}/${fileName}`, {encoding: 'utf-8'});
+  const $ = cheerio.load(html);
   return $('html').first();
 }
 
 export function find($el, selector, callback) {
-  let $els = $el.find(selector);
+  const $els = $el.find(selector);
   if (!$els.length) _assert(false, `node is not found. selector = "${selector}"`);
   if ($els.length !== 1) _assert(false, `many nodes are found. selector = "${selector}"`);
 
@@ -44,7 +44,7 @@ export function findParent($el, selector, parentSelector, callback) {
 function getActual($el, selector, attr) {
   let $target;
   if (selector) {
-    let $els = $el.find(selector);
+    const $els = $el.find(selector);
     if (!$els.length) _assert(false, `node is not found. selector = "${selector}"`);
     if ($els.length !== 1) _assert(false, `many nodes are found. selector = "${selector}"`);
     $target = $els.first();
@@ -71,7 +71,7 @@ function getActual($el, selector, attr) {
 }
 
 _assert.includes = function($el, selector, expect, attr) {
-  let actual = getActual($el, selector, attr);
+  const actual = getActual($el, selector, attr);
   _assert(actual.includes(expect) === true, `selector: "${selector}",\nactual: ${actual}\nexpect: ${expect}`);
 };
 
@@ -98,7 +98,7 @@ _assert.multiIncludes = function($el, selector, expects, attr) {
 };
 
 _assert.notIncludes = function($el, selector, expect, attr) {
-  let actual = getActual($el, selector, attr);
+  const actual = getActual($el, selector, attr);
   _assert(actual.includes(expect) === false, `selector: "${selector}"`);
 };
 

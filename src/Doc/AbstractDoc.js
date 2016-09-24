@@ -137,9 +137,9 @@ export default class AbstractDoc {
    * decide `longname`.
    */
   _$longname() {
-    let memberof = this._value.memberof;
-    let name = this._value.name;
-    let scope = this._value.static ? '.' : '#';
+    const memberof = this._value.memberof;
+    const name = this._value.name;
+    const scope = this._value.static ? '.' : '#';
     if (memberof.includes('~')) {
       this._value.longname = `${memberof}${scope}${name}`;
     } else {
@@ -152,7 +152,7 @@ export default class AbstractDoc {
    * process also @public, @private and @protected.
    */
   _$access() {
-    let tag = this._find(['@access', '@public', '@private', '@protected']);
+    const tag = this._find(['@access', '@public', '@private', '@protected']);
     if (tag) {
       let access;
       /* eslint-disable max-statements-per-line */
@@ -221,7 +221,7 @@ export default class AbstractDoc {
     }
 
     let parent = this._node.parent;
-    let name = this._value.name;
+    const name = this._value.name;
     while (parent) {
       if (parent.type === 'ExportDefaultDeclaration') {
         this._value.importStyle = name;
@@ -247,12 +247,12 @@ export default class AbstractDoc {
    * decide `examples`.
    */
   _$example() {
-    let tags = this._findAll(['@example']);
+    const tags = this._findAll(['@example']);
     if (!tags) return;
     if (!tags.length) return;
 
     this._value.examples = [];
-    for (let tag of tags) {
+    for (const tag of tags) {
       this._value.examples.push(tag.tagValue);
     }
   }
@@ -261,12 +261,12 @@ export default class AbstractDoc {
    * decide `see`.
    */
   _$see() {
-    let tags = this._findAll(['@see']);
+    const tags = this._findAll(['@see']);
     if (!tags) return;
     if (!tags.length) return;
 
     this._value.see = [];
-    for (let tag of tags) {
+    for (const tag of tags) {
       this._value.see.push(tag.tagValue);
     }
   }
@@ -275,7 +275,7 @@ export default class AbstractDoc {
    * decide `lineNumber`.
    */
   _$lineNumber() {
-    let node = this._node;
+    const node = this._node;
     if (node.loc) {
       this._value.lineNumber = node.loc.start.line;
     }
@@ -285,7 +285,7 @@ export default class AbstractDoc {
    * decide `deprecated`.
    */
   _$deprecated() {
-    let tag = this._find(['@deprecated']);
+    const tag = this._find(['@deprecated']);
     if (tag) {
       if (tag.tagValue) {
         this._value.deprecated = tag.tagValue;
@@ -299,7 +299,7 @@ export default class AbstractDoc {
    * decide `experimental`.
    */
   _$experimental() {
-    let tag = this._find(['@experimental']);
+    const tag = this._find(['@experimental']);
     if (tag) {
       if (tag.tagValue) {
         this._value.experimental = tag.tagValue;
@@ -313,7 +313,7 @@ export default class AbstractDoc {
    * decide `since`.
    */
   _$since() {
-    let tag = this._find(['@since']);
+    const tag = this._find(['@since']);
     if (tag) {
       this._value.since = tag.tagValue;
     }
@@ -323,7 +323,7 @@ export default class AbstractDoc {
    * decide `version`.
    */
   _$version() {
-    let tag = this._find(['@version']);
+    const tag = this._find(['@version']);
     if (tag) {
       this._value.version = tag.tagValue;
     }
@@ -333,10 +333,10 @@ export default class AbstractDoc {
    * decide `todo`.
    */
   _$todo() {
-    let tags = this._findAll(['@todo']);
+    const tags = this._findAll(['@todo']);
     if (tags) {
       this._value.todo = [];
-      for (let tag of tags) {
+      for (const tag of tags) {
         this._value.todo.push(tag.tagValue);
       }
     }
@@ -346,7 +346,7 @@ export default class AbstractDoc {
    * decide `ignore`.
    */
   _$ignore() {
-    let tag = this._find(['@ignore']);
+    const tag = this._find(['@ignore']);
     if (tag) {
       this._value.ignore = true;
     }
@@ -365,7 +365,7 @@ export default class AbstractDoc {
    * decide `undocument` with internal tag.
    */
   _$undocument() {
-    let tag = this._find(['@_undocument']);
+    const tag = this._find(['@_undocument']);
     if (tag) {
       this._value.undocument = true;
     }
@@ -375,7 +375,7 @@ export default class AbstractDoc {
    * decide `unknown`.
    */
   _$unknown() {
-    for (let tag of this._commentTags) {
+    for (const tag of this._commentTags) {
       const methodName = tag.tagName.replace(/^[@]/, '_$');
       if (this[methodName]) continue;
 
@@ -388,17 +388,17 @@ export default class AbstractDoc {
    * decide `param`.
    */
   _$param() {
-    let values = this._findAllTagValues(['@param']);
+    const values = this._findAllTagValues(['@param']);
     if (!values) return;
 
     this._value.params = [];
-    for (let value of values) {
-      let {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value);
+    for (const value of values) {
+      const {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value);
       if (!typeText || !paramName) {
         InvalidCodeLogger.show(this._pathResolver.fileFullPath, this._node);
         continue;
       }
-      let result = ParamParser.parseParam(typeText, paramName, paramDesc);
+      const result = ParamParser.parseParam(typeText, paramName, paramDesc);
       this._value.params.push(result);
     }
   }
@@ -407,11 +407,11 @@ export default class AbstractDoc {
    * decide `return`.
    */
   _$return() {
-    let value = this._findTagValue(['@return', '@returns']);
+    const value = this._findTagValue(['@return', '@returns']);
     if (!value) return;
 
-    let {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value, true, false, true);
-    let result = ParamParser.parseParam(typeText, paramName, paramDesc);
+    const {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value, true, false, true);
+    const result = ParamParser.parseParam(typeText, paramName, paramDesc);
     this._value.return = result;
   }
 
@@ -419,13 +419,13 @@ export default class AbstractDoc {
    * decide `property`.
    */
   _$property() {
-    let values = this._findAllTagValues(['@property']);
+    const values = this._findAllTagValues(['@property']);
     if (!values) return;
 
     this._value.properties = [];
-    for (let value of values) {
-      let {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value);
-      let result = ParamParser.parseParam(typeText, paramName, paramDesc);
+    for (const value of values) {
+      const {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value);
+      const result = ParamParser.parseParam(typeText, paramName, paramDesc);
       this._value.properties.push(result);
     }
   }
@@ -434,11 +434,11 @@ export default class AbstractDoc {
    * decide `type`.
    */
   _$type() {
-    let value = this._findTagValue(['@type']);
+    const value = this._findTagValue(['@type']);
     if (!value) return;
 
-    let {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value, true, false, false);
-    let result = ParamParser.parseParam(typeText, paramName, paramDesc);
+    const {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value, true, false, false);
+    const result = ParamParser.parseParam(typeText, paramName, paramDesc);
     this._value.type = result;
   }
 
@@ -446,7 +446,7 @@ export default class AbstractDoc {
    * decide `abstract`.
    */
   _$abstract() {
-    let tag = this._find(['@abstract']);
+    const tag = this._find(['@abstract']);
     if (tag) {
       this._value.abstract = true;
     }
@@ -456,7 +456,7 @@ export default class AbstractDoc {
    * decide `override`.
    */
   _$override() {
-    let tag = this._find(['@override']);
+    const tag = this._find(['@override']);
     if (tag) {
       this._value.override = true;
     }
@@ -466,13 +466,13 @@ export default class AbstractDoc {
    * decide `throws`.
    */
   _$throws() {
-    let values = this._findAllTagValues(['@throws']);
+    const values = this._findAllTagValues(['@throws']);
     if (!values) return;
 
     this._value.throws = [];
-    for (let value of values) {
-      let {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value, true, false, true);
-      let result = ParamParser.parseParam(typeText, paramName, paramDesc);
+    for (const value of values) {
+      const {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value, true, false, true);
+      const result = ParamParser.parseParam(typeText, paramName, paramDesc);
       this._value.throws.push({
         types: result.types,
         description: result.description
@@ -484,13 +484,13 @@ export default class AbstractDoc {
    * decide `emits`.
    */
   _$emits() {
-    let values = this._findAllTagValues(['@emits']);
+    const values = this._findAllTagValues(['@emits']);
     if (!values) return;
 
     this._value.emits = [];
-    for (let value of values) {
-      let {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value, true, false, true);
-      let result = ParamParser.parseParam(typeText, paramName, paramDesc);
+    for (const value of values) {
+      const {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value, true, false, true);
+      const result = ParamParser.parseParam(typeText, paramName, paramDesc);
       this._value.emits.push({
         types: result.types,
         description: result.description
@@ -502,13 +502,13 @@ export default class AbstractDoc {
    * decide `listens`.
    */
   _$listens() {
-    let values = this._findAllTagValues(['@listens']);
+    const values = this._findAllTagValues(['@listens']);
     if (!values) return;
 
     this._value.listens = [];
-    for (let value of values) {
-      let {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value, true, false, true);
-      let result = ParamParser.parseParam(typeText, paramName, paramDesc);
+    for (const value of values) {
+      const {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value, true, false, true);
+      const result = ParamParser.parseParam(typeText, paramName, paramDesc);
       this._value.listens.push({
         types: result.types,
         description: result.description
@@ -523,8 +523,8 @@ export default class AbstractDoc {
    * @private
    */
   _findAll(names) {
-    let results = [];
-    for (let tag of this._commentTags) {
+    const results = [];
+    for (const tag of this._commentTags) {
       if (names.includes(tag.tagName)) results.push(tag);
     }
 
@@ -542,7 +542,7 @@ export default class AbstractDoc {
    * @protected
    */
   _find(names) {
-    let results = this._findAll(names);
+    const results = this._findAll(names);
     if (results && results.length) {
       return results[results.length - 1];
     } else {
@@ -557,11 +557,11 @@ export default class AbstractDoc {
    * @private
    */
   _findAllTagValues(names) {
-    let tags = this._findAll(names);
+    const tags = this._findAll(names);
     if (!tags) return null;
 
-    let results = [];
-    for (let tag of tags) {
+    const results = [];
+    for (const tag of tags) {
       results.push(tag.tagValue);
     }
 
@@ -575,7 +575,7 @@ export default class AbstractDoc {
    * @private
    */
   _findTagValue(names) {
-    let tag = this._find(names);
+    const tag = this._find(names);
     if (tag) {
       return tag.tagValue;
     } else {
@@ -597,11 +597,11 @@ export default class AbstractDoc {
     if (importPath.charAt(0) === '.' || importPath.charAt(0) === '/') {
       if (!path.extname(importPath)) importPath += '.js';
 
-      let resolvedPath = this._pathResolver.resolve(importPath);
-      let longname = `${resolvedPath}~${name}`;
+      const resolvedPath = this._pathResolver.resolve(importPath);
+      const longname = `${resolvedPath}~${name}`;
       return longname;
     } else {
-      let longname = `${importPath}~${name}`;
+      const longname = `${importPath}~${name}`;
       return longname;
     }
   }
@@ -614,7 +614,7 @@ export default class AbstractDoc {
    * @private
    */
   _flattenMemberExpression(node) {
-    let results = [];
+    const results = [];
     let target = node;
 
     while (target) {
@@ -641,7 +641,7 @@ export default class AbstractDoc {
    */
   _findClassLongname(className) {
     // find in same file.
-    for (let node of this._ast.program.body) {
+    for (const node of this._ast.program.body) {
       if (!['ExportDefaultDeclaration', 'ExportNamedDeclaration'].includes(node.type)) continue;
       if (node.declaration && node.declaration.type === 'ClassDeclaration' && node.declaration.id.name === className) {
         return `${this._pathResolver.filePath}~${className}`;
@@ -649,7 +649,7 @@ export default class AbstractDoc {
     }
 
     // find in import.
-    let importPath = ASTUtil.findPathInImportDeclaration(this._ast, className);
+    const importPath = ASTUtil.findPathInImportDeclaration(this._ast, className);
     if (importPath) return this._resolveLongname(className);
 
     // find in external

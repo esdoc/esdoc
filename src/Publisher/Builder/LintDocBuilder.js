@@ -16,7 +16,7 @@ export default class LintDocBuilder extends DocBuilder {
   exec() {
     const results = [];
     const docs = this._find({kind: ['method', 'function']});
-    for (let doc of docs) {
+    for (const doc of docs) {
       if (doc.undocument) continue;
 
       const node = ASTNodeContainer.getNode(doc.__docId__);
@@ -53,7 +53,7 @@ export default class LintDocBuilder extends DocBuilder {
     }
 
     const result = [];
-    for (let param of params) {
+    for (const param of params) {
       switch (param.type) {
         case 'Identifier':
           result.push(param.name);
@@ -116,7 +116,7 @@ export default class LintDocBuilder extends DocBuilder {
    */
   _showResult(results) {
     const sourceDir = path.dirname(path.resolve(this._config.source));
-    for (let result of results) {
+    for (const result of results) {
       const doc = result.doc;
       const node = result.node;
       const filePath = doc.longname.split('~')[0];

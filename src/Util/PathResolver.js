@@ -42,7 +42,7 @@ export default class PathResolver {
    * @type {string}
    */
   get importPath() {
-    let relativeFilePath = this.filePath;
+    const relativeFilePath = this.filePath;
 
     if (this._mainFilePath === path.resolve(relativeFilePath)) {
       return this._packageName;
@@ -71,7 +71,7 @@ export default class PathResolver {
    * @type {string}
    */
   get filePath() {
-    let relativeFilePath = path.relative(path.dirname(this._inDirPath), this._filePath);
+    const relativeFilePath = path.relative(path.dirname(this._inDirPath), this._filePath);
     return this._slash(relativeFilePath);
   }
 
@@ -80,9 +80,9 @@ export default class PathResolver {
    * @param {string} relativePath - relative path on this file.
    */
   resolve(relativePath) {
-    let selfDirPath = path.dirname(this._filePath);
-    let resolvedPath = path.resolve(selfDirPath, relativePath);
-    let resolvedRelativePath = path.relative(path.dirname(this._inDirPath), resolvedPath);
+    const selfDirPath = path.dirname(this._filePath);
+    const resolvedPath = path.resolve(selfDirPath, relativePath);
+    const resolvedRelativePath = path.relative(path.dirname(this._inDirPath), resolvedPath);
     return this._slash(resolvedRelativePath);
   }
 

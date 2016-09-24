@@ -20,10 +20,10 @@ class InvalidCodeLogger {
       return;
     }
 
-    let lines = fs.readFileSync(filePath).toString().split('\n');
-    let targetLines = [];
+    const lines = fs.readFileSync(filePath).toString().split('\n');
+    const targetLines = [];
     let start;
-    let end = node.loc.start.line;
+    const end = node.loc.start.line;
 
     if (node.leadingComments && node.leadingComments[0]) {
       start = node.leadingComments[0].loc.start.line;

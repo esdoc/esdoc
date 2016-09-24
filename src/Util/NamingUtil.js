@@ -1,6 +1,6 @@
 import path from 'path';
 
-let filePathMap = {};
+const filePathMap = {};
 
 /**
  * Identifier Naming Util class.
@@ -16,7 +16,7 @@ export default class NamingUtil {
     basename = basename.replace(/[^a-zA-Z0-9_$]/g, '');
 
     filePathMap[filePath] = filePathMap[filePath] || 0;
-    let count = filePathMap[filePath];
+    const count = filePathMap[filePath];
     if (count > 0) basename += count;
     filePathMap[filePath]++;
 

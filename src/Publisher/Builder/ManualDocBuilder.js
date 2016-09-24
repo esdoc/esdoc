@@ -32,7 +32,7 @@ export default class ManualDocBuilder extends DocBuilder {
       callback(ice.html, fileName);
     }
 
-    for (let item of manualConfig) {
+    for (const item of manualConfig) {
       if (!item.paths) continue;
       const fileName = this._getManualOutputFileName(item);
       const baseUrl = this._getBaseUrl(fileName);
@@ -189,7 +189,7 @@ export default class ManualDocBuilder extends DocBuilder {
    */
   _convertMDToHTML(item) {
     const contents = [];
-    for (let path of item.paths) {
+    for (const path of item.paths) {
       contents.push(fs.readFileSync(path).toString());
     }
     const content = contents.join('\n\n');

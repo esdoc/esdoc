@@ -28,7 +28,7 @@ class Plugin {
    */
   _execHandler(handlerName, ev, giveOption = false) {
     /* eslint-disable global-require */
-    for (let item of this._plugins) {
+    for (const item of this._plugins) {
       let plugin;
       if (item.name.match(/^[.\/]/)) {
         const pluginPath = path.resolve(item.name);

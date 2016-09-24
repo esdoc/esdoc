@@ -24,8 +24,8 @@ export default class IndexDocBuilder extends DocBuilder {
    * @param {function(html: string, filePath: string)} callback - is called with output.
    */
   exec(callback) {
-    let ice = this._buildLayoutDoc();
-    let title = this._getTitle();
+    const ice = this._buildLayoutDoc();
+    const title = this._getTitle();
     ice.load('content', this._buildIndexDoc());
     ice.text('title', title, IceCap.MODE_WRITE);
     callback(ice.html, 'index.html');
@@ -46,9 +46,9 @@ export default class IndexDocBuilder extends DocBuilder {
       return 'Please create README.md';
     }
 
-    let html = this._readTemplate('index.html');
-    let ice = new IceCap(html);
-    let ext = path.extname(this._config.index);
+    const html = this._readTemplate('index.html');
+    const ice = new IceCap(html);
+    const ext = path.extname(this._config.index);
     if (['.md', '.markdown'].includes(ext)) {
       ice.load('index', markdown(indexContent));
     } else {

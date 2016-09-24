@@ -24,10 +24,10 @@ export default class SourceDocBuilder extends DocBuilder {
    * @param {function(html: string, filePath: string)} callback - is called with output html.
    */
   exec(callback) {
-    let ice = this._buildLayoutDoc();
-    let fileName = 'source.html';
-    let baseUrl = this._getBaseUrl(fileName);
-    let title = this._getTitle('Source');
+    const ice = this._buildLayoutDoc();
+    const fileName = 'source.html';
+    const baseUrl = this._getBaseUrl(fileName);
+    const title = this._getTitle('Source');
 
     ice.attr('baseUrl', 'href', baseUrl);
     ice.load('content', this._buildSourceHTML());
@@ -42,10 +42,10 @@ export default class SourceDocBuilder extends DocBuilder {
    * @private
    */
   _buildSourceHTML() {
-    let ice = new IceCap(this._readTemplate('source.html'));
-    let docs = this._find({kind: 'file'});
-    let config = this._config;
-    let useCoverage = this._config.coverage;
+    const ice = new IceCap(this._readTemplate('source.html'));
+    const docs = this._find({kind: 'file'});
+    const config = this._config;
+    const useCoverage = this._config.coverage;
     let coverage;
     if (useCoverage) coverage = this._coverage.files;
 
@@ -53,26 +53,26 @@ export default class SourceDocBuilder extends DocBuilder {
     ice.attr('files', 'data-use-coverage', !!useCoverage);
 
     if (useCoverage) {
-      let actual = this._coverage.actualCount;
-      let expect = this._coverage.expectCount;
-      let coverageCount = `${actual}/${expect}`;
+      const actual = this._coverage.actualCount;
+      const expect = this._coverage.expectCount;
+      const coverageCount = `${actual}/${expect}`;
       ice.text('totalCoverageCount', coverageCount);
     }
 
     ice.loop('file', docs, (i, doc, ice)=>{
-      let sourceDirPath = path.resolve(config.source);
-      let filePath = doc.longname;
-      let absFilePath = path.resolve(path.dirname(sourceDirPath), filePath);
-      let content = fs.readFileSync(absFilePath).toString();
-      let lines = content.split('\n').length - 1;
-      let stat = fs.statSync(absFilePath);
-      let date = dateForUTC(stat.ctime);
+      const sourceDirPath = path.resolve(config.source);
+      const filePath = doc.longname;
+      const absFilePath = path.resolve(path.dirname(sourceDirPath), filePath);
+      const content = fs.readFileSync(absFilePath).toString();
+      const lines = content.split('\n').length - 1;
+      const stat = fs.statSync(absFilePath);
+      const date = dateForUTC(stat.ctime);
       let coverageRatio;
       let coverageCount;
       let undocumentLines;
       if (useCoverage && coverage[filePath]) {
-        let actual = coverage[filePath].actualCount;
-        let expect = coverage[filePath].expectCount;
+        const actual = coverage[filePath].actualCount;
+        const expect = coverage[filePath].expectCount;
         coverageRatio = `${Math.floor(100 * actual / expect)} %`;
         coverageCount = `${actual}/${expect}`;
         undocumentLines = coverage[filePath].undocumentLines.sort().join(',');
@@ -80,11 +80,11 @@ export default class SourceDocBuilder extends DocBuilder {
         coverageRatio = '-';
       }
 
-      let identifierDocs = this._find({
+      const identifierDocs = this._find({
         longname: {left: `${doc.longname}~`},
         kind: ['class', 'function', 'variable']
       });
-      let identifiers = identifierDocs.map(doc =>{
+      const identifiers = identifierDocs.map(doc =>{
         return this._buildDocLinkHTML(doc.longname);
       });
 

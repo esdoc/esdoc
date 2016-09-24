@@ -11,15 +11,15 @@ export default class SingleDocBuilder extends DocBuilder {
    * @param {function(html: string, filePath: string)} callback - is called with output.
    */
   exec(callback) {
-    let ice = this._buildLayoutDoc();
+    const ice = this._buildLayoutDoc();
     ice.autoClose = false;
 
-    let kinds = ['function', 'variable', 'typedef'];
-    for (let kind of kinds) {
-      let docs = this._find({kind: kind});
+    const kinds = ['function', 'variable', 'typedef'];
+    for (const kind of kinds) {
+      const docs = this._find({kind: kind});
       if (!docs.length) continue;
-      let fileName = this._getOutputFileName(docs[0]);
-      let baseUrl = this._getBaseUrl(fileName);
+      const fileName = this._getOutputFileName(docs[0]);
+      const baseUrl = this._getBaseUrl(fileName);
       let title = kind.replace(/^(\w)/, (c)=> c.toUpperCase());
       title = this._getTitle(title);
 
@@ -37,8 +37,8 @@ export default class SingleDocBuilder extends DocBuilder {
    * @private
    */
   _buildSingleDoc(kind) {
-    let title = kind.replace(/^(\w)/, (c)=> c.toUpperCase());
-    let ice = new IceCap(this._readTemplate('single.html'));
+    const title = kind.replace(/^(\w)/, (c)=> c.toUpperCase());
+    const ice = new IceCap(this._readTemplate('single.html'));
     ice.text('title', title);
     ice.load('summaries', this._buildSummaryHTML(null, kind, 'Summary'), 'append');
     ice.load('details', this._buildDetailHTML(null, kind, ''));
