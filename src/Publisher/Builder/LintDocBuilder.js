@@ -129,7 +129,7 @@ export default class LintDocBuilder extends DocBuilder {
       const targetLines = [];
 
       for (let i = startLineNumber - 1; i < endLineNumber; i++) {
-        targetLines.push(`${i}| ${ lines[i]}`);
+        targetLines.push(`${i}| ${lines[i]}`);
       }
 
       console.log(`[33mwarning: signature mismatch: ${name} ${filePath}#${startLineNumber}[32m`);
