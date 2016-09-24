@@ -59,8 +59,8 @@ module.exports = {
     'no-caller': ['error'],
     'no-case-declarations': ['error'],
     'no-div-regex': ['error'],
-    // 'no-else-return': ['error'],
-    // 'no-empty-function': ['error'], // considering
+    'no-else-return': ['off'], // because I do not like this rule.
+    'no-empty-function': ['off'], // because abstract method should be empty body.
     'no-empty-pattern': ['error'],
     'no-eq-null': ['error'],
     'no-eval': ['error'],
@@ -70,7 +70,7 @@ module.exports = {
     'no-fallthrough': ['error'],
     'no-floating-decimal': ['error'],
     'no-global-assign': ['error'],
-    'no-implicit-coercion': ['error', {boolean: false}],
+    'no-implicit-coercion': ['error', {'boolean': false}],
     'no-implicit-globals': ['error'],
     'no-implied-eval': ['error'],
     'no-invalid-this': ['error'],
@@ -78,7 +78,7 @@ module.exports = {
     'no-labels': ['error'],
     'no-lone-blocks': ['error'],
     'no-loop-func': ['error'],
-    // 'no-magic-numbers': ['error'], // considering
+    'no-magic-numbers': ['off', {'ignore': [0, 1, -1, 2, 100], "ignoreArrayIndexes": true }], // because too strict.
     'no-multi-spaces': ['error'],
     'no-multi-str': ['error'],
     'no-new-func': ['error'],
@@ -86,7 +86,7 @@ module.exports = {
     'no-new': ['error'],
     'no-octal-escape': ['error'],
     'no-octal': ['error'],
-    // 'no-param-reassign': ['error'],
+    'no-param-reassign': ['off'], // because often use param-reassign.
     'no-proto': ['error'],
     'no-redeclare': ['error'],
     'no-return-assign': ['error'],
@@ -102,7 +102,7 @@ module.exports = {
     'no-useless-concat': ['error'],
     'no-useless-escape': ['error'],
     'no-void': ['error'],
-    'no-warning-comments': ['warn'], // warnings
+    'no-warning-comments': ['warn'], // because `todo` and `fixme` are remain.
     'no-with': ['error'],
     'radix': ['error'],
     'vars-on-top': ['error'],
@@ -113,13 +113,13 @@ module.exports = {
     'strict': ['error'],
 
     /* Variables */
-    // 'init-declarations': ['error', 'always'],
+    'init-declarations': ['off', 'always'], // because too strict.
     'no-catch-shadow': ['error'],
     'no-delete-var': ['error'],
     'no-label-var': ['error'],
     'no-restricted-globals': ['error'],
     'no-shadow-restricted-names': ['error'],
-    // 'no-shadow': ['error'],
+    'no-shadow': ['off'], // because often use shadowing.
     'no-undef-init': ['error'],
     'no-undef': ['error'],
     'no-undefined': ['error'],
@@ -127,17 +127,17 @@ module.exports = {
     'no-use-before-define': ['error', { 'functions': false, 'classes': false }],
 
     /* Node.js and CommonJS */
-    // 'callback-return': ['error'],
+    'callback-return': ['off'], // because often use callback without return.
     'global-require': ['error'],
     'handle-callback-err': ['error'],
     'no-mixed-requires': ['error'],
     'no-new-require': ['error'],
     'no-path-concat': ['error'],
     'no-process-env': ['error'],
-    // 'no-process-exit': ['error'],
-    // 'no-restricted-modules': ['error'],
-    // 'no-restricted-properties'; ['error'],
-    // 'no-sync': ['error'],
+    'no-process-exit': ['off'], // because often use `process.exist`.
+    'no-restricted-modules': ['off'], // because too strict.
+    'no-restricted-properties': ['off'], // because too strict.
+    'no-sync': ['off'], // because often use synchronous method(e.g. fs.readSyncFile)
 
     /* Stylistic Issues */
     'array-bracket-spacing': ['error', 'never'],
@@ -153,17 +153,17 @@ module.exports = {
     'func-call-spacing': ['error', 'never'],
     'func-names': ['error', 'never'],
     'func-style': ['error', 'declaration', {'allowArrowFunctions': true}],
-    // 'id-blacklist': ['error'], // too hard
-    // 'id-length': ['error'], // too hard
-    // 'id-match': ['error'], // too hard
+    'id-blacklist': ['off'], // because too strict.
+    'id-length': ['off'], // because too strict.
+    'id-match': ['error', '^[A-Za-z_$]+[A-Za-z0-9]*$'],
     'indent': ['error', 2, {'SwitchCase': 1}],
-    // 'jsx-quotes': ['error', 'prefer-single'],
+    'jsx-quotes': ['off', 'prefer-single'], // because not use jsx
     'key-spacing': ['error', {'beforeColon': false, 'afterColon': true, 'mode': 'strict'}],
     'keyword-spacing': ['error', {'before': true, 'after': true}],
-    // 'line-comment-position': ['error', {'position': 'above' }],
+    'line-comment-position': ['off'], // because write comment at above and beside.
     'linebreak-style': ['error', 'unix'],
-    // 'lines-around-comment': ['error', {'beforeBlockComment': true, 'allowBlockStart': true}],
-    // 'lines-around-directive': ['error', 'always'],
+    'lines-around-comment': ['off', {'beforeBlockComment': true, 'allowBlockStart': true}], // because do not care this.
+    'lines-around-directive': ['error', 'always'],
     'max-depth': ['error', {'max': 4}],
     'max-len': ['error', {code: 160, 'ignoreStrings': true, 'ignoreUrls': true, 'ignoreComments': true, 'ignoreTemplateLiterals': true}],
     'max-lines': ['warn', {max: 1000}],
@@ -174,13 +174,13 @@ module.exports = {
     'multiline-ternary': ['error', 'never'],
     'new-cap': ['error', {'newIsCap': true, 'capIsNew': true, 'properties': true}],
     'new-parens': ['error'],
-    // 'newline-after-var': ['error', 'always'],
-    // 'newline-before-return': ['error'],
+    'newline-after-var': ['off', 'always'], // because do not care this.
+    'newline-before-return': ['off'], // because do not care this.
     'newline-per-chained-call': ['error', {'ignoreChainWithDepth': 3}],
     'no-array-constructor': ['error'],
     'no-bitwise': ['error'],
-    // 'no-continue': ['error'],
-    // 'no-inline-comments': ['error'],
+    'no-continue': ['off'], // because often use continue.
+    'no-inline-comments': ['off'], // because often use inline comments.
     'no-lonely-if': ['error'],
     'no-mixed-operators': ['error'],
     'no-mixed-spaces-and-tabs': ['error'],
@@ -188,12 +188,12 @@ module.exports = {
     'no-negated-condition': ['error'],
     'no-nested-ternary': ['error'],
     'no-new-object': ['error'],
-    // 'no-plusplus': ['error', {'allowForLoopAfterthoughts': true}],
-    // 'no-restricted-syntax': ['error'],
+    'no-plusplus': ['off', {'allowForLoopAfterthoughts': true}], // because use ++/--.
+    'no-restricted-syntax': ['off'], // because enough other rules.
     'no-tabs': ['error'],
-    // 'no-ternary': ['error'],
+    'no-ternary': ['off'], // because often use ternary.
     'no-trailing-spaces': ['error', {'skipBlankLines': true}],
-    // 'no-underscore-dangle': ['error'],
+    'no-underscore-dangle': ['off', {'allowAfterThis': true, 'allowAfterSuper': true}], // because often use underscore.
     'no-unneeded-ternary': ['error'],
     'no-whitespace-before-property': ['error'],
     'object-curly-newline': ['error', {'multiline': true}],
@@ -203,14 +203,14 @@ module.exports = {
     'one-var': ['error', 'never'],
     'operator-assignment': ['error', 'always'],
     'operator-linebreak': ['error', 'after'],
-    // 'padded-blocks': ['error', 'never'],
+    'padded-blocks': ['error', 'never'],
     'quote-props': ['error', 'as-needed'],
-    // 'require-jsdoc': ['error'],
+    'require-jsdoc': ['off'], // because not enough detail control.
     'quotes': ['error', 'single', {avoidEscape: true, allowTemplateLiterals: true }],
     'semi': ['error', 'always'],
     'semi-spacing': ['error', {'before': false, 'after': true}],
-    // 'sort-keys': ['error'], // too hard
-    // 'sort-vars': ['error'],  // too hard
+    'sort-keys': ['off'], // because do not care this.
+    'sort-vars': ['off'],  // because do not care this.
     'space-before-blocks': ['error', 'always'],
     'space-before-function-paren': ['error', 'never'],
     'space-in-parens': ['error', 'never'],
@@ -218,12 +218,12 @@ module.exports = {
     'space-unary-ops': ['error'],
     'spaced-comment': ['error'],
     'unicode-bom': ['error', 'never'],
-    // 'wrap-regex': ['error'],
+    'wrap-regex': ['off'], // because do not care this.
 
     /* ESMAScript 2015 */
-    // 'arrow-body-style': ['error', 'as-needed'],
-    // 'arrow-parens': ['error', 'always'],
-    // 'arrow-spacing': ['error', {'before': true, 'after': true}], // considering
+    'arrow-body-style': ['off', 'as-needed'], // considering
+    'arrow-parens': ['off', 'as-needed', { "requireForBlockBody": true }], // considering
+    'arrow-spacing': ['off', {'before': true, 'after': true}], // considering
     'constructor-super': ['error'],
     'generator-star-spacing': ['error', {'before': true, 'after': false}],
     'no-class-assign': ['error'],
@@ -232,7 +232,7 @@ module.exports = {
     'no-dupe-class-members': ['error'],
     'no-duplicate-imports': ['error'],
     'no-new-symbol': ['error'],
-    // 'no-restricted-imports': ['error'],
+    'no-restricted-imports': ['off'], // because too strict.
     'no-this-before-super': ['error'],
     'no-useless-computed-key': ['error'],
     'no-useless-constructor': ['error'],
@@ -248,7 +248,7 @@ module.exports = {
     'prefer-template': ['error'],
     'require-yield': ['error'],
     'rest-spread-spacing': ['error', 'never'],
-    // 'sort-imports': ['error'],
+    'sort-imports': ['off'], // because do not care this.
     'symbol-description': ['error'],
     'template-curly-spacing': ['error', 'never'],
     'yield-star-spacing': ['error', {'before': false, 'after': true}],

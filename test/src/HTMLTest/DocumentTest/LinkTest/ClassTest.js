@@ -18,7 +18,6 @@ describe('TestLinkClass', ()=> {
     findParent(doc, '[id="instance-member-p1"]', '[data-ice="detail"]', (doc)=>{
       assert.includes(doc, '[data-ice="description"] a[href="function/index.html#static-function-testLinkFunction"]', 'testLinkFunction');
     });
-
   });
 
   it('has link from method.', ()=>{

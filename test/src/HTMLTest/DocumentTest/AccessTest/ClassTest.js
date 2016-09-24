@@ -2,7 +2,6 @@ import {readDoc, assert} from './../../../util.js';
 
 /** @test {ClassDocBuilder} */
 describe('TestAccessClass:', ()=> {
-
   describe('in header:', ()=>{
     /** @test {ClassDocBuilder#_buildClassDoc} */
     it('has public accessor.', ()=> {

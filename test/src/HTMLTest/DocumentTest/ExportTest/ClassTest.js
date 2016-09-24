@@ -5,7 +5,6 @@ import {readDoc, assert} from './../../../util.js';
  * @test {ClassDocBuilder@_buildClassDoc}
  */
 describe('test export class', ()=> {
-
   it('has default import path with direct class definition.', ()=> {
     const doc = readDoc('class/src/Export/Class.js~TestExportClass1.html');
     assert.includes(doc, '.header-notice [data-ice="importPath"]', `import TestExportClass1 from 'esdoc-test-fixture/src/Export/Class.js'`);

@@ -33,7 +33,6 @@ describe('TestAccessVariable:', ()=> {
         assert.includes(doc, null, 'private _testAccessVariableAutoPrivate:');
       });
     });
-
   });
 
   /** @test {SingleDocBuilder#_buildSingleDoc} */

@@ -5,7 +5,6 @@ import {readDoc, assert, find} from './../../../util.js';
  * @test {DocResolver@_resolveNecessary}
  */
 describe('TestExtendsInner', ()=> {
-
   it('has extends chain.', ()=>{
     const doc = readDoc('class/src/Extends/Inner.js~TestExtendsInner.html');
     find(doc, '.self-detail [data-ice="extendsChain"]', (doc)=>{

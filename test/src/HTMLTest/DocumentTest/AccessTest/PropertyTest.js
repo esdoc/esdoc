@@ -32,7 +32,6 @@ describe('TestAccessProperty:', ()=> {
         assert.includes(doc, null, 'private _p4: ');
       });
     });
-
   });
 
   describe('in detail:', ()=>{

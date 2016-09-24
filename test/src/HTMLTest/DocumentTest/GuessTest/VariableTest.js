@@ -21,7 +21,6 @@ describe('testGuessVariable', ()=> {
       findParent(doc, '[data-ice="summary"] [href$="#static-variable-testGuessVariable4"]', '[data-ice="target"]', (doc)=> {
         assert.includes(doc, null, 'public testGuessVariable4: string');
       });
-
     });
   });
 

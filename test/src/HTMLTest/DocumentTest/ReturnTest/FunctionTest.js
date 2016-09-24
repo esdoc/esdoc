@@ -5,7 +5,6 @@ describe('test return', ()=>{
   const doc = readDoc('function/index.html');
 
   describe('testReturnFunction1', ()=> {
-
     describe('in summary', ()=> {
       it('has return.', ()=> {
         findParent(doc, '[data-ice="summary"] [href$="#static-function-testReturnFunction1"]', '[data-ice="target"]', (doc)=> {
@@ -26,7 +25,6 @@ describe('test return', ()=>{
   });
 
   describe('testReturnFunction2', ()=> {
-
     describe('in summary', ()=> {
       it('has return.', ()=> {
         findParent(doc, '[data-ice="summary"] [href$="#static-function-testReturnFunction2"]', '[data-ice="target"]', (doc)=> {

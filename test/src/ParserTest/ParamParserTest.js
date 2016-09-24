@@ -3,7 +3,6 @@ import ParamParser from '../../../src/Parser/ParamParser.js';
 
 /** @test {ParamParser} */
 describe('ParamParser:', ()=>{
-
   /** @test {ParamParser.parseParamValue} */
   it('parse param value.', ()=>{
     const value = '{number} p1 this is desc';
