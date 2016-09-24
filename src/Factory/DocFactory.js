@@ -380,6 +380,8 @@ export default class DocFactory {
       case 'Assignment': Clazz = AssignmentDoc; break;
       case 'Typedef': Clazz = TypedefDoc; break;
       case 'External': Clazz = ExternalDoc; break;
+      default:
+        throw new Error(`unexpected type: ${type}`);
     }
 
     if (!Clazz) return null;
@@ -399,6 +401,7 @@ export default class DocFactory {
     let type = null;
     for (const tag of tags) {
       const tagName = tag.tagName;
+      /* eslint-disable default-case */
       switch (tagName) {
         case '@typedef': type = 'Typedef'; break;
         case '@external': type = 'External'; break;
@@ -409,6 +412,7 @@ export default class DocFactory {
 
     if (!node) return {type, node};
 
+    /* eslint-disable default-case */
     switch (node.type) {
       case 'ClassDeclaration':
         return this._decideClassDeclarationType(node);

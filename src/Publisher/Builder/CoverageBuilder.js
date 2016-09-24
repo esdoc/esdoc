@@ -28,6 +28,7 @@ export default class CoverageBuilder extends DocBuilder {
       }
     }
 
+    /* eslint-disable no-extra-parens */
     const coveragePercent = (expectCount === 0 ? 0 : Math.floor(10000 * actualCount / expectCount) / 100);
 
     const coverage = {

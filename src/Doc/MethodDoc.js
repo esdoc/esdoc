@@ -67,6 +67,7 @@ export default class MethodDoc extends AbstractDoc {
     super._$type();
     if (this._value.type) return;
 
+    /* eslint-disable default-case */
     switch (this._value.kind) {
       case 'set':
         this._value.type = ParamParser.guessType(this._node.right);

@@ -38,6 +38,7 @@ export default class SearchIndexBuilder extends DocBuilder {
       }
 
       let kind = doc.kind;
+      /* eslint-disable default-case */
       switch (kind) {
         case 'constructor':
           kind = 'method';

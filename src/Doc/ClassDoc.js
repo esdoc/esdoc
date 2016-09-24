@@ -76,6 +76,7 @@ export default class ClassDoc extends AbstractDoc {
       }
 
       for (const target of targets) {
+        /* eslint-disable default-case */
         switch (target.type) {
           case 'Identifier':
             longnames.push(this._resolveLongname(target.name));

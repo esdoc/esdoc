@@ -161,6 +161,8 @@ export default class AbstractDoc {
         case '@public': access = 'public'; break;
         case '@protected': access = 'protected'; break;
         case '@private': access = 'private'; break;
+        default:
+          throw new Error(`unexpected token: ${tag.tagName}`);
       }
 
       this._value.access = access;

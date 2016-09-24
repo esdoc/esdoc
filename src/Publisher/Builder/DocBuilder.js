@@ -306,6 +306,7 @@ export default class DocBuilder {
 
     if (doc) cond.memberof = doc.longname;
 
+    /* eslint-disable default-case */
     switch (kind) {
       case 'class':
         cond.interface = false;

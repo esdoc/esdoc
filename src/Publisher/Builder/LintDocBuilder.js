@@ -74,6 +74,8 @@ export default class LintDocBuilder extends DocBuilder {
         case 'ArrayPattern':
           result.push('*');
           break;
+        default:
+          throw new Error(`unknown param type: ${param.type}`);
       }
     }
 

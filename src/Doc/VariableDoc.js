@@ -15,7 +15,8 @@ export default class VariableDoc extends AbstractDoc {
   _$name() {
     super._$name();
 
-    switch (this._node.declarations[0].id.type) {
+    const type = this._node.declarations[0].id.type;
+    switch (type) {
       case 'Identifier':
         this._value.name = this._node.declarations[0].id.name;
         break;
@@ -27,6 +28,8 @@ export default class VariableDoc extends AbstractDoc {
         // TODO: optimize
         this._value.name = this._node.declarations[0].id.elements[0].name;
         break;
+      default:
+        throw new Error(`unknown declarations type: ${type}`);
     }
   }
 

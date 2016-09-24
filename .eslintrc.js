@@ -12,7 +12,7 @@ module.exports = {
   rules: {
     /* Possible Errors */
     'no-cond-assign': ['error'],
-    // 'no-console': ['error'],
+    'no-console': ['off'], // because using console.log for log
     'no-constant-condition': ['error'],
     'no-control-regex': ['error'],
     'no-debugger': ['error'],
@@ -23,7 +23,7 @@ module.exports = {
     'no-empty': ['error'],
     'no-ex-assign': ['error'],
     'no-extra-boolean-cast': ['error'],
-    // 'no-extra-parens': ['error'],
+    'no-extra-parens': ['error'],
     'no-extra-semi': ['error'],
     'no-func-assign': ['error'],
     'no-inner-declarations': ['error'],
@@ -39,18 +39,18 @@ module.exports = {
     'no-unsafe-finally': ['error'],
     'no-unsafe-negation': ['error'],
     'use-isnan': ['error'],
-    // 'valid-jsdoc': ['error'],
+    'valid-jsdoc': ['off'], // because using ESDoc
     'valid-typeof': ['error'],
 
     /* Best Practices */
     'accessor-pairs': ['error'], // considering
     'array-callback-return': ['error'],
     'block-scoped-var': ['error'],
-    // 'class-methods-use-this': ['error'],
+    'class-methods-use-this': ['off'], // because too strict
     'complexity': ['error', 23],
     'consistent-return': ['error'],
-    // 'curly': ['error'],
-    // 'default-case': ['error'],
+    'curly': ['error', 'multi-line'],
+    'default-case': ['error'], // suppress some errors
     'dot-location': ['error', 'property'],
     'dot-notation': ['error'],
     'eqeqeq': ['error'],
