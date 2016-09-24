@@ -279,7 +279,7 @@ export default class DocFactory {
     const isLastNodeInParent = this._isLastNodeInParent(node, parentNode);
 
     node[already] = true;
-    Object.defineProperty(node, 'parent', {value: parentNode});
+    Reflect.defineProperty(node, 'parent', {value: parentNode});
 
     // unwrap export declaration
     if (['ExportDefaultDeclaration', 'ExportNamedDeclaration'].includes(node.type)) {
@@ -287,7 +287,7 @@ export default class DocFactory {
       node = this._unwrapExportDeclaration(node);
       if (!node) return;
       node[already] = true;
-      Object.defineProperty(node, 'parent', {value: parentNode});
+      Reflect.defineProperty(node, 'parent', {value: parentNode});
     }
 
     let results;
@@ -313,7 +313,7 @@ export default class DocFactory {
   _traverseComments(parentNode, node, comments) {
     if (!node) {
       const virtualNode = {};
-      Object.defineProperty(virtualNode, 'parent', {value: parentNode});
+      Reflect.defineProperty(virtualNode, 'parent', {value: parentNode});
       node = virtualNode;
     }
 
@@ -341,7 +341,7 @@ export default class DocFactory {
         doc = this._createDoc(node, tags);
       } else {
         const virtualNode = {};
-        Object.defineProperty(virtualNode, 'parent', {value: parentNode});
+        Reflect.defineProperty(virtualNode, 'parent', {value: parentNode});
         doc = this._createDoc(virtualNode, tags);
       }
 
@@ -475,7 +475,7 @@ export default class DocFactory {
    */
   _decideExpressionStatementType(node) {
     const isTop = this._isTopDepthInBody(node, this._ast.program.body);
-    Object.defineProperty(node.expression, 'parent', {value: node});
+    Reflect.defineProperty(node.expression, 'parent', {value: node});
     node = node.expression;
     node[already] = true;
 
@@ -511,7 +511,7 @@ export default class DocFactory {
     /* eslint-disable prefer-const */
     innerNode = node.right;
     innerNode.id = this._copy(node.left.id || node.left.property);
-    Object.defineProperty(innerNode, 'parent', {value: node});
+    Reflect.defineProperty(innerNode, 'parent', {value: node});
     innerNode[already] = true;
 
     return {type: innerType, node: innerNode};
@@ -544,7 +544,7 @@ export default class DocFactory {
 
     innerNode = node.declarations[0].init;
     innerNode.id = this._copy(node.declarations[0].id);
-    Object.defineProperty(innerNode, 'parent', {value: node});
+    Reflect.defineProperty(innerNode, 'parent', {value: node});
     innerNode[already] = true;
 
     return {type: innerType, node: innerNode};
@@ -576,7 +576,7 @@ export default class DocFactory {
     /* eslint-disable prefer-const */
     innerNode = node.right;
     innerNode.id = this._copy(node.left.id || node.left.property);
-    Object.defineProperty(innerNode, 'parent', {value: node});
+    Reflect.defineProperty(innerNode, 'parent', {value: node});
     innerNode[already] = true;
 
     return {type: innerType, node: innerNode};

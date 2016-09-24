@@ -235,5 +235,7 @@ module.exports = {
     'object-shorthand': ['error', 'consistent'],
     'prefer-arrow-callback': ['error'],
     'prefer-const': ['error', {'destructuring': 'all', 'ignoreReadBeforeAssign': true}],
+    'prefer-numeric-literals': ['error'],
+    'prefer-reflect': ['error'],
   }
 };

@@ -17,9 +17,9 @@ export default class TypedefDoc extends AbstractDoc {
 
     this._$typedef();
 
-    delete this._value.export;
-    delete this._value.importPath;
-    delete this._value.importStyle;
+    Reflect.deleteProperty(this._value, 'export');
+    Reflect.deleteProperty(this._value, 'importPath');
+    Reflect.deleteProperty(this._value, 'importStyle');
   }
 
   /** specify ``typedef`` to kind. */
@@ -71,9 +71,9 @@ export default class TypedefDoc extends AbstractDoc {
     const {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value, true, true, false);
     const result = ParamParser.parseParam(typeText, paramName, paramDesc);
 
-    delete result.description;
-    delete result.nullable;
-    delete result.spread;
+    Reflect.deleteProperty(result, 'description');
+    Reflect.deleteProperty(result, 'nullable');
+    Reflect.deleteProperty(result, 'spread');
 
     this._value.type = result;
   }

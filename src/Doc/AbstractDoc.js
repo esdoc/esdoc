@@ -23,7 +23,7 @@ export default class AbstractDoc {
     this._commentTags = commentTags;
     this._value = {};
 
-    Object.defineProperty(this._node, 'doc', {value: this});
+    Reflect.defineProperty(this._node, 'doc', {value: this});
 
     this._value.__docId__ = ASTNodeContainer.addNode(node);
 

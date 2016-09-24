@@ -14,9 +14,9 @@ export default class TestDoc extends AbstractDoc {
 
     this._$testTarget();
 
-    delete this._value.export;
-    delete this._value.importPath;
-    delete this._value.importStyle;
+    Reflect.deleteProperty(this._value, 'export');
+    Reflect.deleteProperty(this._value, 'importPath');
+    Reflect.deleteProperty(this._value, 'importStyle');
   }
 
   /** use name property of self node. */

@@ -13,9 +13,9 @@ export default class MethodDoc extends AbstractDoc {
   _apply() {
     super._apply();
 
-    delete this._value.export;
-    delete this._value.importPath;
-    delete this._value.importStyle;
+    Reflect.deleteProperty(this._value, 'export');
+    Reflect.deleteProperty(this._value, 'importPath');
+    Reflect.deleteProperty(this._value, 'importStyle');
   }
 
   /** use kind property of self node. */

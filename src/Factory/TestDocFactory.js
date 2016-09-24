@@ -67,7 +67,7 @@ export default class TestDocFactory {
     if (node[already]) return;
 
     node[already] = true;
-    Object.defineProperty(node, 'parent', {value: parentNode});
+    Reflect.defineProperty(node, 'parent', {value: parentNode});
 
     if (this._type === 'mocha') this._pushForMocha(node, parentNode);
   }
@@ -86,7 +86,7 @@ export default class TestDocFactory {
     if (!['describe', 'it', 'context', 'suite', 'test'].includes(expression.callee.name)) return;
 
     expression[already] = true;
-    Object.defineProperty(expression, 'parent', {value: node});
+    Reflect.defineProperty(expression, 'parent', {value: node});
 
     let tags = [];
     if (node.leadingComments && node.leadingComments.length) {
