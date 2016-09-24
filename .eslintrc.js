@@ -1,3 +1,4 @@
+// this rule is ESLint v3.5.0
 module.exports = {
   env: {
     node: true,
@@ -9,6 +10,7 @@ module.exports = {
     'sourceType': 'module'
   },
   rules: {
+    /* Possible Errors */
     'no-cond-assign': ['error'],
     // 'no-console': ['error'],
     'no-constant-condition': ['error'],
@@ -39,6 +41,8 @@ module.exports = {
     'use-isnan': ['error'],
     // 'valid-jsdoc': ['error'],
     'valid-typeof': ['error'],
+
+    /* Best Practices */
     'accessor-pairs': ['error'], // considering
     'array-callback-return': ['error'],
     'block-scoped-var': ['error'],
@@ -104,9 +108,11 @@ module.exports = {
     'vars-on-top': ['error'],
     'wrap-iife': ['error'],
     'yoda': ['error', 'never'],
+
+    /* Strict Mode */
     'strict': ['error'],
 
-    /* Variable */
+    /* Variables */
     // 'init-declarations': ['error', 'always'],
     'no-catch-shadow': ['error'],
     'no-delete-var': ['error'],

@@ -13,9 +13,9 @@
     "node": ">= 6.0.0"
   },
   "scripts": {
-    "build": "node ./script/build.js",
-    "test": "node ./script/test.js",
-    "test-prod": "node ./script/test-prod.js",
+    "build": "npm run lint && node ./script/build.js",
+    "test": "npm run lint && node ./script/test.js",
+    "test-prod": "npm run lint && node ./script/test-prod.js",
     "esdoc": "node ./script/esdoc.js",
     "docpad": "node ./script/docpad.js",
     "start": "node ./script/server.js",
