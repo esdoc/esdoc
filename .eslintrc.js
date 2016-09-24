@@ -245,5 +245,6 @@ module.exports = {
     // 'sort-imports': ['error'],
     'symbol-description': ['error'],
     'template-curly-spacing': ['error', 'never'],
+    'yield-star-spacing': ['error', {'before': false, 'after': true}],
   }
 };
