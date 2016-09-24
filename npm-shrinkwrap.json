@@ -40,9 +40,9 @@
       }
     },
     "ajv": {
-      "version": "4.7.2",
+      "version": "4.7.3",
       "from": "ajv@>=4.7.0 <5.0.0",
-      "resolved": "https://registry.npmjs.org/ajv/-/ajv-4.7.2.tgz"
+      "resolved": "https://registry.npmjs.org/ajv/-/ajv-4.7.3.tgz"
     },
     "ajv-keywords": {
       "version": "1.1.0",
@@ -995,9 +995,9 @@
       "resolved": "https://registry.npmjs.org/esdoc-importpath-plugin/-/esdoc-importpath-plugin-0.0.1.tgz"
     },
     "eslint": {
-      "version": "3.5.0",
-      "from": "eslint@3.5.0",
-      "resolved": "https://registry.npmjs.org/eslint/-/eslint-3.5.0.tgz",
+      "version": "3.6.0",
+      "from": "eslint@3.6.0",
+      "resolved": "https://registry.npmjs.org/eslint/-/eslint-3.6.0.tgz",
       "dependencies": {
         "estraverse": {
           "version": "4.2.0",
