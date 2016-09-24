@@ -89,7 +89,7 @@ class Plugin {
    */
   onHandleCodeParser(parser, option, filePath, code) {
     const ev = new PluginEvent();
-    ev.data = {parser: parser, option: option, filePath: filePath, code: code};
+    ev.data = {parser, option, filePath, code};
     this._execHandler('onHandleCodeParser', ev);
     return ev.data.parser;
   }

@@ -213,5 +213,26 @@ module.exports = {
     'spaced-comment': ['error'],
     'unicode-bom': ['error', 'never'],
     // 'wrap-regex': ['error'],
+
+    /* ESMAScript 2015 */
+    // 'arrow-body-style': ['error', 'as-needed'],
+    // 'arrow-parens': ['error', 'always'],
+    // 'arrow-spacing': ['error', {'before': true, 'after': true}], // considering
+    'constructor-super': ['error'],
+    'generator-star-spacing': ['error', {'before': true, 'after': false}],
+    'no-class-assign': ['error'],
+    'no-confusing-arrow': ['error'],
+    'no-const-assign': ['error'],
+    'no-dupe-class-members': ['error'],
+    'no-duplicate-imports': ['error'],
+    'no-new-symbol': ['error'],
+    // 'no-restricted-imports': ['error'],
+    'no-this-before-super': ['error'],
+    'no-useless-computed-key': ['error'],
+    'no-useless-constructor': ['error'],
+    'no-useless-rename': ['error'],
+    'no-var': ['error'],
+    'object-shorthand': ['error', 'consistent'],
+    'prefer-arrow-callback': ['error'],
   }
 };

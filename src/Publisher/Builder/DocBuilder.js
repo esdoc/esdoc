@@ -302,7 +302,7 @@ export default class DocBuilder {
    * @private
    */
   _findAccessDocs(doc, kind, isStatic = true) {
-    let cond = {kind, static: isStatic};
+    let cond = {kind: kind, static: isStatic};
 
     if (doc) cond.memberof = doc.longname;
 
