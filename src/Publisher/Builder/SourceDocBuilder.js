@@ -82,7 +82,8 @@ export default class SourceDocBuilder extends DocBuilder {
 
       let identifierDocs = this._find({
         longname: {left: `${doc.longname}~`},
-        kind: ['class', 'function', 'variable']});
+        kind: ['class', 'function', 'variable']
+      });
       let identifiers = identifierDocs.map(doc =>{
         return this._buildDocLinkHTML(doc.longname);
       });

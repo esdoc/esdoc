@@ -39,7 +39,7 @@ describe('test export class', ()=> {
   it('is not documented.', ()=> {
     try {
       readDoc('class/src/Export/Class.js~TestExportClass7.html');
-    } catch(e) {
+    } catch (e) {
       return;
     }
     assert(false);

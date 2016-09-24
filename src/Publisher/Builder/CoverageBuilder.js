@@ -20,11 +20,11 @@ export default class CoverageBuilder extends DocBuilder {
       if (!files[filePath]) files[filePath] = {expectCount: 0, actualCount: 0, undocumentLines: []};
       files[filePath].expectCount++;
 
-      if (!doc.undocument) {
+      if (doc.undocument) {
+        files[filePath].undocumentLines.push(doc.lineNumber);
+      } else {
         actualCount++;
         files[filePath].actualCount++;
-      } else {
-        files[filePath].undocumentLines.push(doc.lineNumber);
       }
     }
 

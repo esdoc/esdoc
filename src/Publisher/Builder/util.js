@@ -86,8 +86,8 @@ export function markdown(text, breaks = false) {
 
       return sanitizedTag;
     },
-    highlight: function (code) {
-      //return `<pre class="source-code"><code class="prettyprint">${escape(code)}</code></pre>`;
+    highlight: function(code) {
+      // return `<pre class="source-code"><code class="prettyprint">${escape(code)}</code></pre>`;
       return `<code class="source-code prettyprint">${escape(code)}</code>`;
     }
   });

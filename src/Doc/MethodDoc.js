@@ -79,7 +79,10 @@ export default class MethodDoc extends AbstractDoc {
     }
   }
 
-  /** if @return is not exists, guess type of return by usigin self node. but ``constructor``, ``get`` and ``set``are not guessed. */
+  /**
+   * if @return is not exists, guess type of return by using self node.
+   * but ``constructor``, ``get`` and ``set``are not guessed.
+   */
   _$return() {
     super._$return();
     if (this._value.return) return;

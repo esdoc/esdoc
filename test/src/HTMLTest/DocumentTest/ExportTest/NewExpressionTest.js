@@ -18,7 +18,7 @@ describe('test default export with new expression.', ()=> {
       // does not have import path because the class is not clear exported.
       try {
         assert.includes(doc, '.header-notice [data-ice="importPath"]', 'import');
-      } catch(e) {
+      } catch (e) {
         return;
       }
       assert(false);
@@ -51,7 +51,7 @@ describe('test default export with new expression.', ()=> {
       // does not have import path because the class is not clear exported.
       try {
         assert.includes(doc, '.header-notice [data-ice="importPath"]', 'import');
-      } catch(e) {
+      } catch (e) {
         return;
       }
       assert(false);

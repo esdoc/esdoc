@@ -231,8 +231,8 @@ export default class ClassDocBuilder extends DocBuilder {
 
     let longnames = [
       ...doc._custom_extends_chains || []
-      //...doc.implements || [],
-      //...doc._custom_indirect_implements || [],
+      // ...doc.implements || [],
+      // ...doc._custom_indirect_implements || [],
     ];
 
     let html = [];

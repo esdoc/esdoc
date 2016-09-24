@@ -62,7 +62,7 @@ export default class DocResolver {
     let autoPrivate = config.autoPrivate;
 
     /* eslint-disable no-invalid-this */
-    this._data().update(function(){
+    this._data().update(function() {
       if (!this.access) {
         if (autoPrivate && this.name.charAt(0) === '_') {
           /** @ignore */
@@ -144,7 +144,7 @@ export default class DocResolver {
    * @todo resolve all ``description`` property.
    */
   _resolveLink() {
-    if(this._data.__RESOLVED_LINK__) return;
+    if (this._data.__RESOLVED_LINK__) return;
 
     let link = (str)=>{
       if (!str) return str;
@@ -183,7 +183,7 @@ export default class DocResolver {
         for (let i = 0; i < v.see.length; i++) {
           if (v.see[i].indexOf('{@link') === 0) {
             v.see[i] = link(v.see[i]);
-          } else if(v.see[i].indexOf('<a href') === 0) {
+          } else if (v.see[i].indexOf('<a href') === 0) {
             // ignore
           } else {
             v.see[i] = `<a href="${v.see[i]}">${v.see[i]}</a>`;

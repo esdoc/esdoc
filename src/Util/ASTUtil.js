@@ -25,7 +25,7 @@ export default class ASTUtil {
   static traverse(ast, callback) {
     babelTraverse(ast, {
       noScope: true,
-      enter: function(path){
+      enter: function(path) {
         callback(path.node, path.parent, path);
       }
     });
@@ -43,7 +43,7 @@ export default class ASTUtil {
 
     babelTraverse(ast, {
       noScope: true,
-      enter: function(_path){
+      enter: function(_path) {
         const node = _path.node;
         if (node.type !== 'ImportDeclaration') return;
 

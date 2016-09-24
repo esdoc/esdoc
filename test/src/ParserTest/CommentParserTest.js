@@ -27,7 +27,7 @@ describe('CommentParser:', ()=>{
 
     /** @test {CommentParser.parse} */
   it('can parse doc comments with trailing tabs', ()=>{
-      let value = `*
+    let value = `*
 \t* this is desc.
 \t* @tag1
 \t* @tag2 tag2 value

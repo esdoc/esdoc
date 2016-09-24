@@ -61,7 +61,7 @@ export default class LintDocBuilder extends DocBuilder {
         case 'AssignmentPattern':
           if (param.left.type === 'Identifier') {
             result.push(param.left.name);
-          } else if(param.left.type === 'ObjectPattern') {
+          } else if (param.left.type === 'ObjectPattern') {
             result.push('*');
           }
           break;

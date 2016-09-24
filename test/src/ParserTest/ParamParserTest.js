@@ -132,7 +132,7 @@ describe('ParamParser:', ()=>{
 
     try {
       ParamParser.parseParam(typeText, paramName, paramDesc);
-    } catch(e) {
+    } catch (e) {
       assert.equal(e.message, 'Empty Type found name=foo desc=bar');
       return;
     }

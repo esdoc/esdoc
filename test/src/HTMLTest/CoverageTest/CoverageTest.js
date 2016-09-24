@@ -13,6 +13,7 @@ describe('test coverage', ()=> {
     assert.equal(doc.find('[data-ice="file"] [data-ice="coverage"]').length, 108);
   });
 
+  /* eslint-disable max-statements */
   it('has coverage details', ()=>{
     let count = 0;
     function test(filePath, expect) {

@@ -93,7 +93,7 @@ export default class DocFactory {
       let targetVariableName = null;
       let pseudoClassExport;
 
-      switch(exportNode.declaration.type) {
+      switch (exportNode.declaration.type) {
         case 'NewExpression':
           if (exportNode.declaration.callee.type === 'Identifier') {
             targetClassName = exportNode.declaration.callee.name;
@@ -128,7 +128,7 @@ export default class DocFactory {
         let pseudoExportNode1 = this._copy(exportNode);
         pseudoExportNode1.declaration = this._copy(classNode);
         pseudoExportNode1.leadingComments = null;
-        pseudoExportNode1.declaration.__esdoc__pseudo_export = pseudoClassExport;
+        pseudoExportNode1.declaration.__PseudoExport__ = pseudoClassExport;
         pseudoExportNodes.push(pseudoExportNode1);
 
         if (targetVariableName) {
@@ -163,6 +163,7 @@ export default class DocFactory {
     this._ast.program.body.push(...pseudoExportNodes);
   }
 
+  /* eslint-disable max-statements */
   /**
    * inspect ExportNamedDeclaration.
    *
@@ -200,7 +201,7 @@ export default class DocFactory {
             pseudoExportNode.declaration = this._copy(classNode);
             pseudoExportNode.leadingComments = null;
             pseudoExportNodes.push(pseudoExportNode);
-            pseudoExportNode.declaration.__esdoc__pseudo_export = true;
+            pseudoExportNode.declaration.__PseudoExport__ = true;
             ASTUtil.sanitize(classNode);
           }
         }
@@ -235,7 +236,7 @@ export default class DocFactory {
           pseudoExportNode.declaration = this._copy(classNode);
           pseudoExportNode.leadingComments = null;
           pseudoExportNode.specifiers = null;
-          pseudoExportNode.declaration.__esdoc__pseudo_export = pseudoClassExport;
+          pseudoExportNode.declaration.__PseudoExport__ = pseudoClassExport;
           pseudoExportNodes.push(pseudoExportNode);
           ASTUtil.sanitize(classNode);
         }
@@ -368,22 +369,23 @@ export default class DocFactory {
       this._processedClassNodes.push(node);
     }
 
-    let clazz;
+    let Clazz;
+    /* eslint-disable max-statements-per-line */
     switch (type) {
-      case 'Class': clazz = ClassDoc; break;
-      case 'Method': clazz = MethodDoc; break;
-      case 'Member': clazz = MemberDoc; break;
-      case 'Function': clazz = FunctionDoc; break;
-      case 'Variable': clazz = VariableDoc; break;
-      case 'Assignment': clazz = AssignmentDoc; break;
-      case 'Typedef': clazz = TypedefDoc; break;
-      case 'External': clazz = ExternalDoc; break;
+      case 'Class': Clazz = ClassDoc; break;
+      case 'Method': Clazz = MethodDoc; break;
+      case 'Member': Clazz = MemberDoc; break;
+      case 'Function': Clazz = FunctionDoc; break;
+      case 'Variable': Clazz = VariableDoc; break;
+      case 'Assignment': Clazz = AssignmentDoc; break;
+      case 'Typedef': Clazz = TypedefDoc; break;
+      case 'External': Clazz = ExternalDoc; break;
     }
 
-    if (!clazz) return null;
+    if (!Clazz) return null;
     if (!node.type) node.type = type;
 
-    return new clazz(this._ast, node, this._pathResolver, tags);
+    return new Clazz(this._ast, node, this._pathResolver, tags);
   }
 
   /**
@@ -655,7 +657,7 @@ export default class DocFactory {
    */
   _findUp(node, types) {
     let parent = node.parent;
-    while(parent) {
+    while (parent) {
       if (types.includes(parent.type)) return parent;
       parent = parent.parent;
     }

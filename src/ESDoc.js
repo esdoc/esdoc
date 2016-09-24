@@ -234,7 +234,7 @@ export default class ESDoc {
     let ast;
     try {
       ast = ESParser.parse(filePath);
-    } catch(e) {
+    } catch (e) {
       InvalidCodeLogger.showFile(filePath, e);
       return null;
     }
@@ -245,7 +245,7 @@ export default class ESDoc {
     ASTUtil.traverse(ast, (node, parent)=>{
       try {
         factory.push(node, parent);
-      } catch(e) {
+      } catch (e) {
         InvalidCodeLogger.show(filePath, node);
         throw e;
       }
@@ -268,7 +268,7 @@ export default class ESDoc {
     let ast;
     try {
       ast = ESParser.parse(filePath);
-    } catch(e) {
+    } catch (e) {
       InvalidCodeLogger.showFile(filePath, e);
       return null;
     }
@@ -278,7 +278,7 @@ export default class ESDoc {
     ASTUtil.traverse(ast, (node, parent)=>{
       try {
         factory.push(node, parent);
-      } catch(e) {
+      } catch (e) {
         InvalidCodeLogger.show(filePath, node);
         throw e;
       }

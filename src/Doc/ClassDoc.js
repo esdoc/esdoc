@@ -107,7 +107,7 @@ export default class ClassDoc extends AbstractDoc {
   }
 
   /** for @implements */
-  _$implements(){
+  _$implements() {
     let values = this._findAllTagValues(['@implements', '@implement']);
     if (!values) return;
 

@@ -13,7 +13,9 @@ export default class SearchIndexBuilder extends DocBuilder {
     let docs = this._find({});
 
     for (let doc of docs) {
-      let indexText, url, displayText;
+      let indexText;
+      let url;
+      let displayText;
 
       if (doc.importPath) {
         displayText = `<span>${doc.name}</span> <span class="search-result-import-path">${doc.importPath}</span>`;
@@ -25,7 +27,7 @@ export default class SearchIndexBuilder extends DocBuilder {
         let filePath = doc.longname.split('~')[0];
         let fileDoc = this._find({kind: 'testFile', longname: filePath})[0];
         url = `${this._getURL(fileDoc)}#lineNumber${doc.lineNumber}`;
-      } else if(doc.kind === 'external') {
+      } else if (doc.kind === 'external') {
         displayText = doc.longname;
         indexText = displayText.toLowerCase();
         url = doc.externalLink;

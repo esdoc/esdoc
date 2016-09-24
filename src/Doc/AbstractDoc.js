@@ -16,7 +16,7 @@ export default class AbstractDoc {
    * @param {PathResolver} pathResolver - this is file path resolver that contains this doc.
    * @param {Tag[]} commentTags - this is tags that self node has.
    */
-  constructor(ast, node, pathResolver, commentTags = []){
+  constructor(ast, node, pathResolver, commentTags = []) {
     this._ast = ast;
     this._node = node;
     this._pathResolver = pathResolver;
@@ -155,6 +155,7 @@ export default class AbstractDoc {
     let tag = this._find(['@access', '@public', '@private', '@protected']);
     if (tag) {
       let access;
+      /* eslint-disable max-statements-per-line */
       switch (tag.tagName) {
         case '@access': access = tag.tagValue; break;
         case '@public': access = 'public'; break;
@@ -171,7 +172,7 @@ export default class AbstractDoc {
   /**
    * avoid unknown tag.
    */
-  _$public(){}
+  _$public() {}
 
   /**
    * avoid unknown tag.
@@ -214,7 +215,7 @@ export default class AbstractDoc {
    * decide `importStyle`.
    */
   _$importStyle() {
-    if (this._node.__esdoc__pseudo_export) {
+    if (this._node.__PseudoExport__) {
       this._value.importStyle = null;
       return;
     }
@@ -297,7 +298,7 @@ export default class AbstractDoc {
   /**
    * decide `experimental`.
    */
-  _$experimental(){
+  _$experimental() {
     let tag = this._find(['@experimental']);
     if (tag) {
       if (tag.tagValue) {
@@ -311,7 +312,7 @@ export default class AbstractDoc {
   /**
    * decide `since`.
    */
-  _$since(){
+  _$since() {
     let tag = this._find(['@since']);
     if (tag) {
       this._value.since = tag.tagValue;
@@ -321,7 +322,7 @@ export default class AbstractDoc {
   /**
    * decide `version`.
    */
-  _$version(){
+  _$version() {
     let tag = this._find(['@version']);
     if (tag) {
       this._value.version = tag.tagValue;
@@ -331,7 +332,7 @@ export default class AbstractDoc {
   /**
    * decide `todo`.
    */
-  _$todo(){
+  _$todo() {
     let tags = this._findAll(['@todo']);
     if (tags) {
       this._value.todo = [];
@@ -344,7 +345,7 @@ export default class AbstractDoc {
   /**
    * decide `ignore`.
    */
-  _$ignore(){
+  _$ignore() {
     let tag = this._find(['@ignore']);
     if (tag) {
       this._value.ignore = true;
@@ -354,8 +355,8 @@ export default class AbstractDoc {
   /**
    * decide `pseudoExport`.
    */
-  _$pseudoExport(){
-    if (this._node.__esdoc__pseudo_export) {
+  _$pseudoExport() {
+    if (this._node.__PseudoExport__) {
       this._value.pseudoExport = true;
     }
   }
@@ -454,7 +455,7 @@ export default class AbstractDoc {
   /**
    * decide `override`.
    */
-  _$override(){
+  _$override() {
     let tag = this._find(['@override']);
     if (tag) {
       this._value.override = true;
@@ -464,7 +465,7 @@ export default class AbstractDoc {
   /**
    * decide `throws`.
    */
-  _$throws(){
+  _$throws() {
     let values = this._findAllTagValues(['@throws']);
     if (!values) return;
 
@@ -482,7 +483,7 @@ export default class AbstractDoc {
   /**
    * decide `emits`.
    */
-  _$emits(){
+  _$emits() {
     let values = this._findAllTagValues(['@emits']);
     if (!values) return;
 
@@ -500,7 +501,7 @@ export default class AbstractDoc {
   /**
    * decide `listens`.
    */
-  _$listens(){
+  _$listens() {
     let values = this._findAllTagValues(['@listens']);
     if (!values) return;
 
@@ -616,7 +617,7 @@ export default class AbstractDoc {
     let results = [];
     let target = node;
 
-    while(target) {
+    while (target) {
       if (target.type === 'ThisExpression') {
         results.push('this');
         break;

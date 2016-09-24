@@ -20,7 +20,7 @@ export default class SingleDocBuilder extends DocBuilder {
       if (!docs.length) continue;
       let fileName = this._getOutputFileName(docs[0]);
       let baseUrl = this._getBaseUrl(fileName);
-      let title = kind.replace(/^(\w)/, (c)=> c.toUpperCase() );
+      let title = kind.replace(/^(\w)/, (c)=> c.toUpperCase());
       title = this._getTitle(title);
 
       ice.load('content', this._buildSingleDoc(kind), IceCap.MODE_WRITE);
@@ -37,7 +37,7 @@ export default class SingleDocBuilder extends DocBuilder {
    * @private
    */
   _buildSingleDoc(kind) {
-    let title = kind.replace(/^(\w)/, (c)=> c.toUpperCase() );
+    let title = kind.replace(/^(\w)/, (c)=> c.toUpperCase());
     let ice = new IceCap(this._readTemplate('single.html'));
     ice.text('title', title);
     ice.load('summaries', this._buildSummaryHTML(null, kind, 'Summary'), 'append');

@@ -98,11 +98,10 @@ export default class ParamParser {
       // check record and union
       if (typeText[0] === '{') {
         result.types = [typeText];
-      }
-      else if (typeText[0] === '(') {
+      } else if (typeText[0] === '(') {
         typeText = typeText.replace(/^[(]/, '').replace(/[)]$/, '');
         result.types = typeText.split('|');
-      } else if(typeText.includes('|')){
+      } else if (typeText.includes('|')) {
         result.types = typeText.split('|');
       } else {
         result.types = [typeText];
@@ -113,8 +112,7 @@ export default class ParamParser {
       } else {
         result.spread = false;
       }
-    }
-    else {
+    } else {
       result.types = [''];
     }
 
@@ -197,7 +195,7 @@ export default class ParamParser {
             result.types = param.right.elements.length ? [`${typeof param.right.elements[0].value}[]`] : ['*[]'];
             result.defaultRaw = param.right.elements.map((elm)=> elm.value);
             result.defaultValue = `${JSON.stringify(result.defaultRaw)}`;
-          } else if(param.right.type === 'ObjectExpression'){
+          } else if (param.right.type === 'ObjectExpression') {
             let typeMap = {};
             for (let prop of param.left.properties || []) {
               typeMap[prop.key.name] = '*';
@@ -267,7 +265,7 @@ export default class ParamParser {
     let result = {};
     const guessType = this.guessType.bind(this);
 
-    ASTUtil.traverse(body, function(node, parent, path){
+    ASTUtil.traverse(body, function(node, parent, path) {
       // `return` in Function is not the body's `return`
       if (node.type.includes('Function')) {
         path.skip();

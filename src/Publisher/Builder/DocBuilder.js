@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import fs from 'fs';
 import path from 'path';
 import escape from 'escape-html';
@@ -174,10 +175,10 @@ export default class DocBuilder {
           }
         } else if (url.match(/^[\w\d\-_]+\/[\w\d\-_]+$/)) { // url: foo/bar
           url = `https://github.com/${url}`;
-        } else if(url.match(/^git\+https:\/\/github.com\/.*\.git$/)) { // git+https://github.com/foo/bar.git
+        } else if (url.match(/^git\+https:\/\/github.com\/.*\.git$/)) { // git+https://github.com/foo/bar.git
           const matched = url.match(/^git\+(https:\/\/github.com\/.*)\.git$/);
           url = matched[1];
-        } else if(url.match(/(https?:\/\/.*$)/)){ // other url
+        } else if (url.match(/(https?:\/\/.*$)/)) { // other url
           const matched = url.match(/(https?:\/\/.*$)/);
           url = matched[1];
         } else {
@@ -424,6 +425,7 @@ export default class DocBuilder {
     return html;
   }
 
+  /* eslint-disable max-statements */
   /**
    * build detail output html by docs.
    * @param {DocObject[]} docs - target docs.
@@ -776,7 +778,7 @@ export default class DocBuilder {
     if (typeName.indexOf('...') === 0) {
       typeName = typeName.replace('...', '');
       return '...' + this._buildDocLinkHTML(typeName);
-    } else if (typeName.indexOf('?') === 0){
+    } else if (typeName.indexOf('?') === 0) {
       typeName = typeName.replace('?', '');
       return '?' + this._buildDocLinkHTML(typeName);
     } else {
@@ -1012,7 +1014,7 @@ export default class DocBuilder {
     return '';
   }
 
-  //_buildAuthorHTML(doc, separator = '\n') {
+  // _buildAuthorHTML(doc, separator = '\n') {
   //  if (!doc.author) return '';
   //
   //  var html = [];
@@ -1032,5 +1034,5 @@ export default class DocBuilder {
   //  }
   //
   //  return `<ul>${html.join(separator)}</ul>`;
-  //}
+  // }
 }

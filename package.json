@@ -41,7 +41,7 @@
     "codecov": "1.0.1",
     "docpad": "6.78.6",
     "esdoc-importpath-plugin": "0.0.1",
-    "eslint": "3.5.0",
+    "eslint": "3.6.0",
     "http-server": "0.9.0",
     "istanbul": "0.4.4",
     "mocha": "2.5.3"
