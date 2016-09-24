@@ -105,6 +105,8 @@ module.exports = {
     'wrap-iife': ['error'],
     'yoda': ['error', 'never'],
     'strict': ['error'],
+
+    /* Variable */
     // 'init-declarations': ['error', 'always'],
     'no-catch-shadow': ['error'],
     'no-delete-var': ['error'],
@@ -117,6 +119,19 @@ module.exports = {
     'no-undefined': ['error'],
     'no-unused-vars': ['error'],
     'no-use-before-define': ['error', { "functions": false, "classes": false }],
+
+    /* Node.js and CommonJS */
+    // 'callback-return': ['error'],
+    'global-require': ['error'],
+    'handle-callback-err': ['error'],
+    'no-mixed-requires': ['error'],
+    'no-new-require': ['error'],
+    'no-path-concat': ['error'],
+    'no-process-env': ['error'],
+    // 'no-process-exit': ['error'],
+    // 'no-restricted-modules': ['error'],
+    // 'no-restricted-properties'; ['error'],
+    // 'no-sync': ['error'],
     semi: ['error', 'always'],
     quotes: ['error', 'single', {avoidEscape: true, allowTemplateLiterals: true }]
   }

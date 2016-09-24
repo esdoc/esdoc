@@ -85,6 +85,7 @@ export default class ESDocCLI {
     configFilePath = path.resolve(configFilePath);
     const ext = path.extname(configFilePath);
     if (ext === '.js') {
+      /* eslint-disable global-require */
       return require(configFilePath);
     } else {
       const configJSON = fs.readFileSync(configFilePath, {encode: 'utf8'});
