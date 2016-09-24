@@ -122,7 +122,7 @@ export default class DocResolver {
       for (const key of Object.keys(obj)) {
         const value = obj[key];
         if (key === 'description' && typeof value === 'string') {
-          obj[key + 'Raw'] = obj[key];
+          obj[`${key }Raw`] = obj[key];
           obj[key] = markdown(value, false);
         } else if (typeof value === 'object' && value) {
           convert(value);

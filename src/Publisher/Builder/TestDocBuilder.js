@@ -92,7 +92,7 @@ export default class TestDocBuilder extends DocBuilder {
 
       const innerDescribeHTML = this._buildTestDescribeDocHTML(depth + 1, describeDoc.longname);
 
-      html += '\n' + ice.html + '\n' + innerDescribeHTML;
+      html += `\n${ ice.html }\n${ innerDescribeHTML}`;
     }
 
     return html;

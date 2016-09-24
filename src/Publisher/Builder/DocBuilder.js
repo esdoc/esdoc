@@ -123,7 +123,7 @@ export default class DocBuilder {
     const data = this._data(...cond);
 
     if (order) {
-      return data.order(order + ', name asec').map(v => v);
+      return data.order(`${order }, name asec`).map(v => v);
     } else {
       return data.order('name asec').map(v => v);
     }
@@ -496,7 +496,7 @@ export default class DocBuilder {
         }
         if (typeof doc.return.nullable === 'boolean') {
           const nullable = doc.return.nullable;
-          ice.load('returnType', typeNames.join(' | ') + ` (nullable: ${nullable})`);
+          ice.load('returnType', `${typeNames.join(' | ') } (nullable: ${nullable})`);
         } else {
           ice.load('returnType', typeNames.join(' | '));
         }
@@ -721,7 +721,7 @@ export default class DocBuilder {
       let returnType = '';
       if (matched[2]) {
         const type = matched[2].split(':')[1];
-        if (type) returnType = ': ' + this._buildTypeDocLinkHTML(type.trim());
+        if (type) returnType = `: ${ this._buildTypeDocLinkHTML(type.trim())}`;
       }
 
       return `<span>${functionLink}<span>(${innerTypes.join(', ')})</span>${returnType}</span>`;
@@ -777,10 +777,10 @@ export default class DocBuilder {
 
     if (typeName.indexOf('...') === 0) {
       typeName = typeName.replace('...', '');
-      return '...' + this._buildDocLinkHTML(typeName);
+      return `...${ this._buildDocLinkHTML(typeName)}`;
     } else if (typeName.indexOf('?') === 0) {
       typeName = typeName.replace('?', '');
-      return '?' + this._buildDocLinkHTML(typeName);
+      return `?${ this._buildDocLinkHTML(typeName)}`;
     } else {
       return this._buildDocLinkHTML(typeName);
     }

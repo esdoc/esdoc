@@ -79,7 +79,7 @@ export default class ESDoc {
       if (!temp) return;
       results.push(...temp.results);
 
-      asts.push({filePath: 'source' + path.sep + relativeFilePath, ast: temp.ast});
+      asts.push({filePath: `source${ path.sep }${relativeFilePath}`, ast: temp.ast});
     });
 
     if (config.builtinExternal) {
@@ -128,7 +128,7 @@ export default class ESDoc {
       if (!temp) return;
       results.push(...temp.results);
 
-      asts.push({filePath: 'test' + path.sep + relativeFilePath, ast: temp.ast});
+      asts.push({filePath: `test${ path.sep }${relativeFilePath}`, ast: temp.ast});
     });
   }
 

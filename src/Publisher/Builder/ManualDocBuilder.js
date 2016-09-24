@@ -101,7 +101,7 @@ export default class ManualDocBuilder extends DocBuilder {
       if (!src) return;
       if (src.match(/^http[s]?:/)) return;
       if (src.charAt(0) === '/') return;
-      $el.attr('src', './manual/' + src);
+      $el.attr('src', `./manual/${ src}`);
     });
     $root.find('a').each((i, el)=>{
       const $el = cheerio(el);
@@ -110,7 +110,7 @@ export default class ManualDocBuilder extends DocBuilder {
       if (href.match(/^http[s]?:/)) return;
       if (href.charAt(0) === '/') return;
       if (href.charAt(0) === '#') return;
-      $el.attr('href', './manual/' + href);
+      $el.attr('href', `./manual/${ href}`);
     });
 
     return $root.html();
