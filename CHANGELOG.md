@@ -4,6 +4,8 @@
 - **Breaking**
   - Require node v6 or later ([a5b37bd](https://github.com/esdoc/esdoc/commit/a5b37bd0c68304214185f765f617b1077bee81b7))
   - Switch the ES parser to babylon from espree ([8130a3f](https://github.com/esdoc/esdoc/commit/8130a3f42b497e81f9ec6fc4cf0ef07ed5a7fa22))
+- **Feat**
+  - Support `async` function and method ([50452a1](https://github.com/esdoc/esdoc/commit/50452a1e44a1c8908da1fb377d3aa51eba220256))
 - **Internal**
   - Update to babel6 ([149914e](https://github.com/esdoc/esdoc/commit/149914e84cb3bb061f2bdf2e43af00178b131a9e))
   - Refactor test code ([#324](https://github.com/esdoc/esdoc/pull/324))
