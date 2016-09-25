@@ -10,5 +10,5 @@ if (!process.argv[2]) {
   process.exit(1);
 }
 
-const ast = ESParser.parse(process.argv[2]);
+const ast = ESParser.parse({}, process.argv[2]);
 console.log(JSON.stringify(ast, null, 2));
