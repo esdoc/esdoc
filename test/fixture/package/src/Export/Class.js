@@ -27,10 +27,4 @@ export class TestExportClass5 {}
  * this is TestExportClass6.
  */
 class TestExportClass6 {}
-export default TestExportClass6;
-
-/**
- * this is TestExportClass7.
- */
-class TestExportClass7 {}
 

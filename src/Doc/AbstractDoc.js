@@ -47,6 +47,7 @@ export default class AbstractDoc {
     this._$member();
     this._$content();
     this._$generator();
+    this._$async();
 
     this._$static();
     this._$longname();
@@ -121,6 +122,12 @@ export default class AbstractDoc {
    * @abstract
    */
   _$generator() {}
+
+  /**
+   * decide `async`.
+   * @abstract
+   */
+  _$async() {}
 
   /**
    * decide `static`.

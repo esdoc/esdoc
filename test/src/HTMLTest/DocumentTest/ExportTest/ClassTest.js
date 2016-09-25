@@ -30,14 +30,9 @@ describe('test export class', ()=> {
     assert.includes(doc, '.header-notice [data-ice="importPath"]', `import {TestExportClass5} from 'esdoc-test-fixture/src/Export/Class.js'`);
   });
 
-  it('has default import path with indirect class definition.', ()=> {
-    const doc = readDoc('class/src/Export/Class.js~TestExportClass6.html');
-    assert.includes(doc, '.header-notice [data-ice="importPath"]', `import TestExportClass6 from 'esdoc-test-fixture/src/Export/Class.js'`);
-  });
-
   it('is not documented.', ()=> {
     try {
-      readDoc('class/src/Export/Class.js~TestExportClass7.html');
+      readDoc('class/src/Export/Class.js~TestExportClass6.html');
     } catch (e) {
       return;
     }

@@ -9,7 +9,7 @@ export default class TestIgnoreClass1 {
 /**
  * this is TestIgnoreClass2.
  */
-export default class TestIgnoreClass2 {
+export class TestIgnoreClass2 {
   /**
    * this is constructor.
    */

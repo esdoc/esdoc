@@ -8,15 +8,15 @@ export default class TestAccessClassPublic {}
  * this is TestAccessClassProtected.
  * @protected
  */
-export default class TestAccessClassProtected {}
+export class TestAccessClassProtected {}
 
 /**
  * this is TestAccessClassPrivate.
  * @private
  */
-export default class TestAccessClassPrivate {}
+export class TestAccessClassPrivate {}
 
 /**
  * this is TestAccessClassAutoPrivate.
  */
-export default class _TestAccessClassAutoPrivate {}
+export class _TestAccessClassAutoPrivate {}

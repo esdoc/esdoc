@@ -9,8 +9,8 @@ describe('test config.unexportIdentifier: true', ()=>{
   }
 
   it('has unexport identifier', ()=>{
-    const doc = readDoc('class/src/Export/Class.js~TestExportClass7.html');
-    assert.includes(doc, '.self-detail [data-ice="name"]', 'TestExportClass7');
+    const doc = readDoc('class/src/Export/Class.js~TestExportClass6.html');
+    assert.includes(doc, '.self-detail [data-ice="name"]', 'TestExportClass6');
     assert.notIncludes(doc, '.header-notice', 'import');
   });
 });

@@ -10,7 +10,7 @@ describe('test coverage', ()=> {
     assert(badge.includes('79%'));
     assert.includes(doc, '[data-ice="coverageBadge"]', './badge.svg', 'src');
     assert.includes(doc, '[data-ice="totalCoverageCount"]', '255/322');
-    assert.equal(doc.find('[data-ice="file"] [data-ice="coverage"]').length, 108);
+    assert.equal(doc.find('[data-ice="file"] [data-ice="coverage"]').length, 112);
   });
 
   /* eslint-disable max-statements */
@@ -53,17 +53,21 @@ describe('test coverage', ()=> {
     test('file/src/Experimental/Class.js.html', '100 %4/4');
     test('file/src/Experimental/Function.js.html', '100 %1/1');
     test('file/src/Experimental/Variable.js.html', '100 %1/1');
-    test('file/src/Export/Anonymous.js.html', '100 %2/2');
-    test('file/src/Export/Class.js.html#errorLines=24', '83 %5/6');
+    test('file/src/Export/AnonymousClass.js.html', '100 %1/1');
+    test('file/src/Export/AnonymousFunction.js.html', '100 %1/1');
+    test('file/src/Export/Class.js.html#errorLines=24', '80 %4/5');
+    test('file/src/Export/ClassIndirectDefault.js.html', '100 %1/1');
     test('file/src/Export/Default.js.html', '100 %1/1');
     test('file/src/Export/Extends.js.html', '100 %2/2');
-    test('file/src/Export/Function.js.html#errorLines=32', '85 %6/7');
+    test('file/src/Export/Function.js.html#errorLines=32', '83 %5/6');
+    test('file/src/Export/FunctionIndirectDefault.js.html', '100 %1/1');
     test('file/src/Export/Multiple.js.html', '100 %2/2');
     test('file/src/Export/Named.js.html', '100 %1/1');
     test('file/src/Export/NewExpression.js.html', '100 %4/4');
     test('file/src/Export/NewExpressionIndirect.js.html', '100 %2/2');
     test('file/src/Export/NewExpressionProperty.js.html', '100 %2/2');
-    test('file/src/Export/Variable.js.html#errorLines=22,23', '71 %5/7');
+    test('file/src/Export/Variable.js.html#errorLines=22,23', '66 %4/6');
+    test('file/src/Export/VariableIndirectDefault.js.html', '100 %1/1');
     test('file/src/Extends/Builtin.js.html#errorLines=5', '50 %1/2');
     test('file/src/Extends/Deep.js.html#errorLines=1,10,12,14,15,19,2,20,22,24,25,28,30,32,33,37,38,4,40,42,43,46,48,50,51,6,7', '0 %0/27');
     test('file/src/Extends/Expression.js.html#errorLines=10', '66 %2/3');
@@ -132,6 +136,6 @@ describe('test coverage', ()=> {
     test('file/src/Version/Function.js.html', '100 %1/1');
     test('file/src/Version/Variable.js.html', '100 %1/1');
 
-    assert.equal(count, 108);
+    assert.equal(count, 112);
   });
 });

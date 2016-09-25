@@ -8,15 +8,15 @@ export default function testAccessFunctionPublic(){}
  * this is testAccessFunctionProtected.
  * @protected
  */
-export default function testAccessFunctionProtected(){}
+export function testAccessFunctionProtected(){}
 
 /**
  * this is testAccessFunctionPrivate.
  * @private
  */
-export default function testAccessFunctionPrivate(){}
+export function testAccessFunctionPrivate(){}
 
 /**
  * this is testAccessFunctionAutoPrivate.
  */
-export default function _testAccessFunctionAutoPrivate(){}
+export function _testAccessFunctionAutoPrivate(){}

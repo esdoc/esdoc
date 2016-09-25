@@ -32,13 +32,7 @@ export function *testExportFunction6(){}
 export function testExportFunction7(){}
 
 /**
- * this is testExportFunction8
+ * this is testExportFunction8.
  */
 function testExportFunction8() {}
-export default testExportFunction8;
-
-/**
- * this is testExportFunction9.
- */
-function testExportFunction9() {}
-export {testExportFunction9};
+export {testExportFunction8};

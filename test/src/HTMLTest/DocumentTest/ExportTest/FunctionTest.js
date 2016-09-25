@@ -52,15 +52,9 @@ describe('test export function', ()=> {
     });
   });
 
-  it('has default import path with indirect function definition', ()=>{
-    findParent(doc, '[id="static-function-testExportFunction8"]', '[data-ice="detail"]', (doc)=>{
-      assert.includes(doc, '[data-ice="importPath"]', `import testExportFunction8 from 'esdoc-test-fixture/src/Export/Function.js'`);
-    });
-  });
-
   it('has named import path with indirect function definition.', ()=> {
-    findParent(doc, '[id="static-function-testExportFunction9"]', '[data-ice="detail"]', (doc)=>{
-      assert.includes(doc, '[data-ice="importPath"]', `import {testExportFunction9} from 'esdoc-test-fixture/src/Export/Function.js'`);
+    findParent(doc, '[id="static-function-testExportFunction8"]', '[data-ice="detail"]', (doc)=>{
+      assert.includes(doc, '[data-ice="importPath"]', `import {testExportFunction8} from 'esdoc-test-fixture/src/Export/Function.js'`);
     });
   });
 });
