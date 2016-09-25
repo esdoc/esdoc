@@ -8,6 +8,7 @@
   - Update to babel6 ([149914e](https://github.com/esdoc/esdoc/commit/149914e84cb3bb061f2bdf2e43af00178b131a9e))
   - Refactor test code ([#324](https://github.com/esdoc/esdoc/pull/324))
   - Remove internal private tags ([#325](https://github.com/esdoc/esdoc/pull/325))
+  - Use ESLint ([#326](https://github.com/esdoc/esdoc/pull/326))
 
 ## 0.4.8 (2016-08-07)
 - **Feat**
