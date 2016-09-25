@@ -102,4 +102,13 @@ export default class MethodDoc extends AbstractDoc {
 
     this._value.generator = this._node.generator;
   }
+
+  /**
+   * use async property of self node.
+   */
+  _$async() {
+    super._$async();
+
+    this._value.async = this._node.async;
+  }
 }

@@ -40,6 +40,14 @@ export default class FunctionDoc extends AbstractDoc {
     this._value.generator = this._node.generator;
   }
 
+  /**
+   * use async property of self node.
+   */
+  _$async() {
+    super._$async();
+    this._value.async = this._node.async;
+  }
+
   /** if @param is not exists, guess type of param by using self node. */
   _$param() {
     super._$param();

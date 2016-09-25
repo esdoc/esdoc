@@ -422,6 +422,8 @@ export default class DocFactory {
         return this._decideExpressionStatementType(node);
       case 'FunctionDeclaration':
         return this._decideFunctionDeclarationType(node);
+      case 'FunctionExpression':
+        return this._decideFunctionExpressionType(node);
       case 'VariableDeclaration':
         return this._decideVariableType(node);
       case 'AssignmentExpression':
@@ -466,6 +468,23 @@ export default class DocFactory {
    * @private
    */
   _decideFunctionDeclarationType(node) {
+    if (!this._isTopDepthInBody(node, this._ast.program.body)) return {type: null, node: null};
+
+    return {type: 'Function', node: node};
+  }
+
+  /**
+   * decide Doc type from function expression node.
+   * babylon 6.11.2 judges`export default async function foo(){}` to be `FunctionExpression`.
+   * I expect `FunctionDeclaration`. this behavior may be bug of babylon.
+   * for now, workaround for it with this method.
+   * @param {ASTNode} node - target node that is function expression node.
+   * @returns {{type: string, node: ASTNode}} decided type.
+   * @private
+   * @todo inspect with newer babylon.
+   */
+  _decideFunctionExpressionType(node) {
+    if (!node.async) return {type: null, node: null};
     if (!this._isTopDepthInBody(node, this._ast.program.body)) return {type: null, node: null};
 
     return {type: 'Function', node: node};
