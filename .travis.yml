@@ -3,6 +3,6 @@ sudo: false
 node_js:
   - "6"
 script:
-  - TRAVIS=1 npm run test-prod
+  - npm run test-ci
 install:
   - npm install

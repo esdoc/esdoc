@@ -1,14 +1,7 @@
 #!/usr/bin/env node
-var sh = require('./sh');
-
-var mochaOption = " -t 10000 --require ./out/test/src/init.js --recursive ./out/test/src -R spec";
-var istanbulOption = ' cover --include-all-sources --root ./out/src/ -x "**/template/**" ./node_modules/mocha/bin/_mocha  -- ' + mochaOption;
+const sh = require('./sh');
 
 sh.exec('node ./script/build.js');
 sh.rm('./test/fixture/dest');
-
-if (process.env.TRAVIS) {
-  sh.exec('./node_modules/.bin/istanbul' + istanbulOption + ' && ./node_modules/.bin/codecov');
-} else {
-  sh.exec('./node_modules/.bin/istanbul' + istanbulOption);
-}
+const mochaOption = '-t 10000 --require ./out/test/src/init.js --recursive ./out/test/src -R spec';
+sh.exec(`./node_modules/.bin/mocha ${mochaOption}`);

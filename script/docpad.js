@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-var sh = require('./sh');
+const sh = require('./sh');
 
 sh.cd('./doc/');
 sh.exec('../node_modules/.bin/docpad generate');

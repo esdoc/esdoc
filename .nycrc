@@ -1,0 +1,24 @@
+{
+  "include": [
+    "src/**.js"
+  ],
+  "exclude": [
+    "_temp/**",
+    "doc/**",
+    "out/**",
+    "node_modules/**",
+    "script/**",
+    "src/**/template/**",
+    "test/**"
+  ],
+  "require": [
+    "babel-register"
+  ],
+  "reporter": [
+    "lcov",
+    "text-summary"
+  ],
+  "all": true,
+  "sourceMap": false,
+  "instrument": false
+}

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-var sh = require('./sh');
+const sh = require('./sh');
 
 sh.rm('./out/src');
 sh.mkdir('./out/src');

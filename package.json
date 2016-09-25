@@ -13,9 +13,10 @@
     "node": ">= 6.0.0"
   },
   "scripts": {
-    "build": "npm run lint && node ./script/build.js",
-    "test": "npm run lint && node ./script/test.js",
-    "test-prod": "npm run lint && node ./script/test-prod.js",
+    "build": "node ./script/build.js",
+    "test": "node ./script/test.js",
+    "test-prod": "node ./script/test-prod.js",
+    "test-ci": "node ./script/test-ci.js",
     "esdoc": "node ./script/esdoc.js",
     "docpad": "node ./script/docpad.js",
     "start": "node ./script/server.js",
@@ -43,7 +44,8 @@
     "esdoc-importpath-plugin": "0.0.1",
     "eslint": "3.6.0",
     "http-server": "0.9.0",
-    "istanbul": "0.4.4",
+    "nyc": "8.3.0",
+    "babel-plugin-istanbul": "2.0.1",
     "mocha": "2.5.3"
   },
   "keywords": [

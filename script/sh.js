@@ -1,6 +1,6 @@
-var fs = require('fs-extra');
-var path = require('path');
-var child_process = require('child_process');
+const fs = require('fs-extra');
+const path = require('path');
+const childProcess = require('child_process');
 
 function rm(path) {
   fs.removeSync(path);
@@ -12,7 +12,7 @@ function mkdir(path) {
 
 function exec(cmd) {
   cmd = cmd.replace(/\//g, path.sep);
-  child_process.execSync(cmd, {stdio: 'inherit'});
+  childProcess.execSync(cmd, {stdio: 'inherit'});
 }
 
 function chmod(path, mode) {
