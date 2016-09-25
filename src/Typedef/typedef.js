@@ -28,6 +28,8 @@
  * @property {string[]} manual.example
  * @property {string[]} manual.faq
  * @property {string[]} manual.changelog
+ * @property {Object} [experimentalProposal]
+ * @property {boolean} experimentalProposal.classProperties
  * @see https://esdoc.org/config.html
  */
 

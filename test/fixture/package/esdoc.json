@@ -20,5 +20,8 @@
     "example": ["./test/fixture/package/manual/example.md"],
     "faq": ["./test/fixture/package/manual/faq.md"],
     "changelog": ["./test/fixture/package/CHANGELOG.md"]
+  },
+  "experimentalProposal": {
+    "classProperties": true
   }
 }

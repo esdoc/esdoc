@@ -16,18 +16,21 @@ export default class ESParser {
    * @returns {AST} AST of source code.
    */
   static parse(config, filePath) {
-    return this.parseWithBabylon(config, filePath);
+    return this._parseWithBabylon(config, filePath);
   }
 
-  static parseWithBabylon(config, filePath) {
+  /**
+   * parse ECMAScript source code with babylon.
+   * @param {ESDocConfig} config - config of esdoc.
+   * @param {string} filePath - source code file path.
+   * @returns {AST} AST of source code.
+   */
+  static _parseWithBabylon(config, filePath) {
     let code = fs.readFileSync(filePath, {encode: 'utf8'}).toString();
     code = Plugin.onHandleCode(code, filePath);
     if (code.charAt(0) === '#') code = code.replace(/^#!/, '//');
 
-    const option = {
-      sourceType: 'module',
-      plugins: ['jsx']
-    };
+    const option = this._buildParserOptionForBabylon(config);
 
     let parser = (code) => {
       return babylon.parse(code, option);
@@ -40,5 +43,26 @@ export default class ESParser {
     ast = Plugin.onHandleAST(ast, filePath, code);
 
     return ast;
+  }
+
+  /**
+   * build babylon option.
+   * @param {ESDocConfig} config - config of esdoc
+   * @returns {{sourceType: string, plugins: string[]}} option of babylon.
+   * @private
+   */
+  static _buildParserOptionForBabylon(config) {
+    const option = {
+      sourceType: 'module',
+      plugins: ['jsx']
+    };
+
+    const experimental = config.experimentalProposal;
+
+    if (experimental) {
+      if (experimental.classProperties) option.plugins.push('classProperties');
+    }
+
+    return option;
   }
 }

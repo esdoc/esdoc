@@ -3,6 +3,7 @@ import CommentParser from '../Parser/CommentParser.js';
 import FileDoc from '../Doc/FileDoc.js';
 import ClassDoc from '../Doc/ClassDoc.js';
 import MethodDoc from '../Doc/MethodDoc.js';
+import ClassProperty from '../Doc/ClassPropertyDoc';
 import MemberDoc from '../Doc/MemberDoc.js';
 import FunctionDoc from '../Doc/FunctionDoc.js';
 import VariableDoc from '../Doc/VariableDoc.js';
@@ -374,6 +375,7 @@ export default class DocFactory {
     switch (type) {
       case 'Class': Clazz = ClassDoc; break;
       case 'Method': Clazz = MethodDoc; break;
+      case 'ClassProperty': Clazz = ClassProperty; break;
       case 'Member': Clazz = MemberDoc; break;
       case 'Function': Clazz = FunctionDoc; break;
       case 'Variable': Clazz = VariableDoc; break;
@@ -416,8 +418,10 @@ export default class DocFactory {
     switch (node.type) {
       case 'ClassDeclaration':
         return this._decideClassDeclarationType(node);
-      case 'ClassMethod': // for babylon
+      case 'ClassMethod':
         return this._decideMethodDefinitionType(node);
+      case 'ClassProperty':
+        return this._decideClassPropertyType(node);
       case 'ExpressionStatement':
         return this._decideExpressionStatementType(node);
       case 'FunctionDeclaration':
@@ -457,6 +461,22 @@ export default class DocFactory {
       return {type: 'Method', node: node};
     } else {
       logger.w('this method is not in class', node);
+      return {type: null, node: null};
+    }
+  }
+
+  /**
+   * decide Doc type from class property node.
+   * @param {ASTNode} node - target node that is classs property node.
+   * @returns {{type: ?string, node: ?ASTNode}} decided type.
+   * @private
+   */
+  _decideClassPropertyType(node) {
+    const classNode = this._findUp(node, ['ClassDeclaration', 'ClassExpression']);
+    if (this._processedClassNodes.includes(classNode)) {
+      return {type: 'ClassProperty', node: node};
+    } else {
+      logger.w('this class property is not in class', node);
       return {type: null, node: null};
     }
   }
