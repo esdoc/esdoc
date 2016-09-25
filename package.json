@@ -9,21 +9,21 @@
     "type": "git",
     "url": "https://github.com/esdoc/esdoc"
   },
-  "engines" : {
-    "node" : ">= 6.0.0"
+  "engines": {
+    "node": ">= 6.0.0"
   },
   "scripts": {
-    "build": "node ./script/build.js",
-    "test": "node ./script/test.js",
-    "test-prod": "node ./script/test-prod.js",
+    "build": "npm run lint && node ./script/build.js",
+    "test": "npm run lint && node ./script/test.js",
+    "test-prod": "npm run lint && node ./script/test-prod.js",
     "esdoc": "node ./script/esdoc.js",
     "docpad": "node ./script/docpad.js",
-    "start": "node ./script/server.js"
+    "start": "node ./script/server.js",
+    "lint": "node ./script/eslint.js"
   },
   "dependencies": {
     "cheerio": "0.20.0",
     "color-logger": "0.0.3",
-    "core-js": "2.4.1",
     "escape-html": "1.0.3",
     "babylon": "6.8.4",
     "babel-generator": "6.11.4",
@@ -35,12 +35,13 @@
     "taffydb": "2.7.2"
   },
   "devDependencies": {
-    "babel-register": "6.11.6",
     "babel-cli": "6.11.4",
     "babel-plugin-transform-es2015-modules-commonjs": "6.11.5",
+    "babel-register": "6.11.6",
     "codecov": "1.0.1",
     "docpad": "6.78.6",
     "esdoc-importpath-plugin": "0.0.1",
+    "eslint": "3.6.0",
     "http-server": "0.9.0",
     "istanbul": "0.4.4",
     "mocha": "2.5.3"

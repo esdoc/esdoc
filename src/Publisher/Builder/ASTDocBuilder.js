@@ -20,9 +20,9 @@ export default class ASTDocBuilder extends DocBuilder {
    * @param {function(ast: string, filePath: string)} callback - is called each asts.
    */
   exec(callback) {
-    for (let ast of this._asts) {
-      let json = JSON.stringify(ast.ast, null, 2);
-      let filePath = `ast/${ast.filePath}.json`;
+    for (const ast of this._asts) {
+      const json = JSON.stringify(ast.ast, null, 2);
+      const filePath = `ast/${ast.filePath}.json`;
       callback(json, filePath);
     }
   }

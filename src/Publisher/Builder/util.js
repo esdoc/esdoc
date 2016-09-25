@@ -15,7 +15,7 @@ export function shorten(doc, asMarkdown = false) {
 
   if (doc.summary) return doc.summary;
 
-  let desc = doc.descriptionRaw;
+  const desc = doc.descriptionRaw;
   if (!desc) return '';
 
   let len = desc.length;
@@ -23,11 +23,11 @@ export function shorten(doc, asMarkdown = false) {
   let inWQuote = false;
   let inCode = false;
   for (let i = 0; i < desc.length; i++) {
-    let char1 = desc.charAt(i);
-    let char2 = desc.charAt(i + 1);
-    let char4 = desc.substr(i, 6);
-    let char5 = desc.substr(i, 7);
-    if (char1 === "'") inSQuote = !inSQuote;
+    const char1 = desc.charAt(i);
+    const char2 = desc.charAt(i + 1);
+    const char4 = desc.substr(i, 6);
+    const char5 = desc.substr(i, 7);
+    if (char1 === '\'') inSQuote = !inSQuote;
     else if (char1 === '"') inWQuote = !inWQuote;
     else if (char4 === '<code>') inCode = true;
     else if (char5 === '</code>') inCode = false;
@@ -63,7 +63,7 @@ export function markdown(text, breaks = false) {
   const availableTags = ['span', 'a', 'p', 'div', 'img', 'h1', 'h2', 'h3', 'h4', 'h5', 'br', 'hr', 'li', 'ul', 'ol', 'code', 'pre'];
   const availableAttributes = ['src', 'href', 'title', 'class', 'id', 'name', 'width', 'height'];
 
-  let compiled = marked(text, {
+  const compiled = marked(text, {
     gfm: true,
     tables: true,
     breaks: breaks,
@@ -79,14 +79,15 @@ export function markdown(text, breaks = false) {
 
       const sanitizedTag = tag.replace(/([\w\-]+)=(["'].*?["'])/g, (_, attr, val)=>{
         if (!availableAttributes.includes(attr)) return '';
+        /* eslint-disable no-script-url */
         if (val.indexOf('javascript:') !== -1) return '';
         return `${attr}=${val}`;
       });
 
       return sanitizedTag;
     },
-    highlight: function (code) {
-      //return `<pre class="source-code"><code class="prettyprint">${escape(code)}</code></pre>`;
+    highlight: function(code) {
+      // return `<pre class="source-code"><code class="prettyprint">${escape(code)}</code></pre>`;
       return `<code class="source-code prettyprint">${escape(code)}</code>`;
     }
   });
@@ -101,16 +102,16 @@ export function markdown(text, breaks = false) {
  */
 export function dateForUTC(date) {
   function pad(num, len) {
-    let count = Math.max(0, len - `${num}`.length);
+    const count = Math.max(0, len - `${num}`.length);
     return '0'.repeat(count) + num;
   }
 
-  let year = date.getUTCFullYear();
-  let month = pad(date.getUTCMonth() + 1, 2);
-  let day = pad(date.getUTCDay() + 1, 2);
-  let hours = pad(date.getUTCHours(), 2);
-  let minutes = pad(date.getUTCMinutes(), 2);
-  let seconds = pad(date.getUTCSeconds(), 2);
+  const year = date.getUTCFullYear();
+  const month = pad(date.getUTCMonth() + 1, 2);
+  const day = pad(date.getUTCDay() + 1, 2);
+  const hours = pad(date.getUTCHours(), 2);
+  const minutes = pad(date.getUTCMinutes(), 2);
+  const seconds = pad(date.getUTCSeconds(), 2);
 
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds} (UTC)`;
 }
@@ -126,8 +127,9 @@ export function parseExample(example) {
   let body = example;
   let caption = '';
 
-  let regexp = new RegExp("^<caption>(.*?)</caption>\n");
-  let matched = example.match(regexp);
+  /* eslint-disable no-control-regex */
+  const regexp = new RegExp('^<caption>(.*?)</caption>\n');
+  const matched = example.match(regexp);
   if (matched) {
     body = example.replace(regexp, '');
     caption = matched[1].trim();

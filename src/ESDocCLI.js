@@ -24,12 +24,12 @@ export default class ESDocCLI {
 
     if (this._argv.h || this._argv.help) {
       this._showHelp();
-      process.exit(0)
+      process.exit(0);
     }
 
     if (this._argv.v || this._argv.version) {
       this._showVersion();
-      process.exit(0)
+      process.exit(0);
     }
   }
 
@@ -67,7 +67,7 @@ export default class ESDocCLI {
    * @private
    */
   _showVersion() {
-    let packageObj = NPMUtil.findPackage();
+    const packageObj = NPMUtil.findPackage();
     if (packageObj) {
       console.log(packageObj.version);
     } else {
@@ -85,6 +85,7 @@ export default class ESDocCLI {
     configFilePath = path.resolve(configFilePath);
     const ext = path.extname(configFilePath);
     if (ext === '.js') {
+      /* eslint-disable global-require */
       return require(configFilePath);
     } else {
       const configJSON = fs.readFileSync(configFilePath, {encode: 'utf8'});
@@ -95,8 +96,8 @@ export default class ESDocCLI {
 }
 
 // if this file is directory executed, work as CLI.
-let executedFilePath = fs.realpathSync(process.argv[1]);
+const executedFilePath = fs.realpathSync(process.argv[1]);
 if (executedFilePath === __filename) {
-  let cli = new ESDocCLI(process.argv);
+  const cli = new ESDocCLI(process.argv);
   cli.exec();
 }

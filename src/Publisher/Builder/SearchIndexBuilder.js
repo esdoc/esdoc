@@ -1,4 +1,3 @@
-import path from 'path';
 import DocBuilder from './DocBuilder.js';
 
 /**
@@ -10,11 +9,13 @@ export default class SearchIndexBuilder extends DocBuilder {
    * @param {function(javascript: string, filePath: string)} callback - is called with output.
    */
   exec(callback) {
-    let searchIndex = [];
-    let docs = this._find({});
+    const searchIndex = [];
+    const docs = this._find({});
 
-    for (let doc of docs) {
-      let indexText, url, displayText;
+    for (const doc of docs) {
+      let indexText;
+      let url;
+      let displayText;
 
       if (doc.importPath) {
         displayText = `<span>${doc.name}</span> <span class="search-result-import-path">${doc.importPath}</span>`;
@@ -23,10 +24,10 @@ export default class SearchIndexBuilder extends DocBuilder {
       } else if (doc.kind === 'testDescribe' || doc.kind === 'testIt') {
         displayText = doc.testFullDescription;
         indexText = [...(doc.testTargets || []), ...(doc._custom_test_targets || [])].join(' ').toLowerCase();
-        let filePath = doc.longname.split('~')[0];
-        let fileDoc = this._find({kind: 'testFile', longname: filePath})[0];
+        const filePath = doc.longname.split('~')[0];
+        const fileDoc = this._find({kind: 'testFile', longname: filePath})[0];
         url = `${this._getURL(fileDoc)}#lineNumber${doc.lineNumber}`;
-      } else if(doc.kind === 'external') {
+      } else if (doc.kind === 'external') {
         displayText = doc.longname;
         indexText = displayText.toLowerCase();
         url = doc.externalLink;
@@ -37,6 +38,7 @@ export default class SearchIndexBuilder extends DocBuilder {
       }
 
       let kind = doc.kind;
+      /* eslint-disable default-case */
       switch (kind) {
         case 'constructor':
           kind = 'method';
@@ -64,7 +66,7 @@ export default class SearchIndexBuilder extends DocBuilder {
       }
     });
 
-    let javascript = 'window.esdocSearchIndex = ' + JSON.stringify(searchIndex, null, 2);
+    const javascript = `window.esdocSearchIndex = ${JSON.stringify(searchIndex, null, 2)}`;
 
     callback(javascript, 'script/search_index.js');
   }

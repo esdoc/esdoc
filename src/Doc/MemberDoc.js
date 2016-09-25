@@ -1,6 +1,6 @@
 import AbstractDoc from './AbstractDoc.js';
 import MethodDoc from './MethodDoc.js';
-import ParamParser from '../Parser/ParamParser.js'
+import ParamParser from '../Parser/ParamParser.js';
 import babelGenerator from 'babel-generator';
 
 /**
@@ -14,9 +14,9 @@ export default class MemberDoc extends AbstractDoc {
   _apply() {
     super._apply();
 
-    delete this._value.export;
-    delete this._value.importPath;
-    delete this._value.importStyle;
+    Reflect.deleteProperty(this._value, 'export');
+    Reflect.deleteProperty(this._value, 'importPath');
+    Reflect.deleteProperty(this._value, 'importStyle');
   }
 
   /** specify ``member`` to kind. */
@@ -51,7 +51,7 @@ export default class MemberDoc extends AbstractDoc {
 
   /** borrow {@link MethodDoc#@_memberof} */
   _$memberof() {
-    MethodDoc.prototype._$memberof.call(this);
+    Reflect.apply(MethodDoc.prototype._$memberof, this, []);
   }
 
   /** if @type is not exists, guess type by using self node */

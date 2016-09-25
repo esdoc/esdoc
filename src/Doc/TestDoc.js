@@ -14,9 +14,9 @@ export default class TestDoc extends AbstractDoc {
 
     this._$testTarget();
 
-    delete this._value.export;
-    delete this._value.importPath;
-    delete this._value.importStyle;
+    Reflect.deleteProperty(this._value, 'export');
+    Reflect.deleteProperty(this._value, 'importPath');
+    Reflect.deleteProperty(this._value, 'importStyle');
   }
 
   /** use name property of self node. */
@@ -24,7 +24,7 @@ export default class TestDoc extends AbstractDoc {
     super._$kind();
 
     switch (this._node.callee.name) {
-      case 'suite': //fall
+      case 'suite': // fall
       case 'context': // fall
       case 'describe':
         this._value.kind = 'testDescribe';
@@ -50,14 +50,14 @@ export default class TestDoc extends AbstractDoc {
   _$memberof() {
     super._$memberof();
 
-    let chain = [];
+    const chain = [];
     let parent = this._node.parent;
     while (parent) {
       if (parent._esdocTestName) chain.push(parent._esdocTestName);
       parent = parent.parent;
     }
 
-    let filePath = this._pathResolver.filePath;
+    const filePath = this._pathResolver.filePath;
 
     if (chain.length) {
       this._value.memberof = `${filePath}~${chain.reverse().join('.')}`;
@@ -78,12 +78,12 @@ export default class TestDoc extends AbstractDoc {
 
   /** for @testTarget. */
   _$testTarget() {
-    let values = this._findAllTagValues(['@test', '@testTarget']);
+    const values = this._findAllTagValues(['@test', '@testTarget']);
     if (!values) return;
 
     this._value.testTargets = [];
-    for (let value of values) {
-      let {typeText} = ParamParser.parseParamValue(value, true, false, false);
+    for (const value of values) {
+      const {typeText} = ParamParser.parseParamValue(value, true, false, false);
       this._value.testTargets.push(typeText);
     }
   }

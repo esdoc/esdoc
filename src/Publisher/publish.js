@@ -28,17 +28,17 @@ export default function publish(values, asts, config) {
   IceCap.debug = !!config.debug;
 
   if (!config.includeSource) {
-    for (let value of values) {
+    for (const value of values) {
       if (['file', 'testFile'].includes(value.kind) && 'content' in value) {
         value.content = '';
       }
     }
   }
 
-  let dumpPath = path.resolve(config.destination, 'dump.json');
+  const dumpPath = path.resolve(config.destination, 'dump.json');
   fs.outputFileSync(dumpPath, JSON.stringify(values, null, 2));
 
-  let data = taffy(values);
+  const data = taffy(values);
   let _coverage = null;
 
   function log(text) {
@@ -48,25 +48,25 @@ export default function publish(values, asts, config) {
   function writeHTML(html, fileName) {
     log(fileName);
     html = Plugin.onHandleHTML(html, fileName);
-    let filePath = path.resolve(config.destination, fileName);
+    const filePath = path.resolve(config.destination, fileName);
     fs.outputFileSync(filePath, html, {encoding: 'utf8'});
   }
 
   function writeCoverage(coverage, fileName) {
     _coverage = coverage;
-    let json = JSON.stringify(coverage, null, 2);
-    let filePath = path.resolve(config.destination, fileName);
+    const json = JSON.stringify(coverage, null, 2);
+    const filePath = path.resolve(config.destination, fileName);
     fs.outputFileSync(filePath, json, {encoding: 'utf8'});
   }
 
   function writeBadge(badge, fileName) {
     log(fileName);
-    let filePath = path.resolve(config.destination, fileName);
+    const filePath = path.resolve(config.destination, fileName);
     fs.outputFileSync(filePath, badge, {encoding: 'utf8'});
   }
 
   function writeAST(astJSON, fileName) {
-    let filePath = path.resolve(config.destination, fileName);
+    const filePath = path.resolve(config.destination, fileName);
     fs.outputFileSync(filePath, astJSON, {encoding: 'utf8'});
   }
 
@@ -93,7 +93,7 @@ export default function publish(values, asts, config) {
   // package.json
   try {
     const json = fs.readFileSync(config.package, {encoding: 'utf-8'});
-    let filePath = path.resolve(config.destination, 'package.json');
+    const filePath = path.resolve(config.destination, 'package.json');
     fs.outputFileSync(filePath, json, {encoding: 'utf8'});
   } catch (e) {
     // ignore
@@ -113,4 +113,4 @@ export default function publish(values, asts, config) {
   if (config.lint) {
     new LintDocBuilder(data, config).exec();
   }
-};
+}

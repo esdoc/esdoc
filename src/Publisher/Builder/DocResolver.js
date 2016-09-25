@@ -1,5 +1,3 @@
-import fs from 'fs';
-import path from 'path';
 import {markdown} from './util.js';
 
 /**
@@ -39,10 +37,10 @@ export default class DocResolver {
   _resolveIgnore() {
     if (this._data.__RESOLVED_IGNORE__) return;
 
-    let docs = this._builder._find({ignore: true});
-    for (let doc of docs) {
-      let longname = doc.longname.replace(/[$]/g, '\\$');
-      let regex = new RegExp(`^${longname}[.~#]`);
+    const docs = this._builder._find({ignore: true});
+    for (const doc of docs) {
+      const longname = doc.longname.replace(/[$]/g, '\\$');
+      const regex = new RegExp(`^${longname}[.~#]`);
       this._data({longname: {regex: regex}}).remove();
     }
     this._data({ignore: true}).remove();
@@ -59,11 +57,12 @@ export default class DocResolver {
   _resolveAccess() {
     if (this._data.__RESOLVED_ACCESS__) return;
 
-    let config = this._builder._config;
-    let access = config.access || ['public', 'protected', 'private'];
-    let autoPrivate = config.autoPrivate;
+    const config = this._builder._config;
+    const access = config.access || ['public', 'protected', 'private'];
+    const autoPrivate = config.autoPrivate;
 
-    this._data().update(function(){
+    /* eslint-disable no-invalid-this */
+    this._data().update(function() {
       if (!this.access) {
         if (autoPrivate && this.name.charAt(0) === '_') {
           /** @ignore */
@@ -89,7 +88,7 @@ export default class DocResolver {
   _resolveUnexportIdentifier() {
     if (this._data.__RESOLVED_UNEXPORT_IDENTIFIER__) return;
 
-    let config = this._builder._config;
+    const config = this._builder._config;
     if (!config.unexportIdentifier) {
       this._data({export: false}).update({ignore: true});
     }
@@ -120,10 +119,10 @@ export default class DocResolver {
     if (this._data.__RESOLVED_MARKDOWN__) return;
 
     function convert(obj) {
-      for (let key of Object.keys(obj)) {
-        let value = obj[key];
+      for (const key of Object.keys(obj)) {
+        const value = obj[key];
         if (key === 'description' && typeof value === 'string') {
-          obj[key + 'Raw'] = obj[key];
+          obj[`${key}Raw`] = obj[key];
           obj[key] = markdown(value, false);
         } else if (typeof value === 'object' && value) {
           convert(value);
@@ -131,8 +130,8 @@ export default class DocResolver {
       }
     }
 
-    let docs = this._builder._find();
-    for (let doc of docs) {
+    const docs = this._builder._find();
+    for (const doc of docs) {
       convert(doc);
     }
 
@@ -145,12 +144,12 @@ export default class DocResolver {
    * @todo resolve all ``description`` property.
    */
   _resolveLink() {
-    if(this._data.__RESOLVED_LINK__) return;
+    if (this._data.__RESOLVED_LINK__) return;
 
-    let link = (str)=>{
+    const link = (str)=>{
       if (!str) return str;
 
-      return str.replace(/\{@link ([\w\#_\-.:\~\/$]+)}/g, (str, longname)=>{
+      return str.replace(/\{@link ([\w#_\-.:~\/$]+)}/g, (str, longname)=>{
         return this._builder._buildDocLinkHTML(longname, longname);
       });
     };
@@ -159,13 +158,13 @@ export default class DocResolver {
       v.description = link(v.description);
 
       if (v.params) {
-        for (let param of v.params) {
+        for (const param of v.params) {
           param.description = link(param.description);
         }
       }
 
       if (v.properties) {
-        for (let property of v.properties) {
+        for (const property of v.properties) {
           property.description = link(property.description);
         }
       }
@@ -175,7 +174,7 @@ export default class DocResolver {
       }
 
       if (v.throws) {
-        for (let _throw of v.throws) {
+        for (const _throw of v.throws) {
           _throw.description = link(_throw.description);
         }
       }
@@ -184,7 +183,7 @@ export default class DocResolver {
         for (let i = 0; i < v.see.length; i++) {
           if (v.see[i].indexOf('{@link') === 0) {
             v.see[i] = link(v.see[i]);
-          } else if(v.see[i].indexOf('<a href') === 0) {
+          } else if (v.see[i].indexOf('<a href') === 0) {
             // ignore
           } else {
             v.see[i] = `<a href="${v.see[i]}">${v.see[i]}</a>`;
@@ -211,13 +210,15 @@ export default class DocResolver {
   _resolveExtendsChain() {
     if (this._data.__RESOLVED_EXTENDS_CHAIN__) return;
 
-    let extendsChain = (doc) => {
+    const extendsChain = (doc) => {
       if (!doc.extends) return;
 
-      let selfDoc = doc;
+      const selfDoc = doc;
 
       // traverse super class.
-      let chains = [];
+      const chains = [];
+
+      /* eslint-disable */
       while (1) {
         if (!doc.extends) break;
 
@@ -431,7 +432,7 @@ export default class DocResolver {
           return a < b ? -1 : 1;
         });
         ids.shift();
-        ignoreId.push(...ids)
+        ignoreId.push(...ids);
       }
     }
 

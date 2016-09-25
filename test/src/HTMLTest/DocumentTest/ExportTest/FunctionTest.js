@@ -24,8 +24,8 @@ describe('test export function', ()=> {
 
   it('is not documented with direct function definition', ()=> {
     try {
-      findParent(doc, '[id="static-function-testExportFunction4"]', '[data-ice="detail"]', (doc)=>{});
-    } catch(e) {
+      findParent(doc, '[id="static-function-testExportFunction4"]', '[data-ice="detail"]', ()=>{});
+    } catch (e) {
       return;
     }
     assert(false);
@@ -33,8 +33,8 @@ describe('test export function', ()=> {
 
   it('is not documented with direct function expression', ()=> {
     try {
-      findParent(doc, '[id="static-function-testExportFunction5"]', '[data-ice="detail"]', (doc)=>{});
-    } catch(e) {
+      findParent(doc, '[id="static-function-testExportFunction5"]', '[data-ice="detail"]', ()=>{});
+    } catch (e) {
       return;
     }
     assert(false);

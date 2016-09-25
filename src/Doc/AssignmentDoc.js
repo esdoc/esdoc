@@ -17,7 +17,7 @@ export default class AssignmentDoc extends AbstractDoc {
    */
   _$name() {
     super._$name();
-    let name = this._flattenMemberExpression(this._node.left).replace(/^this\./, '');
+    const name = this._flattenMemberExpression(this._node.left).replace(/^this\./, '');
     this._value.name = name;
   }
 

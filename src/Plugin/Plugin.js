@@ -7,7 +7,7 @@ class Plugin {
   /**
    * create instance.
    */
-  constructor()  {
+  constructor() {
     this._plugins = null;
   }
 
@@ -27,7 +27,8 @@ class Plugin {
    * @private
    */
   _execHandler(handlerName, ev, giveOption = false) {
-    for (let item of this._plugins) {
+    /* eslint-disable global-require */
+    for (const item of this._plugins) {
       let plugin;
       if (item.name.match(/^[.\/]/)) {
         const pluginPath = path.resolve(item.name);
@@ -88,7 +89,7 @@ class Plugin {
    */
   onHandleCodeParser(parser, option, filePath, code) {
     const ev = new PluginEvent();
-    ev.data = { parser: parser, option: option, filePath: filePath, code: code };
+    ev.data = {parser, option, filePath, code};
     this._execHandler('onHandleCodeParser', ev);
     return ev.data.parser;
   }

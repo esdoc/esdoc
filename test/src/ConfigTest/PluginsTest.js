@@ -9,6 +9,7 @@ describe('test config.plugins: [...]', ()=>{
     return _readDoc(filePath, './test/fixture/dest/esdoc-plugins');
   }
 
+  /* eslint-disable global-require */
   it('call each handlers', ()=>{
     const pluginPath = path.resolve('./test/fixture/package/plugin/MyPlugin1.js');
     const plugin = require(pluginPath);
@@ -33,6 +34,7 @@ describe('test config.plugins: [...]', ()=>{
     assert.includes(doc, 'head meta[name="x-from-plugin"]', 'fileName:', 'content');
   });
 
+  /* eslint-disable global-require */
   it('call multi plugins', ()=>{
     const pluginPath = path.resolve('./test/fixture/package/plugin/MyPlugin1.js');
     const plugin = require(pluginPath);

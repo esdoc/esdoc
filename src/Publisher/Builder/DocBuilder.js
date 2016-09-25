@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import fs from 'fs';
 import path from 'path';
 import escape from 'escape-html';
@@ -21,6 +22,7 @@ export default class DocBuilder {
     new DocResolver(this).resolve();
   }
 
+  /* eslint-disable no-unused-vars */
   /**
    * execute building output.
    * @abstract
@@ -85,7 +87,7 @@ export default class DocBuilder {
     }
     if (docs.length) return docs;
 
-    let regexp = new RegExp(`[~]${name.replace('*', '\\*')}$`); // if name is `*`, need to escape.
+    const regexp = new RegExp(`[~]${name.replace('*', '\\*')}$`); // if name is `*`, need to escape.
     if (kind) {
       docs = this._orderedFind(null, {longname: {regex: regexp}, kind: kind});
     } else {
@@ -94,14 +96,14 @@ export default class DocBuilder {
     if (docs.length) return docs;
 
     // inherited method?
-    let matched = name.match(/(.*)[.#](.*)$/); // instance method(Foo#bar) or static method(Foo.baz)
+    const matched = name.match(/(.*)[.#](.*)$/); // instance method(Foo#bar) or static method(Foo.baz)
     if (matched) {
-      let parent = matched[1];
-      let childName = matched[2];
-      let parentDoc = this._findByName(parent, 'class')[0];
+      const parent = matched[1];
+      const childName = matched[2];
+      const parentDoc = this._findByName(parent, 'class')[0];
       if (parentDoc && parentDoc._custom_extends_chains) {
-        for (let superLongname of parentDoc._custom_extends_chains) {
-          let docs = this._find({memberof: superLongname, name: childName});
+        for (const superLongname of parentDoc._custom_extends_chains) {
+          const docs = this._find({memberof: superLongname, name: childName});
           if (docs.length) return docs;
         }
       }
@@ -118,10 +120,10 @@ export default class DocBuilder {
    * @private
    */
   _orderedFind(order, ...cond) {
-    let data = this._data(...cond);
+    const data = this._data(...cond);
 
     if (order) {
-      return data.order(order + ', name asec').map(v => v);
+      return data.order(`${order}, name asec`).map(v => v);
     } else {
       return data.order('name asec').map(v => v);
     }
@@ -134,7 +136,7 @@ export default class DocBuilder {
    * @private
    */
   _readTemplate(fileName) {
-    let filePath = path.resolve(__dirname, `./template/${fileName}`);
+    const filePath = path.resolve(__dirname, `./template/${fileName}`);
     return fs.readFileSync(filePath, {encoding: 'utf-8'});
   }
 
@@ -144,12 +146,12 @@ export default class DocBuilder {
    * @private
    */
   _getInfo() {
-    let config = this._config;
+    const config = this._config;
     let packageObj = {};
     if (config.package) {
-      let packagePath = config.package;
+      const packagePath = config.package;
       try {
-        let json = fs.readFileSync(packagePath, {encoding: 'utf-8'});
+        const json = fs.readFileSync(packagePath, {encoding: 'utf-8'});
         packageObj = JSON.parse(json);
       } catch (e) {
         // ignore
@@ -167,16 +169,16 @@ export default class DocBuilder {
 
       if (typeof url === 'string') {
         if (url.indexOf('git@github.com:') === 0) { // url: git@github.com:foo/bar.git
-          let matched = url.match(/^git@github\.com:(.*)\.git$/);
+          const matched = url.match(/^git@github\.com:(.*)\.git$/);
           if (matched && matched[1]) {
             url = `https://github.com/${matched[1]}`;
           }
         } else if (url.match(/^[\w\d\-_]+\/[\w\d\-_]+$/)) { // url: foo/bar
           url = `https://github.com/${url}`;
-        } else if(url.match(/^git\+https:\/\/github.com\/.*\.git$/)) { // git+https://github.com/foo/bar.git
+        } else if (url.match(/^git\+https:\/\/github.com\/.*\.git$/)) { // git+https://github.com/foo/bar.git
           const matched = url.match(/^git\+(https:\/\/github.com\/.*)\.git$/);
           url = matched[1];
-        } else if(url.match(/(https?:\/\/.*$)/)){ // other url
+        } else if (url.match(/(https?:\/\/.*$)/)) { // other url
           const matched = url.match(/(https?:\/\/.*$)/);
           url = matched[1];
         } else {
@@ -187,7 +189,7 @@ export default class DocBuilder {
       }
     }
 
-    let indexInfo = {
+    const indexInfo = {
       title: config.title || packageObj.name,
       version: config.version || packageObj.version,
       url: url
@@ -202,11 +204,11 @@ export default class DocBuilder {
    * @private
    */
   _buildLayoutDoc() {
-    let info = this._getInfo();
+    const info = this._getInfo();
 
-    let ice = new IceCap(this._readTemplate('layout.html'), {autoClose: false});
+    const ice = new IceCap(this._readTemplate('layout.html'), {autoClose: false});
 
-    let packageObj = NPMUtil.findPackage();
+    const packageObj = NPMUtil.findPackage();
     if (packageObj) {
       ice.text('esdocVersion', `(${packageObj.version})`);
     } else {
@@ -226,12 +228,12 @@ export default class DocBuilder {
 
     // see StaticFileBuilder#exec
     ice.loop('userScript', this._config.scripts || [], (i, userScript, ice)=>{
-      let name = `user/script/${i}-${path.basename(userScript)}`;
+      const name = `user/script/${i}-${path.basename(userScript)}`;
       ice.attr('userScript', 'src', name);
     });
 
     ice.loop('userStyle', this._config.styles || [], (i, userStyle, ice)=>{
-      let name = `user/css/${i}-${path.basename(userStyle)}`;
+      const name = `user/css/${i}-${path.basename(userStyle)}`;
       ice.attr('userStyle', 'href', name);
     });
 
@@ -247,8 +249,8 @@ export default class DocBuilder {
    * @private
    */
   _buildNavDoc() {
-    let html = this._readTemplate('nav.html');
-    let ice = new IceCap(html);
+    const html = this._readTemplate('nav.html');
+    const ice = new IceCap(html);
 
     const kinds = ['class', 'function', 'variable', 'typedef', 'external'];
     const allDocs = this._find({kind: kinds}).filter(v => !v.builtinExternal);
@@ -300,10 +302,11 @@ export default class DocBuilder {
    * @private
    */
   _findAccessDocs(doc, kind, isStatic = true) {
-    let cond = {kind, static: isStatic};
+    const cond = {kind: kind, static: isStatic};
 
     if (doc) cond.memberof = doc.longname;
 
+    /* eslint-disable default-case */
     switch (kind) {
       case 'class':
         cond.interface = false;
@@ -317,10 +320,10 @@ export default class DocBuilder {
         break;
     }
 
-    let publicDocs = this._find(cond, {access: 'public'}).filter(v => !v.builtinExternal);
-    let protectedDocs = this._find(cond, {access: 'protected'}).filter(v => !v.builtinExternal);
-    let privateDocs = this._find(cond, {access: 'private'}).filter(v => !v.builtinExternal);
-    let accessDocs = [['Public', publicDocs], ['Protected', protectedDocs], ['Private', privateDocs]];
+    const publicDocs = this._find(cond, {access: 'public'}).filter(v => !v.builtinExternal);
+    const protectedDocs = this._find(cond, {access: 'protected'}).filter(v => !v.builtinExternal);
+    const privateDocs = this._find(cond, {access: 'private'}).filter(v => !v.builtinExternal);
+    const accessDocs = [['Public', publicDocs], ['Protected', protectedDocs], ['Private', privateDocs]];
 
     return accessDocs;
   }
@@ -335,17 +338,17 @@ export default class DocBuilder {
    * @private
    */
   _buildSummaryHTML(doc, kind, title, isStatic = true) {
-    let accessDocs = this._findAccessDocs(doc, kind, isStatic);
+    const accessDocs = this._findAccessDocs(doc, kind, isStatic);
     let html = '';
-    for (let accessDoc of accessDocs) {
-      let docs = accessDoc[1];
+    for (const accessDoc of accessDocs) {
+      const docs = accessDoc[1];
       if (!docs.length) continue;
 
       let prefix = '';
       if (docs[0].static) prefix = 'Static ';
-      let _title = `${prefix}${accessDoc[0]} ${title}`;
+      const _title = `${prefix}${accessDoc[0]} ${title}`;
 
-      let result = this._buildSummaryDoc(docs, _title);
+      const result = this._buildSummaryDoc(docs, _title);
       if (result) {
         html += result.html;
       }
@@ -363,9 +366,9 @@ export default class DocBuilder {
    * @private
    */
   _buildSummaryDoc(docs, title, innerLink) {
-    if (docs.length === 0) return;
+    if (docs.length === 0) return null;
 
-    let ice = new IceCap(this._readTemplate('summary.html'));
+    const ice = new IceCap(this._readTemplate('summary.html'));
 
     ice.text('title', title);
     ice.loop('target', docs, (i, doc, ice)=>{
@@ -406,23 +409,24 @@ export default class DocBuilder {
    * @private
    */
   _buildDetailHTML(doc, kind, title, isStatic = true) {
-    let accessDocs = this._findAccessDocs(doc, kind, isStatic);
+    const accessDocs = this._findAccessDocs(doc, kind, isStatic);
     let html = '';
-    for (let accessDoc of accessDocs) {
-      let docs = accessDoc[1];
+    for (const accessDoc of accessDocs) {
+      const docs = accessDoc[1];
       if (!docs.length) continue;
 
       let prefix = '';
       if (docs[0].static) prefix = 'Static ';
-      let _title = `${prefix}${accessDoc[0]} ${title}`;
+      const _title = `${prefix}${accessDoc[0]} ${title}`;
 
-      let result = this._buildDetailDocs(docs, _title);
+      const result = this._buildDetailDocs(docs, _title);
       if (result) html += result.html;
     }
 
     return html;
   }
 
+  /* eslint-disable max-statements */
   /**
    * build detail output html by docs.
    * @param {DocObject[]} docs - target docs.
@@ -431,13 +435,13 @@ export default class DocBuilder {
    * @private
    */
   _buildDetailDocs(docs, title) {
-    let ice = new IceCap(this._readTemplate('details.html'));
+    const ice = new IceCap(this._readTemplate('details.html'));
 
     ice.text('title', title);
     ice.drop('title', !docs.length);
 
     ice.loop('detail', docs, (i, doc, ice)=>{
-      let scope = doc.static ? 'static' : 'instance';
+      const scope = doc.static ? 'static' : 'instance';
       ice.attr('anchor', 'id', `${scope}-${doc.kind}-${doc.name}`);
       ice.text('generator', doc.generator ? '*' : '');
       ice.text('name', doc.name);
@@ -451,7 +455,7 @@ export default class DocBuilder {
         ice.drop('kind');
       }
       if (doc.export && doc.importPath && doc.importStyle) {
-        let link = this._buildFileDocLinkHTML(doc, doc.importPath);
+        const link = this._buildFileDocLinkHTML(doc, doc.importPath);
         ice.into('importPath', `import ${doc.importStyle} from '${link}'`, (code, ice)=>{
           ice.load('importPathCode', code);
         });
@@ -487,13 +491,13 @@ export default class DocBuilder {
       // return
       if (doc.return) {
         ice.load('returnDescription', doc.return.description);
-        let typeNames = [];
-        for (let typeName of doc.return.types) {
+        const typeNames = [];
+        for (const typeName of doc.return.types) {
           typeNames.push(this._buildTypeDocLinkHTML(typeName));
         }
         if (typeof doc.return.nullable === 'boolean') {
-          let nullable = doc.return.nullable;
-          ice.load('returnType', typeNames.join(' | ') + ` (nullable: ${nullable})`);
+          const nullable = doc.return.nullable;
+          ice.load('returnType', `${typeNames.join(' | ')} (nullable: ${nullable})`);
         } else {
           ice.load('returnType', typeNames.join(' | '));
         }
@@ -536,7 +540,7 @@ export default class DocBuilder {
       // example
       ice.into('example', doc.examples, (examples, ice)=>{
         ice.loop('exampleDoc', examples, (i, exampleDoc, ice)=>{
-          let parsed = parseExample(exampleDoc);
+          const parsed = parseExample(exampleDoc);
           ice.text('exampleCode', parsed.body);
           ice.text('exampleCaption', parsed.caption);
         });
@@ -545,7 +549,7 @@ export default class DocBuilder {
       // tests
       ice.into('tests', doc._custom_tests, (tests, ice)=>{
         ice.loop('test', tests, (i, test, ice)=>{
-          let testDoc = this._find({longname: test})[0];
+          const testDoc = this._find({longname: test})[0];
           ice.load('test', this._buildFileDocLinkHTML(testDoc, testDoc.testFullDescription));
         });
       });
@@ -561,7 +565,7 @@ export default class DocBuilder {
    * @private
    */
   _getTitle(doc = '') {
-    let name = doc.name || doc.toString();
+    const name = doc.name || doc.toString();
 
     if (!name) {
       if (this._config.title) {
@@ -585,7 +589,7 @@ export default class DocBuilder {
    * @private
    */
   _getBaseUrl(fileName) {
-    let baseUrl = '../'.repeat(fileName.split('/').length - 1);
+    const baseUrl = '../'.repeat(fileName.split('/').length - 1);
     return baseUrl;
   }
 
@@ -598,15 +602,15 @@ export default class DocBuilder {
   _getURL(doc) {
     let inner = false;
     if (['variable', 'function', 'member', 'typedef', 'method', 'constructor', 'get', 'set'].includes(doc.kind)) {
-      inner = true
+      inner = true;
     }
 
     if (inner) {
-      let scope = doc.static ? 'static' : 'instance';
-      let fileName = this._getOutputFileName(doc);
+      const scope = doc.static ? 'static' : 'instance';
+      const fileName = this._getOutputFileName(doc);
       return `${fileName}#${scope}-${doc.kind}-${doc.name}`;
     } else {
-      let fileName = this._getOutputFileName(doc);
+      const fileName = this._getOutputFileName(doc);
       return fileName;
     }
   }
@@ -627,9 +631,10 @@ export default class DocBuilder {
       case 'method': // fall
       case 'constructor': // fall
       case 'set': // fall
-      case 'get': // fal
-        let parentDoc = this._find({longname: doc.memberof})[0];
+      case 'get': { // fal
+        const parentDoc = this._find({longname: doc.memberof})[0];
         return this._getOutputFileName(parentDoc);
+      }
       case 'external':
         return 'external/index.html';
       case 'typedef':
@@ -641,9 +646,9 @@ export default class DocBuilder {
       case 'testFile':
         return `test-file/${doc.longname}.html`;
       case 'testDescribe':
-        return `test.html`;
+        return 'test.html';
       case 'testIt':
-        return `test.html`;
+        return 'test.html';
       default:
         throw new Error('DocBuilder: can not resolve file name.');
     }
@@ -663,7 +668,7 @@ export default class DocBuilder {
     if (doc.kind === 'file' || doc.kind === 'testFile') {
       fileDoc = doc;
     } else {
-      let filePath = doc.longname.split('~')[0];
+      const filePath = doc.longname.split('~')[0];
       fileDoc = this._find({kind: ['file', 'testFile'], longname: filePath})[0];
     }
 
@@ -696,28 +701,28 @@ export default class DocBuilder {
     // e.g. function(a: number, b: string): boolean
     matched = typeName.match(/function *\((.*?)\)(.*)/);
     if (matched) {
-      let functionLink = this._buildDocLinkHTML('function');
+      const functionLink = this._buildDocLinkHTML('function');
       if (!matched[1] && !matched[2]) return `<span>${functionLink}<span>()</span></span>`;
 
       let innerTypes = [];
       if (matched[1]) {
         // bad hack: Map.<string, boolean> => Map.<string\Z boolean>
         // bad hack: {a: string, b: boolean} => {a\Y string\Z b\Y boolean}
-        let inner = matched[1]
+        const inner = matched[1]
           .replace(/<.*?>/g, (a)=> a.replace(/,/g, '\\Z'))
           .replace(/{.*?}/g, (a)=> a.replace(/,/g, '\\Z').replace(/:/g, '\\Y'));
         innerTypes = inner.split(',').map((v)=>{
-          let tmp = v.split(':').map((v)=> v.trim());
-          let paramName = tmp[0];
-          let typeName = tmp[1].replace(/\\Z/g, ',').replace(/\\Y/g, ':');
+          const tmp = v.split(':').map((v)=> v.trim());
+          const paramName = tmp[0];
+          const typeName = tmp[1].replace(/\\Z/g, ',').replace(/\\Y/g, ':');
           return `${paramName}: ${this._buildTypeDocLinkHTML(typeName)}`;
         });
       }
 
       let returnType = '';
       if (matched[2]) {
-        let type = matched[2].split(':')[1];
-        if (type) returnType = ': ' + this._buildTypeDocLinkHTML(type.trim());
+        const type = matched[2].split(':')[1];
+        if (type) returnType = `: ${this._buildTypeDocLinkHTML(type.trim())}`;
       }
 
       return `<span>${functionLink}<span>(${innerTypes.join(', ')})</span>${returnType}</span>`;
@@ -730,18 +735,18 @@ export default class DocBuilder {
 
       // bad hack: Map.<string, boolean> => Map.<string\Z boolean>
       // bad hack: {a: string, b: boolean} => {a\Y string\Z b\Y boolean}
-      let inner = matched[1]
+      const inner = matched[1]
         .replace(/<.*?>/g, (a)=> a.replace(/,/g, '\\Z'))
         .replace(/{.*?}/g, (a)=> a.replace(/,/g, '\\Z').replace(/:/g, '\\Y'));
-      let innerTypes = inner.split(',').map((v)=>{
-        let tmp = v.split(':').map((v)=> v.trim());
-        let paramName = tmp[0];
+      const innerTypes = inner.split(',').map((v)=>{
+        const tmp = v.split(':').map((v)=> v.trim());
+        const paramName = tmp[0];
         let typeName = tmp[1].replace(/\\Z/g, ',').replace(/\\Y/g, ':');
         if (typeName.includes('|')) {
           typeName = typeName.replace(/^\(/, '').replace(/\)$/, '');
-          let typeNames = typeName.split('|').map(v => v.trim());
-          let html = [];
-          for (let unionType of typeNames) {
+          const typeNames = typeName.split('|').map(v => v.trim());
+          const html = [];
+          for (const unionType of typeNames) {
             html.push(this._buildTypeDocLinkHTML(unionType));
           }
           return `${paramName}: ${html.join('|')}`;
@@ -756,27 +761,27 @@ export default class DocBuilder {
     // e.g. Map<number, string>
     matched = typeName.match(/^(.*?)\.?<(.*?)>$/);
     if (matched) {
-      let mainType = matched[1];
+      const mainType = matched[1];
       // bad hack: Map.<string, boolean> => Map.<string\Z boolean>
       // bad hack: {a: string, b: boolean} => {a\Y string\Z b\Y boolean}
-      let inner = matched[2]
+      const inner = matched[2]
         .replace(/<.*?>/g, (a)=> a.replace(/,/g, '\\Z'))
         .replace(/{.*?}/g, (a)=> a.replace(/,/g, '\\Z').replace(/:/g, '\\Y'));
-      let innerTypes = inner.split(',').map((v) => {
+      const innerTypes = inner.split(',').map((v) => {
         v = v.trim().replace(/\\Z/g, ',').replace(/\\Y/g, ':');
         return this._buildTypeDocLinkHTML(v);
       });
 
-      let html = `${this._buildDocLinkHTML(mainType, mainType)}<${innerTypes.join(', ')}>`;
+      const html = `${this._buildDocLinkHTML(mainType, mainType)}<${innerTypes.join(', ')}>`;
       return html;
     }
 
     if (typeName.indexOf('...') === 0) {
       typeName = typeName.replace('...', '');
-      return '...' + this._buildDocLinkHTML(typeName);
-    } else if (typeName.indexOf('?') === 0){
+      return `...${this._buildDocLinkHTML(typeName)}`;
+    } else if (typeName.indexOf('?') === 0) {
       typeName = typeName.replace('?', '');
-      return '?' + this._buildDocLinkHTML(typeName);
+      return `?${this._buildDocLinkHTML(typeName)}`;
     } else {
       return this._buildDocLinkHTML(typeName);
     }
@@ -796,7 +801,7 @@ export default class DocBuilder {
 
     if (typeof longname !== 'string') throw new Error(JSON.stringify(longname));
 
-    let doc = this._findByName(longname, kind)[0];
+    const doc = this._findByName(longname, kind)[0];
 
     if (!doc) {
       // if longname is HTML tag, not escape.
@@ -812,7 +817,7 @@ export default class DocBuilder {
       return `<span><a href="${doc.externalLink}">${text}</a></span>`;
     } else {
       text = escape(text || doc.name);
-      let url = this._getURL(doc, inner);
+      const url = this._getURL(doc, inner);
       if (url) {
         return `<span><a href="${url}">${text}</a></span>`;
       } else {
@@ -834,10 +839,10 @@ export default class DocBuilder {
     if (!longnames) return '';
     if (!longnames.length) return '';
 
-    let links = [];
-    for (var longname of longnames) {
+    const links = [];
+    for (const longname of longnames) {
       if (!longname) continue;
-      let link = this._buildDocLinkHTML(longname, text, inner);
+      const link = this._buildDocLinkHTML(longname, text, inner);
       links.push(`<li>${link}</li>`);
     }
 
@@ -854,15 +859,15 @@ export default class DocBuilder {
    */
   _buildSignatureHTML(doc) {
     // call signature
-    let callSignatures = [];
+    const callSignatures = [];
     if (doc.params) {
-      for (let param of doc.params) {
-        let paramName = param.name;
+      for (const param of doc.params) {
+        const paramName = param.name;
         if (paramName.indexOf('.') !== -1) continue; // for object property
         if (paramName.indexOf('[') !== -1) continue; // for array property
 
-        let types = [];
-        for (let typeName of param.types) {
+        const types = [];
+        for (const typeName of param.types) {
           types.push(this._buildTypeDocLinkHTML(typeName));
         }
 
@@ -871,9 +876,9 @@ export default class DocBuilder {
     }
 
     // return signature
-    let returnSignatures = [];
+    const returnSignatures = [];
     if (doc.return) {
-      for (let typeName of doc.return.types) {
+      for (const typeName of doc.return.types) {
         returnSignatures.push(this._buildTypeDocLinkHTML(typeName));
       }
     }
@@ -881,7 +886,7 @@ export default class DocBuilder {
     // type signature
     let typeSignatures = [];
     if (doc.type) {
-      for (let typeName of doc.type.types) {
+      for (const typeName of doc.type.types) {
         typeSignatures.push(this._buildTypeDocLinkHTML(typeName));
       }
     }
@@ -911,7 +916,7 @@ export default class DocBuilder {
    * @private
    */
   _buildProperties(properties = [], title = 'Properties:') {
-    let ice = new IceCap(this._readTemplate('properties.html'));
+    const ice = new IceCap(this._readTemplate('properties.html'));
 
     ice.text('title', title);
 
@@ -922,14 +927,14 @@ export default class DocBuilder {
       ice.attr('name', 'data-depth', prop.name.split('.').length - 1);
       ice.load('description', prop.description);
 
-      let typeNames = [];
-      for (var typeName of prop.types) {
+      const typeNames = [];
+      for (const typeName of prop.types) {
         typeNames.push(this._buildTypeDocLinkHTML(typeName));
       }
       ice.load('type', typeNames.join(' | '));
 
       // appendix
-      let appendix = [];
+      const appendix = [];
       if (prop.optional) {
         appendix.push('<li>optional</li>');
       }
@@ -961,7 +966,7 @@ export default class DocBuilder {
    */
   _buildDeprecatedHTML(doc) {
     if (doc.deprecated) {
-      let deprecated = [`this ${doc.kind} was deprecated.`];
+      const deprecated = [`this ${doc.kind} was deprecated.`];
       if (typeof doc.deprecated === 'string') deprecated.push(doc.deprecated);
       return deprecated.join(' ');
     } else {
@@ -977,7 +982,7 @@ export default class DocBuilder {
    */
   _buildExperimentalHTML(doc) {
     if (doc.experimental) {
-      let experimental = [`this ${doc.kind} is experimental.`];
+      const experimental = [`this ${doc.kind} is experimental.`];
       if (typeof doc.experimental === 'string') experimental.push(doc.experimental);
       return experimental.join(' ');
     } else {
@@ -992,23 +997,25 @@ export default class DocBuilder {
    * @private
    */
   _buildOverrideMethod(doc) {
-    let parentDoc = this._findByName(doc.memberof)[0];
+    const parentDoc = this._findByName(doc.memberof)[0];
     if (!parentDoc) return '';
-    if (!parentDoc._custom_extends_chains) return;
+    if (!parentDoc._custom_extends_chains) return '';
 
-    let chains = [...parentDoc._custom_extends_chains].reverse();
-    for (let longname of chains) {
-      let superClassDoc = this._findByName(longname)[0];
+    const chains = [...parentDoc._custom_extends_chains].reverse();
+    for (const longname of chains) {
+      const superClassDoc = this._findByName(longname)[0];
       if (!superClassDoc) continue;
 
-      let superMethodDoc = this._find({name: doc.name, memberof: superClassDoc.longname})[0];
+      const superMethodDoc = this._find({name: doc.name, memberof: superClassDoc.longname})[0];
       if (!superMethodDoc) continue;
 
       return this._buildDocLinkHTML(superMethodDoc.longname, `${superClassDoc.name}#${superMethodDoc.name}`, true);
     }
+
+    return '';
   }
 
-  //_buildAuthorHTML(doc, separator = '\n') {
+  // _buildAuthorHTML(doc, separator = '\n') {
   //  if (!doc.author) return '';
   //
   //  var html = [];
@@ -1028,5 +1035,5 @@ export default class DocBuilder {
   //  }
   //
   //  return `<ul>${html.join(separator)}</ul>`;
-  //}
+  // }
 }

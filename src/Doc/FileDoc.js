@@ -12,9 +12,9 @@ export default class FileDoc extends AbstractDoc {
   _apply() {
     super._apply();
 
-    delete this._value.export;
-    delete this._value.importPath;
-    delete this._value.importStyle;
+    Reflect.deleteProperty(this._value, 'export');
+    Reflect.deleteProperty(this._value, 'importPath');
+    Reflect.deleteProperty(this._value, 'importStyle');
   }
 
   /** specify ``file`` to kind. */
@@ -38,8 +38,8 @@ export default class FileDoc extends AbstractDoc {
   _$content() {
     super._$content();
 
-    let filePath = this._pathResolver.fileFullPath;
-    let content = fs.readFileSync(filePath, {encode: 'utf8'}).toString();
+    const filePath = this._pathResolver.fileFullPath;
+    const content = fs.readFileSync(filePath, {encode: 'utf8'}).toString();
     this._value.content = content;
   }
 }

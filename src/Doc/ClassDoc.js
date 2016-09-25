@@ -44,7 +44,7 @@ export default class ClassDoc extends AbstractDoc {
 
   /** for @interface */
   _$interface() {
-    let tag = this._find(['@interface']);
+    const tag = this._find(['@interface']);
     if (tag) {
       this._value.interface = ['', 'true', true].includes(tag.tagValue);
     } else {
@@ -54,20 +54,20 @@ export default class ClassDoc extends AbstractDoc {
 
   /** for @extends, does not need to use this tag. */
   _$extends() {
-    let values = this._findAllTagValues(['@extends', '@extend']);
+    const values = this._findAllTagValues(['@extends', '@extend']);
     if (values) {
       this._value.extends = [];
-      for (let value of values) {
-        let {typeText} = ParamParser.parseParamValue(value, true, false, false);
+      for (const value of values) {
+        const {typeText} = ParamParser.parseParamValue(value, true, false, false);
         this._value.extends.push(typeText);
       }
       return;
     }
 
     if (this._node.superClass) {
-      let node = this._node;
+      const node = this._node;
       let longnames = [];
-      let targets = [];
+      const targets = [];
 
       if (node.superClass.type === 'CallExpression') {
         targets.push(node.superClass.callee, ...node.superClass.arguments);
@@ -75,17 +75,19 @@ export default class ClassDoc extends AbstractDoc {
         targets.push(node.superClass);
       }
 
-      for (let target of targets) {
+      for (const target of targets) {
+        /* eslint-disable default-case */
         switch (target.type) {
           case 'Identifier':
             longnames.push(this._resolveLongname(target.name));
             break;
-          case 'MemberExpression':
-            let fullIdentifier = this._flattenMemberExpression(target);
-            let rootIdentifier = fullIdentifier.split('.')[0];
-            let rootLongname = this._resolveLongname(rootIdentifier);
-            let filePath = rootLongname.replace(/~.*/, '');
+          case 'MemberExpression': {
+            const fullIdentifier = this._flattenMemberExpression(target);
+            const rootIdentifier = fullIdentifier.split('.')[0];
+            const rootLongname = this._resolveLongname(rootIdentifier);
+            const filePath = rootLongname.replace(/~.*/, '');
             longnames.push(`${filePath}~${fullIdentifier}`);
+          }
             break;
         }
       }
@@ -94,10 +96,10 @@ export default class ClassDoc extends AbstractDoc {
         // expression extends may have non-class, so filter only class by name rule.
         longnames = longnames.filter((v)=> v.match(/^[A-Z]|^[$_][A-Z]/));
 
-        let filePath = this._pathResolver.fileFullPath;
-        let line = node.superClass.loc.start.line;
-        let start = node.superClass.loc.start.column;
-        let end = node.superClass.loc.end.column;
+        const filePath = this._pathResolver.fileFullPath;
+        const line = node.superClass.loc.start.line;
+        const start = node.superClass.loc.start.column;
+        const end = node.superClass.loc.end.column;
         this._value.expressionExtends = this._readSelection(filePath, line, start, end);
       }
 
@@ -106,13 +108,13 @@ export default class ClassDoc extends AbstractDoc {
   }
 
   /** for @implements */
-  _$implements(){
-    let values = this._findAllTagValues(['@implements', '@implement']);
+  _$implements() {
+    const values = this._findAllTagValues(['@implements', '@implement']);
     if (!values) return;
 
     this._value.implements = [];
-    for (let value of values) {
-      let {typeText} = ParamParser.parseParamValue(value, true, false, false);
+    for (const value of values) {
+      const {typeText} = ParamParser.parseParamValue(value, true, false, false);
       this._value.implements.push(typeText);
     }
   }
@@ -127,10 +129,10 @@ export default class ClassDoc extends AbstractDoc {
    * @private
    */
   _readSelection(filePath, line, startColumn, endColumn) {
-    let code = fs.readFileSync(filePath).toString();
-    let lines = code.split('\n');
-    let selectionLine = lines[line - 1];
-    let tmp = [];
+    const code = fs.readFileSync(filePath).toString();
+    const lines = code.split('\n');
+    const selectionLine = lines[line - 1];
+    const tmp = [];
     for (let i = startColumn; i < endColumn; i++) {
       tmp.push(selectionLine.charAt(i));
     }

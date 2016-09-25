@@ -13,9 +13,9 @@ export default class MethodDoc extends AbstractDoc {
   _apply() {
     super._apply();
 
-    delete this._value.export;
-    delete this._value.importPath;
-    delete this._value.importStyle;
+    Reflect.deleteProperty(this._value, 'export');
+    Reflect.deleteProperty(this._value, 'importPath');
+    Reflect.deleteProperty(this._value, 'importStyle');
   }
 
   /** use kind property of self node. */
@@ -67,25 +67,30 @@ export default class MethodDoc extends AbstractDoc {
     super._$type();
     if (this._value.type) return;
 
+    /* eslint-disable default-case */
     switch (this._value.kind) {
       case 'set':
         this._value.type = ParamParser.guessType(this._node.right);
         break;
-      case 'get':
-        let result = ParamParser.guessReturnParam(this._node.body);
+      case 'get': {
+        const result = ParamParser.guessReturnParam(this._node.body);
         if (result) this._value.type = result;
         break;
+      }
     }
   }
 
-  /** if @return is not exists, guess type of return by usigin self node. but ``constructor``, ``get`` and ``set``are not guessed. */
+  /**
+   * if @return is not exists, guess type of return by using self node.
+   * but ``constructor``, ``get`` and ``set``are not guessed.
+   */
   _$return() {
     super._$return();
     if (this._value.return) return;
 
     if (['constructor', 'set', 'get'].includes(this._value.kind)) return;
 
-    let result = ParamParser.guessReturnParam(this._node.body);
+    const result = ParamParser.guessReturnParam(this._node.body);
     if (result) {
       this._value.return = result;
     }

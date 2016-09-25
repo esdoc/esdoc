@@ -2,7 +2,7 @@ import Logger from 'color-logger';
 import AbstractDoc from './AbstractDoc.js';
 import ParamParser from '../Parser/ParamParser.js';
 
-let logger = new Logger('TypedefDoc');
+const logger = new Logger('TypedefDoc');
 
 /**
  * Doc class for virtual comment node of typedef.
@@ -17,9 +17,9 @@ export default class TypedefDoc extends AbstractDoc {
 
     this._$typedef();
 
-    delete this._value.export;
-    delete this._value.importPath;
-    delete this._value.importStyle;
+    Reflect.deleteProperty(this._value, 'export');
+    Reflect.deleteProperty(this._value, 'importPath');
+    Reflect.deleteProperty(this._value, 'importStyle');
   }
 
   /** specify ``typedef`` to kind. */
@@ -30,16 +30,15 @@ export default class TypedefDoc extends AbstractDoc {
 
   /** set name by using tag. */
   _$name() {
-    let tags = this._findAll(['@typedef']);
+    const tags = this._findAll(['@typedef']);
     if (!tags) {
-      logger.w(`can not resolve name.`);
+      logger.w('can not resolve name.');
       return;
     }
 
     let name;
-    for (let tag of tags) {
-      let {tagName, tagValue} = tag;
-      let {typeText, paramName, paramDesc} = ParamParser.parseParamValue(tagValue, true, true, false);
+    for (const tag of tags) {
+      const {paramName} = ParamParser.parseParamValue(tag.tagValue, true, true, false);
       name = paramName;
     }
 
@@ -66,15 +65,15 @@ export default class TypedefDoc extends AbstractDoc {
 
   /** for @typedef */
   _$typedef() {
-    let value = this._findTagValue(['@typedef']);
+    const value = this._findTagValue(['@typedef']);
     if (!value) return;
 
-    let {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value, true, true, false);
-    let result = ParamParser.parseParam(typeText, paramName, paramDesc);
+    const {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value, true, true, false);
+    const result = ParamParser.parseParam(typeText, paramName, paramDesc);
 
-    delete result.description;
-    delete result.nullable;
-    delete result.spread;
+    Reflect.deleteProperty(result, 'description');
+    Reflect.deleteProperty(result, 'nullable');
+    Reflect.deleteProperty(result, 'spread');
 
     this._value.type = result;
   }

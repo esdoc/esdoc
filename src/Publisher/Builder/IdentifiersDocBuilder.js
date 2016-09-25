@@ -1,4 +1,3 @@
-import fs from 'fs';
 import IceCap from 'ice-cap';
 import DocBuilder from './DocBuilder.js';
 
@@ -11,8 +10,8 @@ export default class IdentifiersDocBuilder extends DocBuilder {
    * @param {function(html: string, filePath: string)} callback - is called with output.
    */
   exec(callback) {
-    let ice = this._buildLayoutDoc();
-    let title = this._getTitle('Index');
+    const ice = this._buildLayoutDoc();
+    const title = this._getTitle('Index');
     ice.load('content', this._buildIdentifierDoc());
     ice.text('title', title, IceCap.MODE_WRITE);
     callback(ice.html, 'identifiers.html');
@@ -24,9 +23,9 @@ export default class IdentifiersDocBuilder extends DocBuilder {
    * @private
    */
   _buildIdentifierDoc() {
-    let indexInfo = this._getInfo();
+    const indexInfo = this._getInfo();
 
-    let ice = new IceCap(this._readTemplate('identifiers.html'));
+    const ice = new IceCap(this._readTemplate('identifiers.html'));
 
     ice.text('title', indexInfo.title);
     ice.text('version', indexInfo.version, 'append');

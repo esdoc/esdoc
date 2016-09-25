@@ -2,7 +2,7 @@ import Logger from 'color-logger';
 import assert from 'assert';
 import ASTUtil from '../Util/ASTUtil.js';
 
-let logger = new Logger('ParamParser');
+const logger = new Logger('ParamParser');
 
 /**
  * Param Type Parser class.
@@ -52,7 +52,7 @@ export default class ParamParser {
       match = value.match(/^(\S+)/);
       if (match) {
         paramName = match[1];
-        value = value.replace(/^\S+\s*/, '')
+        value = value.replace(/^\S+\s*/, '');
       }
     }
 
@@ -82,7 +82,7 @@ export default class ParamParser {
    * let result = ParamParser.parseParam(typeText, paramName, paramDesc);
    */
   static parseParam(typeText = null, paramName = null, paramDesc = null) {
-    let result = {};
+    const result = {};
 
     if (typeText) {
       // check nullable
@@ -98,11 +98,10 @@ export default class ParamParser {
       // check record and union
       if (typeText[0] === '{') {
         result.types = [typeText];
-      }
-      else if (typeText[0] === '(') {
+      } else if (typeText[0] === '(') {
         typeText = typeText.replace(/^[(]/, '').replace(/[)]$/, '');
         result.types = typeText.split('|');
-      } else if(typeText.includes('|')){
+      } else if (typeText.includes('|')) {
         result.types = typeText.split('|');
       } else {
         result.types = [typeText];
@@ -113,8 +112,7 @@ export default class ParamParser {
       } else {
         result.spread = false;
       }
-    }
-    else {
+    } else {
       result.types = [''];
     }
 
@@ -132,11 +130,11 @@ export default class ParamParser {
       }
 
       // check default value
-      let pair = paramName.split('=');
+      const pair = paramName.split('=');
       if (pair.length === 2) {
         result.defaultValue = pair[1];
         try {
-          let raw = JSON.parse(pair[1]);
+          const raw = JSON.parse(pair[1]);
           result.defaultRaw = raw;
         } catch (e) {
           result.defaultRaw = pair[1];
@@ -164,10 +162,10 @@ export default class ParamParser {
    * let results = ParamParser.guessParams(node.params);
    */
   static guessParams(params) {
-    let _params = [];
+    const _params = [];
     for (let i = 0; i < params.length; i++) {
-      let param = params[i];
-      let result = {};
+      const param = params[i];
+      const result = {};
 
       switch (param.type) {
         case 'Identifier':
@@ -197,21 +195,21 @@ export default class ParamParser {
             result.types = param.right.elements.length ? [`${typeof param.right.elements[0].value}[]`] : ['*[]'];
             result.defaultRaw = param.right.elements.map((elm)=> elm.value);
             result.defaultValue = `${JSON.stringify(result.defaultRaw)}`;
-          } else if(param.right.type === 'ObjectExpression'){
-            let typeMap = {};
-            for (let prop of param.left.properties || []) {
+          } else if (param.right.type === 'ObjectExpression') {
+            const typeMap = {};
+            for (const prop of param.left.properties || []) {
               typeMap[prop.key.name] = '*';
             }
 
             // e.g. func(a = {key: 123}){}
-            let obj = {};
-            for (let prop of param.right.properties) {
+            const obj = {};
+            for (const prop of param.right.properties) {
               obj[prop.key.name] = prop.value.value;
               typeMap[prop.key.name] = typeof prop.value.value;
             }
 
-            let types = [];
-            for (let key of Object.keys(typeMap)) {
+            const types = [];
+            for (const key of Object.keys(typeMap)) {
               types.push(`"${key}": ${typeMap[key]}`);
             }
 
@@ -235,10 +233,10 @@ export default class ParamParser {
           result.types = ['...*'];
           result.spread = true;
           break;
-        case 'ObjectPattern':
-          let objectPattern = [];
-          let raw = {};
-          for (let property of param.properties) {
+        case 'ObjectPattern': {
+          const objectPattern = [];
+          const raw = {};
+          for (const property of param.properties) {
             objectPattern.push(`"${property.key.name}": *`);
             raw[property.key.name] = null;
           }
@@ -247,6 +245,7 @@ export default class ParamParser {
           result.defaultRaw = raw;
           result.defaultValue = `${JSON.stringify(result.defaultRaw)}`;
           break;
+        }
         default:
           logger.w('unknown param.type', param);
       }
@@ -263,13 +262,13 @@ export default class ParamParser {
    * @returns {ParsedParam|null}
    */
   static guessReturnParam(body) {
-    let result = {};
+    const result = {};
     const guessType = this.guessType.bind(this);
 
-    ASTUtil.traverse(body, function(node, parent){
+    ASTUtil.traverse(body, (node, parent, path)=>{
       // `return` in Function is not the body's `return`
       if (node.type.includes('Function')) {
-        this.skip();
+        path.skip();
         return;
       }
 
@@ -307,7 +306,7 @@ export default class ParamParser {
 
     if (right.type === 'ArrayExpression') {
       if (right.elements.length) {
-        return {types: [`${typeof right.elements[0].value}[]`]}
+        return {types: [`${typeof right.elements[0].value}[]`]};
       } else {
         return {types: ['*[]']};
       }
@@ -315,12 +314,12 @@ export default class ParamParser {
 
     if (right.type === 'ObjectExpression') {
       const typeMap = {};
-      for (let prop of right.properties) {
+      for (const prop of right.properties) {
         typeMap[prop.key.name] = typeof prop.value.value;
       }
 
-      let types = [];
-      for (let key of Object.keys(typeMap)) {
+      const types = [];
+      for (const key of Object.keys(typeMap)) {
         types.push(`"${key}": ${typeMap[key]}`);
       }
 

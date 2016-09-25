@@ -1,4 +1,3 @@
-import path from 'path';
 import DocBuilder from './DocBuilder.js';
 
 /**
@@ -11,27 +10,28 @@ export default class CoverageBuilder extends DocBuilder {
    * @param {function(badge: string, filePath: string)} badgeCallback - is called with coverage badge.
    */
   exec(callback, badgeCallback) {
-    let docs = this._find({kind: ['class', 'method', 'member', 'get', 'set', 'constructor', 'function', 'variable']});
-    let expectCount = docs.length;
+    const docs = this._find({kind: ['class', 'method', 'member', 'get', 'set', 'constructor', 'function', 'variable']});
+    const expectCount = docs.length;
     let actualCount = 0;
-    let files = {};
+    const files = {};
 
-    for (let doc of docs) {
-      let filePath = doc.longname.split('~')[0];
+    for (const doc of docs) {
+      const filePath = doc.longname.split('~')[0];
       if (!files[filePath]) files[filePath] = {expectCount: 0, actualCount: 0, undocumentLines: []};
       files[filePath].expectCount++;
 
-      if (!doc.undocument) {
+      if (doc.undocument) {
+        files[filePath].undocumentLines.push(doc.lineNumber);
+      } else {
         actualCount++;
         files[filePath].actualCount++;
-      } else {
-        files[filePath].undocumentLines.push(doc.lineNumber);
       }
     }
 
-    let coveragePercent = (expectCount === 0 ? 0 : Math.floor(10000 * actualCount / expectCount) / 100);
+    /* eslint-disable no-extra-parens */
+    const coveragePercent = (expectCount === 0 ? 0 : Math.floor(10000 * actualCount / expectCount) / 100);
 
-    let coverage = {
+    const coverage = {
       coverage: `${coveragePercent}%`,
       expectCount: expectCount,
       actualCount: actualCount,
@@ -41,7 +41,7 @@ export default class CoverageBuilder extends DocBuilder {
     callback(coverage, 'coverage.json');
 
     // create badge
-    let ratio = Math.floor(100 * actualCount / expectCount);
+    const ratio = Math.floor(100 * actualCount / expectCount);
     let color;
     if (ratio < 50) {
       color = '#db654f';
@@ -51,7 +51,7 @@ export default class CoverageBuilder extends DocBuilder {
       color = '#4fc921';
     }
     let badge = this._readTemplate('image/badge.svg');
-    badge = badge.replace(/@ratio@/g, ratio + '%');
+    badge = badge.replace(/@ratio@/g, `${ratio}%`);
     badge = badge.replace(/@color@/g, color);
     badgeCallback(badge, 'badge.svg');
   }

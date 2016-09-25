@@ -2,7 +2,6 @@ import path from 'path';
 import fs from 'fs-extra';
 import DocBuilder from './DocBuilder.js';
 import ASTNodeContainer from '../../Util/ASTNodeContainer.js';
-import InvalidCodeLogger from '../../Util/InvalidCodeLogger.js';
 
 /** @ignore */
 export const _results = [];
@@ -17,7 +16,7 @@ export default class LintDocBuilder extends DocBuilder {
   exec() {
     const results = [];
     const docs = this._find({kind: ['method', 'function']});
-    for (let doc of docs) {
+    for (const doc of docs) {
       if (doc.undocument) continue;
 
       const node = ASTNodeContainer.getNode(doc.__docId__);
@@ -54,7 +53,7 @@ export default class LintDocBuilder extends DocBuilder {
     }
 
     const result = [];
-    for (let param of params) {
+    for (const param of params) {
       switch (param.type) {
         case 'Identifier':
           result.push(param.name);
@@ -62,7 +61,7 @@ export default class LintDocBuilder extends DocBuilder {
         case 'AssignmentPattern':
           if (param.left.type === 'Identifier') {
             result.push(param.left.name);
-          } else if(param.left.type === 'ObjectPattern') {
+          } else if (param.left.type === 'ObjectPattern') {
             result.push('*');
           }
           break;
@@ -75,6 +74,8 @@ export default class LintDocBuilder extends DocBuilder {
         case 'ArrayPattern':
           result.push('*');
           break;
+        default:
+          throw new Error(`unknown param type: ${param.type}`);
       }
     }
 
@@ -117,7 +118,7 @@ export default class LintDocBuilder extends DocBuilder {
    */
   _showResult(results) {
     const sourceDir = path.dirname(path.resolve(this._config.source));
-    for (let result of results) {
+    for (const result of results) {
       const doc = result.doc;
       const node = result.node;
       const filePath = doc.longname.split('~')[0];
@@ -130,7 +131,7 @@ export default class LintDocBuilder extends DocBuilder {
       const targetLines = [];
 
       for (let i = startLineNumber - 1; i < endLineNumber; i++) {
-        targetLines.push(`${i}| ` + lines[i]);
+        targetLines.push(`${i}| ${lines[i]}`);
       }
 
       console.log(`[33mwarning: signature mismatch: ${name} ${filePath}#${startLineNumber}[32m`);

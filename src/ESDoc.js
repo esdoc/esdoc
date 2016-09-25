@@ -1,4 +1,3 @@
-import es6shim from 'core-js/shim';
 import fs from 'fs';
 import path from 'path';
 import assert from 'assert';
@@ -11,7 +10,7 @@ import TestDocFactory from './Factory/TestDocFactory.js';
 import InvalidCodeLogger from './Util/InvalidCodeLogger.js';
 import Plugin from './Plugin/Plugin.js';
 
-let logger = new Logger('ESDoc');
+const logger = new Logger('ESDoc');
 
 /**
  * API Documentation Generator.
@@ -41,15 +40,15 @@ export default class ESDoc {
     this._deprecatedConfig(config);
 
     Logger.debug = !!config.debug;
-    let includes = config.includes.map((v) => new RegExp(v));
-    let excludes = config.excludes.map((v) => new RegExp(v));
+    const includes = config.includes.map((v) => new RegExp(v));
+    const excludes = config.excludes.map((v) => new RegExp(v));
 
     let packageName = null;
     let mainFilePath = null;
     if (config.package) {
       try {
-        let packageJSON = fs.readFileSync(config.package, {encode: 'utf8'});
-        let packageConfig = JSON.parse(packageJSON);
+        const packageJSON = fs.readFileSync(config.package, {encode: 'utf8'});
+        const packageConfig = JSON.parse(packageJSON);
         packageName = packageConfig.name;
         mainFilePath = packageConfig.main;
       } catch (e) {
@@ -58,13 +57,13 @@ export default class ESDoc {
     }
 
     let results = [];
-    let asts = [];
-    let sourceDirPath = path.resolve(config.source);
+    const asts = [];
+    const sourceDirPath = path.resolve(config.source);
 
     this._walk(config.source, (filePath)=>{
       const relativeFilePath = path.relative(sourceDirPath, filePath);
       let match = false;
-      for (let reg of includes) {
+      for (const reg of includes) {
         if (relativeFilePath.match(reg)) {
           match = true;
           break;
@@ -72,15 +71,15 @@ export default class ESDoc {
       }
       if (!match) return;
 
-      for (let reg of excludes) {
+      for (const reg of excludes) {
         if (relativeFilePath.match(reg)) return;
       }
 
-      let temp = this._traverse(config.source, filePath, packageName, mainFilePath);
+      const temp = this._traverse(config.source, filePath, packageName, mainFilePath);
       if (!temp) return;
       results.push(...temp.results);
 
-      asts.push({filePath: 'source' + path.sep + relativeFilePath, ast: temp.ast});
+      asts.push({filePath: `source${path.sep}${relativeFilePath}`, ast: temp.ast});
     });
 
     if (config.builtinExternal) {
@@ -106,14 +105,14 @@ export default class ESDoc {
    * @private
    */
   static _generateForTest(config, results, asts) {
-    let includes = config.test.includes.map((v) => new RegExp(v));
-    let excludes = config.test.excludes.map((v) => new RegExp(v));
-    let sourceDirPath = path.resolve(config.test.source);
+    const includes = config.test.includes.map((v) => new RegExp(v));
+    const excludes = config.test.excludes.map((v) => new RegExp(v));
+    const sourceDirPath = path.resolve(config.test.source);
 
     this._walk(config.test.source, (filePath)=>{
       const relativeFilePath = path.relative(sourceDirPath, filePath);
       let match = false;
-      for (let reg of includes) {
+      for (const reg of includes) {
         if (relativeFilePath.match(reg)) {
           match = true;
           break;
@@ -121,15 +120,15 @@ export default class ESDoc {
       }
       if (!match) return;
 
-      for (let reg of excludes) {
+      for (const reg of excludes) {
         if (relativeFilePath.match(reg)) return;
       }
 
-      let temp = this._traverseForTest(config.test.type, config.test.source, filePath);
+      const temp = this._traverseForTest(config.test.type, config.test.source, filePath);
       if (!temp) return;
       results.push(...temp.results);
 
-      asts.push({filePath: 'test' + path.sep + relativeFilePath, ast: temp.ast});
+      asts.push({filePath: `test${path.sep}${relativeFilePath}`, ast: temp.ast});
     });
   }
 
@@ -175,6 +174,7 @@ export default class ESDoc {
     }
   }
 
+  /* eslint-disable no-unused-vars */
   static _deprecatedConfig(config) {
     // do nothing
   }
@@ -187,11 +187,12 @@ export default class ESDoc {
    * @see {@link src/BuiltinExternal/ECMAScriptExternal.js}
    */
   static _useBuiltinExternal(results) {
-    let dirPath = path.resolve(__dirname, './BuiltinExternal/');
+    const dirPath = path.resolve(__dirname, './BuiltinExternal/');
     this._walk(dirPath, (filePath)=>{
-      let temp = this._traverse(dirPath, filePath);
+      const temp = this._traverse(dirPath, filePath);
+      /* eslint-disable no-return-assign */
       temp.results.forEach((v)=> v.builtinExternal = true);
-      let res = temp.results.filter(v => v.kind === 'external');
+      const res = temp.results.filter(v => v.kind === 'external');
       results.push(...res);
     });
   }
@@ -203,11 +204,11 @@ export default class ESDoc {
    * @private
    */
   static _walk(dirPath, callback) {
-    let entries = fs.readdirSync(dirPath);
+    const entries = fs.readdirSync(dirPath);
 
-    for (let entry of entries) {
-      let entryPath = path.resolve(dirPath, entry);
-      let stat = fs.statSync(entryPath);
+    for (const entry of entries) {
+      const entryPath = path.resolve(dirPath, entry);
+      const stat = fs.statSync(entryPath);
 
       if (stat.isFile()) {
         callback(entryPath);
@@ -233,18 +234,18 @@ export default class ESDoc {
     let ast;
     try {
       ast = ESParser.parse(filePath);
-    } catch(e) {
+    } catch (e) {
       InvalidCodeLogger.showFile(filePath, e);
       return null;
     }
 
-    let pathResolver = new PathResolver(inDirPath, filePath, packageName, mainFilePath);
-    let factory = new DocFactory(ast, pathResolver);
+    const pathResolver = new PathResolver(inDirPath, filePath, packageName, mainFilePath);
+    const factory = new DocFactory(ast, pathResolver);
 
     ASTUtil.traverse(ast, (node, parent)=>{
       try {
         factory.push(node, parent);
-      } catch(e) {
+      } catch (e) {
         InvalidCodeLogger.show(filePath, node);
         throw e;
       }
@@ -267,17 +268,17 @@ export default class ESDoc {
     let ast;
     try {
       ast = ESParser.parse(filePath);
-    } catch(e) {
+    } catch (e) {
       InvalidCodeLogger.showFile(filePath, e);
       return null;
     }
-    let pathResolver = new PathResolver(inDirPath, filePath);
-    let factory = new TestDocFactory(type, ast, pathResolver);
+    const pathResolver = new PathResolver(inDirPath, filePath);
+    const factory = new TestDocFactory(type, ast, pathResolver);
 
     ASTUtil.traverse(ast, (node, parent)=>{
       try {
         factory.push(node, parent);
-      } catch(e) {
+      } catch (e) {
         InvalidCodeLogger.show(filePath, node);
         throw e;
       }
