@@ -9,8 +9,8 @@ describe('test coverage', ()=> {
   it('has coverage summary', ()=> {
     assert(badge.includes('79%'));
     assert.includes(doc, '[data-ice="coverageBadge"]', './badge.svg', 'src');
-    assert.includes(doc, '[data-ice="totalCoverageCount"]', '260/327');
-    assert.equal(doc.find('[data-ice="file"] [data-ice="coverage"]').length, 115);
+    assert.includes(doc, '[data-ice="totalCoverageCount"]', '263/330');
+    assert.equal(doc.find('[data-ice="file"] [data-ice="coverage"]').length, 116);
   });
 
   /* eslint-disable max-statements */
@@ -114,6 +114,7 @@ describe('test coverage', ()=> {
     test('file/src/Todo/Class.js.html', '100 %4/4');
     test('file/src/Todo/Function.js.html', '100 %1/1');
     test('file/src/Todo/Variable.js.html', '100 %1/1');
+    test('file/src/TrailingComma/Definition.js.html', '100 %3/3');
     test('file/src/Type/Array.js.html', '100 %2/2');
     test('file/src/Type/Class.js.html#errorLines=1,9', '33 %1/3');
     test('file/src/Type/Complex.js.html#errorLines=1', '80 %4/5');
@@ -139,6 +140,6 @@ describe('test coverage', ()=> {
     test('file/src/Version/Function.js.html', '100 %1/1');
     test('file/src/Version/Variable.js.html', '100 %1/1');
 
-    assert.equal(count, 115);
+    assert.equal(count, 116);
   });
 });
