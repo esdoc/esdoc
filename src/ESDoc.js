@@ -75,7 +75,7 @@ export default class ESDoc {
         if (relativeFilePath.match(reg)) return;
       }
 
-      const temp = this._traverse(config.source, filePath, packageName, mainFilePath);
+      const temp = this._traverse(config, config.source, filePath, packageName, mainFilePath);
       if (!temp) return;
       results.push(...temp.results);
 
@@ -83,7 +83,7 @@ export default class ESDoc {
     });
 
     if (config.builtinExternal) {
-      this._useBuiltinExternal(results);
+      this._useBuiltinExternal(config, results);
     }
 
     if (config.test) {
@@ -124,7 +124,7 @@ export default class ESDoc {
         if (relativeFilePath.match(reg)) return;
       }
 
-      const temp = this._traverseForTest(config.test.type, config.test.source, filePath);
+      const temp = this._traverseForTest(config, config.test.type, config.test.source, filePath);
       if (!temp) return;
       results.push(...temp.results);
 
@@ -182,14 +182,15 @@ export default class ESDoc {
   /**
    * Use built-in external document.
    * built-in external has number, string, boolean, etc...
+   * @param {ESDocConfig} config - config of esdoc.
    * @param {DocObject[]} results - this method pushes DocObject to this param.
    * @private
    * @see {@link src/BuiltinExternal/ECMAScriptExternal.js}
    */
-  static _useBuiltinExternal(results) {
+  static _useBuiltinExternal(config, results) {
     const dirPath = path.resolve(__dirname, './BuiltinExternal/');
     this._walk(dirPath, (filePath)=>{
-      const temp = this._traverse(dirPath, filePath);
+      const temp = this._traverse(config, dirPath, filePath);
       /* eslint-disable no-return-assign */
       temp.results.forEach((v)=> v.builtinExternal = true);
       const res = temp.results.filter(v => v.kind === 'external');
@@ -220,6 +221,7 @@ export default class ESDoc {
 
   /**
    * traverse doc comment in JavaScript file.
+   * @param {ESDocConfig} config - config of esdoc.
    * @param {string} inDirPath - root directory path.
    * @param {string} filePath - target JavaScript file path.
    * @param {string} [packageName] - npm package name of target.
@@ -229,11 +231,11 @@ export default class ESDoc {
    * @property {AST} ast - this is AST of JavaScript file.
    * @private
    */
-  static _traverse(inDirPath, filePath, packageName, mainFilePath) {
+  static _traverse(config, inDirPath, filePath, packageName, mainFilePath) {
     logger.i(`parsing: ${filePath}`);
     let ast;
     try {
-      ast = ESParser.parse(filePath);
+      ast = ESParser.parse(config, filePath);
     } catch (e) {
       InvalidCodeLogger.showFile(filePath, e);
       return null;
@@ -256,6 +258,7 @@ export default class ESDoc {
 
   /**
    * traverse doc comment in test code file.
+   * @param {ESDocConfig} config - config of esdoc.
    * @param {string} type - test code type.
    * @param {string} inDirPath - root directory path.
    * @param {string} filePath - target test code file path.
@@ -264,10 +267,10 @@ export default class ESDoc {
    * @property {AST} ast - this is AST of test code.
    * @private
    */
-  static _traverseForTest(type, inDirPath, filePath) {
+  static _traverseForTest(config, type, inDirPath, filePath) {
     let ast;
     try {
-      ast = ESParser.parse(filePath);
+      ast = ESParser.parse(config, filePath);
     } catch (e) {
       InvalidCodeLogger.showFile(filePath, e);
       return null;

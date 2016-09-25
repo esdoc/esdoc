@@ -168,7 +168,7 @@ module.exports = {
     'max-len': ['error', {code: 160, 'ignoreStrings': true, 'ignoreUrls': true, 'ignoreComments': true, 'ignoreTemplateLiterals': true}],
     'max-lines': ['warn', {max: 1000}],
     'max-nested-callbacks': ['error', {'max': 3}],
-    'max-params': ['error', {'max': 4}],
+    'max-params': ['error', {'max': 5}],
     'max-statements-per-line': ['error', {'max': 1}],
     'max-statements': ['error', {'max': 50}],
     'multiline-ternary': ['error', 'never'],

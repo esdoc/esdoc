@@ -11,14 +11,15 @@ import * as babylon from 'babylon';
 export default class ESParser {
   /**
    * parse ECMAScript source code.
+   * @param {ESDocConfig} config - config of esdoc.
    * @param {string} filePath - source code file path.
    * @returns {AST} AST of source code.
    */
-  static parse(filePath) {
-    return this.parseWithBabylon(filePath);
+  static parse(config, filePath) {
+    return this.parseWithBabylon(config, filePath);
   }
 
-  static parseWithBabylon(filePath) {
+  static parseWithBabylon(config, filePath) {
     let code = fs.readFileSync(filePath, {encode: 'utf8'}).toString();
     code = Plugin.onHandleCode(code, filePath);
     if (code.charAt(0) === '#') code = code.replace(/^#!/, '//');
