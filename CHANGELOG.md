@@ -8,6 +8,7 @@
   - Support `exponentiation operator` ([29f6ccc](https://github.com/esdoc/esdoc/commit/29f6ccced4256016fed4ac8eb5b98320cd78c4d7))
 - **ES2017**
   - Support `async function` ([50452a1](https://github.com/esdoc/esdoc/commit/50452a1e44a1c8908da1fb377d3aa51eba220256))
+  - Support `trailing comma` ([dc9ba0f](https://github.com/esdoc/esdoc/commit/dc9ba0fd904adbc1519f27c15fab104f1a4414a5))
 - **Internal**
   - Update to babel6 ([149914e](https://github.com/esdoc/esdoc/commit/149914e84cb3bb061f2bdf2e43af00178b131a9e))
   - Refactor test code ([#324](https://github.com/esdoc/esdoc/pull/324))
