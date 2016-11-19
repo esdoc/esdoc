@@ -22,6 +22,7 @@
     "changelog": ["./test/fixture/package/CHANGELOG.md"]
   },
   "experimentalProposal": {
-    "classProperties": true
+    "classProperties": true,
+    "objectRestSpread": true
   }
 }

@@ -30,6 +30,7 @@
  * @property {string[]} manual.changelog
  * @property {Object} [experimentalProposal]
  * @property {boolean} experimentalProposal.classProperties
+ * @property {boolean} experimentalProposal.objectRestSpread
  * @see https://esdoc.org/config.html
  */
 

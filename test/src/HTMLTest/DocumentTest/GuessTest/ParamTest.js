@@ -37,6 +37,10 @@ describe('TestGuessParam', ()=> {
       findParent(doc, '[data-ice="summary"] [href$="#instance-method-method8"]', '[data-ice="target"]', (doc)=> {
         assert.includes(doc, null, 'public method8(p1: *)');
       });
+
+      findParent(doc, '[data-ice="summary"] [href$="#instance-method-method9"]', '[data-ice="target"]', (doc)=> {
+        assert.includes(doc, null, 'public method9(objectPattern: {"x": *, "y": *, ...z: Object})');
+      });
     });
   });
 
@@ -80,8 +84,13 @@ describe('TestGuessParam', ()=> {
       });
 
       findParent(doc, '[id="instance-method-method8"]', '[data-ice="detail"]', (doc)=>{
-        assert.includes(doc, 'h3', 'public ');
+        assert.includes(doc, 'h3', 'public method8(p1: *)');
         assert.includes(doc, '.params tbody tr:nth-child(1)', 'p1 * optional');
+      });
+
+      findParent(doc, '[id="instance-method-method9"]', '[data-ice="detail"]', (doc)=>{
+        assert.includes(doc, 'h3', 'public method9(objectPattern: {"x": *, "y": *, ...z: Object})');
+        assert.includes(doc, '.params tbody tr:nth-child(1)', 'objectPattern {"x": *, "y": *, ...z: Object} default: {"x":null,"y":null,"z":{}}');
       });
     });
   });

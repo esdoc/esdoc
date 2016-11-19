@@ -237,8 +237,13 @@ export default class ParamParser {
           const objectPattern = [];
           const raw = {};
           for (const property of param.properties) {
-            objectPattern.push(`"${property.key.name}": *`);
-            raw[property.key.name] = null;
+            if (property.type === 'ObjectProperty') {
+              objectPattern.push(`"${property.key.name}": *`);
+              raw[property.key.name] = null;
+            } else if (property.type === 'RestProperty') {
+              objectPattern.push(`...${property.argument.name}: Object`);
+              raw[property.argument.name] = {};
+            }
           }
           result.name = `objectPattern${i === 0 ? '' : i}`;
           result.types = [`{${objectPattern.join(', ')}}`];

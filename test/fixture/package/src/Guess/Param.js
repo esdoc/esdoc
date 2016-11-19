@@ -17,4 +17,6 @@ export default class TestGuessParam {
   method7(p1 = value){}
 
   method8(p1 = new Foo()){}
+
+  method9({x, y, ...z}){}
 }

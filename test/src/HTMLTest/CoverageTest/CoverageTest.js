@@ -9,7 +9,7 @@ describe('test coverage', ()=> {
   it('has coverage summary', ()=> {
     assert(badge.includes('79%'));
     assert.includes(doc, '[data-ice="coverageBadge"]', './badge.svg', 'src');
-    assert.includes(doc, '[data-ice="totalCoverageCount"]', '266/333');
+    assert.includes(doc, '[data-ice="totalCoverageCount"]', '267/335');
     assert.equal(doc.find('[data-ice="file"] [data-ice="coverage"]').length, 117);
   });
 
@@ -82,7 +82,7 @@ describe('test coverage', ()=> {
     test('file/src/External/Definition.js.html', '-');
     test('file/src/Generator/Function.js.html', '100 %1/1');
     test('file/src/Generator/Method.js.html', '100 %2/2');
-    test('file/src/Guess/Param.js.html#errorLines=11,13,15,17,19,5,7,9', '11 %1/9');
+    test('file/src/Guess/Param.js.html#errorLines=11,13,15,17,19,21,5,7,9', '10 %1/10');
     test('file/src/Guess/Property.js.html#errorLines=10,12,5,6,8', '16 %1/6');
     test('file/src/Guess/Return.js.html#errorLines=13,17,5,9', '20 %1/5');
     test('file/src/Guess/Variable.js.html#errorLines=1,3,5,7', '0 %0/4');
@@ -128,7 +128,7 @@ describe('test coverage', ()=> {
     test('file/src/Type/Object.js.html', '100 %2/2');
     test('file/src/Type/Optional.js.html', '100 %2/2');
     test('file/src/Type/Record.js.html', '100 %2/2');
-    test('file/src/Type/Spread.js.html', '100 %2/2');
+    test('file/src/Type/Spread.js.html', '100 %3/3');
     test('file/src/Type/Typedef.js.html', '100 %2/2');
     test('file/src/Type/Union.js.html', '100 %2/2');
     test('file/src/Typedef/Definition.js.html', '-');
