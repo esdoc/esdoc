@@ -31,6 +31,7 @@
  * @property {Object} [experimentalProposal]
  * @property {boolean} experimentalProposal.classProperties
  * @property {boolean} experimentalProposal.objectRestSpread
+ * @property {boolean} experimentalProposal.doExpressions
  * @see https://esdoc.org/config.html
  */
 

@@ -3,8 +3,8 @@ import ESParser from '../../../src/Parser/ESParser.js';
 
 /** @test {ESParser} */
 describe('ESParser', ()=>{
-  it('can parse "Class"', ()=>{
-    const ast = ESParser.parse({}, './test/fixture/package/src/Class/Definition.js');
+  it('can parse "do expressions"', ()=>{
+    const ast = ESParser.parse({experimentalProposal: {doExpressions: true}}, './test/fixture/syntax/DoExpressions.js');
     assert(ast.program.sourceType === 'module');
   });
 

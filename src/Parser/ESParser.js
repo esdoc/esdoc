@@ -62,6 +62,7 @@ export default class ESParser {
     if (experimental) {
       if (experimental.classProperties) option.plugins.push('classProperties');
       if (experimental.objectRestSpread) option.plugins.push('objectRestSpread');
+      if (experimental.doExpressions) option.plugins.push('doExpressions');
     }
 
     return option;
