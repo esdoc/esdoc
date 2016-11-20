@@ -8,5 +8,8 @@ describe('ESParser', ()=>{
     assert(ast.program.sourceType === 'module');
   });
 
-  // todo: enhance test patterns.
+  it('can parse "function bind"', ()=>{
+    const ast = ESParser.parse({experimentalProposal: {functionBind: true}}, './test/fixture/syntax/FunctionBind.js');
+    assert(ast.program.sourceType === 'module');
+  });
 });
