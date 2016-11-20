@@ -19,7 +19,7 @@ describe('ESParser', ()=>{
   });
 
   it('can parse "async generators"', ()=>{
-    const ast = ESParser.parse({experimentalProposal: {asyncGenerators: false}}, './test/fixture/syntax/AsyncGenerators.js');
+    const ast = ESParser.parse({experimentalProposal: {asyncGenerators: true}}, './test/fixture/syntax/AsyncGenerators.js');
     assert(ast.program.sourceType === 'module');
   });
 });
