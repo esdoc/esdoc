@@ -65,6 +65,7 @@ export default class ESParser {
       if (experimental.doExpressions) option.plugins.push('doExpressions');
       if (experimental.functionBind) option.plugins.push('functionBind');
       if (experimental.functionSent) option.plugins.push('functionSent');
+      if (experimental.asyncGenerators) option.plugins.push('asyncGenerators');
     }
 
     return option;

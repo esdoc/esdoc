@@ -34,6 +34,7 @@
  * @property {boolean} experimentalProposal.doExpressions
  * @property {boolean} experimentalProposal.functionBind
  * @property {boolean} experimentalProposal.functionSent
+ * @property {boolean} experimentalProposal.asyncGenerators
  * @see https://esdoc.org/config.html
  */
 
