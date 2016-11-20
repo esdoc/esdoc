@@ -33,6 +33,7 @@
  * @property {boolean} experimentalProposal.objectRestSpread
  * @property {boolean} experimentalProposal.doExpressions
  * @property {boolean} experimentalProposal.functionBind
+ * @property {boolean} experimentalProposal.functionSent
  * @see https://esdoc.org/config.html
  */
 

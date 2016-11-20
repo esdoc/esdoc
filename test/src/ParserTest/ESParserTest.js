@@ -12,4 +12,9 @@ describe('ESParser', ()=>{
     const ast = ESParser.parse({experimentalProposal: {functionBind: true}}, './test/fixture/syntax/FunctionBind.js');
     assert(ast.program.sourceType === 'module');
   });
+
+  it('can parse "function sent"', ()=>{
+    const ast = ESParser.parse({experimentalProposal: {functionSent: true}}, './test/fixture/syntax/FunctionSent.js');
+    assert(ast.program.sourceType === 'module');
+  });
 });
