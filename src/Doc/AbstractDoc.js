@@ -3,6 +3,7 @@ import ParamParser from '../Parser/ParamParser.js';
 import ASTUtil from '../Util/ASTUtil.js';
 import InvalidCodeLogger from '../Util/InvalidCodeLogger.js';
 import ASTNodeContainer from '../Util/ASTNodeContainer.js';
+import babelGenerator from 'babel-generator';
 
 /**
  * Abstract Doc Class.
@@ -77,6 +78,7 @@ export default class AbstractDoc {
     this._$throws();
     this._$emits();
     this._$listens();
+    this._$decorator();
   }
 
   /**
@@ -522,6 +524,31 @@ export default class AbstractDoc {
         types: result.types,
         description: result.description
       });
+    }
+  }
+
+  /**
+   * decide `decorator`.
+   */
+  _$decorator() {
+    if (!this._node.decorators) return;
+
+    this._value.decorators = [];
+    for (const decorator of this._node.decorators) {
+      const value = {};
+      switch (decorator.expression.type) {
+        case 'Identifier':
+          value.name = decorator.expression.name;
+          value.arguments = null;
+          break;
+        case 'CallExpression':
+          value.name = decorator.expression.callee.name;
+          value.arguments = babelGenerator(decorator.expression).code.replace(/^[^(]+/, '');
+          break;
+        default:
+          throw new Error(`unknown decorator expression type: ${decorator.expression.type}`);
+      }
+      this._value.decorators.push(value);
     }
   }
 

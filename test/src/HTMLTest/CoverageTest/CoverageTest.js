@@ -7,10 +7,10 @@ describe('test coverage', ()=> {
   const badge = fs.readFileSync('./test/fixture/dest/esdoc/badge.svg', {encoding: 'utf8'}).toString();
 
   it('has coverage summary', ()=> {
-    assert(badge.includes('79%'));
+    assert(badge.includes('80%'));
     assert.includes(doc, '[data-ice="coverageBadge"]', './badge.svg', 'src');
-    assert.includes(doc, '[data-ice="totalCoverageCount"]', '267/335');
-    assert.equal(doc.find('[data-ice="file"] [data-ice="coverage"]').length, 117);
+    assert.includes(doc, '[data-ice="totalCoverageCount"]', '274/342');
+    assert.equal(doc.find('[data-ice="file"] [data-ice="coverage"]').length, 118);
   });
 
   /* eslint-disable max-statements */
@@ -36,6 +36,7 @@ describe('test coverage', ()=> {
     test('file/src/ClassProperty/Definition.js.html', '100 %3/3');
     test('file/src/Computed/Method.js.html', '100 %11/11');
     test('file/src/Computed/Property.js.html', '100 %12/12');
+    test('file/src/Decorator/Definition.js.html', '100 %7/7');
     test('file/src/Deprecated/Class.js.html#errorLines=6', '75 %3/4');
     test('file/src/Deprecated/Function.js.html', '100 %1/1');
     test('file/src/Deprecated/Variable.js.html', '100 %1/1');
@@ -141,6 +142,6 @@ describe('test coverage', ()=> {
     test('file/src/Version/Function.js.html', '100 %1/1');
     test('file/src/Version/Variable.js.html', '100 %1/1');
 
-    assert.equal(count, 117);
+    assert.equal(count, 118);
   });
 });

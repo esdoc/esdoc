@@ -479,6 +479,7 @@ export default class DocBuilder {
       ice.load('see', this._buildDocsLinkHTML(doc.see), 'append');
       ice.load('todo', this._buildDocsLinkHTML(doc.todo), 'append');
       ice.load('override', this._buildOverrideMethod(doc));
+      ice.load('decorator', this._buildDecoratorHTML(doc), 'append');
 
       let isFunction = false;
       if (['method', 'constructor', 'function'].indexOf(doc.kind) !== -1) isFunction = true;
@@ -1015,6 +1016,24 @@ export default class DocBuilder {
     }
 
     return '';
+  }
+
+  _buildDecoratorHTML(doc) {
+    if (!doc.decorators) return '';
+
+    const links = [];
+    for (const decorator of doc.decorators) {
+      const link = this._buildDocLinkHTML(decorator.name, decorator.name, false, 'function');
+      if (decorator.arguments) {
+        links.push(`<li>${link}${decorator.arguments}</li>`);
+      } else {
+        links.push(`<li>${link}</li>`);
+      }
+    }
+
+    if (!links.length) return '';
+
+    return `<ul>${links.join('\n')}</ul>`;
   }
 
   // _buildAuthorHTML(doc, separator = '\n') {

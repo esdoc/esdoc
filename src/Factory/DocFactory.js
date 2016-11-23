@@ -291,6 +291,13 @@ export default class DocFactory {
       Reflect.defineProperty(node, 'parent', {value: parentNode});
     }
 
+    // if node has decorators, leading comments is attached to decorators.
+    if (node.decorators && node.decorators[0].leadingComments) {
+      if (!node.leadingComments || !node.leadingComments.length) {
+        node.leadingComments = node.decorators[0].leadingComments;
+      }
+    }
+
     let results;
     results = this._traverseComments(parentNode, node, node.leadingComments);
     this._results.push(...results);

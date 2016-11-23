@@ -74,6 +74,7 @@ export default class ClassDocBuilder extends DocBuilder {
     ice.load('experimental', this._buildExperimentalHTML(doc));
     ice.load('see', this._buildDocsLinkHTML(doc.see), 'append');
     ice.load('todo', this._buildDocsLinkHTML(doc.todo), 'append');
+    ice.load('decorator', this._buildDecoratorHTML(doc), 'append');
 
     ice.into('instanceDocs', instanceDocs, (instanceDocs, ice)=>{
       ice.loop('instanceDoc', instanceDocs, (i, instanceDoc, ice)=>{
