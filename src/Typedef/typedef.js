@@ -37,6 +37,7 @@
  * @property {boolean} experimentalProposal.asyncGenerators
  * @property {boolean} experimentalProposal.decorators
  * @property {boolean} experimentalProposal.exportExtensions
+ * @property {boolean} experimentalProposal.dynamicImport
  * @see https://esdoc.org/config.html
  */
 

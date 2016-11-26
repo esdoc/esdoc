@@ -26,7 +26,7 @@
     "cheerio": "0.20.0",
     "color-logger": "0.0.3",
     "escape-html": "1.0.3",
-    "babylon": "6.11.2",
+    "babylon": "6.14.1",
     "babel-generator": "6.11.4",
     "babel-traverse": "6.12.0",
     "fs-extra": "0.30.0",

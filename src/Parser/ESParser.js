@@ -69,6 +69,7 @@ export default class ESParser {
       if (experimental.asyncGenerators) option.plugins.push('asyncGenerators');
       if (experimental.decorators) option.plugins.push('decorators');
       if (experimental.exportExtensions) option.plugins.push('exportExtensions');
+      if (experimental.dynamicImport) option.plugins.push('dynamicImport');
     }
 
     return option;

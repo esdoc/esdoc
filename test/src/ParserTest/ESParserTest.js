@@ -27,4 +27,9 @@ describe('ESParser', ()=>{
     const ast = ESParser.parse({experimentalProposal: {exportExtensions: true}}, './test/fixture/syntax/ExportExtensions.js');
     assert(ast.program.sourceType === 'module');
   });
+
+  it('can parse "dynamic import"', ()=>{
+    const ast = ESParser.parse({experimentalProposal: {dynamicImport: true}}, './test/fixture/syntax/DynamicImport.js');
+    assert(ast.program.sourceType === 'module');
+  });
 });
