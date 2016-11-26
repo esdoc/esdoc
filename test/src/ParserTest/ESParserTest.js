@@ -22,4 +22,9 @@ describe('ESParser', ()=>{
     const ast = ESParser.parse({experimentalProposal: {asyncGenerators: true}}, './test/fixture/syntax/AsyncGenerators.js');
     assert(ast.program.sourceType === 'module');
   });
+
+  it('can parse "export extensions"', ()=>{
+    const ast = ESParser.parse({experimentalProposal: {exportExtensions: true}}, './test/fixture/syntax/ExportExtensions.js');
+    assert(ast.program.sourceType === 'module');
+  });
 });

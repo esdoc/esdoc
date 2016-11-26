@@ -36,6 +36,7 @@
  * @property {boolean} experimentalProposal.functionSent
  * @property {boolean} experimentalProposal.asyncGenerators
  * @property {boolean} experimentalProposal.decorators
+ * @property {boolean} experimentalProposal.exportExtensions
  * @see https://esdoc.org/config.html
  */
 
