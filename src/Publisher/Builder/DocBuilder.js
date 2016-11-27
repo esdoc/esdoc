@@ -716,6 +716,10 @@ export default class DocBuilder {
           .replace(/{.*?}/g, (a)=> a.replace(/,/g, '\\Z').replace(/:/g, '\\Y'));
         innerTypes = inner.split(',').map((v)=>{
           const tmp = v.split(':').map((v)=> v.trim());
+          if (tmp.length !== 2) {
+            console.dir(this._data)
+            throw new SyntaxError(`Invalid function type annotation: ${matched[0]}`);
+          }
           const paramName = tmp[0];
           const typeName = tmp[1].replace(/\\Z/g, ',').replace(/\\Y/g, ':');
           return `${paramName}: ${this._buildTypeDocLinkHTML(typeName)}`;
