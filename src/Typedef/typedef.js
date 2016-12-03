@@ -21,11 +21,13 @@
  * @property {Object} [manual]
  * @property {string} manual.asset
  * @property {string[]} manual.overview
+ * @property {string[]} manual.design
  * @property {string[]} manual.installation
  * @property {string[]} manual.usage
  * @property {string[]} manual.tutorial
  * @property {string[]} manual.configuration
  * @property {string[]} manual.example
+ * @property {string[]} manual.advanced
  * @property {string[]} manual.faq
  * @property {string[]} manual.changelog
  * @property {Object} [experimentalProposal]
