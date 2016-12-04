@@ -38,14 +38,20 @@ export default class ESDocCLI {
    */
   exec() {
     let config;
-    if (this._argv.c) {
-      config = this._createConfigFromJSONFile(this._argv.c);
+
+    const configPath = this._findConfigFilePath();
+    if (configPath) {
+      config = this._createConfigFromJSONFile(configPath);
+    } else {
+      config = this._createConfigFromPackageJSON();
+    }
+
+    if (config) {
+      ESDoc.generate(config, defaultPublisher);
     } else {
       this._showHelp();
       process.exit(1);
     }
-
-    ESDoc.generate(config, defaultPublisher);
   }
 
   /**
@@ -60,6 +66,11 @@ export default class ESDocCLI {
     console.log('  -h', 'output usage information');
     console.log('  -v', 'output the version number');
     console.log('');
+    console.log('ESDoc finds configuration:');
+    console.log('  1. -c option');
+    console.log('  2. .esdoc.json in working directory');
+    console.log('  3. .esdoc.js in working directory');
+    console.log('  4. `esdoc` property in package.json');
   }
 
   /**
@@ -73,6 +84,35 @@ export default class ESDocCLI {
     } else {
       console.log('0.0.0');
     }
+  }
+
+  /**
+   * find ESDoc config file.
+   * @returns {string|null} config file path.
+   * @private
+   */
+  _findConfigFilePath() {
+    if (this._argv.c) {
+      return this._argv.c;
+    }
+
+    try {
+      const filePath = path.resolve('./.esdoc.json');
+      fs.readFileSync(filePath);
+      return filePath;
+    } catch (e) {
+      // ignore
+    }
+
+    try {
+      const filePath = path.resolve('./.esdoc.js');
+      fs.readFileSync(filePath);
+      return filePath;
+    } catch (e) {
+      // ignore
+    }
+
+    return null;
   }
 
   /**
@@ -92,6 +132,24 @@ export default class ESDocCLI {
       const config = JSON.parse(configJSON);
       return config;
     }
+  }
+
+  /**
+   * create config object from package.json.
+   * @return {ESDocConfig|null} config object.
+   * @private
+   */
+  _createConfigFromPackageJSON() {
+    try {
+      const filePath = path.resolve('./package.json');
+      const packageJSON = fs.readFileSync(filePath, 'utf8').toString();
+      const packageObj = JSON.parse(packageJSON);
+      return packageObj.esdoc;
+    } catch (e) {
+      // ignore
+    }
+
+    return null;
   }
 }
 

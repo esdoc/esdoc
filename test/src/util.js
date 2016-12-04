@@ -4,13 +4,17 @@ import cheerio from 'cheerio';
 import path from 'path';
 import ESDocCLI from '../../src/ESDocCLI.js';
 
-export function cli(configPath) {
+export function cli(configPath = null) {
   const cliPath = path.resolve('./src/cli.js');
-  configPath = path.resolve(configPath);
-  const argv = ['node', cliPath, '-c', configPath];
-  const cli = new ESDocCLI(argv);
+  const argv = ['node', cliPath];
 
-  console.log(`process: ${configPath}`);
+  if (configPath) {
+    configPath = path.resolve(configPath);
+    argv.push('-c', configPath);
+    console.log(`process: ${configPath}`);
+  }
+
+  const cli = new ESDocCLI(argv);
   consoleLogSwitch(false);
   cli.exec();
   consoleLogSwitch(true);
