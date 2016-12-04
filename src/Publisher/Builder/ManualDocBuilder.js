@@ -1,4 +1,5 @@
 import IceCap from 'ice-cap';
+import path from 'path';
 import fs from 'fs-extra';
 import cheerio from 'cheerio';
 import DocBuilder from './DocBuilder.js';
@@ -34,13 +35,15 @@ export default class ManualDocBuilder extends DocBuilder {
 
     for (const item of manualConfig) {
       if (!item.paths) continue;
-      const fileName = this._getManualOutputFileName(item);
-      const baseUrl = this._getBaseUrl(fileName);
-      ice.load('content', this._buildManual(item), IceCap.MODE_WRITE);
-      ice.load('nav', this._buildManualNav(manualConfig), IceCap.MODE_WRITE);
-      ice.text('title', item.label, IceCap.MODE_WRITE);
-      ice.attr('baseUrl', 'href', baseUrl, IceCap.MODE_WRITE);
-      callback(ice.html, fileName);
+      for (const filePath of item.paths) {
+        const fileName = this._getManualOutputFileName(item, filePath);
+        const baseUrl = this._getBaseUrl(fileName);
+        ice.load('content', this._buildManual(item, filePath), IceCap.MODE_WRITE);
+        ice.load('nav', this._buildManualNav(manualConfig), IceCap.MODE_WRITE);
+        ice.text('title', item.label, IceCap.MODE_WRITE);
+        ice.attr('baseUrl', 'href', baseUrl, IceCap.MODE_WRITE);
+        callback(ice.html, fileName);
+      }
     }
 
     if (this._config.manual.asset) {
@@ -86,11 +89,12 @@ export default class ManualDocBuilder extends DocBuilder {
   /**
    * build manual.
    * @param {ManualConfigItem} item - target manual config item.
+   * @param {string} filePath - target manual file path.
    * @return {IceCap} built manual.
    * @private
    */
-  _buildManual(item) {
-    const html = this._convertMDToHTML(item);
+  _buildManual(item, filePath) {
+    const html = this._convertMDToHTML(filePath);
     const ice = new IceCap(this._readTemplate('manual.html'));
     ice.text('title', item.label);
     ice.load('content', html);
@@ -131,35 +135,30 @@ export default class ManualDocBuilder extends DocBuilder {
       const toc = [];
       if (item.references) {
         const identifiers = this._findAllIdentifiersKindGrouping();
-        if (identifiers.class.length) toc.push({label: 'Class', link: 'identifiers.html#class', indent: 'indent-h1'});
-        if (identifiers.interface.length) toc.push({label: 'Interface', link: 'identifiers.html#interface', indent: 'indent-h1'});
-        if (identifiers.function.length) toc.push({label: 'Function', link: 'identifiers.html#function', indent: 'indent-h1'});
-        if (identifiers.variable.length) toc.push({label: 'Variable', link: 'identifiers.html#variable', indent: 'indent-h1'});
-        if (identifiers.typedef.length) toc.push({label: 'Typedef', link: 'identifiers.html#typedef', indent: 'indent-h1'});
-        if (identifiers.external.length) toc.push({label: 'External', link: 'identifiers.html#external', indent: 'indent-h1'});
+        toc.push({label: 'Reference', link: 'identifiers.html', indent: 'indent-h1'});
+        if (identifiers.class.length) toc.push({label: 'Class', link: 'identifiers.html#class', indent: 'indent-h2'});
+        if (identifiers.interface.length) toc.push({label: 'Interface', link: 'identifiers.html#interface', indent: 'indent-h2'});
+        if (identifiers.function.length) toc.push({label: 'Function', link: 'identifiers.html#function', indent: 'indent-h2'});
+        if (identifiers.variable.length) toc.push({label: 'Variable', link: 'identifiers.html#variable', indent: 'indent-h2'});
+        if (identifiers.typedef.length) toc.push({label: 'Typedef', link: 'identifiers.html#typedef', indent: 'indent-h2'});
+        if (identifiers.external.length) toc.push({label: 'External', link: 'identifiers.html#external', indent: 'indent-h2'});
       } else {
-        const fileName = this._getManualOutputFileName(item);
-        const html = this._convertMDToHTML(item);
-        const $root = cheerio.load(html).root();
-        const isHRise = $root.find('h1').length === 0;
-        $root.find('h1,h2,h3,h4,h5').each((i, el)=>{
-          const $el = cheerio(el);
-          const label = $el.text();
-          const link = `${fileName}#${$el.attr('id')}`;
-          let indent;
-          if (isHRise) {
-            const tagName = `h${parseInt(el.tagName.charAt(1), 10) - 1}`;
-            indent = `indent-${tagName}`;
-          } else {
-            indent = `indent-${el.tagName.toLowerCase()}`;
-          }
-          toc.push({label, link, indent});
-        });
+        for (const filePath of item.paths) {
+          const fileName = this._getManualOutputFileName(item, filePath);
+          const html = this._convertMDToHTML(filePath);
+          const $root = cheerio.load(html).root();
+
+          $root.find('h1,h2,h3,h4,h5').each((i, el)=>{
+            const $el = cheerio(el);
+            const label = $el.text();
+            const link = `${fileName}#${$el.attr('id')}`;
+            const indent = `indent-${el.tagName.toLowerCase()}`;
+            toc.push({label, link, indent});
+          });
+        }
       }
 
       ice.attr('manual', 'data-toc-name', item.label.toLowerCase());
-      ice.text('title', item.label);
-      ice.attr('title', 'href', this._getManualOutputFileName(item));
       ice.loop('manualNav', toc, (i, item, ice)=>{
         ice.attr('manualNav', 'class', item.indent);
         ice.text('link', item.label);
@@ -173,28 +172,27 @@ export default class ManualDocBuilder extends DocBuilder {
   /**
    * get manual file name.
    * @param {ManualConfigItem} item - target manual config item.
+   * @param {string} filePath - target manual markdown file path.
    * @returns {string} file name.
    * @private
    */
-  _getManualOutputFileName(item) {
+  _getManualOutputFileName(item, filePath) {
     if (item.fileName) return item.fileName;
-    return `manual/${item.label.toLowerCase()}.html`;
+
+    const fileName = path.parse(filePath).name;
+    return `manual/${item.label.toLowerCase()}/${fileName}.html`;
   }
 
   /**
    * convert markdown to html.
    * if markdown has only one ``h1`` and it's text is ``item.label``, remove the ``h1``.
    * because duplication ``h1`` in output html.
-   * @param {ManualConfigItem} item - target.
+   * @param {string} filePath - target.
    * @returns {string} converted html.
    * @private
    */
-  _convertMDToHTML(item) {
-    const contents = [];
-    for (const path of item.paths) {
-      contents.push(fs.readFileSync(path).toString());
-    }
-    const content = contents.join('\n\n');
+  _convertMDToHTML(filePath) {
+    const content = fs.readFileSync(filePath).toString();
     const html = markdown(content);
     const $root = cheerio.load(html).root();
     return $root.html();

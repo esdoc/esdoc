@@ -1,5 +1,5 @@
 (function(){
-  var matched = location.pathname.match(/([^/]*)\.html$/);
+  var matched = location.pathname.match(/\/manual\/(.*?)\/.*\.html$/);
   if (!matched) return;
 
   var currentName = matched[1];

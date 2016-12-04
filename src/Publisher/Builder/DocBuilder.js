@@ -589,7 +589,7 @@ export default class DocBuilder {
    * get base url html page. it is used html base tag.
    * @param {string} fileName - output file path.
    * @returns {string} base url.
-   * @private
+   * @protected
    */
   _getBaseUrl(fileName) {
     const baseUrl = '../'.repeat(fileName.split('/').length - 1);

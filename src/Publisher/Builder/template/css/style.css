@@ -750,22 +750,12 @@ table.test-summary .test-target > span:first-child {
   padding-left: 0;
 }
 
-.navigation .manual-toc-title {
-  margin: 0;
-  padding: 0.5em 0 0.5em 1em;
-  border: none;
-  font-size: 1em;
-  font-weight: normal;
-}
-
-.navigation .manual-toc-title:first-child {
-  margin-top: 0;
-}
-
 .navigation .manual-toc {
-  display: none;
-  margin-left: 0.5em;
   margin-top: -0.25em;
+}
+
+.navigation .manual-toc li {
+  white-space: normal;
 }
 
 .github-markdown .manual-toc-title a {
@@ -786,6 +776,25 @@ table.test-summary .test-target > span:first-child {
   list-style-type: none;
 }
 
+.content .manual-toc .indent-h1 {
+  font-size: 1.5em;
+  border-bottom: solid 1px #ddd;
+  padding-bottom: 0.5em;
+}
+
+.content .manual-toc .indent-h1 a {
+  color: inherit;
+  font-weight: bold;
+}
+
+.navigation .manual-toc .indent-h1 {
+  background: #039BE5;
+  padding: 0.5em;
+}
+.navigation .manual-toc .indent-h1 a {
+  color: #fff;
+}
+
 .manual-toc .indent-h1 {
   margin-left: 0;
 }
@@ -793,13 +802,13 @@ table.test-summary .test-target > span:first-child {
   margin-left: 1em;
 }
 .manual-toc .indent-h3 {
-  margin-left: 3em;
+  margin-left: 2em;
 }
 .manual-toc .indent-h4 {
-  margin-left: 4em;
+  margin-left: 3em;
 }
 .manual-toc .indent-h5 {
-  margin-left: 5em;
+  margin-left: 4em;
 }
 
 .manual-nav li {
