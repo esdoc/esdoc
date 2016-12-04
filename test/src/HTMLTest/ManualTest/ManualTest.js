@@ -255,7 +255,7 @@ describe('test manual', ()=>{
     });
 
     it('has changelog', ()=>{
-      const doc = readDoc('manual/changelog/changelog.html');
+      const doc = readDoc('manual/changelog/CHANGELOG.html');
       assert.includes(doc, '.github-markdown h1', 'Changelog');
       assert.includes(doc, '.github-markdown [data-ice="content"] h2:nth-of-type(1)', '0.0.1');
     });

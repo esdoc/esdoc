@@ -88,7 +88,7 @@ export default function publish(values, asts, config) {
   new SearchIndexBuilder(data, config).exec(writeHTML);
   new ASTDocBuilder(data, asts, config).exec(writeAST);
   new SourceDocBuilder(data, config, _coverage).exec(writeHTML);
-  new ManualDocBuilder(data, config).exec(writeHTML, copy);
+  new ManualDocBuilder(data, config).exec(writeHTML, copy, writeBadge);
 
   // package.json
   try {

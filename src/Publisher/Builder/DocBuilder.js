@@ -133,7 +133,7 @@ export default class DocBuilder {
    * read html template.
    * @param {string} fileName - template file name.
    * @return {string} html of template.
-   * @private
+   * @protected
    */
   _readTemplate(fileName) {
     const filePath = path.resolve(__dirname, `./template/${fileName}`);

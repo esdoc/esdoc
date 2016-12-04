@@ -13,8 +13,9 @@ export default class ManualDocBuilder extends DocBuilder {
    * execute building output.
    * @param {function(html: string, filePath: string)} callback - is called each manual.
    * @param {function(src: string, dest: string)} callbackForCopy - is called asset.
+   * @param {function(badge: string, filePath: string)} callbackForBadge - is called with coverage badge.
    */
-  exec(callback, callbackForCopy) {
+  exec(callback, callbackForCopy, callbackForBadge) {
     if (!this._config.manual) return;
 
     const manualConfig = this._getManualConfig();
@@ -26,7 +27,7 @@ export default class ManualDocBuilder extends DocBuilder {
       const fileName = 'manual/index.html';
       const baseUrl = this._getBaseUrl(fileName);
       this._buildManualIndex(manualConfig);
-      ice.load('content', this._buildManualIndex(manualConfig), IceCap.MODE_WRITE);
+      ice.load('content', this._buildManualIndex(manualConfig, true), IceCap.MODE_WRITE);
       ice.load('nav', this._buildManualNav(manualConfig), IceCap.MODE_WRITE);
       ice.text('title', 'Manual', IceCap.MODE_WRITE);
       ice.attr('baseUrl', 'href', baseUrl, IceCap.MODE_WRITE);
@@ -48,6 +49,26 @@ export default class ManualDocBuilder extends DocBuilder {
 
     if (this._config.manual.asset) {
       callbackForCopy(this._config.manual.asset, 'manual/asset');
+    }
+
+    // badge
+    {
+      const starCount = Math.min(Math.floor((manualConfig.length - 1) / 2), 5);
+      const star = '★'.repeat(starCount) + '☆'.repeat(5 - starCount);
+
+      let color;
+      if (starCount <= 3) {
+        color = '#db654f';
+      } else if (starCount <= 4) {
+        color = '#dab226';
+      } else {
+        color = '#4fc921';
+      }
+
+      let badge = this._readTemplate('image/manual-badge.svg');
+      badge = badge.replace(/@star@/g, star);
+      badge = badge.replace(/@color@/g, color);
+      callbackForBadge(badge, 'manual-badge.svg');
     }
   }
 
@@ -125,11 +146,14 @@ export default class ManualDocBuilder extends DocBuilder {
   /**
    * built manual index.
    * @param {ManualConfigItem[]} manualConfig - target manual config.
+   * @param {boolean} [badge=false] - show badge.
    * @return {IceCap} built index.
    * @private
    */
-  _buildManualIndex(manualConfig) {
+  _buildManualIndex(manualConfig, badge = false) {
     const ice = new IceCap(this._readTemplate('manualIndex.html'));
+
+    if (!badge) ice.drop('badge');
 
     ice.loop('manual', manualConfig, (i, item, ice)=>{
       const toc = [];
