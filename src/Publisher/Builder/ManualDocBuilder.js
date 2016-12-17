@@ -53,20 +53,21 @@ export default class ManualDocBuilder extends DocBuilder {
 
     // badge
     {
-      const starCount = Math.min(Math.floor((manualConfig.length - 1) / 2), 5);
-      const star = '★'.repeat(starCount) + '☆'.repeat(5 - starCount);
+      // const starCount = Math.min(Math.floor((manualConfig.length - 1) / 2), 5);
+      // const star = '★'.repeat(starCount) + '☆'.repeat(5 - starCount);
+      const ratio = Math.floor(100 * (manualConfig.length - 1) / 10);
 
       let color;
-      if (starCount <= 3) {
+      if (ratio < 50) {
         color = '#db654f';
-      } else if (starCount <= 4) {
+      } else if (ratio < 90) {
         color = '#dab226';
       } else {
         color = '#4fc921';
       }
 
       let badge = this._readTemplate('image/manual-badge.svg');
-      badge = badge.replace(/@star@/g, star);
+      badge = badge.replace(/@value@/g, `${ratio}%`);
       badge = badge.replace(/@color@/g, color);
       callbackForBadge(badge, 'manual-badge.svg');
     }
