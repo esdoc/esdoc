@@ -13,11 +13,13 @@
   },
   "manual": {
     "overview": ["./test/fixture/package/manual/overview.md"],
+    "design": ["./test/fixture/package/manual/design.md"],
     "installation": ["./test/fixture/package/manual/installation.md"],
     "usage": ["./test/fixture/package/manual/usage1.md", "./test/fixture/package/manual/usage2.md"],
     "tutorial": ["./test/fixture/package/manual/tutorial.md"],
     "configuration": ["./test/fixture/package/manual/configuration.md"],
     "example": ["./test/fixture/package/manual/example.md"],
+    "advanced": ["./test/fixture/package/manual/advanced.md"],
     "faq": ["./test/fixture/package/manual/faq.md"],
     "changelog": ["./test/fixture/package/CHANGELOG.md"]
   },

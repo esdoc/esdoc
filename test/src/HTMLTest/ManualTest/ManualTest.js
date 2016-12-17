@@ -14,14 +14,16 @@ describe('test manual', ()=>{
       const doc = readDoc('manual/index.html');
       find(doc, '[data-ice="nav"]', (doc)=>{
         assert.includes(doc, '[data-ice="manual"]:nth-of-type(1)', 'Overview Feature Demo License Author');
-        assert.includes(doc, '[data-ice="manual"]:nth-of-type(2)', 'Installation indent 2 indent 3 indent 4 indent 5');
-        assert.includes(doc, '[data-ice="manual"]:nth-of-type(3)', 'Tutorial');
-        assert.includes(doc, '[data-ice="manual"]:nth-of-type(4)', 'Usage Usage2 h2 in usage2 h3 in usage2');
-        assert.includes(doc, '[data-ice="manual"]:nth-of-type(5)', 'Configuration');
-        assert.includes(doc, '[data-ice="manual"]:nth-of-type(6)', 'Example Minimum Config Integration Test Code Into Documentation');
-        assert.includes(doc, '[data-ice="manual"]:nth-of-type(7)', 'Reference Class Interface Function Variable Typedef External');
-        assert.includes(doc, '[data-ice="manual"]:nth-of-type(8)', 'FAQ Goal');
-        assert.includes(doc, '[data-ice="manual"]:nth-of-type(9)', 'Changelog 0.0.1');
+        assert.includes(doc, '[data-ice="manual"]:nth-of-type(2)', 'Design Concept Architecture Model');
+        assert.includes(doc, '[data-ice="manual"]:nth-of-type(3)', 'Installation indent 2 indent 3 indent 4 indent 5');
+        assert.includes(doc, '[data-ice="manual"]:nth-of-type(4)', 'Tutorial');
+        assert.includes(doc, '[data-ice="manual"]:nth-of-type(5)', 'Usage Usage2 h2 in usage2 h3 in usage2');
+        assert.includes(doc, '[data-ice="manual"]:nth-of-type(6)', 'Configuration');
+        assert.includes(doc, '[data-ice="manual"]:nth-of-type(7)', 'Example Minimum Config Integration Test Code Into Documentation');
+        assert.includes(doc, '[data-ice="manual"]:nth-of-type(8)', 'Advanced');
+        assert.includes(doc, '[data-ice="manual"]:nth-of-type(9)', 'Reference Class Interface Function Variable Typedef External');
+        assert.includes(doc, '[data-ice="manual"]:nth-of-type(10)', 'FAQ Goal');
+        assert.includes(doc, '[data-ice="manual"]:nth-of-type(11)', 'Changelog 0.0.1');
 
         // overview
         find(doc, '[data-ice="manual"]:nth-of-type(1)', (doc)=>{
@@ -32,8 +34,16 @@ describe('test manual', ()=>{
           assert.includes(doc, '[data-ice="manualNav"]:nth-of-type(5) a', 'manual/overview/overview.html#author', 'href');
         });
 
-        // installation
+        // design
         find(doc, '[data-ice="manual"]:nth-of-type(2)', (doc)=>{
+          assert.includes(doc, '[data-ice="manualNav"]:nth-of-type(1) a', 'manual/design/design.html#design', 'href');
+          assert.includes(doc, '[data-ice="manualNav"]:nth-of-type(2) a', 'manual/design/design.html#concept', 'href');
+          assert.includes(doc, '[data-ice="manualNav"]:nth-of-type(3) a', 'manual/design/design.html#architecture', 'href');
+          assert.includes(doc, '[data-ice="manualNav"]:nth-of-type(4) a', 'manual/design/design.html#model', 'href');
+        });
+
+        // installation
+        find(doc, '[data-ice="manual"]:nth-of-type(3)', (doc)=>{
           assert.includes(doc, '[data-ice="manualNav"]:nth-of-type(1) a', 'manual/installation/installation.html#installation', 'href');
           assert.includes(doc, '[data-ice="manualNav"]:nth-of-type(2) a', 'manual/installation/installation.html#indent-2', 'href');
           assert.includes(doc, '[data-ice="manualNav"]:nth-of-type(3) a', 'manual/installation/installation.html#indent-3', 'href');
@@ -42,12 +52,12 @@ describe('test manual', ()=>{
         });
 
         // tutorial
-        find(doc, '[data-ice="manual"]:nth-of-type(3)', (doc)=>{
+        find(doc, '[data-ice="manual"]:nth-of-type(4)', (doc)=>{
           assert.includes(doc, '[data-ice="manualNav"]:nth-of-type(1) a', 'manual/tutorial/tutorial.html#tutorial', 'href');
         });
 
         // usage
-        find(doc, '[data-ice="manual"]:nth-of-type(4)', (doc)=>{
+        find(doc, '[data-ice="manual"]:nth-of-type(5)', (doc)=>{
           assert.includes(doc, '[data-ice="manualNav"]:nth-of-type(1) a', 'manual/usage/usage1.html#usage', 'href');
           assert.includes(doc, '[data-ice="manualNav"]:nth-of-type(2) a', 'manual/usage/usage2.html#usage2', 'href');
           assert.includes(doc, '[data-ice="manualNav"]:nth-of-type(3) a', 'manual/usage/usage2.html#h2-in-usage2', 'href');
@@ -55,19 +65,24 @@ describe('test manual', ()=>{
         });
 
         // configuration
-        find(doc, '[data-ice="manual"]:nth-of-type(5)', (doc)=>{
+        find(doc, '[data-ice="manual"]:nth-of-type(6)', (doc)=>{
           assert.includes(doc, '[data-ice="manualNav"]:nth-of-type(1) a', 'manual/configuration/configuration.html#configuration', 'href');
         });
 
         // example
-        find(doc, '[data-ice="manual"]:nth-of-type(6)', (doc)=>{
+        find(doc, '[data-ice="manual"]:nth-of-type(7)', (doc)=>{
           assert.includes(doc, '[data-ice="manualNav"]:nth-of-type(1) a', 'manual/example/example.html#example', 'href');
           assert.includes(doc, '[data-ice="manualNav"]:nth-of-type(2) a', 'manual/example/example.html#minimum-config', 'href');
           assert.includes(doc, '[data-ice="manualNav"]:nth-of-type(3) a', 'manual/example/example.html#integration-test-code-into-documentation', 'href');
         });
 
+        // advanced
+        find(doc, '[data-ice="manual"]:nth-of-type(8)', (doc)=>{
+          assert.includes(doc, '[data-ice="manualNav"]:nth-of-type(1) a', 'manual/advanced/advanced.html#advanced', 'href');
+        });
+
         // reference
-        find(doc, '[data-ice="manual"]:nth-of-type(7)', (doc)=>{
+        find(doc, '[data-ice="manual"]:nth-of-type(9)', (doc)=>{
           assert.includes(doc, '[data-ice="manualNav"]:nth-of-type(1) a', 'identifiers.html', 'href');
           assert.includes(doc, '[data-ice="manualNav"]:nth-of-type(2) a', 'identifiers.html#class', 'href');
           assert.includes(doc, '[data-ice="manualNav"]:nth-of-type(3) a', 'identifiers.html#interface', 'href');
@@ -78,12 +93,12 @@ describe('test manual', ()=>{
         });
 
         // faq
-        find(doc, '[data-ice="manual"]:nth-of-type(8)', (doc)=>{
+        find(doc, '[data-ice="manual"]:nth-of-type(10)', (doc)=>{
           assert.includes(doc, '[data-ice="manualNav"]:nth-of-type(1) a', 'manual/faq/faq.html#faq', 'href');
         });
 
         // changelog
-        find(doc, '[data-ice="manual"]:nth-of-type(9)', (doc)=>{
+        find(doc, '[data-ice="manual"]:nth-of-type(11)', (doc)=>{
           assert.includes(doc, '[data-ice="manualNav"]:nth-of-type(1) a', 'manual/changelog/CHANGELOG.html#changelog', 'href');
           assert.includes(doc, '[data-ice="manualNav"]:nth-of-type(2) a', 'manual/changelog/CHANGELOG.html#0-0-1', 'href');
         });
@@ -111,8 +126,22 @@ describe('test manual', ()=>{
       });
     });
 
-    it('has installation heading tags', ()=>{
+    it('has design heading tags', ()=>{
       find(doc, '.content [data-ice="manual"]:nth-of-type(2)', (doc)=>{
+        assert.includes(doc, '.indent-h1[data-ice="manualNav"]:nth-of-type(1)', 'Design');
+        assert.includes(doc, '.indent-h2[data-ice="manualNav"]:nth-of-type(2)', 'Concept');
+        assert.includes(doc, '.indent-h2[data-ice="manualNav"]:nth-of-type(3)', 'Architecture');
+        assert.includes(doc, '.indent-h2[data-ice="manualNav"]:nth-of-type(4)', 'Model');
+
+        assert.includes(doc, '.indent-h1[data-ice="manualNav"]:nth-of-type(1) a', 'manual/design/design.html#design', 'href');
+        assert.includes(doc, '.indent-h2[data-ice="manualNav"]:nth-of-type(2) a', 'manual/design/design.html#concept', 'href');
+        assert.includes(doc, '.indent-h2[data-ice="manualNav"]:nth-of-type(3) a', 'manual/design/design.html#architecture', 'href');
+        assert.includes(doc, '.indent-h2[data-ice="manualNav"]:nth-of-type(4) a', 'manual/design/design.html#model', 'href');
+      });
+    });
+
+    it('has installation heading tags', ()=>{
+      find(doc, '.content [data-ice="manual"]:nth-of-type(3)', (doc)=>{
         assert.includes(doc, '.indent-h1[data-ice="manualNav"]:nth-of-type(1)', 'Installation');
         assert.includes(doc, '.indent-h2[data-ice="manualNav"]:nth-of-type(2)', 'indent 2');
         assert.includes(doc, '.indent-h3[data-ice="manualNav"]:nth-of-type(3)', 'indent 3');
@@ -128,7 +157,7 @@ describe('test manual', ()=>{
     });
 
     it('has tutorial heading tags', ()=>{
-      find(doc, '.content [data-ice="manual"]:nth-of-type(3)', (doc)=>{
+      find(doc, '.content [data-ice="manual"]:nth-of-type(4)', (doc)=>{
         assert.includes(doc, '.indent-h1[data-ice="manualNav"]:nth-of-type(1)', 'Tutorial');
 
         assert.includes(doc, '.indent-h1[data-ice="manualNav"]:nth-of-type(1) a', 'manual/tutorial/tutorial.html#tutorial', 'href');
@@ -136,7 +165,7 @@ describe('test manual', ()=>{
     });
 
     it('has usage heading tags', ()=>{
-      find(doc, '.content [data-ice="manual"]:nth-of-type(4)', (doc)=>{
+      find(doc, '.content [data-ice="manual"]:nth-of-type(5)', (doc)=>{
         assert.includes(doc, '.indent-h1[data-ice="manualNav"]:nth-of-type(1)', 'Usage');
         assert.includes(doc, '.indent-h1[data-ice="manualNav"]:nth-of-type(2)', 'Usage2');
         assert.includes(doc, '.indent-h2[data-ice="manualNav"]:nth-of-type(3)', 'h2 in usage2');
@@ -150,7 +179,7 @@ describe('test manual', ()=>{
     });
 
     it('has configuration heading tags', ()=>{
-      find(doc, '.content [data-ice="manual"]:nth-of-type(5)', (doc)=>{
+      find(doc, '.content [data-ice="manual"]:nth-of-type(6)', (doc)=>{
         assert.includes(doc, '.indent-h1[data-ice="manualNav"]:nth-of-type(1)', 'Configuration');
 
         assert.includes(doc, '.indent-h1[data-ice="manualNav"]:nth-of-type(1) a', 'manual/configuration/configuration.html#configuration', 'href');
@@ -158,7 +187,7 @@ describe('test manual', ()=>{
     });
 
     it('has example heading tags', ()=>{
-      find(doc, '.content [data-ice="manual"]:nth-of-type(6)', (doc)=>{
+      find(doc, '.content [data-ice="manual"]:nth-of-type(7)', (doc)=>{
         assert.includes(doc, '.indent-h1[data-ice="manualNav"]:nth-of-type(1)', 'Example');
         assert.includes(doc, '.indent-h2[data-ice="manualNav"]:nth-of-type(2)', 'Minimum Config');
         assert.includes(doc, '.indent-h2[data-ice="manualNav"]:nth-of-type(3)', 'Integration Test Code Into Documentation');
@@ -169,8 +198,16 @@ describe('test manual', ()=>{
       });
     });
 
+    it('has advanced heading tags', ()=>{
+      find(doc, '.content [data-ice="manual"]:nth-of-type(8)', (doc)=>{
+        assert.includes(doc, '.indent-h1[data-ice="manualNav"]:nth-of-type(1)', 'Advanced');
+
+        assert.includes(doc, '.indent-h1[data-ice="manualNav"]:nth-of-type(1) a', 'manual/advanced/advanced.html#advanced', 'href');
+      });
+    });
+
     it('has reference heading tags', ()=>{
-      find(doc, '.content [data-ice="manual"]:nth-of-type(7)', (doc)=>{
+      find(doc, '.content [data-ice="manual"]:nth-of-type(9)', (doc)=>{
         assert.includes(doc, '.indent-h1[data-ice="manualNav"]:nth-of-type(1)', 'Reference');
         assert.includes(doc, '.indent-h2[data-ice="manualNav"]:nth-of-type(2)', 'Class');
         assert.includes(doc, '.indent-h2[data-ice="manualNav"]:nth-of-type(3)', 'Interface');
@@ -190,7 +227,7 @@ describe('test manual', ()=>{
     });
 
     it('has faq heading tags', ()=>{
-      find(doc, '.content [data-ice="manual"]:nth-of-type(8)', (doc)=>{
+      find(doc, '.content [data-ice="manual"]:nth-of-type(10)', (doc)=>{
         assert.includes(doc, '.indent-h1[data-ice="manualNav"]:nth-of-type(1)', 'FAQ');
         assert.includes(doc, '.indent-h2[data-ice="manualNav"]:nth-of-type(2)', 'Goal');
 
@@ -200,7 +237,7 @@ describe('test manual', ()=>{
     });
 
     it('has changelog heading tags', ()=>{
-      find(doc, '.content [data-ice="manual"]:nth-of-type(9)', (doc)=>{
+      find(doc, '.content [data-ice="manual"]:nth-of-type(11)', (doc)=>{
         assert.includes(doc, '.indent-h1[data-ice="manualNav"]:nth-of-type(1)', 'Changelog');
         assert.includes(doc, '.indent-h2[data-ice="manualNav"]:nth-of-type(2)', '0.0.1');
 
