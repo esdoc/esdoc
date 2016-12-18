@@ -11,6 +11,7 @@
 </head>
 <body>
 <nav>
+  <a class="logo" href="./"><img src="./image/logo.png"/></a>
   <a class="title" href="./">ESDoc</a>
   <ul>
     <li><a href="./feature.html">Features</a></li>

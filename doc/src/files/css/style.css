@@ -61,13 +61,18 @@ nav {
   top: 0;
   width: 100%;
   padding: 10px 0 4px 15px;
-  border-bottom: solid 1px #E02130;
+  border-bottom: solid 1px #E55151;
   background: white;
   font-weight: bold;
 }
 
+nav .logo img {
+  width: 48px;
+  vertical-align: bottom;
+}
+
 nav .title {
-  color: #E02130;
+  color: #E55151;
   font-size: 2em;
 }
 
@@ -92,7 +97,7 @@ article.content {
 }
 
 h1, h2 {
-  color: #E02130;
+  color: #E55151;
 }
 
 h1 {

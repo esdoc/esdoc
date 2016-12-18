@@ -506,6 +506,14 @@ footer, .file-footer {
   padding-bottom: 10px;
 }
 
+footer img {
+  width: 28px;
+  vertical-align: middle;
+  padding-left: 4px;
+  position: relative;
+  top: -4px;
+}
+
 pre.source-code {
   background: #f5f5f5;
   padding: 4px;
