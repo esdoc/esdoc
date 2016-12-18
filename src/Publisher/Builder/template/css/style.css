@@ -755,7 +755,7 @@ table.test-summary .test-target > span:first-child {
 }
 
 .manual-index .manual-card-wrap {
-  width: 33%;
+  width: 25%;
   padding: 10px 20px 10px 0;
   box-sizing: border-box;
 }
@@ -763,7 +763,7 @@ table.test-summary .test-target > span:first-child {
 .manual-index .manual-card-wrap > h1 {
   border: none;
   margin: 0;
-  font-size: 1.5em;
+  font-size: 1.2em;
 }
 
 .manual-index .manual-card {

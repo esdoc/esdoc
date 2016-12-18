@@ -239,6 +239,10 @@ export default class DocBuilder {
 
     ice.drop('manualHeaderLink', !this._config.manual);
 
+    if (this._config.manual && this._config.manual.globalIndex) {
+      ice.drop('manualHeaderLink');
+    }
+
     ice.load('nav', this._buildNavDoc());
     return ice;
   }

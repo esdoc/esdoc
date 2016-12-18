@@ -19,7 +19,9 @@
  * @property {string[]} [scripts=[]]
  * @property {{type: string, source: string, includes: string[], excludes: string[]}} test
  * @property {Object} [manual]
+ * @property {boolean} manual.globalIndex
  * @property {string} manual.asset
+ * @property {string} manual.index
  * @property {string[]} manual.overview
  * @property {string[]} manual.design
  * @property {string[]} manual.installation

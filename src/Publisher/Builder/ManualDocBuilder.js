@@ -33,6 +33,12 @@ export default class ManualDocBuilder extends DocBuilder {
       ice.attr('baseUrl', 'href', baseUrl, IceCap.MODE_WRITE);
       ice.attr('rootContainer', 'class', ' manual-index');
       callback(ice.html, fileName);
+
+      if (this._config.manual.globalIndex) {
+        ice.attr('baseUrl', 'href', './', IceCap.MODE_WRITE);
+        callback(ice.html, 'index.html');
+      }
+
       ice.attr('rootContainer', 'class', ' manual-index', IceCap.MODE_REMOVE);
     }
 
@@ -176,7 +182,7 @@ export default class ManualDocBuilder extends DocBuilder {
           let card = `<h1>${label}</h1>`;
           const nextAll = $el.nextAll();
 
-          for (let i = 0 ; i < nextAll.length; i++) {
+          for (let i = 0; i < nextAll.length; i++) {
             const next = nextAll.get(i);
             const tagName = next.tagName.toLowerCase();
             if (tagName === 'h1') return;
@@ -191,7 +197,7 @@ export default class ManualDocBuilder extends DocBuilder {
 
     const ice = new IceCap(this._readTemplate('manualCardIndex.html'));
     ice.loop('cards', cards, (i, card, ice)=>{
-      ice.text('label', card.label) ;
+      ice.text('label', card.label);
       ice.attr('link', 'href', card.link);
       ice.load('card', card.card);
     });
