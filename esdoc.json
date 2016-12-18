@@ -23,6 +23,7 @@
   ],
   "manual": {
     "asset": "./manual/asset",
+    "index": "./manual/index.md",
     "overview": ["./manual/overview.md", "./manual/feature.md"],
     "design": ["./manual/design.md"],
     "installation": ["./manual/installation.md"],

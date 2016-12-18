@@ -27,11 +27,13 @@ export default class ManualDocBuilder extends DocBuilder {
       const fileName = 'manual/index.html';
       const baseUrl = this._getBaseUrl(fileName);
       this._buildManualIndex(manualConfig);
-      ice.load('content', this._buildManualIndex(manualConfig, true), IceCap.MODE_WRITE);
+      ice.load('content', this._buildManualCardIndex(manualConfig), IceCap.MODE_WRITE);
       ice.load('nav', this._buildManualNav(manualConfig), IceCap.MODE_WRITE);
       ice.text('title', 'Manual', IceCap.MODE_WRITE);
       ice.attr('baseUrl', 'href', baseUrl, IceCap.MODE_WRITE);
+      ice.attr('rootContainer', 'class', ' manual-index');
       callback(ice.html, fileName);
+      ice.attr('rootContainer', 'class', ' manual-index', IceCap.MODE_REMOVE);
     }
 
     for (const item of manualConfig) {
@@ -145,16 +147,75 @@ export default class ManualDocBuilder extends DocBuilder {
   }
 
   /**
-   * built manual index.
+   * built manual card style index.
    * @param {ManualConfigItem[]} manualConfig - target manual config.
-   * @param {boolean} [badge=false] - show badge.
    * @return {IceCap} built index.
    * @private
    */
-  _buildManualIndex(manualConfig, badge = false) {
-    const ice = new IceCap(this._readTemplate('manualIndex.html'));
+  _buildManualCardIndex(manualConfig) {
+    const cards = [];
+    for (const manualItem of manualConfig) {
+      if (manualItem.references) {
+        const filePath = path.resolve(this._config.destination, 'identifiers.html');
+        const html = fs.readFileSync(filePath).toString();
+        const $ = cheerio.load(html);
+        const card = $('.content').html();
+        cards.push({label: 'References', link: 'identifiers.html', card: card});
+        continue;
+      }
 
-    if (!badge) ice.drop('badge');
+      for (const filePath of manualItem.paths) {
+        const fileName = this._getManualOutputFileName(manualItem, filePath);
+        const html = this._buildManual(manualItem, filePath);
+        const $root = cheerio.load(html).root();
+
+        $root.find('h1').each((i, el)=>{
+          const $el = cheerio(el);
+          const label = $el.text();
+          const link = `${fileName}#${$el.attr('id')}`;
+          let card = `<h1>${label}</h1>`;
+          const nextAll = $el.nextAll();
+
+          for (let i = 0 ; i < nextAll.length; i++) {
+            const next = nextAll.get(i);
+            const tagName = next.tagName.toLowerCase();
+            if (tagName === 'h1') return;
+            const $next = cheerio(next);
+            card += `<${tagName}>${$next.html()}</${tagName}>`;
+          }
+
+          cards.push({label, link, card});
+        });
+      }
+    }
+
+    const ice = new IceCap(this._readTemplate('manualCardIndex.html'));
+    ice.loop('cards', cards, (i, card, ice)=>{
+      ice.text('label', card.label) ;
+      ice.attr('link', 'href', card.link);
+      ice.load('card', card.card);
+    });
+
+    if (this._config.manual.index) {
+      const userIndex = this._convertMDToHTML(this._config.manual.index);
+      ice.load('manualUserIndex', userIndex);
+    } else {
+      ice.drop('manualUserIndex', true);
+    }
+
+    ice.drop('manualBadge', !this._config.manual.coverage);
+
+    return ice;
+  }
+
+  /**
+   * built manual index.
+   * @param {ManualConfigItem[]} manualConfig - target manual config.
+   * @return {IceCap} built index.
+   * @private
+   */
+  _buildManualIndex(manualConfig) {
+    const ice = new IceCap(this._readTemplate('manualIndex.html'));
 
     ice.loop('manual', manualConfig, (i, item, ice)=>{
       const toc = [];

@@ -12,6 +12,7 @@
     "includes": ["Test.js$"]
   },
   "manual": {
+    "index": "./test/fixture/package/manual/index.md",
     "overview": ["./test/fixture/package/manual/overview.md"],
     "design": ["./test/fixture/package/manual/design.md"],
     "installation": ["./test/fixture/package/manual/installation.md"],

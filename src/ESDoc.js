@@ -174,6 +174,10 @@ export default class ESDoc {
       if (!config.test.includes) config.test.includes = ['(spec|Spec|test|Test)\\.(js|es6)$'];
       if (!config.test.excludes) config.test.excludes = ['\\.config\\.(js|es6)$'];
     }
+
+    if (config.manual) {
+      if (!('coverage' in config.manual)) config.manual.coverage = true;
+    }
   }
 
   /* eslint-disable no-unused-vars */
