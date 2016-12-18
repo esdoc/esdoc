@@ -46,7 +46,7 @@ export default function publish(values, asts, config) {
   }
 
   function writeHTML(html, fileName) {
-    log(fileName);
+    log(`output: ${fileName}`);
     html = Plugin.onHandleHTML(html, fileName);
     const filePath = path.resolve(config.destination, fileName);
     fs.outputFileSync(filePath, html, {encoding: 'utf8'});
@@ -60,7 +60,7 @@ export default function publish(values, asts, config) {
   }
 
   function writeBadge(badge, fileName) {
-    log(fileName);
+    log(`output: ${fileName}`);
     const filePath = path.resolve(config.destination, fileName);
     fs.outputFileSync(filePath, badge, {encoding: 'utf8'});
   }
@@ -71,7 +71,7 @@ export default function publish(values, asts, config) {
   }
 
   function copy(srcPath, destPath) {
-    log(destPath);
+    log(`output: ${destPath}`);
     fs.copySync(srcPath, path.resolve(config.destination, destPath));
   }
 

@@ -75,6 +75,7 @@ export default class ESDoc {
         if (relativeFilePath.match(reg)) return;
       }
 
+      console.log(`parse: ${filePath}`);
       const temp = this._traverse(config, config.source, filePath, packageName, mainFilePath);
       if (!temp) return;
       results.push(...temp.results);
@@ -124,6 +125,7 @@ export default class ESDoc {
         if (relativeFilePath.match(reg)) return;
       }
 
+      console.log(`parse: ${filePath}`);
       const temp = this._traverseForTest(config, config.test.type, config.test.source, filePath);
       if (!temp) return;
       results.push(...temp.results);

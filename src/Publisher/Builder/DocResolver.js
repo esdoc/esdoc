@@ -17,16 +17,39 @@ export default class DocResolver {
    * resolve various properties.
    */
   resolve() {
+    if (this._data.__RESOLVED_ALL__) return;
+
+    console.log('resolve: extends chain');
     this._resolveExtendsChain();
+
+    console.log('resolve: necessary');
     this._resolveNecessary();
+
+    console.log('resolve: access');
     this._resolveAccess();
+
+    console.log('resolve: unexported identifier');
     this._resolveUnexportIdentifier();
+
+    console.log('resolve: undocument identifier');
     this._resolveUndocumentIdentifier();
+
+    console.log('resolve: duplication');
     this._resolveDuplication();
+
+    console.log('resolve: ignore');
     this._resolveIgnore();
+
+    console.log('resolve: link');
     this._resolveLink();
+
+    console.log('resolve: markdown in description');
     this._resolveMarkdown();
+
+    console.log('resolve: test relation');
     this._resolveTestRelation();
+
+    this._data.__RESOLVED_ALL__ = true;
   }
 
   /**
