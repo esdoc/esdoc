@@ -48,6 +48,9 @@ export default class LintDocBuilder extends DocBuilder {
       case 'ClassMethod':
         params = node.params || [];
         break;
+      case 'ArrowFunctionExpression':
+        params = node.params || [];
+        break;
       default:
         throw new Error(`unknown node type. type = ${node.type}`);
     }

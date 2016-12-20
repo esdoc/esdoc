@@ -439,6 +439,8 @@ export default class DocFactory {
         return this._decideVariableType(node);
       case 'AssignmentExpression':
         return this._decideAssignmentType(node);
+      case 'ArrowFunctionExpression':
+        return this._decideArrowFunctionExpressionType(node);
     }
 
     return {type: null, node: null};
@@ -518,6 +520,18 @@ export default class DocFactory {
   }
 
   /**
+   * decide Doc type from arrow function expression node.
+   * @param {ASTNode} node - target node that is arrow function expression node.
+   * @returns {{type: string, node: ASTNode}} decided type.
+   * @private
+   */
+  _decideArrowFunctionExpressionType(node) {
+    if (!this._isTopDepthInBody(node, this._ast.program.body)) return {type: null, node: null};
+
+    return {type: 'Function', node: node};
+  }
+
+  /**
    * decide Doc type from expression statement node.
    * @param {ASTNode} node - target node that is expression statement node.
    * @returns {{type: ?string, node: ?ASTNode}} decided type.
@@ -586,6 +600,9 @@ export default class DocFactory {
         break;
       case 'ClassExpression':
         innerType = 'Class';
+        break;
+      case 'ArrowFunctionExpression':
+        innerType = 'Function';
         break;
       default:
         return {type: 'Variable', node: node};

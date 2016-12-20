@@ -9,8 +9,8 @@ describe('test coverage', ()=> {
   it('has coverage summary', ()=> {
     assert(badge.includes('80%'));
     assert.includes(doc, '[data-ice="coverageBadge"]', './badge.svg', 'src');
-    assert.includes(doc, '[data-ice="totalCoverageCount"]', '274/342');
-    assert.equal(doc.find('[data-ice="file"] [data-ice="coverage"]').length, 118);
+    assert.includes(doc, '[data-ice="totalCoverageCount"]', '277/346');
+    assert.equal(doc.find('[data-ice="file"] [data-ice="coverage"]').length, 119);
   });
 
   /* eslint-disable max-statements */
@@ -60,6 +60,7 @@ describe('test coverage', ()=> {
     test('file/src/ExponentiationOperator/Definition.js.html', '100 %2/2');
     test('file/src/Export/AnonymousClass.js.html', '100 %1/1');
     test('file/src/Export/AnonymousFunction.js.html', '100 %1/1');
+    test('file/src/Export/ArrowFunction.js.html#errorLines=17', '75 %3/4');
     test('file/src/Export/Class.js.html#errorLines=24', '80 %4/5');
     test('file/src/Export/ClassIndirectDefault.js.html', '100 %1/1');
     test('file/src/Export/Default.js.html', '100 %1/1');
@@ -142,6 +143,6 @@ describe('test coverage', ()=> {
     test('file/src/Version/Function.js.html', '100 %1/1');
     test('file/src/Version/Variable.js.html', '100 %1/1');
 
-    assert.equal(count, 118);
+    assert.equal(count, 119);
   });
 });
