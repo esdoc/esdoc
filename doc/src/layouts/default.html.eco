@@ -14,6 +14,7 @@
   <a class="logo" href="./"><img src="./image/logo.png"/></a>
   <a class="title" href="./">ESDoc</a>
   <ul>
+    <li><a href="./usage.html">Usage</a></li>
     <li><a href="./feature.html">Features</a></li>
     <li><a href="./tutorial.html">Tutorial</a></li>
     <li><a href="./config.html">Config</a></li>

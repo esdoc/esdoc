@@ -171,6 +171,7 @@ describe('MyClass has foo bar feature', ()=>{
 | ``manual.globalIndex`` | - | false | If specify true, ESDoc generates global index using the manual. In other words, it means to replace `config.index` to `config.manual.index` |
 | ``manual.index`` | - | null | If specify markdown file, show manual index using the file. |
 | ``manual.asset`` | - | null | if specify asset(image) directory path, include the directory into manual. |
+| ``manual.badge`` | - | true | if specify true, show manual coverage badge. |
 | ``manual.overview`` | - | null | If specify markdown files, show overview. |
 | ``manual.design`` | - | null | If specify markdown files, show design. |
 | ``manual.installation`` | - | null | If specify markdown files, show installation. |

@@ -1,5 +1,22 @@
 # Example
 
+```sh
+# install ESDoc from npm
+npm install -g esdoc
+
+# move to your project directory
+cd your-project/
+
+# write configuration
+echo '{"source": "./", "destination": "./doc"}' > .esdoc.json
+
+# run ESDoc
+esdoc
+
+# see documentation
+open ./doc/index.html
+```
+
 ## Minimum
 ```json
 {
@@ -11,7 +28,7 @@
 ## Integrate Test Code Into Documentation
 ```json
 {
-  "source": "./src"
+  "source": "./src",
   "destination": "./doc",
   "test": {
     "type": "mocha",

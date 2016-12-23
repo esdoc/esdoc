@@ -59,14 +59,14 @@ However, the import path may be different from real import path because usually 
 So, [ESDoc Import Path Plugin](https://github.com/esdoc/esdoc-importpath-plugin) converts import path to real import path.
 
 ## Who's Using ESDoc
-- [RxJS5](http://reactivex.io/rxjs/)
+- [RxJS](http://reactivex.io/rxjs/)
 - [Sketch API](http://developer.sketchapp.com/reference/api/)
 - [Netflix/unleash](https://github.com/Netflix/unleash)
 - [lonelyplanet/rizzo-next](https://github.com/lonelyplanet/rizzo-next)
 - [linkedin/hopscotch](https://github.com/linkedin/hopscotch/tree/gh72)
 - [electron/electron-compile](https://github.com/electron/electron-compile)
 
-And more.
+And [more](https://github.com/search?o=desc&q=esdoc+filename%3Apackage.json+-user%3Ah13i32maru+-user%3Aesdoc+-user%3Aes-doc&ref=searchresults&s=indexed&type=Code&utf8=%E2%9C%93).
 
 ## Articles
 - English

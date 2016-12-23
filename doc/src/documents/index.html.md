@@ -7,7 +7,7 @@ ESDoc is a documentation generator for JavaScript.
 
 <img class="screen-shot" src="./image/top.png">
 
-# Feature
+# Features
 - Generates good documentation.
 - Measures documentation coverage.
 - Integrate test codes into documentation.
@@ -15,57 +15,29 @@ ESDoc is a documentation generator for JavaScript.
 - Parse ECMAScript proposals.
 - [ESDoc Hosting Service](https://doc.esdoc.org)
 
-# Demo
-- [ESDoc](https://esdoc.org/esdoc) is self-hosting &#x1F604;
+# Users
+- [ESDoc](https://doc.esdoc.org/github.com/esdoc/esdoc/) (self-hosting &#x1F604;)
+- [RxJS](http://reactivex.io/rxjs/)
+- [Sketch API](http://developer.sketchapp.com/reference/api/)
 
-# Install
+And [more](https://github.com/search?o=desc&q=esdoc+filename%3Apackage.json+-user%3Ah13i32maru+-user%3Aesdoc+-user%3Aes-doc&ref=searchresults&s=indexed&type=Code&utf8=%E2%9C%93).
 
-```
+# Quick Start
+```sh
+# install ESDoc from npm
 npm install -g esdoc
-esdoc -h
-```
 
-# Usage
+# move to a your project directory
+cd your-project/
 
-```
-esdoc -c esdoc.json
-```
+# write a configuration file.
+echo '{"source": "./src", "destination": "./doc"}' > .esdoc.json
 
-# Example
-```
-├── esdoc.json
-└── src/MyClass.js
-```
+# run ESDoc
+esdoc
 
-<p class="file-path">src/MyClass.js</p>
-
-```javascript
-/**
- * this is MyClass.
- */
-export default class MyClass {
-  /**
-   * @param {number} param this is param.
-   * @return {number} this is return.
-   */
-  method(param){}
-}
-```
-
-<p class="file-path">esdoc.json</p>
-
-```json
-{
-  "source": "./src",
-  "destination": "./esdoc"
-}
-```
-
-exec esdoc
-
-```
-esdoc -c esdoc.json
-open ./esdoc/index.html
+# see a documentation
+open ./doc/index.html
 ```
 
 # License
