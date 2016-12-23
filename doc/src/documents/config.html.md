@@ -5,12 +5,12 @@ isPage: true
 
 # Config
 
-ESDoc config file.
+ESDoc config example files.
 
 - [Minimum Config](#minimum-config)
 - [Integrate Test Codes Config](#integrate-test-codes-config)
 - [Integrate Manual Config](#integrate-manual-config)
-- [Use ES7 Config](#use-es7-config)
+- [Use ECMAScript Proposal](#use-ecmascript-proposal)
 - [Full Config](#full-config)
 
 ## Minimum Config
@@ -53,27 +53,34 @@ describe('MyClass has foo bar feature', ()=>{
   "destination": "./doc",
   "manual": {
     "overview": ["./manual/overview.md"],
+    "design": ["./manual/design.md"],
     "installation": ["./manual/installation.md"],
     "usage": ["./manual/usage.md"],
+    "tutorial": ["./manual/tutorial.md"],
+    "configuration": ["./manual/configuration.md"],
     "example": ["./manual/example.md"],
+    "advanced": ["./manual/advanced.md"],
     "faq": ["./manual/faq.md"],
     "changelog": ["./CHANGELOG.md"]
   }
 }
 ```
 
-## Use ES7 Config
-```sh
-npm install esdoc-es7-plugin
-```
-
+## Use ECMAScript Proposal
 ```json
 {
   "source": "./src",
   "destination": "./doc",
-  "plugins": [
-    {"name": "esdoc-es7-plugin"}
-  ]
+  "experimentalProposal": {
+    "classProperties": true,
+    "objectRestSpread": true,
+    "decorators": true,
+    "doExpressions": true,
+    "functionBind": true,
+    "asyncGenerators": true,
+    "exportExtensions": true,
+    "dynamicImport": true
+  }
 }
 ```
 
@@ -106,17 +113,31 @@ npm install esdoc-es7-plugin
     {"name": "plugin-name-or-file-path", "option": null}
   ],
   "manual": {
+    "globalIndex": true,
+    "index": "./manual/index.md",
     "asset": "./manual/asset",
     "overview": ["./manual/overview.md"],
+    "design": ["./manual/design.md"],
     "installation": ["./manual/installation.md"],
     "usage": ["./manual/usage.md"],
     "tutorial": ["./manual/tutorial.md"],
     "configuration": ["./manual/configuration.md"],
     "example": ["./manual/example.md"],
+    "advanced": ["./manual/advanced.md"],
     "faq": ["./manual/faq.md"],
     "changelog": ["./CHANGELOG.md"]
   },
-  "lint": true
+  "lint": true,
+  "experimentalProposal": {
+    "classProperties": true,
+    "objectRestSpread": true,
+    "decorators": true,
+    "doExpressions": true,
+    "functionBind": true,
+    "asyncGenerators": true,
+    "exportExtensions": true,
+    "dynamicImport": true
+  }
 }
 ```
 
@@ -147,15 +168,29 @@ npm install esdoc-es7-plugin
 | ``plugins[].name`` | true | - | Plugin module name(e.g. ``your-awesome-plugin``) or plugin file path(e.g. ``./your-awesome-plugin.js``). |
 | ``plugins[].option`` | - | null | If specified, the plugin get the option. |
 | ``manual`` | - | null | If specified, generate manual from markdown. |
+| ``manual.globalIndex`` | - | false | If specify true, ESDoc generates global index using the manual. In other words, it means to replace `config.index` to `config.manual.index` |
+| ``manual.index`` | - | null | If specify markdown file, show manual index using the file. |
 | ``manual.asset`` | - | null | if specify asset(image) directory path, include the directory into manual. |
-| ``manual.overview`` | - | null | if specify markdown files, show overview. |
-| ``manual.installation`` | - | null | if specify markdown files, show installation. |
-| ``manual.usage`` | - | null | if specify markdown files, show usage. |
-| ``manual.tutorial`` | - | null | if specify markdown files, show tutorial. |
-| ``manual.configuration`` | - | null | if specify markdown files, show configuration. |
-| ``manual.example`` | - | null | if specify markdown files, show example. |
-| ``manual.faq`` | - | null | if specify markdown files, show FAQ. |
-| ``manual.changelog`` | - | null | if specify markdown files, show changelog. |
+| ``manual.overview`` | - | null | If specify markdown files, show overview. |
+| ``manual.design`` | - | null | If specify markdown files, show design. |
+| ``manual.installation`` | - | null | If specify markdown files, show installation. |
+| ``manual.usage`` | - | null | If specify markdown files, show usage. |
+| ``manual.tutorial`` | - | null | If specify markdown files, show tutorial. |
+| ``manual.configuration`` | - | null | If specify markdown files, show configuration. |
+| ``manual.example`` | - | null | If specify markdown files, show example. |
+| ``manual.advanced`` | - | null | If specify markdown files, show advanced. |
+| ``manual.faq`` | - | null | If specify markdown files, show FAQ. |
+| ``manual.changelog`` | - | null | If specify markdown files, show changelog. |
 | ``lint`` | - | true | If specified, execute documentation lint. |
+| ``experimentalProposal`` | - | null | Enable ECMAScript experimental proposal features |
+| ``experimentalProposal.classProperties`` | - | false | If specify true, enable [Class Properties](http://babeljs.io/docs/plugins/transform-class-properties/)(Babel). |
+| ``experimentalProposal.objectRestSpread`` | - | false | If specify true, enable [Object Rest/Spread](http://babeljs.io/docs/plugins/transform-object-rest-spread/)(Babel). |
+| ``experimentalProposal.decorators`` | - | false | If specify true, enable [Decorators](http://babeljs.io/docs/plugins/transform-decorators/)(Babel). |
+| ``experimentalProposal.doExpressions`` | - | false | If specify true, enable [Do Expressions](http://babeljs.io/docs/plugins/transform-do-expressions/)(Babel). |
+| ``experimentalProposal.functionBind`` | - | false | If specify true, enable [Function Bind](http://babeljs.io/docs/plugins/transform-function-bind/)(Babel). |
+| ``experimentalProposal.asyncGenerators`` | - | false | If specify true, enable [Async Generators](http://babeljs.io/docs/plugins/transform-async-generator-functions/)(Babel). |
+| ``experimentalProposal.exportExtensions`` | - | false | If specify true, enable [Export Extensions](http://babeljs.io/docs/plugins/transform-export-extensions/)(Babel). |
+| ``experimentalProposal.dynamicImport`` | - | false | If specify true, enable [Dynamic Import](http://babeljs.io/docs/plugins/syntax-dynamic-import/)(Babel). |
+
 
 Note: A file path in config is based on current directory.

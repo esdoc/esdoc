@@ -8,8 +8,8 @@ ESDoc has some features.
 I will introduce part of the features.
 If you want to see all features, you visit [Demo](./#demo) page.
 
-- [ES6 Class](#es6-class)
-- [ES6 Module](#es6-module)
+- [ES2015 Class](#es2015-class)
+- [ES2015 Module](#es2015-module)
 - [Documentation Coverage](#documentation-coverage)
 - [Integration Test Codes](#integration-test-codes)
 - [Integration Manual](#integration-manual)
@@ -20,9 +20,9 @@ If you want to see all features, you visit [Demo](./#demo) page.
 - [ESDoc Hosting Service](#esdoc-hosting-service)
 
 
-## ES6 Class
-ESDoc supports ES6 Class syntax and targets a code that is written by it.
-ES6 Class syntax makes the clear relation of class, method, member, constructor and inheritance.
+## ES2015 Class
+ESDoc supports ES2015 Class syntax and targets a code that is written by it.
+ES2015 Class syntax makes the clear relation of class, method, member, constructor and inheritance.
 This means that ESDoc can generate a document without using a tag for these.
 
 ESDoc automatically generates the under contents by Class syntax.
@@ -36,9 +36,9 @@ ESDoc automatically generates the under contents by Class syntax.
 
 <img src="./image/feature/class2.png" class="screen-shot">
 
-## ES6 Module
-ESDoc supports ES6 Module syntax and targets a code that is written by it.
-ES6 Modules syntax is file base. So ESDoc treats as one file = one module.
+## ES2015 Module
+ESDoc supports ES2015 Module syntax and targets a code that is written by it.
+ES2015 Modules syntax is file base. So ESDoc treats as one file = one module.
 
 ESDoc displays the import style in accordance with the export style.
 - If ``export default class Foo{}``, displays ``import Foo from './Foo.js'``
@@ -86,11 +86,13 @@ However, for now, ESDoc supports only Mocha.
 ## Integration Manual
 You can integrate manual into documentation. The manual is:
 - Overview
+- Design
 - Installation
 - Usage
 - Tutorial
 - Configuration
 - Example
+- Advanced
 - FAQ
 - Changelog
 
@@ -102,11 +104,13 @@ You write manual as markdown and add ``manual`` config.
   "destination": "./doc",
   "manual": {
     "overview": ["./manual/overview.md"],
+    "design": ["./manual/design.md"],
     "installation": ["./manual/installation.md"],
     "usage": ["./manual/usage.md"],
     "tutorial": ["./manual/tutorial.md"],
     "configuration": ["./manual/configuration.md"],
     "example": ["./manual/example.md"],
+    "advanced": ["./manual/advanced.md"],
     "faq": ["./manual/faq.md"],
     "changelog": ["./CHANGELOG.md"]
   }
@@ -130,7 +134,7 @@ However, this implementation is very naive. There might be a problem in search p
 <img src="./image/feature/search1.png" class="screen-shot">
 
 ## Guess Type
-ESDoc guesses type of function arguments by ES6 default argument syntax if there is not  ``@param`` at the function.
+ESDoc guesses type of function arguments by ES2015 default argument syntax if there is not  ``@param`` at the function.
 This implementation is very simply. If Arguments has a primitive(number, boolean, string, etc) default value, ESDoc guesses that the function arguments type is the primitive value.
 ESDoc guesses type of function return in the same way if there is not ``@return`` at the function.
 

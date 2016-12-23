@@ -282,11 +282,13 @@ And add manual configuration.
   "manual": {
     "asset": "./manual/asset",
     "overview": ["./manual/overview.md"],
+    "design": ["./manual/design.md"],
     "installation": ["./manual/installation.md"],
     "usage": ["./manual/usage.md"],
     "tutorial": ["./manual/tutorial.md"],
     "configuration": ["./manual/configuration.md"],
     "example": ["./manual/example.md"],
+    "advanced": ["./manual/advanced.md"],
     "faq": ["./manual/faq.md"],
     "changelog": ["./CHANGELOG.md"]
   }
@@ -311,7 +313,7 @@ open ./out/esdoc/index.html
 ## Appendix
 
 ### Target Code Style
-ESDoc targets at ES6 ``class`` and ``import/export`` style.
+ESDoc targets at ES2015 ``class`` and ``import/export`` style.
 - Use class, extends, static, constructor, method, get and set syntax.
   - If you want to target at ES5, might better to use JSDoc.
 - Use import and export syntax for module.

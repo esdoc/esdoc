@@ -2,7 +2,7 @@
 // so, I manually scroll.
 (function(){
   function adjust() {
-    window.scrollBy(0, -60);
+    window.scrollBy(0, -70);
     var el = document.querySelector('.inner-link-active');
     if (el) el.classList.remove('inner-link-active');
 

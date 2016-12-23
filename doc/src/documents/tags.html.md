@@ -246,7 +246,7 @@ class MyClass{...}
 #### @extends
 syntax: ``@extends <identifier>``
 
-Normally you don't need to use ``@extends``. because ES6 has the Class-Extends syntax. however, you can use this tag if you want to explicitly specify.
+Normally you don't need to use ``@extends``. because ES2015 has the Class-Extends syntax. however, you can use this tag if you want to explicitly specify.
 
 ```javascript
 /**
