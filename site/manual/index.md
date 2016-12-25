@@ -1,4 +1,4 @@
-ESDoc is a documentation generator for JavaScript.
+ESDoc is a good documentation generator for JavaScript.
 
 <img class="screen-shot" src="./manual/asset/image/top.png" width="400px">
 

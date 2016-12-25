@@ -21,7 +21,7 @@ ESDoc has some useful features.
 ## ES2015 Class
 ESDoc supports ES2015 Class syntax and targets codes that are written by it.
 
-ES2015 Class syntax makes the clear relation of class, method, member, constructor and inheritance.
+ES2015 Class syntax makes the clear relation of class, method, member, constructor and inheritance.<br/>
 This means that ESDoc can generate a document without using a tag for these. In other words, you don't need to write tags for classes.
 
 ESDoc automatically generates the under contents by Class syntax.
@@ -38,7 +38,7 @@ ESDoc automatically generates the under contents by Class syntax.
 Note: ESDoc doesn't support prototype base codes and function base codes.
 
 ## ES2015 Module
-ESDoc supports ES2015 Modules syntax and targets codes that are written by it.
+ESDoc supports ES2015 Modules syntax and targets codes that are written by it.<br/>
 ES2015 Modules syntax is file base. So ESDoc treats as one file = one module.
 
 ESDoc displays a import style in accordance with the export style.
@@ -83,8 +83,8 @@ ESDoc measures a documentation coverage. This is useful information for the foll
 - This leads the motivation of documentation.
 - This inspects a missing of documentation.
 
-ESDoc processes only top-level class, function and variable.
-This is based on, ESDoc measures coverage by how much the document is being written out of all the processing target.
+ESDoc processes only top-level class, function and variable.<br/>
+This is based on, ESDoc measures coverage by how much the document is being written out of all the processing target.<br/>
 And, ESDoc is also to measure coverage of each module, you will have become easier to also find a missing of the document.
 
 For example, [this](https://doc.esdoc.org/github.com/esdoc/esdoc/source.html) is coverage of ESDoc itself.
@@ -126,7 +126,7 @@ If you want to disable this lint, you need to specify `false` at configuration.
 Note: For now, ESDoc lints only method/function signature.
 
 ## Integration Test Codes
-Test codes are important information.
+Test codes are important information.<br/>
 So, ESDoc generates a cross reference of test codes and document.
 
 You need to write configurations.
@@ -252,7 +252,7 @@ If you want to use manual as documentation index, you can specify global index.
 ## ECMAScript Proposal
 ESDoc supports a part of [ECMAScript Proposal](https://github.com/tc39/proposals) that are implemented by [Babel](http://babeljs.io/docs/plugins/#transform-plugins-experimental).
 
-If you want to use this, you need to specify `experimentalProposal` at configuration.
+If you want to use this, you need to specify `experimentalProposal` at configuration.<br/>
 All configurations are [here](./configuration/config.html#full-config).
 
 ```json
@@ -297,7 +297,7 @@ export default class Foo {
 ```
 
 ## Customize Documentation
-If you want to customize a document, you can includes your stylesheets and scripts to the document.
+If you want to customize a document, you can includes your stylesheets and scripts to the document.<br/>
 And, ESDoc supports plugin feature. Please read [API](./advanced/api.html) for more information.
 
 ## ESDoc Hosting Service
