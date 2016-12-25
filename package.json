@@ -1,7 +1,7 @@
 {
   "name": "esdoc",
-  "version": "0.4.8",
-  "description": "Documentation Generator For JavaScript(ES6)",
+  "version": "0.5.0",
+  "description": "A Good Documentation Generator For JavaScript",
   "author": "h13i32maru",
   "homepage": "https://esdoc.org/",
   "license": "MIT",
@@ -52,10 +52,11 @@
     "jsdoc",
     "api",
     "document",
-    "ES6",
-    "ES2015",
-    "ECMAScript6",
-    "ECMAScript2015"
+    "documentation",
+    "ES6", "ECMAScript6", "ES2015", "ECMAScript2015",
+    "ES7", "ECMAScript7", "ES2016", "ECMAScript2016",
+    "ES8", "ECMAScript8", "ES2017", "ECMAScript2017",
+    "proposal"
   ],
   "files": [
     "out/src",

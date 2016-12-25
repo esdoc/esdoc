@@ -1,19 +1,47 @@
 # Changelog
 
-## Next
+## 0.5.0 (2016-12-25)
+ESDoc logo was out!
+
+<img src="https://esdoc.org/manual/asset/image/logo.png" width="100px" class="no-shadow"/>
+
 - **Breaking**
   - Require node v6 or later ([a5b37bd](https://github.com/esdoc/esdoc/commit/a5b37bd0c68304214185f765f617b1077bee81b7))
   - Switch the ES parser to babylon from espree ([8130a3f](https://github.com/esdoc/esdoc/commit/8130a3f42b497e81f9ec6fc4cf0ef07ed5a7fa22))
-- **ES2016**  
+    - `onHandleAST` in plugin is breaking
+  - Remove `config.importPathPrefix` ([a665c5d](https://github.com/esdoc/esdoc/commit/a665c5d8c2c2a58cbe108ab3ecc8afc346c80ccf))
+    - Use [ESDoc Import Path Plugin](https://github.com/esdoc/esdoc-importpath-plugin) instead of it
+  - Remove `badge tag` in README ([6869b06](https://github.com/esdoc/esdoc/commit/6869b06e293c2471978ef96882baef6cc14c1766)) 
+    - Use badge of [ESDoc Hosting Service](https://doc.esdoc.org)
+- **Feature: ES2015**
+  - Support `arrow function` ([964eda3](https://github.com/esdoc/esdoc/commit/964eda3d4e2da6e5d92b3a6502a4b2d01422b692))
+- **Feature: ES2016**
   - Support `exponentiation operator` ([29f6ccc](https://github.com/esdoc/esdoc/commit/29f6ccced4256016fed4ac8eb5b98320cd78c4d7))
-- **ES2017**
+- **Feature: ES2017**
   - Support `async function` ([50452a1](https://github.com/esdoc/esdoc/commit/50452a1e44a1c8908da1fb377d3aa51eba220256))
   - Support `trailing comma` ([dc9ba0f](https://github.com/esdoc/esdoc/commit/dc9ba0fd904adbc1519f27c15fab104f1a4414a5))
-- **Experimental Proposal**  
+- **Feature: ECMAScript Proposal** (see [here](https://esdoc.org/manual/usage/feature.html#ecmascript-proposal))
   - Support `class properties` ([c7b4d9b](https://github.com/esdoc/esdoc/commit/c7b4d9b415812cf18c451b1a452c9725593d3891))
+  - Support `object rest spread` ([b58aa05](https://github.com/esdoc/esdoc/commit/b58aa054620e7335d7dcf8e0c81d4cb221e1fc6e))
+  - Support `do expressions` ([33daf5a](https://github.com/esdoc/esdoc/commit/33daf5a89dcdd3cd72a3d8b74829861f2c08e18e))
+  - Support `function bind` ([5b7a7d0](https://github.com/esdoc/esdoc/commit/5b7a7d06028e432d1e23b43963905c1a76b102b2))
+  - Support `function sent` ([fe8a265](https://github.com/esdoc/esdoc/commit/fe8a2656a93cfae51c0a541f291f3f32330aec3b))
+  - Support `async generators` ([e6dc2f2](https://github.com/esdoc/esdoc/commit/e6dc2f2cd00bff0e24f71a7485baedb79949ee94))
+  - Support `decorators` ([c941951](https://github.com/esdoc/esdoc/commit/c9419512b7dda5e8f0b906945fb2a91f0b4621b3))
+  - Support `export extensions` (parsing syntax only) ([8803005](https://github.com/esdoc/esdoc/commit/8803005b5927615027939ed42633bb06d060adaa))
+  - Support `dynamic import` ([d729f5f](https://github.com/esdoc/esdoc/commit/d729f5f4e6ad7d7693888b43ab5d42cb78bc15dd))
+- **Feature: Manual** (see [here](https://esdoc.org/manual/usage/feature.html#integration-manual))
+  - Support new sections(`advanced` and `design`) to manual ([2ebb2c6](https://github.com/esdoc/esdoc/commit/2ebb2c60e9141b4b562c0a684c21e7cfdfc94857))
+  - Improve new manual index page ([0d30880](https://github.com/esdoc/esdoc/commit/0d30880e58264f3bc0069246df4a6a3e6058a69b))
+  - Use manual as global index ([a887852](https://github.com/esdoc/esdoc/commit/a887852316c2c29ea377ed67d9415bf11dc1b630))
+- **Feature: Config**
+  - Support automatically finding config ([08fa2bc](https://github.com/esdoc/esdoc/commit/08fa2bc296b552168f86538561174e010a3a2f14))
+    - `.esdoc.json` in current directory
+    - `.esdoc.js` in current directory
+    - `esdoc` property in `package.json`
 - **Internal**
   - Update to babel6 ([149914e](https://github.com/esdoc/esdoc/commit/149914e84cb3bb061f2bdf2e43af00178b131a9e))
-  - Refactor test code ([#324](https://github.com/esdoc/esdoc/pull/324))
+  - Refactor test codes ([#324](https://github.com/esdoc/esdoc/pull/324))
   - Remove internal private tags ([#325](https://github.com/esdoc/esdoc/pull/325))
   - Use ESLint ([#326](https://github.com/esdoc/esdoc/pull/326))
 

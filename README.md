@@ -1,13 +1,14 @@
-![Owner Status](https://img.shields.io/badge/owner-busy-red.svg)
+<!--![Owner Status](https://img.shields.io/badge/owner-busy-red.svg)-->
 [![Build Status](https://travis-ci.org/esdoc/esdoc.svg?branch=master)](https://travis-ci.org/esdoc/esdoc)
 [![Coverage Status](https://codecov.io/gh/esdoc/esdoc/branch/master/graph/badge.svg)](https://codecov.io/gh/esdoc/esdoc)
 [![Document](https://doc.esdoc.org/github.com/esdoc/esdoc/badge.svg?t=0)](https://doc.esdoc.org/github.com/esdoc/esdoc)
+[![Manual](https://esdoc.org/manual-badge.svg?t=0)](https://doc.esdoc.org/github.com/esdoc/esdoc)
 
 # ESDoc
 
 ESDoc is a documentation generator for JavaScript(ES2015 or later).
 
-<img class="screen-shot" src="https://esdoc.org/image/top.png" width="500px" style="max-width: 500px; border: 1px solid rgba(0,0,0,0.1); box-shadow: 1px 1px 1px rgba(0,0,0,0.5);">
+<img class="screen-shot" src="https://esdoc.org/manual/asset/image/top.png" width="500px" style="max-width: 500px; border: 1px solid rgba(0,0,0,0.1); box-shadow: 1px 1px 1px rgba(0,0,0,0.5);">
 
 # Features
 - Generates good documentation.
