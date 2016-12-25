@@ -509,11 +509,12 @@ footer, .file-footer {
 }
 
 footer img {
-  width: 28px;
+  width: 24px;
   vertical-align: middle;
   padding-left: 4px;
   position: relative;
-  top: -4px;
+  top: -3px;
+  opacity: 0.6;
 }
 
 pre.source-code {
