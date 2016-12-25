@@ -23,7 +23,7 @@ exports.onHandleHTML = function(ev) {
       <li><a href="./manual/configuration/config.html">Config</a></li>
       <li><a href="./manual/usage/tags.html">Tags</a></li>
       <li><a href="./manual/advanced/api.html">API</a></li>
-      <li><a href="./manual/changelog/changelog.html">Releases</a></li>
+      <li><a href="./manual/changelog/CHANGELOG.html">Releases</a></li>
       <li><a href="./manual/faq/faq.html">FAQ</a></li>
     </ul>
     <a href="https://github.com/esdoc/esdoc" class="github"><img src="./manual/asset/image/github.png"/></a>
