@@ -23,7 +23,7 @@ module.exports = {
     'no-empty': ['error'],
     'no-ex-assign': ['error'],
     'no-extra-boolean-cast': ['error'],
-    'no-extra-parens': ['error'],
+    'no-extra-parens': ['off'],
     'no-extra-semi': ['error'],
     'no-func-assign': ['error'],
     'no-inner-declarations': ['error'],
