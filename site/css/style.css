@@ -89,6 +89,11 @@ p + ul {
   box-shadow: none;
 }
 
+.layout-container header .logo,
+.layout-container header .brand {
+  margin: 0;
+}
+
 header .logo img {
   width: 40px;
   vertical-align: bottom;
@@ -113,7 +118,7 @@ header ul li{
 }
 
 header ul li a {
-  color: black;
+  color: #444;
 }
 
 header .github img {

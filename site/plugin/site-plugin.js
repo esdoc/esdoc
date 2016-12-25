@@ -1,4 +1,10 @@
 const cheerio = require('cheerio');
+const fs = require('fs-extra');
+
+let config;
+exports.onHandleConfig = function(ev) {
+  config = ev.data.config;
+};
 
 exports.onHandleHTML = function(ev) {
   const $ = cheerio.load(ev.data.html);
@@ -37,4 +43,8 @@ exports.onHandleHTML = function(ev) {
 
   // result
   ev.data.html = $.html();
+};
+
+exports.onComplete = function() {
+  fs.copySync('./site/favicon.ico', `${config.destination}/favicon.ico`);
 };
