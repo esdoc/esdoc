@@ -1,5 +1,0 @@
-# Example
-
-## Minimum
-
-## Full

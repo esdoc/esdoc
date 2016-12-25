@@ -1,2 +1,0 @@
-# ESDoc Manual
-tbd

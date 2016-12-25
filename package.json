@@ -19,7 +19,6 @@
     "test-ci": "node ./script/test-ci.js",
     "esdoc": "node ./script/esdoc.js",
     "site": "node ./script/site.js",
-    "docpad": "node ./script/docpad.js",
     "start": "node ./script/server.js",
     "lint": "node ./script/eslint.js"
   },
