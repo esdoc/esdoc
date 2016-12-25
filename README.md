@@ -5,68 +5,41 @@
 
 # ESDoc
 
-ESDoc is a documentation generator for JavaScript(ES6).
+ESDoc is a documentation generator for JavaScript(ES2015 or later).
 
 <img class="screen-shot" src="https://esdoc.org/image/top.png" width="500px" style="max-width: 500px; border: 1px solid rgba(0,0,0,0.1); box-shadow: 1px 1px 1px rgba(0,0,0,0.5);">
 
-# Feature
-- Generates detailed documentation.
+# Features
+- Generates good documentation.
 - Measures documentation coverage.
 - Integrate test codes into documentation.
 - Integrate manual into documentation.
+- Parse ECMAScript proposals.
 - [ESDoc Hosting Service](https://doc.esdoc.org)
 
-# Demo
-- [ESDoc](https://esdoc.org/esdoc) is self-hosting &#x1F604;
+# Users
+- [ESDoc](https://doc.esdoc.org/github.com/esdoc/esdoc/) (self-hosting &#x1F604;)
+- [RxJS](http://reactivex.io/rxjs/)
+- [Sketch API](http://developer.sketchapp.com/reference/api/)
 
-# Install
+And [more](https://github.com/search?o=desc&q=esdoc+filename%3Apackage.json+-user%3Ah13i32maru+-user%3Aesdoc+-user%3Aes-doc&ref=searchresults&s=indexed&type=Code&utf8=%E2%9C%93).
 
-```
+# Quick Start
+```sh
+# install ESDoc from npm
 npm install -g esdoc
-esdoc -h
-```
 
-# Usage
+# move to a your project directory
+cd your-project/
 
-```
-esdoc -c esdoc.json
-```
+# write a configuration file.
+echo '{"source": "./src", "destination": "./doc"}' > .esdoc.json
 
-# Example
-```
-├── esdoc.json
-└── src/MyClass.js
-```
+# run ESDoc
+esdoc
 
-``src/MyClass.js``
-
-```javascript
-/**
- * this is MyClass.
- */
-export default class MyClass {
-  /**
-   * @param {number} param this is param.
-   * @return {number} this is return.
-   */
-  method(param){}
-}
-```
-
-``esdoc.json``
-
-```json
-{
-  "source": "./src",
-  "destination": "./esdoc"
-}
-```
-
-exec esdoc
-
-```
-esdoc -c esdoc.json
-open ./esdoc/index.html
+# see a documentation
+open ./doc/index.html
 ```
 
 # Document
