@@ -1,6 +1,6 @@
 {
   "source": "./src",
-  "destination": "./doc/out/esdoc",
+  "destination": "./out/esdoc",
   "excludes": ["Publisher/Builder/template/", "BuiltinExternal/"],
   "access": ["public", "protected", "private"],
   "debug": false,

@@ -59,6 +59,7 @@ p + ul {
 
 .github-markdown img.screen-shot {
   max-width: 400px;
+  border: solid 1px #eee;
 }
 
 .github-markdown h1 {
