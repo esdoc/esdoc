@@ -95,8 +95,8 @@ export default class ManualDocBuilder extends DocBuilder {
     if (m.tutorial) manualConfig.push({label: 'Tutorial', paths: m.tutorial});
     if (m.usage) manualConfig.push({label: 'Usage', paths: m.usage});
     if (m.configuration) manualConfig.push({label: 'Configuration', paths: m.configuration});
-    if (m.example) manualConfig.push({label: 'Example', paths: m.example});
     if (m.advanced) manualConfig.push({label: 'Advanced', paths: m.advanced});
+    if (m.example) manualConfig.push({label: 'Example', paths: m.example});
     manualConfig.push({label: 'Reference', fileName: 'identifiers.html', references: true});
     if (m.faq) manualConfig.push({label: 'FAQ', paths: m.faq});
     if (m.changelog) manualConfig.push({label: 'Changelog', paths: m.changelog});
@@ -166,19 +166,29 @@ export default class ManualDocBuilder extends DocBuilder {
         const html = fs.readFileSync(filePath).toString();
         const $ = cheerio.load(html);
         const card = $('.content').html();
-        cards.push({label: 'References', link: 'identifiers.html', card: card});
+        const identifiers = this._findAllIdentifiersKindGrouping();
+        const sectionCount = identifiers.class.length +
+          identifiers.interface.length +
+          identifiers.function.length +
+          identifiers.typedef.length +
+          identifiers.external.length;
+
+        cards.push({label: 'References', link: 'identifiers.html', card: card, type: 'reference', sectionCount: sectionCount});
         continue;
       }
 
       for (const filePath of manualItem.paths) {
+        const type = manualItem.label.toLowerCase();
         const fileName = this._getManualOutputFileName(manualItem, filePath);
         const html = this._buildManual(manualItem, filePath);
         const $root = cheerio.load(html).root();
+        const h1Count = $root.find('h1').length;
+        const sectionCount = $root.find('h1,h2,h3,h4,h5').length;
 
         $root.find('h1').each((i, el)=>{
           const $el = cheerio(el);
           const label = $el.text();
-          const link = `${fileName}#${$el.attr('id')}`;
+          const link = h1Count === 1 ? fileName : `${fileName}#${$el.attr('id')}`;
           let card = `<h1>${label}</h1>`;
           const nextAll = $el.nextAll();
 
@@ -190,14 +200,19 @@ export default class ManualDocBuilder extends DocBuilder {
             card += `<${tagName}>${$next.html()}</${tagName}>`;
           }
 
-          cards.push({label, link, card});
+          cards.push({label, link, card, type, sectionCount});
         });
       }
     }
 
     const ice = new IceCap(this._readTemplate('manualCardIndex.html'));
     ice.loop('cards', cards, (i, card, ice)=>{
-      ice.text('label', card.label);
+      ice.text('label-inner', card.label);
+      ice.attr('label', 'class', `manual-color manual-color-${card.type}`);
+
+      const sectionCount = Math.min((card.sectionCount / 5) + 1, 5);
+      ice.attr('label', 'data-section-count', '■'.repeat(sectionCount));
+
       ice.attr('link', 'href', card.link);
       ice.load('card', card.card);
     });
@@ -222,8 +237,9 @@ export default class ManualDocBuilder extends DocBuilder {
    */
   _buildManualIndex(manualConfig) {
     const ice = new IceCap(this._readTemplate('manualIndex.html'));
+    const _manualConfig = manualConfig.filter((item) => (item.paths && item.paths.length) || item.references);
 
-    ice.loop('manual', manualConfig, (i, item, ice)=>{
+    ice.loop('manual', _manualConfig, (i, item, ice)=>{
       const toc = [];
       if (item.references) {
         const identifiers = this._findAllIdentifiersKindGrouping();
@@ -234,27 +250,46 @@ export default class ManualDocBuilder extends DocBuilder {
         if (identifiers.variable.length) toc.push({label: 'Variable', link: 'identifiers.html#variable', indent: 'indent-h2'});
         if (identifiers.typedef.length) toc.push({label: 'Typedef', link: 'identifiers.html#typedef', indent: 'indent-h2'});
         if (identifiers.external.length) toc.push({label: 'External', link: 'identifiers.html#external', indent: 'indent-h2'});
+
+        toc[0].sectionCount = identifiers.class.length +
+          identifiers.interface.length +
+          identifiers.function.length +
+          identifiers.typedef.length +
+          identifiers.external.length;
       } else {
         for (const filePath of item.paths) {
           const fileName = this._getManualOutputFileName(item, filePath);
           const html = this._convertMDToHTML(filePath);
           const $root = cheerio.load(html).root();
+          const h1Count = $root.find('h1').length;
+          const sectionCount = $root.find('h1,h2,h3,h4,h5').length;
 
           $root.find('h1,h2,h3,h4,h5').each((i, el)=>{
             const $el = cheerio(el);
             const label = $el.text();
-            const link = `${fileName}#${$el.attr('id')}`;
             const indent = `indent-${el.tagName.toLowerCase()}`;
-            toc.push({label, link, indent});
+
+            let link = `${fileName}#${$el.attr('id')}`;
+            if (el.tagName.toLowerCase() === 'h1' && h1Count === 1) link = fileName;
+
+            toc.push({label, link, indent, sectionCount});
           });
         }
       }
 
       ice.attr('manual', 'data-toc-name', item.label.toLowerCase());
-      ice.loop('manualNav', toc, (i, item, ice)=>{
-        ice.attr('manualNav', 'class', item.indent);
-        ice.text('link', item.label);
-        ice.attr('link', 'href', item.link);
+      ice.loop('manualNav', toc, (i, tocItem, ice)=>{
+        if (tocItem.indent === 'indent-h1') {
+          ice.attr('manualNav', 'class', `${tocItem.indent} manual-color manual-color-${item.label.toLowerCase()}`);
+          const sectionCount = Math.min((tocItem.sectionCount / 5) + 1, 5);
+          ice.attr('manualNav', 'data-section-count', '■'.repeat(sectionCount));
+        } else {
+          ice.attr('manualNav', 'class', tocItem.indent);
+        }
+
+        ice.attr('manualNav', 'data-link', tocItem.link.split('#')[0]);
+        ice.text('link', tocItem.label);
+        ice.attr('link', 'href', tocItem.link);
       });
     });
 
