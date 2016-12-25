@@ -10,7 +10,7 @@ exports.onHandleHTML = function(ev) {
   const $ = cheerio.load(ev.data.html);
 
   // title
-  $('head title').text('ESDoc - Good Documentation for JavaScript');
+  $('head title').text('ESDoc - A Good Documentation Generator for JavaScript');
 
   // header
   const $header = $('body > header');
@@ -40,6 +40,28 @@ exports.onHandleHTML = function(ev) {
 
   // changelog
   $('#changelog').text('Releases');
+
+  // og
+  $('head').append(`
+    <meta property="og:url" content="https://esdoc.org/">
+    <meta property="og:site_name" content="ESDoc">
+    <meta property="og:title" content="ESDoc">
+    <meta property="og:description" content="ESDoc is a good documentation generator for JavaScript.">
+    <meta property="og:type" content="website">
+    <meta property="og:author" content="https://twitter.com/h13i32maru">
+    <meta property="og:image" content="https://esdoc.org/manual/asset/image/logo.png">
+    <meta property="og:image:width" content="300">
+    <meta property="og:image:height" content="300">
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:site" content="@h13i32maru">
+    <meta property="twitter:creator" content="@h13i32maru">
+    <meta property="twitter:title" content="ESDoc">
+    <meta property="twitter:description" content="ESDoc is a good documentation generator for JavaScript">
+    <meta property="twitter:image:src" content="https://esdoc.org/manual/asset/image/logo.png">
+    <meta property="twitter:image:width" content="300">
+    <meta property="twitter:image:height" content="300">
+    <meta name="description" content="ESDoc is a good documentation generator for JavaScript">
+`);
 
   // result
   ev.data.html = $.html();
