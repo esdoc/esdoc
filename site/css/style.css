@@ -1,0 +1,126 @@
+body > nav.navigation {
+  display: none;
+}
+
+body > .content,
+body > footer {
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+body > .content {
+  margin-top: 60px;
+}
+
+body > footer {
+  padding: 60px 20px 30px 0;
+  text-align: right;
+  border-top: 1px solid #ddd;
+  background: #eee;
+  color: #888;
+  font-size: 12px;
+  margin-top: 60px;
+  font-style: normal;
+  font-weight: normal;
+}
+
+a {
+  color: #337ab7;
+}
+
+p + ul {
+  margin-top: -0.5em;
+  margin-bottom: 1em;
+}
+
+.file-path {
+  font-style: italic;
+  margin-bottom: -1em;
+}
+
+.search-box {
+  display: none;
+}
+
+.manual-badge,
+.manual-index .manual-cards {
+  display: none;
+}
+
+.manual-index .manual-user-index {
+  border-bottom: none;
+}
+
+.manual-breadcrumb-list {
+  display: none;
+}
+
+.github-markdown img.screen-shot {
+  max-width: 400px;
+}
+
+.github-markdown h1 {
+  color: #E55151;
+  border: none;
+  font-size: 1.5em;
+  margin-bottom: 0;
+}
+
+.github-markdown h2 {
+  color: #E55151;
+  font-size: 1.2em;
+  margin-bottom: 0.5em;
+  margin-top: 2em;
+}
+
+.github-markdown h3 {
+  font-size: 1em;
+}
+
+/* header */
+.layout-container > header {
+  padding: 10px 0 4px 15px;
+  background: white;
+  font-weight: bold;
+  border-bottom: solid 1px #E55151;
+  box-shadow: none;
+}
+
+header .logo img {
+  width: 40px;
+  vertical-align: bottom;
+}
+
+.layout-container header a.brand {
+  color: #E55151;
+  font-size: 2em;
+  vertical-align: bottom;
+}
+
+header ul {
+  display: inline-block;
+  padding-left: 0;
+  margin: 0 0 0 20px;
+}
+
+header ul li{
+  display: inline-block;
+  list-style: none;
+  margin: 0 4px;
+}
+
+header ul li a {
+  color: black;
+}
+
+header .github img {
+  width: 24px;
+  position: relative;
+  top: 5px;
+}
+
+#changelog + h2 {
+  margin-top: 1em;
+}

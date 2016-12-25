@@ -1,32 +1,17 @@
 {
-  "source": "./src",
-  "destination": "./doc/out/esdoc",
+  "source": "./site",
+  "destination": "./out/site",
   "excludes": ["Publisher/Builder/template/", "BuiltinExternal/"],
-  "access": ["public", "protected", "private"],
-  "debug": false,
-  "index": "./README.md",
-  "package": "./package.json",
   "title": "ESDoc",
-  "test": {
-    "type": "mocha",
-    "source": "./test/src"
-  },
-  "plugins": [
-    {
-      "name": "esdoc-importpath-plugin",
-      "option": {
-        "replaces": [
-          {"from": "^src/", "to": "out/src/"}
-        ]
-      }
-    }
-  ],
+  "styles": ["./site/css/style.css"],
+  "scripts": ["./site/js/analytics.js", "./site/js/inner-link.js"],
+  "plugins": [{"name": "./site/plugin/site-plugin.js"}],
   "manual": {
-    "globalIndex": false,
+    "globalIndex": true,
     "asset": "./site/manual/asset",
     "index": "./site/manual/index.md",
     "overview": [],
-    "design": ["./site/manual/design/design.md"],
+    "design": [],
     "installation": [],
     "usage": ["./site/manual/usage/usage.md", "./site/manual/usage/feature.md", "./site/manual/usage/tags.md"],
     "tutorial": [],
