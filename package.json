@@ -1,7 +1,7 @@
 {
   "name": "esdoc",
-  "version": "0.5.0",
-  "description": "A Good Documentation Generator For JavaScript",
+  "version": "0.5.1",
+  "description": "Good Documentation Generator For JavaScript",
   "author": "h13i32maru",
   "homepage": "https://esdoc.org/",
   "license": "MIT",

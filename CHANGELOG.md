@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.1 (2016-12-26)
+- **Fix**
+  - Fix a message when could not parse the codes ([a98a83c](https://github.com/esdoc/esdoc/commit/a98a83c2cdb2904e2f8a246dee8cf886da47fc48))
+  - Fix a help message ([a16e2c1](https://github.com/esdoc/esdoc/commit/a16e2c121989d7a294d2cf2b6c2b1d1ec32f4277))
+
 ## 0.5.0 (2016-12-25)
 ESDoc logo was out!
 
