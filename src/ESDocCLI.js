@@ -62,14 +62,14 @@ export default class ESDocCLI {
     console.log('Usage: esdoc [-c esdoc.json]');
     console.log('');
     console.log('Options:');
-    console.log('  -c', 'create the documents');
+    console.log('  -c', 'specify config file');
     console.log('  -h', 'output usage information');
     console.log('  -v', 'output the version number');
     console.log('');
-    console.log('ESDoc finds configuration:');
-    console.log('  1. -c option');
-    console.log('  2. .esdoc.json in working directory');
-    console.log('  3. .esdoc.js in working directory');
+    console.log('ESDoc finds configuration by the order:');
+    console.log('  1. `-c your-esdoc.json`');
+    console.log('  2. `.esdoc.json` in current directory');
+    console.log('  3. `.esdoc.js` in current directory');
     console.log('  4. `esdoc` property in package.json');
   }
 
