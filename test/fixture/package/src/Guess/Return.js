@@ -19,7 +19,7 @@ export default class TestGuessReturn {
   }
 
   method5(){
-    const obj = {}
-    return {...obj}
+    const obj = {};
+    return {...obj};
   }
 }

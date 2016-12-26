@@ -384,6 +384,8 @@ export default class ParamParser {
           case 'ObjectMethod':
             typeMap[name] = 'function';
             break;
+          case 'SpreadProperty':
+            return {types: ['*']};
           default:
             typeMap[name] = '*';
         }
