@@ -150,6 +150,7 @@ export default class ParamParser {
   }
 
   /* eslint-disable complexity */
+  /* eslint-disable max-statements */
   /**
    * guess param type by using param default arguments.
    * @param {Object} params - node of callable AST node.
