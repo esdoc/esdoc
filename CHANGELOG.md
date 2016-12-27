@@ -3,6 +3,7 @@
 ## Next
 - **Fix**
   - Display error message when invalid function type ([#351](https://github.com/esdoc/esdoc/issues/351)) Thanks [@LukasHechenberger](https://github.com/LukasHechenberger)
+  - Crash when destructure sparse array ([#350](https://github.com/esdoc/esdoc/issues/350))
 
 ## 0.5.1 (2016-12-26)
 - **Fix**
