@@ -1,5 +1,9 @@
 # Changelog
 
+## Next
+- **Fix**
+  - Display error message when invalid function type ([#351](https://github.com/esdoc/esdoc/issues/351)) Thanks [@LukasHechenberger](https://github.com/LukasHechenberger)
+
 ## 0.5.1 (2016-12-26)
 - **Fix**
   - Fix a message when could not parse the codes ([a98a83c](https://github.com/esdoc/esdoc/commit/a98a83c2cdb2904e2f8a246dee8cf886da47fc48))

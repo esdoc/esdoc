@@ -44,6 +44,16 @@ class InvalidCodeLogger {
   }
 
   /**
+   * show error log.
+   * @param {Error} error - target error.
+   */
+  showError(error) {
+    console.log('[31m');
+    console.log(error);
+    console.log('[0m');
+  }
+
+  /**
    * show log.
    * @param {string} filePath - invalid code in this file.
    * @param {Error} error - error object.

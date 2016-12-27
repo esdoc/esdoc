@@ -93,7 +93,12 @@ export default class ESDoc {
 
     results = Plugin.onHandleTag(results);
 
-    publisher(results, asts, config);
+    try {
+      publisher(results, asts, config);
+    } catch (e) {
+      InvalidCodeLogger.showError(e);
+      process.exit(1);
+    }
 
     Plugin.onComplete();
   }
