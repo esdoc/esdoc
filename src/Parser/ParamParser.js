@@ -252,6 +252,31 @@ export default class ParamParser {
           result.defaultValue = `${JSON.stringify(result.defaultRaw)}`;
           break;
         }
+        case 'ArrayPattern': {
+          // e.g. func([a, b = 10]){}
+          let arrayType = null;
+          const raw = [];
+
+          for (const element of param.elements) {
+            if (element.type === 'Identifier') {
+              raw.push('null');
+            } else if (element.type === 'AssignmentPattern') {
+              if ('value' in element.right) {
+                if (!arrayType && element.right.value !== null) arrayType = typeof element.right.value;
+                raw.push(JSON.stringify(element.right.value));
+              } else {
+                raw.push('*');
+              }
+            }
+          }
+
+          if (!arrayType) arrayType = '*';
+          result.name = `arrayPattern${i === 0 ? '' : i}`;
+          result.types = [`${arrayType}[]`];
+          result.defaultRaw = raw;
+          result.defaultValue = `[${raw.join(', ')}]`;
+          break;
+        }
         default:
           logger.w('unknown param.type', param);
       }

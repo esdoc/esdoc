@@ -41,6 +41,10 @@ describe('TestGuessParam', ()=> {
       findParent(doc, '[data-ice="summary"] [href$="#instance-method-method9"]', '[data-ice="target"]', (doc)=> {
         assert.includes(doc, null, 'public method9(objectPattern: {"x": *, "y": *, ...z: Object})');
       });
+
+      findParent(doc, '[data-ice="summary"] [href$="#instance-method-method10"]', '[data-ice="target"]', (doc)=> {
+        assert.includes(doc, null, 'public method10(arrayPattern: number[])');
+      });
     });
   });
 
@@ -91,6 +95,11 @@ describe('TestGuessParam', ()=> {
       findParent(doc, '[id="instance-method-method9"]', '[data-ice="detail"]', (doc)=>{
         assert.includes(doc, 'h3', 'public method9(objectPattern: {"x": *, "y": *, ...z: Object})');
         assert.includes(doc, '.params tbody tr:nth-child(1)', 'objectPattern {"x": *, "y": *, ...z: Object} default: {"x":null,"y":null,"z":{}}');
+      });
+
+      findParent(doc, '[id="instance-method-method10"]', '[data-ice="detail"]', (doc)=>{
+        assert.includes(doc, 'h3', 'public method10(arrayPattern: number[])');
+        assert.includes(doc, '.params tbody tr:nth-child(1)', 'arrayPattern number[] default: [null, 10, *, "text", *]');
       });
     });
   });
