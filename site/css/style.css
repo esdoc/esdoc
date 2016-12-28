@@ -66,6 +66,10 @@ p + ul {
   box-shadow: none;
 }
 
+.github-markdown img.no-border {
+  border: none;
+}
+
 .github-markdown h1 {
   color: #E55151;
   border: none;

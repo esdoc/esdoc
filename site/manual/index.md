@@ -1,6 +1,6 @@
 ESDoc is a good documentation generator for JavaScript.
 
-<img class="screen-shot" src="./manual/asset/image/top.png" width="400px">
+<img class="screen-shot no-border" src="./manual/asset/image/top.png" width="400px">
 
 # Features
 - Generates good documentation.
