@@ -57,4 +57,16 @@ describe('TestTypeComplex', ()=> {
       ], 'href');
     });
   });
+
+  it('has complex union type in generics.', ()=>{
+    findParent(doc, '[data-ice="summary"] [href$="#instance-method-method5"]', '[data-ice="target"]', (doc)=> {
+      assert.includes(doc, null, 'method5(p1: Promise<string|number, Error>)');
+      assert.multiIncludes(doc, '[data-ice="signature"] a', [
+        'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise',
+        'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String',
+        'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number',
+        'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error'
+      ], 'href');
+    });
+  });
 });

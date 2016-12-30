@@ -777,8 +777,10 @@ export default class DocBuilder {
         .replace(/<.*?>/g, (a)=> a.replace(/,/g, '\\Z'))
         .replace(/{.*?}/g, (a)=> a.replace(/,/g, '\\Z').replace(/:/g, '\\Y'));
       const innerTypes = inner.split(',').map((v) => {
-        v = v.trim().replace(/\\Z/g, ',').replace(/\\Y/g, ':');
-        return this._buildTypeDocLinkHTML(v);
+        return v.split('|').map((vv) => {
+          vv = vv.trim().replace(/\\Z/g, ',').replace(/\\Y/g, ':');
+          return this._buildTypeDocLinkHTML(vv);
+        }).join('|');
       });
 
       const html = `${this._buildDocLinkHTML(mainType, mainType)}<${innerTypes.join(', ')}>`;

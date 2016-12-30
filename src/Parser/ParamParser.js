@@ -102,7 +102,13 @@ export default class ParamParser {
         typeText = typeText.replace(/^[(]/, '').replace(/[)]$/, '');
         result.types = typeText.split('|');
       } else if (typeText.includes('|')) {
-        result.types = typeText.split('|');
+        if (typeText.match(/<.*?\|.*?>/)) {
+          // union in generics. e.g. `Array<string|number>`
+          // hack: in this case, process this type in DocBuilder#_buildTypeDocLinkHTML
+          result.types = [typeText];
+        } else {
+          result.types = typeText.split('|');
+        }
       } else {
         result.types = [typeText];
       }

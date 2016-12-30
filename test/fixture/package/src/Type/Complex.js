@@ -27,4 +27,11 @@ export default class TestTypeComplex {
    * @param {!(number|string)} p2 - this is p2.
    */
   method4(p1, p2){}
+
+  // union in generics
+  /**
+   * this is method5.
+   * @param {Promise<string|number, Error>} p1 - this is p1.
+   */
+  method5(p1){}
 }
