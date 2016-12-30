@@ -9,7 +9,7 @@ e.g.
  * @example
  * let myClass = new MyClass();
  */
-class MyClass {
+export default class MyClass {
   /**
    * this is constructor description.
    * @param {number} arg1 this is arg1 description.
