@@ -452,7 +452,7 @@ export default class DocBuilder {
       ice.text('async', doc.async ? 'async' : '');
       ice.text('name', doc.name);
       ice.load('signature', this._buildSignatureHTML(doc));
-      ice.load('description', doc.description);
+      ice.load('description', doc.description || this._buildOverrideMethodDescription(doc));
       ice.text('abstract', doc.abstract ? 'abstract' : '');
       ice.text('access', doc.access);
       if (['get', 'set'].includes(doc.kind)) {
@@ -1021,6 +1021,31 @@ export default class DocBuilder {
       if (!superMethodDoc) continue;
 
       return this._buildDocLinkHTML(superMethodDoc.longname, `${superClassDoc.name}#${superMethodDoc.name}`, true);
+    }
+
+    return '';
+  }
+
+  /**
+   * build method of ancestor class description.
+   * @param {DocObject} doc - target doc object.
+   * @returns {string} description. if doc does not override ancestor method, returns empty.
+   * @private
+   */
+  _buildOverrideMethodDescription(doc) {
+    const parentDoc = this._findByName(doc.memberof)[0];
+    if (!parentDoc) return '';
+    if (!parentDoc._custom_extends_chains) return '';
+
+    const chains = [...parentDoc._custom_extends_chains].reverse();
+    for (const longname of chains) {
+      const superClassDoc = this._findByName(longname)[0];
+      if (!superClassDoc) continue;
+
+      const superMethodDoc = this._find({name: doc.name, memberof: superClassDoc.longname})[0];
+      if (!superMethodDoc) continue;
+
+      if (superMethodDoc.description) return superMethodDoc.description;
     }
 
     return '';
