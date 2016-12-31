@@ -7,6 +7,7 @@
   - Crash when guess type of array detructuring ([#301](https://github.com/esdoc/esdoc/issues/301))
   - A union type in a generics type ([eb051e7](https://github.com/esdoc/esdoc/commit/eb051e729b83bca552a3d4b43351dc1272ee4154))
   - Crash when function was assigned by member expression ([e59820a](https://github.com/esdoc/esdoc/commit/e59820aed2f3e2091f32d35de34925d0132630e0))
+  - Broken to guess type when property has null value or object expression using string key ([5920c1f](https://github.com/esdoc/esdoc/commit/5920c1f91633202ec795f360bb0ac12f68f258f2))
 - **Feat**
   - Automatically take a super class description if the method override a super class method. ([7b515f0](https://github.com/esdoc/esdoc/commit/7b515f0367a386ceb732b4606b96abf24bfab627))
 
