@@ -1,3 +1,4 @@
+import babelGenerator from 'babel-generator';
 import AbstractDoc from './AbstractDoc.js';
 import ParamParser from '../Parser/ParamParser.js';
 import NamingUtil from '../Util/NamingUtil.js';
@@ -18,8 +19,9 @@ export default class FunctionDoc extends AbstractDoc {
 
     if (this._node.id) {
       if (this._node.id.type === 'MemberExpression') {
-        // todo: can not reproduce this condition.
-        // this._value.name = ASTUtil.flattenMemberExpression(this._node.id);
+        // e.g. foo[bar.baz] = function bal(){}
+        const expression = babelGenerator(this._node.id).code;
+        this._value.name = `[${expression}]`;
       } else {
         this._value.name = this._node.id.name;
       }
