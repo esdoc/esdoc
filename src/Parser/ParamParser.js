@@ -338,6 +338,10 @@ export default class ParamParser {
       return {types: ['string']};
     }
 
+    if (right.type === 'NullLiteral') {
+      return {types: ['*']};
+    }
+
     if (right.type.includes('Literal')) {
       return {types: [typeof right.value]};
     }
@@ -353,15 +357,16 @@ export default class ParamParser {
     if (right.type === 'ObjectExpression') {
       const typeMap = {};
       for (const prop of right.properties) {
+        const name = prop.key.name || prop.key.value;
         switch (prop.type) {
           case 'ObjectProperty':
-            typeMap[prop.key.name] = typeof prop.value.value;
+            typeMap[name] = prop.value.value ? typeof prop.value.value : '*';
             break;
           case 'ObjectMethod':
-            typeMap[prop.key.name] = 'function';
+            typeMap[name] = 'function';
             break;
           default:
-            typeMap[prop.key.name] = '*';
+            typeMap[name] = '*';
         }
       }
 
