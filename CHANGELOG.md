@@ -6,6 +6,8 @@
   - Crash when destructure sparse array ([#350](https://github.com/esdoc/esdoc/issues/350))
   - Crash when guess type of array detructuring ([#301](https://github.com/esdoc/esdoc/issues/301))
   - A union type in a generics type ([eb051e7](https://github.com/esdoc/esdoc/commit/eb051e729b83bca552a3d4b43351dc1272ee4154))
+- **Feat**
+  - Automatically take a super class description if the method override a super class method. ([7b515f0](https://github.com/esdoc/esdoc/commit/7b515f0367a386ceb732b4606b96abf24bfab627))
 
 ## 0.5.1 (2016-12-26)
 - **Fix**
