@@ -34,4 +34,11 @@ export default class TestTypeComplex {
    * @param {Promise<string|number, Error>} p1 - this is p1.
    */
   method5(p1){}
+
+  // union with spread
+  /**
+   * this is method6.
+   * @param {...(number|string)} p1 - this is p1.
+   */
+  method6(...p1){}
 }

@@ -9,7 +9,7 @@ describe('test coverage', ()=> {
   it('has coverage summary', ()=> {
     assert(badge.includes('79%'));
     assert.includes(doc, '[data-ice="coverageBadge"]', './badge.svg', 'src');
-    assert.includes(doc, '[data-ice="totalCoverageCount"]', '278/348');
+    assert.includes(doc, '[data-ice="totalCoverageCount"]', '279/349');
     assert.equal(doc.find('[data-ice="file"] [data-ice="coverage"]').length, 119);
   });
 
@@ -120,7 +120,7 @@ describe('test coverage', ()=> {
     test('file/src/TrailingComma/Definition.js.html', '100 %3/3');
     test('file/src/Type/Array.js.html', '100 %2/2');
     test('file/src/Type/Class.js.html#errorLines=1,9', '33 %1/3');
-    test('file/src/Type/Complex.js.html#errorLines=1', '83 %5/6');
+    test('file/src/Type/Complex.js.html#errorLines=1', '85 %6/7');
     test('file/src/Type/Default.js.html', '100 %2/2');
     test('file/src/Type/External.js.html', '100 %2/2');
     test('file/src/Type/Function.js.html', '100 %2/2');

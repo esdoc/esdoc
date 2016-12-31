@@ -789,7 +789,13 @@ export default class DocBuilder {
 
     if (typeName.indexOf('...') === 0) {
       typeName = typeName.replace('...', '');
-      return `...${this._buildDocLinkHTML(typeName)}`;
+      if (typeName.includes('|')) {
+        const typeNames = typeName.replace('(', '').replace(')', '').split('|');
+        const typeLinks = typeNames.map((v) => this._buildDocLinkHTML(v));
+        return `...(${typeLinks.join('|')})`;
+      } else {
+        return `...${this._buildDocLinkHTML(typeName)}`;
+      }
     } else if (typeName.indexOf('?') === 0) {
       typeName = typeName.replace('?', '');
       return `?${this._buildDocLinkHTML(typeName)}`;

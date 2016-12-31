@@ -69,4 +69,14 @@ describe('TestTypeComplex', ()=> {
       ], 'href');
     });
   });
+
+  it('has complex union type with spread.', ()=>{
+    findParent(doc, '[data-ice="summary"] [href$="#instance-method-method6"]', '[data-ice="target"]', (doc)=> {
+      assert.includes(doc, null, 'method6(p1: ...(number|string))');
+      assert.multiIncludes(doc, '[data-ice="signature"] a', [
+        'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number',
+        'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String'
+      ], 'href');
+    });
+  });
 });

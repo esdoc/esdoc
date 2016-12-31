@@ -106,6 +106,10 @@ export default class ParamParser {
           // union in generics. e.g. `Array<string|number>`
           // hack: in this case, process this type in DocBuilder#_buildTypeDocLinkHTML
           result.types = [typeText];
+        } else if (typeText.match(/^\.\.\.\(.*?\)/)) {
+          // union with spread. e.g. `...(string|number)`
+          // hack: in this case, process this type in DocBuilder#_buildTypeDocLinkHTML
+          result.types = [typeText];
         } else {
           result.types = typeText.split('|');
         }
