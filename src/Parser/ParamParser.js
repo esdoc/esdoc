@@ -49,10 +49,25 @@ export default class ParamParser {
 
     // e.g. [p1=123]
     if (name) {
-      match = value.match(/^(\S+)/);
-      if (match) {
-        paramName = match[1];
-        value = value.replace(/^\S+\s*/, '');
+      if (value.charAt(0) === '[') {
+        paramName = '';
+        let counter = 0;
+        for (const c of value) {
+          paramName += c;
+          if (c === '[') counter++;
+          if (c === ']') counter--;
+          if (counter === 0) break;
+        }
+
+        if (paramName) {
+          value = value.substr(paramName.length).trim();
+        }
+      } else {
+        match = value.match(/^(\S+)/);
+        if (match) {
+          paramName = match[1];
+          value = value.replace(/^\S+\s*/, '');
+        }
       }
     }
 
@@ -151,7 +166,7 @@ export default class ParamParser {
         }
       }
 
-      result.name = pair[0];
+      result.name = pair[0].trim();
     }
 
     result.description = paramDesc;

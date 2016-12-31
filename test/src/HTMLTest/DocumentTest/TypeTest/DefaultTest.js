@@ -13,4 +13,10 @@ describe('TestTypeDefault', ()=> {
       assert.includes(doc, '.params [data-ice="property"]:nth-child(2)', 'optional default: []');
     });
   });
+
+  it('has default value of object.', ()=>{
+    findParent(doc, '[id="instance-method-method2"]', '[data-ice="detail"]', (doc)=>{
+      assert.includes(doc, '.params [data-ice="property"]:nth-child(1)', 'optional default: new Foo()');
+    });
+  });
 });

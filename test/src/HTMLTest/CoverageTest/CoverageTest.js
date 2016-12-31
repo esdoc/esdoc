@@ -7,9 +7,9 @@ describe('test coverage', ()=> {
   const badge = fs.readFileSync('./test/fixture/dest/esdoc/badge.svg', {encoding: 'utf8'}).toString();
 
   it('has coverage summary', ()=> {
-    assert(badge.includes('79%'));
+    assert(badge.includes('80%'));
     assert.includes(doc, '[data-ice="coverageBadge"]', './badge.svg', 'src');
-    assert.includes(doc, '[data-ice="totalCoverageCount"]', '279/349');
+    assert.includes(doc, '[data-ice="totalCoverageCount"]', '280/350');
     assert.equal(doc.find('[data-ice="file"] [data-ice="coverage"]').length, 119);
   });
 
@@ -121,7 +121,7 @@ describe('test coverage', ()=> {
     test('file/src/Type/Array.js.html', '100 %2/2');
     test('file/src/Type/Class.js.html#errorLines=1,9', '33 %1/3');
     test('file/src/Type/Complex.js.html#errorLines=1', '85 %6/7');
-    test('file/src/Type/Default.js.html', '100 %2/2');
+    test('file/src/Type/Default.js.html', '100 %3/3');
     test('file/src/Type/External.js.html', '100 %2/2');
     test('file/src/Type/Function.js.html', '100 %2/2');
     test('file/src/Type/Generics.js.html', '100 %2/2');

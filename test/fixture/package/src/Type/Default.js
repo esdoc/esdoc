@@ -8,4 +8,10 @@ export default class TestTypeDefault {
    * @param {string[]} [p2=[]] - this is default string array p2.
    */
   method1(p1 = 123, p2 = []){}
+
+  /**
+   * this is method2.
+   * @param {Foo} [p1 = new Foo()] - this is default object p1.
+   */
+  method2(p1 = new Foo()){}
 }
