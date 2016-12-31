@@ -247,10 +247,10 @@ export default class DocResolver {
 
         let superClassDoc = this._builder._findByName(doc.extends[0])[0];
 
-        // this is circular extends
-        if (superClassDoc.longname === selfDoc.longname) { break; }
-
         if (superClassDoc) {
+          // this is circular extends
+          if (superClassDoc.longname === selfDoc.longname) { break; }
+
           chains.push(superClassDoc.longname);
           doc = superClassDoc;
         } else {
