@@ -18,12 +18,13 @@ exports.onHandleHTML = function(ev) {
     <a href="./" class="logo"><img src="./manual/asset/image/logo.png"/></a>
     <a href="./" class="brand">ESDoc</a>
     <ul>
-      <li><a href="./manual/usage/usage.html">Usage</a></li>
+      <li><a href="https://try.esdoc.org" target="_blank">Try it out</a></li>
+      <li><a href="./manual/usage/usage.html" class="hair-line">Usage</a></li>
       <li><a href="./manual/usage/feature.html">Features</a></li>
       <li><a href="./manual/configuration/config.html">Config</a></li>
       <li><a href="./manual/usage/tags.html">Tags</a></li>
       <li><a href="./manual/advanced/api.html">API</a></li>
-      <li><a href="./manual/changelog/CHANGELOG.html">Releases</a></li>
+      <li><a href="./manual/changelog/CHANGELOG.html" class="hair-line">Releases</a></li>
       <li><a href="./manual/faq/faq.html">FAQ</a></li>
     </ul>
     <a href="https://github.com/esdoc/esdoc" class="github"><img src="./manual/asset/image/github.png"/></a>

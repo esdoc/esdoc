@@ -135,6 +135,13 @@ header .github img {
   top: 5px;
 }
 
+header .hair-line {
+  margin-left: 0.4em;
+  padding-left: 1em;
+  border-left: 1px solid #bbb;
+  line-height: normal;
+}
+
 #changelog + h2 {
   margin-top: 1em;
 }
