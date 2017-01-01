@@ -9,7 +9,7 @@ describe('test coverage', ()=> {
   it('has coverage summary', ()=> {
     assert(badge.includes('79%'));
     assert.includes(doc, '[data-ice="coverageBadge"]', './badge.svg', 'src');
-    assert.includes(doc, '[data-ice="totalCoverageCount"]', '280/350');
+    assert.includes(doc, '[data-ice="totalCoverageCount"]', '280/351');
     assert.equal(doc.find('[data-ice="file"] [data-ice="coverage"]').length, 119);
   });
 
