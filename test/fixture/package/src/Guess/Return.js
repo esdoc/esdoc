@@ -17,4 +17,9 @@ export default class TestGuessReturn {
   method4(){
     return `text`;
   }
+
+  method5(){
+    const obj = {};
+    return {...obj};
+  }
 }

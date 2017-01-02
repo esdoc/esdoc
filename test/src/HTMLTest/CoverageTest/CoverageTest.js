@@ -7,9 +7,9 @@ describe('test coverage', ()=> {
   const badge = fs.readFileSync('./test/fixture/dest/esdoc/badge.svg', {encoding: 'utf8'}).toString();
 
   it('has coverage summary', ()=> {
-    assert(badge.includes('80%'));
+    assert(badge.includes('79%'));
     assert.includes(doc, '[data-ice="coverageBadge"]', './badge.svg', 'src');
-    assert.includes(doc, '[data-ice="totalCoverageCount"]', '280/350');
+    assert.includes(doc, '[data-ice="totalCoverageCount"]', '280/351');
     assert.equal(doc.find('[data-ice="file"] [data-ice="coverage"]').length, 119);
   });
 
@@ -86,7 +86,7 @@ describe('test coverage', ()=> {
     test('file/src/Generator/Method.js.html', '100 %2/2');
     test('file/src/Guess/Param.js.html#errorLines=11,13,15,17,19,21,23,5,7,9', '9 %1/11');
     test('file/src/Guess/Property.js.html#errorLines=10,12,5,6,8', '16 %1/6');
-    test('file/src/Guess/Return.js.html#errorLines=13,17,5,9', '20 %1/5');
+    test('file/src/Guess/Return.js.html#errorLines=13,17,21,5,9', '16 %1/6');
     test('file/src/Guess/Variable.js.html#errorLines=1,3,5,7', '0 %0/4');
     test('file/src/Ignore/Class.js.html', '100 %2/2');
     test('file/src/Ignore/Function.js.html', '-');

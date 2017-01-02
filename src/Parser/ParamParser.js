@@ -376,6 +376,10 @@ export default class ParamParser {
     if (right.type === 'ObjectExpression') {
       const typeMap = {};
       for (const prop of right.properties) {
+        // Can't guess whats in spread object for now
+        if (prop.type === 'SpreadProperty') {
+          return {types: ['*']};
+        }
         const name = prop.key.name || prop.key.value;
         switch (prop.type) {
           case 'ObjectProperty':
