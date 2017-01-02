@@ -17,6 +17,14 @@ describe('TestGuessParam', ()=> {
       findParent(doc, '[data-ice="summary"] [href$="#instance-method-method3"]', '[data-ice="target"]', (doc)=> {
         assert.includes(doc, null, 'public method3(): {"x1": number, "x2": string}');
       });
+
+      findParent(doc, '[data-ice="summary"] [href$="#instance-method-method4"]', '[data-ice="target"]', (doc)=> {
+        assert.includes(doc, null, 'public method4(): string');
+      });
+
+      findParent(doc, '[data-ice="summary"] [href$="#instance-method-method5"]', '[data-ice="target"]', (doc)=> {
+        assert.includes(doc, null, 'public method5(): {"a": *, ...obj: Object}');
+      });
     });
   });
 
@@ -32,6 +40,14 @@ describe('TestGuessParam', ()=> {
 
       findParent(doc, '[id="instance-method-method3"]', '[data-ice="detail"]', (doc)=>{
         assert.includes(doc, 'h3', 'public method3(): {"x1": number, "x2": string}');
+      });
+
+      findParent(doc, '[id="instance-method-method4"]', '[data-ice="detail"]', (doc)=>{
+        assert.includes(doc, 'h3', 'public method4(): string');
+      });
+
+      findParent(doc, '[id="instance-method-method5"]', '[data-ice="detail"]', (doc)=>{
+        assert.includes(doc, 'h3', 'public method5(): {"a": *, ...obj: Object}');
       });
     });
   });

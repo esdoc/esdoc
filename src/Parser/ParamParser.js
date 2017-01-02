@@ -376,26 +376,32 @@ export default class ParamParser {
     if (right.type === 'ObjectExpression') {
       const typeMap = {};
       for (const prop of right.properties) {
-        // Can't guess whats in spread object for now
-        if (prop.type === 'SpreadProperty') {
-          return {types: ['*']};
-        }
-        const name = prop.key.name || prop.key.value;
         switch (prop.type) {
-          case 'ObjectProperty':
+          case 'ObjectProperty': {
+            const name = `"${prop.key.name || prop.key.value}"`;
             typeMap[name] = prop.value.value ? typeof prop.value.value : '*';
             break;
-          case 'ObjectMethod':
+          }
+          case 'ObjectMethod': {
+            const name = `"${prop.key.name || prop.key.value}"`;
             typeMap[name] = 'function';
             break;
-          default:
+          }
+          case 'SpreadProperty': {
+            const name = `...${prop.argument.name}`;
+            typeMap[name] = 'Object';
+            break;
+          }
+          default: {
+            const name = `"${prop.key.name || prop.key.value}"`;
             typeMap[name] = '*';
+          }
         }
       }
 
       const types = [];
       for (const key of Object.keys(typeMap)) {
-        types.push(`"${key}": ${typeMap[key]}`);
+        types.push(`${key}: ${typeMap[key]}`);
       }
 
       return {types: [`{${types.join(', ')}}`]};
