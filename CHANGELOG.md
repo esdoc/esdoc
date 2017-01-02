@@ -1,6 +1,6 @@
 # Changelog
 
-## Next
+## 0.5.2 (2017-01-02)
 - **Fix**
   - Display error message when invalid function type ([#351](https://github.com/esdoc/esdoc/issues/351)) Thanks [@LukasHechenberger](https://github.com/LukasHechenberger)
   - Crash when destructure sparse array ([#350](https://github.com/esdoc/esdoc/issues/350))
