@@ -9,6 +9,7 @@
   - A union type with a spread type ([199d834](https://github.com/esdoc/esdoc/commit/199d834cfe68ba986212b51cb59ea2d9de55ba1c))
   - Crash when function was assigned by member expression ([e59820a](https://github.com/esdoc/esdoc/commit/e59820aed2f3e2091f32d35de34925d0132630e0))
   - Broken to guess type when property has null value or object expression using string key ([5920c1f](https://github.com/esdoc/esdoc/commit/5920c1f91633202ec795f360bb0ac12f68f258f2))
+  - Crash when guess type of return value that has object spread ([#364](https://github.com/esdoc/esdoc/pull/364)) Thanks [vovkasm](https://github.com/vovkasm)
 - **Feat**
   - Automatically take a super class description if the method override a super class method. ([7b515f0](https://github.com/esdoc/esdoc/commit/7b515f0367a386ceb732b4606b96abf24bfab627))
 
