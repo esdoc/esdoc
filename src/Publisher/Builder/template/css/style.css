@@ -120,8 +120,9 @@ li > code {
   padding: 0 10px;
   margin: 0;
   position: fixed;
+  z-index: 3;
+  box-sizing: border-box;
   width: 100%;
-  z-index: 1;
   background-color: #fafafa;
   top: 0;
   border-bottom: solid 1px #ddd;
@@ -143,18 +144,30 @@ li > code {
 
 .navigation {
   position: fixed;
-  top: 0;
+  z-index: 2;
+  top: 40px;
+  bottom: 0;
   left: 0;
   box-sizing: border-box;
   width: 250px;
-  height: 100%;
-  padding-top: 40px;
-  padding-left: 15px;
-  padding-bottom: 2em;
-  margin-top:1em;
-  overflow-x: scroll;
-  box-shadow: rgba(255, 255, 255, 1) -1px 0 0 inset;
+  padding: 10px 15px 2em 15px;
+  overflow: auto;
   border-right: 1px solid #ddd;
+  background-color: #fff;
+  transition: left .3s ease-in-out, box-shadow .3s ease-in-out;
+}
+
+.navigation:before {
+  content: "";
+  background-color: #000;
+  position: fixed;
+  top: 0;
+  right: 99999px;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  transition: right 0s linear .3s, left .3s ease-in-out, opacity .3s ease-in-out;
+  display: none;
 }
 
 .navigation ul {
@@ -231,9 +244,9 @@ h1 .url a {
 }
 
 .content {
-  margin-top: 40px;
-  margin-left: 250px;
-  padding: 10px 50px 10px 20px;
+  box-sizing: border-box;
+  padding: 50px 20px 2em 270px;
+  transition: padding .3s ease-in-out;
 }
 
 .header-notice {
@@ -1021,4 +1034,33 @@ table.test-summary .test-target > span:first-child {
 .github-markdown img:not([src*=".svg"]) {
   max-width: 100%;
   box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+}
+
+.navigation-burger {
+  display: none;
+  font-weight: bold;
+}
+@media (max-width: 760px) {
+  .navigation-burger {
+    display: inline;
+  }
+  .navigation {
+    left: -250px;
+  }
+  .navigation:before {
+    display: block;
+  }
+  body.navigation-open .navigation {
+    left: 0px;
+    box-shadow: rgba(0, 0, 0, .2) 0 0  10px;
+  }
+  body.navigation-open .navigation:before {
+    right: 0;
+    left: 250px;
+    opacity: .5;
+    transition: right 0s linear, left .3s ease-in-out, opacity .3s ease-in-out;
+  }
+  .content {
+    padding-left: 20px;
+  }
 }
