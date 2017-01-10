@@ -131,7 +131,6 @@ html, body {
 }
 
 .layout-container > header {
-  padding: 0 10px;
   position: absolute;
   z-index: 3;
   top: 0;
@@ -144,18 +143,41 @@ html, body {
   background-color: #fafafa;
 }
 
-.layout-container > header > a {
-  margin: 0 5px;
-  color: #444;
+.header-menu {
+  padding: 0 7px;
+}
+.header-menu > * {
+  display: inline-block;
 }
 
-.layout-container > header > a.repo-url-github {
+.header-menu > .navigation-burger,
+.header-menu > .navigation-menu {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 24px;
+  width: 24px;
+  font-size: 0;
+  vertical-align: top;
+  display: none;
+}
+.navigation-burger {
+  background-image: url("../image/list.png");
+}
+.navigation-menu {
+  background-image: url("../image/down.png");
+}
+
+.header-menu a {
+  display: inline-block;
+  padding: 0 7px;
+  color: #444;
+}
+.header-menu a.repo-url-github {
   font-size: 0;
   display: inline-block;
-  width: 20px;
-  height: 38px;
   background: url("../image/github.png") no-repeat center;
-  background-size: 20px;
+  background-size: 24px;
+  width: 24px;
   vertical-align: top;
 }
 
@@ -1065,13 +1087,9 @@ table.test-summary .test-target > span:first-child {
   box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
 }
 
-.navigation-burger {
-  display: none;
-  font-weight: bold;
-}
 @media (max-width: 760px) {
   .navigation-burger {
-    display: inline;
+    display: inline-block !important;
   }
   .navigation {
     left: -250px;
