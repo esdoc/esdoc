@@ -3,14 +3,12 @@
 * {
   margin: 0;
   padding: 0;
-  text-decoration: none;
 }
 
-html {
+body {
+  margin: 0;
   background-color: #f5f5f5;
   color: #555;
-  /*color: #4d4e53;*/
-  /*color: rgba(0, 0, 0, .68);*/
   font-family: 'Source Sans Pro', sans-serif;
   /*font-size: 14px;*/
 }
@@ -19,7 +17,200 @@ a {
   /*color: #0095dd;*/
   /*color:rgb(37, 138, 175);*/
   color: #039BE5;
+  text-decoration: none;
 }
+
+/* --- layout --- */
+
+html,
+body,
+body > .layout-container {
+  height: 100%;
+  overflow: hidden;
+}
+
+.layout-container {
+  position: relative;
+}
+
+@media (min-width: 1024px) {
+  .layout-container {
+    margin: 0 auto;
+    width: 1024px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+    box-sizing: border-box;
+    border-width: 0 1px;
+    border-style: solid;
+    border-color: #ddd;
+  }
+}
+
+.layout-container > header {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  font-size: 16px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #ddd;
+  background-color: #fafafa;
+}
+
+.navbar,
+.navbar a {
+  padding: 0 7px;
+}
+
+.navbar a {
+  display: inline-block;
+  color: #444;
+}
+
+.navbar > * {
+  display: inline-block;
+}
+
+.navbar > .navbar-burger,
+.navbar > .navbar-menu,
+.navbar a.repo-url-github {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 24px;
+  width: 24px;
+  font-size: 0;
+  vertical-align: top;
+}
+
+.navbar .navbar-burger {
+  display: none;
+  background-image: url("../image/list.png");
+}
+
+.navbar .navbar-menu {
+  display: none;
+  background-image: url("../image/down.png");
+}
+
+.navbar a.repo-url-github {
+  background-image: url("../image/github.png");
+}
+
+.navigation {
+  position: absolute;
+  z-index: 2;
+  top: 40px;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+  width: 250px;
+  padding: 15px 0 2em 10px;
+  box-sizing: border-box;
+  border-right: 1px solid #ddd;
+  background-color: #fff;
+  transition: left .3s ease-in-out, box-shadow .3s ease-in-out;
+}
+
+.main {
+  position: absolute;
+  z-index: 1;
+  top: 40px;
+  right: 0;
+  bottom: 0;
+  left: 250px;
+  background-color: #fafafa; /* it's the footer background */
+  transition: left .3s ease-in-out;
+  overflow: auto;
+}
+
+.main:after {
+  content: "";
+  background-color: #000;
+  position: absolute;
+  top: 0;
+  right: 99999px;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  transition: right 0s linear .3s, opacity .3s ease-in-out;
+  display: none;
+}
+
+.content {
+  box-sizing: border-box;
+  padding: 15px 20px 2em 20px;
+  background-color: #fff;
+}
+
+@media (max-width: 759px) {
+  .navbar-burger,
+  .navbar-menu {
+    display: inline-block !important;
+    transition: opacity .3s ease-out;
+  }
+
+  .menu {
+    box-shadow: rgba(0, 0, 0, .2) 0 5px  5px;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    position: absolute;
+    top: 36px;
+    left: -99999px;
+    opacity: 0;
+    transition: left 0s linear .3s, opacity .3s ease-out;
+  }
+  .menu a {
+    display: block;
+    padding: 0px 6em 0px 14px;
+  }
+
+  .navigation {
+    left: -250px;
+  }
+
+  .main {
+    left: 0;
+  }
+
+  .main:after {
+    display: block;
+  }
+
+  body.menu-open .menu {
+    left: 40px;
+    opacity: .96;
+    transition: left 0s linear, opacity .3s ease-out;
+  }
+
+  body.navigation-open .menu {
+    left: -99999px;
+    opacity: 0;
+    transition: left 0s linear .3s, opacity .3s ease-out;
+  }
+
+  body.navigation-open .navbar-menu {
+    opacity: 0;
+  }
+
+  body.navigation-open .navigation {
+    left: 0;
+    box-shadow: rgba(0, 0, 0, .2) 0 0  10px;
+  }
+
+  body.navigation-open .main {
+    overflow: hidden;
+  }
+
+  body.navigation-open .main:after {
+    right: 0;
+    opacity: .4;
+    transition: right 0s linear, opacity .3s ease-in-out;
+  }
+}
+
+/* --- /layout --- */
 
 code a:hover {
   text-decoration: underline;
@@ -103,99 +294,6 @@ li > code {
   background: white;
 }
 
-html, body {
-  height: 100%;
-  overflow: hidden;
-}
-
-.layout-container {
-  /*display: flex;*/
-  /*flex-direction: row;*/
-  /*justify-content: flex-start;*/
-  /*align-items: stretch;*/
-  position: relative;
-  overflow: hidden;
-  height: 100%;
-}
-
-@media (min-width: 1024px) {
-  .layout-container {
-    margin: 0 auto;
-    width: 1024px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
-    box-sizing: border-box;
-    border-width: 0 1px;
-    border-style: solid;
-    border-color: #ddd;
-  }
-}
-
-.layout-container > header {
-  position: absolute;
-  z-index: 3;
-  top: 0;
-  width: 100%;
-  height: 40px;
-  line-height: 40px;
-  font-size: 16px;
-  box-sizing: border-box;
-  border-bottom: solid 1px #ddd;
-  background-color: #fafafa;
-}
-
-.header-menu {
-  padding: 0 7px;
-}
-.header-menu > * {
-  display: inline-block;
-}
-
-.header-menu > .navigation-burger,
-.header-menu > .navigation-menu {
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 24px;
-  width: 24px;
-  font-size: 0;
-  vertical-align: top;
-  display: none;
-}
-.navigation-burger {
-  background-image: url("../image/list.png");
-}
-.navigation-menu {
-  background-image: url("../image/down.png");
-}
-
-.header-menu a {
-  display: inline-block;
-  padding: 0 7px;
-  color: #444;
-}
-.header-menu a.repo-url-github {
-  font-size: 0;
-  display: inline-block;
-  background: url("../image/github.png") no-repeat center;
-  background-size: 24px;
-  width: 24px;
-  vertical-align: top;
-}
-
-.navigation {
-  position: absolute;
-  z-index: 2;
-  top: 40px;
-  bottom: 0;
-  left: 0;
-  box-sizing: border-box;
-  width: 250px;
-  padding: 15px 15px 2em 15px;
-  overflow: auto;
-  border-right: 1px solid #ddd;
-  background-color: #fff;
-  transition: left .3s ease-in-out, box-shadow .3s ease-in-out;
-}
-
 .navigation ul {
   padding: 0;
 }
@@ -267,39 +365,6 @@ h1 .version,
 h1 .url a {
   font-size: 14px;
   color: #aaa;
-}
-
-.main {
-  position: absolute;
-  top: 40px;
-  right: 0;
-  bottom: 0;
-  left: 250px;
-  transition: left .3s ease-in-out;
-  background-color: #fafafa; /* footer bg */
-}
-.main > * {
-  position: relative;
-  height: 100%;
-  overflow: auto;
-}
-
-.content {
-  box-sizing: border-box;
-  padding: 20px 20px 2em 20px;
-  background-color: #fff;
-}
-.main:after {
-  content: "";
-  background-color: #000;
-  position: absolute;
-  top: 0;
-  right: 99999px;
-  bottom: 0;
-  left: 0;
-  opacity: 0;
-  transition: right 0s linear .3s, opacity .3s ease-in-out;
-  display: none;
 }
 
 .header-notice {
@@ -1085,28 +1150,4 @@ table.test-summary .test-target > span:first-child {
 .github-markdown img:not([src*=".svg"]) {
   max-width: 100%;
   box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
-}
-
-@media (max-width: 760px) {
-  .navigation-burger {
-    display: inline-block !important;
-  }
-  .navigation {
-    left: -250px;
-  }
-  .main {
-    left: 0;
-  }
-  .main:after {
-    display: block;
-  }
-  body.navigation-open .navigation {
-    left: 0;
-    box-shadow: rgba(0, 0, 0, .2) 0 0  10px;
-  }
-  body.navigation-open .main:after {
-    right: 0;
-    opacity: .5;
-    transition: right 0s linear, opacity .3s ease-in-out;
-  }
 }
