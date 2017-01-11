@@ -803,7 +803,7 @@ table.test-summary .test-target > span:first-child {
   transition: width 0.2s ease-out;
 }
 
-.search-box > div {
+.search-input {
   position: relative;
   height: 24px;
   margin-top: 8px;
@@ -811,29 +811,22 @@ table.test-summary .test-target > span:first-child {
   border-bottom: 1px solid #0af;
   display: none;
 }
-.search-box > div:before,
-.search-box > div:after {
+.search-input:before,
+.search-input:after {
   content: "";
   position: absolute;
   bottom: 0;
   height: 5px;
   border-left: 1px solid #0af;
 }
-.search-box > div:before {
+.search-input:before {
   left: 0;
 }
-.search-box > div:after {
+.search-input:after {
   right: 0;
 }
 
-.search-box.active {
-  width: 250px;
-}
-.search-box.active > div {
-  display: block;
-}
-
-.search-input {
+.search-input input {
   display: block;
   box-sizing: border-box;
   width: 100%;
@@ -846,12 +839,19 @@ table.test-summary .test-target > span:first-child {
   font-size: 16px; /* like navbar items */
 }
 
+.search-box.active {
+  width: 250px;
+}
+.search-box.active > .search-input {
+  display: block;
+}
+
 .search-result {
   position: absolute;
   top: 36px;
   right: 0;
-  height: 600px;
   width: 120%;
+  max-height: 600px;
   padding: 0;
   box-shadow: rgba(0, 0, 0, .2) 0 5px  5px;
   border-radius: 3px;
@@ -867,6 +867,10 @@ table.test-summary .test-target > span:first-child {
 .search-result-import-path {
   color: #aaa;
   font-size: 12px;
+}
+
+.search-result ul {
+  padding: 7px;
 }
 
 .search-result li {

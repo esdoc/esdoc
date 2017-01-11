@@ -1,8 +1,9 @@
 (function(){
   var searchIndex = window.esdocSearchIndex;
   var searchBox = document.querySelector('.search-box');
-  var input = document.querySelector('.search-input');
-  var result = document.querySelector('.search-result');
+  var input = document.querySelector('.search-input').firstChild;
+  var resultWrapper = document.querySelector('.search-result');
+  var result = resultWrapper.firstChild;
   var selectedIndex = -1;
   var prevText;
 
@@ -16,7 +17,7 @@
   input.addEventListener('keyup', function(ev){
     var text = ev.target.value.toLowerCase();
     if (!text) {
-      result.style.display = 'none';
+      resultWrapper.style.display = 'none';
       result.innerHTML = '';
       return;
     }
@@ -42,7 +43,7 @@
       innerHTML += '<li class="search-separator">' + kind + '</li>\n' + list.join('\n');
     }
     result.innerHTML = innerHTML;
-    if (innerHTML) result.style.display = 'block';
+    if (innerHTML) resultWrapper.style.display = 'block';
     selectedIndex = -1;
   });
 
@@ -110,7 +111,7 @@
   // clear search result when body is clicked.
   document.body.addEventListener('click', function(ev){
     selectedIndex = -1;
-    result.style.display = 'none';
+    resultWrapper.style.display = 'none';
     result.innerHTML = '';
   });
 
