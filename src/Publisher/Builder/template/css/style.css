@@ -845,6 +845,7 @@ table.test-summary .test-target > span:first-child {
   background: transparent;
   outline: none;
   font-family: 'Source Sans Pro', sans-serif;
+  font-size: inherit;
 }
 
 .search-result {
@@ -852,7 +853,7 @@ table.test-summary .test-target > span:first-child {
   top: 36px;
   right: 0;
   height: 600px;
-  width: 150%;
+  width: 125%;
   padding: 0;
   box-shadow: rgba(0, 0, 0, .2) 0 5px  5px;
   border-radius: 3px;
