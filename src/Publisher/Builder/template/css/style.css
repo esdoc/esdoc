@@ -26,23 +26,11 @@ html,
 body,
 body > .layout-container {
   height: 100%;
-  overflow: hidden;
 }
 
 .layout-container {
   position: relative;
-}
-
-@media (min-width: 1024px) {
-  .layout-container {
-    margin: 0 auto;
-    width: 1024px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
-    box-sizing: border-box;
-    border-width: 0 1px;
-    border-style: solid;
-    border-color: #ddd;
-  }
+  overflow: hidden;
 }
 
 .layout-container > header {
@@ -137,20 +125,28 @@ body > .layout-container {
   display: none;
 }
 
+.main > * {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  position: relative;
+}
+
 .content {
+  overflow-x: auto;
   box-sizing: border-box;
   padding: 15px 20px 2em 20px;
   background-color: #fff;
 }
 
-@media (max-width: 759px) {
-  .navbar-burger,
-  .navbar-menu {
+@media (max-width: 768px) {
+  .responsive .navbar-burger,
+  .responsive .navbar-menu {
     display: inline-block !important;
     transition: opacity .3s ease-out;
   }
 
-  .menu {
+  .responsive .menu {
     box-shadow: rgba(0, 0, 0, .2) 0 5px  5px;
     border-radius: 3px;
     border: 1px solid #ddd;
@@ -161,52 +157,60 @@ body > .layout-container {
     opacity: 0;
     transition: left 0s linear .3s, opacity .3s ease-out;
   }
-  .menu a {
+  .responsive .menu a {
     display: block;
     padding: 0px 6em 0px 14px;
   }
 
-  .navigation {
+  .responsive .navigation {
     left: -250px;
   }
 
-  .main {
+  .responsive .main {
     left: 0;
   }
 
-  .main:after {
+  .responsive .main:after {
     display: block;
   }
 
-  body.menu-open .menu {
+  body.responsive.menu-open .menu {
     left: 40px;
     opacity: .96;
     transition: left 0s linear, opacity .3s ease-out;
   }
 
-  body.navigation-open .menu {
+  body.responsive.navigation-open .menu {
     left: -99999px;
     opacity: 0;
     transition: left 0s linear .3s, opacity .3s ease-out;
   }
 
-  body.navigation-open .navbar-menu {
+  body.responsive.navigation-open .navbar-menu {
     opacity: 0;
   }
 
-  body.navigation-open .navigation {
+  body.responsive.navigation-open .navigation {
     left: 0;
     box-shadow: rgba(0, 0, 0, .2) 0 0  10px;
   }
 
-  body.navigation-open .main {
-    overflow: hidden;
-  }
-
-  body.navigation-open .main:after {
+  body.responsive.navigation-open .main:after {
     right: 0;
     opacity: .4;
     transition: right 0s linear, opacity .3s ease-in-out;
+  }
+}
+
+@media (min-width: 1281px) {
+  .responsive .layout-container {
+    margin: 0 auto;
+    width: 1280px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+    box-sizing: border-box;
+    border-width: 0 1px;
+    border-style: solid;
+    border-color: #ddd;
   }
 }
 
