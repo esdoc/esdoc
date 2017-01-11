@@ -800,8 +800,6 @@ table.test-summary .test-target > span:first-child {
   background-size: 24px;
   width: 38px; /* 24px + 2 x 7px */
   height: 40px;
-  line-height: 24px;
-  font-size: 13px;
   transition: width 0.2s ease-out;
 }
 
@@ -845,7 +843,7 @@ table.test-summary .test-target > span:first-child {
   background: transparent;
   outline: none;
   font-family: 'Source Sans Pro', sans-serif;
-  font-size: inherit;
+  font-size: 16px; /* like navbar items */
 }
 
 .search-result {
@@ -853,12 +851,14 @@ table.test-summary .test-target > span:first-child {
   top: 36px;
   right: 0;
   height: 600px;
-  width: 125%;
+  width: 120%;
   padding: 0;
   box-shadow: rgba(0, 0, 0, .2) 0 5px  5px;
   border-radius: 3px;
   border: 1px solid #ddd;
   background: #fff;
+  line-height: 24px;
+  font-size: 13px;
   white-space: nowrap;
   overflow: auto;
   display: none;
