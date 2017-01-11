@@ -268,6 +268,7 @@ p {
 
 pre > code {
   display: block;
+  overflow: auto;
 }
 
 pre.prettyprint, pre > code {
@@ -396,6 +397,18 @@ h1 .url a {
   margin: 5px 0;
 }
 
+.table-wrapper {
+  margin: 10px 0;
+  overflow: auto;
+}
+
+.table-wrapper table {
+  min-width: 100%;
+  border-spacing: 0;
+  border: 0;
+  border-collapse: collapse;
+}
+
 .description table {
   font-size: 14px;
   border-spacing: 0;
@@ -422,14 +435,6 @@ h1 .url a {
 .flat-list li {
   display: inline;
   list-style: none;
-}
-
-table.summary {
-  width: 100%;
-  margin: 10px 0;
-  border-spacing: 0;
-  border: 0;
-  border-collapse: collapse;
 }
 
 table.summary thead {
@@ -497,14 +502,6 @@ table.summary td p {
   margin-bottom: 24px;
 }
 
-table.params {
-  width: 100%;
-  margin: 10px 0;
-  border-spacing: 0;
-  border: 0;
-  border-collapse: collapse;
-}
-
 table.params thead {
   background: #eee;
   color: #aaa;
@@ -525,6 +522,7 @@ table.params td p {
 
 .content .detail > h3 {
   color: black;
+  overflow: auto;
 }
 
 .content .detail > div {
@@ -685,11 +683,6 @@ pre.source-code.line-number li.error-line {
 }
 
 table.files-summary {
-  width: 100%;
-  margin: 10px 0;
-  border-spacing: 0;
-  border: 0;
-  border-collapse: collapse;
   text-align: right;
 }
 
@@ -748,14 +741,6 @@ table.test-summary thead {
 
 table.test-summary thead .test-description {
   width: 50%;
-}
-
-table.test-summary {
-  width: 100%;
-  margin: 10px 0;
-  border-spacing: 0;
-  border: 0;
-  border-collapse: collapse;
 }
 
 table.test-summary thead .test-count {
