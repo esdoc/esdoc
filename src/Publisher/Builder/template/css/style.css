@@ -848,10 +848,16 @@ table.test-summary .test-target > span:first-child {
 }
 
 .search-box.active {
-  width: 250px;
+  width: 300px;
 }
 .search-box.active > .search-input {
   display: block;
+}
+
+@media (max-width: 480px) {
+  .search-box.active {
+    width: 200px;
+  }
 }
 
 .search-result {
@@ -870,7 +876,7 @@ table.test-summary .test-target > span:first-child {
   overflow: auto;
   opacity: 0.96;
   display: none;
-  max-height: 270px; /* designed for @media (min-height: 320px) */
+  max-height: 310px; /* designed for @media (min-height: 360px) */
 }
 
 @media (min-height: 480px) {
