@@ -187,7 +187,7 @@ body > .layout-container {
   }
 
   body.responsive.navigation-open .navbar-menu {
-    opacity: 0;
+    opacity: 0.25;
   }
 
   body.responsive.navigation-open .navigation {
