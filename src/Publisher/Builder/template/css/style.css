@@ -89,11 +89,12 @@ body > .layout-container {
 
 .menu a {
   font-size: 16px; /* restore font-size */
-  transition: background-color 0.2s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .menu a:hover {
-  background-color: #eee;
+  /*background-color: #eee;*/ /* optional */
+  color: #039BE5;
 }
 
 .navigation {
@@ -924,7 +925,7 @@ table.test-summary .test-target > span:first-child {
   list-style: none;
   margin: 0;
   padding: 2px 8px;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.3s ease;
 }
 
 .search-result li a {
