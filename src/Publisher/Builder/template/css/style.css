@@ -941,6 +941,10 @@ table.test-summary .test-target > span:first-child {
   color: #fff;
 }
 
+.search-result li.search-separator:first-letter {
+    text-transform: uppercase;
+}
+
 .search-result-import-path {
   margin-left: 0.3em;
   font-size: 12px;
