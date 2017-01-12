@@ -808,7 +808,7 @@ table.test-summary .test-target > span:first-child {
 .search-box {
   position: absolute;
   top: 0;
-  right: 14px;
+  right: 7px;
   background: url("../image/find.png") no-repeat 7px center;
   background-size: 24px;
   width: 38px; /* 24px + 2 x 7px */
@@ -829,6 +829,7 @@ table.test-summary .test-target > span:first-child {
   position: relative;
   height: 24px;
   margin-top: 8px;
+  margin-right: 7px;
   margin-left: 38px;
   border-bottom: 1px solid #0af;
   opacity: 0;
@@ -878,7 +879,7 @@ table.test-summary .test-target > span:first-child {
 .search-result {
   position: absolute;
   top: 36px;
-  right: 0;
+  right: 7px;
   width: 120%;
   padding: 0;
   box-shadow: rgba(0, 0, 0, 0.2) 0 5px  5px;
