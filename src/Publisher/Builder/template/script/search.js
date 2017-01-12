@@ -13,6 +13,13 @@
     input.focus();
   });
 
+  // close search box when mouse leave or when input blur.
+  searchBox.addEventListener('mouseleave', closeSearchBox);
+  input.addEventListener('blur', closeSearchBox);
+  function closeSearchBox(){
+    input.value || searchBox.classList.remove('active');
+  }
+
   // search with text when key is upped.
   input.addEventListener('keyup', function(ev){
     var text = ev.target.value.toLowerCase();
