@@ -802,6 +802,15 @@ table.test-summary .test-target > span:first-child {
   transition: width 0.2s ease-out;
 }
 
+.search-result:before {
+  content: "no result";
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  font-style: italic;
+  color: #aaa;
+}
+
 .search-input {
   position: relative;
   height: 24px;
@@ -883,8 +892,9 @@ table.test-summary .test-target > span:first-child {
 }
 
 .search-result ul {
-  min-width: 100%;
+  position: relative; /* just to cover the "no result" message */
   display: inline-block;
+  min-width: 100%;
   padding: 0;
 }
 
