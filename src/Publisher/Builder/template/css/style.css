@@ -37,7 +37,7 @@ body > .layout-container {
   top: 0;
   width: 100%;
   height: 40px;
-  line-height: 40px;
+  line-height: 39px;
   font-size: 16px;
   box-sizing: border-box;
   border-bottom: 1px solid #ddd;
@@ -81,6 +81,19 @@ body > .layout-container {
 
 .navbar a.repo-url-github {
   background-image: url("../image/github.png");
+}
+
+.menu {
+  font-size: 0; /* remove the space of 4px inline-block items */
+}
+
+.menu a {
+  font-size: 16px; /* restore font-size */
+  transition: background-color 0.2s ease;
+}
+
+.menu a:hover {
+  background-color: #eee;
 }
 
 .navigation {
@@ -150,6 +163,7 @@ body > .layout-container {
     border-radius: 3px;
     border: 1px solid #ccc;
     background-color: #fff;
+    overflow: hidden;
     position: absolute;
     top: 36px;
     left: -99999px;
@@ -909,7 +923,7 @@ table.test-summary .test-target > span:first-child {
   list-style: none;
   margin: 0;
   padding: 2px 8px;
-  transition: background-color 0.25s ease;
+  transition: background-color 0.2s ease;
 }
 
 .search-result li a {
