@@ -8,10 +8,14 @@
   var prevText;
 
   // active search box and focus when mouse enter on search box.
-  searchBox.addEventListener('mouseenter', function(){
+  searchBox.addEventListener('mouseenter', openSearchBox);
+  // for mobile device handle the 'click' event
+  // (otherwise the box will not be opened, because of the 'blur' event handler).
+  searchBox.addEventListener('click', openSearchBox);
+  function openSearchBox(){
     searchBox.classList.add('active');
     input.focus();
-  });
+  }
 
   // close search box when mouse leave or when input blur.
   searchBox.addEventListener('mouseleave', closeSearchBox);
