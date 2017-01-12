@@ -932,6 +932,7 @@ table.test-summary .test-target > span:first-child {
   display: block;
 }
 
+.search-result li:hover,
 .search-result li.selected {
   background-color: #eee;
 }
@@ -942,7 +943,7 @@ table.test-summary .test-target > span:first-child {
 }
 
 .search-result li.search-separator:first-letter {
-    text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 .search-result-import-path {
