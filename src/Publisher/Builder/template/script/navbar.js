@@ -11,4 +11,11 @@
   }
   toggleHandler('.navbar-burger', 'navigation-open');
   toggleHandler('.navbar-menu', 'menu-open');
+
+  // close the navigation when click on a link.
+  document.querySelector('.navigation').addEventListener('click', function(e){
+    if (e.target.nodeName.toLowerCase() === 'a') {
+      classList.remove('navigation-open');
+    }
+  });
 })();
