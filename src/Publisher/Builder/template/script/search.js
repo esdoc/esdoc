@@ -7,20 +7,22 @@
   var selectedIndex = -1;
   var prevText;
 
-  // active search box and focus when mouse enter on search box.
-  searchBox.addEventListener('mouseenter', openSearchBox);
-  // for mobile device handle the 'click' event
-  // (otherwise the box will not be opened, because of the 'blur' event handler).
-  searchBox.addEventListener('click', openSearchBox);
-  function openSearchBox(){
+  // active search box and focus when mouse enter or when click on search box.
+  searchBox.addEventListener('mouseenter', openBox);
+  searchBox.addEventListener('click', openBox);
+
+  // close search box when mouse leave on search box or when blur on input.
+  searchBox.addEventListener('mouseleave', closeBox);
+  input.addEventListener('blur', closeBox);
+
+  function openBox(){
     searchBox.classList.add('active');
+    // the `focus` works on Desktop when mouse enter and on Mobile when `click`.
+    // the `focus` fails on Mobile when mouse enter, but a `blur` event is triggered!
     input.focus();
   }
 
-  // close search box when mouse leave or when input blur.
-  searchBox.addEventListener('mouseleave', closeSearchBox);
-  input.addEventListener('blur', closeSearchBox);
-  function closeSearchBox(){
+  function closeBox(){
     input.value || searchBox.classList.remove('active');
   }
 

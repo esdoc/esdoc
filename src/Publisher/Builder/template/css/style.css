@@ -817,7 +817,8 @@ table.test-summary .test-target > span:first-child {
   margin-top: 8px;
   margin-left: 38px;
   border-bottom: 1px solid #0af;
-  display: none;
+  opacity: 0;
+  transition: opacity 0.2s ease-out;
 }
 .search-input:before,
 .search-input:after {
@@ -851,7 +852,7 @@ table.test-summary .test-target > span:first-child {
   width: 300px;
 }
 .search-box.active > .search-input {
-  display: block;
+  opacity: 1;
 }
 
 @media (max-width: 480px) {
