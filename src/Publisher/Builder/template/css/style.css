@@ -823,6 +823,7 @@ table.test-summary .test-target > span:first-child {
   margin: 8px 7px 0 38px;
   height: 24px;
   border-bottom: 1px solid #0af;
+  padding-bottom: 1px;
   overflow: hidden;
   opacity: 0;
   transition: opacity 0.2s ease-out;
