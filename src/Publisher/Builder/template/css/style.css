@@ -926,7 +926,6 @@ table.test-summary .test-target > span:first-child {
   list-style: none;
   margin: 0;
   padding: 2px 8px;
-  transition: background-color 0.2s ease;
 }
 
 .search-result li a {

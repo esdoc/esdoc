@@ -107,22 +107,23 @@
   // select search result when search result is mouse over.
   var mousemove;
   result.addEventListener('mousemove', function(ev){
+    // unselect when mouse move
+    var current = result.children[selectedIndex];
+    if (current) current.classList.remove('selected');
     clearTimeout(mousemove);
     mousemove = setTimeout(function(){
-      var current = result.children[selectedIndex];
-      if (current) current.classList.remove('selected');
-
       var li = ev.target;
       while (li) {
         if (li.nodeName === 'LI') break;
         li = li.parentElement;
       }
 
+      // select when mouse stop
       if (li) {
         selectedIndex = Array.prototype.indexOf.call(result.children, li);
         li.classList.add('selected');
       }
-    }, 100);
+    }, 25);
   });
 
   // clear search result when body is clicked.
