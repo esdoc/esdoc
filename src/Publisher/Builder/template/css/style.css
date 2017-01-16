@@ -1,28 +1,237 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,700);
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,600,700);
 
 * {
   margin: 0;
   padding: 0;
-  text-decoration: none;
 }
 
-html
-{
-  font-family: 'Source Sans Pro', 'Roboto', sans-serif;
-  overflow: auto;
-  /*font-size: 14px;*/
-  /*color: #4d4e53;*/
-  /*color: rgba(0, 0, 0, .68);*/
+body {
+  margin: 0;
+  background-color: #f5f5f5;
   color: #555;
-  background-color: #fff;
+  font-family: 'Source Sans Pro', sans-serif;
+  /*font-size: 14px;*/
 }
 
 a {
-  /*color: #0095dd;*/
-  /*color:rgb(37, 138, 175);*/
+  color: #039BE5;
+  text-decoration: none;
+}
+
+/* --- layout --- */
+
+html,
+body,
+body > .layout-container {
+  height: 100%;
+}
+
+.layout-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.layout-container > header {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  width: 100%;
+  height: 40px;
+  line-height: 39px;
+  font-size: 16px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #ddd;
+  background-color: #fafafa;
+}
+
+.navbar,
+.navbar a {
+  padding: 0 7px;
+}
+
+.navbar a {
+  display: inline-block;
+  color: #444;
+}
+
+.navbar > * {
+  display: inline-block;
+}
+
+.navbar > .navbar-burger,
+.navbar > .navbar-menu,
+.navbar a.repo-url-github {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 24px;
+  width: 24px;
+  font-size: 0;
+  vertical-align: top;
+}
+
+.navbar .navbar-burger {
+  display: none;
+  background-image: url("../image/list.png");
+}
+
+.navbar .navbar-menu {
+  display: none;
+  background-image: url("../image/down.png");
+}
+
+.navbar a.repo-url-github {
+  background-image: url("../image/github.png");
+}
+
+.menu {
+  font-size: 0; /* remove the space of 4px inline-block items */
+}
+
+.menu a {
+  font-size: 16px; /* restore font-size */
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.menu a:hover {
+  /*background-color: #f3f3f3;*/ /* optional */
   color: #039BE5;
 }
+
+.navigation {
+  position: absolute;
+  z-index: 2;
+  top: 40px;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+  width: 250px;
+  padding: 15px 0 2em 10px;
+  box-sizing: border-box;
+  border-right: 1px solid #ccc;
+  background-color: #fff;
+  font-size: 16px;
+  transition: left 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.main {
+  position: absolute;
+  z-index: 1;
+  top: 40px;
+  right: 0;
+  bottom: 0;
+  left: 250px;
+  overflow: hidden;
+  background-color: #fafafa; /* it's the footer background */
+  transition: left 0.3s ease-in-out;
+}
+
+.main:after {
+  content: "";
+  background-color: #000;
+  position: absolute;
+  top: 0;
+  right: 99999px;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  transition: right 0s linear 0.3s, opacity 0.3s ease-in-out;
+  display: none;
+}
+
+.main > * {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.content {
+  overflow-x: auto;
+  overflow-y: hidden;
+  box-sizing: border-box;
+  padding: 15px 20px 2em 20px;
+  background-color: #fff;
+}
+
+@media (max-width: 768px) {
+  .responsive .navbar-burger,
+  .responsive .navbar-menu {
+    display: inline-block !important;
+    transition: opacity 0.3s ease-out;
+  }
+
+  .responsive .menu {
+    box-shadow: rgba(0, 0, 0, 0.2) 0 5px  5px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    overflow: hidden;
+    position: absolute;
+    top: 36px;
+    left: -99999px;
+    opacity: 0;
+    transition: left 0s linear 0.3s, opacity 0.3s ease-out;
+  }
+
+  .responsive .menu a {
+    display: block;
+    padding: 0px 6em 0px 14px;
+  }
+
+  .responsive .navigation {
+    left: -250px;
+  }
+
+  .responsive .main {
+    left: 0;
+  }
+
+  .responsive .main:after {
+    display: block;
+  }
+
+  body.responsive.menu-open .menu {
+    left: 40px;
+    opacity: 0.96;
+    transition: left 0s linear, opacity 0.3s ease-out;
+  }
+
+  body.responsive.navigation-open .menu {
+    left: -99999px;
+    opacity: 0;
+    transition: left 0s linear 0.3s, opacity 0.3s ease-out;
+  }
+
+  body.responsive.navigation-open .navbar-menu {
+    opacity: 0.25;
+  }
+
+  body.responsive.navigation-open .navigation {
+    left: 0;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 0 10px;
+  }
+
+  body.responsive.navigation-open .main:after {
+    right: 0;
+    opacity: 0.4;
+    transition: right 0s linear, opacity 0.3s ease-in-out;
+  }
+}
+
+@media (min-width: 1281px) {
+  .responsive .layout-container {
+    margin: 0 auto;
+    width: 1280px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    border-width: 0 1px;
+    border-style: solid;
+    border-color: #ddd;
+  }
+}
+
+/* --- /layout --- */
 
 code a:hover {
   text-decoration: underline;
@@ -76,6 +285,7 @@ p {
 
 pre > code {
   display: block;
+  overflow: auto;
 }
 
 pre.prettyprint, pre > code {
@@ -104,57 +314,6 @@ li > code {
   padding: 0;
   border: none;
   background: white;
-}
-
-.layout-container {
-  /*display: flex;*/
-  /*flex-direction: row;*/
-  /*justify-content: flex-start;*/
-  /*align-items: stretch;*/
-}
-
-.layout-container > header {
-  height: 40px;
-  line-height: 40px;
-  font-size: 16px;
-  padding: 0 10px;
-  margin: 0;
-  position: fixed;
-  width: 100%;
-  z-index: 1;
-  background-color: #fafafa;
-  top: 0;
-  border-bottom: solid 1px #ddd;
-}
-.layout-container > header > a{
-  margin: 0 5px;
-  color: #444;
-}
-
-.layout-container > header > a.repo-url-github {
-  font-size: 0;
-  display: inline-block;
-  width: 20px;
-  height: 38px;
-  background: url("../image/github.png") no-repeat center;
-  background-size: 20px;
-  vertical-align: top;
-}
-
-.navigation {
-  position: fixed;
-  top: 0;
-  left: 0;
-  box-sizing: border-box;
-  width: 250px;
-  height: 100%;
-  padding-top: 40px;
-  padding-left: 15px;
-  padding-bottom: 2em;
-  margin-top:1em;
-  overflow-x: scroll;
-  box-shadow: rgba(255, 255, 255, 1) -1px 0 0 inset;
-  border-right: 1px solid #ddd;
 }
 
 .navigation ul {
@@ -190,7 +349,7 @@ li > code {
   display: inline-block;
   text-align: center;
   border-radius: 0.2em;
-  margin-right: 0.2em;
+  margin-right: 0.3em;
   font-weight: bold;
 }
 
@@ -230,12 +389,6 @@ h1 .url a {
   color: #aaa;
 }
 
-.content {
-  margin-top: 40px;
-  margin-left: 250px;
-  padding: 10px 50px 10px 20px;
-}
-
 .header-notice {
   font-size: 14px;
   color: #aaa;
@@ -259,6 +412,18 @@ h1 .url a {
 
 .extends-chain > div {
   margin: 5px 0;
+}
+
+.table-wrapper {
+  margin: 10px 0;
+  overflow: auto;
+}
+
+.table-wrapper table {
+  min-width: 100%;
+  border-spacing: 0;
+  border: 0;
+  border-collapse: collapse;
 }
 
 .description table {
@@ -287,14 +452,6 @@ h1 .url a {
 .flat-list li {
   display: inline;
   list-style: none;
-}
-
-table.summary {
-  width: 100%;
-  margin: 10px 0;
-  border-spacing: 0;
-  border: 0;
-  border-collapse: collapse;
 }
 
 table.summary thead {
@@ -362,14 +519,6 @@ table.summary td p {
   margin-bottom: 24px;
 }
 
-table.params {
-  width: 100%;
-  margin: 10px 0;
-  border-spacing: 0;
-  border: 0;
-  border-collapse: collapse;
-}
-
 table.params thead {
   background: #eee;
   color: #aaa;
@@ -390,6 +539,7 @@ table.params td p {
 
 .content .detail > h3 {
   color: black;
+  overflow: auto;
 }
 
 .content .detail > div {
@@ -498,14 +648,11 @@ h3 .right-info {
 footer, .file-footer {
   text-align: right;
   font-style: italic;
-  font-weight: 100;
   font-size: 13px;
-  margin-right: 50px;
-  margin-left: 270px;
   border-top: 1px solid #ddd;
-  padding-top: 30px;
-  margin-top: 20px;
-  padding-bottom: 10px;
+  background-color: #fafafa;
+  padding: 10px;
+  padding-top: 40px;
 }
 
 footer img {
@@ -552,11 +699,6 @@ pre.source-code.line-number li.error-line {
 }
 
 table.files-summary {
-  width: 100%;
-  margin: 10px 0;
-  border-spacing: 0;
-  border: 0;
-  border-collapse: collapse;
   text-align: right;
 }
 
@@ -617,14 +759,6 @@ table.test-summary thead .test-description {
   width: 50%;
 }
 
-table.test-summary {
-  width: 100%;
-  margin: 10px 0;
-  border-spacing: 0;
-  border: 0;
-  border-collapse: collapse;
-}
-
 table.test-summary thead .test-count {
   width: 3em;
 }
@@ -672,95 +806,159 @@ table.test-summary .test-target > span:first-child {
   background: rgb(255, 255, 150);
 }
 
-/* search box */
+/* --- search box --- */
+
 .search-box {
   position: absolute;
-  top: 10px;
-  right: 50px;
-  padding-right: 8px;
-  padding-bottom: 10px;
-  line-height: normal;
-  font-size: 12px;
-}
-
-.search-box img {
-  width: 20px;
-  vertical-align: top;
+  top: 0;
+  right: 7px;
+  background: url("../image/find.png") no-repeat 7px center;
+  background-size: 24px;
+  width: 38px; /* 24px + 2 x 7px */
+  height: 40px;
+  transition: width 0.2s ease-out;
 }
 
 .search-input {
-  display: inline;
-  visibility: hidden;
-  width: 0;
-  padding: 2px;
-  height: 1.5em;
-  outline: none;
-  background: transparent;
-  border: 1px #0af;
-  border-style: none none solid none;
-  vertical-align: bottom;
+  position: relative;
+  box-sizing: border-box;
+  margin: 8px 7px 0 38px;
+  height: 24px;
+  border-bottom: 1px solid #0af;
+  padding-bottom: 1px;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease-out;
+}
+.search-input:before,
+.search-input:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  height: 5px;
+  border-left: 1px solid #0af;
+}
+.search-input:before {
+  left: 0;
+}
+.search-input:after {
+  right: 0;
 }
 
-.search-input-edge {
-  display: none;
-  width: 1px;
-  height: 5px;
-  background-color: #0af;
-  vertical-align: bottom;
+.search-input input {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 0 7px;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 16px; /* like navbar items */
+}
+
+.search-box.active {
+  width: 300px;
+}
+.search-box.active > .search-input {
+  opacity: 1;
+}
+
+@media (max-width: 480px) {
+  .search-box.active {
+    width: 200px;
+  }
 }
 
 .search-result {
   position: absolute;
-  display: none;
-  height: 600px;
-  width: 100%;
+  top: 36px;
+  right: 7px;
+  width: 120%;
   padding: 0;
-  margin-top: 5px;
-  margin-left: 24px;
-  background: white;
-  box-shadow: 1px 1px 4px rgb(0,0,0);
+  box-shadow: rgba(0, 0, 0, 0.2) 0 5px  5px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  background: #fff;
+  line-height: 24px;
+  font-size: 13px;
   white-space: nowrap;
-  overflow-y: scroll;
+  overflow: auto;
+  opacity: 0.96;
+  display: none;
+  max-height: 310px; /* designed for @media (min-height: 360px) */
 }
 
-.search-result-import-path {
+.search-result:before {
+  content: "no result";
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  font-style: italic;
   color: #aaa;
-  font-size: 12px;
+}
+
+@media (min-height: 480px) {
+  .search-result {
+    max-height: 430px;
+  }
+}
+
+@media (min-height: 640px) {
+  .search-result {
+    max-height: 590px;
+  }
+}
+
+@media (min-height: 768px) {
+  .search-result {
+    max-height: 718px;
+  }
+}
+
+.search-result ul {
+  position: relative; /* just to cover the "no result" message */
+  display: inline-block;
+  min-width: 100%;
+  padding: 0;
 }
 
 .search-result li {
   list-style: none;
-  padding: 2px 4px;
+  margin: 0;
+  padding: 2px 8px;
 }
 
 .search-result li a {
   display: block;
 }
 
+.search-result li:hover,
 .search-result li.selected {
-  background: #ddd;
+  background-color: #eee;
 }
 
 .search-result li.search-separator {
   background: rgb(37, 138, 175);
-  color: white;
+  color: #fff;
 }
 
-.search-box.active .search-input {
-  visibility: visible;
-  transition: width 0.2s ease-out;
-  width: 300px;
+.search-result li.search-separator:first-letter {
+  text-transform: uppercase;
 }
 
-.search-box.active .search-input-edge {
-  display: inline-block;
+.search-result-import-path {
+  margin-left: 0.3em;
+  font-size: 12px;
+  color: #aaa;
 }
+
+/** manual */
 
 .github-markdown .manual-toc {
   padding-left: 0;
 }
-
-/** manual */
 
 .manual-index .manual-cards {
   display: flex;
@@ -824,10 +1022,10 @@ table.test-summary .test-target > span:first-child {
   border-bottom: solid 1px #ddd;
 }
 
-.manual-root .navigation {
+/*.manual-root .navigation {
   padding-left: 4px;
   margin-top: 4px;
-}
+}*/
 
 .navigation .manual-toc {
   margin-top: -0.25em;
