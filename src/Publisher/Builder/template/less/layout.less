@@ -1,0 +1,150 @@
+/* --- layout --- */
+
+body {
+  margin: 0;
+}
+
+#esdoc-layout {
+  > header {
+    box-sizing: border-box;
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: @header-height;
+    line-height: @header-height - @border-width;
+    border-bottom: @border-width solid @border-color;    
+    background-color: @bg-color-alt;
+  }
+
+  > header > * {
+    position: relative;
+    height: inherit;
+  }
+
+  > section {
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+    top: @header-height;
+
+    // Add this rule if you need to prevent margin collapsing.
+    /*border-top: 1px solid transparent;*/
+  }
+
+  > header > *,
+  > section {
+    margin: 0 auto;
+    max-width: @screen-lg;
+  }
+
+  > section {
+    > article {
+      padding: @padding;
+      overflow-x: auto;
+    }
+
+    > footer {
+      margin: 0 @padding @padding @padding;
+      padding-top: @padding;
+      border-top: @border-width solid @border-color;
+    }
+  }
+
+  > nav {
+    position: fixed;
+    z-index: 2;
+    top: @header-height;
+    bottom: 0;
+    width: @nav-width;
+  }
+
+  > nav > * {
+    box-sizing: border-box;
+    position: relative;
+    overflow: auto;
+    padding: @padding;
+    border: 0px solid @border-color;
+    background-color: @bg-color-base;
+  }
+}
+
+@media (min-width: @screen-md) {
+  html, body {
+    height: 100%;
+  }
+
+  #esdoc-layout {
+    > nav > * {
+      max-height: 100%;
+      /*border-width: 0 @border-width @border-width @border-width;*/ // optional
+    }
+
+    > section {
+      padding-left: @nav-width;
+    }
+  }
+}
+
+@media (min-width: @screen-lg) {
+  #esdoc-layout > nav {
+    right: 50%;
+    margin-right: (@screen-lg / 2 - @nav-width);
+  }
+}
+
+@media (max-width: (@screen-md - 1)) {
+  html,
+  #esdoc-layout > section > footer {
+    background-color: @bg-color-alt;        
+  }
+
+  body {
+    background-color: @bg-color-base;        
+  }
+
+  #esdoc-layout {
+    > section > footer {
+      margin: 0;
+      padding: @padding;
+    }
+
+    > nav {
+      left: -@nav-width;
+      transition: left @nav-delay ease-out;
+    }
+
+    > nav:before {
+      content: "";
+      position: fixed;
+      z-index: 0;
+      top: @header-height;
+      right: 99999px;
+      bottom: 0;
+      left: 0;
+      background-color: #000;
+      opacity: 0;
+      transition: right 0s linear @nav-delay, opacity @nav-delay ease-in-out;
+    }
+
+    > nav > * {
+      height: 100%;
+      border-right-width: @border-width;
+    }
+
+    &.esdoc-nav-open > nav {
+      left: 0px;
+
+      &:before {
+        right: 0;
+        opacity: 0.5;
+        transition: opacity @nav-delay ease-in;
+      }
+    }
+  }
+
+  body.esdoc-nav-open {
+    overflow: hidden;
+  }
+}

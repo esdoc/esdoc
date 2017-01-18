@@ -1,0 +1,88 @@
+/* --- text --- */
+
+html {
+  font-family: @font-family;
+  font-size: @font-size-lg;
+  color: @color-base;
+
+  @media (max-width: (@screen-md - 1)) {
+    font-size: @font-size-md;
+  }
+}
+
+a {
+  color: @color-link;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;  
+  }
+}
+
+h1 {
+  margin: 1.5rem 0 0.75rem 0;
+  border-bottom: solid 1px #ddd;
+  font-size: 2.25rem; // 36px
+  font-weight: 300;
+}
+
+h2 {
+  margin: 1.5rem 0 0.75rem 0;
+  font-size: 1.5rem; // 24px
+  border-bottom: solid 1px #ddd;
+  font-weight: 300;
+}
+
+h3 {
+  position: relative;
+  margin: 1.5rem 0 0.75rem 0;
+  border-radius: @border-radius;
+  background-color: #eee; // #fcf8e3;
+  padding: 0.5em 1em;
+  font-size: 1rem; // 16px
+  font-weight: 300;
+}
+
+h4 {
+  margin: 1.5rem 0 0.25rem 0;
+  font-size: 1.125rem; // 18px
+  font-weight: bold;
+}
+
+p {
+  margin: 0.75rem 0;
+  line-height: 1.5rem;
+  font-size: 1rem; // 16px
+}
+
+table {
+  border-collapse: collapse;
+}
+
+/*tr:nth-child(even) {
+  background-color: #f5f5f5;
+}
+
+thead tr {
+  background-color: @color-base;
+  color: #fff;
+}
+
+td {
+  padding: 0.5em 1em;
+  border: 1px solid #ddd;
+  border-width: 1px 0;
+}
+
+td p {
+  margin: 0.25rem 0;
+}*/
+
+.esdoc-table {
+  margin-bottom: 0.75rem;
+  overflow: auto;
+
+  table {
+    min-width: 100%;
+  }
+}

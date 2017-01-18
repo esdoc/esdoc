@@ -9,13 +9,14 @@
       });
     }
   }
-  toggleHandler('.navbar-burger', 'navigation-open');
-  toggleHandler('.navbar-menu', 'menu-open');
+  toggleHandler('#esdoc-toggle-nav', 'esdoc-nav-open');
+  toggleHandler('#esdoc-toggle-links', 'esdoc-links-open');
 
   // close the navigation when click on a link.
-  document.querySelector('.navigation').addEventListener('click', function(e){
+  document.querySelector('#esdoc-layout > nav').addEventListener('click', function(e){
     if (e.target.nodeName.toLowerCase() === 'a') {
-      classList.remove('navigation-open');
+      classList.remove('esdoc-nav-open');
     }
   });
+
 })();
