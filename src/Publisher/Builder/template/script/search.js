@@ -1,8 +1,8 @@
 (function(){
   var searchIndex = window.esdocSearchIndex;
-  var searchBox = document.querySelector('#esdoc-search-box');
-  var input = document.querySelector('#esdoc-search-input').firstChild;
-  var resultWrapper = document.querySelector('#esdoc-search-result');
+  var searchBox = document.querySelector('#esdoc-search');
+  var input = searchBox.querySelector('header input');
+  var resultWrapper = searchBox.querySelector('article');
   var result = resultWrapper.firstChild;
   var selectedIndex = -1;
   var prevText;

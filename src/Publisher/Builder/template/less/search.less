@@ -1,6 +1,6 @@
 /* --- search --- */
 
-#esdoc-search-box {
+#esdoc-search {
   position: absolute;
   top: 0;
   right: @menu-span;
@@ -9,139 +9,139 @@
   width: @menu-icon-size + 2 * @menu-span;
   height: @header-height;
   transition: width 0.2s ease-out;
-}
 
-#esdoc-search-input {
-  position: relative;
-  box-sizing: border-box;
-  margin: ((@header-height - @search-height) / 2) @menu-span 0 (@menu-icon-size + 2 * @menu-span);
-  height: @search-height;
-  border-bottom: 1px solid @color-link; // fixed border-width
-  padding-bottom: 1px;
-  overflow: hidden;
-  opacity: 0;
-  transition: opacity 0.2s ease-out;
-
-  &:before,
-  &:after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    height: 5px;
-    border-left: 1px solid @color-link; // fixed border-width
-  }
-
-  &:before {
-    left: 0;
-  }
-
-  &:after {
-    right: 0;
-  }
-
-  input {
-    display: block;
+  > header {
+    position: relative;
     box-sizing: border-box;
-    width: 100%;
-    height: 100%;
-    padding: 0 0.5em;
-    border: none;
-    background: transparent;
-    outline: none;
-    font-family: @font-family;
-    font-size: @font-size-lg;
-  }
-}
+    margin: ((@header-height - @search-height) / 2) @menu-span 0 (@menu-icon-size + 2 * @menu-span);
+    height: @search-height;
+    border-bottom: 1px solid @color-link; // fixed border-width
+    padding-bottom: 1px;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.2s ease-out;
 
-@media (max-width: (@screen-md - 1)) {
-  #esdoc-search-input input {
-    font-size: @font-size-md;
-  }
-}
+    &:before,
+    &:after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      height: 5px;
+      border-left: 1px solid @color-link; // fixed border-width
+    }
 
-#esdoc-search-box.active {
-  width: 300px;
+    &:before {
+      left: 0;
+    }
 
-  @media (max-width: 480px) {
-    width: 200px;
-  }
+    &:after {
+      right: 0;
+    }
 
-  > #esdoc-search-input {
-    opacity: 1;
-  }
-}
-
-#esdoc-search-result {
-  position: absolute;
-  top: @header-dropdown-top;
-  right: @menu-span;
-  width: 120%;
-  padding: 0;
-  box-shadow: @header-dropdown-shadow;
-  border-radius: @border-radius;
-  border: @border-width solid @border-color;
-  background-color: @bg-color-base;
-  line-height: 24px;
-  font-size: 13px;
-  white-space: nowrap;
-  overflow: auto;
-  opacity: @header-dropdown-opacity;
-  display: none;
-  max-height: 360px - @header-height;
-
-  &:before {
-    content: "no result";
-    position: absolute;
-    width: 100%;
-    text-align: center;
-    font-style: italic;
-    color: #aaa;
-  }
-
-  @media (min-height: 480px) {
-    max-height: 480px - @header-height;
-  }
-
-  @media (min-height: 640px) {
-    max-height: 640px - @header-height;
-  }
-
-  @media (min-height: 768px) {
-    max-height: 768px - @header-height;
-  }
-
-  ul {
-    position: relative; // just to cover the "no result" message
-    display: inline-block;
-    min-width: 100%;
-    margin: 0;
-    padding: 0;
-    background-color: @bg-color-base; // just to cover the "no result" message
-  }
-
-  li {
-    list-style: none;
-    margin: 0;
-    padding: 2px 8px;
-
-    a {
+    input {
       display: block;
-      text-decoration: none;
+      box-sizing: border-box;
+      width: 100%;
+      height: 100%;
+      padding: 0 0.5em;
+      border: none;
+      background: transparent;
+      outline: none;
+      font-family: @font-family;
+      font-size: @font-size-lg;
+    }
+  }
+
+  @media (max-width: (@screen-md - 1)) {
+    & > header input {
+      font-size: @font-size-md;
+    }
+  }
+
+  &.active {
+    width: 300px;
+
+    @media (max-width: 480px) {
+      width: 200px;
     }
 
-    &:hover,
-    &.selected {
-      background-color: #eee;
+    > header {
+      opacity: 1;
+    }
+  }
+
+  article {
+    position: absolute;
+    top: @header-dropdown-top;
+    right: @menu-span;
+    width: 120%;
+    padding: 0;
+    box-shadow: @header-dropdown-shadow;
+    border-radius: @border-radius;
+    border: @border-width solid @border-color;
+    background-color: @bg-color-base;
+    line-height: 24px;
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: auto;
+    opacity: @header-dropdown-opacity;
+    display: none;
+    max-height: 360px - @header-height;
+
+    &:before {
+      content: "no result";
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      font-style: italic;
+      color: #aaa;
     }
 
-    &.search-separator {
-      background: desaturate(@color-link, 30%);
-      color: #fff;
-      font-size: 1.1em;
+    @media (min-height: 480px) {
+      max-height: 480px - @header-height;
     }
 
-    &.search-separator:first-letter {
-      text-transform: uppercase;
+    @media (min-height: 640px) {
+      max-height: 640px - @header-height;
+    }
+
+    @media (min-height: 768px) {
+      max-height: 768px - @header-height;
+    }
+
+    ul {
+      position: relative; // just to cover the "no result" message
+      display: inline-block;
+      min-width: 100%;
+      margin: 0;
+      padding: 0;
+      background-color: @bg-color-base; // just to cover the "no result" message
+    }
+
+    li {
+      list-style: none;
+      margin: 0;
+      padding: 2px 8px;
+
+      a {
+        display: block;
+        text-decoration: none;
+      }
+
+      &:hover,
+      &.selected {
+        background-color: #eee;
+      }
+
+      &.search-separator {
+        background: desaturate(@color-link, 30%);
+        color: #fff;
+        font-size: 1.1em;
+      }
+
+      &.search-separator:first-letter {
+        text-transform: uppercase;
+      }
     }
   }
 }

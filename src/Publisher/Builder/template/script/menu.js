@@ -1,16 +1,18 @@
 (function() {
-  var classList = document.querySelector('body').classList;
+  var classList = document.body.classList;
   function toggleHandler(selector, className){
-    var trigger = document.querySelector(selector);
-    if (trigger){
-      trigger.addEventListener('click', function(e){
-        e.preventDefault();
-        classList[classList.contains(className) ? 'remove' : 'add'](className);
+    var triggers = document.querySelectorAll(selector);
+    if (triggers.length){
+      triggers.forEach(function(trigger){
+        trigger.addEventListener('click', function(e){
+          e.preventDefault();
+          classList[classList.contains(className) ? 'remove' : 'add'](className);
+        });
       });
     }
   }
-  toggleHandler('#esdoc-toggle-nav', 'esdoc-nav-open');
-  toggleHandler('#esdoc-toggle-links', 'esdoc-links-open');
+  toggleHandler('.esdoc-toggle-nav', 'esdoc-nav-open');
+  toggleHandler('.esdoc-toggle-links', 'esdoc-links-open');
 
   // close the navigation when click on a link.
   document.querySelector('#esdoc-layout > nav').addEventListener('click', function(e){
@@ -18,5 +20,4 @@
       classList.remove('esdoc-nav-open');
     }
   });
-
 })();

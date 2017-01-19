@@ -15,8 +15,8 @@
     color: @color-base;
   }
 
-  #esdoc-toggle-nav,
-  #esdoc-toggle-links,
+  .esdoc-toggle-nav,
+  .esdoc-toggle-links,
   a.repo-url-github {
     background-repeat: no-repeat;
     background-position: center center;
@@ -26,12 +26,12 @@
     vertical-align: top;
   }
 
-  #esdoc-toggle-nav {
+  .esdoc-toggle-nav {
     display: none;
     background-image: url("../image/list.svg");
   }
 
-  #esdoc-toggle-links {
+  .esdoc-toggle-links {
     display: none;
     background-image: url("../image/down.svg");
   }
@@ -56,8 +56,8 @@
 }
 
 @media (max-width: (@screen-md - 1)) {
-  #esdoc-toggle-nav,
-  #esdoc-toggle-links {
+  .esdoc-toggle-nav,
+  .esdoc-toggle-links {
     display: inline-block !important;
     transition: opacity @nav-delay ease-out;
   }
@@ -97,7 +97,7 @@
         transition: left 0s linear (@nav-delay / 2), opacity (@nav-delay / 2) ease-out;
       }
 
-      #esdoc-toggle-links {
+      .esdoc-toggle-links {
         opacity: 0.25;
       }
     }
