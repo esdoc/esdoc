@@ -14,6 +14,7 @@ body {
     left: 0;
     height: @header-height;
     line-height: @header-height - @border-width;
+    /*box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/ // optional
     border-bottom: @border-width solid @border-color;    
     background-color: @bg-color-alt;
   }
@@ -112,7 +113,8 @@ body {
 
     > nav {
       left: -@nav-width;
-      transition: left @nav-delay ease-out;
+      box-shadow: none;
+      transition: left @nav-delay ease-out, box-shadow @nav-delay ease;
     }
 
     > nav:before {
@@ -135,6 +137,7 @@ body {
 
     &.esdoc-nav-open > nav {
       left: 0px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 
       &:before {
         right: 0;

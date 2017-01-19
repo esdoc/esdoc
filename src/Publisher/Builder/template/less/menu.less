@@ -1,7 +1,7 @@
 /* --- menu --- */
 
 #esdoc-menu {
-  padding: 0 @menu-padding;
+  padding: 0 @menu-span;
   font-size: @menu-font-size;
 
   > * {
@@ -10,7 +10,7 @@
 
   a {
     display: inline-block;
-    padding: 0 @menu-padding;
+    padding: 0 @menu-span;
     text-decoration: none;
     color: @color-base;
   }
@@ -84,7 +84,7 @@
   }
 
   body.esdoc-links-open #esdoc-links {
-    left: @menu-icon-size + 3 * @menu-padding;
+    left: @menu-icon-size + 3 * @menu-span;
     opacity: @header-dropdown-opacity;
     transition: left 0s linear, opacity @nav-delay ease-out;
   }

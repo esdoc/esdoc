@@ -3,10 +3,10 @@
 #esdoc-search-box {
   position: absolute;
   top: 0;
-  right: @menu-padding;
-  background: url("../image/find.svg") no-repeat @menu-padding center;
+  right: @menu-span;
+  background: url("../image/find.svg") no-repeat @menu-span center;
   background-size: @menu-icon-size;
-  width: @menu-icon-size + 2 * @menu-padding;
+  width: @menu-icon-size + 2 * @menu-span;
   height: @header-height;
   transition: width 0.2s ease-out;
 }
@@ -14,7 +14,7 @@
 #esdoc-search-input {
   position: relative;
   box-sizing: border-box;
-  margin: ((@header-height - @search-height) / 2) @menu-padding 0 (@menu-icon-size + 2 * @menu-padding);
+  margin: ((@header-height - @search-height) / 2) @menu-span 0 (@menu-icon-size + 2 * @menu-span);
   height: @search-height;
   border-bottom: 1px solid @color-link; // fixed border-width
   padding-bottom: 1px;
@@ -74,7 +74,7 @@
 #esdoc-search-result {
   position: absolute;
   top: @header-dropdown-top;
-  right: @menu-padding;
+  right: @menu-span;
   width: 120%;
   padding: 0;
   box-shadow: @header-dropdown-shadow;
