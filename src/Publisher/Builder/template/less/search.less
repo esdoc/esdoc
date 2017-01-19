@@ -123,26 +123,26 @@
     list-style: none;
     margin: 0;
     padding: 2px 8px;
-  }
 
-  li a {
-    display: block;
-    text-decoration: none;
-  }
+    a {
+      display: block;
+      text-decoration: none;
+    }
 
-  li:hover,
-  li.selected {
-    background-color: #eee;
-  }
+    &:hover,
+    &.selected {
+      background-color: #eee;
+    }
 
-  li.search-separator {
-    background: desaturate(@color-link, 30%);
-    color: #fff;
-    font-size: 1.1em;
-  }
+    &.search-separator {
+      background: desaturate(@color-link, 30%);
+      color: #fff;
+      font-size: 1.1em;
+    }
 
-  li.search-separator:first-letter {
-    text-transform: uppercase;
+    &.search-separator:first-letter {
+      text-transform: uppercase;
+    }
   }
 }
 

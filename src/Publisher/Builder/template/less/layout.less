@@ -17,11 +17,11 @@ body {
     /*box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/ // optional
     border-bottom: @border-width solid @border-color;    
     background-color: @bg-color-alt;
-  }
 
-  > header > * {
-    position: relative;
-    height: inherit;
+    > * {
+      position: relative;
+      height: inherit;
+    }
   }
 
   > section {
@@ -59,15 +59,15 @@ body {
     top: @header-height;
     bottom: 0;
     width: @nav-width;
-  }
 
-  > nav > * {
-    box-sizing: border-box;
-    position: relative;
-    overflow: auto;
-    padding: @padding;
-    border: 0px solid @border-color;
-    background-color: @bg-color-base;
+    > * {
+      box-sizing: border-box;
+      position: relative;
+      overflow: auto;
+      padding: @padding;
+      border: 0px solid @border-color;
+      background-color: @bg-color-base;
+    }
   }
 }
 
