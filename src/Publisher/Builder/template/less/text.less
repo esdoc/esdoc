@@ -46,8 +46,8 @@ h3 {
 h4 {
   margin: (@space-text * 2) 0 0.25rem 0;
   font-size: 1.125rem; // 18px
-  font-weight: bold;
-  color: #999; // optional
+  font-weight: 300;
+  color: darken(@color-link, 15%); // optional
 }
 
 p {
@@ -93,7 +93,48 @@ pre > code {
   font-size: 0.875em; // 14px
 }
 
+table {
+  margin: 1rem 0;
+  border-collapse: collapse;
+  border: 1px solid transparent;
+}
 
+th,
+td {
+  padding: 0.25em 0.5em;
+
+  p,
+  ol,
+  ul {
+    margin: 0.25em 0;
+  }
+}
+
+thead {
+  font-weight: bold;
+}
+
+tbody {
+  tr {
+    border: 1px solid #d8d8d8;
+    background-color: #fff;
+
+    &:nth-child(even) {
+      background-color: #f8f8f8;
+    }
+  }
+
+  th,
+  td {
+    border-right: 1px dotted #d8d8d8;
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+}
+
+// TODO: Move this into custo.less
 .esdoc-table {
   margin-bottom: @space-text;
   overflow: auto;
