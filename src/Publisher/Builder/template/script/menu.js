@@ -2,12 +2,10 @@
   var classList = document.body.classList;
   function toggleHandler(selector, className){
     var triggers = document.querySelectorAll(selector);
-    if (triggers.length){
-      triggers.forEach(function(trigger){
-        trigger.addEventListener('click', function(e){
-          e.preventDefault();
-          classList[classList.contains(className) ? 'remove' : 'add'](className);
-        });
+    for (var i = 0; i < triggers.length; i++) {
+      triggers[i].addEventListener('click', function(e){
+        e.preventDefault();
+        classList[classList.contains(className) ? 'remove' : 'add'](className);
       });
     }
   }
