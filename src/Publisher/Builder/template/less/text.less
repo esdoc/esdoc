@@ -1,8 +1,9 @@
 /* --- text --- */
 
 html {
-  font-family: @font-family;
+  line-height: @line-height;
   font-size: @font-size-lg;
+  font-family: @font-family;
   color: @color-base;
 
   @media (max-width: (@screen-md - 1)) {
@@ -20,67 +21,70 @@ a {
   }
 }
 
-h1 {
-  margin: (@text-space * 2) 0 @text-space 0;
-  border-bottom: solid 1px #ddd;
-  font-size: 2.25rem; // 36px (based on @font-size-lg = 16px)
+h1, h2, h3 {
+  margin: (@text-space * 2) 0 @text-space 0; // default margin of a section heading
   font-weight: 300;
+}
+
+h1 {
+  padding-bottom: 0.1em;
+  border-bottom: solid 1px #ddd;
+  line-height: @line-height - @line-height-x * 4;
+  font-size: 2.25rem; // 36px (based on @font-size-lg = 16px)
 }
 
 h2 {
-  margin: (@text-space * 2) 0 @text-space 0;
-  font-size: 1.5rem; // 24px
+  padding-bottom: 0.1em;
   border-bottom: solid 1px #ddd;
-  font-weight: 300;
+  line-height: @line-height - @line-height-x * 3;
+  font-size: 1.5rem; // 24px
 }
 
 h3 {
-  margin: (@text-space * 2) 0 @text-space 0;
+  line-height: @line-height - @line-height-x * 2;
   font-size: 1.3125rem; // 20px
-  font-weight: 300;
 }
 
 h4 {
-  margin: (@text-space * 2) 0 0.25rem 0;
+  margin: (@text-space * 2) 0 0.25rem 0; // special margin of a paragraph heading
+  line-height: @line-height - @line-height-x * 1;
   font-size: 1.125rem; // 18px
-  font-weight: 300;
-  color: darken(@color-link, 15%); // optional
+  font-weight: bold;
+  //color: darken(@color-link, 15%); // optional
+}
+
+p, ul, ol, pre, table {
+  margin: 0 0 @text-space 0; // default margin of a paragraph like
 }
 
 p {
-  margin: @text-space 0;
-  line-height: 1.5rem;
+  line-height: @line-height;
   font-size: 1rem; // 16px
 }
 
 ul, ol {
-  margin: @text-space 0;
-  padding-left: 1.25em;
+  padding-left: 2.5em;
 }
 
 li {
-  margin: @padding-v 0;
+  //margin: @padding-v 0;
 }
 
 code {
-  padding: 0.1em 0.4em;
+  padding: 0.15em 0.45em;
   border-radius: @border-radius;
   //border: 1px solid rgba(0, 0, 0, 0.07); // optional
   background-color: rgba(0, 0, 0, 0.07);
-  font-size: 0.875rem; // 14px
+  font-size: 0.8125rem; // 13px
   font-family: Consolas, monaco, monospace;
 
   code {
     font-size: 1em;
   }
-
-  //a {
-  //  text-decoration: underline; // TODO: uniquement si necessaire...
-  //}
 }
 
 pre {
-  margin: 0;
+  overflow: auto;
 
   code {
     border: none;
@@ -90,7 +94,6 @@ pre {
   > code {
     display: block;
     overflow: auto;
-    margin: @text-space 0;
     padding: @padding-v @padding-h;
     border-radius: @border-radius;
     //border: 1px solid rgba(0, 0, 0, 0.07); // optional
@@ -99,21 +102,15 @@ pre {
 }
 
 table {
-  margin: @text-space 0;
   border-collapse: collapse;
   border: 1px solid transparent;
-
-  p,
-  ol,
-  ul {
-    margin: @padding-v 0;
-  }
 }
 
 th,
 td {
   padding: @padding-v @padding-h;
   vertical-align: top;
+  line-height: @line-height;
 }
 
 thead {
@@ -139,6 +136,19 @@ tbody {
     }
   }
 }
+
+table.esdoc-table-simple {
+  min-width: auto !important;
+  tbody {
+    tr, th, td {
+      border: none;
+      background: none;
+    }
+  }
+}
+
+
+
 
 // TODO: Move this into custo.less
 .esdoc-table {

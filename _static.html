@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <base data-ice="baseUrl" href="out/esdoc/" />
+  <title data-ice="title"></title>
+  <link type="text/css" rel="stylesheet" href="css/style.css"/>
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css"/>
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+  <link data-ice="userStyle" type="text/css" rel="stylesheet"/>
+  <script data-ice="userScript"></script>
+</head>
+<body id="esdoc-layout" data-ice="rootContainer">
+
+  <header>
+    <div>
+      <div id="esdoc-menu">
+        <a href="#" class="esdoc-toggle-nav">Toggle navigation</a>
+        <a href="#" class="esdoc-toggle-links">Toggle links</a>
+        <nav id="esdoc-links">
+          <a href="./">Home</a>
+          <a href="./manual/index.html" data-ice="manualHeaderLink">Manual</a>
+          <a href="identifiers.html">Reference</a>
+          <a href="source.html">Source</a>
+          <a href="test.html" data-ice="testLink">Test</a>
+        </nav>
+        <a data-ice="repoURL">Repository</a>
+      </div>
+      <div id="esdoc-search">
+        <header><input/></header>
+        <article><ul></ul></article>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <div class="navigation" data-ice="nav"></div>      
+  </nav>
+
+  <section>
+    <article data-ice="content">
+
+<style>
+  #info {
+    position: fixed;
+    right: 5px;
+    bottom: 5px;
+    padding: 5px;
+    opacity: 0.8;
+    border-radius: 3px;
+    background: #ddd;
+    color: red;
+    font-size: 14px;
+    text-decoration: none;
+  }
+  .info {
+    display: inline-block;
+    line-height: 0;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: normal;
+    color: red;
+  }
+</style>
+<a href="#" id="info">Toggle info</a>
+<script>
+  (function () {
+    var display;
+    document.getElementById('info').addEventListener('click', function (e) {
+      display = display ? '' : 'none';
+      e.preventDefault();
+      document.querySelectorAll('.info').forEach(function (info) {
+        info.style.display = display;
+      });
+    });
+  })();
+</script>
+
+<h1>Lorem ipsum dolor sit amet <i class="info">h1 - page title</i></h1>
+
+<p>Lorem ipsum dolor sit amet, <a href="#">consectetur adipiscing elit <i class="info">link</i></a>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="info">paragraph</i></p>
+
+<h2>Lorem ipsum dolor sit amet <i class="info">h2 - section title</i></h2>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+<h3>Lorem ipsum dolor sit amet <i class="info">h3 - article title</i></h3>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+<h4>Lorem ipsum dolor sit amet <i class="info">h4 - paragraph title</i></h4>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+<h4>Lorem ipsum dolor sit amet</h4>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+<h4><i class="info">ol</i></h4>
+<ol>
+  <li>lorem ipsum dolor sit amet</li>
+  <li>consectetur adipiscing elit</li>
+  <li>sed do eiusmod tempor incididunt</li>
+</ol>
+
+<h4><i class="info">ul</i></h4>
+<ul>
+  <li>lorem ipsum dolor sit amet</li>
+  <li>consectetur adipiscing elit</li>
+  <li>sed do eiusmod tempor incididunt</li>
+</ul>
+
+<h4><i class="info">pre</i></h4>
+<pre>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</pre>
+
+<p>Lorem ipsum dolor sit amet, <code>consectetur adipiscing elit <i class="info">code</i></code>, sed do eiusmod tempor incididunt ut labore et dolore <code>magna aliqua</code>.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+<h4><i class="info">pre > code</i></h4>
+<pre><code>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</code></pre>
+
+<h4><i class="info">.esdoc-table > table</i></h4>
+<div class="esdoc-table">
+  <table>
+    <thead>
+      <tr>
+        <td>lorem</td><td>consectetur</td><td>sed do eiusmod</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>lorem ipsum dolor</td><td>consectetur adipiscing elit</td><td><pre>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</pre></td>
+      </tr>
+      <tr>
+        <td>lorem ipsum dolor</td><td>consectetur adipiscing elit</td><td><pre>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</pre></td>
+      </tr>
+      <tr>
+        <td>lorem ipsum dolor</td><td>consectetur adipiscing elit</td><td><pre>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</pre></td>
+      </tr>
+      <tr>
+        <td>lorem ipsum dolor</td><td>consectetur adipiscing elit</td><td><pre>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<h4><i class="info">table.esdoc-table-simple</i></h4>
+<table class="esdoc-table-simple">
+  <thead>
+    <tr>
+      <td>lorem</td><td>consectetur</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>lorem ipsum dolor</td><td>consectetur adipiscing elit</td><td></td>
+    </tr>
+    <tr>
+      <td>lorem ipsum dolor</td><td>consectetur adipiscing elit</td><td></td>
+    </tr>
+    <tr>
+      <td>lorem ipsum dolor</td><td>consectetur adipiscing elit</td><td></td>
+    </tr>
+    <tr>
+      <td>lorem ipsum dolor</td><td>consectetur adipiscing elit</td><td></td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+    </article>
+    <footer>
+      Generated by
+      <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion"></span><img src="./image/esdoc-logo-mini-black.png"/></a>
+    </footer>
+  </section>
+
+  <script src="script/menu.js"></script>
+  <script src="script/search_index.js"></script>
+  <script src="script/search.js"></script>
+  <script src="script/pretty-print.js"></script>
+  <script src="script/inherited-summary.js"></script>
+  <script src="script/test-summary.js"></script>
+  <script src="script/inner-link.js"></script>
+  <script src="script/patch-for-local.js"></script>
+</body>
+</html>
