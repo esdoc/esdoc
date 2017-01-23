@@ -85,3 +85,35 @@
   list-style: none;
 }
 */
+
+pre.source-code.line-number {
+  code {
+    padding-left: 0em;
+  }
+
+  ol {
+    padding-left: 3.5em;
+    color: #bbb; // line number color
+  }
+
+  li {
+    margin: 0;
+    padding: 0.125em 0;
+    list-style: decimal;
+
+    &.active {
+      background: rgb(255, 255, 150);
+    }
+
+    &.error-line {
+      background: #ffb8bf;
+    }
+  }
+}
+
+/*
+pre.raw-source-code > code {
+  padding: 0;
+  margin: 0;
+}
+*/
