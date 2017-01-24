@@ -22,13 +22,13 @@
     border-radius: @border-radius;
     background-color: @bg-color-highlight;
     padding: @padding-v @padding-h;
-    font-size: 1rem; // 16px
+    font-size: 1rem; // 16px (overwrite default)
 
     .right-info {
       position: absolute;
-      right: 4px;
-      bottom: 4px;
-      padding: 0.25em;
+      right: 2px;
+      bottom: 2px;
+      padding: 0.125em 0.25em;
       border-radius: @border-radius;
       background-color: rgba(255, 255, 255, 0.75);
       font-size: 0.875em;
@@ -43,24 +43,9 @@
     }
   }
 
-  /*.return-params > h4 + .esdoc-table {
-      //margin: 0;
-
-      * {
-          margin: 0;
-          padding: 0;
-          border: none;
-      }
-      table {
-          min-width: auto;
-      }
-      td, th {
-        vertical-align: initial;
-      }
-      p {
-          margin-left: 1em;
-      }
-  }*/
+  //.return-params > h4 + .esdoc-table { 
+    
+  //}
 
   & + .detail {
     margin-top: @text-space * 4;
@@ -88,25 +73,28 @@
 
 pre.source-code.line-number {
   code {
-    padding-left: 0em;
+    padding: 0em;
+    background: #ededed; // same as code background but without alpha
   }
 
   ol {
     padding-left: 3.5em;
-    color: #bbb; // line number color
+    background: #ddd;
+    color: #aaa; // line number color
   }
 
   li {
-    margin: 0;
-    padding: 0.125em 0;
-    list-style: decimal;
+    padding-left: 0.5em;
+    background: #ededed;
 
     &.active {
       background: rgb(255, 255, 150);
+      color: #555; // line number color
     }
 
     &.error-line {
       background: #ffb8bf;
+      color: #555; // line number color
     }
   }
 }

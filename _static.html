@@ -44,11 +44,10 @@
 
 <h1><i class="info">h1 (page title)</i> Lorem ipsum dolor sit amet</h1>
 
-<p><i class="info">paragraph</i> Lorem ipsum dolor sit amet, <a href="#"><i class="info">link</i> consectetur adipiscing elit</a>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p><i class="info">p</i> Lorem ipsum dolor sit amet, <a href="#"><i class="info">a</i> consectetur adipiscing elit</a>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in <del><i class="info">del</i>voluptate velit esse cillum</del> dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
 <h2><i class="info">h2 (section title)</i>Lorem ipsum dolor sit amet</h2>
 
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
 <h3><i class="info">h3 (article title)</i> Lorem ipsum dolor sit amet</h3>
@@ -92,6 +91,12 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
 Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</code></pre>
 
+<i class="info">pre > code code</i> 
+<pre><code><code>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</code></code></pre>
+
 <div><i class="info">.esdoc-table > table</i></div>
 <div class="esdoc-table">
   <table>
@@ -126,16 +131,16 @@ Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru
   </thead>
   <tbody>
     <tr>
-      <td>lorem ipsum dolor</td><td>consectetur adipiscing elit</td><td></td>
+      <td>lorem ipsum dolor</td><td><p>consectetur adipiscing elit</p><p>consectetur adipiscing elit</p></td>
     </tr>
     <tr>
-      <td>lorem ipsum dolor</td><td>consectetur adipiscing elit</td><td></td>
+      <td>lorem ipsum dolor</td><td><p>consectetur adipiscing elit</p></td>
     </tr>
     <tr>
-      <td>lorem ipsum dolor</td><td>consectetur adipiscing elit</td><td></td>
+      <td>lorem ipsum dolor</td><td><p>consectetur adipiscing elit</p></td>
     </tr>
     <tr>
-      <td>lorem ipsum dolor</td><td>consectetur adipiscing elit</td><td></td>
+      <td>lorem ipsum dolor</td><td><p>consectetur adipiscing elit</p></td>
     </tr>
   </tbody>
 </table>
@@ -162,18 +167,17 @@ Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru
 <style>
   .info {
     position: absolute;
-    z-index: 999999;
-    margin: -6px 0px 0 -6px;
-    padding: 2px 4px;
-    opacity: 0.9;
+    z-index: 9999;
+    margin: -10px 0px 0 -5px;
+    padding: 3px 6px;
     border-radius: 3px;
-    box-shadow: 1px 1px 0 rgba(0, 0, 0, .8);
-    text-shadow: -1px -1px 0 rgba(0, 0, 0, .8);
-    background: rgba(0, 0, 0, .7);
-    color: red;
-    line-height: 13px;
-    font-size: 13px;
-    font-family: Arial;
+    box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.85);
+    text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.85);
+    background: rgba(0, 0, 0, .65);
+    color: yellow;
+    line-height: 12px;
+    font-size: 12px;
+    font-family: monospace;
     font-style: normal;
     font-weight: normal;
   }
@@ -189,15 +193,13 @@ Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru
 <a href="#" id="info" class="info">Toggle info</a>
 <script>
   (function () {
-    var css, trigger = document.getElementById('info');
-    trigger.addEventListener('click', function (e) {
-      css = css ? '' : 'none';
+    var css, infos = document.querySelectorAll('i.info');
+    document.querySelector('#info').addEventListener('click', function (e){
       e.preventDefault();
-      document.querySelectorAll('.info').forEach(function (info) {
-        if (trigger !== info) {
-          info.style.display = css;
-        }
-      });
+      css = css ? '' : 'none';
+      for (var i = 0; i < infos.length; i++){
+        infos[i].style.display = css;
+      }
     });
   })();
 </script>

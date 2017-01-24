@@ -21,7 +21,7 @@ a {
 }
 
 h1, h2, h3 {
-  margin: (@text-space * 2) 0 @text-space 0; // default margin of a section heading
+  margin: (@text-space * 2) 0 @text-space 0; // (*) default margin of a section heading
   font-weight: 300;
 }
 
@@ -45,7 +45,7 @@ h3 {
 }
 
 h4 {
-  margin: (@text-space * 2) 0 0.25rem 0; // special margin of a paragraph heading
+  margin: (@text-space * 2) 0 0.25rem 0; // (*) special margin of a paragraph heading
   line-height: @line-height - @line-height-x * 1;
   font-size: 1.125rem; // 18px
   font-weight: bold;
@@ -71,7 +71,7 @@ pre, code {
 }
 
 pre code, // use case
-code code, pre pre, code pre  { // just to prevent issues
+code code, pre pre, code pre { // just to handle other markup
   font-size: 1em;
 }
 
@@ -103,11 +103,9 @@ table {
   border: 1px solid transparent;
 }
 
-th,
-td {
+th, td {
   padding: @padding-v @padding-h;
   vertical-align: top;
-  line-height: @line-height;
 }
 
 thead {
@@ -122,10 +120,13 @@ tbody {
     &:nth-child(even) {
       background-color: #f8f8f8;
     }
+
+    //&:hover {
+    //  background-color: #???;
+    //}
   }
 
-  th,
-  td {
+  th, td {
     border-right: 1px dotted #d8d8d8;
 
     &:last-child {
@@ -134,20 +135,18 @@ tbody {
   }
 }
 
+// TODO: Move this into custo.less
+
 table.esdoc-table-simple {
   min-width: auto !important;
   tbody {
     tr, th, td {
-      border: none;
-      background: none;
+      border: none !important;
+      background: none !important;
     }
   }
 }
 
-
-
-
-// TODO: Move this into custo.less
 .esdoc-table {
   margin-bottom: @text-space;
   overflow: auto;
@@ -179,9 +178,9 @@ table.esdoc-table-simple {
   font-weight: normal;
 }
 */
-.description table {
-  border: 1px solid red !important; // FIXME: Just to know if it's used...
-}
+//.description table {
+  //border: 1px solid red !important; // FIXME: Just to know if it's used...
+//}
 
 /*table.params thead {
   background: #eee;
@@ -194,6 +193,6 @@ table.params td {
 }*/
 
 
-table.params td p {
+//table.params td p {
 //  margin: 0;
-}
+//}
