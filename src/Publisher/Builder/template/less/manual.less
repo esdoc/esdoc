@@ -1,45 +1,63 @@
 /* --- manual --- */
 
+.manual-user-index {
+  margin-bottom: 1em;
+  border-bottom: solid 1px #ddd;
+
+  display: none; // just an idea! remove this part from the "Manual" page...
+}
+
 .manual-cards {
-  display: flex;
-  flex-wrap: wrap;
+  font-size: 0; // remove the 4px space between inline-block elements
 }
 
 .manual-card-wrap {
-  width: 280px;
-  margin: 0 20px 20px 0;
+  display: inline-block;
+  width: 30.333333%;
+  margin: 0 3% 3% 0;
   box-sizing: border-box;
-  box-shadow: 1px 1px 0 rgba(230, 230, 230, 0.42);
   border-radius: @border-radius;
+  border: 1px solid #ddd;
+  overflow: hidden;
+  font-size: @font-size-lg; // restore font-size
+  transition: box-shadow 1s ease;
+
+  &:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  }
 
   > h1 {
     margin: 0;
-    padding: 0.25em 0.5em;
-    border-radius: @border-radius @border-radius 0 0;
-    border: solid 1px rgba(230, 230, 230, 0.84);
-    border-bottom: none;
+    padding: @padding-v @padding-h;
+    border-bottom: 1px solid #fff;
     font-size: 1em;
-    font-weight: 600;
+    font-weight: bold;
 
     span {
-      color: #555;
+      color: @color-base;
     }
+  }
+
+  @media (max-width: (@screen-md - 1)) {
+    font-size: @font-size-md;
+  }
+
+  @media (max-width: (@screen-sm - 1)) {
+    width: 97%;
   }
 }
 
 .manual-card {
-  height: 200px;
-  overflow: hidden;
-  border: solid 1px rgba(230, 230, 230, 0.85);
-  border-top: none;
-  border-radius: 0 0 @border-radius @border-radius;
-  padding: 8px;
   position: relative;
+  height: 200px;
+  padding: 8px;
 
   > div {
-    width: 250%;
-    transform: scale(0.4);
+    overflow: hidden;
+    width: 200%;
+    transform: scale(0.5);
     transform-origin: 0 0;
+    transition: transform 2s ease;
   }
 
   > a {
@@ -48,23 +66,19 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: rgba(210, 210, 210, 0.2);
-    transition: background-color 0.25s ease;
+    background-color: rgba(240, 240, 240, 0.5);
+    transition: background-color 1s ease;
     text-decoration: none;
+  }
 
-    &:hover {
+  &:hover {
+    > div {
+      transform: scale(0.54);
+    }
+    > a {
       background-color: transparent;
     }
   }
-}
-
-.manual-badge {
-  margin: 0;
-}
-
-.manual-user-index {
-  margin-bottom: 1em;
-  border-bottom: solid 1px #ddd;
 }
 
 //.manual-root .navigation {

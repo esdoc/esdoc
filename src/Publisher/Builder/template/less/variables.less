@@ -1,6 +1,7 @@
 
 @screen-lg: 1280px;
 @screen-md: 1024px;
+@screen-sm: 640px;
 
 @font-size-lg: 16px;
 @font-size-md: 14px;
@@ -46,6 +47,7 @@
 @nav-delay: 0.3s;
 
 // @screen-* usage
-@media (min-width: @screen-lg) {}       // target large screen
-@media (min-width: @screen-md) {}       // target medium and large screen
-@media (max-width: (@screen-md - 1)) {} // target small screen
+@media (min-width: @screen-lg) {}                                   // target large screen
+@media (min-width: @screen-md) {}                                   // target medium and large screen
+@media (max-width: (@screen-md - 1)) {}                             // target small and x-small screen
+@media (max-width: (@screen-sm - 1)) {}                             // target x-small screen
