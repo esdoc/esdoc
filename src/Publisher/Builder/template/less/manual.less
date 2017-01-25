@@ -81,84 +81,77 @@
   }
 }
 
-//.manual-root .navigation {
-//  padding-left: 4px;
-//  margin-top: 4px;
-//}
-
-//.navigation .manual-toc {
-//  margin-top: -0.25em;
-//}
-
-//.navigation .manual-toc-root > div {
-//  padding-top: 1px;
-//  padding-left: 0.25em;
-//  padding-right: 0.75em;
-//}
-
 .manual-breadcrumb-list {
-  font-size: 0.8em;
-  margin-bottom: 1em;
+  font-size: 0.8125em;
 }
 
-.manual-toc-title a:hover {
-  color: #039BE5;
+.manual-toc-root {
+  margin-top: -1em;
 }
 
-.manual-toc li {
-  margin: 0.75em 0;
-  list-style-type: none;
-}
+.manual-toc {
+  li {
+    display: none;
+    padding-left: @padding-h;
+    list-style-type: none;
+  }
 
-.navigation .manual-toc [class^="indent-h"] a {
-  color: #666;
-}
+  a {
+    display: block;
+    padding: @padding-v 0;
+    line-height: @line-height;
+  }
 
-.navigation .manual-toc .indent-h1 a {
-  color: #555;
-  font-weight: 600;
-  display: block;
-}
+  .indent-h1 {
+    display: list-item;
+    margin-top: 1em;
+    border-radius: @border-radius;
 
-.manual-toc .indent-h1 {
-  display: block;
-  margin: 1em 0 0 0.25em;
-  padding: 0.2em 0 0.2em 0.5em;
-  border-radius: 0.1em;
-}
-.manual-toc .indent-h2 {
-  display: none;
-  margin-left: 1.5em;
-}
-.manual-toc .indent-h3 {
-  display: none;
-  margin-left: 2.5em;
-}
-.manual-toc .indent-h4 {
-  display: none;
-  margin-left: 3.5em;
-}
-.manual-toc .indent-h5 {
-  display: none;
-  margin-left: 4.5em;
+    a {
+      font-weight: bold;
+    }
+  }
+
+  .indent-h2 a {
+    padding-left: 0.75rem * 1; // should be in rem
+  }
+
+  .indent-h3 a {
+    padding-left: 0.75rem * 2;
+    color: #999 !important;
+    font-size: 0.875em;
+  }
+
+  .indent-h4 a {
+    padding-left: 0.75rem * 3;
+    color: #999 !important;
+    font-size: 0.875em;
+  }
+
+  .indent-h5 a {
+    padding-left: 0.75rem * 4;
+    color: #999 !important;
+    font-size: 0.875em;
+  }
 }
 
 .manual-color {
   position: relative;
-}
+  color: @color-base;
 
-.manual-color:after {
-  content: attr(data-section-count);
-  font-size: 0.5em;
-  opacity: 0.5;
-  position: absolute;
-  right: 0.5em;
-  top: 0.5em;
+  &:after {
+    content: attr(data-section-count);
+    position: absolute;
+    right: 0.5em;
+    top: 0.5em;
+    font-size: 0.5em;
+    opacity: 0.5;
+  }
 }
 
 .manual-color-overview,
 .manual-color-design {
-  color: #db001e;
+  color: #de5463;
   background-color: #edbec3;
 }
 
@@ -186,15 +179,3 @@
   color: #0738c3;
   background-color: #bbcbea;
 }
-
-.manual-nav li {
-  margin: 0.75em 0;
-}
-
-/*.github-markdown .manual-toc {
-  padding-left: 0;
-}
-
-.github-markdown .manual-toc-title a {
-  color: inherit;
-}*/
