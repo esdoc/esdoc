@@ -7,7 +7,6 @@
   }
 
   li {
-    margin: 0.25em 0;
     list-style: none;
     white-space: nowrap;
   }
@@ -18,9 +17,11 @@
   }
 
   .nav-dir-path {
-    margin-top: 0.75em;
-    margin-bottom: 0.25em;
-    font-size: 0.8em;
+    margin-top: 1em;
+    box-sizing: border-box;
+    border-top: @border-width solid @border-color;
+    font-size: 0.8125em;
+    text-align: center;
     color: #aaa;
   }
 }
@@ -31,13 +32,13 @@
 .kind-typedef,
 .kind-variable,
 .kind-external {
-  margin-left: 0.75em;
+  display: inline-block;
   width: 1.2em;
   height: 1.2em;
-  display: inline-block;
+  line-height: 1.2em;
+  margin-right: 0.33em;
+  border-radius: @border-radius;
   text-align: center;
-  border-radius: 0.2em;
-  margin-right: 0.3em;
   font-weight: bold;
 }
 

@@ -63,15 +63,6 @@ table.summary {
 }
 
 .files-summary {
-
-  tbody tr {
-    transition: background-color 0.25s ease;
-
-    &:hover {
-      background-color: @bg-color-highlight;
-    }
-  }
-
   td.identifiers > span {
     display: block;
 
@@ -105,17 +96,12 @@ table.summary {
 
   tbody tr {
     background-color: #fff; // overwrite default tr:nth-child(even) { background-color: #f8f8f8; }
-    transition: background-color 0.25s ease;
     animation-name: test-summary-hightlight; // hightlight when opening
-    animation-duration: 0.5s;
+    animation-duration: 0.75s;
 
     &[data-test-depth="0"] {
       background-color: #f8f8f8; // restore background
       animation: none;
-    }
-
-    &:hover {
-      background-color: @bg-color-highlight;
     }
   }
 

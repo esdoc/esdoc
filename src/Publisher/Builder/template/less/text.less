@@ -114,16 +114,19 @@ thead {
 
 tbody {
   tr {
-    border: 1px solid #d8d8d8;
+    border-width: 1px 0;
+    border-style: solid;
+    border-color: #d8d8d8;
     background-color: #fff;
+    transition: background-color 0.25s ease;
 
     &:nth-child(even) {
       background-color: #f8f8f8;
     }
 
-    //&:hover {
-    //  background-color: #???;
-    //}
+    &:hover {
+      background-color: #fcf8e3;
+    }
   }
 
   th, td {
