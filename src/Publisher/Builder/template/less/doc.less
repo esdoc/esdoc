@@ -1,0 +1,145 @@
+/* --- doc --- */
+
+.header-notice {
+  color: #aaa;
+
+  pre {
+    margin: 0;
+
+    code {
+        margin: 0;
+        padding: 0;
+        border: none;
+        background: none;
+    }
+  }
+}
+
+// ------
+
+.detail {
+  > h3 {
+    position: relative;
+    overflow: auto;
+    border-radius: @border-radius;
+    background-color: @bg-color-highlight;
+    padding: @padding-v @padding-h;
+    font-size: 1rem; // 16px (overwrite default)
+
+    .right-info {
+      position: absolute;
+      right: 2px;
+      bottom: 2px;
+      padding: 0.125em 0.25em;
+      border-radius: @border-radius;
+      background-color: rgba(255, 255, 255, 0.75);
+      font-size: 0.875em;
+
+      a {
+        text-decoration: none; // optional
+      }
+    }
+
+    [data-ice="name"] {
+      font-weight: bold;
+    }
+  }
+
+  > div {
+    margin-left: @content-shift;
+  }
+
+  h4 {
+    + * {
+      padding-left: @content-shift; // use padding (and not margin) to also target the <ul> default padding
+    }
+
+    + ul li {
+      list-style: none;
+    }
+
+    + .example-doc {
+      padding-left: 0; // remove @content-shift
+    }
+  }
+
+  & + .detail {
+    margin-top: @text-space * 2;
+  }
+}
+
+.flat-list {
+  margin-bottom: @text-space;
+}
+
+.instance-docs, .deprecated, .experimental {
+  margin: 0.25em 0;
+
+  &:before {
+    content: "";
+    display: inline-block;
+    width: 0.5em;
+    height: 0.5em;
+    margin-right: 0.5em;
+    border-radius: @border-radius;
+  }
+}
+
+.instance-docs:before {
+  background-color: orange;
+}
+
+.deprecated:before {
+  background-color: orange;
+}
+
+.experimental:before {
+  background-color: orange;
+}
+
+.params, .return-params {
+  p {
+    margin-bottom: 0;
+  }
+}
+
+.import-path pre.prettyprint code {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.inner-link-active {
+  background: rgb(255, 255, 150) !important;
+}
+
+// ------
+
+pre.source-code.line-number {
+  code {
+    padding: 0em;
+    background: #ededed; // same as code background but without alpha
+  }
+
+  ol {
+    padding-left: 3.5em;
+    background: #ddd;
+    color: #aaa; // line number color
+  }
+
+  li {
+    padding-left: 0.5em;
+    background: #ededed;
+
+    &.active {
+      background: rgb(255, 255, 150);
+      color: #555; // line number color
+    }
+
+    &.error-line {
+      background: #ffb8bf;
+      color: #555; // line number color
+    }
+  }
+}

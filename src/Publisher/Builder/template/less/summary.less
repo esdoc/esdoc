@@ -17,7 +17,7 @@ table.summary {
     }
 
     & > div:nth-of-type(2) {
-      margin-left: 1em;
+      margin-left: @content-shift;
     }
 
     p {
@@ -140,7 +140,7 @@ table.summary {
 
   @keyframes test-summary-hightlight {
     from {
-      background-color: #fcf8e3;
+      background-color: rgb(255, 255, 150);
     }
     to {
       background-color: #fff;

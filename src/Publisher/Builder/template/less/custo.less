@@ -1,204 +1,8 @@
 /* --- custo --- */
 
-table.esdoc-table-simple {
-  min-width: auto !important;
-  tbody {
-    tr, th, td {
-      border: none !important;
-      background: none !important;
-    }
-  }
-}
-
-.esdoc-table {
-  margin-bottom: @text-space;
-  overflow: auto;
-
-  table {
-    margin: 0;
-    min-width: 100%;
-  }
-}
-
-
-
-.flat-list {
-  margin-bottom: @text-space; // because of the .description which is below
-}
-
-
-/*
-.flat-list ul {
-  padding-left: 0;
-}
-.flat-list li {
-  display: inline;
-  list-style: none;
-}
-*/
-
-/*
-.description table {
-  font-size: 14px;
-  border-spacing: 0;
-  border: 0;
-  border-collapse: collapse;
-}
-
-.description thead {
-  background: #999;
-  color: white;
-}
-
-.description table td,
-.description table th {
-  border: solid 1px #ddd;
-  padding: 4px;
-  font-weight: normal;
-}
-*/
-//.description table {
-  //border: 1px solid red !important; // FIXME: Just to know if it's used...
-//}
-
-/*table.params thead {
-  background: #eee;
-  color: #aaa;
-}
-
-table.params td {
-  padding: 4px;
-  border: solid 1px #ddd;
-}*/
-
-
-//table.params td p {
-//  margin: 0;
-//}
-
-
-
-
-
-.header-notice {
-  color: #aaa;
-
-  pre {
-    margin: 0;
-
-    code {
-        margin: 0;
-        padding: 0;
-        border: none;
-        background: none;
-    }
-  }
-}
-
-.detail {
-  > h3 {
-    position: relative;
-    overflow: auto;
-    border-radius: @border-radius;
-    background-color: @bg-color-highlight;
-    padding: @padding-v @padding-h;
-    font-size: 1rem; // 16px (overwrite default)
-
-    .right-info {
-      position: absolute;
-      right: 2px;
-      bottom: 2px;
-      padding: 0.125em 0.25em;
-      border-radius: @border-radius;
-      background-color: rgba(255, 255, 255, 0.75);
-      font-size: 0.875em;
-
-      a {
-        text-decoration: none; // optional
-      }
-    }
-
-    [data-ice="name"] {
-      font-weight: bold;
-    }
-  }
-
-  > div {
-    margin-left: 1rem;
-  }
-
-  //.return-params > h4 + .esdoc-table { 
-    
-  //}
-
-  & + .detail {
-    margin-top: @text-space * 4;
-  }
-}
-
-/*
-.detail > .import-path {
-  margin-top: -8px;
-}
-
-.detail .throw td:first-child {
-  padding-right: 10px;
-}
-
-.detail h4 + :not(pre) {
-  padding-left: 0;
-  margin-left: 10px;
-}
-
-.detail h4 + ul li {
-  list-style: none;
-}
-*/
-
-pre.source-code.line-number {
-  code {
-    padding: 0em;
-    background: #ededed; // same as code background but without alpha
-  }
-
-  ol {
-    padding-left: 3.5em;
-    background: #ddd;
-    color: #aaa; // line number color
-  }
-
-  li {
-    padding-left: 0.5em;
-    background: #ededed;
-
-    &.active {
-      background: rgb(255, 255, 150);
-      color: #555; // line number color
-    }
-
-    &.error-line {
-      background: #ffb8bf;
-      color: #555; // line number color
-    }
-  }
-}
-
-/*
-pre.raw-source-code > code {
-  padding: 0;
-  margin: 0;
-}
-*/
-
-
-
 #esdoc-layout > section {
-  > article {
-    &, > .github-markdown {
-      > h1:first-child {
-        margin-top: 0;
-      }
-    } 
+  > article > h1:first-child {
+    margin-top: 0;
   }
 
   > footer {
@@ -214,5 +18,26 @@ pre.raw-source-code > code {
       vertical-align: middle;
       opacity: 0.6;
     }
+  }
+}
+
+table.esdoc-table-simple {
+  min-width: auto !important;
+  tbody {
+    tr, th, td {
+      border: none !important;
+      background: none !important;
+    }
+  }
+}
+
+// usage: .esdoc-table-wrapper > table
+.esdoc-table-wrapper {
+  margin-bottom: @text-space;
+  overflow: auto;
+
+  table {
+    margin: 0;
+    min-width: 100%;
   }
 }
