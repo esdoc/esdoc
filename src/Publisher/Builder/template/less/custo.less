@@ -105,3 +105,31 @@ pre.raw-source-code > code {
   margin: 0;
 }
 */
+
+
+// TODO: move this at the right place...
+
+#esdoc-layout > section {
+  > article {
+    &, > .github-markdown {
+      > h1:first-child {
+        margin-top: 0;
+      }
+    } 
+  }
+
+  > footer {
+    text-align: right;
+    font-style: italic;
+    font-size: 0.875em;
+
+    img {
+      position: relative;
+      top: -3px;
+      margin-left: 4px;
+      width: 24px;
+      vertical-align: middle;
+      opacity: 0.6;
+    }
+  }
+}
