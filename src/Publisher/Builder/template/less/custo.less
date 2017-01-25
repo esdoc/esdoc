@@ -21,6 +21,22 @@ table.esdoc-table-simple {
 }
 
 
+
+.flat-list {
+  margin-bottom: @text-space; // because of the .description which is below
+}
+
+
+/*
+.flat-list ul {
+  padding-left: 0;
+}
+.flat-list li {
+  display: inline;
+  list-style: none;
+}
+*/
+
 /*
 .description table {
   font-size: 14px;
@@ -105,6 +121,10 @@ table.params td {
     [data-ice="name"] {
       font-weight: bold;
     }
+  }
+
+  > div {
+    margin-left: 1rem;
   }
 
   //.return-params > h4 + .esdoc-table { 
