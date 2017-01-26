@@ -59,7 +59,7 @@ table.summary {
   line-height: 0;
   font-size: 0.825rem;
   font-weight: normal;
-  color: #aaa;
+  color: @color-alt;
 }
 
 .files-summary {
@@ -83,7 +83,7 @@ table.summary {
     display: inline-block;
     min-width: 3.5em;
     font-size: 0.825rem;
-    color: #aaa;
+    color: @color-alt;
   }
 }
 
@@ -95,12 +95,12 @@ table.summary {
   }
 
   tbody tr {
-    background-color: #fff; // overwrite default tr:nth-child(even) { background-color: #f8f8f8; }
+    background-color: @bg-color-base; // overwrite default tr:nth-child(even){}
     animation-name: test-summary-highlight; // highlight when opening
     animation-duration: 0.75s;
 
     &[data-test-depth="0"] {
-      background-color: #f8f8f8; // fixed background for the first level
+      background-color: darken(@bg-color-base, 3); // fixed background for the first level
       animation: none;
     }
   }
@@ -144,7 +144,7 @@ table.summary {
       background-color: rgb(255, 255, 150);
     }
     to {
-      background-color: #fff;
+      background-color: transparent;
     }
   }
 }

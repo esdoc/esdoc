@@ -23,7 +23,7 @@ a {
 hr {
   margin: (@text-space * 2) 0;
   border: none;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid @border-color;
 }
 
 h1, h2, h3 {
@@ -33,14 +33,14 @@ h1, h2, h3 {
 
 h1 {
   padding-bottom: 0.1em;
-  border-bottom: solid 1px #ddd;
+  border-bottom: 1px solid @border-color;
   line-height: @line-height - @line-height-x * 4;
   font-size: 2.25rem; // 36px (based on @font-size-lg = 16px)
 }
 
 h2 {
   padding-bottom: 0.1em;
-  border-bottom: solid 1px #ddd;
+  border-bottom: 1px solid @border-color;
   line-height: @line-height - @line-height-x * 3;
   font-size: 1.5rem; // 24px
 }
@@ -55,7 +55,6 @@ h4 {
   line-height: @line-height - @line-height-x * 1;
   font-size: 1.125rem; // 18px
   font-weight: bold;
-  //color: darken(@color-link, 15%); // optional
 }
 
 p, ul, ol, pre, table {
@@ -82,10 +81,9 @@ code code, pre pre, code pre { // notice: this is just to handle other markup
 }
 
 code {
-  padding: 0.15em 0.45em;
+  padding: @code-padding;
   border-radius: @border-radius;
-  //border: 1px solid rgba(0, 0, 0, 0.07); // optional
-  background-color: rgba(0, 0, 0, 0.07);
+  background-color: @code-bg-color;
 
   a {
     text-decoration: none !important;
@@ -104,7 +102,6 @@ pre {
 
   > * code {
     padding: 0;
-    border: none;
     background: none;
   }
 }
@@ -127,21 +124,21 @@ tbody {
   tr {
     border-width: 1px 0;
     border-style: solid;
-    border-color: #d8d8d8;
-    background-color: #fff;
+    border-color: @border-color;
+    background-color: @bg-color-base; // FIXME: use transparent ???
     transition: background-color 0.25s ease;
 
     &:nth-child(even) {
-      background-color: #f8f8f8;
+      background-color: darken(@bg-color-base, 3); // TODO: use @bg-color-alt instead ???
     }
 
     &:hover {
-      background-color: #fcf8e3;
+      background-color: rgba(252, 248, 227, 0.5); // #fcf8e3; TODO: optimze this color in rgba...
     }
   }
 
   th, td {
-    border-right: 1px dotted #d8d8d8;
+    border-right: 1px dotted @border-color;
 
     &:last-child {
       border-right: none;

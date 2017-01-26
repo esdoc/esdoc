@@ -1,7 +1,7 @@
 /* --- doc --- */
 
 .header-notice {
-  color: #aaa;
+  color: @color-alt;
 
   pre {
     margin: 0;
@@ -9,7 +9,6 @@
     code {
         margin: 0;
         padding: 0;
-        border: none;
         background: none;
     }
   }
@@ -110,7 +109,6 @@
 .import-path pre.prettyprint code {
   margin: 0;
   padding: 0;
-  border: none;
   background: transparent;
 }
 
@@ -123,11 +121,11 @@
 .example-caption {
   display: inline-block;
   margin: 0 1em 0 0 !important;
-  padding: 0.15em 0.45em; // like <code>
+  padding: @code-padding;
   border-radius: @border-radius @border-radius 0 0;
-  background-color: rgba(0, 0, 0, 0.07); // like <code>
+  background-color: @code-bg-color;
   font-style: italic;
-  color: #999;
+  color: @color-alt;
 
   // make sure there's no space between .example-caption and .source-code
   padding-bottom: 0 !important;
