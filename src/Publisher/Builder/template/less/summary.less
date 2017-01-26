@@ -96,7 +96,7 @@ table.summary {
 
   tbody tr {
     background-color: #fff; // overwrite default tr:nth-child(even) { background-color: #f8f8f8; }
-    animation-name: test-summary-hightlight; // hightlight when opening
+    animation-name: test-summary-highlight; // highlight when opening
     animation-duration: 0.75s;
 
     &[data-test-depth="0"] {
@@ -138,7 +138,8 @@ table.summary {
     //}
   }
 
-  @keyframes test-summary-hightlight {
+  // highlight the table row when displayed
+  @keyframes test-summary-highlight {
     from {
       background-color: rgb(255, 255, 150);
     }

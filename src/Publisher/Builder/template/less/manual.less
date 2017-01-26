@@ -1,11 +1,17 @@
 /* --- manual --- */
 
 .manual-user-index {
-  margin-bottom: 1em;
+  margin-bottom: @text-space * 2;
   border-bottom: solid 1px #ddd;
 
-  display: none; // just an idea! remove this part from the "Manual" page...
+  // ################
+  // Just a proposal:
+  // remove this part from the "Manual" page...
+  display: none;
+  // ################
 }
+
+// --- cards ---
 
 .manual-cards {
   font-size: 0; // remove the 4px space between inline-block elements
@@ -81,9 +87,13 @@
   }
 }
 
+// --- breadcrumb ---
+
 .manual-breadcrumb-list {
   font-size: 0.8125em;
 }
+
+// --- navigation ---
 
 .manual-toc-root {
   margin-top: -1em;
@@ -109,6 +119,10 @@
 
     a {
       font-weight: bold;
+    }
+
+    + .indent-h2 {
+        margin-top: @padding-v;
     }
   }
 
