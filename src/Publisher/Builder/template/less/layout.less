@@ -36,29 +36,33 @@ body {
 
   > header > *,
   > section {
-    margin: 0 auto;
+    margin: 0 auto; // center the header content and the main section
     max-width: @screen-lg;
   }
 
   > section {
-    > article {
+    > article { // main content
       padding: @layout-space;
       overflow-x: auto;
     }
 
-    > footer {
+    > footer { // site footer
       margin: 0 @layout-space @layout-space @layout-space;
       padding-top: @layout-space;
       border-top: @border-width solid @border-color;
     }
   }
 
-  > nav {
+  > nav { // sidebar
     position: fixed;
     z-index: 2;
     top: @header-height;
     bottom: 0;
     width: @nav-width;
+
+    // notice: set the background to this level if you want 
+    // the sidebar to reach the bottom of the window.
+    //background-color: @bg-color-base;
 
     > * {
       box-sizing: border-box;
@@ -66,6 +70,9 @@ body {
       overflow: auto;
       padding: @layout-space;
       border: 0px solid @border-color;
+
+      // notice: set the background to this level if you want 
+      // the sidebar to fit its content.
       background-color: @bg-color-base;
     }
   }
@@ -98,11 +105,11 @@ body {
 @media (max-width: (@screen-md - 1)) {
   html,
   #esdoc-layout > section > footer {
-    background-color: @bg-color-alt;        
+    background-color: @bg-color-alt; // footer background
   }
 
   body {
-    background-color: @bg-color-base;        
+    background-color: @bg-color-base; // content background       
   }
 
   #esdoc-layout {

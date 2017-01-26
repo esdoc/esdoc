@@ -59,7 +59,7 @@ h4 {
 }
 
 p, ul, ol, pre, table {
-  margin: 0 0 @text-space 0; // default margin of a paragraph like
+  margin: 0 0 @text-space 0; // content default margin (paragraph like)
   line-height: @line-height;
 }
 
@@ -67,7 +67,7 @@ p {
   font-size: 1rem; // 16px
 }
 
-ul, ol {
+ul, ol { // notice: don't set the font-size (use inherited value)
   padding-left: 2.5em;
 }
 
@@ -76,8 +76,8 @@ pre, code {
   font-family: Consolas, monaco, monospace;  
 }
 
-pre code, // use case
-code code, pre pre, code pre { // just to handle other markup
+pre code, // notice: `pre > code` is the usual markup for code block
+code code, pre pre, code pre { // notice: this is just to handle other markup
   font-size: 1em;
 }
 
@@ -109,7 +109,7 @@ pre {
   }
 }
 
-table {
+table { // notice: don't set the font-size (use inherited value)
   border-collapse: collapse;
   border: 1px solid transparent;
 }

@@ -1,8 +1,8 @@
-/* --- custo --- */
+/* --- helper --- */
 
 #esdoc-layout > section {
   > article > h1:first-child {
-    margin-top: 0;
+    margin-top: 0; // overwrite default margin
   }
 
   > footer {
@@ -10,7 +10,7 @@
     font-style: italic;
     font-size: 0.875em;
 
-    img {
+    img { // esdoc logo
       position: relative;
       top: -3px;
       margin-left: 4px;
@@ -21,6 +21,7 @@
   }
 }
 
+// remove table border and background
 table.esdoc-table-simple {
   min-width: auto !important;
   tbody {
@@ -31,6 +32,7 @@ table.esdoc-table-simple {
   }
 }
 
+// make table content scrollable
 // usage: .esdoc-table-wrapper > table
 .esdoc-table-wrapper {
   margin-bottom: @text-space;
