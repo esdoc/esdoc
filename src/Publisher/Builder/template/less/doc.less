@@ -120,6 +120,26 @@
 
 // ------
 
+.example-caption {
+  display: inline-block;
+  margin: 0 1em 0 0 !important;
+  padding: 0.15em 0.45em; // like <code>
+  border-radius: @border-radius @border-radius 0 0;
+  background-color: rgba(0, 0, 0, 0.07); // like <code>
+  font-style: italic;
+  color: #999;
+
+  // make sure there's no space between .example-caption and .source-code
+  padding-bottom: 0 !important;
+  font-size: 1em !important;
+
+  + pre.source-code > code {
+    border-top-left-radius: 0;
+  }
+}
+
+// ------
+
 pre.source-code.line-number {
   code {
     padding: 0em;
