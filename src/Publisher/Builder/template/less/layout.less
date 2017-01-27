@@ -17,7 +17,7 @@ body {
     line-height: @header-height - @border-width;
     /*box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/ // optional
     border-bottom: @border-width solid @border-color;    
-    background-color: @header-bg-color;
+    background-color: @bg-color-alt;
 
     > * {
       position: relative;
@@ -106,7 +106,7 @@ body {
 @media (max-width: (@screen-md - 1)) {
   html,
   #esdoc-layout > section > footer {
-    background-color: @footer-bg-color;
+    background-color: @bg-color-alt;
   }
 
   #esdoc-layout {

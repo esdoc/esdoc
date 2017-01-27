@@ -54,7 +54,7 @@ h4 {
   margin: (@text-space * 2) 0 0.25rem 0; // (*) special margin of a paragraph heading
   line-height: @line-height - @line-height-x * 1;
   font-size: 1.125rem; // 18px
-  font-weight: bold;
+  font-weight: 600;
 }
 
 p, ul, ol, pre, table {
@@ -125,15 +125,15 @@ tbody {
     border-width: 1px 0;
     border-style: solid;
     border-color: @border-color;
-    background-color: @bg-color-base; // FIXME: use transparent ???
+    background-color: @bg-color-base;
     transition: background-color 0.25s ease;
 
     &:nth-child(even) {
-      background-color: darken(@bg-color-base, 3); // TODO: use @bg-color-alt instead ???
+      background-color: @bg-color-alt;
     }
 
     &:hover {
-      background-color: rgba(252, 248, 227, 0.5); // #fcf8e3; TODO: optimze this color in rgba...
+      background-color: @table-bg-hover; // TODO: optimize this color in rgba...
     }
   }
 

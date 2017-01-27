@@ -100,7 +100,7 @@ table.summary {
     animation-duration: 0.75s;
 
     &[data-test-depth="0"] {
-      background-color: darken(@bg-color-base, 3); // fixed background for the first level
+      background-color: @bg-color-alt; // fixed background for the first level
       animation: none;
     }
   }
@@ -141,7 +141,7 @@ table.summary {
   // highlight the table row when displayed
   @keyframes test-summary-highlight {
     from {
-      background-color: rgb(255, 255, 150);
+      background-color: @table-bg-hover;
     }
     to {
       background-color: transparent;

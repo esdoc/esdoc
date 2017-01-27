@@ -13,11 +13,11 @@
 @font-family: 'Source Sans Pro', Arial, Helvetica, sans-serif;
 
 @color-base: #555;
-@color-alt: #aaa; // TODO: use it!
+@color-alt: #aaa;
 @color-link: #039BE5;
 
 @bg-color-base: #fff;
-@bg-color-alt: #f5f5f5; // TODO: use it!
+@bg-color-alt: #f5f5f5;
 @bg-color-highlight: #d9edf7;
 
 @layout-space: 1.25rem;
@@ -34,13 +34,10 @@
 @padding-h: 0.5em;
 
 @header-height: 50px;
-@header-bg-color: #f3f3f3;
 
 @header-dropdown-top: @header-height - @border-width - 4px;
 @header-dropdown-opacity: 0.95;
 @header-dropdown-shadow: rgba(0, 0, 0, 0.3) 0 3px 6px;
-
-@footer-bg-color: #f3f3f3;
 
 @menu-span: 12px;
 @menu-font-size: 18px;
@@ -51,8 +48,10 @@
 @nav-width: 280px;
 @nav-delay: 0.3s;
 
-@code-bg-color: rgba(0, 0, 0, 0.07);
+@code-bg-color: rgba(0, 0, 0, 0.07); // tip: use rgba!
 @code-padding: 0.15em 0.45em;
+
+@table-bg-hover: #fcf8e3;
 
 // @screen-* usage
 @media (min-width: @screen-lg) {}       // target large screen
@@ -64,13 +63,18 @@
 // ------------------
 // --- dark theme ---
 /*
-@color-base: #aaa;
+@color-base: #999;
+@color-alt: #555;
 
 @bg-color-base: #1e1e1e;
-@bg-color-alt: #2e2e2e;
-@bg-color-highlight: #4e4e4e;
+@bg-color-alt: #171717;
+@bg-color-highlight: #2e2e2e;
 
 @border-color: #3e3e3e;
+
+@code-bg-color: rgba(255, 255, 255, 0.07);
+
+@table-bg-hover: #111;
 */
 // ------------------
 // ------------------

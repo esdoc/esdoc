@@ -49,7 +49,7 @@
     transition: background-color 0.4s ease, color 0.4s ease;
 
     &:hover {
-      background-color: rgba(0, 0, 0, 0.05); // optional
+      background-color: darken(@bg-color-alt, 5); // optional
       color: @color-link;
     }
   }
@@ -66,7 +66,7 @@
     box-shadow: @header-dropdown-shadow;
     border-radius: @border-radius;
     border: @border-width solid @border-color;
-    background-color: @bg-color-base;
+    background-color: @bg-color-alt;
     overflow: hidden;
     position: absolute;
     top: @header-dropdown-top;
