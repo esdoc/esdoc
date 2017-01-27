@@ -23,7 +23,7 @@ a {
 hr {
   margin: (@text-space * 2) 0;
   border: none;
-  border-bottom: 1px solid @border-color;
+  border-bottom: @border-width solid @border-color;
 }
 
 h1, h2, h3 {
@@ -33,14 +33,14 @@ h1, h2, h3 {
 
 h1 {
   padding-bottom: 0.1em;
-  border-bottom: 1px solid @border-color;
+  border-bottom: @border-width solid @border-color;
   line-height: @line-height - @line-height-x * 4;
   font-size: 2.25rem; // 36px (based on @font-size-lg = 16px)
 }
 
 h2 {
   padding-bottom: 0.1em;
-  border-bottom: 1px solid @border-color;
+  border-bottom: @border-width solid @border-color;
   line-height: @line-height - @line-height-x * 3;
   font-size: 1.5rem; // 24px
 }
@@ -54,7 +54,7 @@ h4 {
   margin: (@text-space * 2) 0 0.25rem 0; // (*) special margin of a paragraph heading
   line-height: @line-height - @line-height-x * 1;
   font-size: 1.125rem; // 18px
-  font-weight: 600;
+  font-weight: @font-weight-bold;
 }
 
 p, ul, ol, pre, table {
@@ -87,7 +87,7 @@ code {
 
   a {
     text-decoration: none !important;
-    border-bottom: 1px dotted rgba(0, 0, 0, 0.2);
+    border-bottom: 1px dotted rgba(0, 0, 0, 0.2); // tip: use fixed border-width!
   }
 }
 
@@ -108,7 +108,7 @@ pre {
 
 table { // notice: don't set the font-size (use inherited value)
   border-collapse: collapse;
-  border: 1px solid transparent;
+  border: @border-width solid transparent;
 }
 
 th, td {
@@ -117,12 +117,12 @@ th, td {
 }
 
 thead {
-  font-weight: bold;
+  font-weight: @font-weight-bold;
 }
 
 tbody {
   tr {
-    border-width: 1px 0;
+    border-width: @border-width 0;
     border-style: solid;
     border-color: @border-color;
     background-color: @bg-color-base;
@@ -138,7 +138,7 @@ tbody {
   }
 
   th, td {
-    border-right: 1px dotted @border-color;
+    border-right: @border-width dotted @border-color;
 
     &:last-child {
       border-right: none;

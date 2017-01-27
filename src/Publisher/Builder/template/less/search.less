@@ -15,8 +15,8 @@
     box-sizing: border-box;
     margin: ((@header-height - @search-height) / 2) @menu-span 0 (@menu-icon-size + 2 * @menu-span);
     height: @search-height;
-    border-bottom: 1px solid @color-link; // fixed border-width
-    padding-bottom: 1px;
+    border-bottom: @border-width solid @color-link; // fixed border-width
+    padding-bottom: @border-width;
     overflow: hidden;
     opacity: 0;
     transition: opacity 0.2s ease-out;
@@ -27,7 +27,7 @@
       position: absolute;
       bottom: 0;
       height: 5px;
-      border-left: 1px solid @color-link; // fixed border-width
+      border-left: @border-width solid @color-link; // fixed border-width
     }
 
     &:before {

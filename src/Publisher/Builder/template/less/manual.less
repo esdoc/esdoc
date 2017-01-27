@@ -2,7 +2,7 @@
 
 .manual-user-index {
   margin-bottom: @text-space * 2;
-  border-bottom: 1px solid @border-color;
+  border-bottom: @border-width solid @border-color;
 
   // ################
   // Just a proposal:
@@ -23,7 +23,7 @@
   margin: 0 3% 3% 0;
   box-sizing: border-box;
   border-radius: @border-radius;
-  border: 1px solid @border-color;
+  border: @border-width solid @border-color;
   overflow: hidden;
   font-size: @font-size-lg; // restore font-size
   transition: box-shadow 1s ease;
@@ -35,9 +35,7 @@
   > h1 {
     margin: 0;
     padding: @padding-v @padding-h;
-    border-bottom: 1px solid @border-color;
     font-size: 1em;
-    font-weight: bold;
 
     span {
       color: @color-base;
@@ -118,7 +116,7 @@
     border-radius: @border-radius;
 
     a {
-      font-weight: bold;
+      font-weight: @font-weight-bold;
     }
 
     + .indent-h2 {
