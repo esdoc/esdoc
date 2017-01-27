@@ -1,0 +1,39 @@
+// --- theme-dark ---
+
+@color-base: #D7CCC8;
+@color-alt: #A1887F;
+@color-link: #7CB342;
+
+@bg-color-base: #212121;
+@bg-color-alt: #171717;
+@bg-color-highlight: #37474F;
+
+@border-color: #424242;
+
+@code-bg-color: #000;
+
+@table-bg-hover: #263238;
+
+.detail > h3 .right-info {
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+pre.source-code.line-number {
+  code {
+    background: @code-bg-color;
+  }
+
+  ol {
+    background: #111;
+    color: #555; // line number color
+  }
+
+  li {
+    background: @code-bg-color;
+  }
+}
+
+.manual-toc > .indent-h1 a,
+.manual-card-wrap > h1 span {
+    color: @bg-color-base !important;
+}
