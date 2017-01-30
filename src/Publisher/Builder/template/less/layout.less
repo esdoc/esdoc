@@ -55,26 +55,30 @@ body {
   }
 
   > nav { // sidebar
+    box-sizing: border-box;
     position: fixed;
     z-index: 2;
     top: @header-height;
     bottom: 0;
     width: @nav-width;
 
-    // notice: set the background to this level if you want 
-    // the sidebar to reach the bottom of the window.
-    //background-color: @bg-color-base;
+    // notice: set the border and background to this level 
+    // if you want the sidebar to reach the bottom of the window.
+    border: 0px solid @border-color;
+    background-color: @bg-color-base;
 
     > * {
       box-sizing: border-box;
       position: relative;
       overflow: auto;
       padding: @layout-space;
-      border: 0px solid @border-color;
 
-      // notice: set the background to this level if you want 
-      // the sidebar to fit its content.
-      background-color: @bg-color-base;
+      // notice: set the border and background to this level 
+      // if you want the sidebar to fit its content.
+      //border-width: 0 @border-width 0 0;
+      //border-style: solid;
+      //border-color: @border-color;
+      //background-color: @bg-color-base;
     }
   }
 }
@@ -87,7 +91,10 @@ body {
   #esdoc-layout {
     > nav > * {
       max-height: 100%;
-      /*border-width: 0 @border-width @border-width @border-width;*/ // optional
+
+      //box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+      //border-bottom-right-radius: @border-radius;
+      //border-bottom-width: @border-width;
     }
 
     > section {
@@ -100,6 +107,11 @@ body {
   #esdoc-layout > nav {
     right: 50%;
     margin-right: (@screen-lg / 2 - @nav-width);
+
+    //> * {
+    //  border-bottom-left-radius: @border-radius;
+    //  border-left-width: @border-width; // optional
+    //}
   }
 }
 
@@ -118,6 +130,7 @@ body {
     > nav {
       left: -@nav-width;
       box-shadow: none;
+      border-right-width: @border-width;
       transition: left @nav-delay ease-out, box-shadow @nav-delay ease;
     }
 
@@ -131,22 +144,23 @@ body {
       left: 0;
       background-color: #000;
       opacity: 0;
-      transition: right 0s linear @nav-delay, opacity @nav-delay ease-in-out;
+      transition: right 0s linear @nav-delay, left @nav-delay ease-out, opacity @nav-delay ease-in-out;
     }
 
     > nav > * {
       height: 100%;
-      border-right-width: @border-width;
+      //border-right-width: @border-width;
     }
 
     &.esdoc-nav-open > nav {
-      left: 0px;
+      left: 0;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 
       &:before {
         right: 0;
+        left: @nav-width;
         opacity: 0.5;
-        transition: opacity @nav-delay ease-in;
+        transition: left @nav-delay ease-out, opacity @nav-delay ease-in;
       }
     }
   }
