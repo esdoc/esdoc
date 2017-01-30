@@ -21,7 +21,7 @@
     "site": "node ./script/site.js",
     "start": "node ./script/server.js",
     "lint": "node ./script/eslint.js",
-    "less": "lessc ./src/Publisher/Builder/template/less/style.less ./out/esdoc/css/style.css"
+    "less": "lessc ./src/Publisher/Builder/template/less/style-default.less ./out/esdoc/css/style.css"
   },
   "dependencies": {
     "cheerio": "0.22.0",

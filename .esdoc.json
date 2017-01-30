@@ -35,6 +35,5 @@
     "advanced": ["./site/manual/advanced/api.md"],
     "faq": ["./site/manual/faq/faq.md"],
     "changelog": ["./CHANGELOG.md"]
-  },
-  "theme": "dark"
+  }
 }
