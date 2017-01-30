@@ -2,6 +2,7 @@ import fs from 'fs-extra';
 import path from 'path';
 import {taffy} from 'taffydb';
 import IceCap from 'ice-cap';
+import LessFileBuilder from './Builder/LessFileBuilder.js';
 import StaticFileBuilder from './Builder/StaticFileBuilder.js';
 import IdentifiersDocBuilder from './Builder/IdentifiersDocBuilder.js';
 import IndexDocBuilder from './Builder/IndexDocBuilder.js';
@@ -78,13 +79,14 @@ export default function publish(values, asts, config) {
   if (config.coverage) {
     new CoverageBuilder(data, config).exec(writeCoverage, writeBadge);
   }
-
+  
   new IdentifiersDocBuilder(data, config).exec(writeHTML);
   new IndexDocBuilder(data, config, _coverage).exec(writeHTML);
   new ClassDocBuilder(data, config).exec(writeHTML);
   new SingleDocBuilder(data, config).exec(writeHTML);
   new FileDocBuilder(data, config).exec(writeHTML);
   new StaticFileBuilder(data, config).exec(copy);
+  new LessFileBuilder(data, config).exec();
   new SearchIndexBuilder(data, config).exec(writeHTML);
   new ASTDocBuilder(data, asts, config).exec(writeAST);
   new SourceDocBuilder(data, config, _coverage).exec(writeHTML);
