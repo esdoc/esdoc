@@ -1,3 +1,5 @@
+// --- variables ---
+
 @color-base: #BCAAA4;
 @color-alt: #8D6E63;
 @color-link: #7CB342;
@@ -16,17 +18,56 @@
 
 @table-bg-hover: #3E2723;
 
+// --- layout ---
+
+#esdoc-layout {
+  > header {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+
+  > nav {
+    border-width: 0 !important; // remove default border
+
+    > * {
+      border-width: 0 @border-width 0 0;
+      border-style: solid;
+      border-color: @border-color;
+      background-color: @table-bg-hover;
+
+      @media (max-width: (@screen-md - 1)) {
+        box-shadow: -10px 0 10px rgba(0, 0, 0, 0.125) inset;
+      }
+
+      @media (min-width: @screen-md) {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        border-bottom-right-radius: @border-radius;
+        border-bottom-width: @border-width;
+      }
+
+      @media (min-width: @screen-lg) {
+        border-bottom-left-radius: @border-radius;
+        border-left-width: @border-width;
+      }
+    }
+  }
+}
+
+// --- menu ---
+
 #esdoc-menu {
   .esdoc-toggle-nav {
     background-image: url("../image/list-alt.svg");
   }
+
   .esdoc-toggle-links {
     background-image: url("../image/down-alt.svg");
   }
+
   a.repo-url-github {
     background-image: url("../image/github-alt.svg");
   }
 }
+
 #esdoc-search {
   background-image: url("../image/find-alt.svg");
 }

@@ -15,7 +15,6 @@ body {
     left: 0;
     height: @header-height;
     line-height: @header-height - @border-width;
-    /*box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/ // optional
     border-bottom: @border-width solid @border-color;    
     background-color: @bg-color-alt;
 
@@ -61,24 +60,13 @@ body {
     top: @header-height;
     bottom: 0;
     width: @nav-width;
-
-    // notice: set the border and background to this level 
-    // if you want the sidebar to reach the bottom of the window.
-    border: 0px solid @border-color;
-    background-color: @bg-color-base;
+    border-right: 0px solid @border-color;
 
     > * {
       box-sizing: border-box;
       position: relative;
       overflow: auto;
       padding: @layout-space;
-
-      // notice: set the border and background to this level 
-      // if you want the sidebar to fit its content.
-      //border-width: 0 @border-width 0 0;
-      //border-style: solid;
-      //border-color: @border-color;
-      //background-color: @bg-color-base;
     }
   }
 }
@@ -91,10 +79,6 @@ body {
   #esdoc-layout {
     > nav > * {
       max-height: 100%;
-
-      //box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-      //border-bottom-right-radius: @border-radius;
-      //border-bottom-width: @border-width;
     }
 
     > section {
@@ -107,11 +91,6 @@ body {
   #esdoc-layout > nav {
     right: 50%;
     margin-right: (@screen-lg / 2 - @nav-width);
-
-    //> * {
-    //  border-bottom-left-radius: @border-radius;
-    //  border-left-width: @border-width; // optional
-    //}
   }
 }
 
@@ -137,25 +116,25 @@ body {
       left: -@nav-width;
       box-shadow: none;
       border-right-width: @border-width;
+      background-color: @bg-color-base;
       transition: left @nav-delay ease-out, box-shadow @nav-delay ease;
-    }
 
-    > nav:before {
-      content: "";
-      position: fixed;
-      z-index: 0;
-      top: @header-height;
-      right: 99999px;
-      bottom: 0;
-      left: 0;
-      background-color: #000;
-      opacity: 0;
-      transition: right 0s linear @nav-delay, left @nav-delay ease-out, opacity @nav-delay ease-in-out;
-    }
+      &:before {
+        content: "";
+        position: fixed;
+        z-index: 0;
+        top: @header-height;
+        right: 99999px;
+        bottom: 0;
+        left: 0;
+        background-color: #000;
+        opacity: 0;
+        transition: right 0s linear @nav-delay, left @nav-delay ease-out, opacity @nav-delay ease-in-out;
+      }
 
-    > nav > * {
-      height: 100%;
-      //border-right-width: @border-width;
+      > * {
+        height: 100%;
+      }
     }
 
     &.esdoc-nav-open > nav {
