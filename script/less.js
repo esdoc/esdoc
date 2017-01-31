@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const sh = require('./sh');
 
-const sourceMap = '--source-map=out/esdoc/css/style.css.map';
+const sourceMap = '--source-map=out/esdoc/css/style.css.map --source-map-less-inline';
 const source = 'src/Publisher/Builder/template/less/style.less';
 const destination = 'out/esdoc/css/style.css';
 
