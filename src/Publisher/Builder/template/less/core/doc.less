@@ -117,11 +117,6 @@
   border-radius: 0 !important;
   background: #ffe0b2 !important;
 }
-//pre code .inner-link-active {
-  // it's a hack to make the <li> background wider.
-  // we assume the device is at least larger than 300px...
-//  box-shadow: 300px 0 0 0 #ffe0b2 !important;
-//}
 
 // ------
 
@@ -163,8 +158,8 @@ pre.source-code.line-number {
 
     &.active {
       // it's a hack to make the <li> background wider.
-      // we assume the <code> width is larger than 300px...
-      box-shadow: 300px 0 0 0 #ffe0b2 !important;
+      // we assume the <code> width is larger than 200px...
+      box-shadow: 200px 0 0 0 #ffe0b2 !important;
       
       background-color: #ffe0b2;
       color: darken(@code-bg-color-hex, 59.5 * @code-bg-color-x); // active line number color (#555)
@@ -172,8 +167,8 @@ pre.source-code.line-number {
 
     &.error-line {
       // it's a hack to make the <li> background wider.
-      // we assume the <code> width is larger than 300px...
-      box-shadow: 300px 0 0 0 #ffcdd2 !important;
+      // we assume the <code> width is larger than 200px...
+      box-shadow: 200px 0 0 0 #ffcdd2 !important;
 
       background-color: #ffcdd2;
       color: darken(@code-bg-color-hex, 59.5 * @code-bg-color-x); // line number color
