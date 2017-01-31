@@ -28,5 +28,10 @@ export default class StaticFileBuilder extends DocBuilder {
       const name = `./user/css/${i}-${path.basename(userStyle)}`;
       callback(userStyle, name);
     }
+
+    if (this._config.logo) {
+      const logo = this._config.logo.match(/[^\/]+$/)[0];
+      callback(path.resolve(this._config.logo), `.image/${logo}`);
+    }
   }
 }

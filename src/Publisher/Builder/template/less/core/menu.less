@@ -55,7 +55,29 @@
   }
 }
 
+.esdoc-brand-logo {
+  display: inline-block;
+  height: @header-height - @border-width;
+  overflow: hidden;
+  vertical-align: top;
+
+  img {
+    height: inherit; // this rule works well for .svg format
+    width: @menu-brand-width;
+  }
+}
+
+@media (min-width: @screen-md) {
+  .esdoc-brand-logo ~  #esdoc-links > :first-child {
+    display: none; // hide the "Home" link when brand logo is available
+  }
+}
+
 @media (max-width: (@screen-md - 1)) {
+  .esdoc-brand-logo {
+    display: none !important; // hide brand logo on small and x-small screen
+  }
+
   .esdoc-toggle-nav,
   .esdoc-toggle-links {
     display: inline-block !important;
