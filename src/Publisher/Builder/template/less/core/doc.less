@@ -118,6 +118,14 @@
   background: #ffe0b2 !important;
 }
 
+.version, .since {
+  color: @color-alt;
+}
+
+.version + .since:before {
+  content: '| ';
+}
+
 // ------
 
 .example-caption {
