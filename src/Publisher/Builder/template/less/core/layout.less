@@ -118,13 +118,19 @@ body {
 @media (max-width: (@screen-md - 1)) {
   html,
   #esdoc-layout > section > footer {
-    background-color: @bg-color-alt;
+    background-color: @bg-color-alt; // footer color
   }
 
   #esdoc-layout {
-    > section > footer {
-      margin: 0;
-      padding: @layout-space;
+    > section {
+      > article {
+        background-color: @bg-color-base; // main content color
+      }
+
+      > footer {
+        margin: 0;
+        padding: @layout-space;
+      }
     }
 
     > nav {
