@@ -26,7 +26,7 @@
   border: @border-width solid @border-color;
   overflow: hidden;
   font-size: @font-size-lg; // restore font-size
-  transition: box-shadow 1s ease;
+  transition: box-shadow 0.75s ease;
 
   &:hover {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
@@ -61,7 +61,7 @@
     width: 200%;
     transform: scale(0.5);
     transform-origin: 0 0;
-    transition: transform 2s ease;
+    transition: transform 1.5s ease-out;
   }
 
   > a {
@@ -71,7 +71,7 @@
     bottom: 0;
     left: 0;
     background-color: rgba(240, 240, 240, 0.5);
-    transition: background-color 1s ease;
+    transition: background-color 0.75s ease;
     text-decoration: none;
   }
 
