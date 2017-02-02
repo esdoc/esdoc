@@ -51,10 +51,21 @@
 @nav-width: 280px;
 @nav-delay: 0.33s;
 
+@code-border-width: 0px; // disabled by default
+@code-border-color: #e5e5e5;
 @code-bg-color-rgba: rgba(0, 0, 0, 0.07);
 @code-bg-color-hex: #ededed;
 @code-bg-color-x: 1; // set 1 when background is light and -1 when is dark
 @code-padding: 0.15em 0.45em;
+
+// ----
+// enable code border-width:
+// to use this feature, disable *-rgba and use only *-hex
+// (otherwise .example-caption will not be well rendered)
+//
+//@code-border-width: @border-width;
+//@code-bg-color-rgba: @code-bg-color-hex;
+// ----
 
 @table-bg-hover: #fcf8e3;
 

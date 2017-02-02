@@ -9,6 +9,7 @@
     code {
         margin: 0;
         padding: 0;
+        border: none;
         background: none;
     }
   }
@@ -109,6 +110,7 @@
 .import-path pre.prettyprint code {
   margin: 0;
   padding: 0;
+  border: none;
   background: transparent;
 }
 
@@ -130,9 +132,13 @@
 
 .example-caption {
   display: inline-block;
+  position: relative;
+  top: @code-border-width;
   margin: 0 1em 0 0 !important;
   padding: @code-padding;
   border-radius: @border-radius @border-radius 0 0;
+  border: @code-border-width solid @code-border-color;
+  border-bottom: none;
   background-color: @code-bg-color-rgba;
   font-style: italic;
   color: @color-alt;

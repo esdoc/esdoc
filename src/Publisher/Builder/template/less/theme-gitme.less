@@ -8,26 +8,31 @@
 @color-link: #0388A6;
 
 @bg-color-base: #EFEBE9;
-@bg-color-alt: darken(#EFEBE9, 4);
+@bg-color-alt: lighten(#EFEBE9, 3);
 @bg-color-highlight: darken(#EFEBE9, 6);
 
+@border-radius: 5px;
 @border-color: #D7CCC8;
 
-@code-bg-color-rgba: rgba(255, 255, 255, 0.4);
+@code-border-width: @border-width;
+@code-border-color: darken(#EFEBE9, 5);
 @code-bg-color-hex: lighten(#EFEBE9, 5);
+@code-bg-color-rgba: @code-bg-color-hex;
 
 @table-bg-hover: #FFF8E1;
 
 // --- text ---
 
-h1, h2 {
-  color: #F14E32;
-}
-
-code {
+h1, h2, code {
   color: #F14E32;
 }
 
 pre code {
   color: @color-base;
+}
+
+// --- layout ---
+
+#esdoc-layout > header {
+  background: darken(#EFEBE9, 6);
 }
