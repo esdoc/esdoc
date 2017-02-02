@@ -81,7 +81,6 @@
   .esdoc-toggle-nav,
   .esdoc-toggle-links {
     display: inline-block !important;
-    transition: opacity @nav-delay ease-out;
   }
 
   #esdoc-links {
@@ -96,7 +95,7 @@
     line-height: 2em;
     font-size: @menu-font-size;
     opacity: 0;
-    transition: left 0s linear @nav-delay, opacity @nav-delay ease-out;
+    transition: left 0s linear (@nav-delay / 2), opacity (@nav-delay / 2) ease-in;
 
     a {
       display: block;
@@ -105,25 +104,9 @@
     }
   }
 
-  body {
-    &.esdoc-links-open #esdoc-links {
-      left: @menu-icon-size + 3 * @menu-span;
-      opacity: @header-dropdown-opacity;
-      transition: left 0s linear, opacity @nav-delay ease-out;
-    }
-
-    &.esdoc-nav-open {
-      #esdoc-links {
-        left: -99999px;
-        opacity: 0;
-
-        // make the dropdown menu closing faster!
-        transition: left 0s linear (@nav-delay / 2), opacity (@nav-delay / 2) ease-out;
-      }
-
-      .esdoc-toggle-links {
-        opacity: 0.25;
-      }
-    }
+  body.esdoc-links-open #esdoc-links {
+    left: @menu-icon-size + 3 * @menu-span;
+    opacity: @header-dropdown-opacity;
+    transition: left 0s linear, opacity @nav-delay ease-out;
   }
 }

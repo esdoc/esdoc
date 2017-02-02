@@ -117,7 +117,7 @@ body {
       box-shadow: none;
       border-right-width: @border-width;
       background-color: @bg-color-base;
-      transition: left @nav-delay ease-out, box-shadow @nav-delay ease;
+      transition: left (@nav-delay / 2) ease-in, box-shadow (@nav-delay / 2) ease;
 
       &:before {
         content: "";
@@ -129,7 +129,7 @@ body {
         left: 0;
         background-color: #000;
         opacity: 0;
-        transition: right 0s linear @nav-delay, left @nav-delay ease-out, opacity @nav-delay ease-in-out;
+        transition: right 0s linear (@nav-delay / 2), left (@nav-delay / 2) ease-in, opacity (@nav-delay / 2) ease-out;
       }
 
       > * {
@@ -140,6 +140,7 @@ body {
     &.esdoc-nav-open > nav {
       left: 0;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      transition: left @nav-delay ease-out, box-shadow @nav-delay ease;
 
       &:before {
         right: 0;
