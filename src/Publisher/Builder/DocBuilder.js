@@ -239,7 +239,7 @@ export default class DocBuilder {
 
     if (this._config.logo) {
       const logo = this._config.logo.match(/[^\/]+$/)[0];
-      ice.load('brandLogoLink', `<img src=".image/${logo}">`);
+      ice.load('brandLogoLink', `<img src="./image/${logo}"/>`);
     } else {
       ice.drop('brandLogoLink');
     }
