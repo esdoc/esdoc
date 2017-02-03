@@ -24,7 +24,7 @@ body {
     }
   }
 
-  > section {
+  > main {
     box-sizing: border-box;
     position: relative;
     z-index: 1;
@@ -35,13 +35,13 @@ body {
   }
 
   > header > *,
-  > section {
-    margin: 0 auto; // center the header content and the main section
+  > main {
+    margin: 0 auto; // center the header content and the main
     max-width: @screen-lg;
   }
 
-  > section {
-    > article { // main content
+  > main {
+    > section { // main content
       padding: @layout-space;
       overflow-x: auto;
     }
@@ -53,7 +53,7 @@ body {
     }
   }
 
-  > nav { // sidebar
+  > aside { // sidebar
     box-sizing: border-box;
     position: fixed;
     z-index: 2;
@@ -62,7 +62,7 @@ body {
     width: @nav-width;
     border-right: 0px solid @border-color;
 
-    > * {
+    > nav {
       box-sizing: border-box;
       position: relative;
       overflow: auto;
@@ -77,18 +77,18 @@ body {
   }
 
   #esdoc-layout {
-    > nav > * {
+    > aside > nav {
       max-height: 100%;
     }
 
-    > section {
+    > main {
       padding-left: @nav-width;
     }
   }
 }
 
 @media (min-width: @screen-lg) {
-  #esdoc-layout > nav {
+  #esdoc-layout > aside {
     right: 50%;
     margin-right: (@screen-lg / 2 - @nav-width);
   }
@@ -96,13 +96,13 @@ body {
 
 @media (max-width: (@screen-md - 1)) {
   html,
-  #esdoc-layout > section > footer {
+  #esdoc-layout > main > footer {
     background-color: @bg-color-alt; // footer color
   }
 
   #esdoc-layout {
-    > section {
-      > article {
+    > main {
+      > section {
         background-color: @bg-color-base; // main content color
       }
 
@@ -112,7 +112,7 @@ body {
       }
     }
 
-    > nav {
+    > aside {
       left: -@nav-width;
       box-shadow: none;
       border-right-width: @border-width;
@@ -137,7 +137,7 @@ body {
       }
     }
 
-    &.esdoc-nav-open > nav {
+    &.esdoc-nav-open > aside {
       left: 0;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
       transition: left @nav-delay ease-out, box-shadow @nav-delay ease;

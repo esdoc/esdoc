@@ -95,7 +95,7 @@ export default class LessFileBuilder extends DocBuilder {
       'layout',
       'menu',
       'search',
-      'nav',
+      'aside',
       'helper',
       'doc',
       'summary',

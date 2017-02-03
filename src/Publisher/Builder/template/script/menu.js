@@ -13,13 +13,13 @@
   document.body.addEventListener('click', function(e){
     if (e.target.classList.contains('esdoc-toggle-nav')) {
       toggle(e, 'esdoc-nav-open', 'esdoc-links-open');
-    }else if(e.target.classList.contains('esdoc-toggle-links')) {
+    } else if(e.target.classList.contains('esdoc-toggle-links')) {
       toggle(e, 'esdoc-links-open', 'esdoc-nav-open');
     }
   });
 
   // close navigation when click on link (usefull for anchor).
-  document.querySelector('#esdoc-layout > nav').addEventListener('click', function(e){
+  document.querySelector('#esdoc-layout > aside').addEventListener('click', function(e){
     if (e.target.nodeName.toLowerCase() === 'a') {
       classList.remove('esdoc-nav-open');
     }
