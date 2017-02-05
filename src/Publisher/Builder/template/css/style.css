@@ -148,13 +148,40 @@ li > code {
   box-sizing: border-box;
   width: 250px;
   height: 100%;
-  padding-top: 40px;
+  padding-top: 34px;
   padding-left: 15px;
   padding-bottom: 2em;
   margin-top:1em;
   overflow-x: scroll;
   box-shadow: rgba(255, 255, 255, 1) -1px 0 0 inset;
   border-right: 1px solid #ddd;
+}
+
+.navigation .navigation-buttons {
+  text-align: right;
+  font-size: 0.8em;
+  font-weight: 600;
+  padding-right: 10px;
+}
+
+.navigation .navigation-buttons .close-button {
+  border: solid 1px #ddd;
+  padding: 0 0.5em;
+  border-radius: 0.1em 0 0 0.1em;
+  background: #fafafa;
+  color: #666;
+  /*margin-right: -0.2em;*/
+  cursor: pointer;
+}
+
+.navigation .navigation-buttons .open-button {
+  border: solid 1px #ddd;
+  padding: 0 0.5em;
+  border-radius: 0 0.1em 0.1em 0;
+  background: #fafafa;
+  color: #666;
+  border-left: none;
+  cursor: pointer;
 }
 
 .navigation ul {
@@ -176,6 +203,19 @@ li > code {
   margin-bottom: 0.25em;
   font-size: 0.8em;
   color: #aaa;
+  cursor: pointer;
+  //animation: blink 1s;
+  //animation-timing-function: cubic-bezier(0.55, 0.06, 0.68, 0.19);
+}
+
+@keyframes blink {
+  from {
+    color: #039BE5;
+  }
+
+  to {
+    color: #aaa;
+  }
 }
 
 .kind-class,

@@ -279,7 +279,20 @@ export default class DocBuilder {
     let lastDirPath = '.';
     ice.loop('doc', allDocs, (i, doc, ice)=>{
       const filePath = doc.longname.split('~')[0].replace(/^.*?[/]/, '');
-      const dirPath = path.dirname(filePath);
+      // const dirPath = path.dirname(filePath);
+
+      let dirPath;
+      if (doc.kind === 'class') {
+        dirPath = path.dirname(filePath);
+      } else {
+        dirPath = filePath;
+      }
+
+      // if (dirPath === '.') {
+      //   dirPath = path.basename(this._config.source);
+      //   console.log(this._config.source);
+      // }
+
       const kind = doc.interface ? 'interface' : doc.kind;
       const kindText = kind.charAt(0).toUpperCase();
       const kindClass = `kind-${kind}`;
@@ -288,6 +301,7 @@ export default class DocBuilder {
       ice.attr('kind', 'class', kindClass);
       ice.text('dirPath', dirPath);
       ice.drop('dirPath', lastDirPath === dirPath);
+      ice.attr('doc', 'data-in-root', dirPath === '.');
       lastDirPath = dirPath;
     });
 
