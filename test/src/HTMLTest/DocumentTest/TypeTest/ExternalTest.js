@@ -9,8 +9,8 @@ describe('TestTypeExternal', ()=> {
 
   it('has external type.', ()=> {
     findParent(doc, '[data-ice="summary"] [href$="#instance-method-method1"]', '[data-ice="target"]', (doc)=> {
-      assert.includes(doc, null, 'method1(p1: XMLHttpRequest)');
-      assert.includes(doc, 'a[href="https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest"]', 'XMLHttpRequest');
+      assert.includes(doc, null, 'method1(p1: ArrayBuffer)');
+      assert.includes(doc, 'a[href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer"]', 'ArrayBuffer');
     });
   });
 });

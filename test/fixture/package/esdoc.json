@@ -6,6 +6,7 @@
   "package": "./test/fixture/package/package.json",
   "title": "ESDoc Test Fixture",
   "plugins": [
+    {"name": "esdoc-external-ecmascript-plugin", "option": {"enable": true}},
     {"name": "esdoc-accessor-plugin", "option": {"access": ["public", "protected", "private"], "autoPrivate": true}}
   ],
   "test": {

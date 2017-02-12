@@ -83,10 +83,6 @@ export default class ESDoc {
       asts.push({filePath: `source${path.sep}${relativeFilePath}`, ast: temp.ast});
     });
 
-    if (config.builtinExternal) {
-      this._useBuiltinExternal(config, results);
-    }
-
     if (config.test) {
       this._generateForTest(config, results, asts);
     }
@@ -151,8 +147,6 @@ export default class ESDoc {
 
     if (!('unexportIdentifier' in config)) config.unexportIdentifier = false;
 
-    if (!('builtinExternal' in config)) config.builtinExternal = true;
-
     if (!('undocumentIdentifier' in config)) config.undocumentIdentifier = true;
 
     if (!('includeSource' in config)) config.includeSource = true;
@@ -180,25 +174,6 @@ export default class ESDoc {
   /* eslint-disable no-unused-vars */
   static _deprecatedConfig(config) {
     // do nothing
-  }
-
-  /**
-   * Use built-in external document.
-   * built-in external has number, string, boolean, etc...
-   * @param {ESDocConfig} config - config of esdoc.
-   * @param {DocObject[]} results - this method pushes DocObject to this param.
-   * @private
-   * @see {@link src/BuiltinExternal/ECMAScriptExternal.js}
-   */
-  static _useBuiltinExternal(config, results) {
-    const dirPath = path.resolve(__dirname, './BuiltinExternal/');
-    this._walk(dirPath, (filePath)=>{
-      const temp = this._traverse(config, dirPath, filePath);
-      /* eslint-disable no-return-assign */
-      temp.results.forEach((v)=> v.builtinExternal = true);
-      const res = temp.results.filter(v => v.kind === 'external');
-      results.push(...res);
-    });
   }
 
   /**

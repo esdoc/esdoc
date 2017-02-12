@@ -46,7 +46,8 @@
     "nyc": "8.3.0",
     "babel-plugin-istanbul": "2.0.1",
     "mocha": "2.5.3",
-    "esdoc-accessor-plugin": "latest"
+    "esdoc-accessor-plugin": "latest",
+    "esdoc-external-ecmascript-plugin": "latest"
   },
   "keywords": [
     "jsdoc",
