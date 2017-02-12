@@ -159,8 +159,6 @@ export default class ESDoc {
 
     if (!('undocumentIdentifier' in config)) config.undocumentIdentifier = true;
 
-    if (!('coverage' in config)) config.coverage = true;
-
     if (!('includeSource' in config)) config.includeSource = true;
 
     if (!config.index) config.index = './README.md';

@@ -1,8 +1,0 @@
-{
-  "source": "./test/fixture/package/src",
-  "destination": "./test/fixture/dest/esdoc-coverage",
-  "includes": ["Desc/.*\\.js"],
-  "coverage": false,
-  "index": "./test/fixture/package/README.md",
-  "package": "./test/fixture/package/package.json"
-}

@@ -12,11 +12,9 @@ export default class IndexDocBuilder extends DocBuilder {
    * create instance.
    * @param {Taffy} data - doc object database.
    * @param {ESDocConfig} config - use config to build output.
-   * @param {CoverageObject} coverage - use coverage to build output.
    */
-  constructor(data, config, coverage) {
+  constructor(data, config) {
     super(data, config);
-    this._coverage = coverage;
   }
 
   /**
