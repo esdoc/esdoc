@@ -9,15 +9,6 @@ import {markdown} from './util.js';
  */
 export default class IndexDocBuilder extends DocBuilder {
   /**
-   * create instance.
-   * @param {Taffy} data - doc object database.
-   * @param {ESDocConfig} config - use config to build output.
-   */
-  constructor(data, config) {
-    super(data, config);
-  }
-
-  /**
    * execute building output.
    * @param {function(html: string, filePath: string)} callback - is called with output.
    */
