@@ -15,7 +15,6 @@ import SourceDocBuilder from './Builder/SourceDocBuilder.js';
 import TestDocBuilder from './Builder/TestDocBuilder.js';
 import TestFileDocBuilder from './Builder/TestFileDocBuilder.js';
 import ManualDocBuilder from './Builder/ManualDocBuilder.js';
-import LintDocBuilder from './Builder/LintDocBuilder.js';
 import Plugin from '../Plugin/Plugin.js';
 
 /**
@@ -108,9 +107,5 @@ export default function publish(values, asts, config) {
     console.log('==================================');
     console.log(`Coverage: ${_coverage.coverage} (${_coverage.actualCount}/${_coverage.expectCount})`);
     console.log('==================================');
-  }
-
-  if (config.lint) {
-    new LintDocBuilder(data, config).exec();
   }
 }
