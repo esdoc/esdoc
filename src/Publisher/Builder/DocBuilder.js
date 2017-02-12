@@ -140,63 +140,6 @@ export default class DocBuilder {
     return fs.readFileSync(filePath, {encoding: 'utf-8'});
   }
 
-  /**
-   * get target's essential info.
-   * @returns {{title: string, version: string, url: string}}
-   * @private
-   */
-  _getInfo() {
-    const config = this._config;
-    let packageObj = {};
-    if (config.package) {
-      const packagePath = config.package;
-      try {
-        const json = fs.readFileSync(packagePath, {encoding: 'utf-8'});
-        packageObj = JSON.parse(json);
-      } catch (e) {
-        // ignore
-      }
-    }
-
-    // repository url
-    let url = null;
-    if (packageObj.repository) {
-      if (packageObj.repository.url) {
-        url = packageObj.repository.url;
-      } else {
-        url = packageObj.repository;
-      }
-
-      if (typeof url === 'string') {
-        if (url.indexOf('git@github.com:') === 0) { // url: git@github.com:foo/bar.git
-          const matched = url.match(/^git@github\.com:(.*)\.git$/);
-          if (matched && matched[1]) {
-            url = `https://github.com/${matched[1]}`;
-          }
-        } else if (url.match(/^[\w\d\-_]+\/[\w\d\-_]+$/)) { // url: foo/bar
-          url = `https://github.com/${url}`;
-        } else if (url.match(/^git\+https:\/\/github.com\/.*\.git$/)) { // git+https://github.com/foo/bar.git
-          const matched = url.match(/^git\+(https:\/\/github.com\/.*)\.git$/);
-          url = matched[1];
-        } else if (url.match(/(https?:\/\/.*$)/)) { // other url
-          const matched = url.match(/(https?:\/\/.*$)/);
-          url = matched[1];
-        } else {
-          url = '';
-        }
-      } else {
-        url = null;
-      }
-    }
-
-    const indexInfo = {
-      title: config.title || packageObj.name,
-      version: config.version || packageObj.version,
-      url: url
-    };
-
-    return indexInfo;
-  }
 
   /**
    * build common layout output.
@@ -204,8 +147,6 @@ export default class DocBuilder {
    * @private
    */
   _buildLayoutDoc() {
-    const info = this._getInfo();
-
     const ice = new IceCap(this._readTemplate('layout.html'), {autoClose: false});
 
     const packageObj = NPMUtil.findPackage();
@@ -213,15 +154,6 @@ export default class DocBuilder {
       ice.text('esdocVersion', `(${packageObj.version})`);
     } else {
       ice.drop('esdocVersion');
-    }
-
-    if (info.url) {
-      ice.attr('repoURL', 'href', info.url);
-      if (info.url.match(new RegExp('^https?://github.com/'))) {
-        ice.attr('repoURL', 'class', 'repo-url-github');
-      }
-    } else {
-      ice.drop('repoURL');
     }
 
     ice.drop('testLink', !this._config.test);
@@ -574,18 +506,10 @@ export default class DocBuilder {
   _getTitle(doc = '') {
     const name = doc.name || doc.toString();
 
-    if (!name) {
-      if (this._config.title) {
-        return `${this._config.title} API Document`;
-      } else {
-        return 'API Document';
-      }
-    }
-
-    if (this._config.title) {
-      return `${name} | ${this._config.title} API Document`;
+    if (name) {
+      return `${name}`;
     } else {
-      return `${name} | API Document`;
+      return '';
     }
   }
 

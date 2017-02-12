@@ -7,7 +7,7 @@ describe('TestClassDefinition:', ()=> {
   /** @test {DocBuilder#_getTitle} */
   describe('in title:', ()=>{
     it('has document title', ()=> {
-      assert.includes(doc, 'head title', 'TestClassDefinition | ESDoc Test Fixture API Document');
+      assert.includes(doc, 'head title', 'TestClassDefinition');
     });
   });
 

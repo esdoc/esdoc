@@ -14,7 +14,6 @@ exports.onStart = function(ev) {
 
 exports.onHandleConfig = function(ev) {
   callInfo.handlerNames.onHandleConfig = ['MyPlugin1'];
-  ev.data.config.title = 'Modified Config';
 };
 
 exports.onHandleCode = function(ev) {

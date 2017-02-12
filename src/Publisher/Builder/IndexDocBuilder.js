@@ -14,7 +14,7 @@ export default class IndexDocBuilder extends DocBuilder {
    */
   exec(callback) {
     const ice = this._buildLayoutDoc();
-    const title = this._getTitle();
+    const title = this._getTitle('Home');
     ice.load('content', this._buildIndexDoc());
     ice.text('title', title, IceCap.MODE_WRITE);
     callback(ice.html, 'index.html');

@@ -29,7 +29,6 @@ describe('test config.plugins: [...]', ()=>{
   it('custom document by each handlers', ()=>{
     const doc = readDoc('index.html');
 
-    assert.includes(doc, 'head title', 'Modified Config');
     assert.includes(doc, '.navigation', 'MyClass_ModifiedCode_ModifiedAST_ModifiedTag_ModifiedHTML');
     assert.includes(doc, 'head meta[name="x-from-plugin"]', 'fileName:', 'content');
   });
