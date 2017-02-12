@@ -149,10 +149,6 @@ export default class ESDoc {
 
     if (!config.excludes) config.excludes = ['\\.config\\.(js|es6)$'];
 
-    if (!config.access) config.access = ['public', 'protected'];
-
-    if (!('autoPrivate' in config)) config.autoPrivate = true;
-
     if (!('unexportIdentifier' in config)) config.unexportIdentifier = false;
 
     if (!('builtinExternal' in config)) config.builtinExternal = true;

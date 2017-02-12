@@ -1,11 +1,13 @@
 {
   "source": "./test/fixture/package/src",
   "destination": "./test/fixture/dest/esdoc",
-  "access": ["public", "protected", "private"],
   "debug": false,
   "index": "./test/fixture/package/README.md",
   "package": "./test/fixture/package/package.json",
   "title": "ESDoc Test Fixture",
+  "plugins": [
+    {"name": "esdoc-accessor-plugin", "option": {"access": ["public", "protected", "private"], "autoPrivate": true}}
+  ],
   "test": {
     "type": "mocha",
     "source": "./test/fixture/package/test",

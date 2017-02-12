@@ -25,9 +25,6 @@ export default class DocResolver {
     console.log('resolve: necessary');
     this._resolveNecessary();
 
-    console.log('resolve: access');
-    this._resolveAccess();
-
     console.log('resolve: unexported identifier');
     this._resolveUnexportIdentifier();
 
@@ -69,38 +66,6 @@ export default class DocResolver {
     this._data({ignore: true}).remove();
 
     this._data.__RESOLVED_IGNORE__ = true;
-  }
-
-  /**
-   * resolve access property.
-   * if doc does not have access property, the doc is public.
-   * but name is started with '-', the doc is private.
-   * @private
-   */
-  _resolveAccess() {
-    if (this._data.__RESOLVED_ACCESS__) return;
-
-    const config = this._builder._config;
-    const access = config.access || ['public', 'protected', 'private'];
-    const autoPrivate = config.autoPrivate;
-
-    /* eslint-disable no-invalid-this */
-    this._data().update(function() {
-      if (!this.access) {
-        if (autoPrivate && this.name.charAt(0) === '_') {
-          /** @ignore */
-          this.access = 'private';
-        } else {
-          this.access = 'public';
-        }
-      }
-
-      if (!access.includes(this.access)) /** @ignore */ this.ignore = true;
-
-      return this;
-    });
-
-    this._data.__RESOLVED_ACCESS__ = true;
   }
 
   /**

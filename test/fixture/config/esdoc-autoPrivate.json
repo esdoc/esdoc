@@ -1,8 +1,0 @@
-{
-  "source": "./test/fixture/package/src",
-  "destination": "./test/fixture/dest/esdoc-autoPrivate",
-  "includes": ["Access/.*\\.js"],
-  "autoPrivate": false,
-  "index": "./test/fixture/package/README.md",
-  "package": "./test/fixture/package/package.json"
-}
