@@ -13,20 +13,5 @@ export default class StaticFileBuilder extends DocBuilder {
     callback(path.resolve(__dirname, './template/css'), './css');
     callback(path.resolve(__dirname, './template/script'), './script');
     callback(path.resolve(__dirname, './template/image'), './image');
-
-    // see DocBuilder#_buildLayoutDoc
-    const scripts = this._config.scripts || [];
-    for (let i = 0; i < scripts.length; i++) {
-      const userScript = scripts[i];
-      const name = `./user/script/${i}-${path.basename(userScript)}`;
-      callback(userScript, name);
-    }
-
-    const styles = this._config.styles || [];
-    for (let i = 0; i < styles.length; i++) {
-      const userStyle = styles[i];
-      const name = `./user/css/${i}-${path.basename(userStyle)}`;
-      callback(userStyle, name);
-    }
   }
 }

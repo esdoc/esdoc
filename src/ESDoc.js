@@ -153,10 +153,6 @@ export default class ESDoc {
 
     if (!config.package) config.package = './package.json';
 
-    if (!config.styles) config.styles = [];
-
-    if (!config.scripts) config.scripts = [];
-
     if (config.test) {
       assert(config.test.type);
       assert(config.test.source);

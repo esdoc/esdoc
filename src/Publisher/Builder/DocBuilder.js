@@ -158,17 +158,6 @@ export default class DocBuilder {
 
     ice.drop('testLink', !this._config.test);
 
-    // see StaticFileBuilder#exec
-    ice.loop('userScript', this._config.scripts || [], (i, userScript, ice)=>{
-      const name = `user/script/${i}-${path.basename(userScript)}`;
-      ice.attr('userScript', 'src', name);
-    });
-
-    ice.loop('userStyle', this._config.styles || [], (i, userStyle, ice)=>{
-      const name = `user/css/${i}-${path.basename(userStyle)}`;
-      ice.attr('userStyle', 'href', name);
-    });
-
     ice.drop('manualHeaderLink', !this._config.manual);
 
     if (this._config.manual && this._config.manual.globalIndex) {

@@ -1,8 +1,0 @@
-{
-  "source": "./test/fixture/package/src",
-  "destination": "./test/fixture/dest/esdoc-scripts",
-  "includes": ["Desc/.*\\.js"],
-  "scripts": ["./test/fixture/package/script/custom.js"],
-  "index": "./test/fixture/package/README.md",
-  "package": "./test/fixture/package/package.json"
-}

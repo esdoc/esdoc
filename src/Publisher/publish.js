@@ -41,6 +41,12 @@ export default function publish(values, asts, config) {
     fs.outputFileSync(filePath, html, {encoding: 'utf8'});
   }
 
+  function writeJS(js, fileName) {
+    log(`output: ${fileName}`);
+    const filePath = path.resolve(config.destination, fileName);
+    fs.outputFileSync(filePath, js, {encoding: 'utf8'});
+  }
+
   function writeBadge(badge, fileName) {
     log(`output: ${fileName}`);
     const filePath = path.resolve(config.destination, fileName);
@@ -72,7 +78,7 @@ export default function publish(values, asts, config) {
   new SingleDocBuilder(data, config).exec(writeHTML);
   new FileDocBuilder(data, config).exec(writeHTML);
   new StaticFileBuilder(data, config).exec(copy);
-  new SearchIndexBuilder(data, config).exec(writeHTML);
+  new SearchIndexBuilder(data, config).exec(writeJS);
   new ASTDocBuilder(data, asts, config).exec(writeAST);
   new SourceDocBuilder(data, config, coverage).exec(writeHTML);
   new ManualDocBuilder(data, config).exec(writeHTML, copy, writeBadge);
