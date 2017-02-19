@@ -149,8 +149,6 @@ export default class ESDoc {
 
     if (!('undocumentIdentifier' in config)) config.undocumentIdentifier = true;
 
-    if (!('includeSource' in config)) config.includeSource = true;
-
     if (!config.index) config.index = './README.md';
 
     if (!config.package) config.package = './package.json';
