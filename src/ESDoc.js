@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'fs-extra';
 import path from 'path';
 import assert from 'assert';
 import Logger from 'color-logger';
@@ -25,7 +25,7 @@ export default class ESDoc {
   /**
    * Generate documentation.
    * @param {ESDocConfig} config - config for generation.
-   * @param {function(results: Object[], asts: Object[], config: ESDocConfig)} publisher - callback for output html.
+   * @param {function(results: Object[], config: ESDocConfig)} publisher - callback for output html.
    */
   static generate(config, publisher) {
     assert(typeof publisher === 'function');
@@ -94,8 +94,23 @@ export default class ESDoc {
 
     results = Plugin.onHandleTag(results);
 
+    fs.removeSync(config.destination);
+
+    // dump.json
+    {
+      const dumpPath = path.resolve(config.destination, 'dump.json');
+      fs.outputFileSync(dumpPath, JSON.stringify(results, null, 2));
+    }
+
+    // ast
+    for (const ast of asts) {
+      const json = JSON.stringify(ast.ast, null, 2);
+      const filePath = path.resolve(config.destination, `ast/${ast.filePath}.json`);
+      fs.outputFileSync(filePath, json);
+    }
+
     try {
-      publisher(results, asts, config);
+      publisher(results, config);
     } catch (e) {
       InvalidCodeLogger.showError(e);
       process.exit(1);

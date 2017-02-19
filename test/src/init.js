@@ -8,8 +8,6 @@ const configJSON = fs.readFileSync(configFilePath, {encode: 'utf8'});
 const config = JSON.parse(configJSON);
 
 ESDoc.generate(config, (data, asts, config)=>{
-  fs.removeSync(config.destination);
-
   const db = taffy(data);
   db.find = function(...cond) {
     return db(...cond).map(v => v);

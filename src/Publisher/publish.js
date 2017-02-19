@@ -9,7 +9,6 @@ import ClassDocBuilder from './Builder/ClassDocBuilder.js';
 import SingleDocBuilder from './Builder/SingleDocBuilder.js';
 import FileDocBuilder from './Builder/FileDocBuilder.js';
 import SearchIndexBuilder from './Builder/SearchIndexBuilder.js';
-import ASTDocBuilder from './Builder/ASTDocBuilder.js';
 import SourceDocBuilder from './Builder/SourceDocBuilder.js';
 import TestDocBuilder from './Builder/TestDocBuilder.js';
 import TestFileDocBuilder from './Builder/TestFileDocBuilder.js';
@@ -19,14 +18,10 @@ import Plugin from '../Plugin/Plugin.js';
 /**
  * publish document as HTML.
  * @param {DocObject[]} values - all doc objects.
- * @param {AST[]} asts - all ASTs.
  * @param {ESDocConfig} config - ESDoc config object.
  */
-export default function publish(values, asts, config) {
+export default function publish(values, config) {
   IceCap.debug = !!config.debug;
-
-  const dumpPath = path.resolve(config.destination, 'dump.json');
-  fs.outputFileSync(dumpPath, JSON.stringify(values, null, 2));
 
   const data = taffy(values);
 
@@ -53,11 +48,6 @@ export default function publish(values, asts, config) {
     fs.outputFileSync(filePath, badge, {encoding: 'utf8'});
   }
 
-  function writeAST(astJSON, fileName) {
-    const filePath = path.resolve(config.destination, fileName);
-    fs.outputFileSync(filePath, astJSON, {encoding: 'utf8'});
-  }
-
   function copy(srcPath, destPath) {
     log(`output: ${destPath}`);
     fs.copySync(srcPath, path.resolve(config.destination, destPath));
@@ -79,7 +69,6 @@ export default function publish(values, asts, config) {
   new FileDocBuilder(data, config).exec(writeHTML);
   new StaticFileBuilder(data, config).exec(copy);
   new SearchIndexBuilder(data, config).exec(writeJS);
-  new ASTDocBuilder(data, asts, config).exec(writeAST);
   new SourceDocBuilder(data, config, coverage).exec(writeHTML);
   new ManualDocBuilder(data, config).exec(writeHTML, copy, writeBadge);
 
