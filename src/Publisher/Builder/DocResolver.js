@@ -25,9 +25,6 @@ export default class DocResolver {
     console.log('resolve: necessary');
     this._resolveNecessary();
 
-    console.log('resolve: unexported identifier');
-    this._resolveUnexportIdentifier();
-
     console.log('resolve: undocument identifier');
     this._resolveUndocumentIdentifier();
 
@@ -66,22 +63,6 @@ export default class DocResolver {
     this._data({ignore: true}).remove();
 
     this._data.__RESOLVED_IGNORE__ = true;
-  }
-
-  /**
-   * resolve unexport identifier doc.
-   * doc is added ignore property that is not exported.
-   * @private
-   */
-  _resolveUnexportIdentifier() {
-    if (this._data.__RESOLVED_UNEXPORT_IDENTIFIER__) return;
-
-    const config = this._builder._config;
-    if (!config.unexportIdentifier) {
-      this._data({export: false}).update({ignore: true});
-    }
-
-    this._data.__RESOLVED_UNEXPORT_IDENTIFIER__ = true;
   }
 
   /**
@@ -343,7 +324,7 @@ export default class DocResolver {
         let childDoc = builder._find({longname: childName})[0];
         if (!childDoc) continue;
         if (!childDoc.ignore && childDoc.export) {
-          doc.export = true;
+          doc.ignore = false;
           return doc;
         }
       }

@@ -87,6 +87,10 @@ export default class ESDoc {
       this._generateForTest(config, results, asts);
     }
 
+    for (const tag of results) {
+      if (tag.export === false) tag.ignore = true;
+    }
+
     results = Plugin.onHandleTag(results);
 
     try {
@@ -144,8 +148,6 @@ export default class ESDoc {
     if (!config.includes) config.includes = ['\\.(js|es6)$'];
 
     if (!config.excludes) config.excludes = ['\\.config\\.(js|es6)$'];
-
-    if (!('unexportIdentifier' in config)) config.unexportIdentifier = false;
 
     if (!('undocumentIdentifier' in config)) config.undocumentIdentifier = true;
 
