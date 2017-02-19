@@ -18,7 +18,7 @@ exports.onHandleConfig = function(ev) {
 
 exports.onHandleCode = function(ev) {
   callInfo.handlerNames.onHandleCode = ['MyPlugin1'];
-  ev.data.code = 'export default class MyClass_ModifiedCode {}';
+  ev.data.code = '/** this is class */ export default class MyClass_ModifiedCode {}';
 };
 
 exports.onHandleCodeParser = function(ev) {

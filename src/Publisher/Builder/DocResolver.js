@@ -25,9 +25,6 @@ export default class DocResolver {
     console.log('resolve: necessary');
     this._resolveNecessary();
 
-    console.log('resolve: undocument identifier');
-    this._resolveUndocumentIdentifier();
-
     console.log('resolve: duplication');
     this._resolveDuplication();
 
@@ -63,21 +60,6 @@ export default class DocResolver {
     this._data({ignore: true}).remove();
 
     this._data.__RESOLVED_IGNORE__ = true;
-  }
-
-  /**
-   * resolve undocument identifier doc.
-   * doc is added ignore property that does not have document tag.
-   * @private
-   */
-  _resolveUndocumentIdentifier() {
-    if (this._data.__RESOLVED_UNDOCUMENT_IDENTIFIER__) return;
-
-    if (!this._builder._config.undocumentIdentifier) {
-      this._builder._data({undocument: true}).update({ignore: true});
-    }
-
-    this._data.__RESOLVED_UNDOCUMENT_IDENTIFIER__ = true;
   }
 
   /**

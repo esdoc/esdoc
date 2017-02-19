@@ -7,7 +7,8 @@
   "title": "ESDoc Test Fixture",
   "plugins": [
     {"name": "esdoc-external-ecmascript-plugin", "option": {"enable": true}},
-    {"name": "esdoc-accessor-plugin", "option": {"access": ["public", "protected", "private"], "autoPrivate": true}}
+    {"name": "esdoc-accessor-plugin", "option": {"access": ["public", "protected", "private"], "autoPrivate": true}},
+    {"name": "esdoc-undocumented-identifier-plugin"}
   ],
   "test": {
     "type": "mocha",

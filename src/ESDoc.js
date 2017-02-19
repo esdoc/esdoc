@@ -89,6 +89,7 @@ export default class ESDoc {
 
     for (const tag of results) {
       if (tag.export === false) tag.ignore = true;
+      if (tag.undocument === true) tag.ignore = true;
     }
 
     results = Plugin.onHandleTag(results);
@@ -148,8 +149,6 @@ export default class ESDoc {
     if (!config.includes) config.includes = ['\\.(js|es6)$'];
 
     if (!config.excludes) config.excludes = ['\\.config\\.(js|es6)$'];
-
-    if (!('undocumentIdentifier' in config)) config.undocumentIdentifier = true;
 
     if (!config.index) config.index = './README.md';
 
