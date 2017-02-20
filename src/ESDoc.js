@@ -94,6 +94,7 @@ export default class ESDoc {
 
     results = Plugin.onHandleTag(results);
 
+    // cleanup
     fs.removeSync(config.destination);
 
     // dump.json
@@ -109,8 +110,35 @@ export default class ESDoc {
       fs.outputFileSync(filePath, json);
     }
 
+    // package.json
     try {
-      publisher(results, config);
+      const json = fs.readFileSync(config.package, {encoding: 'utf-8'});
+      const filePath = path.resolve(config.destination, 'package.json');
+      fs.outputFileSync(filePath, json, {encoding: 'utf8'});
+    } catch (e) {
+      // ignore
+    }
+
+    try {
+      const write = (content, filePath) =>{
+        const _filePath = path.resolve(config.destination, filePath);
+        content = Plugin.onHandleContent(content, _filePath);
+
+        // todo: remove deprecated code
+        const ext = path.extname(filePath).toLowerCase();
+        if (ext === '.html') content = Plugin.onHandleHTML(content, _filePath);
+
+        console.log(`output: ${_filePath}`);
+        fs.outputFileSync(_filePath, content);
+      };
+
+      const copy = (srcPath, destPath) => {
+        const _destPath = path.resolve(config.destination, destPath);
+        console.log(`output: ${_destPath}`);
+        fs.copySync(srcPath, _destPath);
+      };
+
+      Plugin.onPublish(write, copy);
     } catch (e) {
       InvalidCodeLogger.showError(e);
       process.exit(1);

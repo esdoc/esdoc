@@ -121,15 +121,37 @@ class Plugin {
   }
 
   /**
+   * handle publish
+   * @param {function(filePath: string, content: string)} writeFile - write content.
+   * @param {function(srcPath: string, destPath: string)} copyDir - copy directory.
+   */
+  onPublish(writeFile, copyDir) {
+    const ev = new PluginEvent({});
+
+    // hack: fixme
+    ev.data.writeFile = writeFile;
+    ev.data.copyDir = copyDir;
+
+    this._execHandler('onPublish', ev);
+  }
+
+  /**
    * handle HTML.
    * @param {string} html - original HTML.
    * @param {string} fileName - the fileName of the HTML file.
    * @returns {string} handled HTML.
+   * @deprecated please use onHandleContent
    */
   onHandleHTML(html, fileName) {
     const ev = new PluginEvent({html, fileName});
     this._execHandler('onHandleHTML', ev);
     return ev.data.html;
+  }
+
+  onHandleContent(content, fileName) {
+    const ev = new PluginEvent({content, fileName});
+    this._execHandler('onHandleContent', ev);
+    return ev.data.content;
   }
 
   /**
