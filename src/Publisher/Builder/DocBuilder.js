@@ -237,6 +237,13 @@ export default class DocBuilder {
       ice.attr('userStyle', 'href', name);
     });
 
+    if (this._config.logo) {
+      const logo = this._config.logo.match(/[^\/]+$/)[0];
+      ice.load('brandLogoLink', `<img src="./image/${logo}"/>`);
+    } else {
+      ice.drop('brandLogoLink');
+    }
+
     ice.drop('manualHeaderLink', !this._config.manual);
 
     if (this._config.manual && this._config.manual.globalIndex) {

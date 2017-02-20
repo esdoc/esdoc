@@ -1,0 +1,191 @@
+/* --- doc --- */
+
+.header-notice {
+  color: @color-alt;
+
+  pre {
+    margin: 0;
+
+    code {
+        margin: 0;
+        padding: 0;
+        border: none;
+        background: none;
+    }
+  }
+}
+
+// ------
+
+.detail {
+  > h3 {
+    position: relative;
+    overflow: auto;
+    border-radius: @border-radius;
+    background-color: @bg-color-highlight;
+    padding: @padding-v @padding-h;
+    font-size: 1rem; // 16px (overwrite default)
+
+    .right-info {
+      position: absolute;
+      right: 2px;
+      bottom: 2px;
+      padding: 0.125em 0.25em;
+      border-radius: @border-radius;
+      background-color: fadeout(lighten(@bg-color-highlight, 20), 20);
+      font-size: 0.875em;
+
+      a {
+        text-decoration: none; // optional
+      }
+    }
+
+    [data-ice="name"] {
+      font-weight: bold; // tip: don't use @font-weight-bold
+    }
+  }
+
+  > div {
+    margin-left: @content-shift;
+  }
+
+  h4 {
+    + * {
+      margin-left: @content-shift;
+    }
+
+    + ul {
+      padding-left: 0; // remove default
+
+      li {
+        list-style: none;
+      }
+    }
+
+    + .example-doc {
+      margin-left: 0; // remove @content-shift
+    }
+  }
+
+  & + .detail {
+    margin-top: @text-space * 2;
+  }
+}
+
+.flat-list {
+  margin-bottom: @text-space;
+}
+
+.instance-docs, .deprecated, .experimental {
+  margin: 0.25em 0;
+
+  &:before {
+    content: "";
+    display: inline-block;
+    width: 0.5em;
+    height: 0.5em;
+    margin-right: 0.5em;
+    border-radius: @border-radius;
+  }
+}
+
+.instance-docs:before {
+  background-color: orange;
+}
+
+.deprecated:before {
+  background-color: orange;
+}
+
+.experimental:before {
+  background-color: orange;
+}
+
+.params, .return-params {
+  p {
+    margin-bottom: 0;
+  }
+}
+
+.import-path pre.prettyprint code {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.inner-link-active {
+  box-shadow: 0 0 0 5px #ffe0b2 !important;
+  border-radius: 0 !important;
+  background: #ffe0b2 !important;
+}
+
+.version, .since {
+  color: @color-alt;
+}
+
+.version + .since:before {
+  content: '| ';
+}
+
+// ------
+
+.example-caption {
+  display: inline-block;
+  position: relative;
+  top: @code-border-width;
+  margin: 0 1em 0 0 !important;
+  padding: @code-padding;
+  border-radius: @border-radius @border-radius 0 0;
+  border: @code-border-width solid @code-border-color;
+  border-bottom: none;
+  background-color: @code-bg-color-rgba;
+  font-style: italic;
+  color: @color-alt;
+
+  // make sure there's no space between .example-caption and .source-code
+  padding-bottom: 0 !important;
+  font-size: 1em !important;
+
+  + pre.source-code > code {
+    border-top-left-radius: 0;
+  }
+}
+
+// ------
+
+pre.source-code.line-number {
+  code {
+    padding: 0em;
+    background-color: @code-bg-color-hex; // (#ededed)
+  }
+
+  ol {
+    padding-left: 3.5em;
+    background-color: darken(@code-bg-color-hex, 6.25 * @code-bg-color-x); // (#ddd)
+    color: darken(@code-bg-color-hex, 26.25 * @code-bg-color-x); // line number color (#aaa)
+  }
+
+  li {
+    padding-left: 0.5em;
+    background-color: @code-bg-color-hex;
+
+    &.active {
+      // it's a hack to make the <li> background wider.
+      // we assume the <code> width is larger than 200px...
+      box-shadow: 200px 0 0 0 #ffe0b2 !important;
+      
+      background-color: #ffe0b2;
+      color: darken(@code-bg-color-hex, 59.5 * @code-bg-color-x); // active line number color (#555)
+    }
+
+    &.error-line {
+      // it's a hack to make the <li> background wider.
+      // we assume the <code> width is larger than 200px...
+      box-shadow: 200px 0 0 0 #ffcdd2 !important;
+
+      background-color: #ffcdd2;
+      color: darken(@code-bg-color-hex, 59.5 * @code-bg-color-x); // line number color
+    }
+  }
+}

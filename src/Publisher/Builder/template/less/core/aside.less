@@ -1,0 +1,73 @@
+/* --- aside --- */
+
+#esdoc-layout > aside {
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    list-style: none;
+    white-space: nowrap;
+  }
+
+  a {
+    color: @color-base;
+    text-decoration: none;
+  }
+
+  .nav-dir-path {
+    margin-top: 1em;
+    box-sizing: border-box;
+    border-top: @border-width solid @border-color;
+    font-size: 0.8125em;
+    text-align: center;
+    color: @color-alt;
+  }
+}
+
+.kind-class,
+.kind-interface,
+.kind-function,
+.kind-typedef,
+.kind-variable,
+.kind-external {
+  display: inline-block;
+  width: 1.2em;
+  height: 1.2em;
+  line-height: 1.2em;
+  margin-right: 0.33em;
+  border-radius: @border-radius;
+  text-align: center;
+  font-weight: @font-weight-bold;
+}
+
+.kind-class {
+  color: #009800;
+  background-color: #bfe5bf;
+}
+
+.kind-interface {
+  color: #fbca04;
+  background-color: #fef2c0;
+}
+
+.kind-function {
+  color: #6b0090;
+  background-color: #d6bdde;
+}
+
+.kind-variable {
+  color: #eb6420;
+  background-color: #fad8c7;
+}
+
+.kind-typedef {
+  color: #db001e;
+  background-color: #edbec3;
+}
+
+.kind-external {
+  color: #0738c3;
+  background-color: #bbcbea;
+}

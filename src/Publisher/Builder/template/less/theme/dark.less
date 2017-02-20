@@ -1,0 +1,74 @@
+// note: less files in `./core` directory are loaded dynamically (see `LessFileBuilder.js` for more details).
+// thus, each `theme/[name].less` file just needs to add or overwrite the css rules according to its design.
+
+// --- variables ---
+
+@color-base: #BCAAA4; // Brown 200
+@color-alt: #8D6E63; // Brown 400
+@color-link: #7CB342; // Light Green 600
+
+@bg-color-base: #212121; // Grey 900
+@bg-color-alt: #191919;
+@bg-color-highlight: #5D4037; // Brown 700
+
+@border-color: #4E342E; // Brown 800
+
+@code-bg-color-rgba: rgba(0, 0, 0, 0.4);
+@code-bg-color-hex: #000;
+@code-bg-color-x: -1;
+
+@table-bg-hover: #3E2723; // Brown 900
+
+// --- layout ---
+
+#esdoc-layout {
+  > header {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+
+  > aside {
+    border-width: 0 !important; // remove default border
+
+    > * {
+      border-width: 0 @border-width 0 0;
+      border-style: solid;
+      border-color: @border-color;
+      background-color: @table-bg-hover;
+
+      @media (max-width: (@screen-md - 1)) {
+        box-shadow: -10px 0 10px rgba(0, 0, 0, 0.125) inset;
+      }
+
+      @media (min-width: @screen-md) {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        border-bottom-right-radius: @border-radius;
+        border-bottom-width: @border-width;
+      }
+
+      @media (min-width: @screen-lg) {
+        border-bottom-left-radius: @border-radius;
+        border-left-width: @border-width;
+      }
+    }
+  }
+}
+
+// --- menu ---
+
+#esdoc-menu {
+  .esdoc-toggle-nav {
+    background-image: url("../image/list-alt.svg");
+  }
+
+  .esdoc-toggle-links {
+    background-image: url("../image/down-alt.svg");
+  }
+
+  a.repo-url-github {
+    background-image: url("../image/github-alt.svg");
+  }
+}
+
+#esdoc-search {
+  background-image: url("../image/find-alt.svg");
+}

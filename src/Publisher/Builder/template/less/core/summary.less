@@ -1,0 +1,150 @@
+/* --- summary --- */
+
+table.summary {
+  tbody td {
+    &:nth-child(1) {
+      width: 1%;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    &:nth-child(2) {    
+      border-right: none;
+    }
+
+    &:nth-child(3) {
+      white-space: nowrap;
+    }
+
+    & > div:nth-of-type(2) {
+      margin-left: @content-shift;
+    }
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+}
+
+// --- inherited-summary ---
+
+.inherited-summary .summary {
+  tbody {
+    display: none;
+  }
+
+  .toggle {
+    display: inline-block;
+    width: 1.5em;
+    font-size: 0.75em;
+    cursor: pointer;
+
+    &.closed:before {
+      content: "▶";
+      color: @color-link;
+    }
+
+    &.opened:before {
+      content: "▼";
+      color: @color-link;
+    }
+  }
+}
+
+// --- files-summary ---
+
+.total-coverage-count {
+  margin-left: 1em;
+  vertical-align: middle;
+  line-height: 0;
+  font-size: 0.825rem;
+  font-weight: normal;
+  color: @color-alt;
+}
+
+.files-summary {
+  td.identifiers > span {
+    display: block;
+
+    //& + span {
+    //  margin-top: @padding-v; // optional (add a little space between blocks)
+    //}
+  }
+
+  td.coverage {
+    text-align: right;
+  }
+
+  &[data-use-coverage="false"] td.coverage {
+    display: none;
+  }
+
+  .coverage-count {
+    display: inline-block;
+    min-width: 3.5em;
+    font-size: 0.825rem;
+    color: @color-alt;
+  }
+}
+
+// --- test-summary ---
+
+.test-summary {
+  p {
+    margin: 0;
+  }
+
+  tbody tr {
+    background-color: @bg-color-base; // overwrite default tr:nth-child(even){}
+    animation-name: test-summary-highlight; // highlight when opening
+    animation-duration: 0.75s;
+
+    &[data-test-depth="0"] {
+      background-color: @bg-color-alt; // fixed background for the first level
+      animation: none;
+    }
+  }
+
+  tr.test-describe {
+    td:first-child {
+      white-space: nowrap;
+    }
+
+    .toggle {
+      display: inline-block;
+      width: 1.5em;
+      font-size: 0.75em;
+      cursor: pointer;
+
+      & + * {
+        display: inline-block;
+      }
+
+      &.closed:before {
+        content: '▶';
+      }
+
+      &.opened:before {
+        content: '▼';
+      }
+    }
+  }
+
+  td.test-target > span {
+    display: block;
+
+    //& + span {
+    //  margin-top: @padding-v; // optional (add a little space between blocks)
+    //}
+  }
+
+  // highlight the table row when displayed
+  @keyframes test-summary-highlight {
+    from {
+      background-color: @table-bg-hover;
+    }
+    to {
+      background-color: transparent;
+    }
+  }
+}

@@ -20,7 +20,8 @@
     "esdoc": "node ./script/esdoc.js",
     "site": "node ./script/site.js",
     "start": "node ./script/server.js",
-    "lint": "node ./script/eslint.js"
+    "lint": "node ./script/eslint.js",
+    "less": "node ./script/less.js"
   },
   "dependencies": {
     "cheerio": "0.22.0",
@@ -31,30 +32,40 @@
     "babel-traverse": "6.12.0",
     "fs-extra": "1.0.0",
     "ice-cap": "0.0.4",
+    "less": "2.7.2",
     "marked": "0.3.6",
     "minimist": "1.2.0",
     "taffydb": "2.7.2"
   },
   "devDependencies": {
     "babel-cli": "6.11.4",
+    "babel-plugin-istanbul": "2.0.1",
     "babel-plugin-transform-es2015-modules-commonjs": "6.11.5",
     "babel-register": "6.11.6",
     "codecov": "1.0.1",
     "esdoc-importpath-plugin": "0.1.0",
     "eslint": "3.6.0",
     "http-server": "0.9.0",
-    "nyc": "8.3.0",
-    "babel-plugin-istanbul": "2.0.1",
-    "mocha": "2.5.3"
+    "mocha": "2.5.3",
+    "nyc": "8.3.0"
   },
   "keywords": [
     "jsdoc",
     "api",
     "document",
     "documentation",
-    "ES6", "ECMAScript6", "ES2015", "ECMAScript2015",
-    "ES7", "ECMAScript7", "ES2016", "ECMAScript2016",
-    "ES8", "ECMAScript8", "ES2017", "ECMAScript2017",
+    "ES6",
+    "ECMAScript6",
+    "ES2015",
+    "ECMAScript2015",
+    "ES7",
+    "ECMAScript7",
+    "ES2016",
+    "ECMAScript2016",
+    "ES8",
+    "ECMAScript8",
+    "ES2017",
+    "ECMAScript2017",
     "proposal"
   ],
   "files": [

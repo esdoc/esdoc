@@ -1,0 +1,112 @@
+/* --- menu --- */
+
+#esdoc-menu {
+  padding: 0 @menu-span;
+  font-size: @menu-font-size;
+
+  > * {
+    display: inline-block;
+  }
+
+  a {
+    display: inline-block;
+    padding: 0 @menu-span;
+    text-decoration: none;
+    color: @color-base;
+  }
+
+  .esdoc-toggle-nav,
+  .esdoc-toggle-links,
+  a.repo-url-github {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: @menu-icon-size;
+    width: @menu-icon-size;
+    font-size: 0;
+    vertical-align: top;
+  }
+
+  .esdoc-toggle-nav {
+    display: none;
+    background-image: url("../image/list.svg");
+  }
+
+  .esdoc-toggle-links {
+    display: none;
+    background-image: url("../image/down.svg");
+  }
+
+  a.repo-url-github {
+    background-image: url("../image/github.svg");
+  }
+}
+
+#esdoc-links {
+  font-size: 0; // remove the 4px space between inline-block elements
+
+  a {
+    font-size: @menu-font-size; // restore font-size
+    transition: background-color 0.4s ease, color 0.4s ease;
+
+    &:hover {
+      background-color: darken(@bg-color-alt, 5); // optional
+      color: @color-link;
+    }
+  }
+}
+
+.esdoc-brand-logo {
+  height: @header-height - @border-width;
+  vertical-align: top;
+  font-size: 0;
+
+  img {
+    width: @menu-brand-size;
+    height: @menu-brand-size;
+    vertical-align: middle;
+  }
+}
+
+@media (min-width: @screen-md) {
+  .esdoc-brand-logo ~  #esdoc-links > :first-child {
+    display: none; // hide the "Home" link when "Brand" link is available
+  }
+}
+
+@media (max-width: (@screen-md - 1)) {
+  .esdoc-brand-logo {
+    display: none !important; // hide "Brand" link on small and x-small screen
+  }
+
+  .esdoc-toggle-nav,
+  .esdoc-toggle-links {
+    display: inline-block !important;
+  }
+
+  #esdoc-links {
+    box-shadow: @header-dropdown-shadow;
+    border-radius: @border-radius;
+    border: @border-width solid @border-color;
+    background-color: @bg-color-alt;
+    overflow: hidden;
+    position: absolute;
+    top: @header-dropdown-top;
+    left: -99999px;
+    line-height: 2em;
+    font-size: @menu-font-size;
+    opacity: 0;
+    transition: left 0s linear (@nav-delay / 2), opacity (@nav-delay / 2) ease-in;
+
+    a {
+      display: block;
+      padding: 0px 6em 0px 0.75em;
+      font-size: inherit;
+    }
+  }
+
+  body.esdoc-links-open #esdoc-links {
+    left: @menu-icon-size + 3 * @menu-span;
+    opacity: @header-dropdown-opacity;
+    transition: left 0s linear, opacity @nav-delay ease-out;
+  }
+}

@@ -1,0 +1,149 @@
+/* --- text --- */
+
+html {
+  font-size: @font-size-lg;
+  font-family: @font-family;
+  color: @color-base;
+
+  @media (max-width: (@screen-md - 1)) {
+    font-size: @font-size-md;
+  }
+}
+
+a {
+  color: @color-link;
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    text-decoration: underline;  
+  }
+}
+
+hr {
+  margin: (@text-space * 2) 0;
+  border: none;
+  border-bottom: @border-width solid @border-color;
+}
+
+h1, h2, h3 {
+  margin: (@text-space * 2) 0 @text-space 0; // (*) default margin of a section heading
+  font-weight: 300;
+}
+
+h1 {
+  padding-bottom: 0.1em;
+  border-bottom: @border-width solid @border-color;
+  line-height: @line-height - @line-height-x * 4;
+  font-size: 2.25rem; // 36px (based on @font-size-lg = 16px)
+}
+
+h2 {
+  padding-bottom: 0.1em;
+  border-bottom: @border-width solid @border-color;
+  line-height: @line-height - @line-height-x * 3;
+  font-size: 1.5rem; // 24px
+}
+
+h3 {
+  line-height: @line-height - @line-height-x * 2;
+  font-size: 1.3125rem; // 20px
+}
+
+h4 {
+  margin: (@text-space * 2) 0 0.25rem 0; // (*) special margin of a paragraph heading
+  line-height: @line-height - @line-height-x * 1;
+  font-size: 1.125rem; // 18px
+  font-weight: @font-weight-bold;
+}
+
+p, ul, ol, pre, table {
+  margin: 0 0 @text-space 0; // content default margin (paragraph like)
+  line-height: @line-height;
+}
+
+p {
+  font-size: 1rem; // 16px
+}
+
+ul, ol { // notice: don't set the font-size (use inherited value)
+  padding-left: 2.5em;
+}
+
+pre, code {
+  font-size: 0.8125rem; // 13px
+  font-family: Consolas, monaco, monospace;  
+}
+
+pre code, // notice: `pre > code` is the usual markup for code block
+code code, pre pre, code pre { // notice: this is just to handle other markup
+  font-size: 1em;
+}
+
+code {
+  padding: @code-padding;
+  border-radius: @border-radius;
+  border: @code-border-width solid @code-border-color;
+  background-color: @code-bg-color-rgba;
+
+  a {
+    text-decoration: none !important;
+    border-bottom: 1px dotted rgba(0, 0, 0, 0.2); // tip: use fixed border-width!
+  }
+
+  code {
+    padding: 0;
+    border: none;
+    background: none;
+  }
+}
+
+pre {
+  overflow: auto;
+
+  > code {
+    display: block;
+    overflow: auto;
+    padding: @padding-v @padding-h;
+  }
+}
+
+table { // notice: don't set the font-size (use inherited value)
+  border-collapse: collapse;
+  border: @border-width solid transparent;
+}
+
+th, td {
+  padding: @padding-v @padding-h;
+  vertical-align: top;
+}
+
+thead {
+  font-weight: @font-weight-bold;
+}
+
+tbody {
+  tr {
+    border-width: @border-width 0;
+    border-style: solid;
+    border-color: @border-color;
+    background-color: @bg-color-base;
+    transition: background-color 0.25s ease;
+
+    &:nth-child(even) {
+      background-color: @bg-color-alt;
+    }
+
+    &:hover {
+      background-color: @table-bg-hover; // TODO: optimize this color in rgba...
+    }
+  }
+
+  th, td {
+    border-right: @border-width dotted @border-color;
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+}

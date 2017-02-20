@@ -1,22 +1,36 @@
 (function(){
   var searchIndex = window.esdocSearchIndex;
-  var searchBox = document.querySelector('.search-box');
-  var input = document.querySelector('.search-input');
-  var result = document.querySelector('.search-result');
+  var searchBox = document.querySelector('#esdoc-search');
+  var input = searchBox.querySelector('header input');
+  var resultWrapper = searchBox.querySelector('article');
+  var result = resultWrapper.firstChild;
   var selectedIndex = -1;
   var prevText;
 
-  // active search box and focus when mouse enter on search box.
-  searchBox.addEventListener('mouseenter', function(){
+  // active search box and focus when mouse enter or when click on search box.
+  searchBox.addEventListener('mouseenter', openBox);
+  searchBox.addEventListener('click', openBox);
+
+  // close search box when mouse leave on search box or when blur on input.
+  searchBox.addEventListener('mouseleave', closeBox);
+  input.addEventListener('blur', closeBox);
+
+  function openBox(){
     searchBox.classList.add('active');
+    // the `focus` works on Desktop when mouse enter and on Mobile when `click`.
+    // the `focus` fails on Mobile when mouse enter, but a `blur` event is triggered!
     input.focus();
-  });
+  }
+
+  function closeBox(){
+    input.value || searchBox.classList.remove('active');
+  }
 
   // search with text when key is upped.
   input.addEventListener('keyup', function(ev){
     var text = ev.target.value.toLowerCase();
     if (!text) {
-      result.style.display = 'none';
+      resultWrapper.style.display = 'none';
       result.innerHTML = '';
       return;
     }
@@ -42,7 +56,7 @@
       innerHTML += '<li class="search-separator">' + kind + '</li>\n' + list.join('\n');
     }
     result.innerHTML = innerHTML;
-    if (innerHTML) result.style.display = 'block';
+    if (innerHTML) resultWrapper.style.display = 'block';
     selectedIndex = -1;
   });
 
@@ -91,26 +105,31 @@
   });
 
   // select search result when search result is mouse over.
+  var mousemove;
   result.addEventListener('mousemove', function(ev){
+    // unselect when mouse move
     var current = result.children[selectedIndex];
     if (current) current.classList.remove('selected');
+    clearTimeout(mousemove);
+    mousemove = setTimeout(function(){
+      var li = ev.target;
+      while (li) {
+        if (li.nodeName === 'LI') break;
+        li = li.parentElement;
+      }
 
-    var li = ev.target;
-    while (li) {
-      if (li.nodeName === 'LI') break;
-      li = li.parentElement;
-    }
-
-    if (li) {
-      selectedIndex = Array.prototype.indexOf.call(result.children, li);
-      li.classList.add('selected');
-    }
+      // select when mouse stop
+      if (li) {
+        selectedIndex = Array.prototype.indexOf.call(result.children, li);
+        li.classList.add('selected');
+      }
+    }, 25);
   });
 
   // clear search result when body is clicked.
   document.body.addEventListener('click', function(ev){
     selectedIndex = -1;
-    result.style.display = 'none';
+    resultWrapper.style.display = 'none';
     result.innerHTML = '';
   });
 

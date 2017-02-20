@@ -1,0 +1,76 @@
+
+@screen-lg: 1280px;
+@screen-md: 1024px;
+@screen-sm: 640px;
+
+@font-size-lg: 16px;
+@font-size-md: 14px;
+
+@line-height: 1.5em;
+@line-height-x: 0.1; // line-height factor (designed for h1, h2, ...)
+
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,600,700);
+@font-family: 'Source Sans Pro', Arial, Helvetica, sans-serif;
+
+@font-weight-bold: 600;
+
+@color-base: #555;
+@color-alt: #aaa;
+@color-link: #039BE5;
+
+@bg-color-base: #fff;
+@bg-color-alt: #f5f5f5;
+@bg-color-highlight: #d9edf7;
+
+@layout-space: 1.25rem;
+
+@text-space: 0.75rem; // content margin base (like between paragraphs)
+
+@content-shift: 1rem; // used as margin-left for content (like .description)
+
+@border-radius: 3px;
+@border-width: 1px;
+@border-color: #ddd;
+
+@padding-v: 0.25em; // content padding (like in table cell)
+@padding-h: 0.5em;
+
+@header-height: 50px;
+
+@header-dropdown-top: @header-height - @border-width - 4px;
+@header-dropdown-opacity: 0.95;
+@header-dropdown-shadow: rgba(0, 0, 0, 0.3) 0 3px 6px;
+
+@menu-span: 12px;
+@menu-font-size: 18px;
+@menu-icon-size: 24px;
+@menu-brand-size: 34px;
+
+@search-height: 30px;
+
+@nav-width: 280px;
+@nav-delay: 0.33s;
+
+@code-border-width: 0px; // disabled by default
+@code-border-color: #e5e5e5;
+@code-bg-color-rgba: rgba(0, 0, 0, 0.07);
+@code-bg-color-hex: #ededed;
+@code-bg-color-x: 1; // set 1 when background is light and -1 when is dark
+@code-padding: 0.15em 0.45em;
+
+// ----
+// enable code border-width:
+// to use this feature, disable *-rgba and use only *-hex
+// (otherwise .example-caption will not be well rendered)
+//
+//@code-border-width: @border-width;
+//@code-bg-color-rgba: @code-bg-color-hex;
+// ----
+
+@table-bg-hover: #fcf8e3;
+
+// @screen-* usage
+@media (min-width: @screen-lg) {}       // target large screen
+@media (min-width: @screen-md) {}       // target medium and large screen
+@media (max-width: (@screen-md - 1)) {} // target small and x-small screen
+@media (max-width: (@screen-sm - 1)) {} // target x-small screen

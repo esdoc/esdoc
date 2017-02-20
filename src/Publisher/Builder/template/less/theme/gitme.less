@@ -1,0 +1,38 @@
+// note: less files in `./core` directory are loaded dynamically (see `LessFileBuilder.js` for more details).
+// thus, each `theme/[name].less` file just needs to add or overwrite the css rules according to its design.
+
+// --- variables ---
+
+@color-base: #4E443C;
+@color-alt: #A1887F;
+@color-link: #0388A6;
+
+@bg-color-base: #EFEBE9;
+@bg-color-alt: lighten(#EFEBE9, 3);
+@bg-color-highlight: darken(#EFEBE9, 6);
+
+@border-radius: 5px;
+@border-color: #D7CCC8;
+
+@code-border-width: @border-width;
+@code-border-color: darken(#EFEBE9, 5);
+@code-bg-color-hex: lighten(#EFEBE9, 5);
+@code-bg-color-rgba: @code-bg-color-hex;
+
+@table-bg-hover: #FFF8E1;
+
+// --- text ---
+
+h1, h2, code {
+  color: #F14E32;
+}
+
+pre code {
+  color: @color-base;
+}
+
+// --- layout ---
+
+#esdoc-layout > header {
+  background: darken(#EFEBE9, 6);
+}

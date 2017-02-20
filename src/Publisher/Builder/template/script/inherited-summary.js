@@ -17,7 +17,7 @@
     } else {
       button.classList.remove('closed');
       button.classList.add('opened');
-      tbody.style.display = 'block';
+      tbody.style.display = 'table-row-group';
     }
   }
 

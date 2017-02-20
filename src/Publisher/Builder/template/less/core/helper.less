@@ -1,0 +1,45 @@
+/* --- helper --- */
+
+#esdoc-layout > main {
+  > section > h1:first-child {
+    margin-top: 0; // overwrite default margin
+  }
+
+  > footer {
+    text-align: right;
+    font-style: italic;
+    font-size: 0.875em;
+
+    img { // esdoc logo
+      position: relative;
+      top: -3px;
+      margin-left: 4px;
+      width: 24px;
+      vertical-align: middle;
+      opacity: 0.6;
+    }
+  }
+}
+
+// remove table border and background
+table.esdoc-table-simple {
+  min-width: auto !important;
+  tbody {
+    tr, th, td {
+      border: none !important;
+      background: none !important;
+    }
+  }
+}
+
+// make table content scrollable
+// usage: .esdoc-table-wrapper > table
+.esdoc-table-wrapper {
+  margin-bottom: @text-space;
+  overflow: auto;
+
+  table {
+    margin: 0;
+    min-width: 100%;
+  }
+}
