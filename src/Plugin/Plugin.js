@@ -124,13 +124,15 @@ class Plugin {
    * handle publish
    * @param {function(filePath: string, content: string)} writeFile - write content.
    * @param {function(srcPath: string, destPath: string)} copyDir - copy directory.
+   * @param {function(filePath: string):string} readFile - read content.
    */
-  onPublish(writeFile, copyDir) {
+  onPublish(writeFile, copyDir, readFile) {
     const ev = new PluginEvent({});
 
     // hack: fixme
     ev.data.writeFile = writeFile;
     ev.data.copyDir = copyDir;
+    ev.data.readFile = readFile;
 
     this._execHandler('onPublish', ev);
   }

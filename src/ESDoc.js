@@ -25,10 +25,8 @@ export default class ESDoc {
   /**
    * Generate documentation.
    * @param {ESDocConfig} config - config for generation.
-   * @param {function(results: Object[], config: ESDocConfig)} publisher - callback for output html.
    */
-  static generate(config, publisher) {
-    assert(typeof publisher === 'function');
+  static generate(config) {
     assert(config.source);
     assert(config.destination);
 
@@ -92,6 +90,29 @@ export default class ESDoc {
       if (tag.undocument === true) tag.ignore = true;
     }
 
+    // config.index
+    if (config.index) {
+      try {
+        const indexContent = fs.readFileSync(config.index, {encode: 'utf8'}).toString();
+        const tag = {
+          kind: 'index',
+          content: indexContent,
+          longname: path.resolve(config.index),
+          name: config.index,
+          static: true,
+          access: 'public'
+        };
+        results.push(tag);
+      } catch (e) {
+        // ignore
+      }
+    }
+
+    // manual
+    if (config.manual) {
+      results.push(...this._generateForManual(config));
+    }
+
     results = Plugin.onHandleTag(results);
 
     // cleanup
@@ -138,7 +159,12 @@ export default class ESDoc {
         fs.copySync(srcPath, _destPath);
       };
 
-      Plugin.onPublish(write, copy);
+      const read = (filePath) => {
+        const _filePath = path.resolve(config.destination, filePath);
+        return fs.readFileSync(_filePath).toString();
+      };
+
+      Plugin.onPublish(write, copy, read);
     } catch (e) {
       InvalidCodeLogger.showError(e);
       process.exit(1);
@@ -304,5 +330,53 @@ export default class ESDoc {
     });
 
     return {results: factory.results, ast: ast};
+  }
+
+  static _generateForManual(config) {
+    const results = [];
+
+    if (!config.manual) return results;
+
+    if (config.manual.index) {
+      results.push({
+        kind: 'manualIndex',
+        globalIndex: config.manual.globalIndex,
+        coverage: config.manual.coverage,
+        content: fs.readFileSync(config.manual.index).toString(),
+        longname: path.resolve(config.manual.index),
+        name: config.manual.index,
+        static: true,
+        access: 'public'
+      });
+    }
+
+    if (config.manual.asset) {
+      results.push({
+        kind: 'manualAsset',
+        longname: path.resolve(config.manual.asset),
+        name: config.manual.asset,
+        static: true,
+        access: 'public'
+      });
+    }
+
+    const names = ['overview', 'design', 'installation', 'usage', 'tutorial', 'configuration', 'example', 'advanced', 'faq', 'changelog'];
+    for (const name of names) {
+      if (!config.manual[name]) continue;
+
+      const kind = `manual${name.replace(/^./, c => c.toUpperCase())}`;
+      for (const filePath of config.manual[name]) {
+        results.push({
+          kind: kind,
+          longname: path.resolve(filePath),
+          name: filePath,
+          content: fs.readFileSync(filePath).toString(),
+          static: true,
+          access: 'public'
+        });
+      }
+    }
+
+    return results;
   }
 }

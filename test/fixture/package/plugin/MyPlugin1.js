@@ -37,10 +37,18 @@ exports.onHandleTag = function(ev) {
   ev.data.tag[1].name += '_ModifiedTag';
 };
 
+exports.onPublish = function(ev) {
+  callInfo.handlerNames.onPublish = ['MyPlugin1'];
+  ev.data.writeFile('<html><head><meta charset="utf=8"/></head><body>content was made by MyPlugin1.onPublish</body></html>', 'index.html');
+};
+
+exports.onHandleContent = function(ev) {
+  callInfo.handlerNames.onHandleContent = ['MyPlugin1'];
+  ev.data.content = ev.data.content.replace('MyPlugin1', 'MyPlugin1(modified)');
+};
+
 exports.onHandleHTML = function(ev) {
   callInfo.handlerNames.onHandleHTML = ['MyPlugin1'];
-  ev.data.html = ev.data.html.replace('MyClass_ModifiedCode_ModifiedAST_ModifiedTag', 'MyClass_ModifiedCode_ModifiedAST_ModifiedTag_ModifiedHTML');
-  // insert ev.data.fileName into <head />
   ev.data.html = ev.data.html.replace(
     '</head>',
     `<meta name="x-from-plugin" content="fileName:${ev.data.fileName}" />\n</head>`

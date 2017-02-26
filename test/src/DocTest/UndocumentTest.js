@@ -1,4 +1,4 @@
-import {assert} from '../util.js';
+import assert from 'assert';
 
 /**
  * @test {DocFactory#_traverseComments}
@@ -7,7 +7,7 @@ import {assert} from '../util.js';
  */
 describe('test undocument', ()=> {
   it('has undocument tag.', ()=> {
-    const doc = global.db.find({name: 'TestUndocumentDefinition', undocument: true})[0];
-    assert.equal(doc.undocument, true);
+    const tag = global.tags.find(tag => tag.name === 'TestUndocumentDefinition');
+    assert.equal(tag.undocument, true);
   });
 });

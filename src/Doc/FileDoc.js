@@ -31,7 +31,7 @@ export default class FileDoc extends AbstractDoc {
 
   /** specify name to longname */
   _$longname() {
-    this._value.longname = this._value.name;
+    this._value.longname = this._pathResolver.fileFullPath;
   }
 
   /** specify file content to value.content */

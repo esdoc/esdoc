@@ -4,7 +4,6 @@
   "debug": false,
   "index": "./test/fixture/package/README.md",
   "package": "./test/fixture/package/package.json",
-  "title": "ESDoc Test Fixture",
   "plugins": [
     {"name": "esdoc-external-ecmascript-plugin", "option": {"enable": true}},
     {"name": "esdoc-accessor-plugin", "option": {"access": ["public", "protected", "private"], "autoPrivate": true}},
@@ -17,6 +16,8 @@
   },
   "manual": {
     "index": "./test/fixture/package/manual/index.md",
+    "globalIndex": true,
+    "asset": "./test/fixture/package/manual/asset",
     "overview": ["./test/fixture/package/manual/overview.md"],
     "design": ["./test/fixture/package/manual/design.md"],
     "installation": ["./test/fixture/package/manual/installation.md"],

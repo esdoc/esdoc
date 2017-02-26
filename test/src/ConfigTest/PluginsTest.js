@@ -1,13 +1,12 @@
+import fs from 'fs';
 import path from 'path';
-import {cli, readDoc as _readDoc, assert} from '../util.js';
+import assert from 'assert';
+import {cli, readTags} from '../util.js';
 
 /** @test {Plugin} */
 describe('test config.plugins: [...]', ()=>{
   cli('./test/fixture/config/esdoc-plugins.json');
-
-  function readDoc(filePath) {
-    return _readDoc(filePath, './test/fixture/dest/esdoc-plugins');
-  }
+  const tags = readTags('./test/fixture/dest/esdoc-plugins/dump.json');
 
   /* eslint-disable global-require */
   it('call each handlers', ()=>{
@@ -20,6 +19,8 @@ describe('test config.plugins: [...]', ()=>{
     assert(plugin.callInfo.handlerNames.onHandleCodeParser);
     assert(plugin.callInfo.handlerNames.onHandleAST);
     assert(plugin.callInfo.handlerNames.onHandleTag);
+    assert(plugin.callInfo.handlerNames.onPublish);
+    assert(plugin.callInfo.handlerNames.onHandleContent);
     assert(plugin.callInfo.handlerNames.onHandleHTML);
     assert(plugin.callInfo.handlerNames.onComplete);
     assert.deepEqual(plugin.callInfo.option, {foo: 1});
@@ -27,10 +28,12 @@ describe('test config.plugins: [...]', ()=>{
   });
 
   it('custom document by each handlers', ()=>{
-    const doc = readDoc('index.html');
+    const tag = tags.find(tag => tag.name === 'MyClass_ModifiedCode_ModifiedAST_ModifiedTag');
+    assert(tag);
 
-    assert.includes(doc, '.navigation', 'MyClass_ModifiedCode_ModifiedAST_ModifiedTag_ModifiedHTML');
-    assert.includes(doc, 'head meta[name="x-from-plugin"]', 'fileName:', 'content');
+    const html = fs.readFileSync('./test/fixture/dest/esdoc-plugins/index.html');
+    assert(html.includes('content was made by MyPlugin1(modified).onPublish'));
+    assert(html.includes('x-from-plugin'));
   });
 
   /* eslint-disable global-require */
@@ -44,6 +47,8 @@ describe('test config.plugins: [...]', ()=>{
     assert.deepEqual(plugin.callInfo.handlerNames.onHandleCodeParser, ['MyPlugin1', 'MyPlugin2']);
     assert.deepEqual(plugin.callInfo.handlerNames.onHandleAST, ['MyPlugin1', 'MyPlugin2']);
     assert.deepEqual(plugin.callInfo.handlerNames.onHandleTag, ['MyPlugin1', 'MyPlugin2']);
+    assert.deepEqual(plugin.callInfo.handlerNames.onPublish, ['MyPlugin1', 'MyPlugin2']);
+    assert.deepEqual(plugin.callInfo.handlerNames.onHandleContent, ['MyPlugin1', 'MyPlugin2']);
     assert.deepEqual(plugin.callInfo.handlerNames.onHandleHTML, ['MyPlugin1', 'MyPlugin2']);
     assert.deepEqual(plugin.callInfo.handlerNames.onComplete, ['MyPlugin1', 'MyPlugin2']);
   });

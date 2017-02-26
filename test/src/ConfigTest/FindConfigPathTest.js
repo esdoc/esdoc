@@ -1,5 +1,6 @@
 import process from 'process';
-import {readDoc, assert, cli} from '../util.js';
+import assert from 'assert';
+import {cli, readTags} from '../util.js';
 
 describe('test finding config path:', ()=>{
   const cwd = process.cwd();
@@ -17,17 +18,20 @@ describe('test finding config path:', ()=>{
   process.chdir(cwd);
 
   it('can find .esdoc.json', ()=>{
-    const doc = readDoc('class/src/Access/Class.js~TestAccessClassPublic.html', './test/fixture/dest/find-.esdoc.json');
-    assert.includes(doc, '.self-detail [data-ice="name"]', 'TestAccessClassPublic');
+    const tags = readTags('./test/fixture/dest/find-.esdoc.json/dump.json');
+    const tag = tags.find(tag => tag.name === 'TestAccessClassPublic');
+    assert(tag);
   });
 
   it('can find .esdoc.js', ()=>{
-    const doc = readDoc('class/src/Access/Class.js~TestAccessClassPublic.html', './test/fixture/dest/find-.esdoc.js');
-    assert.includes(doc, '.self-detail [data-ice="name"]', 'TestAccessClassPublic');
+    const tags = readTags('./test/fixture/dest/find-.esdoc.js/dump.json');
+    const tag = tags.find(tag => tag.name === 'TestAccessClassPublic');
+    assert(tag);
   });
 
   it('can find package.js', ()=>{
-    const doc = readDoc('class/src/Access/Class.js~TestAccessClassPublic.html', './test/fixture/dest/find-package.json');
-    assert.includes(doc, '.self-detail [data-ice="name"]', 'TestAccessClassPublic');
+    const tags = readTags('./test/fixture/dest/find-package.json/dump.json');
+    const tag = tags.find(tag => tag.name === 'TestAccessClassPublic');
+    assert(tag);
   });
 });

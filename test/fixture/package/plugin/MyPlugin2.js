@@ -1,4 +1,4 @@
-var callInfo = require('./MyPlugin1.js').callInfo;
+const callInfo = require('./MyPlugin1.js').callInfo;
 
 exports.onStart = function(ev) {
   callInfo.handlerNames.onStart.push('MyPlugin2');
@@ -22,6 +22,14 @@ exports.onHandleAST = function(ev) {
 
 exports.onHandleTag = function(ev) {
   callInfo.handlerNames.onHandleTag.push('MyPlugin2');
+};
+
+exports.onPublish = function(ev) {
+  callInfo.handlerNames.onPublish.push('MyPlugin2');
+};
+
+exports.onHandleContent = function(ev) {
+  callInfo.handlerNames.onHandleContent.push('MyPlugin2');
 };
 
 exports.onHandleHTML = function(ev) {

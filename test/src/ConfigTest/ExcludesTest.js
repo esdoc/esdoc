@@ -1,16 +1,13 @@
-import {readDoc as _readDoc, assert, cli} from '../util.js';
+import assert from 'assert';
+import {cli, readTags} from '../util.js';
 
 /** @test {ESDoc.generate} */
 describe('test config.excludes: ["Class\\.js"]', ()=>{
   cli('./test/fixture/config/esdoc-excludes.json');
-
-  function readDoc(filePath) {
-    return _readDoc(filePath, './test/fixture/dest/esdoc-excludes');
-  }
+  const tags = readTags('./test/fixture/dest/esdoc-excludes/dump.json');
 
   it('does not have excluded identifier', ()=>{
-    assert.throws(()=>{
-      readDoc('class/src/Desc/Class.js~TestDescClass.html');
-    });
+    const tag = tags.find(tag => tag.name === 'TestDescClass');
+    assert.equal(tag, null);
   });
 });

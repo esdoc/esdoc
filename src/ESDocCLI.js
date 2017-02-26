@@ -3,7 +3,6 @@ import fs from 'fs';
 import path from 'path';
 import minimist from 'minimist';
 import ESDoc from './ESDoc.js';
-import defaultPublisher from './Publisher/publish.js';
 import NPMUtil from './Util/NPMUtil.js';
 
 /**
@@ -47,7 +46,7 @@ export default class ESDocCLI {
     }
 
     if (config) {
-      ESDoc.generate(config, defaultPublisher);
+      ESDoc.generate(config);
     } else {
       this._showHelp();
       process.exit(1);
