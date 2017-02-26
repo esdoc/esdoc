@@ -85,6 +85,7 @@ export default class ESDoc {
       this._generateForTest(config, results, asts);
     }
 
+    // ignore unexported and undocumented
     for (const tag of results) {
       if (tag.export === false) tag.ignore = true;
       if (tag.undocument === true) tag.ignore = true;
@@ -92,20 +93,7 @@ export default class ESDoc {
 
     // config.index
     if (config.index) {
-      try {
-        const indexContent = fs.readFileSync(config.index, {encode: 'utf8'}).toString();
-        const tag = {
-          kind: 'index',
-          content: indexContent,
-          longname: path.resolve(config.index),
-          name: config.index,
-          static: true,
-          access: 'public'
-        };
-        results.push(tag);
-      } catch (e) {
-        // ignore
-      }
+      results.push(this._generateForIndex(config));
     }
 
     // manual
@@ -140,35 +128,8 @@ export default class ESDoc {
       // ignore
     }
 
-    try {
-      const write = (content, filePath) =>{
-        const _filePath = path.resolve(config.destination, filePath);
-        content = Plugin.onHandleContent(content, _filePath);
-
-        // todo: remove deprecated code
-        const ext = path.extname(filePath).toLowerCase();
-        if (ext === '.html') content = Plugin.onHandleHTML(content, _filePath);
-
-        console.log(`output: ${_filePath}`);
-        fs.outputFileSync(_filePath, content);
-      };
-
-      const copy = (srcPath, destPath) => {
-        const _destPath = path.resolve(config.destination, destPath);
-        console.log(`output: ${_destPath}`);
-        fs.copySync(srcPath, _destPath);
-      };
-
-      const read = (filePath) => {
-        const _filePath = path.resolve(config.destination, filePath);
-        return fs.readFileSync(_filePath).toString();
-      };
-
-      Plugin.onPublish(write, copy, read);
-    } catch (e) {
-      InvalidCodeLogger.showError(e);
-      process.exit(1);
-    }
+    // publish
+    this._publish(config);
 
     Plugin.onComplete();
   }
@@ -332,6 +293,20 @@ export default class ESDoc {
     return {results: factory.results, ast: ast};
   }
 
+  static _generateForIndex(config) {
+    const indexContent = fs.readFileSync(config.index, {encode: 'utf8'}).toString();
+    const tag = {
+      kind: 'index',
+      content: indexContent,
+      longname: path.resolve(config.index),
+      name: config.index,
+      static: true,
+      access: 'public'
+    };
+
+    return tag;
+  }
+
   static _generateForManual(config) {
     const results = [];
 
@@ -378,5 +353,37 @@ export default class ESDoc {
     }
 
     return results;
+  }
+
+  static _publish(config) {
+    try {
+      const write = (content, filePath) =>{
+        const _filePath = path.resolve(config.destination, filePath);
+        content = Plugin.onHandleContent(content, _filePath);
+
+        // todo: remove deprecated code
+        const ext = path.extname(filePath).toLowerCase();
+        if (ext === '.html') content = Plugin.onHandleHTML(content, _filePath);
+
+        console.log(`output: ${_filePath}`);
+        fs.outputFileSync(_filePath, content);
+      };
+
+      const copy = (srcPath, destPath) => {
+        const _destPath = path.resolve(config.destination, destPath);
+        console.log(`output: ${_destPath}`);
+        fs.copySync(srcPath, _destPath);
+      };
+
+      const read = (filePath) => {
+        const _filePath = path.resolve(config.destination, filePath);
+        return fs.readFileSync(_filePath).toString();
+      };
+
+      Plugin.onPublish(write, copy, read);
+    } catch (e) {
+      InvalidCodeLogger.showError(e);
+      process.exit(1);
+    }
   }
 }
