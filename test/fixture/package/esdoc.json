@@ -28,10 +28,5 @@
     "advanced": ["./test/fixture/package/manual/advanced.md"],
     "faq": ["./test/fixture/package/manual/faq.md"],
     "changelog": ["./test/fixture/package/CHANGELOG.md"]
-  },
-  "experimentalProposal": {
-    "classProperties": true,
-    "objectRestSpread": true,
-    "decorators": true
   }
 }

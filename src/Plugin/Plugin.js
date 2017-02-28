@@ -82,16 +82,16 @@ class Plugin {
   /**
    * handle code parser.
    * @param {function(code: string)} parser - original js parser.
-   * @param {object} option - default Espree options.
+   * @param {object} option - default babylon options.
    * @param {string} filePath - source code file path.
    * @param {string} code - original code.
-   * @returns {function(code: string)} handled parser.
+   * @returns {{parser: function(code: string), option: Object}} handled parser.
    */
   onHandleCodeParser(parser, option, filePath, code) {
     const ev = new PluginEvent();
     ev.data = {parser, option, filePath, code};
     this._execHandler('onHandleCodeParser', ev);
-    return ev.data.parser;
+    return {parser: ev.data.parser, option: ev.data.option};
   }
 
   /**

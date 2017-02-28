@@ -74,7 +74,7 @@ export default class ESDoc {
       }
 
       console.log(`parse: ${filePath}`);
-      const temp = this._traverse(config, config.source, filePath, packageName, mainFilePath);
+      const temp = this._traverse(config.source, filePath, packageName, mainFilePath);
       if (!temp) return;
       results.push(...temp.results);
 
@@ -162,7 +162,7 @@ export default class ESDoc {
       }
 
       console.log(`parse: ${filePath}`);
-      const temp = this._traverseForTest(config, config.test.type, config.test.source, filePath);
+      const temp = this._traverseForTest(config.test.type, config.test.source, filePath);
       if (!temp) return;
       results.push(...temp.results);
 
@@ -224,7 +224,6 @@ export default class ESDoc {
 
   /**
    * traverse doc comment in JavaScript file.
-   * @param {ESDocConfig} config - config of esdoc.
    * @param {string} inDirPath - root directory path.
    * @param {string} filePath - target JavaScript file path.
    * @param {string} [packageName] - npm package name of target.
@@ -234,11 +233,11 @@ export default class ESDoc {
    * @property {AST} ast - this is AST of JavaScript file.
    * @private
    */
-  static _traverse(config, inDirPath, filePath, packageName, mainFilePath) {
+  static _traverse(inDirPath, filePath, packageName, mainFilePath) {
     logger.i(`parsing: ${filePath}`);
     let ast;
     try {
-      ast = ESParser.parse(config, filePath);
+      ast = ESParser.parse(filePath);
     } catch (e) {
       InvalidCodeLogger.showFile(filePath, e);
       return null;
@@ -261,7 +260,6 @@ export default class ESDoc {
 
   /**
    * traverse doc comment in test code file.
-   * @param {ESDocConfig} config - config of esdoc.
    * @param {string} type - test code type.
    * @param {string} inDirPath - root directory path.
    * @param {string} filePath - target test code file path.
@@ -270,10 +268,10 @@ export default class ESDoc {
    * @property {AST} ast - this is AST of test code.
    * @private
    */
-  static _traverseForTest(config, type, inDirPath, filePath) {
+  static _traverseForTest(type, inDirPath, filePath) {
     let ast;
     try {
-      ast = ESParser.parse(config, filePath);
+      ast = ESParser.parse(filePath);
     } catch (e) {
       InvalidCodeLogger.showFile(filePath, e);
       return null;
