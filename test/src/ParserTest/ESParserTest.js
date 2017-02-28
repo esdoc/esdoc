@@ -32,4 +32,9 @@ describe('ESParser', ()=>{
     const ast = ESParser.parse({experimentalProposal: {dynamicImport: true}}, './test/fixture/syntax/DynamicImport.js');
     assert(ast.program.sourceType === 'module');
   });
+  
+  it('can parse "flow"', ()=>{
+    const ast = ESParser.parse({parserPlugins: ['flow']}, './test/fixture/syntax/Flow.js');
+    assert(ast.program.sourceType === 'module');
+  });
 });
