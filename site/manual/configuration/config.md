@@ -6,6 +6,7 @@ ESDoc config example files.
 - [Integrate Test Codes Config](#integrate-test-codes-config)
 - [Integrate Manual Config](#integrate-manual-config)
 - [Use ECMAScript Proposal](#use-ecmascript-proposal)
+- [Additional Babylon parser plugins (Flow, etc.)](#additional-babylon-parser-plugins-flow-etc)
 - [Full Config](#full-config)
 
 ## Minimum Config
@@ -79,6 +80,26 @@ describe('MyClass has foo bar feature', ()=>{
 }
 ```
 
+## Additional Babylon parser plugins (Flow, etc.)
+
+Additional [Babylon Plugins][] like [Flow][] can be enabled by setting the
+`parserPlugins` config option to an array of strings:
+
+```json
+{
+  "source": "./src",
+  "destination": "./doc",
+  "parserPlugins": [
+    "flow"
+  ]
+}
+```
+
+The `JSX` plugin is included by default.
+
+[Babylon Plugins]: https://github.com/babel/babylon#plugins
+[Flow]: https://flowtype.org/
+
 ## Full Config
 ```json
 {
@@ -132,7 +153,10 @@ describe('MyClass has foo bar feature', ()=>{
     "asyncGenerators": true,
     "exportExtensions": true,
     "dynamicImport": true
-  }
+  },
+  "parserPlugins": [
+    "flow"
+  ]
 }
 ```
 
@@ -187,6 +211,6 @@ describe('MyClass has foo bar feature', ()=>{
 | ``experimentalProposal.asyncGenerators`` | - | false | If specify true, enable [Async Generators](http://babeljs.io/docs/plugins/transform-async-generator-functions/)(Babel). |
 | ``experimentalProposal.exportExtensions`` | - | false | If specify true, enable [Export Extensions](http://babeljs.io/docs/plugins/transform-export-extensions/)(Babel). |
 | ``experimentalProposal.dynamicImport`` | - | false | If specify true, enable [Dynamic Import](http://babeljs.io/docs/plugins/syntax-dynamic-import/)(Babel). |
-
+| ``parserPlugins`` | - | null | Optional array of string plugin names like ["flow"](https://babeljs.io/docs/plugins/syntax-flow/) to add to the Babylon parser |
 
 Note: A file path in config is based on current directory.

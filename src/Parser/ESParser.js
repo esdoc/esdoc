@@ -71,6 +71,12 @@ export default class ESParser {
       if (experimental.exportExtensions) option.plugins.push('exportExtensions');
       if (experimental.dynamicImport) option.plugins.push('dynamicImport');
     }
+    
+    if (config.parserPlugins) {
+      config.parserPlugins.forEach((plugin) => {
+        option.plugins.push(plugin);
+      });
+    }
 
     return option;
   }
