@@ -1,4 +1,4 @@
-import {readDoc, assert, find} from './../../util.js';
+import {readDoc, assert, find} from '../../util.js';
 
 /** @test {ManualDocBuilder} */
 describe('test manual', ()=>{
@@ -24,6 +24,9 @@ describe('test manual', ()=>{
         assert.includes(doc, '[data-ice="manual"]:nth-of-type(9)', 'Reference Class Interface Function Variable Typedef External');
         assert.includes(doc, '[data-ice="manual"]:nth-of-type(10)', 'FAQ Goal');
         assert.includes(doc, '[data-ice="manual"]:nth-of-type(11)', 'Changelog 0.0.1');
+        assert.includes(doc, '[data-ice="manual"]:nth-of-type(12)', 'Custom Page 1');
+        assert.includes(doc, '[data-ice="manual"]:nth-of-type(13)', 'Custom Page 2');
+        assert.notFound(doc, '[data-ice="manual"]:nth-of-type(14)');
 
         // overview
         find(doc, '[data-ice="manual"]:nth-of-type(1)', (doc)=>{
@@ -101,6 +104,16 @@ describe('test manual', ()=>{
         find(doc, '[data-ice="manual"]:nth-of-type(11)', (doc)=>{
           assert.includes(doc, '[data-ice="manualNav"]:nth-of-type(1) a', 'manual/changelog/CHANGELOG.html', 'href');
           assert.includes(doc, '[data-ice="manualNav"]:nth-of-type(2) a', 'manual/changelog/CHANGELOG.html#0-0-1', 'href');
+        });
+
+        // custom page 1
+        find(doc, '[data-ice="manual"]:nth-of-type(12)', (doc)=>{
+          assert.includes(doc, '[data-ice="manualNav"]:nth-of-type(1) a', 'manual/custom_page_1/customPage1.html', 'href');
+        });
+
+        // custom page 2
+        find(doc, '[data-ice="manual"]:nth-of-type(13)', (doc)=>{
+          assert.includes(doc, '[data-ice="manualNav"]:nth-of-type(1) a', 'manual/custom_page_2/customPage2.html', 'href');
         });
       });
     });
@@ -193,6 +206,24 @@ describe('test manual', ()=>{
         assert.includes(doc, '.manual-card > a', 'manual/changelog/CHANGELOG.html', 'href');
       });
     });
+
+    it('has custom page 1 heading tags', ()=>{
+      find(doc, '.manual-card-wrap:nth-of-type(13)', (doc)=>{
+        assert.includes(doc, 'h1[data-ice="label"]', 'Custom Page 1');
+        assert.includes(doc, '.manual-card > a', 'manual/custom_page_1/customPage1.html', 'href');
+      });
+    });
+
+    it('has custom page 2 heading tags', ()=>{
+      find(doc, '.manual-card-wrap:nth-of-type(14)', (doc)=>{
+        assert.includes(doc, 'h1[data-ice="label"]', 'Custom Page 2');
+        assert.includes(doc, '.manual-card > a', 'manual/custom_page_2/customPage2.html', 'href');
+      });
+    });
+
+    it('does NOT have anymore tags', ()=>{
+      assert.notFound(doc, '.manual-card-wrap:nth-of-type(15)');
+    });
   });
 
   /** @test {ManualDocBuilder#_buildManual} */
@@ -243,6 +274,18 @@ describe('test manual', ()=>{
       const doc = readDoc('manual/changelog/CHANGELOG.html');
       assert.includes(doc, '.github-markdown h1', 'Changelog');
       assert.includes(doc, '.github-markdown [data-ice="content"] h2:nth-of-type(1)', '0.0.1');
+    });
+
+    it('has custom page 1', ()=>{
+      const doc = readDoc('manual/custom_page_1/customPage1.html');
+      assert.includes(doc, '.github-markdown h1', 'Custom Page 1');
+      assert.includes(doc, '.github-markdown [data-ice="content"]', 'Foo 1');
+    });
+
+    it('has custom page 2', ()=>{
+      const doc = readDoc('manual/custom_page_2/customPage2.html');
+      assert.includes(doc, '.github-markdown h1', 'Custom Page 2');
+      assert.includes(doc, '.github-markdown [data-ice="content"]', 'Foo 2');
     });
   });
 });

@@ -89,18 +89,57 @@ export default class ManualDocBuilder extends DocBuilder {
   _getManualConfig() {
     const m = this._config.manual;
     const manualConfig = [];
-    if (m.overview) manualConfig.push({label: 'Overview', paths: m.overview});
-    if (m.design) manualConfig.push({label: 'Design', paths: m.design});
-    if (m.installation) manualConfig.push({label: 'Installation', paths: m.installation});
-    if (m.tutorial) manualConfig.push({label: 'Tutorial', paths: m.tutorial});
-    if (m.usage) manualConfig.push({label: 'Usage', paths: m.usage});
-    if (m.configuration) manualConfig.push({label: 'Configuration', paths: m.configuration});
-    if (m.advanced) manualConfig.push({label: 'Advanced', paths: m.advanced});
-    if (m.example) manualConfig.push({label: 'Example', paths: m.example});
-    manualConfig.push({label: 'Reference', fileName: 'identifiers.html', references: true});
-    if (m.faq) manualConfig.push({label: 'FAQ', paths: m.faq});
-    if (m.changelog) manualConfig.push({label: 'Changelog', paths: m.changelog});
+    if (m.overview) manualConfig.push({label: 'Overview', paths: m.overview, type: 'overview' });
+    if (m.design) manualConfig.push({label: 'Design', paths: m.design, type: 'design'});
+    if (m.installation) manualConfig.push({label: 'Installation', paths: m.installation, type: 'installation'});
+    if (m.tutorial) manualConfig.push({label: 'Tutorial', paths: m.tutorial, type: 'tutorial'});
+    if (m.usage) manualConfig.push({label: 'Usage', paths: m.usage, type: 'usage'});
+    if (m.configuration) manualConfig.push({label: 'Configuration', paths: m.configuration, type: 'configuration'});
+    if (m.advanced) manualConfig.push({label: 'Advanced', paths: m.advanced, type: 'advanced'});
+    if (m.example) manualConfig.push({label: 'Example', paths: m.example, type: 'example'});
+    manualConfig.push({label: 'Reference', fileName: 'identifiers.html', references: true, type: 'reference'});
+    if (m.faq) manualConfig.push({label: 'FAQ', paths: m.faq, type: 'faq'});
+    if (m.changelog) manualConfig.push({label: 'Changelog', paths: m.changelog, type: 'changelog'});
+    if (Array.isArray(m.customPages)) this._addCustomPages(manualConfig, m.customPages);
     return manualConfig;
+  }
+
+  _validateCustomPageConfig(existingTypes, customPage) {
+    if (typeof customPage.label !== 'string') {
+      console.log('Custom manual page config "label" is not a string, skipping: ', customPage);
+      return {isValid: false};
+    }
+    if (!Array.isArray(customPage.paths)) {
+      console.log('Custom manual page config "paths" is not an array, skipping: ', customPage);
+      return {isValid: false};
+    }
+    const invalidLabelCharacters = /[^\w ]+/g;
+    const badCharacters = customPage.label.match(invalidLabelCharacters);
+    if (badCharacters) {
+      console.log(`Custom manual page config "label" contains invalid characters "${badCharacters}", skipping:`, customPage);
+      return {isValid: false};
+    }
+    const type = customPage.label.replace(/ /g, '_').toLowerCase();
+    if (existingTypes.indexOf(type) >= 0) {
+      console.log('Custom manual page config "label" duplicates existing label, skipping: ', customPage);
+      return {isValid: false};
+    }
+    return {isValid: true, type: type};
+  }
+
+  _addCustomPages(manualConfigs, customPageList) {
+    const existingTypes = [];
+    for (let manualConfig of manualConfigs) {
+      existingTypes.push(manualConfig.type);
+    }
+    for (let customPage of customPageList) {
+      const validationInfo = this._validateCustomPageConfig(existingTypes, customPage);
+      if (validationInfo.isValid) {
+        customPage.type = validationInfo.type;
+        existingTypes.push(validationInfo.type);
+        manualConfigs.push(customPage);
+      }
+    }
   }
 
   /**
@@ -178,7 +217,7 @@ export default class ManualDocBuilder extends DocBuilder {
       }
 
       for (const filePath of manualItem.paths) {
-        const type = manualItem.label.toLowerCase();
+        const type = manualItem.type;
         const fileName = this._getManualOutputFileName(manualItem, filePath);
         const html = this._buildManual(manualItem, filePath);
         const $root = cheerio.load(html).root();
@@ -277,10 +316,10 @@ export default class ManualDocBuilder extends DocBuilder {
         }
       }
 
-      ice.attr('manual', 'data-toc-name', item.label.toLowerCase());
+      ice.attr('manual', 'data-toc-name', item.type);
       ice.loop('manualNav', toc, (i, tocItem, ice)=>{
         if (tocItem.indent === 'indent-h1') {
-          ice.attr('manualNav', 'class', `${tocItem.indent} manual-color manual-color-${item.label.toLowerCase()}`);
+          ice.attr('manualNav', 'class', `${tocItem.indent} manual-color manual-color-${item.type}`);
           const sectionCount = Math.min((tocItem.sectionCount / 5) + 1, 5);
           ice.attr('manualNav', 'data-section-count', '■'.repeat(sectionCount));
         } else {
@@ -307,7 +346,7 @@ export default class ManualDocBuilder extends DocBuilder {
     if (item.fileName) return item.fileName;
 
     const fileName = path.parse(filePath).name;
-    return `manual/${item.label.toLowerCase()}/${fileName}.html`;
+    return `manual/${item.type}/${fileName}.html`;
   }
 
   /**
