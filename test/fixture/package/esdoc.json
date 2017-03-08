@@ -22,7 +22,15 @@
     "example": ["./test/fixture/package/manual/example.md"],
     "advanced": ["./test/fixture/package/manual/advanced.md"],
     "faq": ["./test/fixture/package/manual/faq.md"],
-    "changelog": ["./test/fixture/package/CHANGELOG.md"]
+    "changelog": ["./test/fixture/package/CHANGELOG.md"],
+    "customPages": [
+      {"label": "Custom Page 1", "paths": ["./test/fixture/package/manual/customPage1.md"]},
+      {"label": "Custom Page 2", "paths": ["./test/fixture/package/manual/customPage2.md"]},
+      {"label": 1, "paths": ["badTypeOfLabel"]},
+      {"label": "bad typeof path", "paths": "badTypeOfPath"},
+      {"label": "B@d label characters", "paths": ["badLabelCharacters"]},
+      {"label": "Overview", "paths": ["duplicateLabel"]}
+    ]
   },
   "experimentalProposal": {
     "classProperties": true,
