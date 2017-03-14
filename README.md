@@ -28,19 +28,19 @@ And [more](https://github.com/search?o=desc&q=esdoc+filename%3Apackage.json+-use
 
 # Quick Start
 ```sh
-# install ESDoc from npm
+# Install ESDoc from npm.
 npm install -g esdoc
 
-# move to a your project directory
+# Move to a your project directory.
 cd your-project/
 
-# write a configuration file.
+# Create a configuration file.
 echo '{"source": "./src", "destination": "./doc"}' > .esdoc.json
 
-# run ESDoc
+# Run ESDoc.
 esdoc
 
-# see a documentation
+# View the documentation.
 open ./doc/index.html
 ```
 
