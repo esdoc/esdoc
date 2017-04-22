@@ -19,12 +19,12 @@ export default class ESParser {
     code = Plugin.onHandleCode(code, filePath);
     if (code.charAt(0) === '#') code = code.replace(/^#!/, '//');
 
-    let option = {sourceType: 'module', plugins: []};
+    let parserOption = {sourceType: 'module', plugins: []};
     let parser = (code) => {
-      return babylon.parse(code, option);
+      return babylon.parse(code, parserOption);
     };
 
-    ({parser, option} = Plugin.onHandleCodeParser(parser, option, filePath, code));
+    ({parser, parserOption} = Plugin.onHandleCodeParser(parser, parserOption, filePath, code));
 
     let ast = parser(code);
 

@@ -39,7 +39,7 @@ exports.onHandleTag = function(ev) {
 
 exports.onPublish = function(ev) {
   callInfo.handlerNames.onPublish = ['MyPlugin1'];
-  ev.data.writeFile('<html><head><meta charset="utf=8"/></head><body>content was made by MyPlugin1.onPublish</body></html>', 'index.html');
+  ev.data.writeFile('index.html', '<html><head><meta charset="utf=8"/></head><body>content was made by MyPlugin1.onPublish</body></html>');
 };
 
 exports.onHandleContent = function(ev) {

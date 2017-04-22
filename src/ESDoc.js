@@ -321,6 +321,17 @@ export default class ESDoc {
         static: true,
         access: 'public'
       });
+    } else {
+      results.push({
+        kind: 'manualIndex',
+        globalIndex: false,
+        coverage: config.manual.coverage,
+        content: null,
+        longname: '', // longname does not must be null.
+        name: config.manual.index,
+        static: true,
+        access: 'public'
+      });
     }
 
     if (config.manual.asset) {
@@ -355,7 +366,7 @@ export default class ESDoc {
 
   static _publish(config) {
     try {
-      const write = (content, filePath) =>{
+      const write = (filePath, content, option) =>{
         const _filePath = path.resolve(config.destination, filePath);
         content = Plugin.onHandleContent(content, _filePath);
 
@@ -364,7 +375,7 @@ export default class ESDoc {
         if (ext === '.html') content = Plugin.onHandleHTML(content, _filePath);
 
         console.log(`output: ${_filePath}`);
-        fs.outputFileSync(_filePath, content);
+        fs.outputFileSync(_filePath, content, option);
       };
 
       const copy = (srcPath, destPath) => {

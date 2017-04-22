@@ -16,17 +16,16 @@ class Plugin {
    * @param {Array<{name: string, option: object}>} plugins - expect config.plugins property.
    */
   init(plugins = []) {
-    this._plugins = copy(plugins);
+    this.onHandlePlugins(plugins);
   }
 
   /**
    * exec plugin handler.
    * @param {string} handlerName - handler name(e.g. onHandleCode)
    * @param {PluginEvent} ev - plugin event object.
-   * @param {boolean} [giveOption=false] - if true, event has plugin option.
    * @private
    */
-  _execHandler(handlerName, ev, giveOption = false) {
+  _execHandler(handlerName, ev) {
     /* eslint-disable global-require */
     for (const item of this._plugins) {
       let plugin;
@@ -41,10 +40,16 @@ class Plugin {
 
       if (!plugin[handlerName]) continue;
 
-      if (giveOption) ev.data.option = item.option;
-
+      ev.data.option = item.option;
       plugin[handlerName](ev);
     }
+  }
+
+  onHandlePlugins(plugins) {
+    this._plugins = plugins;
+    const ev = new PluginEvent({plugins});
+    this._execHandler('onHandlePlugins', ev);
+    this._plugins = ev.data.plugins;
   }
 
   /**
@@ -52,7 +57,7 @@ class Plugin {
    */
   onStart() {
     const ev = new PluginEvent();
-    this._execHandler('onStart', ev, true);
+    this._execHandler('onStart', ev);
   }
 
   /**
@@ -82,16 +87,16 @@ class Plugin {
   /**
    * handle code parser.
    * @param {function(code: string)} parser - original js parser.
-   * @param {object} option - default babylon options.
+   * @param {object} parserOption - default babylon options.
    * @param {string} filePath - source code file path.
    * @param {string} code - original code.
-   * @returns {{parser: function(code: string), option: Object}} handled parser.
+   * @returns {{parser: function(code: string), parserOption: Object}} handled parser.
    */
-  onHandleCodeParser(parser, option, filePath, code) {
+  onHandleCodeParser(parser, parserOption, filePath, code) {
     const ev = new PluginEvent();
-    ev.data = {parser, option, filePath, code};
+    ev.data = {parser, parserOption, filePath, code};
     this._execHandler('onHandleCodeParser', ev);
-    return {parser: ev.data.parser, option: ev.data.option};
+    return {parser: ev.data.parser, parserOption: ev.data.parserOption};
   }
 
   /**
@@ -131,6 +136,7 @@ class Plugin {
 
     // hack: fixme
     ev.data.writeFile = writeFile;
+    ev.data.copyFile = copyDir;
     ev.data.copyDir = copyDir;
     ev.data.readFile = readFile;
 
