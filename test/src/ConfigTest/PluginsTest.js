@@ -6,7 +6,7 @@ import {cli, readTags} from '../util.js';
 /** @test {Plugin} */
 describe('test config.plugins: [...]', ()=>{
   cli('./test/fixture/config/esdoc-plugins.json');
-  const tags = readTags('./test/fixture/dest/esdoc-plugins/dump.json');
+  const tags = readTags('./test/fixture/dest/esdoc-plugins/index.json');
 
   /* eslint-disable global-require */
   it('call each handlers', ()=>{

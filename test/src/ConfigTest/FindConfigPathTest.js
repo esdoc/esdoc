@@ -18,19 +18,19 @@ describe('test finding config path:', ()=>{
   process.chdir(cwd);
 
   it('can find .esdoc.json', ()=>{
-    const tags = readTags('./test/fixture/dest/find-.esdoc.json/dump.json');
+    const tags = readTags('./test/fixture/dest/find-.esdoc.json/index.json');
     const tag = tags.find(tag => tag.name === 'TestAccessClassPublic');
     assert(tag);
   });
 
   it('can find .esdoc.js', ()=>{
-    const tags = readTags('./test/fixture/dest/find-.esdoc.js/dump.json');
+    const tags = readTags('./test/fixture/dest/find-.esdoc.js/index.json');
     const tag = tags.find(tag => tag.name === 'TestAccessClassPublic');
     assert(tag);
   });
 
   it('can find package.js', ()=>{
-    const tags = readTags('./test/fixture/dest/find-package.json/dump.json');
+    const tags = readTags('./test/fixture/dest/find-package.json/index.json');
     const tag = tags.find(tag => tag.name === 'TestAccessClassPublic');
     assert(tag);
   });

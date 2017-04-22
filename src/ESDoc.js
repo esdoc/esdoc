@@ -106,9 +106,9 @@ export default class ESDoc {
     // cleanup
     fs.removeSync(config.destination);
 
-    // dump.json
+    // index.json
     {
-      const dumpPath = path.resolve(config.destination, 'dump.json');
+      const dumpPath = path.resolve(config.destination, 'index.json');
       fs.outputFileSync(dumpPath, JSON.stringify(results, null, 2));
     }
 
