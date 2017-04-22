@@ -96,6 +96,11 @@ export default class ESDoc {
       results.push(this._generateForIndex(config));
     }
 
+    // config.package
+    if (config.package) {
+      results.push(this._generateForPackageJSON(config));
+    }
+
     // manual
     if (config.manual) {
       results.push(...this._generateForManual(config));
@@ -117,15 +122,6 @@ export default class ESDoc {
       const json = JSON.stringify(ast.ast, null, 2);
       const filePath = path.resolve(config.destination, `ast/${ast.filePath}.json`);
       fs.outputFileSync(filePath, json);
-    }
-
-    // package.json
-    try {
-      const json = fs.readFileSync(config.package, {encoding: 'utf-8'});
-      const filePath = path.resolve(config.destination, 'package.json');
-      fs.outputFileSync(filePath, json, {encoding: 'utf8'});
-    } catch (e) {
-      // ignore
     }
 
     // publish
@@ -298,6 +294,28 @@ export default class ESDoc {
       content: indexContent,
       longname: path.resolve(config.index),
       name: config.index,
+      static: true,
+      access: 'public'
+    };
+
+    return tag;
+  }
+
+  static _generateForPackageJSON(config) {
+    let packageJSON = '';
+    let packagePath = '';
+    try {
+      packageJSON = fs.readFileSync(config.package, {encoding: 'utf-8'});
+      packagePath = path.resolve(config.package);
+    } catch (e) {
+      // ignore
+    }
+
+    const tag = {
+      kind: 'packageJSON',
+      content: packageJSON,
+      longname: packagePath,
+      name: path.basename(packagePath),
       static: true,
       access: 'public'
     };
