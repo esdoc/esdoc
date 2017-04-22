@@ -115,14 +115,14 @@ class Plugin {
   }
 
   /**
-   * handle tag.
-   * @param {Tag} tag - original tag(s).
-   * @returns {Tag} handled tag.
+   * handle docs.
+   * @param {Object[]} docs - docs.
+   * @returns {Object[]} handled docs.
    */
-  onHandleTag(tag) {
-    const ev = new PluginEvent({tag});
-    this._execHandler('onHandleTag', ev);
-    return ev.data.tag;
+  onHandleDocs(docs) {
+    const ev = new PluginEvent({docs});
+    this._execHandler('onHandleDocs', ev);
+    return ev.data.docs;
   }
 
   /**

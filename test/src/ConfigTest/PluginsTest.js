@@ -18,7 +18,7 @@ describe('test config.plugins: [...]', ()=>{
     assert(plugin.callInfo.handlerNames.onHandleCode);
     assert(plugin.callInfo.handlerNames.onHandleCodeParser);
     assert(plugin.callInfo.handlerNames.onHandleAST);
-    assert(plugin.callInfo.handlerNames.onHandleTag);
+    assert(plugin.callInfo.handlerNames.onHandleDocs);
     assert(plugin.callInfo.handlerNames.onPublish);
     assert(plugin.callInfo.handlerNames.onHandleContent);
     assert(plugin.callInfo.handlerNames.onComplete);
@@ -44,7 +44,7 @@ describe('test config.plugins: [...]', ()=>{
     assert.deepEqual(plugin.callInfo.handlerNames.onHandleCode, ['MyPlugin1', 'MyPlugin2']);
     assert.deepEqual(plugin.callInfo.handlerNames.onHandleCodeParser, ['MyPlugin1', 'MyPlugin2']);
     assert.deepEqual(plugin.callInfo.handlerNames.onHandleAST, ['MyPlugin1', 'MyPlugin2']);
-    assert.deepEqual(plugin.callInfo.handlerNames.onHandleTag, ['MyPlugin1', 'MyPlugin2']);
+    assert.deepEqual(plugin.callInfo.handlerNames.onHandleDocs, ['MyPlugin1', 'MyPlugin2']);
     assert.deepEqual(plugin.callInfo.handlerNames.onPublish, ['MyPlugin1', 'MyPlugin2']);
     assert.deepEqual(plugin.callInfo.handlerNames.onHandleContent, ['MyPlugin1', 'MyPlugin2']);
     assert.deepEqual(plugin.callInfo.handlerNames.onComplete, ['MyPlugin1', 'MyPlugin2']);

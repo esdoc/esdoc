@@ -20,8 +20,8 @@ exports.onHandleAST = function(ev) {
   callInfo.handlerNames.onHandleAST.push('MyPlugin2');
 };
 
-exports.onHandleTag = function(ev) {
-  callInfo.handlerNames.onHandleTag.push('MyPlugin2');
+exports.onHandleDocs = function(ev) {
+  callInfo.handlerNames.onHandleDocs.push('MyPlugin2');
 };
 
 exports.onPublish = function(ev) {

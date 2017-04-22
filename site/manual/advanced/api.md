@@ -57,14 +57,14 @@ exports.onHandleAST = function(ev) {
   ev.data.ast = ...;
 };
 
-exports.onHandleTag = function(ev) {
-  // modify tag
-  ev.data.tag = ...;
+exports.onHandleDocs = function(ev) {
+  // modify docs
+  ev.data.docs = ...;
 };
 
-exports.onHandleHTML = function(ev) {
-  // modify HTML
-  ev.data.html = ...;
+exports.onHandleContent = function(ev) {
+  // modify content
+  ev.data.content = ...;
 };
 
 exports.onComplete = function(ev) {

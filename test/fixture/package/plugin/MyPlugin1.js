@@ -32,9 +32,9 @@ exports.onHandleAST = function(ev) {
   ev.data.ast.program.body[0].declaration.id.name += '_ModifiedAST';
 };
 
-exports.onHandleTag = function(ev) {
-  callInfo.handlerNames.onHandleTag = ['MyPlugin1'];
-  ev.data.tag[1].name += '_ModifiedTag';
+exports.onHandleDocs = function(ev) {
+  callInfo.handlerNames.onHandleDocs = ['MyPlugin1'];
+  ev.data.docs[1].name += '_ModifiedTag';
 };
 
 exports.onPublish = function(ev) {

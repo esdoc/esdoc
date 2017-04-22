@@ -1,13 +1,16 @@
 const cheerio = require('cheerio');
 const fs = require('fs-extra');
+const path = require('path');
 
 let config;
 exports.onHandleConfig = function(ev) {
   config = ev.data.config;
 };
 
-exports.onHandleHTML = function(ev) {
-  const $ = cheerio.load(ev.data.html);
+exports.onHandleContent = function(ev) {
+  if (path.extname(ev.data.fileName) !== '.html') return;
+
+  const $ = cheerio.load(ev.data.content);
 
   // title
   $('head title').text('ESDoc - A Good Documentation Generator for JavaScript');
@@ -65,7 +68,7 @@ exports.onHandleHTML = function(ev) {
 `);
 
   // result
-  ev.data.html = $.html();
+  ev.data.content = $.html();
 };
 
 exports.onComplete = function() {

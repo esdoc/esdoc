@@ -101,7 +101,7 @@ export default class ESDoc {
       results.push(...this._generateForManual(config));
     }
 
-    results = Plugin.onHandleTag(results);
+    results = Plugin.onHandleDocs(results);
 
     // cleanup
     fs.removeSync(config.destination);
