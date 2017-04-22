@@ -32,10 +32,6 @@ exports.onHandleContent = function(ev) {
   callInfo.handlerNames.onHandleContent.push('MyPlugin2');
 };
 
-exports.onHandleHTML = function(ev) {
-  callInfo.handlerNames.onHandleHTML.push('MyPlugin2');
-};
-
 exports.onComplete = function(ev) {
   callInfo.handlerNames.onComplete.push('MyPlugin2');
 };

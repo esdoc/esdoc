@@ -370,10 +370,6 @@ export default class ESDoc {
         const _filePath = path.resolve(config.destination, filePath);
         content = Plugin.onHandleContent(content, _filePath);
 
-        // todo: remove deprecated code
-        const ext = path.extname(filePath).toLowerCase();
-        if (ext === '.html') content = Plugin.onHandleHTML(content, _filePath);
-
         console.log(`output: ${_filePath}`);
         fs.outputFileSync(_filePath, content, option);
       };

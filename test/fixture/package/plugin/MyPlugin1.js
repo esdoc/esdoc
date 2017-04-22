@@ -47,14 +47,6 @@ exports.onHandleContent = function(ev) {
   ev.data.content = ev.data.content.replace('MyPlugin1', 'MyPlugin1(modified)');
 };
 
-exports.onHandleHTML = function(ev) {
-  callInfo.handlerNames.onHandleHTML = ['MyPlugin1'];
-  ev.data.html = ev.data.html.replace(
-    '</head>',
-    `<meta name="x-from-plugin" content="fileName:${ev.data.fileName}" />\n</head>`
-  );
-};
-
 exports.onComplete = function(ev) {
   callInfo.handlerNames.onComplete = ['MyPlugin1'];
 };

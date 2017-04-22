@@ -21,7 +21,6 @@ describe('test config.plugins: [...]', ()=>{
     assert(plugin.callInfo.handlerNames.onHandleTag);
     assert(plugin.callInfo.handlerNames.onPublish);
     assert(plugin.callInfo.handlerNames.onHandleContent);
-    assert(plugin.callInfo.handlerNames.onHandleHTML);
     assert(plugin.callInfo.handlerNames.onComplete);
     assert.deepEqual(plugin.callInfo.option, {foo: 1});
     assert.equal(plugin.callInfo.usedParser, true);
@@ -33,7 +32,6 @@ describe('test config.plugins: [...]', ()=>{
 
     const html = fs.readFileSync('./test/fixture/dest/esdoc-plugins/index.html');
     assert(html.includes('content was made by MyPlugin1(modified).onPublish'));
-    assert(html.includes('x-from-plugin'));
   });
 
   /* eslint-disable global-require */
@@ -49,7 +47,6 @@ describe('test config.plugins: [...]', ()=>{
     assert.deepEqual(plugin.callInfo.handlerNames.onHandleTag, ['MyPlugin1', 'MyPlugin2']);
     assert.deepEqual(plugin.callInfo.handlerNames.onPublish, ['MyPlugin1', 'MyPlugin2']);
     assert.deepEqual(plugin.callInfo.handlerNames.onHandleContent, ['MyPlugin1', 'MyPlugin2']);
-    assert.deepEqual(plugin.callInfo.handlerNames.onHandleHTML, ['MyPlugin1', 'MyPlugin2']);
     assert.deepEqual(plugin.callInfo.handlerNames.onComplete, ['MyPlugin1', 'MyPlugin2']);
   });
 });

@@ -144,18 +144,11 @@ class Plugin {
   }
 
   /**
-   * handle HTML.
-   * @param {string} html - original HTML.
+   * handle content.
+   * @param {string} content - original content.
    * @param {string} fileName - the fileName of the HTML file.
    * @returns {string} handled HTML.
-   * @deprecated please use onHandleContent
    */
-  onHandleHTML(html, fileName) {
-    const ev = new PluginEvent({html, fileName});
-    this._execHandler('onHandleHTML', ev);
-    return ev.data.html;
-  }
-
   onHandleContent(content, fileName) {
     const ev = new PluginEvent({content, fileName});
     this._execHandler('onHandleContent', ev);
