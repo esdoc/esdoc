@@ -85,12 +85,6 @@ export default class ESDoc {
       this._generateForTest(config, results, asts);
     }
 
-    // ignore unexported and undocumented
-    for (const tag of results) {
-      if (tag.export === false) tag.ignore = true;
-      if (tag.undocument === true) tag.ignore = true;
-    }
-
     // config.index
     if (config.index) {
       results.push(this._generateForIndex(config));
