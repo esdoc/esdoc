@@ -85,16 +85,20 @@ export default class ASTUtil {
    * find ClassDeclaration node.
    * @param {string} name - class name.
    * @param {AST} ast - find in this ast.
-   * @returns {ASTNode|null} found ast node.
+   * @returns {{classNode: ASTNode|null, exported: boolean|null}} found ast node.
    */
   static findClassDeclarationNode(name, ast) {
-    if (!name) return null;
+    if (!name) return {classNode: null, exported: null};
 
     for (const node of ast.program.body) {
-      if (node.type === 'ClassDeclaration' && node.id.name === name) return node;
+      if (node.type === 'ClassDeclaration' && node.id.name === name) return {classNode: node, exported: false};
+
+      if (node.type === 'ExportDefaultDeclaration' || node.type === 'ExportNamedDeclaration') {
+        if (node.declaration && node.declaration.type === 'ClassDeclaration' && node.declaration.id.name === name) return {classNode: node, exported: true};
+      }
     }
 
-    return null;
+    return {classNode: null, exported: null};
   }
 
   /**

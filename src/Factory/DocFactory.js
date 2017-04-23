@@ -124,13 +124,16 @@ export default class DocFactory {
           break;
       }
 
-      const classNode = ASTUtil.findClassDeclarationNode(targetClassName, this._ast);
+      const {classNode, exported} = ASTUtil.findClassDeclarationNode(targetClassName, this._ast);
       if (classNode) {
-        const pseudoExportNode1 = this._copy(exportNode);
-        pseudoExportNode1.declaration = this._copy(classNode);
-        pseudoExportNode1.leadingComments = null;
-        pseudoExportNode1.declaration.__PseudoExport__ = pseudoClassExport;
-        pseudoExportNodes.push(pseudoExportNode1);
+        if (!exported) {
+          const pseudoExportNode1 = this._copy(exportNode);
+          pseudoExportNode1.declaration = this._copy(classNode);
+          pseudoExportNode1.leadingComments = null;
+          pseudoExportNode1.declaration.__PseudoExport__ = pseudoClassExport;
+          pseudoExportNodes.push(pseudoExportNode1);
+          ASTUtil.sanitize(classNode);
+        }
 
         if (targetVariableName) {
           const pseudoExportNode2 = this._copy(exportNode);
@@ -138,7 +141,6 @@ export default class DocFactory {
           pseudoExportNodes.push(pseudoExportNode2);
         }
 
-        ASTUtil.sanitize(classNode);
         ASTUtil.sanitize(exportNode);
       }
 
@@ -196,8 +198,8 @@ export default class DocFactory {
         for (const declaration of exportNode.declaration.declarations) {
           if (!declaration.init || declaration.init.type !== 'NewExpression') continue;
 
-          const classNode = ASTUtil.findClassDeclarationNode(declaration.init.callee.name, this._ast);
-          if (classNode) {
+          const {classNode, exported} = ASTUtil.findClassDeclarationNode(declaration.init.callee.name, this._ast);
+          if (classNode && !exported) {
             const pseudoExportNode = this._copy(exportNode);
             pseudoExportNode.declaration = this._copy(classNode);
             pseudoExportNode.leadingComments = null;
@@ -231,8 +233,8 @@ export default class DocFactory {
           pseudoClassExport = false;
         }
 
-        const classNode = ASTUtil.findClassDeclarationNode(targetClassName, this._ast);
-        if (classNode) {
+        const {classNode, exported} = ASTUtil.findClassDeclarationNode(targetClassName, this._ast);
+        if (classNode && !exported) {
           const pseudoExportNode = this._copy(exportNode);
           pseudoExportNode.declaration = this._copy(classNode);
           pseudoExportNode.leadingComments = null;
