@@ -102,9 +102,6 @@ export default class ESDoc {
 
     results = Plugin.onHandleDocs(results);
 
-    // cleanup
-    fs.removeSync(config.destination);
-
     // index.json
     {
       const dumpPath = path.resolve(config.destination, 'index.json');
