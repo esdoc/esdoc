@@ -1,0 +1,32 @@
+{
+  "source": "./test.new/src",
+  "destination": "./test.new/out",
+  "excludes": [".test.js$"],
+  "//index": "./test/fixture/package/README.md",
+  "//package": "./test/fixture/package/package.json",
+  "//plugins": [
+    {"name": "esdoc-external-ecmascript-plugin", "option": {"enable": true}},
+    {"name": "esdoc-accessor-plugin", "option": {"access": ["public", "protected", "private"], "autoPrivate": true}},
+    {"name": "esdoc-undocumented-identifier-plugin"}
+  ],
+  "//test": {
+    "type": "mocha",
+    "source": "./test.new/fixture/test",
+    "includes": ["Test.js$"]
+  },
+  "//manual": {
+    "index": "./test/fixture/package/manual/index.md",
+    "globalIndex": true,
+    "asset": "./test/fixture/package/manual/asset",
+    "overview": ["./test/fixture/package/manual/overview.md"],
+    "design": ["./test/fixture/package/manual/design.md"],
+    "installation": ["./test/fixture/package/manual/installation.md"],
+    "usage": ["./test/fixture/package/manual/usage1.md", "./test/fixture/package/manual/usage2.md"],
+    "tutorial": ["./test/fixture/package/manual/tutorial.md"],
+    "configuration": ["./test/fixture/package/manual/configuration.md"],
+    "example": ["./test/fixture/package/manual/example.md"],
+    "advanced": ["./test/fixture/package/manual/advanced.md"],
+    "faq": ["./test/fixture/package/manual/faq.md"],
+    "changelog": ["./test/fixture/package/CHANGELOG.md"]
+  }
+}
