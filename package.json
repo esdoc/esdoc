@@ -15,7 +15,6 @@
   "scripts": {
     "build": "node ./script/build.js",
     "test": "node ./script/test.js",
-    "test-prod": "node ./script/test-prod.js",
     "test-ci": "node ./script/test-ci.js",
     "esdoc": "node ./script/esdoc.js",
     "site": "node ./script/site.js",
