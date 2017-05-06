@@ -1,9 +1,0 @@
-{
-  "name": "esdoc-test-fixture",
-  "version": "1.2.3",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/esdoc/esdoc"
-  },
-  "main": "./src/Class/Definition.js"
-}

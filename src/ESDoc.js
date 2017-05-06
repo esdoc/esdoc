@@ -100,6 +100,8 @@ export default class ESDoc {
       results.push(...this._generateForManual(config));
     }
 
+    results = this._resolveDuplication(results);
+
     results = Plugin.onHandleDocs(results);
 
     // index.json
@@ -371,6 +373,34 @@ export default class ESDoc {
     }
 
     return results;
+  }
+
+  static _resolveDuplication(docs) {
+    const memberDocs = docs.filter((doc) => doc.kind === 'member');
+    const removeIds = [];
+
+    for (const memberDoc of memberDocs) {
+      // member duplicate with getter/setter/method.
+      // when it, remove member.
+      // getter/setter/method are high priority.
+      const sameLongnameDoc = docs.find((doc) => doc.longname === memberDoc.longname && doc.kind !== 'member');
+      if (sameLongnameDoc) {
+        removeIds.push(memberDoc.__docId__);
+        continue;
+      }
+
+      const dup = docs.filter((doc) => doc.longname === memberDoc.longname && doc.kind === 'member');
+      if (dup.length > 1) {
+        const ids = dup.map(v => v.__docId__);
+        ids.sort((a, b) => {
+          return a < b ? -1 : 1;
+        });
+        ids.shift();
+        removeIds.push(...ids);
+      }
+    }
+
+    return docs.filter((doc) => !removeIds.includes(doc.__docId__));
   }
 
   static _publish(config) {
