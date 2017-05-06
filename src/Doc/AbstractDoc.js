@@ -376,7 +376,7 @@ export default class AbstractDoc {
    * decide `undocument` with internal tag.
    */
   _$undocument() {
-    const tag = this._find(['@_undocument']);
+    const tag = this._find(['@undocument']);
     if (tag) {
       this._value.undocument = true;
     }

@@ -338,7 +338,7 @@ export default class DocFactory {
     }
 
     if (comments.length === 0) {
-      comments = [{type: 'CommentBlock', value: '* @_undocument'}];
+      comments = [{type: 'CommentBlock', value: '* @undocument'}];
     }
 
     const results = [];

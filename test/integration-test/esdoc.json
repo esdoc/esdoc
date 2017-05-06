@@ -1,0 +1,31 @@
+{
+  "source": "./test/integration-test/src",
+  "destination": "./test/integration-test/out",
+  "excludes": [".test.js$", "_Misc/Exclude.js$"],
+  "index": "./test/integration-test/README.md",
+  "package": "./test/integration-test/package.json",
+  "plugins": [
+    {"name": "./test/integration-test/plugin/MyPlugin1.js", "option": {"enable": true}},
+    {"name": "./test/integration-test/plugin/MyPlugin2.js", "option": {"enable": true}}
+  ],
+  "test": {
+    "type": "mocha",
+    "source": "./test/integration-test/test",
+    "includes": ["Test.js$"]
+  },
+  "manual": {
+    "index": "./test/integration-test/manual/index.md",
+    "globalIndex": true,
+    "asset": "./test/integration-test/manual/asset",
+    "overview": ["./test/integration-test/manual/overview.md"],
+    "design": ["./test/integration-test/manual/design.md"],
+    "installation": ["./test/integration-test/manual/installation.md"],
+    "usage": ["./test/integration-test/manual/usage1.md", "./test/integration-test/manual/usage2.md"],
+    "tutorial": ["./test/integration-test/manual/tutorial.md"],
+    "configuration": ["./test/integration-test/manual/configuration.md"],
+    "example": ["./test/integration-test/manual/example.md"],
+    "advanced": ["./test/integration-test/manual/advanced.md"],
+    "faq": ["./test/integration-test/manual/faq.md"],
+    "changelog": ["./test/integration-test/CHANGELOG.md"]
+  }
+}

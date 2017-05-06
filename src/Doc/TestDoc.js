@@ -87,4 +87,8 @@ export default class TestDoc extends AbstractDoc {
       this._value.testTargets.push(typeText);
     }
   }
+
+  _$test() {
+    // alias of testTarget
+  }
 }

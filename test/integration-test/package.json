@@ -1,0 +1,9 @@
+{
+  "name": "esdoc-test",
+  "version": "1.2.3",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/esdoc/esdoc"
+  },
+  "main": "./src/Desc/Desc.js"
+}
