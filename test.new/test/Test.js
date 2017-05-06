@@ -1,24 +1,49 @@
-describe('Use describe style mocha interface', ()=>{
-  it('Use it style mocha interface', ()=>{
+/**
+ * @test {TestTarget1}
+ */
+describe('describe/', ()=>{
+  /**
+   * @test {TestTarget2}
+   */
+  it('describe/it', ()=>{});
+
+  /**
+   * @test {TestTarget3}
+   */
+  describe('describe/describe/', ()=>{
+    /**
+     * @test {TestTarget4}
+     */
+    it('describe/describe/it', ()=>{});
   });
 
-  describe('Nested describe', ()=>{
-    it('Nested it in describe', ()=>{
-    });
-  });
-
-  context('Use context style mocha interface', ()=>{
-    it('Nested it in context', ()=>{
-    });
+  /**
+   * @test {TestTarget5}
+   */
+  context('describe/context/', ()=>{
+    /**
+     * @test {TestTarget6}
+     */
+    it('describe/context/it', ()=>{});
   });
 });
 
-suite('Use suite style mocha interface', ()=>{
-  test('Use test style mocha interface', ()=>{
-  });
+/**
+ * @test {TestTarget7}
+ */
+suite('suite/', ()=>{
+  /**
+   * @test {TestTarget8}
+   */
+  test('suite/test', ()=>{});
 
-  suite('Nested suite', ()=>{
-    test('Nested test', ()=>{
-    });
+  /**
+   * @test {TestTarget9}
+   */
+  suite('suite/suite/', ()=>{
+    /**
+     * @test {TestTarget10}
+     */
+    test('suite/suite/test', ()=>{});
   })
 });

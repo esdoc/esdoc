@@ -9,9 +9,9 @@
     {"name": "esdoc-accessor-plugin", "option": {"access": ["public", "protected", "private"], "autoPrivate": true}},
     {"name": "esdoc-undocumented-identifier-plugin"}
   ],
-  "//test": {
+  "test": {
     "type": "mocha",
-    "source": "./test.new/fixture/test",
+    "source": "./test.new/test",
     "includes": ["Test.js$"]
   },
   "manual": {
