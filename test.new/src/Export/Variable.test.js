@@ -31,4 +31,28 @@ describe('test/Export/Variable:', ()=>{
     assert.equal(doc1.export, true);
     assert.equal(doc2.export, true);
   });
+
+  describe('array destructuring name export', ()=>{
+    it('is export that first', ()=>{
+      const doc = find('longname', 'src/Export/Variable.js~testExportVariable7');
+      assert.equal(doc.export, true);
+    });
+
+    xit('is export that second', ()=>{
+      // const doc = find('longname', 'src/Export/Variable.js~testExportVariable8');
+      // assert.equal(doc.export, true);
+    });
+  });
+
+  describe('object destructuring name export', ()=>{
+    it('is export that first', ()=>{
+      const doc = find('longname', 'src/Export/Variable.js~testExportVariable9');
+      assert.equal(doc.export, true);
+    });
+
+    xit('is export that second', ()=>{
+      // const doc = find('longname', 'src/Export/Variable.js~testExportVariable10');
+      // assert.equal(doc.export, true);
+    });
+  });
 });

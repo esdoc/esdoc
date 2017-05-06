@@ -1,0 +1,4 @@
+/**
+ * @interface
+ */
+export class TestInterfaceClass {}
