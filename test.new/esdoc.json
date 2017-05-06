@@ -14,19 +14,19 @@
     "source": "./test.new/fixture/test",
     "includes": ["Test.js$"]
   },
-  "//manual": {
-    "index": "./test/fixture/package/manual/index.md",
+  "manual": {
+    "index": "./test.new/manual/index.md",
     "globalIndex": true,
-    "asset": "./test/fixture/package/manual/asset",
-    "overview": ["./test/fixture/package/manual/overview.md"],
-    "design": ["./test/fixture/package/manual/design.md"],
-    "installation": ["./test/fixture/package/manual/installation.md"],
-    "usage": ["./test/fixture/package/manual/usage1.md", "./test/fixture/package/manual/usage2.md"],
-    "tutorial": ["./test/fixture/package/manual/tutorial.md"],
-    "configuration": ["./test/fixture/package/manual/configuration.md"],
-    "example": ["./test/fixture/package/manual/example.md"],
-    "advanced": ["./test/fixture/package/manual/advanced.md"],
-    "faq": ["./test/fixture/package/manual/faq.md"],
-    "changelog": ["./test/fixture/package/CHANGELOG.md"]
+    "asset": "./test.new/manual/asset",
+    "overview": ["./test.new/manual/overview.md"],
+    "design": ["./test.new/manual/design.md"],
+    "installation": ["./test.new/manual/installation.md"],
+    "usage": ["./test.new/manual/usage1.md", "./test.new/manual/usage2.md"],
+    "tutorial": ["./test.new/manual/tutorial.md"],
+    "configuration": ["./test.new/manual/configuration.md"],
+    "example": ["./test.new/manual/example.md"],
+    "advanced": ["./test.new/manual/advanced.md"],
+    "faq": ["./test.new/manual/faq.md"],
+    "changelog": ["./test.new/CHANGELOG.md"]
   }
 }
