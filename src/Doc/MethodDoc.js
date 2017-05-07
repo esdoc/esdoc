@@ -1,5 +1,4 @@
 import AbstractDoc from './AbstractDoc.js';
-import ParamParser from '../Parser/ParamParser.js';
 import babelGenerator from 'babel-generator';
 
 /**
@@ -49,50 +48,6 @@ export default class MethodDoc extends AbstractDoc {
         return;
       }
       parent = parent.parent;
-    }
-  }
-
-  /** if @param is not exists, guess type of param by using self node. but ``get`` and ``set`` are not guessed. */
-  _$param() {
-    super._$param();
-    if (this._value.params) return;
-
-    if (['set', 'get'].includes(this._value.kind)) return;
-
-    this._value.params = ParamParser.guessParams(this._node.params);
-  }
-
-  /** if @type is not exists, guess type by using self node. only ``get`` and ``set`` are guess. */
-  _$type() {
-    super._$type();
-    if (this._value.type) return;
-
-    /* eslint-disable default-case */
-    switch (this._value.kind) {
-      case 'set':
-        this._value.type = ParamParser.guessType(this._node.right);
-        break;
-      case 'get': {
-        const result = ParamParser.guessReturnParam(this._node.body);
-        if (result) this._value.type = result;
-        break;
-      }
-    }
-  }
-
-  /**
-   * if @return is not exists, guess type of return by using self node.
-   * but ``constructor``, ``get`` and ``set``are not guessed.
-   */
-  _$return() {
-    super._$return();
-    if (this._value.return) return;
-
-    if (['constructor', 'set', 'get'].includes(this._value.kind)) return;
-
-    const result = ParamParser.guessReturnParam(this._node.body);
-    if (result) {
-      this._value.return = result;
     }
   }
 

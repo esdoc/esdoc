@@ -6,6 +6,13 @@ describe('test/_Misc/Duplication:', ()=>{
     assert.equal(docs.length, 1);
 
     const doc = docs[0];
-    assert.deepEqual(doc.type, {types: ['number']});
+    assert.deepEqual(doc.type, {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": null
+    });
   });
 });

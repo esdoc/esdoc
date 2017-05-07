@@ -1,6 +1,5 @@
 import AbstractDoc from './AbstractDoc.js';
 import MethodDoc from './MethodDoc.js';
-import ParamParser from '../Parser/ParamParser.js';
 import babelGenerator from 'babel-generator';
 
 /**
@@ -52,13 +51,5 @@ export default class MemberDoc extends AbstractDoc {
   /** borrow {@link MethodDoc#@_memberof} */
   _$memberof() {
     Reflect.apply(MethodDoc.prototype._$memberof, this, []);
-  }
-
-  /** if @type is not exists, guess type by using self node */
-  _$type() {
-    super._$type();
-    if (this._value.type) return;
-
-    this._value.type = ParamParser.guessType(this._node.right);
   }
 }

@@ -1,6 +1,5 @@
 import babelGenerator from 'babel-generator';
 import AbstractDoc from './AbstractDoc.js';
-import ParamParser from '../Parser/ParamParser.js';
 import NamingUtil from '../Util/NamingUtil.js';
 
 /**
@@ -48,24 +47,5 @@ export default class FunctionDoc extends AbstractDoc {
   _$async() {
     super._$async();
     this._value.async = this._node.async;
-  }
-
-  /** if @param is not exists, guess type of param by using self node. */
-  _$param() {
-    super._$param();
-    if (this._value.params) return;
-
-    this._value.params = ParamParser.guessParams(this._node.params);
-  }
-
-  /** if @return is not exists, guess type of return by using self node. */
-  _$return() {
-    super._$return();
-    if (this._value.return) return;
-
-    const result = ParamParser.guessReturnParam(this._node.body);
-    if (result) {
-      this._value.return = result;
-    }
   }
 }
