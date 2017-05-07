@@ -95,11 +95,6 @@ export default class ESDoc {
       results.push(this._generateForPackageJSON(config));
     }
 
-    // manual
-    if (config.manual) {
-      results.push(...this._generateForManual(config));
-    }
-
     results = this._resolveDuplication(results);
 
     results = Plugin.onHandleDocs(results);
@@ -178,10 +173,6 @@ export default class ESDoc {
       assert(config.test.source);
       if (!config.test.includes) config.test.includes = ['(spec|Spec|test|Test)\\.(js|es6)$'];
       if (!config.test.excludes) config.test.excludes = ['\\.config\\.(js|es6)$'];
-    }
-
-    if (config.manual) {
-      if (!('coverage' in config.manual)) config.manual.coverage = true;
     }
   }
 
@@ -314,65 +305,6 @@ export default class ESDoc {
     };
 
     return tag;
-  }
-
-  static _generateForManual(config) {
-    const results = [];
-
-    if (!config.manual) return results;
-
-    if (config.manual.index) {
-      results.push({
-        kind: 'manualIndex',
-        globalIndex: config.manual.globalIndex,
-        coverage: config.manual.coverage,
-        content: fs.readFileSync(config.manual.index).toString(),
-        longname: path.resolve(config.manual.index),
-        name: config.manual.index,
-        static: true,
-        access: 'public'
-      });
-    } else {
-      results.push({
-        kind: 'manualIndex',
-        globalIndex: false,
-        coverage: config.manual.coverage,
-        content: null,
-        longname: '', // longname does not must be null.
-        name: config.manual.index,
-        static: true,
-        access: 'public'
-      });
-    }
-
-    if (config.manual.asset) {
-      results.push({
-        kind: 'manualAsset',
-        longname: path.resolve(config.manual.asset),
-        name: config.manual.asset,
-        static: true,
-        access: 'public'
-      });
-    }
-
-    const names = ['overview', 'design', 'installation', 'usage', 'tutorial', 'configuration', 'example', 'advanced', 'faq', 'changelog'];
-    for (const name of names) {
-      if (!config.manual[name]) continue;
-
-      const kind = `manual${name.replace(/^./, c => c.toUpperCase())}`;
-      for (const filePath of config.manual[name]) {
-        results.push({
-          kind: kind,
-          longname: path.resolve(filePath),
-          name: filePath,
-          content: fs.readFileSync(filePath).toString(),
-          static: true,
-          access: 'public'
-        });
-      }
-    }
-
-    return results;
   }
 
   static _resolveDuplication(docs) {

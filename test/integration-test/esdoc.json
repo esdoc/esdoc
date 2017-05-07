@@ -12,20 +12,5 @@
     "type": "mocha",
     "source": "./test/integration-test/test",
     "includes": ["Test.js$"]
-  },
-  "manual": {
-    "index": "./test/integration-test/manual/index.md",
-    "globalIndex": true,
-    "asset": "./test/integration-test/manual/asset",
-    "overview": ["./test/integration-test/manual/overview.md"],
-    "design": ["./test/integration-test/manual/design.md"],
-    "installation": ["./test/integration-test/manual/installation.md"],
-    "usage": ["./test/integration-test/manual/usage1.md", "./test/integration-test/manual/usage2.md"],
-    "tutorial": ["./test/integration-test/manual/tutorial.md"],
-    "configuration": ["./test/integration-test/manual/configuration.md"],
-    "example": ["./test/integration-test/manual/example.md"],
-    "advanced": ["./test/integration-test/manual/advanced.md"],
-    "faq": ["./test/integration-test/manual/faq.md"],
-    "changelog": ["./test/integration-test/CHANGELOG.md"]
   }
 }
