@@ -6,7 +6,6 @@ import ASTUtil from './Util/ASTUtil.js';
 import ESParser from './Parser/ESParser';
 import PathResolver from './Util/PathResolver.js';
 import DocFactory from './Factory/DocFactory.js';
-import TestDocFactory from './Factory/TestDocFactory.js';
 import InvalidCodeLogger from './Util/InvalidCodeLogger.js';
 import Plugin from './Plugin/Plugin.js';
 
@@ -81,10 +80,6 @@ export default class ESDoc {
       asts.push({filePath: `source${path.sep}${relativeFilePath}`, ast: temp.ast});
     });
 
-    if (config.test) {
-      this._generateForTest(config, results, asts);
-    }
-
     // config.index
     if (config.index) {
       results.push(this._generateForIndex(config));
@@ -119,42 +114,6 @@ export default class ESDoc {
   }
 
   /**
-   * Generate document from test code.
-   * @param {ESDocConfig} config - config for generating.
-   * @param {DocObject[]} results - push DocObject to this.
-   * @param {AST[]} asts - push ast to this.
-   * @private
-   */
-  static _generateForTest(config, results, asts) {
-    const includes = config.test.includes.map((v) => new RegExp(v));
-    const excludes = config.test.excludes.map((v) => new RegExp(v));
-    const sourceDirPath = path.resolve(config.test.source);
-
-    this._walk(config.test.source, (filePath)=>{
-      const relativeFilePath = path.relative(sourceDirPath, filePath);
-      let match = false;
-      for (const reg of includes) {
-        if (relativeFilePath.match(reg)) {
-          match = true;
-          break;
-        }
-      }
-      if (!match) return;
-
-      for (const reg of excludes) {
-        if (relativeFilePath.match(reg)) return;
-      }
-
-      console.log(`parse: ${filePath}`);
-      const temp = this._traverseForTest(config.test.type, config.test.source, filePath);
-      if (!temp) return;
-      results.push(...temp.results);
-
-      asts.push({filePath: `test${path.sep}${relativeFilePath}`, ast: temp.ast});
-    });
-  }
-
-  /**
    * set default config to specified config.
    * @param {ESDocConfig} config - specified config.
    * @private
@@ -167,13 +126,6 @@ export default class ESDoc {
     if (!config.index) config.index = './README.md';
 
     if (!config.package) config.package = './package.json';
-
-    if (config.test) {
-      assert(config.test.type);
-      assert(config.test.source);
-      if (!config.test.includes) config.test.includes = ['(spec|Spec|test|Test)\\.(js|es6)$'];
-      if (!config.test.excludes) config.test.excludes = ['\\.config\\.(js|es6)$'];
-    }
   }
 
   /* eslint-disable no-unused-vars */
@@ -225,39 +177,6 @@ export default class ESDoc {
 
     const pathResolver = new PathResolver(inDirPath, filePath, packageName, mainFilePath);
     const factory = new DocFactory(ast, pathResolver);
-
-    ASTUtil.traverse(ast, (node, parent)=>{
-      try {
-        factory.push(node, parent);
-      } catch (e) {
-        InvalidCodeLogger.show(filePath, node);
-        throw e;
-      }
-    });
-
-    return {results: factory.results, ast: ast};
-  }
-
-  /**
-   * traverse doc comment in test code file.
-   * @param {string} type - test code type.
-   * @param {string} inDirPath - root directory path.
-   * @param {string} filePath - target test code file path.
-   * @returns {Object} return document info that is traversed.
-   * @property {DocObject[]} results - this is contained test code.
-   * @property {AST} ast - this is AST of test code.
-   * @private
-   */
-  static _traverseForTest(type, inDirPath, filePath) {
-    let ast;
-    try {
-      ast = ESParser.parse(filePath);
-    } catch (e) {
-      InvalidCodeLogger.showFile(filePath, e);
-      return null;
-    }
-    const pathResolver = new PathResolver(inDirPath, filePath);
-    const factory = new TestDocFactory(type, ast, pathResolver);
 
     ASTUtil.traverse(ast, (node, parent)=>{
       try {

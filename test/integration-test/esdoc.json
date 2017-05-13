@@ -7,10 +7,5 @@
   "plugins": [
     {"name": "./test/integration-test/plugin/MyPlugin1.js", "option": {"enable": true}},
     {"name": "./test/integration-test/plugin/MyPlugin2.js", "option": {"enable": true}}
-  ],
-  "test": {
-    "type": "mocha",
-    "source": "./test/integration-test/test",
-    "includes": ["Test.js$"]
-  }
+  ]
 }
