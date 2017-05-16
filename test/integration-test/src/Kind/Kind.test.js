@@ -54,23 +54,6 @@ describe('test/Kind/Kind:', ()=>{
 
   xit('has kind = file');
 
-  xit('has kind = testFile');
-  xit('has kind = testDescribe');
-  xit('has kind = testIt');
-
   xit('has kind = packageJOSN');
   xit('has kind = index');
-
-  xit('has kind = manualIndex');
-  xit('has kind = manualAsset');
-  xit('has kind = manualOverview');
-  xit('has kind = manualInstallation');
-  xit('has kind = manualDesign');
-  xit('has kind = manualTutorial');
-  xit('has kind = manualUsage');
-  xit('has kind = manualAdvanced');
-  xit('has kind = manualConfiguration');
-  xit('has kind = manualExample');
-  xit('has kind = manualFaq');
-  xit('has kind = manualChangelog');
 });

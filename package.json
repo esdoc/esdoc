@@ -2,7 +2,10 @@
   "name": "esdoc",
   "version": "1.0.0-alpha.6",
   "description": "Good Documentation Generator For JavaScript",
-  "author": "h13i32maru",
+  "author": {
+    "name": "h13i32maru",
+    "url": "https://h13i32maru.jp"
+  },
   "homepage": "https://esdoc.org/",
   "license": "MIT",
   "repository": {
