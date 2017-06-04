@@ -54,6 +54,19 @@ export default class CommentParser {
   }
 
   /**
+   * parse node to tags.
+   * @param {ASTNode} node - node.
+   * @returns {{tags: Tag[], commentNode: CommentNode}} parsed comment.
+   */
+  static parseFromNode(node) {
+    if (!node.leadingComments) node.leadingComments = [{type: 'CommentBlock', value: ''}];
+    const commentNode = node.leadingComments[node.leadingComments.length - 1];
+    const tags = this.parse(commentNode);
+
+    return {tags, commentNode};
+  }
+
+  /**
    * judge doc comment or not.
    * @param {ASTNode} commentNode - comment node.
    * @returns {boolean} if true, this comment node is doc comment.
@@ -61,5 +74,17 @@ export default class CommentParser {
   static isESDoc(commentNode) {
     if (commentNode.type !== 'CommentBlock') return false;
     return commentNode.value.charAt(0) === '*';
+  }
+
+  /**
+   * build comment from tags
+   * @param {Tag[]} tags
+   * @returns {string} block comment value.
+   */
+  static buildComment(tags) {
+    return tags.reduce((comment, tag) => {
+      const line = tag.tagValue.replace(/\n/g, '\n * ');
+      return `${comment} * ${tag.tagName} \n * ${line} \n`;
+    }, '*\n');
   }
 }

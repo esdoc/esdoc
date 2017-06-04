@@ -3,7 +3,7 @@ const sh = require('./sh');
 
 sh.rm('./test.new/out');
 const mochaOptions = [
-  '-t 10000',
+  '--timeout 0',
   '--require ./node_modules/babel-register',
   '--require ./test/init.js',
   // '--recursive ./test.new/src',
