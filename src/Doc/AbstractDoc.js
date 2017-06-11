@@ -286,9 +286,14 @@ export default class AbstractDoc {
    * decide `lineNumber`.
    */
   _$lineNumber() {
-    const node = this._node;
-    if (node.loc) {
-      this._value.lineNumber = node.loc.start.line;
+    const tag = this._find(['@lineNumber']);
+    if (tag) {
+      this._value.lineNumber = parseInt(tag.tagValue, 10);
+    } else {
+      const node = this._node;
+      if (node.loc) {
+        this._value.lineNumber = node.loc.start.line;
+      }
     }
   }
 
