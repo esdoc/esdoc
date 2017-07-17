@@ -119,9 +119,9 @@ export default class ESDoc {
    * @private
    */
   static _setDefaultConfig(config) {
-    if (!config.includes) config.includes = ['\\.(js|es6)$'];
+    if (!config.includes) config.includes = ['\\.js$'];
 
-    if (!config.excludes) config.excludes = ['\\.config\\.(js|es6)$'];
+    if (!config.excludes) config.excludes = ['\\.config\\.js$', '\\.test\\.js$'];
 
     if (!config.index) config.index = './README.md';
 
