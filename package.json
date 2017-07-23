@@ -51,7 +51,8 @@
     "mocha": "2.5.3",
     "esdoc-accessor-plugin": "latest",
     "esdoc-external-ecmascript-plugin": "latest",
-    "esdoc-undocumented-identifier-plugin": "latest"
+    "esdoc-undocumented-identifier-plugin": "latest",
+    "esdoc-standard-plugin": "latest"
   },
   "keywords": [
     "jsdoc",

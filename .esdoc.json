@@ -1,39 +1,37 @@
 {
   "source": "./src",
-  "destination": "./out/esdoc",
-  "excludes": ["Publisher/Builder/template/", "BuiltinExternal/"],
-  "access": ["public", "protected", "private"],
+  "destination": "./out/docs",
+  "excludes": ["Publisher/Builder/template/"],
   "debug": false,
   "index": "./README.md",
   "package": "./package.json",
-  "title": "ESDoc",
-  "test": {
-    "type": "mocha",
-    "source": "./test/src"
-  },
   "plugins": [
+    {
+      "name": "esdoc-standard-plugin",
+      "option": {
+        "brand": {"title": "ESDoc", "logo": "../esdoc-site/src/manual/asset/image/logo.png"},
+        "test": {"source": "./test", "includes": ["\\.test\\.js$"]},
+        "manual": {
+          "index": "./README.md",
+          "asset": "../esdoc-site/src/manual/asset",
+          "files": [
+            "../esdoc-site/src/manual/usage.md",
+            "../esdoc-site/src/manual/feature.md",
+            "../esdoc-site/src/manual/tags.md",
+            "../esdoc-site/src/manual/config.md",
+            "../esdoc-site/src/manual/api.md",
+            "../esdoc-site/src/manual/faq.md",
+            "../esdoc-site/src/manual/migration.md",
+            "./CHANGELOG.md"
+          ]
+        }
+      }
+    },
     {
       "name": "esdoc-importpath-plugin",
       "option": {
-        "replaces": [
-          {"from": "^src/", "to": "out/src/"}
-        ]
+        "replaces": [{"from": "^src/", "to": "out/src/"}]
       }
     }
-  ],
-  "manual": {
-    "globalIndex": false,
-    "asset": "./site/manual/asset",
-    "index": "./site/manual/index.md",
-    "overview": [],
-    "design": ["./site/manual/design/design.md"],
-    "installation": [],
-    "usage": ["./site/manual/usage/usage.md", "./site/manual/usage/feature.md", "./site/manual/usage/tags.md"],
-    "tutorial": [],
-    "configuration": ["./site/manual/configuration/config.md"],
-    "example": [],
-    "advanced": ["./site/manual/advanced/api.md"],
-    "faq": ["./site/manual/faq/faq.md"],
-    "changelog": ["./CHANGELOG.md"]
-  }
+  ]
 }
