@@ -29,6 +29,8 @@ export default class ESDoc {
     assert(config.source);
     assert(config.destination);
 
+    this._checkOldConfig(config);
+
     Plugin.init(config.plugins);
     Plugin.onStart();
     config = Plugin.onHandleConfig(config);
@@ -111,6 +113,41 @@ export default class ESDoc {
     this._publish(config);
 
     Plugin.onComplete();
+  }
+
+  /**
+   * check ESDoc config. and if it is old, exit with warning message.
+   * @param config
+   * @private
+   */
+  static _checkOldConfig(config) {
+    let exit = false;
+
+    const keys = [
+      ['access', 'esdoc-standard-plugin'],
+      ['autoPrivate', 'esdoc-standard-plugin'],
+      ['unexportIdentifier', 'esdoc-standard-plugin'],
+      ['undocumentIdentifier', 'esdoc-standard-plugin'],
+      ['builtinExternal', 'esdoc-standard-plugin'],
+      ['coverage', 'esdoc-standard-plugin'],
+      ['test', 'esdoc-standard-plugin'],
+      ['title', 'esdoc-standard-plugin'],
+      ['manual', 'esdoc-standard-plugin'],
+      ['lint', 'esdoc-standard-plugin'],
+      ['includeSource', 'esdoc-exclude-source-plugin'],
+      ['styles', 'esdoc-inject-style-plugin'],
+      ['scripts', 'esdoc-inject-script-plugin'],
+      ['experimentalProposal', 'esdoc-ecmascript-proposal-plugin']
+    ];
+
+    for (const [key, plugin] of keys) {
+      if (key in config) {
+        console.log(`[31merror: config.${key} is invalid. Please use ${plugin}. how to migration: https://esdoc.org/manual/migration.html[0m`);
+        exit = true;
+      }
+    }
+
+    if (exit) process.exit(1);
   }
 
   /**
