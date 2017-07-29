@@ -36,7 +36,6 @@ export default class ESDoc {
     config = Plugin.onHandleConfig(config);
 
     this._setDefaultConfig(config);
-    this._deprecatedConfig(config);
 
     Logger.debug = !!config.debug;
     const includes = config.includes.map((v) => new RegExp(v));
@@ -117,7 +116,7 @@ export default class ESDoc {
 
   /**
    * check ESDoc config. and if it is old, exit with warning message.
-   * @param config
+   * @param {ESDocConfig} config - check config
    * @private
    */
   static _checkOldConfig(config) {
@@ -163,11 +162,6 @@ export default class ESDoc {
     if (!config.index) config.index = './README.md';
 
     if (!config.package) config.package = './package.json';
-  }
-
-  /* eslint-disable no-unused-vars */
-  static _deprecatedConfig(config) {
-    // do nothing
   }
 
   /**
@@ -227,6 +221,12 @@ export default class ESDoc {
     return {results: factory.results, ast: ast};
   }
 
+  /**
+   * generate index doc
+   * @param {ESDocConfig} config
+   * @returns {Tag}
+   * @private
+   */
   static _generateForIndex(config) {
     const indexContent = fs.readFileSync(config.index, {encode: 'utf8'}).toString();
     const tag = {
@@ -241,6 +241,12 @@ export default class ESDoc {
     return tag;
   }
 
+  /**
+   * generate package doc
+   * @param {ESDocConfig} config
+   * @returns {Tag}
+   * @private
+   */
   static _generateForPackageJSON(config) {
     let packageJSON = '';
     let packagePath = '';
@@ -263,6 +269,12 @@ export default class ESDoc {
     return tag;
   }
 
+  /**
+   * resolve duplication docs
+   * @param {Tag[]} docs
+   * @returns {Tag[]}
+   * @private
+   */
   static _resolveDuplication(docs) {
     const memberDocs = docs.filter((doc) => doc.kind === 'member');
     const removeIds = [];
@@ -291,6 +303,11 @@ export default class ESDoc {
     return docs.filter((doc) => !removeIds.includes(doc.__docId__));
   }
 
+  /**
+   * publish content
+   * @param {ESDocConfig} config
+   * @private
+   */
   static _publish(config) {
     try {
       const write = (filePath, content, option) =>{

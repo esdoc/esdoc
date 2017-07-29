@@ -50,17 +50,21 @@ open ./doc/index.html
 # move to a your project directory
 cd your-project/
 
-# install ESDoc from npm
-npm install --save-dev esdoc esdoc-standard-plugin
+# install ESDoc and standard plugin
+npm install esdoc esdoc-standard-plugin
 
 # write a configuration file.
-echo '{"source": "./src", "destination": "./doc", "plugins": [{"name": "esdoc-standard-plugin"}]}' > .esdoc.json
+echo '{
+  "source": "./src",
+  "destination": "./docs",
+  "plugins": [{"name": "esdoc-standard-plugin"}]
+}' > .esdoc.json
 
 # run ESDoc
 ./node_modules/.bin/esdoc
 
 # see a documentation
-open ./doc/index.html
+open ./docs/index.html
 ```
 
 # Document
