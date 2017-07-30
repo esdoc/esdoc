@@ -8,7 +8,7 @@
 ESDoc is a documentation generator for JavaScript.<br/>
 Please <a href="https://try.esdoc.org">try it out</a>!
 
-<img class="screen-shot" src="https://esdoc.org/manual/asset/image/top.png" width="500px" style="max-width: 500px; border: 1px solid rgba(0,0,0,0.1); box-shadow: 1px 1px 1px rgba(0,0,0,0.5);">
+<img class="screen-shot" src="https://raw.githubusercontent.com/esdoc/esdoc/master/manual/asset/image/top.png" width="500px" style="max-width: 500px; border: 1px solid rgba(0,0,0,0.1); box-shadow: 1px 1px 1px rgba(0,0,0,0.5);">
 
 # Features
 - Generates good documentation.
