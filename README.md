@@ -26,26 +26,6 @@ Please <a href="https://try.esdoc.org">try it out</a>!
 And [more](https://github.com/search?o=desc&q=esdoc+filename%3Apackage.json+-user%3Ah13i32maru+-user%3Aesdoc+-user%3Aes-doc&ref=searchresults&s=indexed&type=Code&utf8=%E2%9C%93).
 
 # Quick Start
-**for v0.5.x**
-
-```sh
-# move to a your project directory
-cd your-project/
-
-# install ESDoc from npm
-npm install --save-dev esdoc
-
-# write a configuration file.
-echo '{"source": "./src", "destination": "./doc"}' > .esdoc.json
-
-# run ESDoc
-./node_modules/.bin/esdoc
-
-# see a documentation
-open ./doc/index.html
-```
-
-**for v1.0.0-alpha.x**
 ```sh
 # move to a your project directory
 cd your-project/

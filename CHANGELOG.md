@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.0.1 (2017-07-30)
+- **Breaking**
+  - Some features were carved out to plugins
+    - [Migration to v1.0](https://esdoc.org/manual/migration.html)
+    - [v0.5 documentation](https://esdoc.org/v0.5/index.html)
+- **Feat**
+  - [esdoc-publish-markdown-plugin](https://github.com/esdoc/esdoc-plugins/tree/master/esdoc-publish-markdown-plugin) PoC
+  - [esdoc-flow-type-plugin](https://github.com/esdoc/esdoc-plugins/tree/master/esdoc-flow-type-plugin) PoC
+  - [esdoc-typescript-plugin](https://github.com/esdoc/esdoc-plugins/tree/master/esdoc-typescript-plugin) PoC
+  - [esdoc-react-plugin](https://github.com/esdoc/esdoc-plugins/tree/master/esdoc-react-plugin) PoC
+  - [esdoc-jsx-plugin](https://github.com/esdoc/esdoc-plugins/tree/master/esdoc-jsx-plugin)
+- **Note**
+  - `v1.0.0` can not use. Because `v1.0.0` had been used in past.
+
 ## 0.5.2 (2017-01-02)
 - **Fix**
   - Display error message when invalid function type ([#351](https://github.com/esdoc/esdoc/issues/351)) Thanks [@LukasHechenberger](https://github.com/LukasHechenberger)

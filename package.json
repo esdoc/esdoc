@@ -1,6 +1,6 @@
 {
   "name": "esdoc",
-  "version": "1.0.0-alpha.8",
+  "version": "1.0.1",
   "description": "Good Documentation Generator For JavaScript",
   "author": {
     "name": "h13i32maru",
@@ -14,9 +14,6 @@
   },
   "engines": {
     "node": ">= 6.0.0"
-  },
-  "publishConfig": {
-    "tag": "alpha"
   },
   "scripts": {
     "build": "node ./script/build.js",
