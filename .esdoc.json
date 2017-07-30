@@ -9,19 +9,19 @@
     {
       "name": "esdoc-standard-plugin",
       "option": {
-        "brand": {"title": "ESDoc", "logo": "../esdoc-site/src/manual/asset/image/logo.png"},
+        "brand": {"title": "ESDoc", "logo": "./manual/asset/image/logo.png"},
         "test": {"source": "./test", "includes": ["\\.test\\.js$"]},
         "manual": {
           "index": "./README.md",
-          "asset": "../esdoc-site/src/manual/asset",
+          "asset": "./manual/asset",
           "files": [
-            "../esdoc-site/src/manual/usage.md",
-            "../esdoc-site/src/manual/feature.md",
-            "../esdoc-site/src/manual/tags.md",
-            "../esdoc-site/src/manual/config.md",
-            "../esdoc-site/src/manual/api.md",
-            "../esdoc-site/src/manual/faq.md",
-            "../esdoc-site/src/manual/migration.md",
+            "./manual/usage.md",
+            "./manual/feature.md",
+            "./manual/tags.md",
+            "./manual/config.md",
+            "./manual/api.md",
+            "./manual/faq.md",
+            "./manual/migration.md",
             "./CHANGELOG.md"
           ]
         }
