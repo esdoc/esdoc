@@ -8,7 +8,7 @@ Install ESDoc and standard-plugin from npm.
 
 ```sh
 cd your-project/
-npm install --save-dev esdoc esdco-standard-plugin
+npm install --save-dev esdoc esdoc-standard-plugin
 ./node_modules/.bin/esdoc -h
 ```
 
