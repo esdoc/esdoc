@@ -53,7 +53,7 @@ export default class MyClass {
 
 And run ESDoc.
 ```
-./node_modules/.bind/esdoc
+./node_modules/.bin/esdoc
 open ./docs/index.html
 ```
 
