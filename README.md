@@ -27,23 +27,23 @@ And [more](https://github.com/search?o=desc&q=esdoc+filename%3Apackage.json+-use
 
 # Quick Start
 ```sh
-# move to a your project directory
+# Move to a your project directory.
 cd your-project/
 
-# install ESDoc and standard plugin
+# Install ESDoc and standard plugin.
 npm install esdoc esdoc-standard-plugin
 
-# write a configuration file.
+# Create a configuration file.
 echo '{
   "source": "./src",
   "destination": "./docs",
   "plugins": [{"name": "esdoc-standard-plugin"}]
 }' > .esdoc.json
 
-# run ESDoc
+# Run ESDoc.
 ./node_modules/.bin/esdoc
 
-# see a documentation
+# View a documentation
 open ./docs/index.html
 ```
 
