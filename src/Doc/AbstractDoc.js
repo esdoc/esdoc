@@ -665,6 +665,9 @@ export default class AbstractDoc {
       } else if (target.type === 'Identifier') {
         results.push(target.name);
         break;
+      } else if (target.type === 'CallExpression') {
+        results.push(target.callee.name);
+        break;
       } else {
         results.push(target.property.name);
         target = target.object;
