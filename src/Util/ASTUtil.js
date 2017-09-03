@@ -94,7 +94,7 @@ export default class ASTUtil {
       if (node.type === 'ClassDeclaration' && node.id.name === name) return {classNode: node, exported: false};
 
       if (node.type === 'ExportDefaultDeclaration' || node.type === 'ExportNamedDeclaration') {
-        if (node.declaration && node.declaration.type === 'ClassDeclaration' && node.declaration.id.name === name) return {classNode: node, exported: true};
+        if (node.declaration && node.declaration.type === 'ClassDeclaration' && node.declaration.id && node.declaration.id.name === name) return {classNode: node, exported: true};
       }
     }
 
