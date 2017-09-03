@@ -1,6 +1,6 @@
 # Changelog
 
-## Next
+## 1.0.2 (2017-09-03)
 - **Fix**
   - Broken if code block has `@`. ([#436](https://github.com/esdoc/esdoc/pull/436)) Thanks [@pzuraq](https://github.com/pzuraq)
   - Broken if anonymous default export is exist. ([#431](https://github.com/esdoc/esdoc/issues/431)) Thanks [@zemzheng](https://github.com/zemzheng)
