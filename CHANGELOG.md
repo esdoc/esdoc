@@ -4,6 +4,7 @@
 - **Fix**
   - Broken if code block has `@`. ([#436](https://github.com/esdoc/esdoc/pull/436)) Thanks [@pzuraq](https://github.com/pzuraq)
   - Broken if anonymous default export is exist. ([#431](https://github.com/esdoc/esdoc/issues/431)) Thanks [@zemzheng](https://github.com/zemzheng)
+  - Broken if expression extends is exist. ([#409](https://github.com/esdoc/esdoc/pull/409)) Thanks [@dimitryvolkov](https://github.com/dimitryvolkov)
 
 ## 1.0.1 (2017-07-30)
 - **Breaking**
