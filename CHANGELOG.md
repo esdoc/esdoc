@@ -1,5 +1,9 @@
 # Changelog
 
+## Next
+- **Fix**
+  - Broken if code block has `@`. ([#436](https://github.com/esdoc/esdoc/pull/436)) Thanks [@pzuraq](https://github.com/pzuraq)
+
 ## 1.0.1 (2017-07-30)
 - **Breaking**
   - Some features were carved out to plugins
