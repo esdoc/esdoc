@@ -47,7 +47,10 @@ export default class CommentParser {
           tagValue = nextLine;
           i++;
         }
-        tagValue = tagValue.replace('\\TRUE', '').replace(/\\ESCAPED_AT\\/g, '@').replace(/^\n/, '').replace(/\n*$/, '');
+        tagValue = tagValue.replace('\\TRUE', '')
+          .replace(/\\ESCAPED_AT\\/g, '@')
+          .replace(/^\n/, '')
+          .replace(/\n*$/, '');
         tags.push({tagName, tagValue});
       }
     }
