@@ -684,7 +684,7 @@ export default class AbstractDoc {
     // find in same file.
     for (const node of this._ast.program.body) {
       if (!['ExportDefaultDeclaration', 'ExportNamedDeclaration'].includes(node.type)) continue;
-      if (node.declaration && node.declaration.type === 'ClassDeclaration' && node.declaration.id.name === className) {
+      if (node.declaration && node.declaration.type === 'ClassDeclaration' && node.declaration.id && node.declaration.id.name === className) {
         return `${this._pathResolver.filePath}~${className}`;
       }
     }
