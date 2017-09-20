@@ -547,8 +547,12 @@ export default class AbstractDoc {
           value.arguments = null;
           break;
         case 'CallExpression':
-          value.name = decorator.expression.callee.name;
+          value.name = babelGenerator(decorator.expression).code.replace(/[(].*/, '');
           value.arguments = babelGenerator(decorator.expression).code.replace(/^[^(]+/, '');
+          break;
+        case 'MemberExpression':
+          value.name = babelGenerator(decorator.expression).code.replace(/[(].*/, '');
+          value.arguments = null;
           break;
         default:
           throw new Error(`unknown decorator expression type: ${decorator.expression.type}`);

@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.3 (2017-09-20)
+- **Fix**
+  - Broken if using `@foo.bar` decorator. ([#439](https://github.com/esdoc/esdoc/issues/439))
+
 ## 1.0.2 (2017-09-03)
 - **Fix**
   - Broken if code block has `@`. ([#436](https://github.com/esdoc/esdoc/pull/436)) Thanks [@pzuraq](https://github.com/pzuraq)
