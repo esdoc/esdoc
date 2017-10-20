@@ -547,11 +547,11 @@ export default class AbstractDoc {
           value.arguments = null;
           break;
         case 'CallExpression':
-          value.name = babelGenerator(decorator.expression).code.replace(/[(].*/, '');
+          value.name = babelGenerator(decorator.expression).code.replace(/[(][\S\s.]*/, '');
           value.arguments = babelGenerator(decorator.expression).code.replace(/^[^(]+/, '');
           break;
         case 'MemberExpression':
-          value.name = babelGenerator(decorator.expression).code.replace(/[(].*/, '');
+          value.name = babelGenerator(decorator.expression).code.replace(/[(][\S\s.]*/, '');
           value.arguments = null;
           break;
         default:
