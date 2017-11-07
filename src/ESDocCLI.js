@@ -46,7 +46,7 @@ export default class ESDocCLI {
     }
 
     if (config) {
-      ESDoc.generate(config);
+      return ESDoc.generate(config);
     } else {
       this._showHelp();
       process.exit(1);

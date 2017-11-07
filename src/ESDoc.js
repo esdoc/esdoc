@@ -29,140 +29,142 @@ export default class ESDoc {
    * @param {ESDocConfig} config - config for generation.
    */
   static generate(config) {
-    assert(config.source);
-    assert(config.destination);
+    return new Promise((resolve) => {
+      assert(config.source);
+      assert(config.destination);
 
-    this._checkOldConfig(config);
+      this._checkOldConfig(config);
 
-    Plugin.init(config.plugins);
-    Plugin.onStart();
-    config = Plugin.onHandleConfig(config);
+      Plugin.init(config.plugins);
+      Plugin.onStart();
+      config = Plugin.onHandleConfig(config);
 
-    this._setDefaultConfig(config);
+      this._setDefaultConfig(config);
 
-    Logger.debug = !!config.debug;
-    const includes = config.includes.map((v) => new RegExp(v));
-    const excludes = config.excludes.map((v) => new RegExp(v));
+      Logger.debug = !!config.debug;
+      const includes = config.includes.map((v) => new RegExp(v));
+      const excludes = config.excludes.map((v) => new RegExp(v));
 
-    let packageName = null;
-    let mainFilePath = null;
-    let filesProcessed = 0;
-    let filesCount = 0;
-    if (config.package) {
-      try {
-        const packageJSON = fs.readFileSync(config.package, {encode: 'utf8'});
-        const packageConfig = JSON.parse(packageJSON);
-        packageName = packageConfig.name;
-        mainFilePath = packageConfig.main;
-      } catch (e) {
+      let packageName = null;
+      let mainFilePath = null;
+      let filesProcessed = 0;
+      let filesCount = 0;
+      if (config.package) {
+        try {
+          const packageJSON = fs.readFileSync(config.package, {encode: 'utf8'});
+          const packageConfig = JSON.parse(packageJSON);
+          packageName = packageConfig.name;
+          mainFilePath = packageConfig.main;
+        } catch (e) {
         // ignore
-      }
-    }
-
-    let results = [];
-    const sourceDirPath = path.resolve(config.source);
-    const onWriteFinish = () => {
-      console.log('ast write complete');
-  
-      // publish
-      this._publish(config);
-  
-      Plugin.onComplete();
-  
-      this._memUsage();
-    };
-
-    const objectStream = new Transform({
-      readableObjectMode: true,
-      transform: function(chunk, encoding, callback) {
-        this.push(chunk);
-        callback();
-      }
-    });
-
-    const jsonWriteStream = new Transform({
-      writableObjectMode: true,
-      readableObjectMode: true,
-      transform: function(chunk, encoding, callback) {
-        const fullPath = path.resolve(config.destination, `ast/${chunk.filePath}.json`);
-        const stringifyStream = json.createStringifyStream({body: chunk.ast});
-        mkdirp(fullPath.split('/').slice(0, -1).join('/'), (err) => {
-          if (err) {
-            console.error(err);
-            process.exit(1);
-          }
-          const fileWrite = fs.createWriteStream(fullPath);
-          stringifyStream.on('error', err => {
-            console.log(err);
-            process.exit(1);
-          });
-          fileWrite.on('error', err => {
-            console.log(err);
-            process.exit(1);
-          });
-          stringifyStream.on('data', buffer => {
-            fileWrite.write(buffer);
-          });
-          // stringifyStream.pipe(fileWrite);
-          stringifyStream.on('end', () => {
-            console.log('write:', fullPath);
-            filesProcessed++;
-            fileWrite.end();
-            callback();
-            if (filesProcessed >= filesCount) {
-              onWriteFinish();
-            }
-          });
-        });
-      }
-    });
-
-    objectStream.pipe(jsonWriteStream);
-    const asts = [];
-    this._walk(config.source, (filePath)=>{
-      const relativeFilePath = path.relative(sourceDirPath, filePath);
-      let match = false;
-      for (const reg of includes) {
-        if (relativeFilePath.match(reg)) {
-          match = true;
-          break;
         }
       }
-      if (!match) return;
 
-      for (const reg of excludes) {
-        if (relativeFilePath.match(reg)) return;
-      }
+      let results = [];
+      const sourceDirPath = path.resolve(config.source);
+      const onWriteFinish = () => {
+        console.log('ast write complete');
+  
+        // publish
+        this._publish(config);
+  
+        Plugin.onComplete();
+  
+        this._memUsage();
+        resolve(true);
+      };
 
-      console.log(`parse: ${filePath}`);
-      const temp = this._traverse(config.source, filePath, packageName, mainFilePath);
-      if (!temp) return;
-      results.push(...temp.results);
-      asts.push({filePath: `source${path.sep}${relativeFilePath}`, ast: temp.ast});
-      filesCount++;
-    });
+      const objectStream = new Transform({
+        readableObjectMode: true,
+        transform: function(chunk, encoding, callback) {
+          this.push(chunk);
+          callback();
+        }
+      });
 
-    asts.forEach(definition => objectStream.push(definition));
+      const jsonWriteStream = new Transform({
+        writableObjectMode: true,
+        readableObjectMode: true,
+        transform: function(chunk, encoding, callback) {
+          const fullPath = path.resolve(config.destination, `ast/${chunk.filePath}.json`);
+          const stringifyStream = json.createStringifyStream({body: chunk.ast});
+          mkdirp(fullPath.split('/').slice(0, -1).join('/'), (err) => {
+            if (err) {
+              console.error(err);
+              process.exit(1);
+            }
+            const fileWrite = fs.createWriteStream(fullPath);
+            stringifyStream.on('error', err => {
+              console.log(err);
+              process.exit(1);
+            });
+            fileWrite.on('error', err => {
+              console.log(err);
+              process.exit(1);
+            });
+            stringifyStream.on('data', buffer => {
+              fileWrite.write(buffer);
+            });
+            stringifyStream.on('end', () => {
+              console.log('write:', fullPath);
+              filesProcessed++;
+              callback();
+              fileWrite.end();
+              if (filesProcessed >= filesCount) {
+                onWriteFinish();
+              }
+            });
+          });
+        }
+      });
+
+      objectStream.pipe(jsonWriteStream);
+      const asts = [];
+      this._walk(config.source, (filePath)=>{
+        const relativeFilePath = path.relative(sourceDirPath, filePath);
+        let match = false;
+        for (const reg of includes) {
+          if (relativeFilePath.match(reg)) {
+            match = true;
+            break;
+          }
+        }
+        if (!match) return;
+
+        for (const reg of excludes) {
+          if (relativeFilePath.match(reg)) return;
+        }
+
+        console.log(`parse: ${filePath}`);
+        const temp = this._traverse(config.source, filePath, packageName, mainFilePath);
+        if (!temp) return;
+        results.push(...temp.results);
+        asts.push({filePath: `source${path.sep}${relativeFilePath}`, ast: temp.ast});
+        filesCount++;
+      });
+
+      asts.forEach(definition => objectStream.push(definition));
     
-    // config.index
-    if (config.index) {
-      results.push(this._generateForIndex(config));
-    }
+      // config.index
+      if (config.index) {
+        results.push(this._generateForIndex(config));
+      }
   
-    // config.package
-    if (config.package) {
-      results.push(this._generateForPackageJSON(config));
-    }
+      // config.package
+      if (config.package) {
+        results.push(this._generateForPackageJSON(config));
+      }
   
-    results = this._resolveDuplication(results);
+      results = this._resolveDuplication(results);
   
-    results = Plugin.onHandleDocs(results);
+      results = Plugin.onHandleDocs(results);
   
-    // index.json
-    {
-      const dumpPath = path.resolve(config.destination, 'index.json');
-      fs.outputFileSync(dumpPath, JSON.stringify(results, null, 2));
-    }
+      // index.json
+      {
+        const dumpPath = path.resolve(config.destination, 'index.json');
+        fs.outputFileSync(dumpPath, JSON.stringify(results, null, 2));
+      }
+    });
   }
 
   /**

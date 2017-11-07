@@ -1,6 +1,7 @@
 {
   "name": "esdoc",
   "version": "1.0.3",
+  "private": true,
   "description": "Good Documentation Generator For JavaScript",
   "author": {
     "name": "h13i32maru",
