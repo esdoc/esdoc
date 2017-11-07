@@ -126,6 +126,8 @@ export default class ESDoc {
     this._publish(config);
 
     Plugin.onComplete();
+
+    this._memUsage();
   }
 
   /**
@@ -348,5 +350,12 @@ export default class ESDoc {
       InvalidCodeLogger.showError(e);
       process.exit(1);
     }
+  }
+
+  static _memUsage() {    
+    const used = process.memoryUsage();
+    Object.keys(used).forEach(key => {
+      console.log(`${key} ${Math.round(used[key] / 1024 / 1024 * 100) / 100} MB`);
+    })
   }
 }
