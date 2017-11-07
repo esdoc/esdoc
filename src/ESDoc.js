@@ -8,6 +8,8 @@ import PathResolver from './Util/PathResolver.js';
 import DocFactory from './Factory/DocFactory.js';
 import InvalidCodeLogger from './Util/InvalidCodeLogger.js';
 import Plugin from './Plugin/Plugin.js';
+import {Transform} from 'stream';
+import json from 'big-json';
 
 const logger = new Logger('ESDoc');
 
@@ -55,9 +57,30 @@ export default class ESDoc {
     }
 
     let results = [];
-    const asts = [];
     const sourceDirPath = path.resolve(config.source);
+    
+    const objectify = new Transform({
+      readableObjectMode: true,
+      transform: function(chunk, encoding, callback) {
+        this.push(chunk);
+        callback();
+      }
+    });
 
+    const objectToString = new Transform({
+      writableObjectMode: true,
+      transform: function(chunk, encoding, callback) {
+        const stringifyStream = json.createStringifyStream({body: chunk.ast});
+        const fullPath = path.resolve(config.destination, `ast/${chunk.filePath}.json`);
+        const fileStream = fs.createWriteStream(fullPath);
+        stringifyStream.pipe(fileStream);
+        console.log('ast:', fullPath);
+        callback();
+      }
+    });
+
+    objectify.pipe(objectToString);
+    
     this._walk(config.source, (filePath)=>{
       const relativeFilePath = path.relative(sourceDirPath, filePath);
       let match = false;
@@ -77,8 +100,7 @@ export default class ESDoc {
       const temp = this._traverse(config.source, filePath, packageName, mainFilePath);
       if (!temp) return;
       results.push(...temp.results);
-
-      asts.push({filePath: `source${path.sep}${relativeFilePath}`, ast: temp.ast});
+      objectify.push({filePath: `source${path.sep}${relativeFilePath}`, ast: temp.ast});
     });
 
     // config.index
@@ -101,17 +123,12 @@ export default class ESDoc {
       fs.outputFileSync(dumpPath, JSON.stringify(results, null, 2));
     }
 
-    // ast
-    for (const ast of asts) {
-      const json = JSON.stringify(ast.ast, null, 2);
-      const filePath = path.resolve(config.destination, `ast/${ast.filePath}.json`);
-      fs.outputFileSync(filePath, json);
-    }
-
     // publish
     this._publish(config);
 
     Plugin.onComplete();
+
+    this._memUsage();
   }
 
   /**
@@ -334,5 +351,12 @@ export default class ESDoc {
       InvalidCodeLogger.showError(e);
       process.exit(1);
     }
+  }
+
+  static _memUsage() {
+    const used = process.memoryUsage();
+    Object.keys(used).forEach(key => {
+      console.log(`${key} ${Math.round(used[key] / 1024 / 1024 * 100) / 100} MB`);
+    });
   }
 }
