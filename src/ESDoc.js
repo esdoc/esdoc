@@ -63,25 +63,6 @@ export default class ESDoc {
     const sourceDirPath = path.resolve(config.source);
     const onWriteFinish = () => {
       console.log('ast write complete');
-      // config.index
-      if (config.index) {
-        results.push(this._generateForIndex(config));
-      }
-  
-      // config.package
-      if (config.package) {
-        results.push(this._generateForPackageJSON(config));
-      }
-  
-      results = this._resolveDuplication(results);
-  
-      results = Plugin.onHandleDocs(results);
-  
-      // index.json
-      {
-        const dumpPath = path.resolve(config.destination, 'index.json');
-        fs.outputFileSync(dumpPath, JSON.stringify(results, null, 2));
-      }
   
       // publish
       this._publish(config);
@@ -122,10 +103,11 @@ export default class ESDoc {
           stringifyStream.on('data', buffer => {
             fileWrite.write(buffer);
           });
+          // stringifyStream.pipe(fileWrite);
           stringifyStream.on('end', () => {
             console.log('write:', fullPath);
-            fileWrite.end();
             filesProcessed++;
+            fileWrite.end();
             callback();
             if (filesProcessed >= filesCount) {
               onWriteFinish();
@@ -136,7 +118,7 @@ export default class ESDoc {
     });
 
     objectStream.pipe(jsonWriteStream);
-    
+    const asts = [];
     this._walk(config.source, (filePath)=>{
       const relativeFilePath = path.relative(sourceDirPath, filePath);
       let match = false;
@@ -156,9 +138,31 @@ export default class ESDoc {
       const temp = this._traverse(config.source, filePath, packageName, mainFilePath);
       if (!temp) return;
       results.push(...temp.results);
-      objectStream.push({filePath: `source${path.sep}${relativeFilePath}`, ast: temp.ast});
+      asts.push({filePath: `source${path.sep}${relativeFilePath}`, ast: temp.ast});
       filesCount++;
     });
+
+    asts.forEach(definition => objectStream.push(definition));
+    
+    // config.index
+    if (config.index) {
+      results.push(this._generateForIndex(config));
+    }
+  
+    // config.package
+    if (config.package) {
+      results.push(this._generateForPackageJSON(config));
+    }
+  
+    results = this._resolveDuplication(results);
+  
+    results = Plugin.onHandleDocs(results);
+  
+    // index.json
+    {
+      const dumpPath = path.resolve(config.destination, 'index.json');
+      fs.outputFileSync(dumpPath, JSON.stringify(results, null, 2));
+    }
   }
 
   /**
