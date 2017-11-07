@@ -20,7 +20,7 @@
     "test": "node ./script/test.js",
     "test-ci": "node ./script/test-ci.js",
     "esdoc": "node ./script/esdoc.js",
-    "lint": "node ./script/eslint.js"
+    "lint": "node ./script/eslint.js --fix"
   },
   "dependencies": {
     "cheerio": "0.22.0",
