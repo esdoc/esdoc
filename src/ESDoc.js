@@ -8,6 +8,7 @@ import PathResolver from './Util/PathResolver.js';
 import DocFactory from './Factory/DocFactory.js';
 import InvalidCodeLogger from './Util/InvalidCodeLogger.js';
 import Plugin from './Plugin/Plugin.js';
+import { Transform } from 'stream';
 
 const logger = new Logger('ESDoc');
 
@@ -57,7 +58,29 @@ export default class ESDoc {
     let results = [];
     const asts = [];
     const sourceDirPath = path.resolve(config.source);
+    
+    const objectify = new Transform({
+      readableObjectMode: true,
+      transform(chunk, encoding, callback) {
+        this.push(chunk);
+        callback();
+      }
+    });
 
+    const objectToString = new Transform({
+      writableObjectMode: true,
+      transform(chunk, encoding, callback) {        
+        this.push(JSON.stringify(chunk.ast) + '\n');        
+        const fullPath = path.resolve(config.destination, `ast/${chunk.filePath}.json`)
+        const fileStream = fs.createWriteStream(fullPath)
+        this.pipe(fileStream)
+        console.log('ast:', fullPath)
+        callback();
+      }
+    });
+
+    objectify.pipe(objectToString);
+    
     this._walk(config.source, (filePath)=>{
       const relativeFilePath = path.relative(sourceDirPath, filePath);
       let match = false;
@@ -77,8 +100,8 @@ export default class ESDoc {
       const temp = this._traverse(config.source, filePath, packageName, mainFilePath);
       if (!temp) return;
       results.push(...temp.results);
-
-      asts.push({filePath: `source${path.sep}${relativeFilePath}`, ast: temp.ast});
+      objectify.push({filePath: `source${path.sep}${relativeFilePath}`, ast: temp.ast})
+      
     });
 
     // config.index
@@ -99,13 +122,6 @@ export default class ESDoc {
     {
       const dumpPath = path.resolve(config.destination, 'index.json');
       fs.outputFileSync(dumpPath, JSON.stringify(results, null, 2));
-    }
-
-    // ast
-    for (const ast of asts) {
-      const json = JSON.stringify(ast.ast, null, 2);
-      const filePath = path.resolve(config.destination, `ast/${ast.filePath}.json`);
-      fs.outputFileSync(filePath, json);
     }
 
     // publish
