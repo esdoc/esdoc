@@ -9,6 +9,7 @@ import DocFactory from './Factory/DocFactory.js';
 import InvalidCodeLogger from './Util/InvalidCodeLogger.js';
 import Plugin from './Plugin/Plugin.js';
 import {Transform} from 'stream';
+import json from 'big-json';
 
 const logger = new Logger('ESDoc');
 
@@ -69,10 +70,10 @@ export default class ESDoc {
     const objectToString = new Transform({
       writableObjectMode: true,
       transform: function(chunk, encoding, callback) {
-        this.push(JSON.stringify(`${chunk.ast}\n`));
+        const stringifyStream = json.createStringifyStream({body: chunk.ast});
         const fullPath = path.resolve(config.destination, `ast/${chunk.filePath}.json`);
         const fileStream = fs.createWriteStream(fullPath);
-        this.pipe(fileStream);
+        stringifyStream.pipe(fileStream);
         console.log('ast:', fullPath);
         callback();
       }
@@ -352,10 +353,10 @@ export default class ESDoc {
     }
   }
 
-  static _memUsage() {    
+  static _memUsage() {
     const used = process.memoryUsage();
     Object.keys(used).forEach(key => {
       console.log(`${key} ${Math.round(used[key] / 1024 / 1024 * 100) / 100} MB`);
-    })
+    });
   }
 }
