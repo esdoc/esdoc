@@ -47,8 +47,6 @@ export default class ESDoc {
 
       let packageName = null;
       let mainFilePath = null;
-      let filesProcessed = 0;
-      let filesCount = 0;
       if (config.package) {
         try {
           const packageJSON = fs.readFileSync(config.package, {encode: 'utf8'});
@@ -64,63 +62,46 @@ export default class ESDoc {
       const sourceDirPath = path.resolve(config.source);
       const onWriteFinish = () => {
         console.log('ast write complete');
-  
+
         // publish
         this._publish(config);
-  
+
         Plugin.onComplete();
-  
+
         this._memUsage();
         resolve(true);
       };
 
-      const objectStream = new Transform({
-        readableObjectMode: true,
-        transform: function(chunk, encoding, callback) {
-          this.push(chunk);
-          callback();
-        }
-      });
+      const fatalError = err => {
+        console.error(err);
+        process.exit(1);
+      };
 
-      const jsonWriteStream = new Transform({
+      const stringifyWriteTransform = new Transform({
         writableObjectMode: true,
         readableObjectMode: true,
-        transform: function(chunk, encoding, callback) {
+        transform: function(chunk, encoding, transformCallback) {
           const fullPath = path.resolve(config.destination, `ast/${chunk.filePath}.json`);
-          const stringifyStream = json.createStringifyStream({body: chunk.ast});
           mkdirp(fullPath.split('/').slice(0, -1).join('/'), (err) => {
-            if (err) {
-              console.error(err);
-              process.exit(1);
-            }
-            const fileWrite = fs.createWriteStream(fullPath);
-            stringifyStream.on('error', err => {
-              console.log(err);
-              process.exit(1);
-            });
-            fileWrite.on('error', err => {
-              console.log(err);
-              process.exit(1);
-            });
-            stringifyStream.on('data', buffer => {
-              fileWrite.write(buffer);
-            });
-            stringifyStream.on('end', () => {
-              console.log('write:', fullPath);
-              filesProcessed++;
-              callback();
-              fileWrite.end();
-              if (filesProcessed >= filesCount) {
-                onWriteFinish();
-              }
-            });
+            if (err) fatalError(err);
+
+            const fileWriteStream = fs.createWriteStream(fullPath);
+            fileWriteStream.on('error', fatalError);
+            fileWriteStream.on('finish', transformCallback);
+
+            const stringifyStream = json.createStringifyStream({body: chunk.ast});
+            stringifyStream.on('error', fatalError);
+            stringifyStream.on('end', fileWriteStream.end);
+            stringifyStream.pipe(fileWriteStream);
           });
         }
       });
 
-      objectStream.pipe(jsonWriteStream);
-      const asts = [];
-      this._walk(config.source, (filePath)=>{
+      stringifyWriteTransform.on('finish', onWriteFinish);
+      stringifyWriteTransform.on('error', fatalError);
+
+      // const asts = [];
+      this._walk(config.source, (filePath) => {
         const relativeFilePath = path.relative(sourceDirPath, filePath);
         let match = false;
         for (const reg of includes) {
@@ -139,26 +120,25 @@ export default class ESDoc {
         const temp = this._traverse(config.source, filePath, packageName, mainFilePath);
         if (!temp) return;
         results.push(...temp.results);
-        asts.push({filePath: `source${path.sep}${relativeFilePath}`, ast: temp.ast});
-        filesCount++;
+        stringifyWriteTransform.write({filePath: `source${path.sep}${relativeFilePath}`, ast: temp.ast});
       });
 
-      asts.forEach(definition => objectStream.push(definition));
-    
+      stringifyWriteTransform.end();
+
       // config.index
       if (config.index) {
         results.push(this._generateForIndex(config));
       }
-  
+
       // config.package
       if (config.package) {
         results.push(this._generateForPackageJSON(config));
       }
-  
+
       results = this._resolveDuplication(results);
-  
+
       results = Plugin.onHandleDocs(results);
-  
+
       // index.json
       {
         const dumpPath = path.resolve(config.destination, 'index.json');
@@ -262,7 +242,7 @@ export default class ESDoc {
     const pathResolver = new PathResolver(inDirPath, filePath, packageName, mainFilePath);
     const factory = new DocFactory(ast, pathResolver);
 
-    ASTUtil.traverse(ast, (node, parent)=>{
+    ASTUtil.traverse(ast, (node, parent) => {
       try {
         factory.push(node, parent);
       } catch (e) {
@@ -363,7 +343,7 @@ export default class ESDoc {
    */
   static _publish(config) {
     try {
-      const write = (filePath, content, option) =>{
+      const write = (filePath, content, option) => {
         const _filePath = path.resolve(config.destination, filePath);
         content = Plugin.onHandleContent(content, _filePath);
 
@@ -389,6 +369,10 @@ export default class ESDoc {
     }
   }
 
+  /**
+   * show memory usage stat
+   * @return {undefined} no return
+   */
   static _memUsage() {
     const used = process.memoryUsage();
     Object.keys(used).forEach(key => {
