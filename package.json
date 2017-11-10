@@ -19,7 +19,8 @@
     "test": "node ./scripts/test.js",
     "test-ci": "node ./scripts/test-ci.js",
     "esdoc": "node ./scripts/esdoc.js",
-    "lint": "node ./scripts/eslint.js --fix"
+    "lint": "node ./scripts/eslint.js --fix",
+    "start": "static out/docs"
   },
   "dependencies": {
     "babel-generator": "6.11.4",
@@ -49,6 +50,7 @@
     "eslint": "3.6.0",
     "http-server": "0.9.0",
     "mocha": "2.5.3",
+    "node-static": "^0.7.10",
     "nyc": "8.3.0"
   },
   "keywords": [
