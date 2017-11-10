@@ -1,16 +1,15 @@
 {
-  "name": "esdoc",
-  "version": "1.0.3",
-  "description": "Good Documentation Generator For JavaScript",
+  "name": "esdoc2",
+  "version": "1.1.0",
+  "description": "Better Documentation Generator For JavaScript",
   "author": {
-    "name": "h13i32maru",
-    "url": "https://h13i32maru.jp"
+    "name": "Matt McFarland",
+    "url": "https://github.com/esdoc2/esdoc2"
   },
-  "homepage": "https://esdoc.org/",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/esdoc/esdoc"
+    "url": "https://github.com/esdoc2/esdoc2"
   },
   "engines": {
     "node": ">= 6.0.0"
@@ -54,23 +53,12 @@
   },
   "keywords": [
     "jsdoc",
+    "esdoc",
     "api",
     "document",
     "documentation",
-    "ES6",
-    "ECMAScript6",
-    "ES2015",
-    "ECMAScript2015",
-    "ES7",
-    "ECMAScript7",
-    "ES2016",
-    "ECMAScript2016",
-    "ES8",
-    "ECMAScript8",
-    "ES2017",
-    "ECMAScript2017",
-    "proposal"
-  ],
+    "ES6"
+    ],
   "files": [
     "out/src",
     "README.md"

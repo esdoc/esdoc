@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.0 (2017-11-10)
+- **Fix**
+  - Broken when using JSON.stringify with output of AST
+
 ## 1.0.3 (2017-09-20)
 - **Fix**
   - Broken if using `@foo.bar` decorator. ([#439](https://github.com/esdoc/esdoc/issues/439))
