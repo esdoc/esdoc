@@ -1,6 +1,27 @@
+machine:
+  node:
+    version: 8.9.1
+general:
+  artifacts:
+    - "out"
+dependencies:
+  pre:
+    - npm install yarn -g
+  override:
+    - yarn
+test:
+  override:
+    - yarn test
+  post:
+    - yarn build
+    - yarn esdoc
 deployment:
   npm:
     tag: /v[0-9]+(\.[0-9]+)*/
       commands:
       - npm publish
+  docs:
+    tag: /v[0-9]+(\.[0-9]+)*/
+    heroku:
+      appname: esdoc2
   
