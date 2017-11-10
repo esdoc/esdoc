@@ -7,6 +7,7 @@ general:
 dependencies:
   pre:
     - npm install yarn -g
+    - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
   override:
     - yarn
 test:
@@ -24,4 +25,5 @@ deployment:
     tag: /v[0-9]+(\.[0-9]+)*/
     heroku:
       appname: esdoc2
+      
   
