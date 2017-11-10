@@ -1016,45 +1016,45 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-esdoc2-accessor-plugin@^1.0.0, esdoc2-accessor-plugin@latest:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/esdoc2-accessor-plugin/-/esdoc2-accessor-plugin-1.0.0.tgz#791ba4872e6c403515ce749b1348d6f0293ad9eb"
+esdoc2-accessor-plugin@2.0.0, esdoc2-accessor-plugin@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/esdoc2-accessor-plugin/-/esdoc2-accessor-plugin-2.0.0.tgz#87a25c12ce6e649de8a1411fc242a03188caa4cc"
 
-esdoc2-brand-plugin@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/esdoc2-brand-plugin/-/esdoc2-brand-plugin-1.0.0.tgz#9e216d735e62fcec49f7a339bb4121da67cc6033"
+esdoc2-brand-plugin@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/esdoc2-brand-plugin/-/esdoc2-brand-plugin-2.0.0.tgz#7579a98f318a307f91395ba79c7758c4dbf4cc07"
   dependencies:
     cheerio "0.22.0"
 
-esdoc2-coverage-plugin@^1.0.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/esdoc2-coverage-plugin/-/esdoc2-coverage-plugin-1.1.0.tgz#3869869cd7f87891f972625787695a299aece45c"
+esdoc2-coverage-plugin@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/esdoc2-coverage-plugin/-/esdoc2-coverage-plugin-2.0.0.tgz#e0a3ca5078d15d691a02b58a67800a715dfcea67"
 
-esdoc2-external-ecmascript-plugin@^1.0.0, esdoc2-external-ecmascript-plugin@latest:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/esdoc2-external-ecmascript-plugin/-/esdoc2-external-ecmascript-plugin-1.0.0.tgz#78f565d4a0c5185ac63152614dce1fe1a86688db"
+esdoc2-external-ecmascript-plugin@2.0.0, esdoc2-external-ecmascript-plugin@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/esdoc2-external-ecmascript-plugin/-/esdoc2-external-ecmascript-plugin-2.0.0.tgz#ef9e8f5f9a22925b7c64923da43662ec2595d3b9"
   dependencies:
     fs-extra "1.0.0"
 
-esdoc2-importpath-plugin@0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/esdoc2-importpath-plugin/-/esdoc2-importpath-plugin-0.1.0.tgz#ab70433268a8f2d8df12fb48eae05ab457995406"
+esdoc2-importpath-plugin@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/esdoc2-importpath-plugin/-/esdoc2-importpath-plugin-2.0.0.tgz#e64f19eb69a6cb87bc85f73a5b70166d7bd38217"
 
-esdoc2-integrate-manual-plugin@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/esdoc2-integrate-manual-plugin/-/esdoc2-integrate-manual-plugin-1.0.0.tgz#1854a6aa1c081035d7c8c51e3bdd4fb65aa4711c"
+esdoc2-integrate-manual-plugin@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/esdoc2-integrate-manual-plugin/-/esdoc2-integrate-manual-plugin-2.0.0.tgz#3a6e7223fb327079f4f8d1f9da1e61619d981d68"
 
-esdoc2-integrate-test-plugin@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/esdoc2-integrate-test-plugin/-/esdoc2-integrate-test-plugin-1.0.0.tgz#e2d0d00090f7f0c35e5d2f2c033327a79e53e409"
+esdoc2-integrate-test-plugin@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/esdoc2-integrate-test-plugin/-/esdoc2-integrate-test-plugin-2.0.0.tgz#5f03eb73fbb78b8bbebc3702372aa942b8758cad"
 
-esdoc2-lint-plugin@^1.0.0:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/esdoc2-lint-plugin/-/esdoc2-lint-plugin-1.0.1.tgz#87bee6403e676c087f61be92c452d60f2c6a70e5"
+esdoc2-lint-plugin@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/esdoc2-lint-plugin/-/esdoc2-lint-plugin-2.0.0.tgz#260ae803d7b8b799ed822e3f02bc7349f32577a1"
 
-esdoc2-publish-html-plugin@^1.0.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/esdoc2-publish-html-plugin/-/esdoc2-publish-html-plugin-1.1.0.tgz#093f8337aca169022572cb387ffcc3f470b02513"
+esdoc2-publish-html-plugin@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/esdoc2-publish-html-plugin/-/esdoc2-publish-html-plugin-2.0.0.tgz#54b8fc08305036f62beb298f700cc4dd76dea844"
   dependencies:
     babel-generator "6.11.4"
     cheerio "0.22.0"
@@ -1064,33 +1064,33 @@ esdoc2-publish-html-plugin@^1.0.0:
     marked "0.3.6"
     taffydb "2.7.2"
 
-esdoc2-standard-plugin@latest:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/esdoc2-standard-plugin/-/esdoc2-standard-plugin-1.0.0.tgz#661201cac7ef868924902446fdac1527253c5d4d"
+esdoc2-standard-plugin@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/esdoc2-standard-plugin/-/esdoc2-standard-plugin-2.0.0.tgz#8dc07ca5b6ffa1d61812541118f825f4725e0473"
   dependencies:
-    esdoc2-accessor-plugin "^1.0.0"
-    esdoc2-brand-plugin "^1.0.0"
-    esdoc2-coverage-plugin "^1.0.0"
-    esdoc2-external-ecmascript-plugin "^1.0.0"
-    esdoc2-integrate-manual-plugin "^1.0.0"
-    esdoc2-integrate-test-plugin "^1.0.0"
-    esdoc2-lint-plugin "^1.0.0"
-    esdoc2-publish-html-plugin "^1.0.0"
-    esdoc2-type-inference-plugin "^1.0.0"
-    esdoc2-undocumented-identifier-plugin "^1.0.0"
-    esdoc2-unexported-identifier-plugin "^1.0.0"
+    esdoc2-accessor-plugin "^2.0.0"
+    esdoc2-brand-plugin "^2.0.0"
+    esdoc2-coverage-plugin "^2.0.0"
+    esdoc2-external-ecmascript-plugin "^2.0.0"
+    esdoc2-integrate-manual-plugin "^2.0.0"
+    esdoc2-integrate-test-plugin "^2.0.0"
+    esdoc2-lint-plugin "^2.0.0"
+    esdoc2-publish-html-plugin "^2.0.0"
+    esdoc2-type-inference-plugin "^2.0.0"
+    esdoc2-undocumented-identifier-plugin "^2.0.0"
+    esdoc2-unexported-identifier-plugin "^2.0.0"
 
-esdoc2-type-inference-plugin@^1.0.0:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/esdoc2-type-inference-plugin/-/esdoc2-type-inference-plugin-1.0.1.tgz#aabca78641f99bd1ece6f302f045bbd631be72f5"
+esdoc2-type-inference-plugin@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/esdoc2-type-inference-plugin/-/esdoc2-type-inference-plugin-2.0.0.tgz#9d0cc9a6eda0686447e544f12d06575b39ff45ab"
 
-esdoc2-undocumented-identifier-plugin@^1.0.0, esdoc2-undocumented-identifier-plugin@latest:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/esdoc2-undocumented-identifier-plugin/-/esdoc2-undocumented-identifier-plugin-1.0.0.tgz#82e05d371c32d12871140f1d5c81ec99fd9cc2c8"
+esdoc2-undocumented-identifier-plugin@2.0.0, esdoc2-undocumented-identifier-plugin@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/esdoc2-undocumented-identifier-plugin/-/esdoc2-undocumented-identifier-plugin-2.0.0.tgz#54c1c7e21076eac0b505e95eb0716d41cc966c6d"
 
-esdoc2-unexported-identifier-plugin@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/esdoc2-unexported-identifier-plugin/-/esdoc2-unexported-identifier-plugin-1.0.0.tgz#1f9874c6a7c2bebf9ad397c3ceb75c9c69dabab1"
+esdoc2-unexported-identifier-plugin@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/esdoc2-unexported-identifier-plugin/-/esdoc2-unexported-identifier-plugin-2.0.0.tgz#7b861f13ebca657f40535b20a707721d3c586a3d"
 
 eslint@3.6.0:
   version "3.6.0"

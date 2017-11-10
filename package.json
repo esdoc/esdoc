@@ -12,7 +12,7 @@
     "url": "https://github.com/esdoc2/esdoc2"
   },
   "engines": {
-    "node": ">= 8.9.1"
+    "node": ">= 8.0.0"
   },
   "scripts": {
     "build": "node ./scripts/build.js",

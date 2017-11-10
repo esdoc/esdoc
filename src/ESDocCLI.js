@@ -2,7 +2,7 @@
 import fs from 'fs';
 import path from 'path';
 import minimist from 'minimist';
-import esdoc2 from './esdoc2.js';
+import esdoc2 from './ESDoc.js';
 import NPMUtil from './Util/NPMUtil.js';
 
 /**
@@ -39,6 +39,7 @@ export default class ESDocCLI {
     let config;
 
     const configPath = this._findConfigFilePath();
+    console.log({configPath});
     if (configPath) {
       config = this._createConfigFromJSONFile(configPath);
     } else {
@@ -48,6 +49,7 @@ export default class ESDocCLI {
     if (config) {
       esdoc2.generate(config);
     } else {
+      console.log();
       this._showHelp();
       process.exit(1);
     }
@@ -58,7 +60,7 @@ export default class ESDocCLI {
    * @private
    */
   _showHelp() {
-    console.log('Usage: esdoc2 [-c esdoc2.json]');
+    console.log('Usage: esdoc [-c esdoc.json]');
     console.log('');
     console.log('Options:');
     console.log('  -c', 'specify config file');
@@ -66,10 +68,10 @@ export default class ESDocCLI {
     console.log('  -v', 'output the version number');
     console.log('');
     console.log('esdoc2 finds configuration by the order:');
-    console.log('  1. `-c your-esdoc2.json`');
-    console.log('  2. `.esdoc2.json` in current directory');
-    console.log('  3. `.esdoc2.js` in current directory');
-    console.log('  4. `esdoc2` property in package.json');
+    console.log('  1. `-c your-esdoc.json`');
+    console.log('  2. `.esdoc.json` in current directory');
+    console.log('  3. `.esdoc.js` in current directory');
+    console.log('  4. `esdoc` property in package.json');
   }
 
   /**
@@ -96,7 +98,7 @@ export default class ESDocCLI {
     }
 
     try {
-      const filePath = path.resolve('./.esdoc2.json');
+      const filePath = path.resolve('./.esdoc.json');
       fs.readFileSync(filePath);
       return filePath;
     } catch (e) {
@@ -104,7 +106,7 @@ export default class ESDocCLI {
     }
 
     try {
-      const filePath = path.resolve('./.esdoc2.js');
+      const filePath = path.resolve('./.esdoc.js');
       fs.readFileSync(filePath);
       return filePath;
     } catch (e) {

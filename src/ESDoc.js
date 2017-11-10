@@ -23,7 +23,7 @@ const logger = new Logger('esdoc2');
  *   console.log(results);
  * });
  */
-export default class esdoc2 {
+export default class ESDoc {
   /**
    * Generate documentation.
    * @param {ESDocConfig} config - config for generation.
