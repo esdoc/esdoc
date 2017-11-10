@@ -4,36 +4,36 @@
 - [Writing Tags](#writing-tags)
 
 ## Installation
-Install ESDoc and standard-plugin from npm.
+Install esdoc2 and standard-plugin from npm.
 
 ```sh
 cd your-project/
-npm install --save-dev esdoc esdoc-standard-plugin
-./node_modules/.bin/esdoc -h
+npm install --save-dev esdoc2 esdoc2-standard-plugin
+./node_modules/.bin/esdoc2 -h
 ```
 
 ## Configuration
 The minimum configuration is the following JSON. All configurations are [here](./config.html).
 
-<p class="file-path">.esdoc.json</p>
+<p class="file-path">.esdoc2.json</p>
 ```json
 {
   "source": "./src",
   "destination": "./docs",
   "plugins": [
-    {"name": "esdoc-standard-plugin"}
+    {"name": "esdoc2-standard-plugin"}
   ]
 }
 ```
 
-ESDoc automatically finds the configuration file path by the order, if you don't specify `-c esdoc.json`.
+esdoc2 automatically finds the configuration file path by the order, if you don't specify `-c esdoc2.json`.
 
-1. `.esdoc.json` in the current directory
-2. `.esdoc.js` in the current directory
-3. `esdoc` property in `package.json`
+1. `.esdoc2.json` in the current directory
+2. `.esdoc2.js` in the current directory
+3. `esdoc2` property in `package.json`
 
 ## Writing Tags
-ESDoc supports some documentation tags(aka. jsdoc tags). All tags are [here](./tags.html).
+esdoc2 supports some documentation tags(aka. jsdoc tags). All tags are [here](./tags.html).
 
 ```javascript
 /**
@@ -51,9 +51,9 @@ export default class MyClass {
 }
 ```
 
-And run ESDoc.
+And run esdoc2.
 ```
-./node_modules/.bin/esdoc
+./node_modules/.bin/esdoc2
 open ./docs/index.html
 ```
 

@@ -7,9 +7,9 @@
   "package": "./package.json",
   "plugins": [
     {
-      "name": "esdoc-standard-plugin",
+      "name": "esdoc2-standard-plugin",
       "option": {
-        "brand": {"title": "ESDoc", "logo": "./manual/asset/image/logo.png"},
+        "brand": {"title": "esdoc2", "logo": "./manual/asset/image/logo.png"},
         "test": {"source": "./test", "includes": ["\\.test\\.js$"]},
         "manual": {
           "index": "./README.md",
@@ -28,7 +28,7 @@
       }
     },
     {
-      "name": "esdoc-importpath-plugin",
+      "name": "esdoc2-importpath-plugin",
       "option": {
         "replaces": [{"from": "^src/", "to": "out/src/"}]
       }

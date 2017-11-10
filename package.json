@@ -18,7 +18,7 @@
     "build": "node ./script/build.js",
     "test": "node ./script/test.js",
     "test-ci": "node ./script/test-ci.js",
-    "esdoc": "node ./script/esdoc.js",
+    "esdoc2": "node ./script/esdoc2.js",
     "lint": "node ./script/eslint.js --fix"
   },
   "dependencies": {
@@ -41,11 +41,11 @@
     "babel-plugin-transform-es2015-modules-commonjs": "6.11.5",
     "babel-register": "6.11.6",
     "codecov": "1.0.1",
-    "esdoc-accessor-plugin": "latest",
-    "esdoc-external-ecmascript-plugin": "latest",
-    "esdoc-importpath-plugin": "0.1.0",
-    "esdoc-standard-plugin": "latest",
-    "esdoc-undocumented-identifier-plugin": "latest",
+    "esdoc2-accessor-plugin": "latest",
+    "esdoc2-external-ecmascript-plugin": "latest",
+    "esdoc2-importpath-plugin": "0.1.0",
+    "esdoc2-standard-plugin": "latest",
+    "esdoc2-undocumented-identifier-plugin": "latest",
     "eslint": "3.6.0",
     "http-server": "0.9.0",
     "mocha": "2.5.3",
@@ -53,7 +53,7 @@
   },
   "keywords": [
     "jsdoc",
-    "esdoc",
+    "esdoc2",
     "api",
     "document",
     "documentation",
@@ -63,8 +63,8 @@
     "out/src",
     "README.md"
   ],
-  "main": "out/src/ESDoc.js",
+  "main": "out/src/esdoc2.js",
   "bin": {
-    "esdoc": "out/src/ESDocCLI.js"
+    "esdoc2": "out/src/ESDocCLI.js"
   }
 }

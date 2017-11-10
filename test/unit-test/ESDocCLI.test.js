@@ -26,25 +26,25 @@ describe('test ESDocCLI:', ()=>{
 
   describe('find configuration', ()=>{
     it('finds -c', ()=>{
-      const cli = new ESDocCLI([null, null, '-c', 'esdoc.json']);
-      assert.equal(cli._findConfigFilePath(), 'esdoc.json');
+      const cli = new ESDocCLI([null, null, '-c', 'esdoc2.json']);
+      assert.equal(cli._findConfigFilePath(), 'esdoc2.json');
     });
 
-    it('finds .esdoc.json', ()=>{
+    it('finds .esdoc2.json', ()=>{
       process.chdir('./test/');
-      fs.writeFileSync('.esdoc.json', 'dummy');
+      fs.writeFileSync('.esdoc2.json', 'dummy');
       const cli = new ESDocCLI([null, null]);
-      assert.equal(cli._findConfigFilePath(), path.resolve('.esdoc.json'));
-      fs.unlinkSync('.esdoc.json');
+      assert.equal(cli._findConfigFilePath(), path.resolve('.esdoc2.json'));
+      fs.unlinkSync('.esdoc2.json');
       process.chdir('../');
     });
 
-    it('finds .esdoc.js', ()=>{
+    it('finds .esdoc2.js', ()=>{
       process.chdir('./test/');
-      fs.writeFileSync('.esdoc.js', 'dummy');
+      fs.writeFileSync('.esdoc2.js', 'dummy');
       const cli = new ESDocCLI([null, null]);
-      assert.equal(cli._findConfigFilePath(), path.resolve('.esdoc.js'));
-      fs.unlinkSync('.esdoc.js');
+      assert.equal(cli._findConfigFilePath(), path.resolve('.esdoc2.js'));
+      fs.unlinkSync('.esdoc2.js');
       process.chdir('../');
     });
   });

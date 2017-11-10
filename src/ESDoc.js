@@ -12,18 +12,18 @@ import {Transform} from 'stream';
 import json from 'big-json';
 import mkdirp from 'mkdirp';
 
-const logger = new Logger('ESDoc');
+const logger = new Logger('esdoc2');
 
 /**
  * API Documentation Generator.
  *
  * @example
- * let config = {source: './src', destination: './esdoc'};
- * ESDoc.generate(config, (results, config)=>{
+ * let config = {source: './src', destination: './esdoc2'};
+ * esdoc2.generate(config, (results, config)=>{
  *   console.log(results);
  * });
  */
-export default class ESDoc {
+export default class esdoc2 {
   /**
    * Generate documentation.
    * @param {ESDocConfig} config - config for generation.
@@ -148,7 +148,7 @@ export default class ESDoc {
   }
 
   /**
-   * check ESDoc config. and if it is old, exit with warning message.
+   * check esdoc2 config. and if it is old, exit with warning message.
    * @param {ESDocConfig} config - check config
    * @private
    */
@@ -156,25 +156,25 @@ export default class ESDoc {
     let exit = false;
 
     const keys = [
-      ['access', 'esdoc-standard-plugin'],
-      ['autoPrivate', 'esdoc-standard-plugin'],
-      ['unexportIdentifier', 'esdoc-standard-plugin'],
-      ['undocumentIdentifier', 'esdoc-standard-plugin'],
-      ['builtinExternal', 'esdoc-standard-plugin'],
-      ['coverage', 'esdoc-standard-plugin'],
-      ['test', 'esdoc-standard-plugin'],
-      ['title', 'esdoc-standard-plugin'],
-      ['manual', 'esdoc-standard-plugin'],
-      ['lint', 'esdoc-standard-plugin'],
-      ['includeSource', 'esdoc-exclude-source-plugin'],
-      ['styles', 'esdoc-inject-style-plugin'],
-      ['scripts', 'esdoc-inject-script-plugin'],
-      ['experimentalProposal', 'esdoc-ecmascript-proposal-plugin']
+      ['access', 'esdoc2-standard-plugin'],
+      ['autoPrivate', 'esdoc2-standard-plugin'],
+      ['unexportIdentifier', 'esdoc2-standard-plugin'],
+      ['undocumentIdentifier', 'esdoc2-standard-plugin'],
+      ['builtinExternal', 'esdoc2-standard-plugin'],
+      ['coverage', 'esdoc2-standard-plugin'],
+      ['test', 'esdoc2-standard-plugin'],
+      ['title', 'esdoc2-standard-plugin'],
+      ['manual', 'esdoc2-standard-plugin'],
+      ['lint', 'esdoc2-standard-plugin'],
+      ['includeSource', 'esdoc2-exclude-source-plugin'],
+      ['styles', 'esdoc2-inject-style-plugin'],
+      ['scripts', 'esdoc2-inject-script-plugin'],
+      ['experimentalProposal', 'esdoc2-ecmascript-proposal-plugin']
     ];
 
     for (const [key, plugin] of keys) {
       if (key in config) {
-        console.log(`[31merror: config.${key} is invalid. Please use ${plugin}. how to migration: https://esdoc.org/manual/migration.html[0m`);
+        console.log(`[31merror: config.${key} is invalid. Please use ${plugin}. how to migration: https://esdoc2.org/manual/migration.html[0m`);
         exit = true;
       }
     }

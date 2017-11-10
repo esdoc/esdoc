@@ -2,11 +2,11 @@
 import fs from 'fs';
 import path from 'path';
 import minimist from 'minimist';
-import ESDoc from './ESDoc.js';
+import esdoc2 from './esdoc2.js';
 import NPMUtil from './Util/NPMUtil.js';
 
 /**
- * Command Line Interface for ESDoc.
+ * Command Line Interface for esdoc2.
  *
  * @example
  * let cli = new ESDocCLI(process.argv);
@@ -46,7 +46,7 @@ export default class ESDocCLI {
     }
 
     if (config) {
-      ESDoc.generate(config);
+      esdoc2.generate(config);
     } else {
       this._showHelp();
       process.exit(1);
@@ -54,26 +54,26 @@ export default class ESDocCLI {
   }
 
   /**
-   * show help of ESDoc
+   * show help of esdoc2
    * @private
    */
   _showHelp() {
-    console.log('Usage: esdoc [-c esdoc.json]');
+    console.log('Usage: esdoc2 [-c esdoc2.json]');
     console.log('');
     console.log('Options:');
     console.log('  -c', 'specify config file');
     console.log('  -h', 'output usage information');
     console.log('  -v', 'output the version number');
     console.log('');
-    console.log('ESDoc finds configuration by the order:');
-    console.log('  1. `-c your-esdoc.json`');
-    console.log('  2. `.esdoc.json` in current directory');
-    console.log('  3. `.esdoc.js` in current directory');
-    console.log('  4. `esdoc` property in package.json');
+    console.log('esdoc2 finds configuration by the order:');
+    console.log('  1. `-c your-esdoc2.json`');
+    console.log('  2. `.esdoc2.json` in current directory');
+    console.log('  3. `.esdoc2.js` in current directory');
+    console.log('  4. `esdoc2` property in package.json');
   }
 
   /**
-   * show version of ESDoc
+   * show version of esdoc2
    * @private
    */
   _showVersion() {
@@ -86,7 +86,7 @@ export default class ESDocCLI {
   }
 
   /**
-   * find ESDoc config file.
+   * find esdoc2 config file.
    * @returns {string|null} config file path.
    * @private
    */
@@ -96,7 +96,7 @@ export default class ESDocCLI {
     }
 
     try {
-      const filePath = path.resolve('./.esdoc.json');
+      const filePath = path.resolve('./.esdoc2.json');
       fs.readFileSync(filePath);
       return filePath;
     } catch (e) {
@@ -104,7 +104,7 @@ export default class ESDocCLI {
     }
 
     try {
-      const filePath = path.resolve('./.esdoc.js');
+      const filePath = path.resolve('./.esdoc2.js');
       fs.readFileSync(filePath);
       return filePath;
     } catch (e) {
@@ -143,7 +143,7 @@ export default class ESDocCLI {
       const filePath = path.resolve('./package.json');
       const packageJSON = fs.readFileSync(filePath, 'utf8').toString();
       const packageObj = JSON.parse(packageJSON);
-      return packageObj.esdoc;
+      return packageObj.esdoc2;
     } catch (e) {
       // ignore
     }
