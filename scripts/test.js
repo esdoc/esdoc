@@ -1,16 +1,26 @@
 #!/usr/bin/env node
-const sh = require('./sh');
-const path = require('path');
+require('babel-core/register')({
+  plugins: [
+    'transform-es2015-modules-commonjs'
+  ],
+  env: {coverage: {plugins: ['istanbul']}}
+});
+const Mocha = require('mocha');
+const init = require('../test/init').default;
+const mocha = new Mocha();
 
-sh.rm('./test.new/out');
-const mochaOptions = [
-  '$(find test/ -regex \'.*.test.js$\')',
-];
-
-const mochaOption = mochaOptions.join(' ');
-const runMochaPath = path.resolve(__dirname, 'run-mocha.js');
-if (process.env.NODE_ENV === 'coverage') {
-  sh.exec(`nyc ${runMochaPath} ${mochaOption}`);
-} else {
-  sh.exec(`${runMochaPath} ${mochaOption}`);
+if (process.env.CI) {
+  mocha.reporter('mocha-junit-reporter')
 }
+
+init.then(() => {
+  const tests = process.argv.slice(2);
+  tests.forEach((test) => {
+    mocha.addFile(test);
+  });
+  mocha.run((failures) => {
+    process.on('exit', () => {
+      process.exit(failures);  // exit with non-zero status if there were failures
+    });
+  });
+});

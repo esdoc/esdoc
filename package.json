@@ -19,7 +19,7 @@
     "build": "yarn build:package && yarn build:docs",
     "build:package": "scripts/build-package.js",
     "build:docs": "scripts/build-docs.js",
-    "test": "scripts/test.js",
+    "test": "scripts/test.js $(find test/ -regex '.*.test.js$')",
     "lint": "scripts/lint.js",
     "lint:es": "eslint ./src ./test/src",
     "lint:es:ci": "eslint ./src ./test/src --format junit --output-file ~/reports/eslint.xml",

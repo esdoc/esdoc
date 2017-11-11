@@ -20,14 +20,14 @@ test:
   pre:
     - yarn lint
   override:
-    - yarn test:
+    - nyc yarn test:
         environment:
           MOCHA_FILE: $CIRCLE_TEST_REPORTS/junit/test-results.xml
           NODE_ENV: coverage
   post:
     - yarn build:package
     - yarn build:docs
-    - cp -a "coverage/." $CIRCLE_ARTIFACTS
+    - codecov
 
 deployment:
   npm:
