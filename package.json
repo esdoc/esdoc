@@ -4,7 +4,7 @@
   "description": "Better Documentation Generator For JavaScript",
   "author": {
     "name": "Matt McFarland",
-    "url": "https://github.com/esdoc2/esdoc2"
+    "url": "http://esdoc2.org"
   },
   "license": "MIT",
   "repository": {
@@ -16,9 +16,10 @@
     "yarn": ">= 1"
   },
   "scripts": {
-    "build": "node ./scripts/build.js",
-    "test": "node ./scripts/test.js",
-    "esdoc": "node ./scripts/esdoc.js",
+    "build": "yarn build:package && yarn build:docs",
+    "build:package": "scripts/build-package.js",
+    "build:docs": "scripts/build-docs.js",
+    "test": "scripts/test.js",
     "lint": "yarn lint:json && yarn lint:yaml && yarn lint:es",
     "lint:es": "eslint ./src ./test/src",
     "lint:json": "jsonlint ./package.json",
@@ -74,8 +75,13 @@
   ],
   "files": [
     "out/src",
+    "manual",
     "README.md"
   ],
+  "directories": {
+    "doc": "manual",
+    "lib": "src"
+  },
   "main": "out/src/esdoc2.js",
   "bin": {
     "esdoc2": "out/src/ESDocCLI.js"

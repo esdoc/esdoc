@@ -25,8 +25,8 @@ test:
           MOCHA_FILE: $CIRCLE_TEST_REPORTS/junit/test-results.xml
           NODE_ENV: test
   post:
-    - yarn build
-    - yarn esdoc
+    - yarn build:package
+    - yarn build:docs
 
 deployment:
   npm:
