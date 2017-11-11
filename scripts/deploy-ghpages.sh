@@ -35,6 +35,9 @@ fi
 # copy over or recompile the new site
 cp -a "../${siteSource}/." .
 
+# reset CNAME record since we removed all the things
+echo esdoc2.org > CNAME
+
 # stage any changes and new files
 git add -A
 # now commit, ignoring branch gh-pages doesn't seem to work, so trying skip
