@@ -18,10 +18,10 @@ test:
     - yarn esdoc
 deployment:
   npm:
-    tag: v\d\.\d.\d.*
+    tag: /v[0-9]+(\.[0-9]+)*/
     commands:
       - npm publish    
-  docs:
+  Github Pages:
     branch: master
-    heroku:
-      appname: esdoc2     
+    commands:
+      - yarn deploy-docs

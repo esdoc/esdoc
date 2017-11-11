@@ -12,7 +12,7 @@
     "url": "https://github.com/esdoc2/esdoc2"
   },
   "engines": {
-    "node": ">= 8.0.0",
+    "node": ">= 8",
     "yarn": ">= 1"
   },
   "scripts": {
@@ -21,8 +21,7 @@
     "test-ci": "node ./scripts/test-ci.js",
     "esdoc": "node ./scripts/esdoc.js",
     "lint": "node ./scripts/eslint.js --fix",
-    "heroku-prebuild": "yarn install --production=false --non-interactive --pure-lockfile --ignore-engines --no-progress; yarn build ; yarn esdoc",
-    "start": "static out/docs",
+    "deploy-docs": "scripts/deploy-ghpages.sh",
     "prepublishOnly": "yarn build"
   },
   "dependencies": {
@@ -51,7 +50,6 @@
     "esdoc2-standard-plugin": "2.0.0",
     "esdoc2-undocumented-identifier-plugin": "2.0.0",
     "eslint": "3.6.0",
-    "http-server": "0.9.0",
     "mocha": "2.5.3",
     "node-static": "^0.7.10",
     "nyc": "8.3.0"
