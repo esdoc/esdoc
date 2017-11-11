@@ -27,7 +27,7 @@ test:
   post:
     - yarn build:package
     - yarn build:docs
-    - cp -a ".nyc_output/." $CIRCLE_ARTIFACTS
+    - mv coverage $CIRCLE_ARTIFACTS
 
 deployment:
   npm:
