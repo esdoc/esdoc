@@ -19,8 +19,9 @@
     "test": "node ./scripts/test.js",
     "test-ci": "node ./scripts/test-ci.js",
     "esdoc": "node ./scripts/esdoc.js",
-    "lint": "node ./scripts/eslint.js --fix",
-    "start": "static out/docs"
+    "lint": "node ./scripts/eslint.js --fix",    
+    "start": "DEBUG=* ; static out/docs || export",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "babel-generator": "6.11.4",

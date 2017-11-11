@@ -24,4 +24,4 @@ deployment:
   docs:
     branch: master
     heroku:
-      appname: esdoc2     
+      appname: esdoc2
