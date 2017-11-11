@@ -9,8 +9,8 @@ const mochaOptions = [
 
 const mochaOption = mochaOptions.join(' ');
 const runMochaPath = path.resolve(__dirname, 'run-mocha.js');
-if (process.argv.includes('--coverage')) {
-  sh.exec(`NODE_ENV=coverage nyc ${runMochaPath} ${mochaOption}`);
+if (process.env.NODE_ENV === 'coverage') {
+  sh.exec(`nyc ${runMochaPath} ${mochaOption}`);
 } else {
   sh.exec(`${runMochaPath} ${mochaOption}`);
 }
