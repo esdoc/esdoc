@@ -2,20 +2,19 @@
 [![Coverage Status](https://codecov.io/gh/esdoc2/esdoc2/branch/master/graph/badge.svg)](https://codecov.io/gh/esdoc2/esdoc2)
 ![Document Coverage Status](http://esdoc2.org/badge.svg?t=0)
 
-# ESDoc2
+## ESDoc2
 
-ESDoc2 is the progression of esdoc, a documentation generator for JavaScript. ESDoc2, is the result of the original author of ESDoc refusing to add any other contributors to the project, despite the project falling behind.  If you are using ESDoc, you should switch to ESDoc2.
+ESDoc2 is a drop-in replacement of ESDoc, a documentation generator for JavaScript. ESDoc2 was created as the result of the original author of ESDoc refusing to add any other contributors to the project, despite the project falling behind.  **If you are using ESDoc, you should switch to ESDoc2.**
 
-# Features
+## Features
 - Generates good documentation.
 - Measures documentation coverage.
 - Integrate test codes into documentation.
 - Integrate manual into documentation.
 - Parse ECMAScript proposals.
+- Lots of [plugins](https://github.com/search?o=desc&q=esdoc2+filename%3Apackage.json)
 
-And [more](https://github.com/search?o=desc&q=esdoc2+filename%3Apackage.json+-user%3Ah13i32maru+-user%3Aesdoc+-user%3Aes-doc&ref=searchresults&s=indexed&type=Code&utf8=%E2%9C%93).
-
-# Quick Start
+## Quick Start
 ```sh
 # Move to your project directory.
 cd your-project/
@@ -37,12 +36,12 @@ echo '{
 open ./docs/index.html
 ```
 
-# Documentation
-Please visit [esdoc2.org](https://esdoc2.org) to see more documentation.
+## Documentation
+Please visit [esdoc2.org](http://esdoc2.org) to see more documentation.
 
-# License
+## License
 MIT
 
-# Acknolwedgements
+## Acknolwedgements
 
 - Ryo Maruyama, author of ESDoc

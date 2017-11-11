@@ -1,26 +1,36 @@
 machine:
   node:
     version: 8.9.1
+  environment:
+    PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"    
+
 general:
   artifacts:
     - "out"
+
 dependencies:
   pre:
-    - npm install yarn -g
     - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
   override:
     - yarn
+  cache_directories:
+    - ~/.cache/yarn
+    
 test:
   override:
     - yarn test
+        environment:
+          MOCHA_FILE: $CIRCLE_TEST_REPORTS/junit/test-results.xml
+          NODE_ENV: test
   post:
     - yarn build
     - yarn esdoc
+
 deployment:
   npm:
     tag: /v[0-9]+(\.[0-9]+)*/
     commands:
-      - npm publish    
+      - npm publish
   Github Pages:
     branch: master
     commands:

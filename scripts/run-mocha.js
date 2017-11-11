@@ -9,6 +9,10 @@ const Mocha = require('mocha');
 const init = require('../test/init').default;
 const mocha = new Mocha();
 
+if (process.env.CI) {
+  mocha.reporter('mocha-junit-reporter')
+}
+
 init.then(() => {
   const tests = process.argv.slice(2);
   tests.forEach((test) => {

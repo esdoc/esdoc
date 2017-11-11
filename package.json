@@ -18,9 +18,8 @@
   "scripts": {
     "build": "node ./scripts/build.js",
     "test": "node ./scripts/test.js",
-    "test-ci": "node ./scripts/test-ci.js",
     "esdoc": "node ./scripts/esdoc.js",
-    "lint": "node ./scripts/eslint.js --fix",
+    "lint": "node ./scripts/eslint.js",
     "deploy-docs": "scripts/deploy-ghpages.sh",
     "prepublishOnly": "yarn build"
   },
@@ -51,6 +50,7 @@
     "esdoc2-undocumented-identifier-plugin": "2.0.0",
     "eslint": "3.6.0",
     "mocha": "2.5.3",
+    "mocha-junit-reporter": "^1.15.0",
     "node-static": "^0.7.10",
     "nyc": "8.3.0"
   },
