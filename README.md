@@ -51,9 +51,7 @@ open ./docs/index.html
 please visit [esdoc2.org](https://esdoc2.org) to see more documentation.
 
 # License
-Like ESDoc, ESDoc2 is MIT Licensed.  All code ported from ESDoc is under Copyright (c) 2015 [Ryo Maruyama@h13i32maru](https://twitter.com/h13i32maru)
+MIT
 
-# Acknowledgements
-
-ESDoc - [Ryo Maruyama@h13i32maru](https://twitter.com/h13i32maru)
-ESDoc2 - MattMcFarland and all Contributors
+# Author
+[Ryo Maruyama@h13i32maru](https://twitter.com/h13i32maru)
