@@ -1,6 +1,6 @@
 {
   "name": "esdoc2",
-  "version": "2.0.0-0",
+  "version": "2.0.0",
   "description": "Better Documentation Generator For JavaScript",
   "author": {
     "name": "Matt McFarland",
@@ -19,7 +19,7 @@
     "test": "node ./scripts/test.js",
     "test-ci": "node ./scripts/test-ci.js",
     "esdoc": "node ./scripts/esdoc.js",
-    "lint": "node ./scripts/eslint.js --fix",    
+    "lint": "node ./scripts/eslint.js --fix",
     "start": "DEBUG=* ; static out/docs || export",
     "prepublishOnly": "npm run build"
   },
