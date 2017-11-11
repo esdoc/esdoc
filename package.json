@@ -19,11 +19,17 @@
     "build": "node ./scripts/build.js",
     "test": "node ./scripts/test.js",
     "esdoc": "node ./scripts/esdoc.js",
+    "lint": "yarn lint:json && yarn lint:yaml && yarn lint:es",
     "lint:es": "eslint ./src ./test/src",
-    "lint:yaml": "js-yaml ./circle-ci.yml",
+    "lint:json": "jsonlint ./package.json",
+    "lint:yaml": "js-yaml ./circle.yml",
     "deploy-docs": "scripts/deploy-ghpages.sh",
     "prepublishOnly": "yarn build"
   },
+  "precommit": [
+    "lint",
+    "test"
+  ],
   "dependencies": {
     "babel-generator": "6.11.4",
     "babel-traverse": "6.12.0",
@@ -51,6 +57,7 @@
     "esdoc2-undocumented-identifier-plugin": "2.0.0",
     "eslint": "3.6.0",
     "js-yaml": "^3.10.0",
+    "jsonlint": "^1.6.2",
     "mocha": "2.5.3",
     "mocha-junit-reporter": "^1.15.0",
     "node-static": "^0.7.10",
