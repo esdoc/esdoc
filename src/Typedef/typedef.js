@@ -1,5 +1,5 @@
 /**
- * ESDoc config object.
+ * esdoc2 config object.
  * @typedef {Object} ESDocConfig
  * @property {!string} source - directory path of javascript source code.
  * @property {!string} destination - directory path of output.
@@ -42,7 +42,7 @@
  * @property {boolean} experimentalProposal.decorators
  * @property {boolean} experimentalProposal.exportExtensions
  * @property {boolean} experimentalProposal.dynamicImport
- * @see https://esdoc.org/config.html
+ * @see https://esdoc2.org/config.html
  */
 
 /**
@@ -72,7 +72,7 @@
  * @property {Object[]} [leadingComments]
  * @property {Object[]} [trailingComments]
  * @property {Object[]} [body]
- * @property {ASTNode} [parent] - this is customize by ESDoc
+ * @property {ASTNode} [parent] - this is customize by esdoc2
  */
 
 /**

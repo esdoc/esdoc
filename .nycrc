@@ -15,8 +15,7 @@
     "babel-register"
   ],
   "reporter": [
-    "lcov",
-    "text-summary"
+    "lcov"
   ],
   "all": true,
   "sourceMap": false,

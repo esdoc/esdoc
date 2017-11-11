@@ -1,34 +1,45 @@
 {
-  "name": "esdoc",
-  "version": "1.0.3",
-  "description": "Good Documentation Generator For JavaScript",
+  "name": "esdoc2",
+  "version": "2.0.0-4",
+  "description": "Better Documentation Generator For JavaScript",
   "author": {
-    "name": "h13i32maru",
-    "url": "https://h13i32maru.jp"
+    "name": "Matt McFarland",
+    "url": "http://esdoc2.org"
   },
-  "homepage": "https://esdoc.org/",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/esdoc/esdoc"
+    "url": "https://github.com/esdoc2/esdoc2"
   },
   "engines": {
-    "node": ">= 6.0.0"
+    "node": ">= 8",
+    "yarn": ">= 1"
   },
   "scripts": {
-    "build": "node ./script/build.js",
-    "test": "node ./script/test.js",
-    "test-ci": "node ./script/test-ci.js",
-    "esdoc": "node ./script/esdoc.js",
-    "lint": "node ./script/eslint.js"
+    "build": "yarn build:package && yarn build:docs",
+    "build:package": "scripts/build-package.js",
+    "build:docs": "scripts/build-docs.js",
+    "test": "scripts/test.js $(find test/ -regex '.*.test.js$')",
+    "lint": "scripts/lint.js",
+    "lint:es": "eslint ./src ./test/src",
+    "lint:es:ci": "eslint ./src ./test/src --format junit --output-file ~/reports/eslint.xml",
+    "lint:json": "jsonlint ./package.json",
+    "lint:yaml": "js-yaml ./circle.yml",
+    "deploy-docs": "scripts/deploy-ghpages.sh",
+    "prepublishOnly": "yarn build"
   },
+  "precommit": [
+    "lint",
+    "test"
+  ],
   "dependencies": {
+    "babel-generator": "6.11.4",
+    "babel-traverse": "6.12.0",
+    "babylon": "6.14.1",
+    "big-json": "^1.2.0",
     "cheerio": "0.22.0",
     "color-logger": "0.0.3",
     "escape-html": "1.0.3",
-    "babylon": "6.14.1",
-    "babel-generator": "6.11.4",
-    "babel-traverse": "6.12.0",
     "fs-extra": "1.0.0",
     "ice-cap": "0.0.4",
     "marked": "0.3.6",
@@ -37,36 +48,43 @@
   },
   "devDependencies": {
     "babel-cli": "6.11.4",
+    "babel-plugin-istanbul": "2.0.1",
     "babel-plugin-transform-es2015-modules-commonjs": "6.11.5",
     "babel-register": "6.11.6",
     "codecov": "1.0.1",
-    "esdoc-importpath-plugin": "0.1.0",
+    "esdoc2-accessor-plugin": "2.0.0",
+    "esdoc2-external-ecmascript-plugin": "2.0.0",
+    "esdoc2-importpath-plugin": "2.0.0",
+    "esdoc2-standard-plugin": "2.0.0",
+    "esdoc2-undocumented-identifier-plugin": "2.0.0",
     "eslint": "3.6.0",
-    "http-server": "0.9.0",
-    "nyc": "8.3.0",
-    "babel-plugin-istanbul": "2.0.1",
+    "js-yaml": "^3.10.0",
+    "jsonlint": "^1.6.2",
     "mocha": "2.5.3",
-    "esdoc-accessor-plugin": "latest",
-    "esdoc-external-ecmascript-plugin": "latest",
-    "esdoc-undocumented-identifier-plugin": "latest",
-    "esdoc-standard-plugin": "latest"
+    "mocha-junit-reporter": "^1.15.0",
+    "node-static": "^0.7.10",
+    "nyc": "8.3.0",
+    "pre-commit": "^1.2.2"
   },
   "keywords": [
     "jsdoc",
+    "esdoc2",
     "api",
     "document",
     "documentation",
-    "ES6", "ECMAScript6", "ES2015", "ECMAScript2015",
-    "ES7", "ECMAScript7", "ES2016", "ECMAScript2016",
-    "ES8", "ECMAScript8", "ES2017", "ECMAScript2017",
-    "proposal"
+    "ES6"
   ],
   "files": [
     "out/src",
+    "manual",
     "README.md"
   ],
-  "main": "out/src/ESDoc.js",
+  "directories": {
+    "doc": "manual",
+    "lib": "src"
+  },
+  "main": "out/src/esdoc2.js",
   "bin": {
-    "esdoc": "out/src/ESDocCLI.js"
+    "esdoc2": "out/src/ESDocCLI.js"
   }
 }

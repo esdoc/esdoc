@@ -1,7 +1,8 @@
 node_modules
 out
-npm-debug.log
+*.log
 /coverage
 /_temp
 /test/fixture/dest
 /.nyc_output/
+.npmrc

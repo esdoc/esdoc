@@ -8,15 +8,18 @@ import PathResolver from './Util/PathResolver.js';
 import DocFactory from './Factory/DocFactory.js';
 import InvalidCodeLogger from './Util/InvalidCodeLogger.js';
 import Plugin from './Plugin/Plugin.js';
+import {Transform} from 'stream';
+import json from 'big-json';
+import mkdirp from 'mkdirp';
 
-const logger = new Logger('ESDoc');
+const logger = new Logger('esdoc2');
 
 /**
  * API Documentation Generator.
  *
  * @example
- * let config = {source: './src', destination: './esdoc'};
- * ESDoc.generate(config, (results, config)=>{
+ * let config = {source: './src', destination: './esdoc2'};
+ * esdoc2.generate(config, (results, config)=>{
  *   console.log(results);
  * });
  */
@@ -26,96 +29,126 @@ export default class ESDoc {
    * @param {ESDocConfig} config - config for generation.
    */
   static generate(config) {
-    assert(config.source);
-    assert(config.destination);
+    return new Promise((resolve) => {
+      assert(config.source);
+      assert(config.destination);
 
-    this._checkOldConfig(config);
+      this._checkOldConfig(config);
 
-    Plugin.init(config.plugins);
-    Plugin.onStart();
-    config = Plugin.onHandleConfig(config);
+      Plugin.init(config.plugins);
+      Plugin.onStart();
+      config = Plugin.onHandleConfig(config);
 
-    this._setDefaultConfig(config);
+      this._setDefaultConfig(config);
 
-    Logger.debug = !!config.debug;
-    const includes = config.includes.map((v) => new RegExp(v));
-    const excludes = config.excludes.map((v) => new RegExp(v));
+      Logger.debug = !!config.debug;
+      const includes = config.includes.map((v) => new RegExp(v));
+      const excludes = config.excludes.map((v) => new RegExp(v));
 
-    let packageName = null;
-    let mainFilePath = null;
-    if (config.package) {
-      try {
-        const packageJSON = fs.readFileSync(config.package, {encode: 'utf8'});
-        const packageConfig = JSON.parse(packageJSON);
-        packageName = packageConfig.name;
-        mainFilePath = packageConfig.main;
-      } catch (e) {
+      let packageName = null;
+      let mainFilePath = null;
+      if (config.package) {
+        try {
+          const packageJSON = fs.readFileSync(config.package, {encode: 'utf8'});
+          const packageConfig = JSON.parse(packageJSON);
+          packageName = packageConfig.name;
+          mainFilePath = packageConfig.main;
+        } catch (e) {
         // ignore
-      }
-    }
-
-    let results = [];
-    const asts = [];
-    const sourceDirPath = path.resolve(config.source);
-
-    this._walk(config.source, (filePath)=>{
-      const relativeFilePath = path.relative(sourceDirPath, filePath);
-      let match = false;
-      for (const reg of includes) {
-        if (relativeFilePath.match(reg)) {
-          match = true;
-          break;
         }
       }
-      if (!match) return;
 
-      for (const reg of excludes) {
-        if (relativeFilePath.match(reg)) return;
+      let results = [];
+      const sourceDirPath = path.resolve(config.source);
+      const onWriteFinish = () => {
+        console.log('ast write complete');
+
+        // publish
+        this._publish(config);
+
+        Plugin.onComplete();
+
+        this._memUsage();
+        resolve(true);
+      };
+
+      const fatalError = err => {
+        console.error(err);
+        process.exit(1);
+      };
+
+      const stringifyWriteTransform = new Transform({
+        writableObjectMode: true,
+        readableObjectMode: true,
+        transform: function(chunk, encoding, transformCallback) {
+          const fullPath = path.resolve(config.destination, `ast/${chunk.filePath}.json`);
+          mkdirp(fullPath.split('/').slice(0, -1).join('/'), (err) => {
+            if (err) fatalError(err);
+
+            const fileWriteStream = fs.createWriteStream(fullPath);
+            fileWriteStream.on('error', fatalError);
+            fileWriteStream.on('finish', transformCallback);
+
+            const stringifyStream = json.createStringifyStream({body: chunk.ast});
+            stringifyStream.on('error', fatalError);
+            stringifyStream.on('end', fileWriteStream.end);
+            stringifyStream.pipe(fileWriteStream);
+          });
+        }
+      });
+
+      stringifyWriteTransform.on('finish', onWriteFinish);
+      stringifyWriteTransform.on('error', fatalError);
+
+      // const asts = [];
+      this._walk(config.source, (filePath) => {
+        const relativeFilePath = path.relative(sourceDirPath, filePath);
+        let match = false;
+        for (const reg of includes) {
+          if (relativeFilePath.match(reg)) {
+            match = true;
+            break;
+          }
+        }
+        if (!match) return;
+
+        for (const reg of excludes) {
+          if (relativeFilePath.match(reg)) return;
+        }
+
+        console.log(`parse: ${filePath}`);
+        const temp = this._traverse(config.source, filePath, packageName, mainFilePath);
+        if (!temp) return;
+        results.push(...temp.results);
+        stringifyWriteTransform.write({filePath: `source${path.sep}${relativeFilePath}`, ast: temp.ast});
+      });
+
+      stringifyWriteTransform.end();
+
+      // config.index
+      if (config.index) {
+        results.push(this._generateForIndex(config));
       }
 
-      console.log(`parse: ${filePath}`);
-      const temp = this._traverse(config.source, filePath, packageName, mainFilePath);
-      if (!temp) return;
-      results.push(...temp.results);
+      // config.package
+      if (config.package) {
+        results.push(this._generateForPackageJSON(config));
+      }
 
-      asts.push({filePath: `source${path.sep}${relativeFilePath}`, ast: temp.ast});
+      results = this._resolveDuplication(results);
+
+      results = Plugin.onHandleDocs(results);
+
+      // index.json
+      {
+        const dumpPath = path.resolve(config.destination, 'index.json');
+        fs.outputFileSync(dumpPath, JSON.stringify(results, null, 2));
+      }
     });
-
-    // config.index
-    if (config.index) {
-      results.push(this._generateForIndex(config));
-    }
-
-    // config.package
-    if (config.package) {
-      results.push(this._generateForPackageJSON(config));
-    }
-
-    results = this._resolveDuplication(results);
-
-    results = Plugin.onHandleDocs(results);
-
-    // index.json
-    {
-      const dumpPath = path.resolve(config.destination, 'index.json');
-      fs.outputFileSync(dumpPath, JSON.stringify(results, null, 2));
-    }
-
-    // ast
-    for (const ast of asts) {
-      const json = JSON.stringify(ast.ast, null, 2);
-      const filePath = path.resolve(config.destination, `ast/${ast.filePath}.json`);
-      fs.outputFileSync(filePath, json);
-    }
-
-    // publish
-    this._publish(config);
-
-    Plugin.onComplete();
   }
 
   /**
-   * check ESDoc config. and if it is old, exit with warning message.
+   * check esdoc2 config. and if it is old, exit with warning message.
    * @param {ESDocConfig} config - check config
    * @private
    */
@@ -123,25 +156,25 @@ export default class ESDoc {
     let exit = false;
 
     const keys = [
-      ['access', 'esdoc-standard-plugin'],
-      ['autoPrivate', 'esdoc-standard-plugin'],
-      ['unexportIdentifier', 'esdoc-standard-plugin'],
-      ['undocumentIdentifier', 'esdoc-standard-plugin'],
-      ['builtinExternal', 'esdoc-standard-plugin'],
-      ['coverage', 'esdoc-standard-plugin'],
-      ['test', 'esdoc-standard-plugin'],
-      ['title', 'esdoc-standard-plugin'],
-      ['manual', 'esdoc-standard-plugin'],
-      ['lint', 'esdoc-standard-plugin'],
-      ['includeSource', 'esdoc-exclude-source-plugin'],
-      ['styles', 'esdoc-inject-style-plugin'],
-      ['scripts', 'esdoc-inject-script-plugin'],
-      ['experimentalProposal', 'esdoc-ecmascript-proposal-plugin']
+      ['access', 'esdoc2-standard-plugin'],
+      ['autoPrivate', 'esdoc2-standard-plugin'],
+      ['unexportIdentifier', 'esdoc2-standard-plugin'],
+      ['undocumentIdentifier', 'esdoc2-standard-plugin'],
+      ['builtinExternal', 'esdoc2-standard-plugin'],
+      ['coverage', 'esdoc2-standard-plugin'],
+      ['test', 'esdoc2-standard-plugin'],
+      ['title', 'esdoc2-standard-plugin'],
+      ['manual', 'esdoc2-standard-plugin'],
+      ['lint', 'esdoc2-standard-plugin'],
+      ['includeSource', 'esdoc2-exclude-source-plugin'],
+      ['styles', 'esdoc2-inject-style-plugin'],
+      ['scripts', 'esdoc2-inject-script-plugin'],
+      ['experimentalProposal', 'esdoc2-ecmascript-proposal-plugin']
     ];
 
     for (const [key, plugin] of keys) {
       if (key in config) {
-        console.log(`[31merror: config.${key} is invalid. Please use ${plugin}. how to migration: https://esdoc.org/manual/migration.html[0m`);
+        console.log(`[31merror: config.${key} is invalid. Please use ${plugin}. how to migration: https://esdoc2.org/manual/migration.html[0m`);
         exit = true;
       }
     }
@@ -209,7 +242,7 @@ export default class ESDoc {
     const pathResolver = new PathResolver(inDirPath, filePath, packageName, mainFilePath);
     const factory = new DocFactory(ast, pathResolver);
 
-    ASTUtil.traverse(ast, (node, parent)=>{
+    ASTUtil.traverse(ast, (node, parent) => {
       try {
         factory.push(node, parent);
       } catch (e) {
@@ -310,7 +343,7 @@ export default class ESDoc {
    */
   static _publish(config) {
     try {
-      const write = (filePath, content, option) =>{
+      const write = (filePath, content, option) => {
         const _filePath = path.resolve(config.destination, filePath);
         content = Plugin.onHandleContent(content, _filePath);
 
@@ -334,5 +367,16 @@ export default class ESDoc {
       InvalidCodeLogger.showError(e);
       process.exit(1);
     }
+  }
+
+  /**
+   * show memory usage stat
+   * @return {undefined} no return
+   */
+  static _memUsage() {
+    const used = process.memoryUsage();
+    Object.keys(used).forEach(key => {
+      console.log(`${key} ${Math.round(used[key] / 1024 / 1024 * 100) / 100} MB`);
+    });
   }
 }

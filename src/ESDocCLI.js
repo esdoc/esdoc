@@ -2,11 +2,11 @@
 import fs from 'fs';
 import path from 'path';
 import minimist from 'minimist';
-import ESDoc from './ESDoc.js';
+import esdoc2 from './ESDoc.js';
 import NPMUtil from './Util/NPMUtil.js';
 
 /**
- * Command Line Interface for ESDoc.
+ * Command Line Interface for esdoc2.
  *
  * @example
  * let cli = new ESDocCLI(process.argv);
@@ -39,6 +39,7 @@ export default class ESDocCLI {
     let config;
 
     const configPath = this._findConfigFilePath();
+    console.log({configPath});
     if (configPath) {
       config = this._createConfigFromJSONFile(configPath);
     } else {
@@ -46,15 +47,16 @@ export default class ESDocCLI {
     }
 
     if (config) {
-      ESDoc.generate(config);
+      esdoc2.generate(config);
     } else {
+      console.log();
       this._showHelp();
       process.exit(1);
     }
   }
 
   /**
-   * show help of ESDoc
+   * show help of esdoc2
    * @private
    */
   _showHelp() {
@@ -65,7 +67,7 @@ export default class ESDocCLI {
     console.log('  -h', 'output usage information');
     console.log('  -v', 'output the version number');
     console.log('');
-    console.log('ESDoc finds configuration by the order:');
+    console.log('esdoc2 finds configuration by the order:');
     console.log('  1. `-c your-esdoc.json`');
     console.log('  2. `.esdoc.json` in current directory');
     console.log('  3. `.esdoc.js` in current directory');
@@ -73,7 +75,7 @@ export default class ESDocCLI {
   }
 
   /**
-   * show version of ESDoc
+   * show version of esdoc2
    * @private
    */
   _showVersion() {
@@ -86,7 +88,7 @@ export default class ESDocCLI {
   }
 
   /**
-   * find ESDoc config file.
+   * find esdoc2 config file.
    * @returns {string|null} config file path.
    * @private
    */
@@ -143,7 +145,7 @@ export default class ESDocCLI {
       const filePath = path.resolve('./package.json');
       const packageJSON = fs.readFileSync(filePath, 'utf8').toString();
       const packageObj = JSON.parse(packageJSON);
-      return packageObj.esdoc;
+      return packageObj.esdoc2;
     } catch (e) {
       // ignore
     }

@@ -62,7 +62,7 @@ class Plugin {
 
   /**
    * handle config.
-   * @param {ESDocConfig} config - original esdoc config.
+   * @param {ESDocConfig} config - original esdoc2 config.
    * @returns {ESDocConfig} handled config.
    */
   onHandleConfig(config) {

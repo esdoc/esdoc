@@ -1,6 +1,6 @@
 # Config
 
-Introduce config files of ESDoc with esdoc-standard-plugin.
+Introduce config files of esdoc2 with esdoc2-standard-plugin.
 
 - [Minimum Config](#minimum-config)
 - [Integrate Test Codes Config](#integrate-test-codes-config)
@@ -12,7 +12,7 @@ Introduce config files of ESDoc with esdoc-standard-plugin.
 {
   "source": "./src",
   "destination": "./docs",
-  "plugins": [{"name": "esdoc-standard-plugin"}]
+  "plugins": [{"name": "esdoc2-standard-plugin"}]
 }
 ```
 
@@ -23,7 +23,7 @@ Introduce config files of ESDoc with esdoc-standard-plugin.
   "destination": "./docs",
   "plugins": [
   {
-    "name": "esdoc-standard-plugin",
+    "name": "esdoc2-standard-plugin",
     "option": {
       "test": {
         "source": "./test/",
@@ -56,7 +56,7 @@ describe('MyClass has foo bar feature', ()=>{
   "destination": "./docs",
   "plugins": [
   {
-    "name": "esdoc-standard-plugin",
+    "name": "esdoc2-standard-plugin",
     "option": {
       "manual": {
         "index": "./manual/index.md",
@@ -85,7 +85,7 @@ describe('MyClass has foo bar feature', ()=>{
   "excludes": ["\\.config\\.js$"],
   "plugins": [
   {
-    "name": "esdoc-standard-plugin",
+    "name": "esdoc2-standard-plugin",
     "option": {
       "lint": {"enable": true},
       "coverage": {"enable": true},
@@ -121,7 +121,7 @@ describe('MyClass has foo bar feature', ()=>{
 }
 ```
 
-**ESDoc Config**
+**esdoc2 Config**
 
 | Name  | Required | Default | Description |
 | ----- | -------- | ------- | ----------- |
@@ -136,7 +136,7 @@ describe('MyClass has foo bar feature', ()=>{
 | ``plugins[].option`` | - | null | If specified, the plugin get the option. |
 
 <br/>
-**`esdoc-standard-plugin` Option**
+**`esdoc2-standard-plugin` Option**
 
 | Name  | Required | Default | Description |
 | ----- | -------- | ------- | ----------- |
@@ -154,7 +154,7 @@ describe('MyClass has foo bar feature', ()=>{
 | `brand.site` | - | - | If specified, write og tag and twitter card.|
 | `brand.author` | - | - | If specified, write og tag and twitter card. |
 | `brand.image` | - | - | If specified, write og tag and twitter card. |
-| ``manual.globalIndex`` | - | false | If specify true, ESDoc generates global index using the manual. In other words, it means to replace `config.index` to `config.manual.index` |
+| ``manual.globalIndex`` | - | false | If specify true, esdoc2 generates global index using the manual. In other words, it means to replace `config.index` to `config.manual.index` |
 | ``manual.index`` | - | null | If specify markdown file, show manual index using the file. |
 | ``manual.asset`` | - | null | if specify asset(image) directory path, include the directory into manual. |
 | ``manual.files`` | - | null | If specify markdown files, include manual into output. |

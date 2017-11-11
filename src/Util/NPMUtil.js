@@ -7,7 +7,7 @@ import fs from 'fs-extra';
 export default class NPMUtil {
 
   /**
-   * find ESDoc package.json object.
+   * find esdoc2 package.json object.
    * @returns {Object} package.json object.
    */
   static findPackage() {

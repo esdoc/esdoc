@@ -6,7 +6,7 @@ You can modify data(config, code, parser, AST, doc and content) at hook points w
 
 First, you set ``plugins`` property in config.
 - specify directly JavaScript file (e.g. `./my-plugin.js`)
-- specify npm module name (e.g. `esdoc-foo-plugin`), before you need to install the module.
+- specify npm module name (e.g. `esdoc2-foo-plugin`), before you need to install the module.
 
 ```json
 {
@@ -14,7 +14,7 @@ First, you set ``plugins`` property in config.
   "destination": "./docs",
   "plugins": [
     {"name": "./MyPlugin.js"},
-    {"name": "esdoc-foo-plugin", "option": {"foo": 123}}
+    {"name": "esdoc2-foo-plugin", "option": {"foo": 123}}
   ]
 }
 ```
@@ -87,7 +87,7 @@ class MyPlugin {
 module.exports = new MyPlugin();
 ```
 
-Note: [esdoc/esdoc-plugins](https://github.com/esdoc/esdoc-plugins) is helpful for writing plugins.
+Note: [esdoc2/esdoc2-plugins](https://github.com/esdoc2/esdoc2-plugins) is helpful for writing plugins.
 
 ## Data Format
 TODO: describe data format.
