@@ -25,5 +25,6 @@ deployment:
     tag: /v[0-9]+(\.[0-9]+)*/
     heroku:
       appname: esdoc2
+    commands:
+      - git push
       
-  
