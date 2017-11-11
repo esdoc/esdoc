@@ -20,9 +20,8 @@ deployment:
   npm:
     tag: /v[0-9]+(\.[0-9]+)*/
     commands:
-      - npm publish
-      - git push      
+      - npm publish    
   docs:
-    tag: /v[0-9]+(\.[0-9]+)*/
+    branch: master
     heroku:
       appname: esdoc2     
