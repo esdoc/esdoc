@@ -1,6 +1,6 @@
 {
   "name": "esdoc2",
-  "version": "2.0.0-3",
+  "version": "2.0.0-4",
   "description": "Better Documentation Generator For JavaScript",
   "author": {
     "name": "Matt McFarland",
@@ -12,7 +12,8 @@
     "url": "https://github.com/esdoc2/esdoc2"
   },
   "engines": {
-    "node": ">= 8.0.0"
+    "node": ">= 8.0.0",
+    "yarn": ">= 1.2.0"
   },
   "scripts": {
     "build": "node ./scripts/build.js",
@@ -20,7 +21,7 @@
     "test-ci": "node ./scripts/test-ci.js",
     "esdoc": "node ./scripts/esdoc.js",
     "lint": "node ./scripts/eslint.js --fix",
-    "heroku-prebuild": "npm i yarn -g ; yarn ; yarn build ; yarn esdoc",
+    "heroku-prebuild": "yarn install --production=false --non-interactive --pure-lockfile --ignore-engines --no-progress; yarn build ; yarn esdoc",
     "start": "static out/docs",
     "prepublishOnly": "yarn build"
   },
