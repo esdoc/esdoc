@@ -1,19 +1,16 @@
 #!/usr/bin/env node
 const sh = require('./sh');
+const path = require('path');
 
 sh.rm('./test.new/out');
 const mochaOptions = [
-  '--timeout 0',
-  '--require ./node_modules/babel-register',
-  '--require ./test/init.js',
-  // '--recursive ./test.new/src',
   '$(find test/ -regex \'.*.test.js$\')',
-  '-R spec'
 ];
-const mochaOption = mochaOptions.join(' ');
 
+const mochaOption = mochaOptions.join(' ');
+const runMochaPath = path.resolve(__dirname, 'run-mocha.js')
 if (process.argv.includes('--coverage')) {
-  sh.exec(`NODE_ENV=coverage ./node_modules/.bin/nyc ./node_modules/mocha/bin/_mocha ${mochaOption}`);
+  sh.exec(`NODE_ENV=coverage ./node_modules/.bin/nyc ${runMochaPath} ${mochaOption}`);
 } else {
-  sh.exec(`./node_modules/.bin/mocha ${mochaOption}`);
+  sh.exec(`${runMochaPath} ${mochaOption}`);
 }

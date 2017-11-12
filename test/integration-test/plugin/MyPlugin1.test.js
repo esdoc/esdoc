@@ -3,21 +3,20 @@ import fs from 'fs';
 import {find} from '../util';
 
 describe('test/plugin/MyPlugin1:', ()=>{
-  it('calls handlers', ()=>{
-    const callInfo = require('./MyPlugin1').callInfo;
-    assert.deepEqual(callInfo.handlerNames, {
-      onStart: true,
-      onHandleConfig: true,
-      onHandleCode: true,
-      onHandleCodeParser: true,
-      onHandleAST: true,
-      onHandleDocs: true,
-      onPublish: true,
-      onHandleContent: true,
-      onComplete: true
-    });
-
-    assert.equal(callInfo.usedParser, true);
+  it('calls handlers', async ()=>{
+      const callInfo = require('./MyPlugin1').callInfo;
+      assert.deepEqual(callInfo.handlerNames, {
+        onStart: true,
+        onHandleConfig: true,
+        onHandleCode: true,
+        onHandleCodeParser: true,
+        onHandleAST: true,
+        onHandleDocs: true,
+        onPublish: true,
+        onHandleContent: true,
+        onComplete: true
+      });
+      assert.equal(callInfo.usedParser, true);  
   });
 
   it('modified input', ()=>{
