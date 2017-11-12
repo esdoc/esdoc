@@ -1,6 +1,6 @@
 {
   "name": "esdoc",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Good Documentation Generator For JavaScript",
   "author": {
     "name": "h13i32maru",
@@ -23,9 +23,9 @@
     "lint": "node ./script/eslint.js --fix"
   },
   "dependencies": {
-    "babel-generator": "6.11.4",
-    "babel-traverse": "6.12.0",
-    "babylon": "6.14.1",
+    "babel-generator": "6.26.0",
+    "babel-traverse": "6.26.0",
+    "babylon": "6.18.0",
     "big-json": "^1.2.0",
     "cheerio": "0.22.0",
     "color-logger": "0.0.3",
