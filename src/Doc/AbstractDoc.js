@@ -158,10 +158,10 @@ export default class AbstractDoc {
 
   /**
    * decide `access`.
-   * process also @public, @private and @protected.
+   * process also @public, @private, @protected and @package.
    */
   _$access() {
-    const tag = this._find(['@access', '@public', '@private', '@protected']);
+    const tag = this._find(['@access', '@public', '@private', '@protected', '@package']);
     if (tag) {
       let access;
       /* eslint-disable max-statements-per-line */
@@ -169,6 +169,7 @@ export default class AbstractDoc {
         case '@access': access = tag.tagValue; break;
         case '@public': access = 'public'; break;
         case '@protected': access = 'protected'; break;
+        case '@package': access = 'package'; break;
         case '@private': access = 'private'; break;
         default:
           throw new Error(`unexpected token: ${tag.tagName}`);
@@ -194,6 +195,11 @@ export default class AbstractDoc {
    * avoid unknown tag.
    */
   _$private() {}
+
+  /**
+   * avoid unknown tag.
+   */
+  _$package() {}
 
   /**
    * decide `export`.

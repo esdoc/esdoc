@@ -89,7 +89,7 @@ describe('MyClass has foo bar feature', ()=>{
     "option": {
       "lint": {"enable": true},
       "coverage": {"enable": true},
-      "accessor": {"access": ["public", "protected", "private"], "autoPrivate": true},
+      "accessor": {"access": ["public", "protected", "package", private"], "autoPrivate": true},
       "undocumentIdentifier": {"enable": true},
       "unexportedIdentifier": {"enable": false},
       "typeInference": {"enable": true},
@@ -142,7 +142,7 @@ describe('MyClass has foo bar feature', ()=>{
 | ----- | -------- | ------- | ----------- |
 | `lint.enable` | - | `true` | If specified, execute documentation lint. |
 | ``coverage.enable`` | - | ``true`` | If true, output document coverage. |
-| ``accessor.access`` | - | ``["public", "protected", "private""]`` | Process only identifiers(class, method, etc...) that are have the access(public, protected and private). |
+| ``accessor.access`` | - | ``["public", "protected", "package", "private"]`` | Process only identifiers(class, method, etc...) that are have the access(public, protected, package, and private). |
 | ``accessor.autoPrivate`` | - | ``true`` | Deal with identifiers beginning with "_" as a private. <br> e.g. ``this._foo`` is private. but ``/** @public */ this._foo`` is public.|
 | ``undocumentIdentifier.enable`` | - | ``true`` | If true, also process undocument Identifiers. <br> e.g. ``/** @foo bar */ class MyClass`` is document identifier, ``class MyClass`` is undocument identifier. |
 | ``unexportIdentifier.enable`` | - | ``false`` | If true, also process unexported Identifiers. <br> e.g. ``export class MyClass`` is exported, ``class MyClass`` is not exported. |

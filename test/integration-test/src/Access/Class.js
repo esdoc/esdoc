@@ -9,6 +9,11 @@ export default class TestAccessClassPublic {}
 export class TestAccessClassProtected {}
 
 /**
+ * @package
+ */
+export class TestAccessClassPackage {}
+
+/**
  * @private
  */
 export class TestAccessClassPrivate {}
