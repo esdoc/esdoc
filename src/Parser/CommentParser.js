@@ -22,10 +22,17 @@ export default class CommentParser {
 
     // TODO: refactor
     comment = comment.replace(/\r\n/gm, '\n'); // for windows
-    comment = comment.replace(/^[\t ]*/gm, ''); // remove line head space
     comment = comment.replace(/^\*[\t ]?/, ''); // remove first '*'
     comment = comment.replace(/[\t ]$/, ''); // remove last space
-    comment = comment.replace(/^\*[\t ]?/gm, ''); // remove line head '*'
+
+    let lineHead = comment.match(/^[\t *]*[^\t *\n]/)[0];
+
+    if (lineHead) {
+      let indentationLevel = lineHead.length - 1;
+
+      comment.replace(new RegExp(`^.{1,${indentationLevel}}`), '');
+    }
+
     if (comment.charAt(0) !== '@') comment = `@desc ${comment}`; // auto insert @desc
     comment = comment.replace(/[\t ]*$/, ''); // remove tail space.
     comment = comment.replace(/```[\s\S]*?```/g, (match) => match.replace(/@/g, '\\ESCAPED_AT\\')); // escape code in descriptions
