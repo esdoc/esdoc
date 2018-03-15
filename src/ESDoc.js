@@ -125,7 +125,7 @@ export default class ESDoc {
     const keys = [
       ['access', 'esdoc-standard-plugin'],
       ['autoPrivate', 'esdoc-standard-plugin'],
-      ['unexportIdentifier', 'esdoc-standard-plugin'],
+      ['unexportedIdentifier', 'esdoc-standard-plugin'],
       ['undocumentIdentifier', 'esdoc-standard-plugin'],
       ['builtinExternal', 'esdoc-standard-plugin'],
       ['coverage', 'esdoc-standard-plugin'],
