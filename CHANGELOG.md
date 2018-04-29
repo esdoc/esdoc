@@ -1,6 +1,8 @@
 # Changelog
 
 ## Next
+- **Fix**
+  - Crash if `config.index` file was not found ([#490](https://github.com/esdoc/esdoc/pull/490)). Thanks [@22a](https://github.com/22a)
 - **Chore**
   - Update `marked`. ([#503](https://github.com/esdoc/esdoc/pull/503)) Thanks [@jan-molak](https://github.com/jan-molak)
   - Update some packages.
