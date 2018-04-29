@@ -162,7 +162,7 @@ export default class ESDoc {
 
     if (!config.package) config.package = './package.json';
 
-    if (typeof config.outputAST === 'undefined') config.outputAST = true;
+    if (!('outputAST' in config)) config.outputAST = true;
   }
 
   /**

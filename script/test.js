@@ -3,7 +3,7 @@ const sh = require('./sh');
 
 sh.exec('./script/eslint.js');
 
-sh.rm('./test.new/out');
+sh.rm('./test/integration-test/out');
 const mochaOptions = [
   '--timeout 0',
   '--require ./node_modules/babel-register',
