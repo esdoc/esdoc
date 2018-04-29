@@ -226,10 +226,14 @@ export default class ESDoc {
    * @private
    */
   static _generateForIndex(config) {
-    let indexContent = "";
+    let indexContent = '';
+
     if (fs.existsSync(config.index)) {
       indexContent = fs.readFileSync(config.index, {encode: 'utf8'}).toString();
+    } else {
+      console.log(`[31mwarning: ${config.index} is not found. Please check config.index.[0m`);
     }
+
     const tag = {
       kind: 'index',
       content: indexContent,
