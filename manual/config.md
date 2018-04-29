@@ -145,7 +145,7 @@ describe('MyClass has foo bar feature', ()=>{
 | ``accessor.access`` | - | ``["public", "protected", "private""]`` | Process only identifiers(class, method, etc...) that are have the access(public, protected and private). |
 | ``accessor.autoPrivate`` | - | ``true`` | Deal with identifiers beginning with "_" as a private. <br> e.g. ``this._foo`` is private. but ``/** @public */ this._foo`` is public.|
 | ``undocumentIdentifier.enable`` | - | ``true`` | If true, also process undocument Identifiers. <br> e.g. ``/** @foo bar */ class MyClass`` is document identifier, ``class MyClass`` is undocument identifier. |
-| ``unexportIdentifier.enable`` | - | ``false`` | If true, also process unexported Identifiers. <br> e.g. ``export class MyClass`` is exported, ``class MyClass`` is not exported. |
+| ``unexportedIdentifier.enable`` | - | ``false`` | If true, also process unexported Identifiers. <br> e.g. ``export class MyClass`` is exported, ``class MyClass`` is not exported. |
 | `typeInference.true` | - | `true` | If true, infer type of variable, return value. |
 | `brand.logo` | - | - | aaa |
 | `brand.title` | - | - | Use title for output. |
