@@ -46,7 +46,7 @@
     "esdoc-importpath-plugin": "^1.0.1",
     "esdoc-standard-plugin": "latest",
     "esdoc-undocumented-identifier-plugin": "latest",
-    "eslint": "3.6.0",
+    "eslint": "4.19.1",
     "mocha": "5.1.1",
     "nyc": "11.7.1"
   },

@@ -4,7 +4,6 @@ import fs from 'fs-extra';
  * logger for invalid code which can not be parsed with ESDoc.
  */
 class InvalidCodeLogger {
-
   constructor() {
     this._logs = [];
   }

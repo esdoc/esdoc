@@ -4,7 +4,6 @@ import assert from 'assert';
  * Param Type Parser class.
  */
 export default class ParamParser {
-
   /**
    * parse param value.
    * @param {string} value - param value.
@@ -69,7 +68,7 @@ export default class ParamParser {
 
     // e.g. this is p1 desc.
     if (desc) {
-      match = value.match(/^\-?\s*((:?.|\n)*)$/m);
+      match = value.match(/^-?\s*((:?.|\n)*)$/m);
       if (match) {
         paramDesc = match[1];
       }
@@ -145,7 +144,7 @@ export default class ParamParser {
       // check optional
       if (paramName[0] === '[') {
         result.optional = true;
-        paramName = paramName.replace(/^[\[]/, '').replace(/[\]]$/, '');
+        paramName = paramName.replace(/^[[]/, '').replace(/[\]]$/, '');
       } else {
         result.optional = false;
       }

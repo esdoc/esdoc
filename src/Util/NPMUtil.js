@@ -5,7 +5,6 @@ import fs from 'fs-extra';
  * Node Package Manager(npm) util class.
  */
 export default class NPMUtil {
-
   /**
    * find ESDoc package.json object.
    * @returns {Object} package.json object.
