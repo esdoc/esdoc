@@ -89,7 +89,7 @@ describe('MyClass has foo bar feature', ()=>{
     "option": {
       "lint": {"enable": true},
       "coverage": {"enable": true},
-      "accessor": {"access": ["public", "protected", "package", private"], "autoPrivate": true},
+      "accessor": {"access": ["public", "protected", "package", "private"], "autoPrivate": true},
       "undocumentIdentifier": {"enable": true},
       "unexportedIdentifier": {"enable": false},
       "typeInference": {"enable": true},
