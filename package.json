@@ -31,7 +31,7 @@
     "babel-traverse": "6.26.0",
     "fs-extra": "1.0.0",
     "ice-cap": "0.0.4",
-    "marked": "0.3.6",
+    "marked": "0.3.12",
     "minimist": "1.2.0",
     "taffydb": "2.7.2"
   },
