@@ -12,6 +12,12 @@ export const testAccessVariableProtected = 123;
 
 /**
  * @type {number}
+ * @package
+ */
+export const testAccessVariablePackage = 123;
+
+/**
+ * @type {number}
  * @private
  */
 export const testAccessVariablePrivate = 123;

@@ -13,6 +13,12 @@ export default class TestAccessMember {
     this.mProtected = 123;
 
     /**
+     * @package
+     * @type {number}
+     */
+    this.mPackage = 123;
+
+    /**
      * @private
      * @type {number}
      */

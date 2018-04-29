@@ -12,6 +12,11 @@ describe('test/Access/Variable:', ()=>{
     assert.equal(doc.access, 'protected');
   });
 
+  it('is package', ()=>{
+    const doc = find('longname', 'src/Access/Variable.js~testAccessVariablePackage');
+    assert.equal(doc.access, 'package');
+  });
+
   it('is private', ()=>{
     const doc = find('longname', 'src/Access/Variable.js~testAccessVariablePrivate');
     assert.equal(doc.access, 'private');

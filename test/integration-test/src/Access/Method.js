@@ -10,6 +10,11 @@ export default class TestAccessMethod {
   methodProtected(){}
 
   /**
+   * @package
+   */
+  methodPackage(){}
+
+  /**
    * @private
    */
   methodPrivate(){}

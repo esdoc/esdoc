@@ -6,7 +6,7 @@
  * @property {string} [title]
  * @property {string[]} [includes=["\\.(js|es6)$"]]
  * @property {string[]} [excludes=["\\.config\\.(js|es6)$"]]
- * @property {string[]} [access=["public", "protected"]]
+ * @property {string[]} [access=["public", "protected", "package", "private"]]
  * @property {boolean} [autoPrivate=true]
  * @property {boolean} [builtinExternal=true]
  * @property {boolean} [unexportedIdentifier=false]

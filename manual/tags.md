@@ -66,9 +66,9 @@ export default class MyClass {
 
 ## For Common
 ### @access
-syntax: ``@access <public|protected|private>``
+syntax: ``@access <public|protected|package|private>``
 
-Alias are ``@public``, ``@protected`` and ``@private``.
+Alias are ``@public``, ``@protected``, ``@package``, and ``@private``.
 
 ```javascript
 /**
