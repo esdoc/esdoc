@@ -33,7 +33,7 @@
     "ice-cap": "0.0.4",
     "marked": "0.3.19",
     "minimist": "1.2.0",
-    "taffydb": "2.7.2"
+    "taffydb": "2.7.3"
   },
   "devDependencies": {
     "babel-cli": "6.11.4",
