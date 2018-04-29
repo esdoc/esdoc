@@ -27,7 +27,7 @@
     "color-logger": "0.0.6",
     "escape-html": "1.0.3",
     "babylon": "6.18.0",
-    "babel-generator": "6.26.0",
+    "babel-generator": "6.26.1",
     "babel-traverse": "6.26.0",
     "fs-extra": "5.0.0",
     "ice-cap": "0.0.4",
