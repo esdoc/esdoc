@@ -31,7 +31,7 @@ And [more](https://github.com/search?o=desc&q=esdoc+filename%3Apackage.json+-use
 cd your-project/
 
 # Install ESDoc and standard plugin.
-npm install esdoc esdoc-standard-plugin
+npm install --save-dev esdoc esdoc-standard-plugin
 
 # Create a configuration file.
 echo '{
