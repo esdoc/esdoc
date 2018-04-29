@@ -1,8 +1,9 @@
 # Changelog
 
 ## Next
-- **Fix**
+- **Chore**
   - Update `marked`. ([#503](https://github.com/esdoc/esdoc/pull/503)) Thanks [@jan-molak](https://github.com/jan-molak)
+  - Update some packages.
 
 ## 1.0.4 (2017-11-12)
 - **Fix**
