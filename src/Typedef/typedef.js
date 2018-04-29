@@ -13,6 +13,7 @@
  * @property {boolean} [undocumentIdentifier=true]
  * @property {boolean} [coverage=true]
  * @property {boolean} [debug=false]
+ * @property {boolean} [outputAST=true]
  * @property {string} [index="./README.md"]
  * @property {string} [package="./package.json"]
  * @property {string[]} [styles=[]]

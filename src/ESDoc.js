@@ -75,8 +75,9 @@ export default class ESDoc {
       const temp = this._traverse(config.source, filePath, packageName, mainFilePath);
       if (!temp) return;
       results.push(...temp.results);
-
-      asts.push({filePath: `source${path.sep}${relativeFilePath}`, ast: temp.ast});
+      if (config.outputAST) {
+        asts.push({filePath: `source${path.sep}${relativeFilePath}`, ast: temp.ast});
+      }
     });
 
     // config.index
@@ -99,7 +100,7 @@ export default class ESDoc {
       fs.outputFileSync(dumpPath, JSON.stringify(results, null, 2));
     }
 
-    // ast
+    // ast, array will be empty if config.outputAST is false - resulting in skipping the loop
     for (const ast of asts) {
       const json = JSON.stringify(ast.ast, null, 2);
       const filePath = path.resolve(config.destination, `ast/${ast.filePath}.json`);
@@ -160,6 +161,8 @@ export default class ESDoc {
     if (!config.index) config.index = './README.md';
 
     if (!config.package) config.package = './package.json';
+
+    if (typeof config.outputAST === 'undefined') config.outputAST = true;
   }
 
   /**
