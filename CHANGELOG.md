@@ -1,5 +1,9 @@
 # Changelog
 
+## Next
+- **Fix**
+  - Update `marked`. ([#503](https://github.com/esdoc/esdoc/pull/503)) Thanks [@jan-molak](https://github.com/jan-molak)
+
 ## 1.0.4 (2017-11-12)
 - **Fix**
   - Fix `import { type foo } from './Bar'` (flowtype syntax). ([#464](https://github.com/esdoc/esdoc/pull/464)) Thanks [@mprobber](https://github.com/mprobber)
