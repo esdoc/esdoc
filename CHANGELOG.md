@@ -1,6 +1,6 @@
 # Changelog
 
-## Next
+## 1.1.0 (2018-04-29)
 - **Feat**
   - Add `config.outputAST` ([#483](https://github.com/esdoc/esdoc/pull/483)). Thanks [@MattMcFarland](https://github.com/MattMcFarland)
   - Add `@package` tag ([#486](https://github.com/esdoc/esdoc/pull/486)). Thanks [@bmaupin](https://github.com/bmaupin)
