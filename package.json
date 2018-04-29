@@ -23,8 +23,8 @@
     "lint": "node ./script/eslint.js"
   },
   "dependencies": {
-    "cheerio": "0.22.0",
-    "color-logger": "0.0.3",
+    "cheerio": "1.0.0-rc.2",
+    "color-logger": "0.0.6",
     "escape-html": "1.0.3",
     "babylon": "6.18.0",
     "babel-generator": "6.26.0",

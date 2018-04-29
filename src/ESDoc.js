@@ -1,15 +1,13 @@
 import fs from 'fs-extra';
 import path from 'path';
 import assert from 'assert';
-import Logger from 'color-logger';
+import logger from 'color-logger';
 import ASTUtil from './Util/ASTUtil.js';
 import ESParser from './Parser/ESParser';
 import PathResolver from './Util/PathResolver.js';
 import DocFactory from './Factory/DocFactory.js';
 import InvalidCodeLogger from './Util/InvalidCodeLogger.js';
 import Plugin from './Plugin/Plugin.js';
-
-const logger = new Logger('ESDoc');
 
 /**
  * API Documentation Generator.
@@ -37,7 +35,7 @@ export default class ESDoc {
 
     this._setDefaultConfig(config);
 
-    Logger.debug = !!config.debug;
+    logger.debug = !!config.debug;
     const includes = config.includes.map((v) => new RegExp(v));
     const excludes = config.excludes.map((v) => new RegExp(v));
 

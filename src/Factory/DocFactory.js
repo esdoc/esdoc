@@ -1,4 +1,4 @@
-import Logger from 'color-logger';
+import logger from 'color-logger';
 import CommentParser from '../Parser/CommentParser.js';
 import FileDoc from '../Doc/FileDoc.js';
 import ClassDoc from '../Doc/ClassDoc.js';
@@ -13,7 +13,6 @@ import ExternalDoc from '../Doc/ExternalDoc.js';
 import ASTUtil from '../Util/ASTUtil.js';
 
 const already = Symbol('already');
-const logger = new Logger('DocFactory');
 
 /**
  * Doc factory class.

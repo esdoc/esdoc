@@ -1,8 +1,6 @@
-import Logger from 'color-logger';
+import logger from 'color-logger';
 import AbstractDoc from './AbstractDoc.js';
 import ParamParser from '../Parser/ParamParser.js';
-
-const logger = new Logger('TypedefDoc');
 
 /**
  * Doc class for virtual comment node of typedef.
