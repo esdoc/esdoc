@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 const sh = require('./sh');
 
+sh.exec('./script/eslint.js');
+
 sh.rm('./test.new/out');
 const mochaOptions = [
   '--timeout 0',
