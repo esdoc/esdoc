@@ -187,6 +187,34 @@ export default class ESDoc {
   }
 
   /**
+   * Get DocFactory for Javascript File.
+   * @param {string} inDirPath - root directory path.
+   * @param {string} filePath - target JavaScript file path.
+   * @param {string} [packageName] - npm package name of target.
+   * @param {string} [mainFilePath] - npm main file path of target.
+   * @returns {Object} - return document that is traversed.
+   * @property {DocObject[]} results - this is contained JavaScript file.
+   * @property {AST} ast - this is AST of JavaScript file.
+   * @private
+   */
+  static _getFactory(inDirPath, filePath, packageName, mainFilePath) {
+    logger.i(`parsing: ${filePath}`);
+    let ast;
+    try {
+      ast = ESParser.parse(filePath);
+    } catch (e) {
+      InvalidCodeLogger.showFile(filePath, e);
+      return {factory: null, ast: null};
+    }
+
+    const pathResolver = new PathResolver(inDirPath, filePath, packageName, mainFilePath);
+    return {
+      factory: new DocFactory(ast, pathResolver, (filePath) => this._getFactory(inDirPath, filePath, packageName, mainFilePath)),
+      ast: ast
+    };
+  }
+
+  /**
    * traverse doc comment in JavaScript file.
    * @param {string} inDirPath - root directory path.
    * @param {string} filePath - target JavaScript file path.
@@ -198,17 +226,11 @@ export default class ESDoc {
    * @private
    */
   static _traverse(inDirPath, filePath, packageName, mainFilePath) {
-    logger.i(`parsing: ${filePath}`);
-    let ast;
-    try {
-      ast = ESParser.parse(filePath);
-    } catch (e) {
-      InvalidCodeLogger.showFile(filePath, e);
+    const {factory, ast} = this._getFactory(inDirPath, filePath, packageName, mainFilePath);
+
+    if (!factory) {
       return null;
     }
-
-    const pathResolver = new PathResolver(inDirPath, filePath, packageName, mainFilePath);
-    const factory = new DocFactory(ast, pathResolver);
 
     ASTUtil.traverse(ast, (node, parent)=>{
       try {

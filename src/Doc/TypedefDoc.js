@@ -28,19 +28,22 @@ export default class TypedefDoc extends AbstractDoc {
 
   /** set name by using tag. */
   _$name() {
-    const tags = this._findAll(['@typedef']);
-    if (!tags) {
-      logger.w('can not resolve name.');
-      return;
-    }
+    super._$name();
+    if (!this._value.name) {
+      const tags = this._findAll(['@typedef']);
+      if (!tags) {
+        logger.w('can not resolve name.');
+        return;
+      }
 
-    let name;
-    for (const tag of tags) {
-      const {paramName} = ParamParser.parseParamValue(tag.tagValue, true, true, false);
-      name = paramName;
-    }
+      let name;
+      for (const tag of tags) {
+        const {paramName} = ParamParser.parseParamValue(tag.tagValue, true, true, false);
+        name = paramName;
+      }
 
-    this._value.name = name;
+      this._value.name = name;
+    }
   }
 
   /** set memberof by using file path. */

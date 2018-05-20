@@ -4,6 +4,7 @@ import ASTUtil from '../Util/ASTUtil.js';
 import InvalidCodeLogger from '../Util/InvalidCodeLogger.js';
 import ASTNodeContainer from '../Util/ASTNodeContainer.js';
 import babelGenerator from 'babel-generator';
+import {name} from '../Factory/DocFactory';
 
 /**
  * Abstract Doc Class.
@@ -97,9 +98,12 @@ export default class AbstractDoc {
 
   /**
    * decide `name`
-   * @abstract
    */
-  _$name() {}
+  _$name() {
+    if (this._node[name]) {
+      this._value.name = this._node[name];
+    }
+  }
 
   /**
    * decide `memberof`.

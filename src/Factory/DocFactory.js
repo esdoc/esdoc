@@ -13,6 +13,9 @@ import ExternalDoc from '../Doc/ExternalDoc.js';
 import ASTUtil from '../Util/ASTUtil.js';
 
 const already = Symbol('already');
+const external = Symbol('external');
+const astKey = Symbol('ast');
+export const name = Symbol('name');
 
 /**
  * Doc factory class.
@@ -35,14 +38,16 @@ export default class DocFactory {
    * @param {AST} ast - AST of source code.
    * @param {PathResolver} pathResolver - path resolver of source code.
    */
-  constructor(ast, pathResolver) {
+  constructor(ast, pathResolver, getFactory) {
     this._ast = ast;
     this._pathResolver = pathResolver;
     this._results = [];
     this._processedClassNodes = [];
+    this._getFactory = getFactory;
 
     this._inspectExportDefaultDeclaration();
     this._inspectExportNamedDeclaration();
+    this._inspectExportAllDeclaration();
 
     // file doc
     const doc = new FileDoc(ast, ast, pathResolver, []);
@@ -165,6 +170,35 @@ export default class DocFactory {
     this._ast.program.body.push(...pseudoExportNodes);
   }
 
+  _inspectExportAllDeclaration() {
+    const pseudoExportNodes = [];
+
+    for (const exportNode of this._ast.program.body) {
+      if (exportNode.type !== 'ExportAllDeclaration') continue;
+
+      const source = exportNode.source.value;
+      if (source[0] === '.') {
+        const path = this._pathResolver.resolve(source, false);
+        const {ast} = this._getFactory(require.resolve(path));
+        for (const node of ast.program.body) {
+          if (!['ExportNamedDeclaration', 'ExportDefaultDeclaration'].includes(node.type)) continue;
+
+          const pseudoNode = this._copy(node);
+          if (pseudoNode.declaration) {
+            pseudoNode.declaration.leadingComments = exportNode.leadingComments;
+            pseudoNode.declaration[external] = true;
+            pseudoNode.declaration[astKey] = pseudoNode.declaration[astKey] || ast;
+          }
+          pseudoNode.leadingComments = null;
+          pseudoExportNodes.push(pseudoNode);
+        }
+        ASTUtil.sanitize(exportNode);
+      }
+    }
+
+    this._ast.program.body.push(...pseudoExportNodes);
+  }
+
   /* eslint-disable max-statements */
   /**
    * inspect ExportNamedDeclaration.
@@ -216,19 +250,20 @@ export default class DocFactory {
         let targetClassName = null;
         let pseudoClassExport;
 
-        const varNode = ASTUtil.findVariableDeclarationAndNewExpressionNode(specifier.exported.name, this._ast);
+        const varNode = ASTUtil.findVariableDeclarationAndNewExpressionNode(specifier.local.name, this._ast);
         if (varNode) {
           targetClassName = varNode.declarations[0].init.callee.name;
           pseudoClassExport = true;
 
           const pseudoExportNode = this._copy(exportNode);
           pseudoExportNode.declaration = this._copy(varNode);
+          pseudoExportNode.declaration[name] = specifier.exported.name;
           pseudoExportNode.specifiers = null;
           pseudoExportNodes.push(pseudoExportNode);
 
           ASTUtil.sanitize(varNode);
         } else {
-          targetClassName = specifier.exported.name;
+          targetClassName = specifier.local.name;
           pseudoClassExport = false;
         }
 
@@ -236,6 +271,7 @@ export default class DocFactory {
         if (classNode && !exported) {
           const pseudoExportNode = this._copy(exportNode);
           pseudoExportNode.declaration = this._copy(classNode);
+          pseudoExportNode.declaration[name] = targetClassName;
           pseudoExportNode.leadingComments = null;
           pseudoExportNode.specifiers = null;
           pseudoExportNode.declaration.__PseudoExport__ = pseudoClassExport;
@@ -243,24 +279,50 @@ export default class DocFactory {
           ASTUtil.sanitize(classNode);
         }
 
-        const functionNode = ASTUtil.findFunctionDeclarationNode(specifier.exported.name, this._ast);
+        const functionNode = ASTUtil.findFunctionDeclarationNode(specifier.local.name, this._ast);
         if (functionNode) {
           const pseudoExportNode = this._copy(exportNode);
           pseudoExportNode.declaration = this._copy(functionNode);
+          pseudoExportNode.declaration[name] = specifier.exported.name;
           pseudoExportNode.leadingComments = null;
           pseudoExportNode.specifiers = null;
           ASTUtil.sanitize(functionNode);
           pseudoExportNodes.push(pseudoExportNode);
         }
 
-        const variableNode = ASTUtil.findVariableDeclarationNode(specifier.exported.name, this._ast);
+        const variableNode = ASTUtil.findVariableDeclarationNode(specifier.local.name, this._ast);
         if (variableNode) {
           const pseudoExportNode = this._copy(exportNode);
           pseudoExportNode.declaration = this._copy(variableNode);
+          pseudoExportNode.declaration[name] = specifier.exported.name;
           pseudoExportNode.leadingComments = null;
           pseudoExportNode.specifiers = null;
           ASTUtil.sanitize(variableNode);
           pseudoExportNodes.push(pseudoExportNode);
+        }
+
+        const importNode = ASTUtil.findImportDeclarationNode(specifier.local.name, this._ast);
+        const source = importNode && importNode.source.value;
+        if (importNode && source[0] === '.') {
+          const path = this._pathResolver.resolve(source, false);
+          const {ast} = this._getFactory(require.resolve(path));
+          const defaultSpecifier = importNode.specifiers.find(sp => sp.type === 'ImportDefaultSpecifier');
+          const n = defaultSpecifier && defaultSpecifier.local.name === specifier.local.name ? 'default' : specifier.local.name;
+
+          const found = ASTUtil.findExportInAst(n, ast);
+          if (found) {
+            const pseudoExportNode = this._copy(exportNode);
+
+            pseudoExportNode.declaration = this._copy(found.declaration);
+            pseudoExportNode.declaration.leadingComments = exportNode.leadingComments;
+            pseudoExportNode.declaration[external] = true;
+            pseudoExportNode.declaration[astKey] = ast;
+            pseudoExportNode.declaration[name] = specifier.exported.name;
+
+            pseudoExportNode.leadingComments = null;
+            pseudoExportNode.specifiers = null;
+            pseudoExportNodes.push(pseudoExportNode);
+          }
         }
       }
     }
@@ -397,7 +459,7 @@ export default class DocFactory {
     if (!Clazz) return null;
     if (!node.type) node.type = type;
 
-    return new Clazz(this._ast, node, this._pathResolver, tags);
+    return new Clazz(node[astKey] || this._ast, node, this._pathResolver, tags);
   }
 
   /**
@@ -693,6 +755,8 @@ export default class DocFactory {
    * @private
    */
   _isTopDepthInBody(node, body) {
+    // From another file, eg: import
+    if (node[external]) return true;
     if (!body) return false;
     if (!Array.isArray(body)) return false;
 

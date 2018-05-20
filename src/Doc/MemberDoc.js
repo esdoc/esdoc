@@ -38,14 +38,17 @@ export default class MemberDoc extends AbstractDoc {
 
   /** take out self name from self node */
   _$name() {
-    let name;
-    if (this._node.left.computed) {
-      const expression = babelGenerator(this._node.left.property).code.replace(/^this/, '');
-      name = `[${expression}]`;
-    } else {
-      name = this._flattenMemberExpression(this._node.left).replace(/^this\./, '');
+    super._$name();
+    if (!this._value.name) {
+      let name;
+      if (this._node.left.computed) {
+        const expression = babelGenerator(this._node.left.property).code.replace(/^this/, '');
+        name = `[${expression}]`;
+      } else {
+        name = this._flattenMemberExpression(this._node.left).replace(/^this\./, '');
+      }
+      this._value.name = name;
     }
-    this._value.name = name;
   }
 
   /** borrow {@link MethodDoc#@_memberof} */

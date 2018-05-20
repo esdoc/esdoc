@@ -26,7 +26,9 @@ export default class FileDoc extends AbstractDoc {
   /** take out self name from file path */
   _$name() {
     super._$name();
-    this._value.name = this._pathResolver.filePath;
+    if (!this._value.name) {
+      this._value.name = this._pathResolver.filePath;
+    }
   }
 
   /** specify name to longname */
