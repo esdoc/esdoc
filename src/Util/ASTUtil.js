@@ -1,4 +1,5 @@
 import babelTraverse from 'babel-traverse';
+import {name} from '../Factory/DocFactory';
 
 /**
  * Utility for AST.
@@ -130,6 +131,33 @@ export default class ASTUtil {
       if (node.type === 'VariableDeclaration' && node.declarations[0].id.name === name) return node;
     }
 
+    return null;
+  }
+
+  /**
+   * find ImportDeclaration node.
+   * @param {string} name - variable name.
+   * @param {AST} ast - find in this ast.
+   * @returns {ASTNode|null} found ast node.
+   */
+  static findImportDeclarationNode(name, ast) {
+    if (!name) return null;
+
+    for (const node of ast.program.body) {
+      if (node.type === 'ImportDeclaration' && node.specifiers.some(spec => spec.local.name === name)) return node;
+    }
+
+    return null;
+  }
+
+  static findExportInAst(n, ast) {
+    for (const exportNode of ast.program.body) {
+      if (exportNode.type === 'ExportNamedDeclaration' && exportNode.declaration && exportNode.declaration[name] === n) {
+        return exportNode;
+      } else if (exportNode.type === 'ExportDefaultDeclaration' && n === 'default') {
+        return exportNode;
+      }
+    }
     return null;
   }
 

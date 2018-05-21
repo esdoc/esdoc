@@ -15,17 +15,18 @@ export default class FunctionDoc extends AbstractDoc {
   /** take out self name from self node */
   _$name() {
     super._$name();
-
-    if (this._node.id) {
-      if (this._node.id.type === 'MemberExpression') {
-        // e.g. foo[bar.baz] = function bal(){}
-        const expression = babelGenerator(this._node.id).code;
-        this._value.name = `[${expression}]`;
+    if (!this._value.name) {
+      if (this._node.id) {
+        if (this._node.id.type === 'MemberExpression') {
+          // e.g. foo[bar.baz] = function bal(){}
+          const expression = babelGenerator(this._node.id).code;
+          this._value.name = `[${expression}]`;
+        } else {
+          this._value.name = this._node.id.name;
+        }
       } else {
-        this._value.name = this._node.id.name;
+        this._value.name = NamingUtil.filePathToName(this._pathResolver.filePath);
       }
-    } else {
-      this._value.name = NamingUtil.filePathToName(this._pathResolver.filePath);
     }
   }
 

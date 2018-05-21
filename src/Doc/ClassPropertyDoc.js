@@ -26,7 +26,9 @@ export default class ClassPropertyDoc extends AbstractDoc {
   /** take out self name from self node */
   _$name() {
     super._$name();
-    this._value.name = this._node.key.name;
+    if (!this._value.name) {
+      this._value.name = this._node.key.name;
+    }
   }
 
   /** borrow {@link MethodDoc#@_memberof} */

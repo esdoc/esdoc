@@ -26,27 +26,30 @@ export default class ExternalDoc extends AbstractDoc {
 
   /** take out self name from tag */
   _$name() {
-    const value = this._findTagValue(['@external']);
-    if (!value) {
-      logger.w('can not resolve name.');
+    super._$name();
+    if (!this._value.name) {
+      const value = this._findTagValue(['@external']);
+      if (!value) {
+        logger.w('can not resolve name.');
+      }
+
+      this._value.name = value;
+
+      const tags = this._findAll(['@external']);
+      if (!tags) {
+        logger.w('can not resolve name.');
+        return;
+      }
+
+      let name;
+      for (const tag of tags) {
+        const {typeText, paramDesc} = ParamParser.parseParamValue(tag.tagValue, true, false, true);
+        name = typeText;
+        this._value.externalLink = paramDesc;
+      }
+
+      this._value.name = name;
     }
-
-    this._value.name = value;
-
-    const tags = this._findAll(['@external']);
-    if (!tags) {
-      logger.w('can not resolve name.');
-      return;
-    }
-
-    let name;
-    for (const tag of tags) {
-      const {typeText, paramDesc} = ParamParser.parseParamValue(tag.tagValue, true, false, true);
-      name = typeText;
-      this._value.externalLink = paramDesc;
-    }
-
-    this._value.name = name;
   }
 
   /** take out self memberof from file path. */

@@ -26,12 +26,13 @@ export default class MethodDoc extends AbstractDoc {
   /** take out self name from self node */
   _$name() {
     super._$name();
-
-    if (this._node.computed) {
-      const expression = babelGenerator(this._node.key).code;
-      this._value.name = `[${expression}]`;
-    } else {
-      this._value.name = this._node.key.name;
+    if (!this._value.name) {
+      if (this._node.computed) {
+        const expression = babelGenerator(this._node.key).code;
+        this._value.name = `[${expression}]`;
+      } else {
+        this._value.name = this._node.key.name;
+      }
     }
   }
 

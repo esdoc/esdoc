@@ -79,11 +79,13 @@ export default class PathResolver {
    * resolve file path on this file.
    * @param {string} relativePath - relative path on this file.
    */
-  resolve(relativePath) {
+  resolve(relativePath, relative = true) {
     const selfDirPath = path.dirname(this._filePath);
-    const resolvedPath = path.resolve(selfDirPath, relativePath);
-    const resolvedRelativePath = path.relative(path.dirname(this._inDirPath), resolvedPath);
-    return this._slash(resolvedRelativePath);
+    let resolvedPath = path.resolve(selfDirPath, relativePath);
+    if (relative) {
+      resolvedPath = path.relative(path.dirname(this._inDirPath), resolvedPath);
+    }
+    return this._slash(resolvedPath);
   }
 
   /**
