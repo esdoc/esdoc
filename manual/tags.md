@@ -24,10 +24,12 @@ export default class MyClass {
   - [@access](#-access)
   - [@deprecated](#-deprecated)
   - [@desc](#-desc)
+  - [@emits](#-emits)
   - [@example](#-example)
   - [@experimental](#-experimental)
   - [@ignore](#-ignore)
   - [@link](#-link)
+  - [@listens](#-listens)
   - [@see](#-see)
   - [@since](#-since)
   - [@todo](#-todo)
@@ -38,8 +40,7 @@ export default class MyClass {
   - [@interface](#-interface)
 - [For Method And Function](#for-method-and-function)
   - [@abstract](#-abstract)
-  - [@emits](#-emits)
-  - [@listens](#-listens)
+
   - [@override](#-override)
   - [@param](#-param)
   - [@return](#-return)
@@ -117,6 +118,29 @@ class MyClass{...}
 
 ----
 
+### @emits
+syntax: ``@emits <type> <name> [-] [description]``
+
+About ``<type>`` to see [Type Syntax](#type-syntax)
+
+```javascript
+/**
+ * @emits {InputEvent} input
+ * @emits {MouseEvent} click emit when pressed
+ * @emits {CustomEvent} foobar - emits when foobar
+ */
+class MyClass {
+  /**
+   * @emits {UIEvent} scroll
+   * @emits {Event} foo emit event when foo.
+   * @emits {CustomEvent} bar - emit event when bar.
+   */
+  method(){...}
+}
+```
+
+----
+
 ### @example
 syntax: ``@example <JavaScript>``
 
@@ -183,6 +207,29 @@ link other identifier
  * If device spec is low, you can use {@link MySimpleClass}.
  */
 class MyClass{...}
+```
+
+----
+
+### @listens
+syntax: ``@listens <type> <name> [description]``
+
+About ``<type>`` to see [Type Syntax](#type-syntax)
+
+```javascript
+/**
+ * @listens {*} scroll
+ * @listens {MouseEvent} click listen for 'click' event
+ * @listens {InputEvent} input - listen for user input
+ */
+class MyClass {
+  /**
+   * @listens {Event} foo
+   * @listens {CustomEvent} bar listen for custom 'bar' event
+   * @listens {*} bang - listen for any type of 'bang' event
+   */
+  method(){...}
+}
 ```
 
 ----
@@ -294,35 +341,6 @@ class MyClass {
 
 ----
 
-### @emits
-syntax: ``@emits <identifier> [description]``
-
-```javascript
-class MyClass {
-  /**
-   * @emits {MyEvent1} emit event when foo.
-   * @emits {MyEvent2} emit event when bar.
-   */
-  method(){...}
-}
-```
-
-----
-
-### @listens
-syntax: ``@listens <identifier> [description]``
-
-```javascript
-class MyClass {
-  /**
-   * @listens {MyEvent1} listen event because foo.
-   * @listens {MyEvent2} listen event because bar.
-   */
-  method(){...}
-}
-```
-
-----
 
 ### @override
 syntax: ``@override``
@@ -497,7 +515,14 @@ describe('MyClass has foo bar feature', ()=>{
 
 ## Type Syntax
 
-``@param``, ``@return``, ``@type`` and ``@typedef`` are support the following type syntax.
+The following tags support the type syntax described below:
+
+* [@emits](#-emits)
+* [@listens](#-listens)
+* [@param](#-param)
+* [@return](#-return)
+* [@type](#-type)
+* [@typedef](#-typedef)
 
 ### Simple
 ```javascript

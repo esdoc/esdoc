@@ -1,16 +1,17 @@
+/**
+ * @emits {InputEvent} input
+ * @emits {MouseEvent} click emits class event when click.
+ * @emits {CustomEvent} foobar - emits class event when foobar.
+ */
 export default class TestEmitsClass {
   /**
-   * @emits {TestEmitsEvent1} emits event when foo.
-   * @emits {TestEmitsEvent2} emits event when bar.
+   * @emits {Event} foo - emits event when foo.
+   * @emits {Event} bar emits event when bar.
    */
   methodEmits(){}
 }
 
 /**
- * @emits {TestEmitsEvent1}
+ * @emits {Event} fizz
  */
 export function testEmitsFunction(){}
-
-export class TestEmitsEvent1 {}
-export class TestEmitsEvent2 {}
-
