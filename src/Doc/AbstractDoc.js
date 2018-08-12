@@ -511,10 +511,15 @@ export default class AbstractDoc {
 
     this._value.emits = [];
     for (const value of values) {
-      const {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value, true, false, true);
+      const {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value);
+      if (!typeText || !paramName) {
+        InvalidCodeLogger.show(this._pathResolver.fileFullPath, this._node);
+        continue;
+      }
       const result = ParamParser.parseParam(typeText, paramName, paramDesc);
       this._value.emits.push({
         types: result.types,
+        name: result.name,
         description: result.description
       });
     }
@@ -529,10 +534,11 @@ export default class AbstractDoc {
 
     this._value.listens = [];
     for (const value of values) {
-      const {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value, true, false, true);
+      const {typeText, paramName, paramDesc} = ParamParser.parseParamValue(value);
       const result = ParamParser.parseParam(typeText, paramName, paramDesc);
       this._value.listens.push({
         types: result.types,
+        name: result.name,
         description: result.description
       });
     }

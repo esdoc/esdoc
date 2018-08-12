@@ -1,10 +1,13 @@
+/**
+ * @listens {*} scroll
+ * @listens {MouseEvent} click listens for click
+ * @listens {InputEvent} input - listens for input
+ */
 export default class TestListensClass {
   /**
-   * @listens {TestListensEvent1}
-   * @listens {TestListensEvent2} listens TestListensEvent2
+   * @listens {Event} foo
+   * @listens {CustomEvent} bar listens for custom bar
+   * @listens {*} bang - listens for any bang
    */
   methodListens(){}
 }
-
-export class TestListensEvent1 {}
-export class TestListensEvent2 {}
