@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-require('babel-register');
+require('@babel/register');
 const ESParser = require('../src/Parser/ESParser.js').default;
 const Plugin = require('../src/Plugin/Plugin.js').default;
 

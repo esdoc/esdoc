@@ -12,7 +12,7 @@
     "test/**"
   ],
   "require": [
-    "babel-register"
+    "@babel/register"
   ],
   "reporter": [
     "lcov",

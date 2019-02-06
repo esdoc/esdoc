@@ -1,6 +1,6 @@
+import {parse} from '@babel/parser';
 import fs from 'fs-extra';
 import Plugin from '../Plugin/Plugin.js';
-import * as babylon from 'babylon';
 
 /**
  * ECMAScript Parser class.
@@ -21,7 +21,7 @@ export default class ESParser {
 
     let parserOption = {sourceType: 'module', plugins: []};
     let parser = (code) => {
-      return babylon.parse(code, parserOption);
+      return parse(code, parserOption);
     };
 
     ({parser, parserOption} = Plugin.onHandleCodeParser(parser, parserOption, filePath, code));

@@ -1,9 +1,9 @@
+import babelGenerator from '@babel/generator';
 import path from 'path';
 import ParamParser from '../Parser/ParamParser.js';
 import ASTUtil from '../Util/ASTUtil.js';
 import InvalidCodeLogger from '../Util/InvalidCodeLogger.js';
 import ASTNodeContainer from '../Util/ASTNodeContainer.js';
-import babelGenerator from 'babel-generator';
 
 /**
  * Abstract Doc Class.
