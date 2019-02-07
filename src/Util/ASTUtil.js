@@ -1,4 +1,4 @@
-import babelTraverse from 'babel-traverse';
+import babelTraverse from '@babel/traverse';
 
 /**
  * Utility for AST.
