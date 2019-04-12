@@ -1,6 +1,6 @@
 {
   "name": "esdoc",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Good Documentation Generator For JavaScript",
   "author": {
     "name": "h13i32maru",
@@ -31,7 +31,7 @@
     "babel-traverse": "6.26.0",
     "fs-extra": "5.0.0",
     "ice-cap": "0.0.4",
-    "marked": "0.3.19",
+    "marked": "0.6.2",
     "minimist": "1.2.0",
     "taffydb": "2.7.3"
   },
