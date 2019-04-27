@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.0
+- **Fix**
+  - Updating Babel to latest version
+
 ## 1.1.0 (2018-04-29)
 - **Feat**
   - Add `config.outputAST` ([#483](https://github.com/esdoc/esdoc/pull/483)). Thanks [@MattMcFarland](https://github.com/MattMcFarland)

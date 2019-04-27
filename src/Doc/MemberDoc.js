@@ -1,6 +1,6 @@
 import AbstractDoc from './AbstractDoc.js';
 import MethodDoc from './MethodDoc.js';
-import babelGenerator from 'babel-generator';
+import babelGenerator from '@babel/generator';
 
 /**
  * Doc Class from Member Expression AST node.
