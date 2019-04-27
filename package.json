@@ -26,6 +26,7 @@
     "@babel/generator": "^7.3.2",
     "@babel/parser": "^7.3.2",
     "@babel/preset-env": "^7.3.1",
+    "@babel/runtime": "^7.4.4",
     "@babel/traverse": "^7.2.3",
     "acorn": "^6.1.1",
     "cheerio": "^1.0.0-rc.3",
