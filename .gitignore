@@ -4,3 +4,4 @@ npm-debug.log
 /_temp
 /test/fixture/dest
 /.nyc_output/
+out
