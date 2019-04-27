@@ -7,7 +7,7 @@
   "package": "./package.json",
   "plugins": [
     {
-      "name": "esdoc-standard-plugin",
+      "name": "@sebastianwessel/esdoc-standard-plugin",
       "option": {
         "brand": {"title": "ESDoc", "logo": "./manual/asset/image/logo.png"},
         "test": {"source": "./test", "includes": ["\\.test\\.js$"]},
@@ -28,7 +28,7 @@
       }
     },
     {
-      "name": "esdoc-importpath-plugin",
+      "name": "@sebastianwessel/esdoc-importpath-plugin",
       "option": {
         "replaces": [{"from": "^src/", "to": "out/src/"}]
       }
