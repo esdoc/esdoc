@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _AbstractDoc = _interopRequireDefault(require("./AbstractDoc.js"));
 
-var _babelGenerator = _interopRequireDefault(require("babel-generator"));
+var _generator = _interopRequireDefault(require("@babel/generator"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -41,7 +41,7 @@ class MethodDoc extends _AbstractDoc.default {
     super._$name();
 
     if (this._node.computed) {
-      const expression = (0, _babelGenerator.default)(this._node.key).code;
+      const expression = (0, _generator.default)(this._node.key).code;
       this._value.name = `[${expression}]`;
     } else {
       this._value.name = this._node.key.name;
