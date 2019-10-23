@@ -1,16 +1,16 @@
 {
   "name": "@sebastianwessel/esdoc",
-  "version": "2.0.0",
-  "description": "Good Documentation Generator For JavaScript",
+  "version": "2.1.0",
+  "description": "Fork of ESDoc - A Good Documentation Generator For JavaScript",
   "author": {
-    "name": "h13i32maru",
-    "url": "https://h13i32maru.jp"
+    "name": "Sebastian Wessel",
+    "url": "https://sebastianwessel.de"
   },
-  "homepage": "https://esdoc.org/",
+  "homepage": "https://github.com/sebastianwessel/esdoc",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/esdoc/esdoc"
+    "url": "https://github.com/sebastianwessel/esdoc"
   },
   "engines": {
     "node": ">= 6.0.0"
@@ -23,36 +23,36 @@
     "lint": "node ./script/eslint.js"
   },
   "dependencies": {
-    "@babel/generator": "^7.3.2",
-    "@babel/parser": "^7.3.2",
-    "@babel/preset-env": "^7.3.1",
-    "@babel/runtime": "^7.4.4",
-    "@babel/traverse": "^7.2.3",
-    "acorn": "^6.1.1",
+    "@babel/generator": "^7.6.4",
+    "@babel/parser": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/runtime": "^7.6.3",
+    "@babel/traverse": "^7.6.3",
+    "acorn": "^7.1.0",
     "cheerio": "^1.0.0-rc.3",
     "color-logger": "^0.0.6",
     "escape-html": "^1.0.3",
-    "fs-extra": "^7.0.1",
+    "fs-extra": "^8.1.0",
     "ice-cap": "^0.0.4",
-    "marked": "^0.6.2",
+    "marked": "^0.7.0",
     "minimist": "^1.2.0",
     "taffydb": "^2.7.3"
   },
   "devDependencies": {
-    "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.2.2",
-    "@babel/plugin-transform-modules-commonjs": "^7.2.0",
-    "@babel/register": "^7.0.0",
-    "babel-plugin-istanbul": "^5.1.0",
-    "codecov": "^3.1.0",
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/plugin-transform-modules-commonjs": "^7.6.0",
+    "@babel/register": "^7.6.2",
     "@sebastianwessel/esdoc-accessor-plugin": "latest",
     "@sebastianwessel/esdoc-external-ecmascript-plugin": "latest",
     "@sebastianwessel/esdoc-importpath-plugin": "latest",
     "@sebastianwessel/esdoc-standard-plugin": "latest",
     "@sebastianwessel/esdoc-undocumented-identifier-plugin": "latest",
-    "eslint": "^5.13.0",
-    "mocha": "^5.2.0",
-    "nyc": "^14.1.0"
+    "babel-plugin-istanbul": "^5.2.0",
+    "codecov": "^3.6.1",
+    "eslint": "^6.5.1",
+    "mocha": "^6.2.2",
+    "nyc": "^14.1.1"
   },
   "keywords": [
     "jsdoc",
